@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EspecieWSImplService WSDL service -->
+
+  <service name="EspecieWSImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar"/>
+      <parameter name="wsdlServiceElement" value="EspecieWSImplService"/>
+      <parameter name="schemaQualified" value="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar,http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar"/>
+      <parameter name="wsdlServicePort" value="EspecieWSImpl"/>
+      <parameter name="className" value="ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.EspecieWSImpl"/>
+      <parameter name="wsdlPortType" value="EspecieWSImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:retNS="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:rtns="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" name="getEspecies" qname="operNS:getEspecies" returnQName="retNS:getEspeciesReturn" returnType="rtns:Especie" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" name="addEspecie" qname="operNS:addEspecie" soapAction="">
+        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" qname="pns:in0" type="tns:Especie"/>
+      </operation>
+      <parameter name="allowedMethods" value="getEspecies addEspecie"/>
+
+      <typeMapping xmlns:ns="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" qname="ns:Especie" type="java:ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

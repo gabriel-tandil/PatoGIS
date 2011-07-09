@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <context id="context1" >
+    <jdbcConnection driverClass="org.postgresql.Driver" connectionURL="jdbc:postgresql:patoGis" userId="postgres" password="atlas" />
+    <javaModelGenerator targetPackage="ar.edu.unicen.exa.galvarez.patoGIS.servidor.modelo" targetProject="ProveedorServicios" />
+    <sqlMapGenerator targetPackage="ar.edu.unicen.exa.galvarez.patoGIS.servidor.mapeos" targetProject="ProveedorServicios" />
+    <javaClientGenerator targetPackage="ar.edu.unicen.exa.galvarez.patoGIS.servidor.logica" targetProject="ProveedorServicios" type="XMLMAPPER" />
+<!--     <table schema="???" tableName="???" > -->
+<!--       <columnOverride column="???" property="???" /> -->
+<!--     </table> -->
+      <table schema="public" tableName="campana" />
+      <table schema="public" tableName="especie" />
+      <table schema="public" tableName="observacion" />
+      <table schema="public" tableName="observacion_clima" />
+      <table schema="public" tableName="observacion_especie" />
+      <table schema="public" tableName="observacion_foto" />
+      <table schema="public" tableName="observacion_matriz_productiva" />
+      <table schema="public" tableName="par_usuarios" />
+      <table schema="public" tableName="tipo_matriz_productiva" />
+      <table schema="public" tableName="ubicacion" />
+      <table schema="public" tableName="usuario" />
+  </context>
+</generatorConfiguration>
