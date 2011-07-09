@@ -13,7 +13,7 @@
       <operation xmlns:operNS="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:retNS="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:rtns="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" name="getEspecies" qname="operNS:getEspecies" returnQName="retNS:getEspeciesReturn" returnType="rtns:Especie" soapAction="">
       </operation>
       <operation xmlns:operNS="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" name="addEspecie" qname="operNS:addEspecie" soapAction="">
-        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" qname="pns:in0" type="tns:Especie"/>
+        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" qname="pns:especie" type="tns:Especie"/>
       </operation>
       <parameter name="allowedMethods" value="getEspecies addEspecie"/>
 

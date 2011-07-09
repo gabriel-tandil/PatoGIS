@@ -18,7 +18,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="addEspecie">
     <complexType>
      <sequence>
-      <element name="in0" type="tns1:Especie"/>
+      <element name="especie" type="tns1:Especie"/>
      </sequence>
     </complexType>
    </element>
