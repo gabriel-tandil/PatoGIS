@@ -46,7 +46,7 @@ public abstract class PatoGisWSAbstract<T> {
 
 	
 	
-	public List<T> getElementos(Class<T> clase) throws RemoteException {
+	public T[] getElementos(Class<T> clase) throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
 			sqlSession = obtenerSesion();
@@ -56,8 +56,9 @@ public abstract class PatoGisWSAbstract<T> {
 
 			List<T> allRecords = mapper.selectByExample(especieExample);
 
+			T[] array = (T[]) Array.newInstance(clase, allRecords.size());
+			return allRecords.toArray(array);
 			
-			return allRecords;
 		} catch (Exception e) {
 
 			e.printStackTrace();
