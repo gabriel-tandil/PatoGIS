@@ -7,8 +7,8 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="addElemento">
     <complexType>
      <sequence>
-      <element name="elemento" type="xsd:anyType"/>
-      <element name="idUsuario" type="xsd:int"/>
+      <element name="in0" type="xsd:anyType"/>
+      <element name="in1" type="xsd:int"/>
      </sequence>
     </complexType>
    </element>
@@ -134,7 +134,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdl:port binding="impl:EspecieWSImplSoapBinding" name="EspecieWSImpl">
 
-         <wsdlsoap:address location="http://localhost:8080/ProveedorServicios/services/EspecieWSImpl"/>
+         <wsdlsoap:address location="http://localhost:7965/ProveedorServicios/services/EspecieWSImpl"/>
 
       </wsdl:port>
 
