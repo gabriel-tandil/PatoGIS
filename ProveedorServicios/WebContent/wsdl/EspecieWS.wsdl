@@ -1,68 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:intf="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns1="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions targetNamespace="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:intf="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar"/>
-   <element name="getEspecies">
-    <complexType/>
-   </element>
-   <element name="getEspeciesResponse">
+   <element name="addElemento">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="getEspeciesReturn" type="tns1:Especie"/>
+      <element name="elemento" type="xsd:anyType"/>
+      <element name="idUsuario" type="xsd:int"/>
      </sequence>
     </complexType>
    </element>
-   <element name="addEspecie">
+   <element name="addElementoResponse">
+    <complexType/>
+   </element>
+   <element name="getElementos">
+    <complexType/>
+   </element>
+   <element name="getElementosResponse">
     <complexType>
      <sequence>
-      <element name="especie" type="tns1:Especie"/>
+      <element maxOccurs="unbounded" name="getElementosReturn" type="xsd:anyType"/>
      </sequence>
     </complexType>
    </element>
-   <element name="addEspecieResponse">
-    <complexType/>
-   </element>
-  </schema>
-  <schema elementFormDefault="qualified" targetNamespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
-   <complexType name="Especie">
-    <sequence>
-     <element name="id" nillable="true" type="xsd:int"/>
-     <element name="nombre" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="addEspecieResponse">
+   <wsdl:message name="addElementoResponse">
 
-      <wsdl:part element="impl:addEspecieResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="addEspecieRequest">
-
-      <wsdl:part element="impl:addEspecie" name="parameters">
+      <wsdl:part element="impl:addElementoResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="getEspeciesRequest">
+   <wsdl:message name="addElementoRequest">
 
-      <wsdl:part element="impl:getEspecies" name="parameters">
+      <wsdl:part element="impl:addElemento" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="getEspeciesResponse">
+   <wsdl:message name="getElementosResponse">
 
-      <wsdl:part element="impl:getEspeciesResponse" name="parameters">
+      <wsdl:part element="impl:getElementosResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElementosRequest">
+
+      <wsdl:part element="impl:getElementos" name="parameters">
 
       </wsdl:part>
 
@@ -70,25 +62,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="EspecieWSImpl">
 
-      <wsdl:operation name="getEspecies">
+      <wsdl:operation name="addElemento">
 
-         <wsdl:input message="impl:getEspeciesRequest" name="getEspeciesRequest">
+         <wsdl:input message="impl:addElementoRequest" name="addElementoRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getEspeciesResponse" name="getEspeciesResponse">
+         <wsdl:output message="impl:addElementoResponse" name="addElementoResponse">
 
        </wsdl:output>
 
       </wsdl:operation>
 
-      <wsdl:operation name="addEspecie">
+      <wsdl:operation name="getElementos">
 
-         <wsdl:input message="impl:addEspecieRequest" name="addEspecieRequest">
+         <wsdl:input message="impl:getElementosRequest" name="getElementosRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:addEspecieResponse" name="addEspecieResponse">
+         <wsdl:output message="impl:getElementosResponse" name="getElementosResponse">
 
        </wsdl:output>
 
@@ -100,17 +92,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="getEspecies">
+      <wsdl:operation name="addElemento">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getEspeciesRequest">
+         <wsdl:input name="addElementoRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getEspeciesResponse">
+         <wsdl:output name="addElementoResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -118,17 +110,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="addEspecie">
+      <wsdl:operation name="getElementos">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="addEspecieRequest">
+         <wsdl:input name="getElementosRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="addEspecieResponse">
+         <wsdl:output name="getElementosResponse">
 
             <wsdlsoap:body use="literal"/>
 
