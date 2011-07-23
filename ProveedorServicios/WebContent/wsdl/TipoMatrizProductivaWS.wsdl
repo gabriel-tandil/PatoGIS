@@ -8,7 +8,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="addElemento">
     <complexType>
      <sequence>
-      <element name="elemento" type="tns1:Especie"/>
+      <element name="elemento" type="tns1:TipoMatrizProductiva"/>
       <element name="idUsuario" type="xsd:int"/>
      </sequence>
     </complexType>
@@ -22,13 +22,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="getElementosResponse">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="getElementosReturn" type="tns1:Especie"/>
+      <element maxOccurs="unbounded" name="getElementosReturn" type="tns1:TipoMatrizProductiva"/>
      </sequence>
     </complexType>
    </element>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
-   <complexType name="Especie">
+   <complexType name="TipoMatrizProductiva">
     <sequence>
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="nombre" nillable="true" type="xsd:string"/>
@@ -69,7 +69,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:portType name="EspecieWSImpl">
+   <wsdl:portType name="TipoMatrizProductivaWSImpl">
 
       <wsdl:operation name="addElemento">
 
@@ -97,7 +97,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:portType>
 
-   <wsdl:binding name="EspecieWSImplSoapBinding" type="impl:EspecieWSImpl">
+   <wsdl:binding name="TipoMatrizProductivaWSImplSoapBinding" type="impl:TipoMatrizProductivaWSImpl">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
@@ -139,11 +139,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:binding>
 
-   <wsdl:service name="EspecieWSImplService">
+   <wsdl:service name="TipoMatrizProductivaWSImplService">
 
-      <wsdl:port binding="impl:EspecieWSImplSoapBinding" name="EspecieWSImpl">
+      <wsdl:port binding="impl:TipoMatrizProductivaWSImplSoapBinding" name="TipoMatrizProductivaWSImpl">
 
-         <wsdlsoap:address location="http://localhost:8080/ProveedorServicios/services/EspecieWSImpl"/>
+         <wsdlsoap:address location="http://localhost:8080/ProveedorServicios/services/TipoMatrizProductivaWSImpl"/>
 
       </wsdl:port>
 

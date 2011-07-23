@@ -13,9 +13,9 @@ import org.apache.ibatis.session.SqlSession;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.AuditoriaUtil;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.PersistenciaUtil;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.SqlConnection;
-import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.PatoGisWSAbstract;
 
-public abstract class PatoGisWSAbstractImpl<T> implements PatoGisWSAbstract<T>{
+
+public abstract class PatoGisWSAbstractImpl<T>{
 
 	private Class<T>	clazz;
 
@@ -51,9 +51,9 @@ public abstract class PatoGisWSAbstractImpl<T> implements PatoGisWSAbstract<T>{
 
 	
 	
-	@Override
+
 	@SuppressWarnings("unchecked")
-	public T[] getElementos() throws RemoteException {
+	protected T[] getElementosGenerico() throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
 			sqlSession = obtenerSesion();
@@ -92,8 +92,7 @@ public abstract class PatoGisWSAbstractImpl<T> implements PatoGisWSAbstract<T>{
 
 
 
-	@Override
-	public void addElemento(T elemento, Integer idUsuario) throws RemoteException {
+	protected void addElementoGenerico(T elemento, Integer idUsuario) throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
 			sqlSession = obtenerSesionAuditada(idUsuario.intValue());
