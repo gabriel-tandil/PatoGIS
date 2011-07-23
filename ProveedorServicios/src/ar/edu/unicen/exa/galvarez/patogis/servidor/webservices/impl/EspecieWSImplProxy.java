@@ -44,16 +44,16 @@ public class EspecieWSImplProxy implements ar.edu.unicen.exa.galvarez.patogis.se
     return especieWSImpl;
   }
   
-  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie elemento, int idUsuario) throws java.rmi.RemoteException{
-    if (especieWSImpl == null)
-      _initEspecieWSImplProxy();
-    especieWSImpl.addElemento(elemento, idUsuario);
-  }
-  
   public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementos() throws java.rmi.RemoteException{
     if (especieWSImpl == null)
       _initEspecieWSImplProxy();
     return especieWSImpl.getElementos();
+  }
+  
+  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie elemento, int idUsuario) throws java.rmi.RemoteException{
+    if (especieWSImpl == null)
+      _initEspecieWSImplProxy();
+    especieWSImpl.addElemento(elemento, idUsuario);
   }
   
   

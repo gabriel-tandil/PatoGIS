@@ -8,6 +8,6 @@
 package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl;
 
 public interface EspecieWSImpl extends java.rmi.Remote {
-    public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getEspecies() throws java.rmi.RemoteException;
-    public void addEspecie(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie in0) throws java.rmi.RemoteException;
+    public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie elemento, int idUsuario) throws java.rmi.RemoteException;
+    public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementos() throws java.rmi.RemoteException;
 }

@@ -1,5 +1,5 @@
 /**
- * Especie.java
+ * TipoMatrizProductiva.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
@@ -7,15 +7,15 @@
 
 package ar.edu.unicen.exa.galvarez.patogis.servidor.modelo;
 
-public class Especie  implements java.io.Serializable {
+public class TipoMatrizProductiva  implements java.io.Serializable {
     private java.lang.Integer id;
 
     private java.lang.String nombre;
 
-    public Especie() {
+    public TipoMatrizProductiva() {
     }
 
-    public Especie(
+    public TipoMatrizProductiva(
            java.lang.Integer id,
            java.lang.String nombre) {
            this.id = id;
@@ -24,7 +24,7 @@ public class Especie  implements java.io.Serializable {
 
 
     /**
-     * Gets the id value for this Especie.
+     * Gets the id value for this TipoMatrizProductiva.
      * 
      * @return id
      */
@@ -34,7 +34,7 @@ public class Especie  implements java.io.Serializable {
 
 
     /**
-     * Sets the id value for this Especie.
+     * Sets the id value for this TipoMatrizProductiva.
      * 
      * @param id
      */
@@ -44,7 +44,7 @@ public class Especie  implements java.io.Serializable {
 
 
     /**
-     * Gets the nombre value for this Especie.
+     * Gets the nombre value for this TipoMatrizProductiva.
      * 
      * @return nombre
      */
@@ -54,7 +54,7 @@ public class Especie  implements java.io.Serializable {
 
 
     /**
-     * Sets the nombre value for this Especie.
+     * Sets the nombre value for this TipoMatrizProductiva.
      * 
      * @param nombre
      */
@@ -64,8 +64,8 @@ public class Especie  implements java.io.Serializable {
 
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof Especie)) return false;
-        Especie other = (Especie) obj;
+        if (!(obj instanceof TipoMatrizProductiva)) return false;
+        TipoMatrizProductiva other = (TipoMatrizProductiva) obj;
         if (obj == null) return false;
         if (this == obj) return true;
         if (__equalsCalc != null) {
@@ -103,10 +103,10 @@ public class Especie  implements java.io.Serializable {
 
     // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(Especie.class, true);
+        new org.apache.axis.description.TypeDesc(TipoMatrizProductiva.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Especie"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "TipoMatrizProductiva"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("id");
         elemField.setXmlName(new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "id"));

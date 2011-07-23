@@ -10,6 +10,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("especies")
 public interface EspeciesService extends RemoteService {
-	List<String> getEspecies();
-	void addEspecie(String Especie);
+	List<String> getElementos();
+	void addElemento(String especie);
 }

@@ -1,5 +1,5 @@
 /**
- * EspecieWSImplSoapBindingStub.java
+ * TipoMatrizProductivaWSImplSoapBindingStub.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
@@ -7,7 +7,7 @@
 
 package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl;
 
-public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub implements ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.EspecieWSImpl {
+public class TipoMatrizProductivaWSImplSoapBindingStub extends org.apache.axis.client.Stub implements ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.TipoMatrizProductivaWSImpl {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
     private java.util.Vector cachedSerFactories = new java.util.Vector();
@@ -25,7 +25,7 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("addElemento");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar", "elemento"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Especie"), ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar", "elemento"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "TipoMatrizProductiva"), ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva.class, false, false);
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar", "idUsuario"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
@@ -36,8 +36,8 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getElementos");
-        oper.setReturnType(new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Especie"));
-        oper.setReturnClass(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[].class);
+        oper.setReturnType(new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "TipoMatrizProductiva"));
+        oper.setReturnClass(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar", "getElementosReturn"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
@@ -45,16 +45,16 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
 
     }
 
-    public EspecieWSImplSoapBindingStub() throws org.apache.axis.AxisFault {
+    public TipoMatrizProductivaWSImplSoapBindingStub() throws org.apache.axis.AxisFault {
          this(null);
     }
 
-    public EspecieWSImplSoapBindingStub(java.net.URL endpointURL, javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
+    public TipoMatrizProductivaWSImplSoapBindingStub(java.net.URL endpointURL, javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
          this(service);
          super.cachedEndpoint = endpointURL;
     }
 
-    public EspecieWSImplSoapBindingStub(javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
+    public TipoMatrizProductivaWSImplSoapBindingStub(javax.xml.rpc.Service service) throws org.apache.axis.AxisFault {
         if (service == null) {
             super.service = new org.apache.axis.client.Service();
         } else {
@@ -74,9 +74,9 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
             java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
-            qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Especie");
+            qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "TipoMatrizProductiva");
             cachedSerQNames.add(qName);
-            cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie.class;
+            cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -147,7 +147,7 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
         }
     }
 
-    public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie elemento, int idUsuario) throws java.rmi.RemoteException {
+    public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva elemento, int idUsuario) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -174,7 +174,7 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
 }
     }
 
-    public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementos() throws java.rmi.RemoteException {
+    public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva[] getElementos() throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -198,9 +198,9 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
         else {
             extractAttachments(_call);
             try {
-                return (ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[]) _resp;
+                return (ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva[]) _resp;
             } catch (java.lang.Exception _exception) {
-                return (ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[]) org.apache.axis.utils.JavaUtils.convert(_resp, ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[].class);
+                return (ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva[]) org.apache.axis.utils.JavaUtils.convert(_resp, ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

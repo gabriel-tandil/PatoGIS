@@ -66,7 +66,7 @@ public class AplicacionWeb implements EntryPoint {
 	public void onModuleLoad() {
 		final Label errorLabel = new Label();
 
-		especiesService.getEspecies(new AsyncCallback<List<String>>() {
+		especiesService.getElementos(new AsyncCallback<List<String>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel.setText("Error al obtener especies del webservice");
 			}
@@ -293,7 +293,7 @@ public class AplicacionWeb implements EntryPoint {
 		}
 
 		protected void grabar() {
-			especiesService.addEspecie(text.getValue(),
+			especiesService.addElemento(text.getValue(),
 					new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					errorLabel.setText("Error al guardar nueva especie via webService");
