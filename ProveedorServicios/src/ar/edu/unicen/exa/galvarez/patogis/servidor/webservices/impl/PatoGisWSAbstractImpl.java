@@ -2,6 +2,7 @@ package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -9,17 +10,20 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.EspecieMapper;
-import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
-import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.EspecieExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.AuditoriaUtil;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.util.PersistenciaUtil;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.SqlConnection;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.PatoGisWSAbstract;
 
-public abstract class PatoGisWSAbstractImpl<T> implements PatoGisWSAbstract<T> {
+public abstract class PatoGisWSAbstractImpl<T> implements PatoGisWSAbstract<T>{
 
-	public PatoGisWSAbstractImpl() {
-		super();
+	private Class<T>	clazz;
+
+
+
+	public PatoGisWSAbstractImpl(Class<T> clazz) {
+		   this.clazz = clazz;
+
 	}
 
 	protected SqlSession obtenerSesion() throws IOException {
@@ -47,17 +51,21 @@ public abstract class PatoGisWSAbstractImpl<T> implements PatoGisWSAbstract<T> {
 
 	
 	
-	public T[] getElementos(Class<T> clase) throws RemoteException {
+	@Override
+	@SuppressWarnings("unchecked")
+	public T[] getElementos() throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
 			sqlSession = obtenerSesion();
-			EspecieExample especieExample = new EspecieExample();
+	
+			Class<?> exampleClass = getExampleClass();
+			Class<?> mapperClass = getMapperClass();
+			Object mapper = sqlSession.getMapper(mapperClass);
+			Object example = exampleClass.newInstance();
+			Method m=mapperClass.getDeclaredMethod("selectByExample", exampleClass);
+			List<T> allRecords = (List<T>) m.invoke(mapper, example);
 
-			EspecieMapper mapper = sqlSession.getMapper(EspecieMapper.class);
-
-			List<T> allRecords = (List<T>) mapper.selectByExample(especieExample);
-
-			T[] array = (T[]) Array.newInstance(clase, allRecords.size());
+			T[] array = (T[]) Array.newInstance(clazz, allRecords.size());
 			return allRecords.toArray(array);
 			
 		} catch (Exception e) {
@@ -70,13 +78,29 @@ public abstract class PatoGisWSAbstractImpl<T> implements PatoGisWSAbstract<T> {
 
 	}
 
-	public void addEspecie(Especie especie) throws RemoteException {
+	protected Class<?> getMapperClass() throws ClassNotFoundException
+	{
+		Class<?> mapperClass = PersistenciaUtil.getMapper(clazz);
+		return mapperClass;
+	}
+
+	protected Class<?> getExampleClass() throws ClassNotFoundException
+	{
+		Class<?> exampleClass = PersistenciaUtil.getExample(clazz);
+		return exampleClass;
+	}
+
+
+
+	@Override
+	public void addElemento(T elemento, Integer idUsuario) throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
-			int idUsuario=1;
-			sqlSession = obtenerSesionAuditada(idUsuario);
-			EspecieMapper mapper = sqlSession.getMapper(EspecieMapper.class);
-			mapper.insertSelective(especie);
+			sqlSession = obtenerSesionAuditada(idUsuario.intValue());
+			Class<?> mapperClass = getMapperClass();
+			Method m=mapperClass.getDeclaredMethod("insertSelective", clazz);
+			Object mapper = sqlSession.getMapper(mapperClass);
+			m.invoke(mapper, elemento);
 			liberarSesionAuditada(sqlSession);
 		} catch (Exception e) {
 
