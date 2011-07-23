@@ -10,7 +10,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.EspecieExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.EspecieWS;
 
-public class EspecieWSImpl extends PatoGisWSAbstract implements EspecieWS {
+public class EspecieWSImpl extends PatoGisWSAbstractImpl<Especie> implements EspecieWS {
 
 	public Especie[] getEspecies() throws RemoteException {
 		SqlSession sqlSession = null;
@@ -48,6 +48,19 @@ public class EspecieWSImpl extends PatoGisWSAbstract implements EspecieWS {
 			sqlSession.close();
 		}
 
+	}
+
+	@Override
+	public void addElemento(Especie elemento, Integer idUsuario)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Especie[] getElementos() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

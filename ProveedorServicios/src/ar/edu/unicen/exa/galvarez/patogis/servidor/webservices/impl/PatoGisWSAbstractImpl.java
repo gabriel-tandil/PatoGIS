@@ -14,10 +14,11 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.EspecieExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.AuditoriaUtil;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.SqlConnection;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.PatoGisWSAbstract;
 
-public abstract class PatoGisWSAbstract<T> {
+public abstract class PatoGisWSAbstractImpl<T> implements PatoGisWSAbstract<T> {
 
-	public PatoGisWSAbstract() {
+	public PatoGisWSAbstractImpl() {
 		super();
 	}
 
@@ -54,7 +55,7 @@ public abstract class PatoGisWSAbstract<T> {
 
 			EspecieMapper mapper = sqlSession.getMapper(EspecieMapper.class);
 
-			List<T> allRecords = mapper.selectByExample(especieExample);
+			List<T> allRecords = (List<T>) mapper.selectByExample(especieExample);
 
 			T[] array = (T[]) Array.newInstance(clase, allRecords.size());
 			return allRecords.toArray(array);
