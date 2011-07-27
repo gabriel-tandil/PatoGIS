@@ -6,15 +6,12 @@ import java.util.List;
 
 import javax.xml.rpc.ServiceException;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
 import ar.edu.unicen.exa.galvarez.patogis.client.TipoMatrizProductivaService;
-import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
-import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.EspecieWSImpl;
-import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.EspecieWSImplServiceLocator;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.TipoMatrizProductivaWSImpl;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.TipoMatrizProductivaWSImplServiceLocator;
+
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
  * The server side implementation of the RPC service.
@@ -32,9 +29,10 @@ TipoMatrizProductivaService {
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator
 			.getTipoMatrizProductivaWSImpl();
 			TipoMatrizProductiva[] tiposMatrizProductiva = tipoMatrizProductivaWS.getElementos();
+			if (tiposMatrizProductiva!=null){
 			for (int i = 0; i < tiposMatrizProductiva.length; i++) {
 				l.add(tiposMatrizProductiva[i].getNombre());
-			}
+			}}
 			return l;
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block

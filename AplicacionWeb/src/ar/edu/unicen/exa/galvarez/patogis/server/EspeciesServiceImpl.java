@@ -29,8 +29,10 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 			EspecieWSImpl especieWS = especieWSServiceLocator
 					.getEspecieWSImpl();
 			Especie[] especies = especieWS.getElementos();
-			for (int i = 0; i < especies.length; i++) {
-				l.add(especies[i].getNombre());
+			if (especies != null) {
+				for (int i = 0; i < especies.length; i++) {
+					l.add(especies[i].getNombre());
+				}
 			}
 			return l;
 		} catch (ServiceException e) {
@@ -41,7 +43,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 	@Override
@@ -52,16 +54,16 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 
 			EspecieWSImpl especieWS = especieWSServiceLocator
 					.getEspecieWSImpl();
-			Especie e=new Especie();
+			Especie e = new Especie();
 			e.setNombre(especie);
-			especieWS.addElemento(e,1);
+			especieWS.addElemento(e, 1);
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 	}
 
 }
