@@ -3,15 +3,15 @@ package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 
-public interface EspecieWS extends Remote {
+public interface UbicacionWS extends Remote {
 
 	// los metodos getElementos y addElemento se redefinen aca invocando al del
 	// padre porque la refinicion del web service asi lo requiere
-	public Especie[] getElementos() throws RemoteException;
+	public Ubicacion[] getElementos() throws RemoteException;
 
-	public void addElemento(Especie elemento, Integer idUsuario)
+	public void addElemento(Ubicacion elemento, Integer idUsuario)
 			throws RemoteException;
 
 }

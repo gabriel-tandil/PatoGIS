@@ -14,15 +14,12 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.util.AuditoriaUtil;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.PersistenciaUtil;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.SqlConnection;
 
+public abstract class PatoGisWSAbstractImpl<T> {
 
-public abstract class PatoGisWSAbstractImpl<T>{
-
-	private Class<T>	clazz;
-
-
+	private Class<T> clazz;
 
 	public PatoGisWSAbstractImpl(Class<T> clazz) {
-		   this.clazz = clazz;
+		this.clazz = clazz;
 
 	}
 
@@ -49,25 +46,23 @@ public abstract class PatoGisWSAbstractImpl<T>{
 		return sqlSession;
 	}
 
-	
-	
-
 	@SuppressWarnings("unchecked")
 	protected T[] getElementosGenerico() throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
 			sqlSession = obtenerSesion();
-	
+
 			Class<?> exampleClass = getExampleClass();
 			Class<?> mapperClass = getMapperClass();
 			Object mapper = sqlSession.getMapper(mapperClass);
 			Object example = exampleClass.newInstance();
-			Method m=mapperClass.getDeclaredMethod("selectByExample", exampleClass);
+			Method m = mapperClass.getDeclaredMethod("selectByExample",
+					exampleClass);
 			List<T> allRecords = (List<T>) m.invoke(mapper, example);
 
 			T[] array = (T[]) Array.newInstance(clazz, allRecords.size());
 			return allRecords.toArray(array);
-			
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -78,26 +73,23 @@ public abstract class PatoGisWSAbstractImpl<T>{
 
 	}
 
-	protected Class<?> getMapperClass() throws ClassNotFoundException
-	{
+	protected Class<?> getMapperClass() throws ClassNotFoundException {
 		Class<?> mapperClass = PersistenciaUtil.getMapper(clazz);
 		return mapperClass;
 	}
 
-	protected Class<?> getExampleClass() throws ClassNotFoundException
-	{
+	protected Class<?> getExampleClass() throws ClassNotFoundException {
 		Class<?> exampleClass = PersistenciaUtil.getExample(clazz);
 		return exampleClass;
 	}
 
-
-
-	protected void addElementoGenerico(T elemento, Integer idUsuario) throws RemoteException {
+	protected void addElementoGenerico(T elemento, Integer idUsuario)
+			throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
 			sqlSession = obtenerSesionAuditada(idUsuario.intValue());
 			Class<?> mapperClass = getMapperClass();
-			Method m=mapperClass.getDeclaredMethod("insertSelective", clazz);
+			Method m = mapperClass.getDeclaredMethod("insertSelective", clazz);
 			Object mapper = sqlSession.getMapper(mapperClass);
 			m.invoke(mapper, elemento);
 			liberarSesionAuditada(sqlSession);
@@ -108,6 +100,6 @@ public abstract class PatoGisWSAbstractImpl<T>{
 			sqlSession.close();
 		}
 
-	}	
-	
+	}
+
 }

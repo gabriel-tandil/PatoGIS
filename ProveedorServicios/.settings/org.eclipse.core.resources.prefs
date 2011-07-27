@@ -1,7 +1,4 @@
-#Sat Jul 23 10:13:16 ART 2011
+#Tue Jul 26 20:38:21 ART 2011
 eclipse.preferences.version=1
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/modelo/Especie.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/EspecieWSImpl.java=UTF-8
-encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/EspecieWSImplService.java=UTF-8
-encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/EspecieWSImplServiceLocator.java=UTF-8
-encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/EspecieWSImplSoapBindingStub.java=UTF-8

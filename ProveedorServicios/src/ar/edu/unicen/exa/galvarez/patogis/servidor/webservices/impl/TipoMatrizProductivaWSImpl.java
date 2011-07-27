@@ -12,12 +12,15 @@ public class TipoMatrizProductivaWSImpl extends
 		super(TipoMatrizProductiva.class);
 	}
 
-	//los metodos getElementos y addElemento se redefinen aca invocando al del padre porque la refinicion del web service asi lo requiere
+	// los metodos getElementos y addElemento se redefinen aca invocando al del
+	// padre porque la refinicion del web service asi lo requiere
+	@Override
 	public TipoMatrizProductiva[] getElementos() throws RemoteException {
 		return super.getElementosGenerico();
 
 	}
 
+	@Override
 	public void addElemento(TipoMatrizProductiva elemento, Integer idUsuario)
 			throws RemoteException {
 		super.addElementoGenerico(elemento, idUsuario);

@@ -1,13 +1,27 @@
-/**
- * EspecieWSImpl.java
- *
- * This file was auto-generated from WSDL
- * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
- */
-
 package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl;
 
-public interface EspecieWSImpl extends java.rmi.Remote {
-    public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie elemento, int idUsuario) throws java.rmi.RemoteException;
-    public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementos() throws java.rmi.RemoteException;
+import java.rmi.RemoteException;
+
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.EspecieWS;
+
+public class EspecieWSImpl extends PatoGisWSAbstractImpl<Especie> implements
+		EspecieWS {
+	public EspecieWSImpl() {
+		super(Especie.class);
+	}
+
+	// los metodos getElementos y addElemento se redefinen aca invocando al del
+	// padre porque la refinicion del web service asi lo requiere
+	@Override
+	public Especie[] getElementos() throws RemoteException {
+		return super.getElementosGenerico();
+
+	}
+
+	@Override
+	public void addElemento(Especie elemento, Integer idUsuario)
+			throws RemoteException {
+		super.addElementoGenerico(elemento, idUsuario);
+	}
 }
