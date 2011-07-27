@@ -26,6 +26,17 @@
     <servlet-name>especiesServlet</servlet-name>
     <url-pattern>/aplicacionweb/especies</url-pattern>
   </servlet-mapping>  
+
+  <servlet>
+    <servlet-name>tipoMatrizProductivaServlet</servlet-name>
+    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.TipoMatrizProductivaServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>tipoMatrizProductivaServlet</servlet-name>
+    <url-pattern>/aplicacionweb/tipoMatrizProductiva</url-pattern>
+  </servlet-mapping>  
+
   
   <!-- Default page to serve -->
   <welcome-file-list>

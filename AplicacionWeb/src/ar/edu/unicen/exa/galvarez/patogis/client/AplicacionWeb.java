@@ -55,10 +55,14 @@ public class AplicacionWeb implements EntryPoint {
 			.create(GreetingService.class);
 
 	private List<String> especies;
+	private List<String> tiposMatrizProductiva;
 	private final EspeciesServiceAsync especiesService = GWT
 			.create(EspeciesService.class);
+	private final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
+			.create(TipoMatrizProductivaService.class);
 
 	private List<HorizontalPanel> conteosEspecie = new ArrayList<HorizontalPanel>();
+	private List<HorizontalPanel> observacionesMatrizProductiva = new ArrayList<HorizontalPanel>();
 
 	/**
 	 * This is the entry point method.
@@ -80,10 +84,31 @@ public class AplicacionWeb implements EntryPoint {
 					HorizontalPanel hp = iterator.next();
 					ListBox combo = (ListBox) hp.getWidget(0);
 					if (combo.getItemCount() == 0)
-						agregarEspeciesCombo(combo);
+						agregarItemsCombo(combo, especies);
 				}
 			}
 		});
+
+		tipoMatrizProductivaService
+				.getElementos(new AsyncCallback<List<String>>() {
+					public void onFailure(Throwable caught) {
+						errorLabel
+								.setText("Error al obtener tipos de matriz productiva del webservice");
+					}
+
+					@Override
+					public void onSuccess(List<String> result) {
+						// TODO Auto-generated method stub
+						tiposMatrizProductiva = result;
+						for (Iterator<HorizontalPanel> iterator = observacionesMatrizProductiva
+								.iterator(); iterator.hasNext();) {
+							HorizontalPanel hp = iterator.next();
+							ListBox combo = (ListBox) hp.getWidget(0);
+							if (combo.getItemCount() == 0)
+								agregarItemsCombo(combo, tiposMatrizProductiva);
+						}
+					}
+				});
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
@@ -118,16 +143,33 @@ public class AplicacionWeb implements EntryPoint {
 
 		final VerticalPanel verticalPanel_1 = new VerticalPanel();
 		grid.setWidget(2, 1, verticalPanel_1);
-		agregarConteoEspecie(verticalPanel_1);
+		agregarObservacionConteo(verticalPanel_1);
 
 		Button button = new Button("+");
 
 		grid.setWidget(2, 2, button);
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				agregarConteoEspecie(verticalPanel_1);
+				agregarObservacionConteo(verticalPanel_1);
 			}
 		});
+
+		Label lblNewLabel_3 = new Label("Matriz Productiva");
+		grid.setWidget(2, 0, lblNewLabel_3);
+
+		final VerticalPanel verticalPanel_2 = new VerticalPanel();
+		grid.setWidget(2, 1, verticalPanel_2);
+		agregarObservacionMatrizProductiva(verticalPanel_2);
+
+		Button button2 = new Button("+");
+
+		grid.setWidget(2, 2, button2);
+		button2.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				agregarObservacionMatrizProductiva(verticalPanel_2);
+			}
+		});
+
 		final Button sendButton = new Button("Enviar");
 		grid.setWidget(3, 1, sendButton);
 
@@ -237,14 +279,26 @@ public class AplicacionWeb implements EntryPoint {
 		nameField.addKeyUpHandler(handler);
 	}
 
-	class AgregarEspecieDialog extends DialogBox {
+	abstract class AgregarElementoObservableDialog extends DialogBox {
 
-		private ListBox combo;
+		protected ListBox combo;
+
+		public ListBox getCombo() {
+			return combo;
+		}
+
+		public void setCombo(ListBox combo) {
+			this.combo = combo;
+		}
+
 		TextBox text = null;
-		Label errorLabel=null;
-		public AgregarEspecieDialog(ListBox comboBox) {
-			setText("Ingresar Nueva Especie");
-			this.combo = comboBox;
+		Label errorLabel = null;
+		protected String titulo = "";
+
+		@SuppressWarnings("deprecation")
+		// sino no anda el setfocus
+		public AgregarElementoObservableDialog() {
+			setText(titulo);
 			Button aceptarButton = new Button("Aceptar");
 			Button closeButton = new Button("Cancelar");
 			closeButton.addClickHandler(new ClickHandler() {
@@ -282,61 +336,102 @@ public class AplicacionWeb implements EntryPoint {
 			botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 			dock.setWidth("100%");
 			setWidget(dock);
-			DeferredCommand.addCommand(new Command()
-            {
-                public void execute()
-                {
-                    text.setFocus(true);
-                }
-            });
-
-		}
-
-		protected void grabar() {
-			especiesService.addElemento(text.getValue(),
-					new AsyncCallback<Void>() {
-				public void onFailure(Throwable caught) {
-					errorLabel.setText("Error al guardar nueva especie via webService");
-				}
-
-				@Override
-				public void onSuccess(Void result) {
-					// nada
-					
+			DeferredCommand.addCommand(new Command() {
+				public void execute() {
+					text.setFocus(true);
 				}
 			});
-			especies.add(text.getValue());
-			establecerEspecie(combo, text.getValue());
-			hide();
+
 		}
+
+		protected abstract void grabar();
 
 		public void cerrar() {
 			combo.setSelectedIndex(0);
 			hide();
 		}
+
 	}
 
-	private void agregarConteoEspecie(final VerticalPanel verticalPanel_1) {
+	class AgregarEspecieDialog extends AgregarElementoObservableDialog {
+
+		public AgregarEspecieDialog() {
+			titulo = "Ingresar Nueva Especie";
+		}
+
+		protected void grabar() {
+			especiesService.addElemento(text.getValue(),
+					new AsyncCallback<Void>() {
+						public void onFailure(Throwable caught) {
+							errorLabel
+									.setText("Error al guardar nueva especie via webService");
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// nada
+
+						}
+					});
+			especies.add(text.getValue());
+			establecerElementoCombo(combo, text.getValue());
+			hide();
+		}
+
+	}
+
+	class AgregarTipoMatrizProductivaDialog extends
+			AgregarElementoObservableDialog {
+
+		public AgregarTipoMatrizProductivaDialog() {
+			titulo = "Ingresar Nuevo Tipo de Matriz Productiva";
+		}
+
+		protected void grabar() {
+			especiesService.addElemento(text.getValue(),
+					new AsyncCallback<Void>() {
+						public void onFailure(Throwable caught) {
+							errorLabel
+									.setText("Error al guardar Nuevo Tipo de Matriz Productiva especie via webService");
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// nada
+
+						}
+					});
+			especies.add(text.getValue());
+			establecerElementoCombo(combo, text.getValue());
+			hide();
+		}
+
+	}
+
+	private void agregarObservacionMatrizProductiva(
+			final VerticalPanel verticalPanel_1) {
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		verticalPanel_1.add(horizontalPanel);
 
-		final ListBox comboBox = new ListBox();
+		final ListBox comboBox = generarComboItemsObservables(
+				tiposMatrizProductiva, AgregarTipoMatrizProductivaDialog.class);
 
-		comboBox.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
+		horizontalPanel.add(comboBox);
 
-				if (comboBox.getItemText(comboBox.getSelectedIndex()).equals(
-						"Otra...")) {
+		TextBox textBox_1 = new TextBox();
+		horizontalPanel.add(textBox_1);
+		observacionesMatrizProductiva.add(horizontalPanel);
+		textBox_1.setWidth("60px");
+		Label l=new Label("%") ;
+		horizontalPanel.add(l);
+	}
 
-					DialogBox dlg = new AgregarEspecieDialog(comboBox);
-					dlg.center();
+	private void agregarObservacionConteo(final VerticalPanel verticalPanel_1) {
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
+		verticalPanel_1.add(horizontalPanel);
 
-				}
-			}
-		});
-		if (especies != null) {
-			agregarEspeciesCombo(comboBox);
-		}
+		final ListBox comboBox = generarComboItemsObservables(especies,
+				AgregarEspecieDialog.class);
 
 		horizontalPanel.add(comboBox);
 
@@ -346,18 +441,47 @@ public class AplicacionWeb implements EntryPoint {
 		textBox_1.setWidth("60px");
 	}
 
-	private void agregarEspeciesCombo(final ListBox comboBox) {
+	private ListBox generarComboItemsObservables(List<String> items,
+			@SuppressWarnings("rawtypes") final Class agregarObservableDialogClass) {
+		final ListBox comboBox = new ListBox();
+
+		comboBox.addChangeHandler(new ChangeHandler() {
+
+			public void onChange(ChangeEvent event) {
+
+				if (comboBox.getItemText(comboBox.getSelectedIndex()).equals(
+						"Otra...")) {
+
+					AgregarElementoObservableDialog dlg;
+
+						try {
+							dlg = (AgregarElementoObservableDialog) agregarObservableDialogClass
+									.newInstance();
+							dlg.setCombo(comboBox);
+							dlg.center();							
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+				}
+			}
+		});
+		if (items != null) {
+			agregarItemsCombo(comboBox, items);
+		}
+		return comboBox;
+	}
+
+	private void agregarItemsCombo(final ListBox comboBox, List<String> list) {
 		comboBox.addItem("Seleccionar");
-		for (Iterator<String> iterator = especies.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
 			String especie = iterator.next();
 			comboBox.addItem(especie);
 		}
 		comboBox.setItemSelected(0, true);
-		comboBox.addItem("Otra...");		
+		comboBox.addItem("Otra...");
 	}
 
-	private void establecerEspecie(ListBox combo, String especie) {
+	private void establecerElementoCombo(ListBox combo, String especie) {
 		combo.addItem(especie);
 		combo.setSelectedIndex(combo.getItemCount() - 1);
 	}
