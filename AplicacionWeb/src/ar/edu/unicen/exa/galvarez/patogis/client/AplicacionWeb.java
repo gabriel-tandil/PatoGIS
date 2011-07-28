@@ -1,6 +1,7 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,6 +35,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
+import com.ibm.icu.text.SimpleDateFormat;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -128,13 +130,28 @@ public class AplicacionWeb implements EntryPoint {
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
 
-		Label lblNewLabel_1 = new Label("Fecha");
+		Label lblNewLabel_1 = new Label("Fecha y Horas");
 		grid.setWidget(1, 0, lblNewLabel_1);
-
+		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
 		DateBox dateBox = new DateBox();
-		grid.setWidget(1, 1, dateBox);
+		dateBox.setWidth("70px");
+		grid.setWidget(1, 1, horizontalPanel1);
 		dateBox.setFormat(new DefaultFormat(DateTimeFormat
-				.getFormat("dd/MM/yy HH:mm")));
+				.getFormat("dd/MM/yy")));
+		dateBox.setValue(new Date());
+TimeBox horaInicio=new TimeBox();
+horaInicio.setWidth("45px");
+horaInicio.setValue(DateTimeFormat
+		.getFormat("HH:mm").format(new Date()));
+TimeBox horaFin=new TimeBox();
+horaFin.setWidth("45px");
+horaFin.setValue(DateTimeFormat
+		.getFormat("HH:mm").format(new Date()));
+
+
+horizontalPanel1.add(dateBox);
+horizontalPanel1.add(horaInicio);
+horizontalPanel1.add(horaFin);
 
 		Label lblNewLabel_2 = new Label("Conteo Especie");
 		grid.setWidget(2, 0, lblNewLabel_2);
@@ -413,20 +430,21 @@ public class AplicacionWeb implements EntryPoint {
 
 	private void agregarObservacionMatrizProductiva(
 			final VerticalPanel verticalPanel_1) {
-		HorizontalPanel horizontalPanel = new HorizontalPanel();
-		verticalPanel_1.add(horizontalPanel);
+		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
+		verticalPanel_1.add(horizontalPanel1);
 
 		final ListBox comboBox = generarComboItemsObservables(
 				tiposMatrizProductiva, new AgregarTipoMatrizProductivaDialog());
 
-		horizontalPanel.add(comboBox);
+		horizontalPanel1.add(comboBox);
 
 		TextBox textBox_1 = new TextBox();
-		horizontalPanel.add(textBox_1);
-		observacionesMatrizProductiva.add(horizontalPanel);
-		textBox_1.setWidth("60px");
+		horizontalPanel1.add(textBox_1);
+		observacionesMatrizProductiva.add(horizontalPanel1);
+		textBox_1.setWidth("50px");
 		Label l = new Label("%");
-		horizontalPanel.add(l);
+		horizontalPanel1.add(l);
+	//	horizontalPanel1.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
 	}
 
 	private void agregarObservacionConteo(final VerticalPanel verticalPanel_1) {
