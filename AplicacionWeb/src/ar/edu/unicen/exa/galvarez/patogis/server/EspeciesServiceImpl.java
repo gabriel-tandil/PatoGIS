@@ -21,11 +21,10 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 		EspeciesService {
 
 	public List<String> getElementos() throws IllegalArgumentException {
-
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
+		List<String> l = new ArrayList<String>();
 
 		try {
-			List<String> l = new ArrayList<String>();
 			EspecieWSImpl especieWS = especieWSServiceLocator
 					.getEspecieWSImpl();
 			Especie[] especies = especieWS.getElementos();
@@ -34,7 +33,6 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 					l.add(especies[i].getNombre());
 				}
 			}
-			return l;
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,8 +40,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
-
+		return l;
 	}
 
 	@Override

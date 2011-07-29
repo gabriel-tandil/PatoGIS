@@ -21,11 +21,13 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment.AutoHorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -35,7 +37,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
-import com.ibm.icu.text.SimpleDateFormat;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -63,7 +64,7 @@ public class AplicacionWeb implements EntryPoint {
 	private final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
 			.create(TipoMatrizProductivaService.class);
 
-	private List<HorizontalPanel> conteosEspecie = new ArrayList<HorizontalPanel>();
+	private List<VerticalPanel> conteosEspecie = new ArrayList<VerticalPanel>();
 	private List<HorizontalPanel> observacionesMatrizProductiva = new ArrayList<HorizontalPanel>();
 
 	/**
@@ -80,10 +81,11 @@ public class AplicacionWeb implements EntryPoint {
 			@Override
 			public void onSuccess(List<String> result) {
 				especies = result;
-				for (Iterator<HorizontalPanel> iterator = conteosEspecie
+				for (Iterator<VerticalPanel> iterator = conteosEspecie
 						.iterator(); iterator.hasNext();) {
-					HorizontalPanel hp = iterator.next();
-					ListBox combo = (ListBox) hp.getWidget(0);
+					VerticalPanel hp = iterator.next();
+					ListBox combo = (ListBox) ((HorizontalPanel) hp
+							.getWidget(0)).getWidget(0);
 					if (combo.getItemCount() == 0)
 						agregarItemsCombo(combo, especies);
 				}
@@ -115,7 +117,7 @@ public class AplicacionWeb implements EntryPoint {
 		RootPanel rootPanel = RootPanel.get("principalContainer");
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 
-		Grid grid = new Grid(6, 3);
+		Grid grid = new Grid(12, 3);
 		// grid.getElement().getStyle().setPosition(Position.RELATIVE);
 
 		rootPanel.add(grid);
@@ -139,19 +141,17 @@ public class AplicacionWeb implements EntryPoint {
 		dateBox.setFormat(new DefaultFormat(DateTimeFormat
 				.getFormat("dd/MM/yy")));
 		dateBox.setValue(new Date());
-TimeBox horaInicio=new TimeBox();
-horaInicio.setWidth("45px");
-horaInicio.setValue(DateTimeFormat
-		.getFormat("HH:mm").format(new Date()));
-TimeBox horaFin=new TimeBox();
-horaFin.setWidth("45px");
-horaFin.setValue(DateTimeFormat
-		.getFormat("HH:mm").format(new Date()));
+		TimeBox horaInicio = new TimeBox();
+		horaInicio.setWidth("45px");
+		horaInicio.setValue(DateTimeFormat.getFormat("HH:mm")
+				.format(new Date()));
+		TimeBox horaFin = new TimeBox();
+		horaFin.setWidth("45px");
+		horaFin.setValue(DateTimeFormat.getFormat("HH:mm").format(new Date()));
 
-
-horizontalPanel1.add(dateBox);
-horizontalPanel1.add(horaInicio);
-horizontalPanel1.add(horaFin);
+		horizontalPanel1.add(dateBox);
+		horizontalPanel1.add(horaInicio);
+		horizontalPanel1.add(horaFin);
 
 		Label lblNewLabel_2 = new Label("Conteo Especie");
 		grid.setWidget(2, 0, lblNewLabel_2);
@@ -174,7 +174,7 @@ horizontalPanel1.add(horaFin);
 				HasVerticalAlignment.ALIGN_BOTTOM);
 		grid.getCellFormatter().setVerticalAlignment(2, 0,
 				HasVerticalAlignment.ALIGN_TOP);
-		
+
 		Label lblNewLabel_3 = new Label("Matriz Productiva");
 		grid.setWidget(3, 0, lblNewLabel_3);
 
@@ -196,11 +196,45 @@ horizontalPanel1.add(horaFin);
 				HasVerticalAlignment.ALIGN_BOTTOM);
 		grid.getCellFormatter().setVerticalAlignment(3, 0,
 				HasVerticalAlignment.ALIGN_TOP);
+
+		Label lblNewLabel0 = new Label("Clima");
+		grid.setWidget(4, 0, lblNewLabel0);
+		Grid grid2 = new Grid(2, 4);
+
+
+		Label lblNewLabel1 = new Label("Sol");
+		final CheckBox checkSol = new CheckBox();
+
+		grid2.setWidget(0, 0,lblNewLabel1);
+		grid2.setWidget(0, 1,checkSol);
+
+		Label lblNewLabel3 = new Label("Nuves");
+
+		final ListBox comboNuves = comboClima();
+
+		grid2.setWidget(0, 2,lblNewLabel3);
+		grid2.setWidget(0, 3,comboNuves);
+
+
+
+
+
+		Label lblNewLabel2 = new Label("Lluvia");
+		final CheckBox checkLluvia = new CheckBox();
+		grid2.setWidget(1, 0,lblNewLabel2);
+		grid2.setWidget(1, 1,checkLluvia);
+
+		Label lblNewLabel4 = new Label("Viento");
+
+		final ListBox comboViento = comboClima();
+		grid2.setWidget(1, 2,lblNewLabel4);
+		grid2.setWidget(1, 3,comboViento);
+
+		grid.setWidget(4, 1, grid2);
+
 		final Button sendButton = new Button("Enviar");
-		sendButton.addStyleName("sendButton");		
-		grid.setWidget(4, 1, sendButton);
-
-
+		sendButton.addStyleName("sendButton");
+		grid.setWidget(5, 1, sendButton);
 
 		nameField.selectAll();
 
@@ -299,6 +333,15 @@ horizontalPanel1.add(horaFin);
 		nameField.selectAll();
 
 		nameField.addKeyUpHandler(handler);
+	}
+
+	private ListBox comboClima() {
+		final ListBox comboNuves = new ListBox();
+		comboNuves.addItem("Normal -", "0");
+		comboNuves.addItem("Normal", "1");
+		comboNuves.addItem("Normal +", "2");
+		comboNuves.setSelectedIndex(1);
+		return comboNuves;
 	}
 
 	abstract class AgregarElementoObservableDialog extends DialogBox {
@@ -431,6 +474,8 @@ horizontalPanel1.add(horaFin);
 	private void agregarObservacionMatrizProductiva(
 			final VerticalPanel verticalPanel_1) {
 		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
+		if (observacionesMatrizProductiva.size() > 0)
+			verticalPanel_1.setBorderWidth(1);
 		verticalPanel_1.add(horizontalPanel1);
 
 		final ListBox comboBox = generarComboItemsObservables(
@@ -444,12 +489,16 @@ horizontalPanel1.add(horaFin);
 		textBox_1.setWidth("50px");
 		Label l = new Label("%");
 		horizontalPanel1.add(l);
-	//	horizontalPanel1.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
+		// horizontalPanel1.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
 	}
 
 	private void agregarObservacionConteo(final VerticalPanel verticalPanel_1) {
+		VerticalPanel verticalPanel = new VerticalPanel();
+		if (conteosEspecie.size() > 0)
+			verticalPanel_1.setBorderWidth(1);
+		verticalPanel_1.add(verticalPanel);
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
-		verticalPanel_1.add(horizontalPanel);
+		verticalPanel.add(horizontalPanel);
 
 		final ListBox comboBox = generarComboItemsObservables(especies,
 				new AgregarEspecieDialog());
@@ -458,7 +507,29 @@ horizontalPanel1.add(horaFin);
 
 		TextBox textBox_1 = new TextBox();
 		horizontalPanel.add(textBox_1);
-		conteosEspecie.add(horizontalPanel);
+
+		HorizontalPanel horizontalPanel2 = new HorizontalPanel();
+		verticalPanel.add(horizontalPanel2);
+		ListBox edad = new ListBox();
+		edad.addItem("Pichon", "0");
+		edad.addItem("Juvenil", "1");
+		edad.addItem("Adulto", "2");
+		edad.setSelectedIndex(2);
+		horizontalPanel2.add(edad);
+
+		ListBox distancia = new ListBox();
+		distancia.addItem("Cerca", "0");
+		distancia.addItem("Lejos", "1");
+		edad.setSelectedIndex(0);
+		horizontalPanel2.add(distancia);
+
+		ListBox conteo = new ListBox();
+		conteo.addItem("Estimado", "0");
+		conteo.addItem("Preciso", "1");
+		edad.setSelectedIndex(0);
+		horizontalPanel2.add(conteo);
+
+		conteosEspecie.add(verticalPanel);
 		textBox_1.setWidth("60px");
 	}
 

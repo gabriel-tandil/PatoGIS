@@ -21,19 +21,18 @@ public class TipoMatrizProductivaServiceImpl extends RemoteServiceServlet implem
 TipoMatrizProductivaService {
 
 	public List<String> getElementos() throws IllegalArgumentException {
-
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
+		List<String> l = new ArrayList<String>();
 
 		try {
-			List<String> l = new ArrayList<String>();
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator
 			.getTipoMatrizProductivaWSImpl();
 			TipoMatrizProductiva[] tiposMatrizProductiva = tipoMatrizProductivaWS.getElementos();
 			if (tiposMatrizProductiva!=null){
-			for (int i = 0; i < tiposMatrizProductiva.length; i++) {
-				l.add(tiposMatrizProductiva[i].getNombre());
-			}}
-			return l;
+				for (int i = 0; i < tiposMatrizProductiva.length; i++) {
+					l.add(tiposMatrizProductiva[i].getNombre());
+				}
+			}
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,8 +40,7 @@ TipoMatrizProductivaService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
-		
+		return l;
 	}
 
 	@Override
