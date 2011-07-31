@@ -83,7 +83,7 @@ public abstract class PatoGisWSAbstractImpl<T> {
 		return exampleClass;
 	}
 
-	protected void addElementoGenerico(T elemento, Integer idUsuario)
+	protected Integer addElementoGenerico(T elemento, Integer idUsuario)
 			throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
@@ -93,12 +93,15 @@ public abstract class PatoGisWSAbstractImpl<T> {
 			Object mapper = sqlSession.getMapper(mapperClass);
 			m.invoke(mapper, elemento);
 			liberarSesionAuditada(sqlSession);
+			m=clazz.getDeclaredMethod("getId");
+			return (Integer) m.invoke(elemento);
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		} finally {
 			sqlSession.close();
 		}
+		return null;
 
 	}
 

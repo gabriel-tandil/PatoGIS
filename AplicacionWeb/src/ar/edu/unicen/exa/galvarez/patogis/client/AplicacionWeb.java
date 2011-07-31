@@ -1,5 +1,14 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
+import gwtupload.client.IFileInput.FileInputType;
+import gwtupload.client.IUploadStatus.Status;
+import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.UploadedInfo;
+import gwtupload.client.IUploader.UploaderConstants;
+import gwtupload.client.PreloadedImage;
+import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
+import gwtupload.client.SingleUploader;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -24,10 +33,10 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment.AutoHorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -56,7 +65,7 @@ public class AplicacionWeb implements EntryPoint {
 	 */
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
-
+	  private FlowPanel panelImages = new FlowPanel();
 	private List<String> especies;
 	private List<String> tiposMatrizProductiva;
 	private final EspeciesServiceAsync especiesService = GWT
@@ -232,9 +241,40 @@ public class AplicacionWeb implements EntryPoint {
 
 		grid.setWidget(4, 1, grid2);
 
+
+		Label lblNewLabel5 = new Label("Fotos");
+
+
+		grid.setWidget(5, 0,lblNewLabel5);
+
+	
+		
+
+
+
+		    // Attach the image viewer to the document
+			grid.setWidget(6, 1, panelImages);
+		    
+		    // Create a new uploader panel and attach it to the document
+
+		    SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
+		    uploader.setI18Constants(new uploaderConstants());
+		    uploader.setAutoSubmit(true);
+		    uploader.setEnabled(true);
+		    uploader.setAvoidRepeatFiles(true);
+		    uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+		    uploader.setValidExtensions("jpg", "jpeg", "png", "gif");
+			grid.setWidget(5, 1, uploader );
+
+			  
+	
+
+	
+		
+		
 		final Button sendButton = new Button("Enviar");
 		sendButton.addStyleName("sendButton");
-		grid.setWidget(5, 1, sendButton);
+		grid.setWidget(8, 1, sendButton);
 
 		nameField.selectAll();
 
@@ -335,6 +375,35 @@ public class AplicacionWeb implements EntryPoint {
 		nameField.addKeyUpHandler(handler);
 	}
 
+
+	  // Load the image in the document and in the case of success attach it to the viewer
+	  private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
+	    public void onFinish(IUploader uploader) {
+	      if (uploader.getStatus() == Status.SUCCESS) {
+
+	        new PreloadedImage(uploader.fileUrl(), showImage);
+	        
+	        // The server sends useful information to the client by default
+	        UploadedInfo info = uploader.getServerInfo();
+	        System.out.println("File name " + info.name);
+	        System.out.println("File content-type " + info.ctype);
+	        System.out.println("File size " + info.size);
+
+	        // Also, you can send any customized message and parse it 
+	        System.out.println("Server message " + info.message);
+	      }
+	    }
+	  };
+
+	  // Attach an image to the pictures viewer
+	  private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
+	    public void onLoad(PreloadedImage image) {
+	      image.setWidth("75px");
+	      panelImages.add(image);
+	    }
+	  };
+
+
 	private ListBox comboClima() {
 		final ListBox comboNuves = new ListBox();
 		comboNuves.addItem("Normal -", "0");
@@ -415,7 +484,123 @@ public class AplicacionWeb implements EntryPoint {
 		}
 
 	}
+	class uploaderConstants implements UploaderConstants{
 
+		@Override
+		public String uploadLabelCancel() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploadStatusCanceled() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploadStatusCanceling() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploadStatusDeleted() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploadStatusError() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploadStatusInProgress() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploadStatusQueued() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploadStatusSubmitting() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploadStatusSuccess() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploaderActiveUpload() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploaderAlreadyDone() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploaderBlobstoreError() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploaderBrowse() {
+			// TODO Auto-generated method stub
+			return "Seleccionar...";
+		}
+
+		@Override
+		public String uploaderInvalidExtension() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploaderSend() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploaderServerError() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String submitError() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploaderServerUnavailable() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String uploaderTimeout() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+	}
 	class AgregarEspecieDialog extends AgregarElementoObservableDialog {
 
 		public AgregarEspecieDialog() {

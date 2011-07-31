@@ -12,7 +12,8 @@
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
 	<!-- Other module inherits                                      -->
-
+	<inherits name="gwtupload.GWTUpload"/>
+	
 	<!-- Specify the app entry point class.                         -->
 	<entry-point
 		class='ar.edu.unicen.exa.galvarez.patogis.client.AplicacionWeb' />

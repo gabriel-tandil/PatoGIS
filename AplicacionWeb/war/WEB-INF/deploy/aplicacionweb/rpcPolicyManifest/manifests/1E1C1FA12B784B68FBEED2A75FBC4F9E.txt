@@ -1,0 +1,2 @@
+serviceClass: ar.edu.unicen.exa.galvarez.patogis.client.TipoMatrizProductivaService
+path: 2134E55E871A752EC08819595B68BF0F.gwt.rpc
