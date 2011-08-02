@@ -60,6 +60,15 @@
     <url-pattern>/aplicacionweb/tipoMatrizProductiva</url-pattern>
   </servlet-mapping>  
 
+  <servlet>
+    <servlet-name>ubicacionServlet</servlet-name>
+    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.UbicacionServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ubicacionServlet</servlet-name>
+    <url-pattern>/aplicacionweb/ubicacion</url-pattern>
+  </servlet-mapping>  
   
   <!-- Default page to serve -->
   <welcome-file-list>

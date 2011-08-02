@@ -64,8 +64,10 @@ public class Ubicacion {
 	 * @return  the value of public.ubicacion.coordenadas
 	 * @mbggenerated  Sun Jun 12 16:42:33 ART 2011
 	 */
-	public Object getCoordenadas() {
-		return coordenadas;
+	public String getCoordenadas() {
+		if (coordenadas==null)
+			return null;
+		return coordenadas.toString();
 	}
 
 	/**
@@ -73,7 +75,7 @@ public class Ubicacion {
 	 * @param coordenadas  the value for public.ubicacion.coordenadas
 	 * @mbggenerated  Sun Jun 12 16:42:33 ART 2011
 	 */
-	public void setCoordenadas(Object coordenadas) {
+	public void setCoordenadas(String coordenadas) {
 		this.coordenadas = coordenadas;
 	}
 
