@@ -52,21 +52,22 @@ public class UploadServlet extends UploadAction {
    */
   @Override
   public String executeAction(HttpServletRequest request, List<FileItem> sessionFiles) throws UploadActionException {
-    String response = "";
+    String response = ""; //$NON-NLS-1$
     int cont = 0;
     for (FileItem item : sessionFiles) {
       if (false == item.isFormField()) {
         cont ++;
         try {
           /// Create a new file based on the remote file name in the client
-          // String saveName = item.getName().replaceAll("[\\\\/><\\|\\s\"'{}()\\[\\]]+", "_");
-          // File file =new File("/tmp/" + saveName);
+           String saveName = item.getName().replaceAll("[\\\\/><\\|\\s\"'{}()\\[\\]]+", "_"); //$NON-NLS-1$ //$NON-NLS-2$
+           saveName=System.currentTimeMillis()+"_"+saveName;
+           File file =new File(Configuracion.getString("carpeta_imagenes") + saveName); //$NON-NLS-1$
           
-          /// Create a temporary file placed in /tmp (only works in unix)
-          // File file = File.createTempFile("upload-", ".bin", new File("/tmp"));
-          
-          /// Create a temporary file placed in the default system temp folder
-          File file = File.createTempFile("upload-", ".bin");
+//          /// Create a temporary file placed in /tmp (only works in unix)
+//           File file = File.createTempFile("upload-", ".bin", new File("/tmp"));
+//          
+//          /// Create a temporary file placed in the default system temp folder
+//          File file = File.createTempFile("upload-", ".bin");
           item.write(file);
           
           /// Save a list with the received files
@@ -74,7 +75,7 @@ public class UploadServlet extends UploadAction {
           receivedContentTypes.put(item.getFieldName(), item.getContentType());
           
           /// Send a customized message to the client.
-          response += "File saved as " + file.getAbsolutePath();
+          response +=  file.getName(); 
 
         } catch (Exception e) {
           throw new UploadActionException(e.getMessage());
@@ -101,7 +102,7 @@ public class UploadServlet extends UploadAction {
       FileInputStream is = new FileInputStream(f);
       copyFromInputStreamToOutputStream(is, response.getOutputStream());
     } else {
-      renderXmlResponse(request, response, "ERROR_ITEM_NOT_FOUND");
+      renderXmlResponse(request, response, "ERROR_ITEM_NOT_FOUND"); //$NON-NLS-1$
    }
   }
   

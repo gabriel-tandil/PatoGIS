@@ -1,7 +1,8 @@
-#Sat Jul 23 10:14:48 ART 2011
+#Mon Aug 01 20:36:04 ART 2011
 eclipse.preferences.version=1
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/modelo/Especie.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/modelo/TipoMatrizProductiva.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/modelo/Ubicacion.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/EspecieWSImpl.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/EspecieWSImplService.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/EspecieWSImplServiceLocator.java=UTF-8
@@ -10,3 +11,7 @@ encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/TipoM
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/TipoMatrizProductivaWSImplService.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/TipoMatrizProductivaWSImplServiceLocator.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/TipoMatrizProductivaWSImplSoapBindingStub.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UbicacionWSImpl.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UbicacionWSImplService.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UbicacionWSImplServiceLocator.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UbicacionWSImplSoapBindingStub.java=UTF-8

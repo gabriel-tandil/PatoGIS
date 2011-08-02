@@ -42,6 +42,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -65,11 +66,15 @@ public class AplicacionWeb implements EntryPoint {
 	 */
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
-	  private FlowPanel panelImages = new FlowPanel();
+	private FlowPanel panelImages = new FlowPanel();
+	private List<String> imagenes = new ArrayList<String>();
 	private List<String> especies;
+	private List<String> ubicaciones;
 	private List<String> tiposMatrizProductiva;
 	private final EspeciesServiceAsync especiesService = GWT
 			.create(EspeciesService.class);
+	private final UbicacionServiceAsync ubicacionService = GWT
+			.create(UbicacionService.class);
 	private final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
 			.create(TipoMatrizProductivaService.class);
 
@@ -132,14 +137,34 @@ public class AplicacionWeb implements EntryPoint {
 		rootPanel.add(grid);
 		grid.setSize("100px", "100px");
 
-		Label lblNewLabel = new Label("New label");
+		Label lblNewLabel = new Label("Laguna");
 		grid.setWidget(0, 0, lblNewLabel);
-		final TextBox nameField = new TextBox();
-		grid.setWidget(0, 1, nameField);
-		nameField.setText("GWT User");
+		final ListBox laguna = generarComboItemsObservables(ubicaciones,
+				new AgregarUbicacionDialog());
+		grid.setWidget(0, 1, laguna);
+
+		ubicacionService.getElementos(new AsyncCallback<List<String>>() {
+			public void onFailure(Throwable caught) {
+				errorLabel
+						.setText("Error al obtener ubicaciones del webservice");
+			}
+
+			@Override
+			public void onSuccess(List<String> result) {
+				ubicaciones = result;
+
+				if (laguna.getItemCount() == 0)
+					agregarItemsCombo(laguna, ubicaciones);
+			}
+
+		});
+
+		// final TextBox nameField = new TextBox();
+		// grid.setWidget(0, 1, nameField);
+		// nameField.setText("GWT User");
 
 		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
+		laguna.setFocus(true);
 
 		Label lblNewLabel_1 = new Label("Fecha y Horas");
 		grid.setWidget(1, 0, lblNewLabel_1);
@@ -210,73 +235,61 @@ public class AplicacionWeb implements EntryPoint {
 		grid.setWidget(4, 0, lblNewLabel0);
 		Grid grid2 = new Grid(2, 4);
 
-
 		Label lblNewLabel1 = new Label("Sol");
 		final CheckBox checkSol = new CheckBox();
 
-		grid2.setWidget(0, 0,lblNewLabel1);
-		grid2.setWidget(0, 1,checkSol);
+		grid2.setWidget(0, 0, lblNewLabel1);
+		grid2.setWidget(0, 1, checkSol);
 
 		Label lblNewLabel3 = new Label("Nuves");
 
 		final ListBox comboNuves = comboClima();
 
-		grid2.setWidget(0, 2,lblNewLabel3);
-		grid2.setWidget(0, 3,comboNuves);
-
-
-
-
+		grid2.setWidget(0, 2, lblNewLabel3);
+		grid2.setWidget(0, 3, comboNuves);
 
 		Label lblNewLabel2 = new Label("Lluvia");
 		final CheckBox checkLluvia = new CheckBox();
-		grid2.setWidget(1, 0,lblNewLabel2);
-		grid2.setWidget(1, 1,checkLluvia);
+		grid2.setWidget(1, 0, lblNewLabel2);
+		grid2.setWidget(1, 1, checkLluvia);
 
 		Label lblNewLabel4 = new Label("Viento");
 
 		final ListBox comboViento = comboClima();
-		grid2.setWidget(1, 2,lblNewLabel4);
-		grid2.setWidget(1, 3,comboViento);
+		grid2.setWidget(1, 2, lblNewLabel4);
+		grid2.setWidget(1, 3, comboViento);
 
 		grid.setWidget(4, 1, grid2);
 
+		Label lblNewLabel6 = new Label("Observacioens");
+
+		grid.setWidget(5, 0, lblNewLabel6);
+		final TextArea observaciones = new TextArea();
+		// Attach the image viewer to the document
+		grid.setWidget(5, 1, observaciones);
 
 		Label lblNewLabel5 = new Label("Fotos");
 
+		grid.setWidget(6, 0, lblNewLabel5);
 
-		grid.setWidget(5, 0,lblNewLabel5);
+		// Create a new uploader panel and attach it to the document
 
-	
-		
+		SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
+		uploader.setI18Constants(new uploaderConstants());
+		uploader.setAutoSubmit(true);
+		uploader.setEnabled(true);
+		uploader.setAvoidRepeatFiles(true);
+		uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+		uploader.setValidExtensions("jpg", "jpeg", "png", "gif");
+		grid.setWidget(6, 1, uploader);
+		// Attach the image viewer to the document
+		grid.setWidget(7, 1, panelImages);
 
-
-
-		    // Attach the image viewer to the document
-			grid.setWidget(6, 1, panelImages);
-		    
-		    // Create a new uploader panel and attach it to the document
-
-		    SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
-		    uploader.setI18Constants(new uploaderConstants());
-		    uploader.setAutoSubmit(true);
-		    uploader.setEnabled(true);
-		    uploader.setAvoidRepeatFiles(true);
-		    uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-		    uploader.setValidExtensions("jpg", "jpeg", "png", "gif");
-			grid.setWidget(5, 1, uploader );
-
-			  
-	
-
-	
-		
-		
 		final Button sendButton = new Button("Enviar");
 		sendButton.addStyleName("sendButton");
 		grid.setWidget(8, 1, sendButton);
 
-		nameField.selectAll();
+		// nameField.selectAll();
 
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
@@ -330,7 +343,7 @@ public class AplicacionWeb implements EntryPoint {
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
-				String textToServer = nameField.getText();
+				String textToServer = observaciones.getText();
 				if (!FieldVerifier.isValidName(textToServer)) {
 					errorLabel.setText("Please enter at least four characters");
 					return;
@@ -366,43 +379,53 @@ public class AplicacionWeb implements EntryPoint {
 		}
 
 		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();
-
-		sendButton.addClickHandler(handler);
-
-		nameField.selectAll();
-
-		nameField.addKeyUpHandler(handler);
+		// MyHandler handler = new MyHandler();
+		//
+		// sendButton.addClickHandler(handler);
+		//
+		// nameField.selectAll();
+		//
+		// nameField.addKeyUpHandler(handler);
 	}
 
+	// Load the image in the document and in the case of success attach it to
+	// the viewer
+	private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
+		public void onFinish(IUploader uploader) {
+			if (uploader.getStatus() == Status.SUCCESS) {
 
-	  // Load the image in the document and in the case of success attach it to the viewer
-	  private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
-	    public void onFinish(IUploader uploader) {
-	      if (uploader.getStatus() == Status.SUCCESS) {
+				new PreloadedImage(uploader.fileUrl(), showImage);
 
-	        new PreloadedImage(uploader.fileUrl(), showImage);
-	        
-	        // The server sends useful information to the client by default
-	        UploadedInfo info = uploader.getServerInfo();
-	        System.out.println("File name " + info.name);
-	        System.out.println("File content-type " + info.ctype);
-	        System.out.println("File size " + info.size);
+				// The server sends useful information to the client by default
+				UploadedInfo info = uploader.getServerInfo();
+				System.out.println("File name " + info.name);
+				System.out.println("File content-type " + info.ctype);
+				System.out.println("File size " + info.size);
 
-	        // Also, you can send any customized message and parse it 
-	        System.out.println("Server message " + info.message);
-	      }
-	    }
-	  };
+				// Also, you can send any customized message and parse it
+				System.out.println("Nombre Salvado " + info.message);
+				imagenes.add(info.message);
+			}
+		}
+	};
 
-	  // Attach an image to the pictures viewer
-	  private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
-	    public void onLoad(PreloadedImage image) {
-	      image.setWidth("75px");
-	      panelImages.add(image);
-	    }
-	  };
+	// Attach an image to the pictures viewer
+	private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
+		public void onLoad(PreloadedImage image) {
+			image.setWidth("75px");
+			HorizontalPanel hp = new HorizontalPanel();
+			hp.add(image);
+			VerticalPanel vp = new VerticalPanel();
 
+			CheckBox cb = new CheckBox();
+			cb.setText("Panoramica");
+			vp.add(cb);
+			Button borrar = new Button("X");
+			vp.add(borrar);
+			hp.add(vp);
+			panelImages.add(hp);
+		}
+	};
 
 	private ListBox comboClima() {
 		final ListBox comboNuves = new ListBox();
@@ -484,7 +507,8 @@ public class AplicacionWeb implements EntryPoint {
 		}
 
 	}
-	class uploaderConstants implements UploaderConstants{
+
+	class uploaderConstants implements UploaderConstants {
 
 		@Override
 		public String uploadLabelCancel() {
@@ -561,7 +585,7 @@ public class AplicacionWeb implements EntryPoint {
 		@Override
 		public String uploaderBrowse() {
 			// TODO Auto-generated method stub
-			return "Seleccionar...";
+			return "Agregar...";
 		}
 
 		@Override
@@ -599,8 +623,9 @@ public class AplicacionWeb implements EntryPoint {
 			// TODO Auto-generated method stub
 			return null;
 		}
-		
+
 	}
+
 	class AgregarEspecieDialog extends AgregarElementoObservableDialog {
 
 		public AgregarEspecieDialog() {
@@ -640,7 +665,7 @@ public class AplicacionWeb implements EntryPoint {
 					new AsyncCallback<Void>() {
 						public void onFailure(Throwable caught) {
 							errorLabel
-									.setText("Error al guardar Nuevo Tipo de Matriz Productiva especie via webService");
+									.setText("Error al guardar nuevo tipo de matriz productiva via webService");
 						}
 
 						@Override
@@ -650,6 +675,33 @@ public class AplicacionWeb implements EntryPoint {
 						}
 					});
 			tiposMatrizProductiva.add(text.getValue());
+			establecerElementoCombo(combo, text.getValue());
+			hide();
+		}
+
+	}
+
+	class AgregarUbicacionDialog extends AgregarElementoObservableDialog {
+
+		public AgregarUbicacionDialog() {
+			setText("Ingresar Nombre Nueva Ubicación");
+		}
+
+		protected void grabar() {
+			ubicacionService.addElemento(text.getValue(),
+					new AsyncCallback<Void>() {
+						public void onFailure(Throwable caught) {
+							errorLabel
+									.setText("Error al guardar nueva ubicación via webService");
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// nada
+
+						}
+					});
+			ubicaciones.add(text.getValue());
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
