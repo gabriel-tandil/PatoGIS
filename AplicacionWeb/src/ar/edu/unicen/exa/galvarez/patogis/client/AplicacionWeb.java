@@ -41,14 +41,18 @@ import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
  */
 public class AplicacionWeb implements EntryPoint {
 
-
+	private SingleUploader uploader = null;
 	private FlowPanel panelImages = new FlowPanel();
 	private List<String> imagenes = new ArrayList<String>();
 	List<String> especies;
 	List<String> ubicaciones;
 	List<String> tiposMatrizProductiva;
+	final Label errorLabel = new Label();
+	final ArchivosServiceAsync archivosService = GWT
+			.create(ArchivosService.class);
 	final EspeciesServiceAsync especiesService = GWT
 			.create(EspeciesService.class);
+
 	final UbicacionServiceAsync ubicacionService = GWT
 			.create(UbicacionService.class);
 	final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
@@ -61,7 +65,6 @@ public class AplicacionWeb implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Label errorLabel = new Label();
 
 		especiesService.getElementos(new AsyncCallback<List<String>>() {
 			public void onFailure(Throwable caught) {
@@ -133,7 +136,6 @@ public class AplicacionWeb implements EntryPoint {
 			}
 
 		});
-
 
 		// Focus the cursor on the name field when the app loads
 		laguna.setFocus(true);
@@ -243,8 +245,7 @@ public class AplicacionWeb implements EntryPoint {
 
 		grid.setWidget(6, 0, lblNewLabel5);
 
-
-		SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
+		uploader = new SingleUploader(FileInputType.BUTTON);
 		uploader.setI18Constants(new UploaderConstantsImpl());
 		uploader.setAutoSubmit(true);
 		uploader.setEnabled(true);
@@ -286,7 +287,7 @@ public class AplicacionWeb implements EntryPoint {
 	private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
 		public void onLoad(PreloadedImage image) {
 			image.setWidth("75px");
-			HorizontalPanel hp = new HorizontalPanel();
+			final HorizontalPanel hp = new HorizontalPanel();
 			hp.add(image);
 			VerticalPanel vp = new VerticalPanel();
 
@@ -294,11 +295,34 @@ public class AplicacionWeb implements EntryPoint {
 			cb.setText("Panoramica");
 			vp.add(cb);
 			Button borrar = new Button("X");
+			borrar.addClickHandler(new ClickHandler() {
+				String imagen = imagenes.get(imagenes.size() - 1);
+
+				public void onClick(ClickEvent event) {
+					borrarImagen(imagen);
+					panelImages.remove(hp);
+				}
+			});
 			vp.add(borrar);
 			hp.add(vp);
 			panelImages.add(hp);
 		}
 	};
+
+	private void borrarImagen(String imagen) {
+
+		archivosService.borrar(imagen, new AsyncCallback<Void>() {
+			public void onFailure(Throwable caught) {
+				errorLabel.setText("Error al  eliminar archivo");
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				// nada
+
+			}
+		});
+	}
 
 	private ListBox comboClima() {
 		final ListBox comboNuves = new ListBox();
@@ -317,7 +341,8 @@ public class AplicacionWeb implements EntryPoint {
 		verticalPanel_1.add(horizontalPanel1);
 
 		final ListBox comboBox = generarComboItemsObservables(
-				tiposMatrizProductiva, new AgregarTipoMatrizProductivaDialog(this));
+				tiposMatrizProductiva, new AgregarTipoMatrizProductivaDialog(
+						this));
 
 		horizontalPanel1.add(comboBox);
 

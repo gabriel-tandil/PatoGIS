@@ -71,7 +71,7 @@ public class UploadServlet extends UploadAction {
           item.write(file);
           
           /// Save a list with the received files
-          receivedFiles.put(item.getFieldName(), file);
+          receivedFiles.put(file.getName(), file);
           receivedContentTypes.put(item.getFieldName(), item.getContentType());
           
           /// Send a customized message to the client.
