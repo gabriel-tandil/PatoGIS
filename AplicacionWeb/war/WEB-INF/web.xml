@@ -26,17 +26,6 @@
   <servlet-mapping>
     <servlet-name>uploadServlet</servlet-name>
     <url-pattern>*.gupld</url-pattern>
-  </servlet-mapping>  
-  
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/aplicacionweb/greet</url-pattern>
   </servlet-mapping>
   
   <!-- Servlets -->
