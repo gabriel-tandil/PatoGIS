@@ -1,19 +1,3 @@
-/*
- * Copyright 2009 Manuel Carrasco Moñino. (manuel_carrasco at users.sourceforge.net) 
- * http://code.google.com/p/gwtupload
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package ar.edu.unicen.exa.galvarez.patogis.server;
 import static gwtupload.shared.UConsts.*;
 import gwtupload.server.UploadAction;
@@ -30,12 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 
-/**
- * This class sends by email, all the fields and files received by GWTUpload servlet.
- * 
- * @author Manolo Carrasco Moñino
- *
- */
+
 public class UploadServlet extends UploadAction {
 
   private static final long serialVersionUID = 1L;
@@ -63,15 +42,10 @@ public class UploadServlet extends UploadAction {
            saveName=System.currentTimeMillis()+"_"+saveName;
            File file =new File(Configuracion.getString("carpeta_imagenes") + saveName); //$NON-NLS-1$
           
-//          /// Create a temporary file placed in /tmp (only works in unix)
-//           File file = File.createTempFile("upload-", ".bin", new File("/tmp"));
-//          
-//          /// Create a temporary file placed in the default system temp folder
-//          File file = File.createTempFile("upload-", ".bin");
           item.write(file);
           
           /// Save a list with the received files
-          receivedFiles.put(file.getName(), file);
+          receivedFiles.put(item.getFieldName(), file);
           receivedContentTypes.put(item.getFieldName(), item.getContentType());
           
           /// Send a customized message to the client.

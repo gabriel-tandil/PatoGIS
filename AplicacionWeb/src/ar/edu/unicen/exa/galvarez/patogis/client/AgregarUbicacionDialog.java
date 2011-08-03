@@ -7,15 +7,15 @@ class AgregarUbicacionDialog extends AgregarElementoObservableDialog {
 	/**
 	 * 
 	 */
-	private final AplicacionWeb agregarUbicacionDialog;
+	private final AplicacionWeb aplicacionWeb;
 
 	public AgregarUbicacionDialog(AplicacionWeb aplicacionWeb) {
-		agregarUbicacionDialog = aplicacionWeb;
+		this.aplicacionWeb= aplicacionWeb;
 		setText("Ingresar Nombre Nueva Ubicación");
 	}
 
 	protected void grabar() {
-		agregarUbicacionDialog.ubicacionService.addElemento(text.getValue(),
+		aplicacionWeb.ubicacionService.addElemento(text.getValue(),
 				new AsyncCallback<Void>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
@@ -28,8 +28,8 @@ class AgregarUbicacionDialog extends AgregarElementoObservableDialog {
 
 					}
 				});
-		agregarUbicacionDialog.ubicaciones.add(text.getValue());
-		agregarUbicacionDialog.establecerElementoCombo(combo, text.getValue());
+		aplicacionWeb.ubicaciones.add(text.getValue());
+		aplicacionWeb.establecerElementoCombo(combo, text.getValue());
 		hide();
 	}
 

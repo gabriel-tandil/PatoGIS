@@ -7,15 +7,15 @@ class AgregarEspecieDialog extends AgregarElementoObservableDialog {
 	/**
 	 * 
 	 */
-	private final AplicacionWeb agregarEspecieDialog;
+	private final AplicacionWeb aplicacionWeb;
 
 	public AgregarEspecieDialog(AplicacionWeb aplicacionWeb) {
-		agregarEspecieDialog = aplicacionWeb;
+		this.aplicacionWeb = aplicacionWeb;
 		setText("Ingresar Nueva Especie");
 	}
 
 	protected void grabar() {
-		agregarEspecieDialog.especiesService.addElemento(text.getValue(),
+		aplicacionWeb.especiesService.addElemento(text.getValue(),
 				new AsyncCallback<Void>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
@@ -28,8 +28,8 @@ class AgregarEspecieDialog extends AgregarElementoObservableDialog {
 
 					}
 				});
-		agregarEspecieDialog.especies.add(text.getValue());
-		agregarEspecieDialog.establecerElementoCombo(combo, text.getValue());
+		aplicacionWeb.especies.add(text.getValue());
+		aplicacionWeb.establecerElementoCombo(combo, text.getValue());
 		hide();
 	}
 

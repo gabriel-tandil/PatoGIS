@@ -41,7 +41,6 @@ import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
  */
 public class AplicacionWeb implements EntryPoint {
 
-	private SingleUploader uploader = null;
 	private FlowPanel panelImages = new FlowPanel();
 	private List<String> imagenes = new ArrayList<String>();
 	List<String> especies;
@@ -245,7 +244,7 @@ public class AplicacionWeb implements EntryPoint {
 
 		grid.setWidget(6, 0, lblNewLabel5);
 
-		uploader = new SingleUploader(FileInputType.BUTTON);
+		SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
 		uploader.setI18Constants(new UploaderConstantsImpl());
 		uploader.setAutoSubmit(true);
 		uploader.setEnabled(true);

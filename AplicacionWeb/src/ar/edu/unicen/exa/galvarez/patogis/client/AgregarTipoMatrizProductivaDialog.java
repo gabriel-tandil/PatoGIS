@@ -8,15 +8,15 @@ class AgregarTipoMatrizProductivaDialog extends
 	/**
 	 * 
 	 */
-	private final AplicacionWeb agregarTipoMatrizProductivaDialog;
+	private final AplicacionWeb aplicacionWeb;
 
 	public AgregarTipoMatrizProductivaDialog(AplicacionWeb aplicacionWeb) {
-		agregarTipoMatrizProductivaDialog = aplicacionWeb;
+		this.aplicacionWeb = aplicacionWeb;
 		setText("Ingresar Nuevo Tipo de Matriz Productiva");
 	}
 
 	protected void grabar() {
-		agregarTipoMatrizProductivaDialog.tipoMatrizProductivaService.addElemento(text.getValue(),
+		aplicacionWeb.tipoMatrizProductivaService.addElemento(text.getValue(),
 				new AsyncCallback<Void>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
@@ -29,8 +29,8 @@ class AgregarTipoMatrizProductivaDialog extends
 
 					}
 				});
-		agregarTipoMatrizProductivaDialog.tiposMatrizProductiva.add(text.getValue());
-		agregarTipoMatrizProductivaDialog.establecerElementoCombo(combo, text.getValue());
+		aplicacionWeb.tiposMatrizProductiva.add(text.getValue());
+		aplicacionWeb.establecerElementoCombo(combo, text.getValue());
 		hide();
 	}
 
