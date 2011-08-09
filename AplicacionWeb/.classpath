@@ -5,14 +5,14 @@
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ProveedorServicios"/>
-	<classpathentry kind="lib" path="/opt/PRG/env/eclipse/plugins/org.apache.axis_1.4.0.v201005080400/lib/axis.jar"/>
-	<classpathentry kind="lib" path="/opt/PRG/env/eclipse/plugins/org.apache.commons.discovery_0.2.0.v201004190315/lib/commons-discovery-0.2.jar"/>
-	<classpathentry kind="lib" path="/opt/PRG/env/eclipse/plugins/javax.xml.rpc_1.1.0.v201005080400/lib/jaxrpc.jar"/>
-	<classpathentry kind="lib" path="/opt/PRG/env/eclipse/plugins/javax.xml.soap_1.2.0.v201005080501/lib/saaj.jar"/>
-	<classpathentry kind="lib" path="/opt/PRG/env/eclipse/plugins/javax.wsdl_1.6.2.v201005080631.jar"/>
-	<classpathentry kind="lib" path="/opt/PRG/env/eclipse/plugins/org.apache.commons.logging_1.0.4.v201005080501.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtupload-0.6.4-20110712.073705-11.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/axis.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.wsdl_1.6.2.v201005080631.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/org.apache.commons.logging_1.0.4.v201005080501.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/saaj.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

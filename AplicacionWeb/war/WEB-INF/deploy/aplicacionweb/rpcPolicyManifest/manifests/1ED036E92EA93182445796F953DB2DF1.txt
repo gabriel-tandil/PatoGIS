@@ -1,2 +1,0 @@
-serviceClass: ar.edu.unicen.exa.galvarez.patogis.client.GreetingService
-path: 9E6671791AF483E5D5443B6FC2B224D6.gwt.rpc
