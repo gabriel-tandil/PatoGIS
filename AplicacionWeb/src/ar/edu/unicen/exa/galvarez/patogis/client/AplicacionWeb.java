@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -51,7 +53,8 @@ public class AplicacionWeb implements EntryPoint {
 			.create(ArchivosService.class);
 	final EspeciesServiceAsync especiesService = GWT
 			.create(EspeciesService.class);
-
+	final ObservacionServiceAsync observacionService = GWT
+	.create(ObservacionService.class);
 	final UbicacionServiceAsync ubicacionService = GWT
 			.create(UbicacionService.class);
 	final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
@@ -142,17 +145,17 @@ public class AplicacionWeb implements EntryPoint {
 		Label lblNewLabel_1 = new Label("Fecha y Horas");
 		grid.setWidget(1, 0, lblNewLabel_1);
 		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
-		DateBox dateBox = new DateBox();
+		final DateBox dateBox = new DateBox();
 		dateBox.setWidth("70px");
 		grid.setWidget(1, 1, horizontalPanel1);
 		dateBox.setFormat(new DefaultFormat(DateTimeFormat
 				.getFormat("dd/MM/yy")));
 		dateBox.setValue(new Date());
-		TimeBox horaInicio = new TimeBox();
+		final TimeBox horaInicio = new TimeBox();
 		horaInicio.setWidth("45px");
 		horaInicio.setValue(DateTimeFormat.getFormat("HH:mm")
 				.format(new Date()));
-		TimeBox horaFin = new TimeBox();
+		final TimeBox horaFin = new TimeBox();
 		horaFin.setWidth("45px");
 		horaFin.setValue(DateTimeFormat.getFormat("HH:mm").format(new Date()));
 
@@ -257,6 +260,46 @@ public class AplicacionWeb implements EntryPoint {
 
 		final Button sendButton = new Button("Enviar");
 		sendButton.addStyleName("sendButton");
+		sendButton.addClickHandler(new ClickHandler() {
+
+			@SuppressWarnings("deprecation")
+			public void onClick(ClickEvent event) {
+				Observacion observacion = new Observacion();
+				observacion.setObservaciones(observaciones.getValue());
+				observacion.setEstado("A Revisar");
+				observacion.setAlcance("");
+				// observacion.setIdUbicacion(c)
+
+				Date fecha = new Date(dateBox.getValue().getYear(), dateBox
+						.getValue().getMonth(), dateBox.getValue().getDate(),
+						DateTimeFormat.getFormat("HH:mm")
+								.parse(horaInicio.getValue()).getHours(),
+						DateTimeFormat.getFormat("HH:mm")
+								.parse(horaInicio.getValue()).getMinutes());
+				observacion.setInicio(fecha);
+				fecha = new Date(dateBox.getValue().getYear(), dateBox
+						.getValue().getMonth(), dateBox.getValue().getDate(),
+						DateTimeFormat.getFormat("HH:mm")
+								.parse(horaFin.getValue()).getHours(),
+						DateTimeFormat.getFormat("HH:mm")
+								.parse(horaFin.getValue()).getMinutes());
+				observacion.setFin(fecha);
+observacionService.addElemento(observacion, new AsyncCallback<Void>() {
+	
+	@Override
+	public void onSuccess(Void result) {
+		errorLabel.setText("Observacion guardada");
+		
+	}
+	
+	@Override
+	public void onFailure(Throwable caught) {
+		errorLabel.setText("Error al guardar observacion");
+		
+	}
+});
+			}
+		});
 		grid.setWidget(8, 1, sendButton);
 
 	}

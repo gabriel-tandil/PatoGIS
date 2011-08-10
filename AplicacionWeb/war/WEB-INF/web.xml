@@ -68,6 +68,16 @@
     <servlet-name>archivosServlet</servlet-name>
     <url-pattern>/aplicacionweb/archivos</url-pattern>
   </servlet-mapping>  
+
+  <servlet>
+    <servlet-name>observacionServlet</servlet-name>
+    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.ObservacionServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>observacionServlet</servlet-name>
+    <url-pattern>/aplicacionweb/observacion</url-pattern>
+  </servlet-mapping>  
   
   <!-- Default page to serve -->
   <welcome-file-list>
