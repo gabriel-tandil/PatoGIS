@@ -10,9 +10,11 @@ import gwtupload.client.SingleUploader;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
@@ -49,9 +51,9 @@ public class AplicacionWeb implements EntryPoint {
 
 	private FlowPanel panelImages = new FlowPanel();
 	private List<String> imagenes = new ArrayList<String>();
-	Map<String,Especie> especies;
-	Map<String,Ubicacion> ubicaciones;
-	Map<String,TipoMatrizProductiva> tiposMatrizProductiva;
+	Map<String, Especie> especies=new HashMap<String, Especie>();
+	Map<String, Ubicacion> ubicaciones=new HashMap<String, Ubicacion>();
+	Map<String, TipoMatrizProductiva> tiposMatrizProductiva=new HashMap<String, TipoMatrizProductiva>();
 	final Label errorLabel = new Label();
 	final ArchivosServiceAsync archivosService = GWT
 			.create(ArchivosService.class);
@@ -67,22 +69,18 @@ public class AplicacionWeb implements EntryPoint {
 	private List<VerticalPanel> conteosEspecie = new ArrayList<VerticalPanel>();
 	private List<HorizontalPanel> observacionesMatrizProductiva = new ArrayList<HorizontalPanel>();
 
-	private List<String> obtenerNombres(Map<String,?> elementos) {
-		return new ArrayList<String>(elementos.keySet());
-	}
-
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
 
-		especiesService.getElementos(new AsyncCallback<Map<String,Especie>>() {
+		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel.setText("Error al obtener especies del webservice");
 			}
 
 			@Override
-			public void onSuccess(Map<String,Especie> result) {
+			public void onSuccess(Map<String, Especie> result) {
 				especies = result;
 				for (Iterator<VerticalPanel> iterator = conteosEspecie
 						.iterator(); iterator.hasNext();) {
@@ -90,20 +88,21 @@ public class AplicacionWeb implements EntryPoint {
 					ListBox combo = (ListBox) ((HorizontalPanel) hp
 							.getWidget(0)).getWidget(0);
 					if (combo.getItemCount() == 0)
-						agregarItemsCombo(combo, obtenerNombres(especies));
+						agregarItemsCombo(combo, especies.keySet());
 				}
 			}
 		});
 
 		tipoMatrizProductivaService
-				.getElementos(new AsyncCallback<Map<String,TipoMatrizProductiva>>() {
+				.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
 								.setText("Error al obtener tipos de matriz productiva del webservice");
 					}
 
 					@Override
-					public void onSuccess(Map<String,TipoMatrizProductiva> result) {
+					public void onSuccess(
+							Map<String, TipoMatrizProductiva> result) {
 						tiposMatrizProductiva = result;
 						for (Iterator<HorizontalPanel> iterator = observacionesMatrizProductiva
 								.iterator(); iterator.hasNext();) {
@@ -111,7 +110,7 @@ public class AplicacionWeb implements EntryPoint {
 							ListBox combo = (ListBox) hp.getWidget(0);
 							if (combo.getItemCount() == 0)
 								agregarItemsCombo(combo,
-										obtenerNombres(tiposMatrizProductiva));
+										tiposMatrizProductiva.keySet());
 						}
 					}
 
@@ -130,24 +129,25 @@ public class AplicacionWeb implements EntryPoint {
 		Label lblNewLabel = new Label("Laguna");
 		grid.setWidget(0, 0, lblNewLabel);
 		final ListBox laguna = generarComboItemsObservables(
-				obtenerNombres(ubicaciones), new AgregarUbicacionDialog());
+				ubicaciones.keySet(), new AgregarUbicacionDialog());
 		grid.setWidget(0, 1, laguna);
 
-		ubicacionService.getElementos(new AsyncCallback<Map<String,Ubicacion>>() {
-			public void onFailure(Throwable caught) {
-				errorLabel
-						.setText("Error al obtener ubicaciones del webservice");
-			}
+		ubicacionService
+				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
+					public void onFailure(Throwable caught) {
+						errorLabel
+								.setText("Error al obtener ubicaciones del webservice");
+					}
 
-			@Override
-			public void onSuccess(Map<String,Ubicacion> result) {
-				ubicaciones = result;
+					@Override
+					public void onSuccess(Map<String, Ubicacion> result) {
+						ubicaciones = result;
 
-				if (laguna.getItemCount() == 0)
-					agregarItemsCombo(laguna, obtenerNombres(ubicaciones));
-			}
+						if (laguna.getItemCount() == 0)
+							agregarItemsCombo(laguna, ubicaciones.keySet());
+					}
 
-		});
+				});
 
 		// Focus the cursor on the name field when the app loads
 		laguna.setFocus(true);
@@ -395,7 +395,7 @@ public class AplicacionWeb implements EntryPoint {
 		verticalPanel_1.add(horizontalPanel1);
 
 		final ListBox comboBox = generarComboItemsObservables(
-				obtenerNombres(tiposMatrizProductiva),
+				tiposMatrizProductiva.keySet(),
 				new AgregarTipoMatrizProductivaDialog());
 
 		horizontalPanel1.add(comboBox);
@@ -417,7 +417,7 @@ public class AplicacionWeb implements EntryPoint {
 		verticalPanel.add(horizontalPanel);
 
 		final ListBox comboBox = generarComboItemsObservables(
-				obtenerNombres(especies), new AgregarEspecieDialog());
+				especies.keySet(), new AgregarEspecieDialog());
 
 		horizontalPanel.add(comboBox);
 
@@ -449,7 +449,7 @@ public class AplicacionWeb implements EntryPoint {
 		textBox_1.setWidth("60px");
 	}
 
-	private ListBox generarComboItemsObservables(List<String> items,
+	private ListBox generarComboItemsObservables(Set<String> items,
 			final AgregarElementoObservableDialog dlg) {
 		final ListBox comboBox = new ListBox();
 
@@ -466,13 +466,13 @@ public class AplicacionWeb implements EntryPoint {
 				}
 			}
 		});
-		if (items != null) {
+		if (!items.isEmpty()) {
 			agregarItemsCombo(comboBox, items);
 		}
 		return comboBox;
 	}
 
-	private void agregarItemsCombo(final ListBox comboBox, List<String> list) {
+	private void agregarItemsCombo(final ListBox comboBox, Set<String> list) {
 		comboBox.addItem("Seleccionar");
 		for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
 			String especie = iterator.next();
@@ -509,7 +509,7 @@ public class AplicacionWeb implements EntryPoint {
 
 				}
 			});
-			especies.put(text.getValue(),e);
+			especies.put(text.getValue(), e);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
@@ -539,7 +539,7 @@ public class AplicacionWeb implements EntryPoint {
 
 						}
 					});
-			tiposMatrizProductiva.put(text.getValue(),tmp);
+			tiposMatrizProductiva.put(text.getValue(), tmp);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
@@ -568,7 +568,7 @@ public class AplicacionWeb implements EntryPoint {
 
 				}
 			});
-			ubicaciones.put(text.getValue(),u);
+			ubicaciones.put(text.getValue(), u);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
