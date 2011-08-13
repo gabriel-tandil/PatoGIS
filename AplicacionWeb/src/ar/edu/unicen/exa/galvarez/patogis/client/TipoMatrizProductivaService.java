@@ -1,6 +1,6 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
-import java.util.List;
+import java.util.Map;
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 
@@ -12,6 +12,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("tipoMatrizProductiva")
 public interface TipoMatrizProductivaService extends RemoteService {
-	List<TipoMatrizProductiva> getElementos();
+	Map<String, TipoMatrizProductiva> getElementos();
 	void addElemento(TipoMatrizProductiva tipoMatrizProductiva);
 }

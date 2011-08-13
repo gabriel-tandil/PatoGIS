@@ -1,8 +1,8 @@
 package ar.edu.unicen.exa.galvarez.patogis.server;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
 
@@ -20,9 +20,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class EspeciesServiceImpl extends RemoteServiceServlet implements
 		EspeciesService {
 
-	public List<Especie> getElementos() throws IllegalArgumentException {
+	public Map<String, Especie> getElementos() throws IllegalArgumentException {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
-		List<Especie> l = new ArrayList<Especie>();
+		Map<String,Especie> l = new HashMap<String,Especie>();
 
 		try {
 			EspecieWSImpl especieWS = especieWSServiceLocator
@@ -30,7 +30,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 			Especie[] especies = especieWS.getElementos();
 			if (especies != null) {
 				for (int i = 0; i < especies.length; i++) {
-					l.add(especies[i]);
+					l.put(especies[i].getNombre(),especies[i]);
 				}
 			}
 		} catch (ServiceException e) {

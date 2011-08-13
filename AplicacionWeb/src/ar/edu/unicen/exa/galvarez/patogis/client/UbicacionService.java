@@ -1,6 +1,6 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
-import java.util.List;
+import java.util.Map;
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 
@@ -12,6 +12,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("ubicacion")
 public interface UbicacionService extends RemoteService {
-	List<Ubicacion> getElementos();
+	Map<String, Ubicacion> getElementos();
 	void addElemento(Ubicacion ubicacion);
 }

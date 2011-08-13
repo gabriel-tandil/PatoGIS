@@ -8,14 +8,12 @@ import gwtupload.client.PreloadedImage;
 import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
 import gwtupload.client.SingleUploader;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Dominio;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
@@ -51,9 +49,9 @@ public class AplicacionWeb implements EntryPoint {
 
 	private FlowPanel panelImages = new FlowPanel();
 	private List<String> imagenes = new ArrayList<String>();
-	List<Especie> especies;
-	List<Ubicacion> ubicaciones;
-	List<TipoMatrizProductiva> tiposMatrizProductiva;
+	Map<String,Especie> especies;
+	Map<String,Ubicacion> ubicaciones;
+	Map<String,TipoMatrizProductiva> tiposMatrizProductiva;
 	final Label errorLabel = new Label();
 	final ArchivosServiceAsync archivosService = GWT
 			.create(ArchivosService.class);
@@ -69,15 +67,8 @@ public class AplicacionWeb implements EntryPoint {
 	private List<VerticalPanel> conteosEspecie = new ArrayList<VerticalPanel>();
 	private List<HorizontalPanel> observacionesMatrizProductiva = new ArrayList<HorizontalPanel>();
 
-	private List<String> obtenerNombres(List<?> elementos) {
-		List<String> nombres = new ArrayList<String>();
-		for (@SuppressWarnings("unchecked")
-		Iterator<Dominio> iterator = (Iterator<Dominio>) elementos.iterator(); iterator
-				.hasNext();) {
-			Dominio object = (Dominio) iterator.next();
-			nombres.add(object.getNombre());
-		}
-		return nombres;
+	private List<String> obtenerNombres(Map<String,?> elementos) {
+		return new ArrayList<String>(elementos.keySet());
 	}
 
 	/**
@@ -85,13 +76,13 @@ public class AplicacionWeb implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
-		especiesService.getElementos(new AsyncCallback<List<Especie>>() {
+		especiesService.getElementos(new AsyncCallback<Map<String,Especie>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel.setText("Error al obtener especies del webservice");
 			}
 
 			@Override
-			public void onSuccess(List<Especie> result) {
+			public void onSuccess(Map<String,Especie> result) {
 				especies = result;
 				for (Iterator<VerticalPanel> iterator = conteosEspecie
 						.iterator(); iterator.hasNext();) {
@@ -105,14 +96,14 @@ public class AplicacionWeb implements EntryPoint {
 		});
 
 		tipoMatrizProductivaService
-				.getElementos(new AsyncCallback<List<TipoMatrizProductiva>>() {
+				.getElementos(new AsyncCallback<Map<String,TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
 								.setText("Error al obtener tipos de matriz productiva del webservice");
 					}
 
 					@Override
-					public void onSuccess(List<TipoMatrizProductiva> result) {
+					public void onSuccess(Map<String,TipoMatrizProductiva> result) {
 						tiposMatrizProductiva = result;
 						for (Iterator<HorizontalPanel> iterator = observacionesMatrizProductiva
 								.iterator(); iterator.hasNext();) {
@@ -142,14 +133,14 @@ public class AplicacionWeb implements EntryPoint {
 				obtenerNombres(ubicaciones), new AgregarUbicacionDialog());
 		grid.setWidget(0, 1, laguna);
 
-		ubicacionService.getElementos(new AsyncCallback<List<Ubicacion>>() {
+		ubicacionService.getElementos(new AsyncCallback<Map<String,Ubicacion>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel
 						.setText("Error al obtener ubicaciones del webservice");
 			}
 
 			@Override
-			public void onSuccess(List<Ubicacion> result) {
+			public void onSuccess(Map<String,Ubicacion> result) {
 				ubicaciones = result;
 
 				if (laguna.getItemCount() == 0)
@@ -518,7 +509,7 @@ public class AplicacionWeb implements EntryPoint {
 
 				}
 			});
-			especies.add(e);
+			especies.put(text.getValue(),e);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
@@ -548,7 +539,7 @@ public class AplicacionWeb implements EntryPoint {
 
 						}
 					});
-			tiposMatrizProductiva.add(tmp);
+			tiposMatrizProductiva.put(text.getValue(),tmp);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
@@ -577,7 +568,7 @@ public class AplicacionWeb implements EntryPoint {
 
 				}
 			});
-			ubicaciones.add(u);
+			ubicaciones.put(text.getValue(),u);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}

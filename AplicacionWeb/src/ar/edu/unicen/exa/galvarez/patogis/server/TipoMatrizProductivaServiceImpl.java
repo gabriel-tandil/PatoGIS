@@ -1,8 +1,8 @@
 package ar.edu.unicen.exa.galvarez.patogis.server;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
 
@@ -20,9 +20,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class TipoMatrizProductivaServiceImpl extends RemoteServiceServlet implements
 TipoMatrizProductivaService {
 
-	public List<TipoMatrizProductiva> getElementos() throws IllegalArgumentException {
+	public Map<String, TipoMatrizProductiva> getElementos() throws IllegalArgumentException {
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
-		List<TipoMatrizProductiva> l = new ArrayList<TipoMatrizProductiva>();
+		Map<String, TipoMatrizProductiva> l = new HashMap<String, TipoMatrizProductiva>();
 
 		try {
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator
@@ -30,7 +30,7 @@ TipoMatrizProductivaService {
 			TipoMatrizProductiva[] tiposMatrizProductiva = tipoMatrizProductivaWS.getElementos();
 			if (tiposMatrizProductiva!=null){
 				for (int i = 0; i < tiposMatrizProductiva.length; i++) {
-					l.add(tiposMatrizProductiva[i]);
+					l.put(tiposMatrizProductiva[i].getNombre(),tiposMatrizProductiva[i]);
 				}
 			}
 		} catch (ServiceException e) {
