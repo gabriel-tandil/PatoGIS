@@ -29,6 +29,7 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 	@Override
 	public void addElemento(Observacion elemento, Integer idUsuario)
 			throws RemoteException {
+		//TODO: mejorar esquema de salvado e ids padres en hijos y viceversa y separar dto y jbo
 		super.addElementoGenerico(elemento, idUsuario);
 		ObservacionEspecieWS oews=new ObservacionEspecieWSImpl();
 		ObservacionMatrizProductivaWS ompws=new ObservacionMatrizProductivaWSImpl();
