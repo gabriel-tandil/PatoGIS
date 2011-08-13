@@ -20,9 +20,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class EspeciesServiceImpl extends RemoteServiceServlet implements
 		EspeciesService {
 
-	public List<String> getElementos() throws IllegalArgumentException {
+	public List<Especie> getElementos() throws IllegalArgumentException {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
-		List<String> l = new ArrayList<String>();
+		List<Especie> l = new ArrayList<Especie>();
 
 		try {
 			EspecieWSImpl especieWS = especieWSServiceLocator
@@ -30,7 +30,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 			Especie[] especies = especieWS.getElementos();
 			if (especies != null) {
 				for (int i = 0; i < especies.length; i++) {
-					l.add(especies[i].getNombre());
+					l.add(especies[i]);
 				}
 			}
 		} catch (ServiceException e) {
@@ -44,16 +44,15 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public void addElemento(String especie) {
+	public void addElemento(Especie especie) {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
 
 		try {
 
 			EspecieWSImpl especieWS = especieWSServiceLocator
 					.getEspecieWSImpl();
-			Especie e = new Especie();
-			e.setNombre(especie);
-			especieWS.addElemento(e, 1);
+			
+			especieWS.addElemento(especie, 1);
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Dominio;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
@@ -70,28 +71,11 @@ public class AplicacionWeb implements EntryPoint {
 
 	private List<String> obtenerNombres(List<?> elementos) {
 		List<String> nombres = new ArrayList<String>();
-		for (Iterator iterator = elementos.iterator(); iterator.hasNext();) {
-			Object object = (Object) iterator.next();
-			try {
-				Method m = object.getClass().getDeclaredMethod("getNombre");
-				String nombre = (String) m.invoke(object);
-				nombres.add(nombre);
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		for (@SuppressWarnings("unchecked")
+		Iterator<Dominio> iterator = (Iterator<Dominio>) elementos.iterator(); iterator
+				.hasNext();) {
+			Dominio object = (Dominio) iterator.next();
+			nombres.add(object.getNombre());
 		}
 		return nombres;
 	}
@@ -101,7 +85,7 @@ public class AplicacionWeb implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
-		especiesService.getElementos(new AsyncCallback<List<String>>() {
+		especiesService.getElementos(new AsyncCallback<List<Especie>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel.setText("Error al obtener especies del webservice");
 			}
@@ -115,13 +99,13 @@ public class AplicacionWeb implements EntryPoint {
 					ListBox combo = (ListBox) ((HorizontalPanel) hp
 							.getWidget(0)).getWidget(0);
 					if (combo.getItemCount() == 0)
-						agregarItemsCombo(combo, especies);
+						agregarItemsCombo(combo, obtenerNombres(especies));
 				}
 			}
 		});
 
 		tipoMatrizProductivaService
-				.getElementos(new AsyncCallback<List<String>>() {
+				.getElementos(new AsyncCallback<List<TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
 								.setText("Error al obtener tipos de matriz productiva del webservice");
@@ -154,22 +138,22 @@ public class AplicacionWeb implements EntryPoint {
 
 		Label lblNewLabel = new Label("Laguna");
 		grid.setWidget(0, 0, lblNewLabel);
-		final ListBox laguna = generarComboItemsObservables(ubicaciones,
-				new AgregarUbicacionDialog(this));
+		final ListBox laguna = generarComboItemsObservables(
+				obtenerNombres(ubicaciones), new AgregarUbicacionDialog());
 		grid.setWidget(0, 1, laguna);
 
-		ubicacionService.getElementos(new AsyncCallback<List<String>>() {
+		ubicacionService.getElementos(new AsyncCallback<List<Ubicacion>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel
 						.setText("Error al obtener ubicaciones del webservice");
 			}
 
 			@Override
-			public void onSuccess(List<String> result) {
+			public void onSuccess(List<Ubicacion> result) {
 				ubicaciones = result;
 
 				if (laguna.getItemCount() == 0)
-					agregarItemsCombo(laguna, ubicaciones);
+					agregarItemsCombo(laguna, obtenerNombres(ubicaciones));
 			}
 
 		});
@@ -420,8 +404,8 @@ public class AplicacionWeb implements EntryPoint {
 		verticalPanel_1.add(horizontalPanel1);
 
 		final ListBox comboBox = generarComboItemsObservables(
-				tiposMatrizProductiva, new AgregarTipoMatrizProductivaDialog(
-						this));
+				obtenerNombres(tiposMatrizProductiva),
+				new AgregarTipoMatrizProductivaDialog());
 
 		horizontalPanel1.add(comboBox);
 
@@ -441,8 +425,8 @@ public class AplicacionWeb implements EntryPoint {
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel);
 
-		final ListBox comboBox = generarComboItemsObservables(especies,
-				new AgregarEspecieDialog(this));
+		final ListBox comboBox = generarComboItemsObservables(
+				obtenerNombres(especies), new AgregarEspecieDialog());
 
 		horizontalPanel.add(comboBox);
 
@@ -510,5 +494,93 @@ public class AplicacionWeb implements EntryPoint {
 	void establecerElementoCombo(ListBox combo, String especie) {
 		combo.addItem(especie);
 		combo.setSelectedIndex(combo.getItemCount() - 1);
+	}
+
+	class AgregarEspecieDialog extends AgregarElementoObservableDialog {
+
+		public AgregarEspecieDialog() {
+
+			setText("Ingresar Nueva Especie");
+		}
+
+		protected void grabar() {
+			Especie e = new Especie();
+			e.setNombre(text.getValue());
+			especiesService.addElemento(e, new AsyncCallback<Void>() {
+				public void onFailure(Throwable caught) {
+					errorLabel
+							.setText("Error al guardar nueva especie via webService");
+				}
+
+				@Override
+				public void onSuccess(Void result) {
+					// nada
+
+				}
+			});
+			especies.add(e);
+			establecerElementoCombo(combo, text.getValue());
+			hide();
+		}
+	}
+
+	class AgregarTipoMatrizProductivaDialog extends
+			AgregarElementoObservableDialog {
+
+		public AgregarTipoMatrizProductivaDialog() {
+
+			setText("Ingresar Nuevo Tipo de Matriz Productiva");
+		}
+
+		protected void grabar() {
+			TipoMatrizProductiva tmp = new TipoMatrizProductiva();
+			tmp.setNombre(text.getValue());
+			tipoMatrizProductivaService.addElemento(tmp,
+					new AsyncCallback<Void>() {
+						public void onFailure(Throwable caught) {
+							errorLabel
+									.setText("Error al guardar nuevo tipo de matriz productiva via webService");
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// nada
+
+						}
+					});
+			tiposMatrizProductiva.add(tmp);
+			establecerElementoCombo(combo, text.getValue());
+			hide();
+		}
+
+	}
+
+	class AgregarUbicacionDialog extends AgregarElementoObservableDialog {
+
+		public AgregarUbicacionDialog() {
+
+			setText("Ingresar Nombre Nueva Ubicación");
+		}
+
+		protected void grabar() {
+			Ubicacion u = new Ubicacion();
+			u.setNombre(text.getValue());
+			ubicacionService.addElemento(u, new AsyncCallback<Void>() {
+				public void onFailure(Throwable caught) {
+					errorLabel
+							.setText("Error al guardar nueva ubicación via webService");
+				}
+
+				@Override
+				public void onSuccess(Void result) {
+					// nada
+
+				}
+			});
+			ubicaciones.add(u);
+			establecerElementoCombo(combo, text.getValue());
+			hide();
+		}
+
 	}
 }

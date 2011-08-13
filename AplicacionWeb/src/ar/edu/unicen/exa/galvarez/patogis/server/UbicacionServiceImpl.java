@@ -20,9 +20,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class UbicacionServiceImpl extends RemoteServiceServlet implements
 UbicacionService {
 
-	public List<String> getElementos() throws IllegalArgumentException {
+	public List<Ubicacion> getElementos() throws IllegalArgumentException {
 		UbicacionWSImplServiceLocator UbicacionWSImplServiceLocator = new UbicacionWSImplServiceLocator();
-		List<String> l = new ArrayList<String>();
+		List<Ubicacion> l = new ArrayList<Ubicacion>();
 
 		try {
 			UbicacionWSImpl UbicacionWS = UbicacionWSImplServiceLocator
@@ -30,7 +30,7 @@ UbicacionService {
 			Ubicacion[] ubicaciones = UbicacionWS.getElementos();
 			if (ubicaciones!=null){
 				for (int i = 0; i < ubicaciones.length; i++) {
-					l.add(ubicaciones[i].getNombre());
+					l.add(ubicaciones[i]);
 				}
 			}
 		} catch (ServiceException e) {
@@ -44,16 +44,14 @@ UbicacionService {
 	}
 
 	@Override
-	public void addElemento(String ubicacion) {
+	public void addElemento(Ubicacion ubicacion) {
 		UbicacionWSImplServiceLocator UbicacionWSImplServiceLocator = new UbicacionWSImplServiceLocator();
 
 		try {
 
 			UbicacionWSImpl UbicacionWS = UbicacionWSImplServiceLocator
 					.getUbicacionWSImpl();
-			Ubicacion t=new Ubicacion();
-			t.setNombre(ubicacion);
-			UbicacionWS.addElemento(t,1);
+			UbicacionWS.addElemento(ubicacion,1);
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

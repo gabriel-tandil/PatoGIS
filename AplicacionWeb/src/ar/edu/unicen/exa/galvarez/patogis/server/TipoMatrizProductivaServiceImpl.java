@@ -20,9 +20,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class TipoMatrizProductivaServiceImpl extends RemoteServiceServlet implements
 TipoMatrizProductivaService {
 
-	public List<String> getElementos() throws IllegalArgumentException {
+	public List<TipoMatrizProductiva> getElementos() throws IllegalArgumentException {
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
-		List<String> l = new ArrayList<String>();
+		List<TipoMatrizProductiva> l = new ArrayList<TipoMatrizProductiva>();
 
 		try {
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator
@@ -30,7 +30,7 @@ TipoMatrizProductivaService {
 			TipoMatrizProductiva[] tiposMatrizProductiva = tipoMatrizProductivaWS.getElementos();
 			if (tiposMatrizProductiva!=null){
 				for (int i = 0; i < tiposMatrizProductiva.length; i++) {
-					l.add(tiposMatrizProductiva[i].getNombre());
+					l.add(tiposMatrizProductiva[i]);
 				}
 			}
 		} catch (ServiceException e) {
@@ -44,16 +44,13 @@ TipoMatrizProductivaService {
 	}
 
 	@Override
-	public void addElemento(String tipoMatrizProductiva) {
+	public void addElemento(TipoMatrizProductiva tipoMatrizProductiva) {
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
 
 		try {
-
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator
 					.getTipoMatrizProductivaWSImpl();
-			TipoMatrizProductiva t=new TipoMatrizProductiva();
-			t.setNombre(tipoMatrizProductiva);
-			tipoMatrizProductivaWS.addElemento(t,1);
+			tipoMatrizProductivaWS.addElemento(tipoMatrizProductiva,1);
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
