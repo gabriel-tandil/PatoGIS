@@ -2,7 +2,7 @@ package ar.edu.unicen.exa.galvarez.patogis.servidor.modelo;
 
 import java.io.Serializable;
 
-public class Ubicacion implements Serializable {
+public class Ubicacion implements Dominio, Serializable {
 	/**
 	 * 
 	 */

@@ -8,12 +8,17 @@ import gwtupload.client.PreloadedImage;
 import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
 import gwtupload.client.SingleUploader;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -45,16 +50,16 @@ public class AplicacionWeb implements EntryPoint {
 
 	private FlowPanel panelImages = new FlowPanel();
 	private List<String> imagenes = new ArrayList<String>();
-	List<String> especies;
-	List<String> ubicaciones;
-	List<String> tiposMatrizProductiva;
+	List<Especie> especies;
+	List<Ubicacion> ubicaciones;
+	List<TipoMatrizProductiva> tiposMatrizProductiva;
 	final Label errorLabel = new Label();
 	final ArchivosServiceAsync archivosService = GWT
 			.create(ArchivosService.class);
 	final EspeciesServiceAsync especiesService = GWT
 			.create(EspeciesService.class);
 	final ObservacionServiceAsync observacionService = GWT
-	.create(ObservacionService.class);
+			.create(ObservacionService.class);
 	final UbicacionServiceAsync ubicacionService = GWT
 			.create(UbicacionService.class);
 	final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
@@ -62,6 +67,34 @@ public class AplicacionWeb implements EntryPoint {
 
 	private List<VerticalPanel> conteosEspecie = new ArrayList<VerticalPanel>();
 	private List<HorizontalPanel> observacionesMatrizProductiva = new ArrayList<HorizontalPanel>();
+
+	private List<String> obtenerNombres(List<?> elementos) {
+		List<String> nombres = new ArrayList<String>();
+		for (Iterator iterator = elementos.iterator(); iterator.hasNext();) {
+			Object object = (Object) iterator.next();
+			try {
+				Method m = object.getClass().getDeclaredMethod("getNombre");
+				String nombre = (String) m.invoke(object);
+				nombres.add(nombre);
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return nombres;
+	}
 
 	/**
 	 * This is the entry point method.
@@ -74,7 +107,7 @@ public class AplicacionWeb implements EntryPoint {
 			}
 
 			@Override
-			public void onSuccess(List<String> result) {
+			public void onSuccess(List<Especie> result) {
 				especies = result;
 				for (Iterator<VerticalPanel> iterator = conteosEspecie
 						.iterator(); iterator.hasNext();) {
@@ -95,16 +128,18 @@ public class AplicacionWeb implements EntryPoint {
 					}
 
 					@Override
-					public void onSuccess(List<String> result) {
+					public void onSuccess(List<TipoMatrizProductiva> result) {
 						tiposMatrizProductiva = result;
 						for (Iterator<HorizontalPanel> iterator = observacionesMatrizProductiva
 								.iterator(); iterator.hasNext();) {
 							HorizontalPanel hp = iterator.next();
 							ListBox combo = (ListBox) hp.getWidget(0);
 							if (combo.getItemCount() == 0)
-								agregarItemsCombo(combo, tiposMatrizProductiva);
+								agregarItemsCombo(combo,
+										obtenerNombres(tiposMatrizProductiva));
 						}
 					}
+
 				});
 
 		// Add the nameField and sendButton to the RootPanel
@@ -284,20 +319,22 @@ public class AplicacionWeb implements EntryPoint {
 						DateTimeFormat.getFormat("HH:mm")
 								.parse(horaFin.getValue()).getMinutes());
 				observacion.setFin(fecha);
-observacionService.addElemento(observacion, new AsyncCallback<Void>() {
-	
-	@Override
-	public void onSuccess(Void result) {
-		errorLabel.setText("Observacion guardada");
-		
-	}
-	
-	@Override
-	public void onFailure(Throwable caught) {
-		errorLabel.setText("Error al guardar observacion");
-		
-	}
-});
+				observacionService.addElemento(observacion,
+						new AsyncCallback<Void>() {
+
+							@Override
+							public void onSuccess(Void result) {
+								errorLabel.setText("Observacion guardada");
+
+							}
+
+							@Override
+							public void onFailure(Throwable caught) {
+								errorLabel
+										.setText("Error al guardar observacion");
+
+							}
+						});
 			}
 		});
 		grid.setWidget(8, 1, sendButton);

@@ -2,7 +2,7 @@ package ar.edu.unicen.exa.galvarez.patogis.servidor.modelo;
 
 import java.io.Serializable;
 
-public class TipoMatrizProductiva implements Serializable {
+public class TipoMatrizProductiva implements Dominio, Serializable {
 	/**
 	 * 
 	 */

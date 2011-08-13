@@ -2,7 +2,7 @@ package ar.edu.unicen.exa.galvarez.patogis.servidor.modelo;
 
 import java.io.Serializable;
 
-public class Especie implements Serializable {
+public class Especie   implements Dominio, Serializable {
 	/**
 	 * 
 	 */
