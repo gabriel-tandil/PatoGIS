@@ -18,6 +18,10 @@ import java.util.Set;
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecie;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFoto;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 
@@ -35,11 +39,11 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
@@ -51,9 +55,9 @@ public class AplicacionWeb implements EntryPoint {
 
 	private FlowPanel panelImages = new FlowPanel();
 	private List<String> imagenes = new ArrayList<String>();
-	Map<String, Especie> especies=new HashMap<String, Especie>();
-	Map<String, Ubicacion> ubicaciones=new HashMap<String, Ubicacion>();
-	Map<String, TipoMatrizProductiva> tiposMatrizProductiva=new HashMap<String, TipoMatrizProductiva>();
+	Map<String, Especie> especies = new HashMap<String, Especie>();
+	Map<String, Ubicacion> ubicaciones = new HashMap<String, Ubicacion>();
+	Map<String, TipoMatrizProductiva> tiposMatrizProductiva = new HashMap<String, TipoMatrizProductiva>();
 	final Label errorLabel = new Label();
 	final ArchivosServiceAsync archivosService = GWT
 			.create(ArchivosService.class);
@@ -68,6 +72,15 @@ public class AplicacionWeb implements EntryPoint {
 
 	private List<VerticalPanel> conteosEspecie = new ArrayList<VerticalPanel>();
 	private List<HorizontalPanel> observacionesMatrizProductiva = new ArrayList<HorizontalPanel>();
+	private ListBox laguna;
+	private CheckBox checkSol;
+	private ListBox comboNuves;
+	private CheckBox checkLluvia;
+	private ListBox comboViento;
+	private DateBox dateBox;
+	private TimeBox horaInicio;
+	private TimeBox horaFin;
+	private TextArea observaciones;
 
 	/**
 	 * This is the entry point method.
@@ -128,8 +141,8 @@ public class AplicacionWeb implements EntryPoint {
 
 		Label lblNewLabel = new Label("Laguna");
 		grid.setWidget(0, 0, lblNewLabel);
-		final ListBox laguna = generarComboItemsObservables(
-				ubicaciones.keySet(), new AgregarUbicacionDialog());
+		laguna = generarComboItemsObservables(ubicaciones.keySet(),
+				new AgregarUbicacionDialog());
 		grid.setWidget(0, 1, laguna);
 
 		ubicacionService
@@ -155,17 +168,17 @@ public class AplicacionWeb implements EntryPoint {
 		Label lblNewLabel_1 = new Label("Fecha y Horas");
 		grid.setWidget(1, 0, lblNewLabel_1);
 		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
-		final DateBox dateBox = new DateBox();
+		dateBox = new DateBox();
 		dateBox.setWidth("70px");
 		grid.setWidget(1, 1, horizontalPanel1);
 		dateBox.setFormat(new DefaultFormat(DateTimeFormat
 				.getFormat("dd/MM/yy")));
 		dateBox.setValue(new Date());
-		final TimeBox horaInicio = new TimeBox();
+		horaInicio = new TimeBox();
 		horaInicio.setWidth("45px");
 		horaInicio.setValue(DateTimeFormat.getFormat("HH:mm")
 				.format(new Date()));
-		final TimeBox horaFin = new TimeBox();
+		horaFin = new TimeBox();
 		horaFin.setWidth("45px");
 		horaFin.setValue(DateTimeFormat.getFormat("HH:mm").format(new Date()));
 
@@ -221,26 +234,26 @@ public class AplicacionWeb implements EntryPoint {
 		Grid grid2 = new Grid(2, 4);
 
 		Label lblNewLabel1 = new Label("Sol");
-		final CheckBox checkSol = new CheckBox();
+		checkSol = new CheckBox();
 
 		grid2.setWidget(0, 0, lblNewLabel1);
 		grid2.setWidget(0, 1, checkSol);
 
 		Label lblNewLabel3 = new Label("Nuves");
 
-		final ListBox comboNuves = comboClima();
+		comboNuves = comboClima();
 
 		grid2.setWidget(0, 2, lblNewLabel3);
 		grid2.setWidget(0, 3, comboNuves);
 
 		Label lblNewLabel2 = new Label("Lluvia");
-		final CheckBox checkLluvia = new CheckBox();
+		checkLluvia = new CheckBox();
 		grid2.setWidget(1, 0, lblNewLabel2);
 		grid2.setWidget(1, 1, checkLluvia);
 
 		Label lblNewLabel4 = new Label("Viento");
 
-		final ListBox comboViento = comboClima();
+		comboViento = comboClima();
 		grid2.setWidget(1, 2, lblNewLabel4);
 		grid2.setWidget(1, 3, comboViento);
 
@@ -249,7 +262,7 @@ public class AplicacionWeb implements EntryPoint {
 		Label lblNewLabel6 = new Label("Observacioens");
 
 		grid.setWidget(5, 0, lblNewLabel6);
-		final TextArea observaciones = new TextArea();
+		observaciones = new TextArea();
 
 		grid.setWidget(5, 1, observaciones);
 
@@ -272,28 +285,8 @@ public class AplicacionWeb implements EntryPoint {
 		sendButton.addStyleName("sendButton");
 		sendButton.addClickHandler(new ClickHandler() {
 
-			@SuppressWarnings("deprecation")
 			public void onClick(ClickEvent event) {
-				Observacion observacion = new Observacion();
-				observacion.setObservaciones(observaciones.getValue());
-				observacion.setEstado("A Revisar");
-				observacion.setAlcance("");
-				// observacion.setIdUbicacion(c)
-
-				Date fecha = new Date(dateBox.getValue().getYear(), dateBox
-						.getValue().getMonth(), dateBox.getValue().getDate(),
-						DateTimeFormat.getFormat("HH:mm")
-								.parse(horaInicio.getValue()).getHours(),
-						DateTimeFormat.getFormat("HH:mm")
-								.parse(horaInicio.getValue()).getMinutes());
-				observacion.setInicio(fecha);
-				fecha = new Date(dateBox.getValue().getYear(), dateBox
-						.getValue().getMonth(), dateBox.getValue().getDate(),
-						DateTimeFormat.getFormat("HH:mm")
-								.parse(horaFin.getValue()).getHours(),
-						DateTimeFormat.getFormat("HH:mm")
-								.parse(horaFin.getValue()).getMinutes());
-				observacion.setFin(fecha);
+				Observacion observacion = obtenerObservacion();
 				observacionService.addElemento(observacion,
 						new AsyncCallback<Void>() {
 
@@ -314,6 +307,19 @@ public class AplicacionWeb implements EntryPoint {
 		});
 		grid.setWidget(8, 1, sendButton);
 
+	}
+
+	private ObservacionClima getObservacionClima() {
+		ObservacionClima oc = new ObservacionClima();
+		oc.setLluvia(checkLluvia.getValue());
+		oc.setSol(checkSol.getValue());
+		oc.setNuves(comboNuves.getValue(comboNuves.getSelectedIndex()));
+		oc.setViento(comboViento.getValue(comboViento.getSelectedIndex()));
+		return oc;
+	}
+
+	private Ubicacion getUbicacion() {
+		return ubicaciones.get(laguna.getValue(laguna.getSelectedIndex()));
 	}
 
 	// Load the image in the document and in the case of success attach it to
@@ -400,7 +406,7 @@ public class AplicacionWeb implements EntryPoint {
 
 		horizontalPanel1.add(comboBox);
 
-		TextBox textBox_1 = new TextBox();
+		IntegerBox textBox_1 = new IntegerBox();
 		horizontalPanel1.add(textBox_1);
 		observacionesMatrizProductiva.add(horizontalPanel1);
 		textBox_1.setWidth("50px");
@@ -421,7 +427,7 @@ public class AplicacionWeb implements EntryPoint {
 
 		horizontalPanel.add(comboBox);
 
-		TextBox textBox_1 = new TextBox();
+		IntegerBox textBox_1 = new IntegerBox();
 		horizontalPanel.add(textBox_1);
 
 		HorizontalPanel horizontalPanel2 = new HorizontalPanel();
@@ -485,6 +491,83 @@ public class AplicacionWeb implements EntryPoint {
 	void establecerElementoCombo(ListBox combo, String especie) {
 		combo.addItem(especie);
 		combo.setSelectedIndex(combo.getItemCount() - 1);
+	}
+
+	@SuppressWarnings("deprecation")
+	private Observacion obtenerObservacion() {
+		Observacion observacion = new Observacion();
+		observacion.setObservaciones(observaciones.getValue());
+		observacion.setEstado("A Revisar");
+		observacion.setAlcance("");
+		observacion.setIdUbicacion(getUbicacion().getId());
+		observacion.setObservacionClima(getObservacionClima());
+
+		for (VerticalPanel vp : conteosEspecie) {
+			observacion.addObservacionEspecie(getObservacionEspecie(vp));
+		}
+
+		for (HorizontalPanel hp : observacionesMatrizProductiva) {
+			observacion
+					.addObservacionMatrizProductiva(getObservacionMatrizProductiva(hp));
+		}
+
+		for (int i = 0; i < imagenes.size(); i++) {
+			observacion.addObservacionFoto(getObservacionFoto(i));
+
+		}
+
+		Date fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
+				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
+				.getFormat("HH:mm").parse(horaInicio.getValue()).getHours(),
+				DateTimeFormat.getFormat("HH:mm").parse(horaInicio.getValue())
+						.getMinutes());
+		observacion.setInicio(fecha);
+		fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
+				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
+				.getFormat("HH:mm").parse(horaFin.getValue()).getHours(),
+				DateTimeFormat.getFormat("HH:mm").parse(horaFin.getValue())
+						.getMinutes());
+		observacion.setFin(fecha);
+
+		return observacion;
+	}
+
+	private ObservacionFoto getObservacionFoto(int i) {
+		ObservacionFoto observacionFoto = new ObservacionFoto();
+		observacionFoto.setNombreArchivo(imagenes.get(i));
+		observacionFoto.setTipo((((CheckBox)((HorizontalPanel)panelImages.getWidget(i)).getWidget(1)).getValue()==Boolean.TRUE?"Panoramica":"Normal"));
+		return(observacionFoto);
+	}
+
+	private ObservacionEspecie getObservacionEspecie(VerticalPanel vp) {
+		ObservacionEspecie oe = new ObservacionEspecie();
+		oe.setCantidad(((IntegerBox) ((HorizontalPanel) vp.getWidget(0))
+				.getWidget(1)).getValue());
+		oe.setIdEspecie(especies
+				.get((((ListBox) ((HorizontalPanel) vp.getWidget(0))
+						.getWidget(0))
+						.getValue(((ListBox) ((HorizontalPanel) vp.getWidget(0))
+								.getWidget(0)).getSelectedIndex()))).getId());
+		oe.setEdad(((ListBox) ((HorizontalPanel) vp.getWidget(1)).getWidget(0))
+				.getValue(((ListBox) ((HorizontalPanel) vp.getWidget(1))
+						.getWidget(0)).getSelectedIndex()));
+		oe.setConteo(((ListBox) ((HorizontalPanel) vp.getWidget(1))
+				.getWidget(1)).getValue(((ListBox) ((HorizontalPanel) vp
+				.getWidget(1)).getWidget(1)).getSelectedIndex()));
+		oe.setConteo(((ListBox) ((HorizontalPanel) vp.getWidget(1))
+				.getWidget(2)).getValue(((ListBox) ((HorizontalPanel) vp
+				.getWidget(1)).getWidget(2)).getSelectedIndex()));
+		return oe;
+	}
+
+	private ObservacionMatrizProductiva getObservacionMatrizProductiva(
+			HorizontalPanel hp) {
+		ObservacionMatrizProductiva omp = new ObservacionMatrizProductiva();
+		omp.setIdTipoMatrizProductiva(tiposMatrizProductiva.get(
+				(((ListBox) hp.getWidget(0)).getValue(((ListBox) hp
+						.getWidget(0)).getSelectedIndex()))).getId());
+		omp.setPorcentaje(((IntegerBox) hp.getWidget(1)).getValue());
+		return omp;
 	}
 
 	class AgregarEspecieDialog extends AgregarElementoObservableDialog {
