@@ -32,9 +32,11 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -42,6 +44,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -87,6 +91,66 @@ public class AplicacionWeb implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
+
+
+		// Add the nameField and sendButton to the RootPanel
+		// Use RootPanel.get() to get the entire body element
+		RootPanel rootPanel = RootPanel.get("menuContainer");
+		rootPanel.add(crearMenu());
+		RootPanel.get("errorLabelContainer").add(errorLabel);
+	}
+
+	private FlexTable ventanaListado() {
+		final FlexTable grid = new FlexTable();
+		Label l = new Label();
+		
+		grid.setText(0, 0, "Fecha");
+		
+		grid.setText(0, 1, "Inicio");
+		
+		grid.setText(0, 2, "Fin");
+		
+		observacionService.getElementos(new AsyncCallback<List<Observacion>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				errorLabel.setText("Error al obtener observaciones del webservice");
+
+			}
+
+			public void onSuccess(List<Observacion> result) {
+	
+				int cuenta = 1;
+				for (Iterator<Observacion> iterator = result.iterator(); iterator
+						.hasNext();) {
+					Observacion observacion = iterator.next();
+					
+					grid.setText(cuenta, 0, DateTimeFormat.getFormat(
+					"dd/MM/yy").format(observacion.getInicio()));
+					
+					grid.setText(cuenta, 1, DateTimeFormat.getFormat("HH:mm").format(
+							observacion.getInicio()));
+					
+					grid.setText(cuenta, 2, DateTimeFormat.getFormat("HH:mm").format(
+							observacion.getFin()));
+					cuenta++;
+				}
+			};
+
+		});
+
+		return grid;
+	}
+
+	private Grid ventanaCarga() {
+		Grid grid = new Grid(12, 3);
+
+		grid.setSize("100px", "100px");
+
+		Label lblNewLabel = new Label("Laguna");
+		grid.setWidget(0, 0, lblNewLabel);
+		laguna = generarComboItemsObservables(ubicaciones.keySet(),
+				new AgregarUbicacionDialog());
+		
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel.setText("Error al obtener especies del webservice");
@@ -128,23 +192,6 @@ public class AplicacionWeb implements EntryPoint {
 					}
 
 				});
-
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		RootPanel rootPanel = RootPanel.get("principalContainer");
-		RootPanel.get("errorLabelContainer").add(errorLabel);
-
-		Grid grid = new Grid(12, 3);
-
-		rootPanel.add(grid);
-		grid.setSize("100px", "100px");
-
-		Label lblNewLabel = new Label("Laguna");
-		grid.setWidget(0, 0, lblNewLabel);
-		laguna = generarComboItemsObservables(ubicaciones.keySet(),
-				new AgregarUbicacionDialog());
-		grid.setWidget(0, 1, laguna);
-
 		ubicacionService
 				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 					public void onFailure(Throwable caught) {
@@ -160,7 +207,9 @@ public class AplicacionWeb implements EntryPoint {
 							agregarItemsCombo(laguna, ubicaciones.keySet());
 					}
 
-				});
+				});		
+		
+		grid.setWidget(0, 1, laguna);
 
 		// Focus the cursor on the name field when the app loads
 		laguna.setFocus(true);
@@ -306,7 +355,7 @@ public class AplicacionWeb implements EntryPoint {
 			}
 		});
 		grid.setWidget(8, 1, sendButton);
-
+		return grid;
 	}
 
 	private ObservacionClima getObservacionClima() {
@@ -498,8 +547,8 @@ public class AplicacionWeb implements EntryPoint {
 		Observacion observacion = new Observacion();
 		observacion.setObservaciones(observaciones.getValue());
 		observacion.setEstado("A Revisar");
-		observacion.setAlcance("Parcial");//TODO: poner Combo
-		observacion.setFiabilidad("Fiable");//TODO: asociar al usuario
+		observacion.setAlcance("Parcial");// TODO: poner Combo
+		observacion.setFiabilidad("Fiable");// TODO: asociar al usuario
 		observacion.setIdUbicacion(getUbicacion().getId());
 		observacion.setObservacionClima(getObservacionClima());
 
@@ -661,4 +710,40 @@ public class AplicacionWeb implements EntryPoint {
 		}
 
 	}
+
+	private MenuBar crearMenu() {
+		// Create a command that will execute on menu item selection
+		Command cargarCommand = new Command() {
+
+			public void execute() {
+				RootPanel rootPanel = RootPanel.get("principalContainer");
+				rootPanel.clear();
+				rootPanel.add(ventanaCarga());
+			}
+		};
+		Command listarCommand = new Command() {
+
+			public void execute() {
+				RootPanel rootPanel = RootPanel.get("principalContainer");
+				rootPanel.clear();
+				rootPanel.add(ventanaListado());
+			}
+		};
+		// Create a menu bar
+		MenuBar menu = new MenuBar();
+		menu.setAutoOpen(true);
+		menu.setWidth("355px");
+		menu.setAnimationEnabled(true);
+
+		// Create a sub menu of recent documents
+		MenuBar observacionesMenu = new MenuBar(true);
+
+		observacionesMenu.addItem("Cargar", cargarCommand);
+		observacionesMenu.addItem("Ver", listarCommand);
+
+		menu.addItem(new MenuItem("Observaciones", observacionesMenu));
+
+		return menu;
+	}
+
 }
