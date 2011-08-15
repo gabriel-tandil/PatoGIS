@@ -191,14 +191,14 @@ public class AplicacionWeb implements EntryPoint {
 
 		final VerticalPanel verticalPanel_1 = new VerticalPanel();
 		grid.setWidget(2, 1, verticalPanel_1);
-		agregarObservacionConteo(verticalPanel_1);
+		agregarObservacionEspecie(verticalPanel_1);
 
 		Button button = new Button("+");
 
 		grid.setWidget(2, 2, button);
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				agregarObservacionConteo(verticalPanel_1);
+				agregarObservacionEspecie(verticalPanel_1);
 			}
 		});
 		// We can add style names to widgets
@@ -386,9 +386,9 @@ public class AplicacionWeb implements EntryPoint {
 
 	private ListBox comboClima() {
 		final ListBox comboNuves = new ListBox();
-		comboNuves.addItem("Normal -", "0");
-		comboNuves.addItem("Normal", "1");
-		comboNuves.addItem("Normal +", "2");
+		comboNuves.addItem("Normal -", "Normal -");
+		comboNuves.addItem("Normal", "Normal");
+		comboNuves.addItem("Normal +", "Normal +");
 		comboNuves.setSelectedIndex(1);
 		return comboNuves;
 	}
@@ -414,7 +414,7 @@ public class AplicacionWeb implements EntryPoint {
 		horizontalPanel1.add(l);
 	}
 
-	private void agregarObservacionConteo(final VerticalPanel verticalPanel_1) {
+	private void agregarObservacionEspecie(final VerticalPanel verticalPanel_1) {
 		VerticalPanel verticalPanel = new VerticalPanel();
 		if (conteosEspecie.size() > 0)
 			verticalPanel_1.setBorderWidth(1);
@@ -433,21 +433,21 @@ public class AplicacionWeb implements EntryPoint {
 		HorizontalPanel horizontalPanel2 = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel2);
 		ListBox edad = new ListBox();
-		edad.addItem("Pichon", "0");
-		edad.addItem("Juvenil", "1");
-		edad.addItem("Adulto", "2");
+		edad.addItem("Pichon", "Pichon");
+		edad.addItem("Juvenil", "Juvenil");
+		edad.addItem("Adulto", "Adulto");
 		edad.setSelectedIndex(2);
 		horizontalPanel2.add(edad);
 
 		ListBox distancia = new ListBox();
-		distancia.addItem("Cerca", "0");
-		distancia.addItem("Lejos", "1");
+		distancia.addItem("Cerca", "Cerca");
+		distancia.addItem("Lejos", "Lejos");
 		edad.setSelectedIndex(0);
 		horizontalPanel2.add(distancia);
 
 		ListBox conteo = new ListBox();
-		conteo.addItem("Estimado", "0");
-		conteo.addItem("Preciso", "1");
+		conteo.addItem("Estimado", "Estimado");
+		conteo.addItem("Preciso", "Preciso");
 		edad.setSelectedIndex(0);
 		horizontalPanel2.add(conteo);
 
@@ -498,7 +498,8 @@ public class AplicacionWeb implements EntryPoint {
 		Observacion observacion = new Observacion();
 		observacion.setObservaciones(observaciones.getValue());
 		observacion.setEstado("A Revisar");
-		observacion.setAlcance("");
+		observacion.setAlcance("Parcial");//TODO: poner Combo
+		observacion.setFiabilidad("Fiable");//TODO: asociar al usuario
 		observacion.setIdUbicacion(getUbicacion().getId());
 		observacion.setObservacionClima(getObservacionClima());
 
@@ -535,8 +536,11 @@ public class AplicacionWeb implements EntryPoint {
 	private ObservacionFoto getObservacionFoto(int i) {
 		ObservacionFoto observacionFoto = new ObservacionFoto();
 		observacionFoto.setNombreArchivo(imagenes.get(i));
-		observacionFoto.setTipo((((CheckBox)((HorizontalPanel)panelImages.getWidget(i)).getWidget(1)).getValue()==Boolean.TRUE?"Panoramica":"Normal"));
-		return(observacionFoto);
+		observacionFoto
+				.setTipo((((CheckBox) ((VerticalPanel) ((HorizontalPanel) panelImages
+						.getWidget(i)).getWidget(1)).getWidget(0)).getValue() == Boolean.TRUE ? "Panorama"
+						: "Normal"));
+		return (observacionFoto);
 	}
 
 	private ObservacionEspecie getObservacionEspecie(VerticalPanel vp) {
