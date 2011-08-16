@@ -33,12 +33,16 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IntegerBox;
@@ -48,6 +52,7 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
@@ -102,8 +107,6 @@ public class AplicacionWeb implements EntryPoint {
 
 	private FlexTable ventanaListado() {
 		final FlexTable grid = new FlexTable();
-
-		
 		
 		grid.setText(0, 0, "Fecha");
 		grid.setText(0, 1, "Inicio");
@@ -125,24 +128,33 @@ public class AplicacionWeb implements EntryPoint {
 			}
 
 			public void onSuccess(List<Observacion> result) {
-	
-				int cuenta = 1;
+
 				for (Iterator<Observacion> iterator = result.iterator(); iterator
 						.hasNext();) {
-					Observacion observacion = iterator.next();
-					
-					grid.setText(cuenta, 0, DateTimeFormat.getFormat(
+					final Observacion observacion = iterator.next();
+					int fila=grid.getRowCount();
+					grid.setText(fila, 0, DateTimeFormat.getFormat(
 					"dd/MM/yy").format(observacion.getInicio()));
 					
-					grid.setText(cuenta, 1, DateTimeFormat.getFormat("HH:mm").format(
+					grid.setText(fila, 1, DateTimeFormat.getFormat("HH:mm").format(
 							observacion.getInicio()));
 					
-					grid.setText(cuenta, 2, DateTimeFormat.getFormat("HH:mm").format(
+					grid.setText(fila, 2, DateTimeFormat.getFormat("HH:mm").format(
 							observacion.getFin()));
-					grid.setText(cuenta, 3,observacion.getUbicacion().getNombre());
+					grid.setText(fila, 3,observacion.getUbicacion().getNombre());
 					Button detalles =new Button("Detalles");
-					grid.setWidget(cuenta, 4, detalles);
-					cuenta++;
+					detalles.addClickHandler(new ClickHandler() {
+						public void onClick(ClickEvent event) {
+							mostrarDetalles(observacion);
+						}
+
+						private void mostrarDetalles(Observacion observacion) {
+							DetallesObservacionDialog dlg=new DetallesObservacionDialog(observacion);
+							dlg.center();
+							
+						}
+					});
+					grid.setWidget(fila, 4, detalles);
 				}
 			};
 
@@ -150,7 +162,52 @@ public class AplicacionWeb implements EntryPoint {
 
 		return grid;
 	}
+	
+	class DetallesObservacionDialog extends DialogBox {
 
+		public DetallesObservacionDialog(Observacion obs) {
+			setAnimationEnabled(true);
+			Button closeButton = new Button("Cancelar");
+			closeButton.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					cerrar();
+				}
+			});
+
+			HorizontalPanel botones = new HorizontalPanel();
+			botones.add(closeButton);
+			FlexTable tabla=new FlexTable();
+			
+			tabla.setText(0, 0, "Especie");
+			tabla.setText(0, 1, "Cantidad");
+			tabla.getRowFormatter().addStyleName(0, "watchListHeader");
+			tabla.addStyleName("watchList");
+			tabla.getCellFormatter().addStyleName(0, 1, "watchListNumericColumn");
+
+			for (ObservacionEspecie observacionEspecie : obs.getObservacionesEspecie()) {
+				int fila=tabla.getRowCount();
+				tabla.setText(fila, 0, observacionEspecie.getEspecie().getNombre());
+				tabla.setText(fila, 1, observacionEspecie.getCantidad().toString());
+			}
+			DockPanel dock = new DockPanel();
+			dock.setSpacing(4);
+
+			dock.add(botones, DockPanel.SOUTH);
+	
+			dock.add(tabla, DockPanel.CENTER);
+
+			botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+			dock.setWidth("100%");
+			setWidget(dock);
+
+		}
+
+		public void cerrar() {
+			hide();
+		}
+
+	}
 	private Grid ventanaCarga() {
 		Grid grid = new Grid(12, 3);
 

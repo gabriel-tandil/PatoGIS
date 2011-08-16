@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.EspecieMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionClimaMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionEspecieMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionFotoMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionMatrizProductivaMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.UbicacionMapper;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClimaExample;
@@ -20,7 +22,6 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFotoExample
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductivaExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
-import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.UbicacionExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.ObservacionClimaWS;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.ObservacionEspecieWS;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.ObservacionFotoWS;
@@ -50,6 +51,11 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 						.getMapper(ObservacionEspecieMapper.class);
 				List<ObservacionEspecie> loe = oem.selectByExample(oee);
 				for (ObservacionEspecie observacionEspecie : loe) {
+					EspecieMapper em = sqlSession
+							.getMapper(EspecieMapper.class);
+					Especie especie = em.selectByPrimaryKey(observacionEspecie
+							.getIdEspecie());
+					observacionEspecie.setEspecie(especie);
 					observacion.addObservacionEspecie(observacionEspecie);
 				}
 
@@ -85,13 +91,12 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 					observacion.setObservacionClima(observacionClima);
 				}
 
-			
 				UbicacionMapper um = sqlSession
 						.getMapper(UbicacionMapper.class);
-				Ubicacion u = um.selectByPrimaryKey(observacion.getIdUbicacion());
+				Ubicacion u = um.selectByPrimaryKey(observacion
+						.getIdUbicacion());
 				observacion.setUbicacion(u);
-								
-				
+
 			}
 		} catch (Exception e) {
 
