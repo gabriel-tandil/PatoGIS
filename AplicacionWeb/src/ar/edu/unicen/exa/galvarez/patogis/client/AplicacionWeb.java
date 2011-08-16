@@ -102,14 +102,21 @@ public class AplicacionWeb implements EntryPoint {
 
 	private FlexTable ventanaListado() {
 		final FlexTable grid = new FlexTable();
-		Label l = new Label();
+
+		
 		
 		grid.setText(0, 0, "Fecha");
-		
 		grid.setText(0, 1, "Inicio");
-		
 		grid.setText(0, 2, "Fin");
-		
+		grid.setText(0, 3, "Laguna");
+		grid.setText(0, 4, "Detalles");
+		grid.getRowFormatter().addStyleName(0, "watchListHeader");
+		grid.addStyleName("watchList");
+		grid.getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");
+		grid.getCellFormatter().addStyleName(0, 1, "watchListNumericColumn");
+		grid.getCellFormatter().addStyleName(0, 2, "watchListNumericColumn");
+		grid.getCellFormatter().addStyleName(0, 4,"watchListRemoveColumn");
+
 		observacionService.getElementos(new AsyncCallback<List<Observacion>>() {
 			@Override
 			public void onFailure(Throwable caught) {
@@ -132,6 +139,9 @@ public class AplicacionWeb implements EntryPoint {
 					
 					grid.setText(cuenta, 2, DateTimeFormat.getFormat("HH:mm").format(
 							observacion.getFin()));
+					grid.setText(cuenta, 3,observacion.getUbicacion().getNombre());
+					Button detalles =new Button("Detalles");
+					grid.setWidget(cuenta, 4, detalles);
 					cuenta++;
 				}
 			};

@@ -28,9 +28,8 @@ public class SqlConnection {
 				sqlFactory = new SqlConnection();
 
 		
-			sqlFactory.sessionFactory = new SqlSessionFactoryBuilder().build(reader);
+			SqlConnection.sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

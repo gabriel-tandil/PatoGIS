@@ -32,3 +32,30 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+
+/* stock list header row */
+.watchListHeader {
+  background-color: #2062B8;
+  color: white;
+  font-style: italic;
+}
+
+/* stock list flex table */
+.watchList {
+  border: 1px solid silver;
+  padding: 2px;
+  margin-bottom:6px;
+}
+
+/* stock list Price and Change fields */
+.watchListNumericColumn {
+  text-align: right;
+  width:8em;
+}
+
+/* stock list Remove column */
+.watchListRemoveColumn {
+  text-align: center;
+}
+
+

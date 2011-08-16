@@ -1,11 +1,26 @@
 package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionClimaMapper;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionEspecieMapper;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionFotoMapper;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionMatrizProductivaMapper;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.UbicacionMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClimaExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecie;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecieExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFoto;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFotoExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductivaExample;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.UbicacionExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.ObservacionClimaWS;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.ObservacionEspecieWS;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.ObservacionFotoWS;
@@ -22,25 +37,90 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 	// padre porque la refinicion del web service asi lo requiere
 	@Override
 	public Observacion[] getElementos() throws RemoteException {
-		return super.getElementosGenerico();
+
+		Observacion[] resultado = super.getElementosGenerico();
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = obtenerSesion();
+			for (Observacion observacion : resultado) {
+				ObservacionEspecieExample oee = new ObservacionEspecieExample();
+				oee.createCriteria().andIdObservacionEqualTo(
+						observacion.getId());
+				ObservacionEspecieMapper oem = sqlSession
+						.getMapper(ObservacionEspecieMapper.class);
+				List<ObservacionEspecie> loe = oem.selectByExample(oee);
+				for (ObservacionEspecie observacionEspecie : loe) {
+					observacion.addObservacionEspecie(observacionEspecie);
+				}
+
+				ObservacionFotoExample ofe = new ObservacionFotoExample();
+				oee.createCriteria().andIdObservacionEqualTo(
+						observacion.getId());
+				ObservacionFotoMapper ofm = sqlSession
+						.getMapper(ObservacionFotoMapper.class);
+				List<ObservacionFoto> lof = ofm.selectByExample(ofe);
+				for (ObservacionFoto observacionFoto : lof) {
+					observacion.addObservacionFoto(observacionFoto);
+				}
+
+				ObservacionMatrizProductivaExample ompe = new ObservacionMatrizProductivaExample();
+				ompe.createCriteria().andIdObservacionEqualTo(
+						observacion.getId());
+				ObservacionMatrizProductivaMapper ompm = sqlSession
+						.getMapper(ObservacionMatrizProductivaMapper.class);
+				List<ObservacionMatrizProductiva> lomp = ompm
+						.selectByExample(ompe);
+				for (ObservacionMatrizProductiva observacionMatrizProductiva : lomp) {
+					observacion
+							.addObservacionMatrizProductiva(observacionMatrizProductiva);
+				}
+
+				ObservacionClimaExample oce = new ObservacionClimaExample();
+				oce.createCriteria().andIdObservacionEqualTo(
+						observacion.getId());
+				ObservacionClimaMapper ocm = sqlSession
+						.getMapper(ObservacionClimaMapper.class);
+				List<ObservacionClima> loc = ocm.selectByExample(oce);
+				for (ObservacionClima observacionClima : loc) {
+					observacion.setObservacionClima(observacionClima);
+				}
+
+			
+				UbicacionMapper um = sqlSession
+						.getMapper(UbicacionMapper.class);
+				Ubicacion u = um.selectByPrimaryKey(observacion.getIdUbicacion());
+				observacion.setUbicacion(u);
+								
+				
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return resultado;
 
 	}
 
 	@Override
 	public void addElemento(Observacion elemento, Integer idUsuario)
 			throws RemoteException {
-		//TODO: mejorar esquema de salvado e ids padres en hijos y viceversa y separar dto y jbo
+		// TODO: mejorar esquema de salvado e ids padres en hijos y viceversa y
+		// separar dto y jbo
 		super.addElementoGenerico(elemento, idUsuario);
-		ObservacionEspecieWS oews=new ObservacionEspecieWSImpl();
-		ObservacionMatrizProductivaWS ompws=new ObservacionMatrizProductivaWSImpl();
-		ObservacionClimaWS ocws=new ObservacionClimaWSImpl();
-		ObservacionFotoWS ofws=new ObservacionFotoWSImpl();
+		ObservacionEspecieWS oews = new ObservacionEspecieWSImpl();
+		ObservacionMatrizProductivaWS ompws = new ObservacionMatrizProductivaWSImpl();
+		ObservacionClimaWS ocws = new ObservacionClimaWSImpl();
+		ObservacionFotoWS ofws = new ObservacionFotoWSImpl();
 
-		for (ObservacionEspecie observacionEspecie : elemento.getObservacionesEspecie()) {
+		for (ObservacionEspecie observacionEspecie : elemento
+				.getObservacionesEspecie()) {
 			observacionEspecie.setIdObservacion(elemento.getId());
 			oews.addElemento(observacionEspecie, idUsuario);
 		}
-		for (ObservacionMatrizProductiva observacionMatrizProductiva : elemento.getObservacionesMatrizProductiva()) {
+		for (ObservacionMatrizProductiva observacionMatrizProductiva : elemento
+				.getObservacionesMatrizProductiva()) {
 			observacionMatrizProductiva.setIdObservacion(elemento.getId());
 			ompws.addElemento(observacionMatrizProductiva, idUsuario);
 		}
