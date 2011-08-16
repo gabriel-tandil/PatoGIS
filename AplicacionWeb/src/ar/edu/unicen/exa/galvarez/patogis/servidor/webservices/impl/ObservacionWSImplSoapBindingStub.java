@@ -101,6 +101,20 @@ public class ObservacionWSImplSoapBindingStub extends org.apache.axis.client.Stu
             cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
             cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
 
+            qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Campana");
+            cachedSerQNames.add(qName);
+            cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Campana.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Especie");
+            cachedSerQNames.add(qName);
+            cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
             qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Observacion");
             cachedSerQNames.add(qName);
             cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion.class;
@@ -132,6 +146,27 @@ public class ObservacionWSImplSoapBindingStub extends org.apache.axis.client.Stu
             qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "ObservacionMatrizProductiva");
             cachedSerQNames.add(qName);
             cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "TipoMatrizProductiva");
+            cachedSerQNames.add(qName);
+            cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Ubicacion");
+            cachedSerQNames.add(qName);
+            cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Usuario");
+            cachedSerQNames.add(qName);
+            cls = ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);

@@ -44,14 +44,27 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar"/>
+   <complexType name="Campana">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="nombre" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
    <complexType name="ObservacionClima">
     <sequence>
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="idObservacion" nillable="true" type="xsd:int"/>
      <element name="lluvia" nillable="true" type="xsd:boolean"/>
      <element name="nuves" nillable="true" type="xsd:string"/>
+     <element name="observacion" nillable="true" type="tns1:Observacion"/>
      <element name="sol" nillable="true" type="xsd:boolean"/>
      <element name="viento" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Especie">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="nombre" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
    <complexType name="ObservacionEspecie">
@@ -60,9 +73,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="conteo" nillable="true" type="xsd:string"/>
      <element name="distancia" nillable="true" type="xsd:string"/>
      <element name="edad" nillable="true" type="xsd:string"/>
+     <element name="especie" nillable="true" type="tns1:Especie"/>
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="idEspecie" nillable="true" type="xsd:int"/>
      <element name="idObservacion" nillable="true" type="xsd:int"/>
+     <element name="observacion" nillable="true" type="tns1:Observacion"/>
      <element name="observaciones" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
@@ -71,7 +86,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="idObservacion" nillable="true" type="xsd:int"/>
      <element name="nombreArchivo" nillable="true" type="xsd:string"/>
+     <element name="observacion" nillable="true" type="tns1:Observacion"/>
      <element name="tipo" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="TipoMatrizProductiva">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="nombre" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
    <complexType name="ObservacionMatrizProductiva">
@@ -79,12 +101,33 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="idObservacion" nillable="true" type="xsd:int"/>
      <element name="idTipoMatrizProductiva" nillable="true" type="xsd:int"/>
+     <element name="observacion" nillable="true" type="tns1:Observacion"/>
      <element name="porcentaje" nillable="true" type="xsd:int"/>
+     <element name="tipoMatrizProductiva" nillable="true" type="tns1:TipoMatrizProductiva"/>
+    </sequence>
+   </complexType>
+   <complexType name="Ubicacion">
+    <sequence>
+     <element name="altura" nillable="true" type="xsd:int"/>
+     <element name="coordenadas" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="nombre" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Usuario">
+    <sequence>
+     <element name="clave" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="nombre" nillable="true" type="xsd:string"/>
+     <element name="telefono" nillable="true" type="xsd:string"/>
+     <element name="tipo" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
    <complexType name="Observacion">
     <sequence>
      <element name="alcance" nillable="true" type="xsd:string"/>
+     <element name="campana" nillable="true" type="tns1:Campana"/>
      <element name="estado" nillable="true" type="xsd:string"/>
      <element name="fiabilidad" nillable="true" type="xsd:string"/>
      <element name="fin" nillable="true" type="xsd:dateTime"/>
@@ -99,6 +142,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="observacionesEspecie" nillable="true" type="impl:ArrayOf_tns1_ObservacionEspecie"/>
      <element name="observacionesFoto" nillable="true" type="impl:ArrayOf_tns1_ObservacionFoto"/>
      <element name="observacionesMatrizProductiva" nillable="true" type="impl:ArrayOf_tns1_ObservacionMatrizProductiva"/>
+     <element name="ubicacion" nillable="true" type="tns1:Ubicacion"/>
+     <element name="usuario" nillable="true" type="tns1:Usuario"/>
+     <element name="usuarioApoyo" nillable="true" type="tns1:Usuario"/>
     </sequence>
    </complexType>
   </schema>
