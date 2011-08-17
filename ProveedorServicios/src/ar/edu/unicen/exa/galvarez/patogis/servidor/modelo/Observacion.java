@@ -1,9 +1,7 @@
 package ar.edu.unicen.exa.galvarez.patogis.servidor.modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Observacion implements Serializable {
 
@@ -17,21 +15,15 @@ public class Observacion implements Serializable {
 	private static final long serialVersionUID = 1928924094610852269L;
 
 	public ObservacionMatrizProductiva[] getObservacionesMatrizProductiva() {
-		ObservacionMatrizProductiva[] retorno = new ObservacionMatrizProductiva[observacionesMatrizProductiva
-				.size()];
-		return observacionesMatrizProductiva.toArray(retorno);
+		return observacionesMatrizProductiva;
 	}
 
 	public ObservacionEspecie[] getObservacionesEspecie() {
-		ObservacionEspecie[] retorno = new ObservacionEspecie[observacionesEspecie
-				.size()];
-		return observacionesEspecie.toArray(retorno);
+		return observacionesEspecie;
 	}
 
 	public ObservacionFoto[] getObservacionesFoto() {
-		ObservacionFoto[] retorno = new ObservacionFoto[observacionesFoto
-				.size()];
-		return observacionesFoto.toArray(retorno);
+		return observacionesFoto;
 	}
 
 	public ObservacionClima getObservacionClima() {
@@ -42,22 +34,9 @@ public class Observacion implements Serializable {
 		this.observacionClima = observacionClima;
 	}
 
-	public void addObservacionFoto(ObservacionFoto observacionFoto) {
-		observacionesFoto.add(observacionFoto);
-	}
-
-	public void addObservacionEspecie(ObservacionEspecie observacionEspecie) {
-		observacionesEspecie.add(observacionEspecie);
-	}
-
-	public void addObservacionMatrizProductiva(
-			ObservacionMatrizProductiva observacionMatrizProductiva) {
-		observacionesMatrizProductiva.add(observacionMatrizProductiva);
-	}
-
-	private List<ObservacionMatrizProductiva> observacionesMatrizProductiva= new ArrayList<ObservacionMatrizProductiva>();
-	private List<ObservacionEspecie> observacionesEspecie=new ArrayList<ObservacionEspecie>();;
-	private List<ObservacionFoto> observacionesFoto=new ArrayList<ObservacionFoto>();;
+	private ObservacionMatrizProductiva observacionesMatrizProductiva[];
+	private ObservacionEspecie observacionesEspecie[];
+	private ObservacionFoto observacionesFoto[];
 	private ObservacionClima observacionClima;
 
 	/**
@@ -176,16 +155,16 @@ public class Observacion implements Serializable {
 	}
 
 	public void setObservacionesMatrizProductiva(
-			List<ObservacionMatrizProductiva> observacionesMatrizProductiva) {
+			ObservacionMatrizProductiva[] observacionesMatrizProductiva) {
 		this.observacionesMatrizProductiva = observacionesMatrizProductiva;
 	}
 
 	public void setObservacionesEspecie(
-			List<ObservacionEspecie> observacionesEspecie) {
+			ObservacionEspecie[] observacionesEspecie) {
 		this.observacionesEspecie = observacionesEspecie;
 	}
 
-	public void setObservacionesFoto(List<ObservacionFoto> observacionesFoto) {
+	public void setObservacionesFoto(ObservacionFoto[] observacionesFoto) {
 		this.observacionesFoto = observacionesFoto;
 	}
 

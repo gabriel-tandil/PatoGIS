@@ -33,7 +33,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -52,7 +51,6 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
@@ -79,8 +77,8 @@ public class AplicacionWeb implements EntryPoint {
 	final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
 			.create(TipoMatrizProductivaService.class);
 
-	private List<VerticalPanel> conteosEspecie = new ArrayList<VerticalPanel>();
-	private List<HorizontalPanel> observacionesMatrizProductiva = new ArrayList<HorizontalPanel>();
+	private List<VerticalPanel> widgetsObsEspecie = new ArrayList<VerticalPanel>();
+	private List<HorizontalPanel> widgetsObsMatrizProductiva = new ArrayList<HorizontalPanel>();
 	private ListBox laguna;
 	private CheckBox checkSol;
 	private ListBox comboNuves;
@@ -96,10 +94,6 @@ public class AplicacionWeb implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
-
-
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
 		RootPanel rootPanel = RootPanel.get("menuContainer");
 		rootPanel.add(crearMenu());
 		RootPanel.get("errorLabelContainer").add(errorLabel);
@@ -107,7 +101,7 @@ public class AplicacionWeb implements EntryPoint {
 
 	private FlexTable ventanaListado() {
 		final FlexTable grid = new FlexTable();
-		
+
 		grid.setText(0, 0, "Fecha");
 		grid.setText(0, 1, "Inicio");
 		grid.setText(0, 2, "Fin");
@@ -118,12 +112,13 @@ public class AplicacionWeb implements EntryPoint {
 		grid.getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");
 		grid.getCellFormatter().addStyleName(0, 1, "watchListNumericColumn");
 		grid.getCellFormatter().addStyleName(0, 2, "watchListNumericColumn");
-		grid.getCellFormatter().addStyleName(0, 4,"watchListRemoveColumn");
+		grid.getCellFormatter().addStyleName(0, 4, "watchListRemoveColumn");
 
 		observacionService.getElementos(new AsyncCallback<List<Observacion>>() {
 			@Override
 			public void onFailure(Throwable caught) {
-				errorLabel.setText("Error al obtener observaciones del webservice");
+				errorLabel
+						.setText("Error al obtener observaciones del webservice");
 
 			}
 
@@ -132,26 +127,28 @@ public class AplicacionWeb implements EntryPoint {
 				for (Iterator<Observacion> iterator = result.iterator(); iterator
 						.hasNext();) {
 					final Observacion observacion = iterator.next();
-					int fila=grid.getRowCount();
-					grid.setText(fila, 0, DateTimeFormat.getFormat(
-					"dd/MM/yy").format(observacion.getInicio()));
-					
-					grid.setText(fila, 1, DateTimeFormat.getFormat("HH:mm").format(
-							observacion.getInicio()));
-					
-					grid.setText(fila, 2, DateTimeFormat.getFormat("HH:mm").format(
-							observacion.getFin()));
-					grid.setText(fila, 3,observacion.getUbicacion().getNombre());
-					Button detalles =new Button("Detalles");
+					int fila = grid.getRowCount();
+					grid.setText(fila, 0, DateTimeFormat.getFormat("dd/MM/yy")
+							.format(observacion.getInicio()));
+
+					grid.setText(fila, 1, DateTimeFormat.getFormat("HH:mm")
+							.format(observacion.getInicio()));
+
+					grid.setText(fila, 2, DateTimeFormat.getFormat("HH:mm")
+							.format(observacion.getFin()));
+					grid.setText(fila, 3, observacion.getUbicacion()
+							.getNombre());
+					Button detalles = new Button("Detalles");
 					detalles.addClickHandler(new ClickHandler() {
 						public void onClick(ClickEvent event) {
 							mostrarDetalles(observacion);
 						}
 
 						private void mostrarDetalles(Observacion observacion) {
-							DetallesObservacionDialog dlg=new DetallesObservacionDialog(observacion);
+							DetallesObservacionDialog dlg = new DetallesObservacionDialog(
+									observacion);
 							dlg.center();
-							
+
 						}
 					});
 					grid.setWidget(fila, 4, detalles);
@@ -162,10 +159,11 @@ public class AplicacionWeb implements EntryPoint {
 
 		return grid;
 	}
-	
+
 	class DetallesObservacionDialog extends DialogBox {
 
 		public DetallesObservacionDialog(Observacion obs) {
+			setText("Detalles Observación");
 			setAnimationEnabled(true);
 			Button closeButton = new Button("Cancelar");
 			closeButton.addClickHandler(new ClickHandler() {
@@ -177,24 +175,28 @@ public class AplicacionWeb implements EntryPoint {
 
 			HorizontalPanel botones = new HorizontalPanel();
 			botones.add(closeButton);
-			FlexTable tabla=new FlexTable();
-			
+			FlexTable tabla = new FlexTable();
+
 			tabla.setText(0, 0, "Especie");
 			tabla.setText(0, 1, "Cantidad");
 			tabla.getRowFormatter().addStyleName(0, "watchListHeader");
 			tabla.addStyleName("watchList");
-			tabla.getCellFormatter().addStyleName(0, 1, "watchListNumericColumn");
+			tabla.getCellFormatter().addStyleName(0, 1,
+					"watchListNumericColumn");
 
-			for (ObservacionEspecie observacionEspecie : obs.getObservacionesEspecie()) {
-				int fila=tabla.getRowCount();
-				tabla.setText(fila, 0, observacionEspecie.getEspecie().getNombre());
-				tabla.setText(fila, 1, observacionEspecie.getCantidad().toString());
+			for (ObservacionEspecie observacionEspecie : obs
+					.getObservacionesEspecie()) {
+				int fila = tabla.getRowCount();
+				tabla.setText(fila, 0, observacionEspecie.getEspecie()
+						.getNombre());
+				tabla.setText(fila, 1, observacionEspecie.getCantidad()
+						.toString());
 			}
 			DockPanel dock = new DockPanel();
 			dock.setSpacing(4);
 
 			dock.add(botones, DockPanel.SOUTH);
-	
+
 			dock.add(tabla, DockPanel.CENTER);
 
 			botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
@@ -208,6 +210,7 @@ public class AplicacionWeb implements EntryPoint {
 		}
 
 	}
+
 	private Grid ventanaCarga() {
 		Grid grid = new Grid(12, 3);
 
@@ -217,7 +220,7 @@ public class AplicacionWeb implements EntryPoint {
 		grid.setWidget(0, 0, lblNewLabel);
 		laguna = generarComboItemsObservables(ubicaciones.keySet(),
 				new AgregarUbicacionDialog());
-		
+
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel.setText("Error al obtener especies del webservice");
@@ -226,7 +229,7 @@ public class AplicacionWeb implements EntryPoint {
 			@Override
 			public void onSuccess(Map<String, Especie> result) {
 				especies = result;
-				for (Iterator<VerticalPanel> iterator = conteosEspecie
+				for (Iterator<VerticalPanel> iterator = widgetsObsEspecie
 						.iterator(); iterator.hasNext();) {
 					VerticalPanel hp = iterator.next();
 					ListBox combo = (ListBox) ((HorizontalPanel) hp
@@ -248,7 +251,7 @@ public class AplicacionWeb implements EntryPoint {
 					public void onSuccess(
 							Map<String, TipoMatrizProductiva> result) {
 						tiposMatrizProductiva = result;
-						for (Iterator<HorizontalPanel> iterator = observacionesMatrizProductiva
+						for (Iterator<HorizontalPanel> iterator = widgetsObsMatrizProductiva
 								.iterator(); iterator.hasNext();) {
 							HorizontalPanel hp = iterator.next();
 							ListBox combo = (ListBox) hp.getWidget(0);
@@ -274,8 +277,8 @@ public class AplicacionWeb implements EntryPoint {
 							agregarItemsCombo(laguna, ubicaciones.keySet());
 					}
 
-				});		
-		
+				});
+
 		grid.setWidget(0, 1, laguna);
 
 		// Focus the cursor on the name field when the app loads
@@ -512,7 +515,7 @@ public class AplicacionWeb implements EntryPoint {
 	private void agregarObservacionMatrizProductiva(
 			final VerticalPanel verticalPanel_1) {
 		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
-		if (observacionesMatrizProductiva.size() > 0)
+		if (widgetsObsMatrizProductiva.size() > 0)
 			verticalPanel_1.setBorderWidth(1);
 		verticalPanel_1.add(horizontalPanel1);
 
@@ -524,7 +527,7 @@ public class AplicacionWeb implements EntryPoint {
 
 		IntegerBox textBox_1 = new IntegerBox();
 		horizontalPanel1.add(textBox_1);
-		observacionesMatrizProductiva.add(horizontalPanel1);
+		widgetsObsMatrizProductiva.add(horizontalPanel1);
 		textBox_1.setWidth("50px");
 		Label l = new Label("%");
 		horizontalPanel1.add(l);
@@ -532,7 +535,7 @@ public class AplicacionWeb implements EntryPoint {
 
 	private void agregarObservacionEspecie(final VerticalPanel verticalPanel_1) {
 		VerticalPanel verticalPanel = new VerticalPanel();
-		if (conteosEspecie.size() > 0)
+		if (widgetsObsEspecie.size() > 0)
 			verticalPanel_1.setBorderWidth(1);
 		verticalPanel_1.add(verticalPanel);
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
@@ -567,12 +570,12 @@ public class AplicacionWeb implements EntryPoint {
 		edad.setSelectedIndex(0);
 		horizontalPanel2.add(conteo);
 
-		conteosEspecie.add(verticalPanel);
+		widgetsObsEspecie.add(verticalPanel);
 		textBox_1.setWidth("60px");
 	}
 
 	private ListBox generarComboItemsObservables(Set<String> items,
-			final AgregarElementoObservableDialog dlg) {
+			final AgregarElementoDialog dlg) {
 		final ListBox comboBox = new ListBox();
 
 		comboBox.addChangeHandler(new ChangeHandler() {
@@ -619,19 +622,28 @@ public class AplicacionWeb implements EntryPoint {
 		observacion.setIdUbicacion(getUbicacion().getId());
 		observacion.setObservacionClima(getObservacionClima());
 
-		for (VerticalPanel vp : conteosEspecie) {
-			observacion.addObservacionEspecie(getObservacionEspecie(vp));
+		ObservacionEspecie[] observacionesEspecie = new ObservacionEspecie[widgetsObsEspecie
+				.size()];
+		for (int i = 0; i < widgetsObsEspecie.size(); i++) {
+			observacionesEspecie[i] = getObservacionEspecie(widgetsObsEspecie
+					.get(i));
 		}
+		observacion.setObservacionesEspecie(observacionesEspecie);
 
-		for (HorizontalPanel hp : observacionesMatrizProductiva) {
-			observacion
-					.addObservacionMatrizProductiva(getObservacionMatrizProductiva(hp));
+		ObservacionMatrizProductiva[] obsMatrizProductiva = new ObservacionMatrizProductiva[widgetsObsMatrizProductiva
+				.size()];
+		for (int i = 0; i < widgetsObsMatrizProductiva.size(); i++) {
+			obsMatrizProductiva[i] = getObservacionMatrizProductiva(widgetsObsMatrizProductiva
+					.get(i));
 		}
+		observacion.setObservacionesMatrizProductiva(obsMatrizProductiva);
 
+		ObservacionFoto[] observacionesFoto = new ObservacionFoto[imagenes
+				.size()];
 		for (int i = 0; i < imagenes.size(); i++) {
-			observacion.addObservacionFoto(getObservacionFoto(i));
-
+			observacionesFoto[i] = getObservacionFoto(i);
 		}
+		observacion.setObservacionesFoto(observacionesFoto);
 
 		Date fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
 				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
@@ -690,7 +702,7 @@ public class AplicacionWeb implements EntryPoint {
 		return omp;
 	}
 
-	class AgregarEspecieDialog extends AgregarElementoObservableDialog {
+	class AgregarEspecieDialog extends AgregarElementoDialog {
 
 		public AgregarEspecieDialog() {
 
@@ -718,8 +730,7 @@ public class AplicacionWeb implements EntryPoint {
 		}
 	}
 
-	class AgregarTipoMatrizProductivaDialog extends
-			AgregarElementoObservableDialog {
+	class AgregarTipoMatrizProductivaDialog extends AgregarElementoDialog {
 
 		public AgregarTipoMatrizProductivaDialog() {
 
@@ -749,7 +760,7 @@ public class AplicacionWeb implements EntryPoint {
 
 	}
 
-	class AgregarUbicacionDialog extends AgregarElementoObservableDialog {
+	class AgregarUbicacionDialog extends AgregarElementoDialog {
 
 		public AgregarUbicacionDialog() {
 

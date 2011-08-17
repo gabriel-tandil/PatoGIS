@@ -9,6 +9,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.EspecieMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionClimaMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionEspecieMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionFotoMapper;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionMatrizProductivaMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.UbicacionMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
@@ -17,6 +18,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClimaExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecieExample;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFoto;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFotoExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
@@ -56,18 +58,17 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 					Especie especie = em.selectByPrimaryKey(observacionEspecie
 							.getIdEspecie());
 					observacionEspecie.setEspecie(especie);
-					observacion.addObservacionEspecie(observacionEspecie);
+					
 				}
-
+				observacion.setObservacionesEspecie(loe.toArray(new ObservacionEspecie[loe.size()]));
 				ObservacionFotoExample ofe = new ObservacionFotoExample();
 				oee.createCriteria().andIdObservacionEqualTo(
 						observacion.getId());
 				ObservacionFotoMapper ofm = sqlSession
 						.getMapper(ObservacionFotoMapper.class);
 				List<ObservacionFoto> lof = ofm.selectByExample(ofe);
-				for (ObservacionFoto observacionFoto : lof) {
-					observacion.addObservacionFoto(observacionFoto);
-				}
+				observacion.setObservacionesFoto(lof.toArray(new ObservacionFoto[lof.size()]));
+				
 
 				ObservacionMatrizProductivaExample ompe = new ObservacionMatrizProductivaExample();
 				ompe.createCriteria().andIdObservacionEqualTo(
@@ -76,10 +77,8 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 						.getMapper(ObservacionMatrizProductivaMapper.class);
 				List<ObservacionMatrizProductiva> lomp = ompm
 						.selectByExample(ompe);
-				for (ObservacionMatrizProductiva observacionMatrizProductiva : lomp) {
-					observacion
-							.addObservacionMatrizProductiva(observacionMatrizProductiva);
-				}
+				observacion.setObservacionesMatrizProductiva(lomp.toArray(new ObservacionMatrizProductiva[lomp.size()]));
+				
 
 				ObservacionClimaExample oce = new ObservacionClimaExample();
 				oce.createCriteria().andIdObservacionEqualTo(
@@ -87,9 +86,9 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 				ObservacionClimaMapper ocm = sqlSession
 						.getMapper(ObservacionClimaMapper.class);
 				List<ObservacionClima> loc = ocm.selectByExample(oce);
-				for (ObservacionClima observacionClima : loc) {
-					observacion.setObservacionClima(observacionClima);
-				}
+				if (loc.size()!=0)
+					observacion.setObservacionClima(loc.get(0));
+				
 
 				UbicacionMapper um = sqlSession
 						.getMapper(UbicacionMapper.class);
@@ -114,6 +113,25 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 		// TODO: mejorar esquema de salvado e ids padres en hijos y viceversa y
 		// separar dto y jbo
 		super.addElementoGenerico(elemento, idUsuario);
+		
+		ObservacionExample oe = new ObservacionExample();
+		oe.createCriteria().andInicioEqualTo(elemento.getInicio()).andFinEqualTo(elemento.getFin());
+		oe.setOrderByClause("id desc");
+		
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = obtenerSesion();				
+		ObservacionMapper om = sqlSession
+				.getMapper(ObservacionMapper.class);
+		List<Observacion> lo = om.selectByExample(oe);
+		elemento.setId(lo.get(lo.size()-1).getId());
+		
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
 		ObservacionEspecieWS oews = new ObservacionEspecieWSImpl();
 		ObservacionMatrizProductivaWS ompws = new ObservacionMatrizProductivaWSImpl();
 		ObservacionClimaWS ocws = new ObservacionClimaWSImpl();
