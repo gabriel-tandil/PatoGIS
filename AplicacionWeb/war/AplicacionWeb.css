@@ -58,4 +58,9 @@ h1 {
   text-align: center;
 }
 
-
+.tooltip {
+        border: 1px solid black;
+        padding: 2px 3px 3px 3px;
+        font-size: smaller;
+        background-color: #ffffcc;
+}
