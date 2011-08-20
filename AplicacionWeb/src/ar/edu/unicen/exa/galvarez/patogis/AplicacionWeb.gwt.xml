@@ -14,7 +14,7 @@
 	<!-- Other module inherits                                      -->
 	<inherits name="gwtupload.GWTUpload"/>
 	
-	
+	<inherits name="com.google.gwt.i18n.I18N"/>
 <!-- 	<inherits  name="ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie"/> -->
 <!-- 	<inherits  name="ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion"/> -->
 <!-- 	<inherits  name="ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima"/> -->

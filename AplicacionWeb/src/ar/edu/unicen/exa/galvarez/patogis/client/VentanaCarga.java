@@ -57,11 +57,13 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
 public class VentanaCarga extends Grid {
+	  VentanaCargaConstantes constantes = GWT.create(VentanaCargaConstantes.class);
 	class AgregarEspecieDialog extends AgregarElementoDialog {
+
 
 		public AgregarEspecieDialog() {
 
-			setText(Messages.getString("VentanaCarga.IngresarNuevaEspecie")); //$NON-NLS-1$
+			setText(constantes.IngresarNuevaEspecie());
 		}
 
 		protected void grabar() {
@@ -70,7 +72,7 @@ public class VentanaCarga extends Grid {
 			especiesService.addElemento(e, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					errorLabel
-							.setText(Messages.getString("VentanaCarga.errorGuardarEspecie")); //$NON-NLS-1$
+							.setText(constantes.errorGuardarEspecie());
 				}
 
 				@Override
@@ -88,7 +90,7 @@ public class VentanaCarga extends Grid {
 
 		public AgregarTipoMatrizProductivaDialog() {
 
-			setText(Messages.getString("VentanaCarga.ingresarNuevoTipoMatrizProductiva")); //$NON-NLS-1$
+			setText(constantes.ingresarNuevoTipoMatrizProductiva());
 		}
 
 		protected void grabar() {
@@ -98,7 +100,7 @@ public class VentanaCarga extends Grid {
 					new AsyncCallback<Void>() {
 						public void onFailure(Throwable caught) {
 							errorLabel
-									.setText(Messages.getString("VentanaCarga.errorGuardarNuevoTipoMatrizProductiva")); //$NON-NLS-1$
+									.setText(constantes.errorGuardarNuevoTipoMatrizProductiva());
 						}
 
 						@Override
@@ -117,7 +119,7 @@ public class VentanaCarga extends Grid {
 
 		public AgregarUbicacionDialog() {
 
-			setText(Messages.getString("VentanaCarga.ingresarNuevaUbicacion")); //$NON-NLS-1$
+			setText(constantes.ingresarNuevaUbicacion());
 		}
 
 		protected void grabar() {
@@ -126,7 +128,7 @@ public class VentanaCarga extends Grid {
 			ubicacionService.addElemento(u, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					errorLabel
-							.setText(Messages.getString("VentanaCarga.errorGuardarNuevaUbicacion")); //$NON-NLS-1$
+							.setText(constantes.errorGuardarNuevaUbicacion());
 				}
 
 				@Override
@@ -190,9 +192,9 @@ public class VentanaCarga extends Grid {
 			VerticalPanel vp = new VerticalPanel();
 
 			CheckBox cb = new CheckBox();
-			cb.setText(Messages.getString("VentanaCarga.panoramica")); //$NON-NLS-1$
-			vp.add(cb);Mensajes.INSTANCE.messages();
-			Button borrar = new Button(Messages.getString("VentanaCarga.eliminarFoto")); //$NON-NLS-1$
+			cb.setText(constantes.panoramica());
+			vp.add(cb);
+			Button borrar = new Button(constantes.eliminarFoto());
 			borrar.addClickHandler(new ClickHandler() {
 				String imagen = imagenes.get(imagenes.size() - 1);
 
@@ -228,15 +230,15 @@ public class VentanaCarga extends Grid {
 		final Label errorLabel =(Label) RootPanel.get("errorLabelContainer").getWidget(0);
 		setSize("100px", "100px");
 
-		Label lblNewLabel = new Label(Messages.getString("VentanaCarga.laguna")); //$NON-NLS-1$
+		Label lblNewLabel = new Label(constantes.laguna());
 		setWidget(0, 0, lblNewLabel);
 		laguna = generarComboItemsObservables(ubicaciones.keySet(),
 				new AgregarUbicacionDialog());
 		laguna.addMouseListener(new TooltipListener(
-				Messages.getString("VentanaCarga.lafuna.tooltip"), 5000)); //$NON-NLS-1$
+				constantes.lagunaTooltip(), 5000));
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
-				errorLabel.setText(Messages.getString("VentanaCarga.errorObtenerEspecies")); //$NON-NLS-1$
+				errorLabel.setText(constantes.errorObtenerEspecies());
 			}
 
 			@Override
@@ -257,7 +259,7 @@ public class VentanaCarga extends Grid {
 				.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
-								.setText(Messages.getString("VentanaCarga.errorObtenerTiposMatrizProductiva")); //$NON-NLS-1$
+								.setText(constantes.errorObtenerTiposMatrizProductiva());
 					}
 
 					@Override
@@ -279,7 +281,7 @@ public class VentanaCarga extends Grid {
 				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
-								.setText(Messages.getString("VentanaCarga.errorObtenerUbicaciones")); //$NON-NLS-1$
+								.setText(constantes.errorObtenerUbicaciones());
 					}
 
 					@Override
@@ -297,35 +299,35 @@ public class VentanaCarga extends Grid {
 		// Focus the cursor on the name field when the app loads
 		laguna.setFocus(true);
 
-		Label lblNewLabel_1 = new Label(Messages.getString("VentanaCarga.fechaYHoras")); //$NON-NLS-1$
+		Label lblNewLabel_1 = new Label(constantes.fechaYHoras());
 		setWidget(1, 0, lblNewLabel_1);
 		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
 		dateBox = new DateBox();
 		dateBox.setWidth("70px");
 		setWidget(1, 1, horizontalPanel1);
 		dateBox.setFormat(new DefaultFormat(DateTimeFormat
-				.getFormat(Messages.getString("VentanaCarga.formatoFechaCorta")))); //$NON-NLS-1$
+				.getFormat(constantes.formatoFechaCorta())));
 		dateBox.setValue(new Date());
 		horaInicio = new TimeBox();
 		horaInicio.setWidth("45px");
-		horaInicio.setValue(DateTimeFormat.getFormat(Messages.getString("VentanaCarga.formatoHora")) //$NON-NLS-1$
+		horaInicio.setValue(DateTimeFormat.getFormat(constantes.formatoHora())
 				.format(new Date()));
 		horaFin = new TimeBox();
 		horaFin.setWidth("45px");
-		horaFin.setValue(DateTimeFormat.getFormat(Messages.getString("VentanaCarga.formatoHora")).format(new Date())); //$NON-NLS-1$
+		horaFin.setValue(DateTimeFormat.getFormat(constantes.formatoHora()).format(new Date()));
 
 		horizontalPanel1.add(dateBox);
 		horizontalPanel1.add(horaInicio);
 		horizontalPanel1.add(horaFin);
 
-		Label lblNewLabel_2 = new Label(Messages.getString("VentanaCarga.conteoEspecie")); //$NON-NLS-1$
+		Label lblNewLabel_2 = new Label(constantes.conteoEspecie());
 		setWidget(2, 0, lblNewLabel_2);
 
 		final VerticalPanel verticalPanel_1 = new VerticalPanel();
 		setWidget(2, 1, verticalPanel_1);
 		agregarObservacionEspecie(verticalPanel_1);
 
-		Button button = new Button(Messages.getString("VentanaCarga.agregar")); //$NON-NLS-1$
+		Button button = new Button(constantes.agregar());
 
 		setWidget(2, 2, button);
 		button.addClickHandler(new ClickHandler() {
@@ -340,14 +342,14 @@ public class VentanaCarga extends Grid {
 		getCellFormatter().setVerticalAlignment(2, 0,
 				HasVerticalAlignment.ALIGN_TOP);
 
-		Label lblNewLabel_3 = new Label(Messages.getString("VentanaCarga.matrizProductiva")); //$NON-NLS-1$
+		Label lblNewLabel_3 = new Label(constantes.matrizProductiva());
 		setWidget(3, 0, lblNewLabel_3);
 
 		final VerticalPanel verticalPanel_2 = new VerticalPanel();
 		setWidget(3, 1, verticalPanel_2);
 		agregarObservacionMatrizProductiva(verticalPanel_2);
 
-		Button button2 = new Button(Messages.getString("VentanaCarga.agregar")); //$NON-NLS-1$
+		Button button2 = new Button(constantes.agregar());
 
 		setWidget(3, 2, button2);
 		button2.addClickHandler(new ClickHandler() {
@@ -361,29 +363,29 @@ public class VentanaCarga extends Grid {
 		getCellFormatter().setVerticalAlignment(3, 0,
 				HasVerticalAlignment.ALIGN_TOP);
 
-		Label lblNewLabel0 = new Label(Messages.getString("VentanaCarga.clima")); //$NON-NLS-1$
+		Label lblNewLabel0 = new Label(constantes.clima());
 		setWidget(4, 0, lblNewLabel0);
 		Grid grid2 = new Grid(2, 4);
 
-		Label lblNewLabel1 = new Label(Messages.getString("VentanaCarga.sol")); //$NON-NLS-1$
+		Label lblNewLabel1 = new Label(constantes.sol());
 		checkSol = new CheckBox();
 
 		grid2.setWidget(0, 0, lblNewLabel1);
 		grid2.setWidget(0, 1, checkSol);
 
-		Label lblNewLabel3 = new Label(Messages.getString("VentanaCarga.nubes")); //$NON-NLS-1$
+		Label lblNewLabel3 = new Label(constantes.nubes());
 
 		comboNuves = comboNubes();
 
 		grid2.setWidget(0, 2, lblNewLabel3);
 		grid2.setWidget(0, 3, comboNuves);
 
-		Label lblNewLabel2 = new Label(Messages.getString("VentanaCarga.lluvia")); //$NON-NLS-1$
+		Label lblNewLabel2 = new Label(constantes.lluvia());
 		checkLluvia = new CheckBox();
 		grid2.setWidget(1, 0, lblNewLabel2);
 		grid2.setWidget(1, 1, checkLluvia);
 
-		Label lblNewLabel4 = new Label(Messages.getString("VentanaCarga.viento")); //$NON-NLS-1$
+		Label lblNewLabel4 = new Label(constantes.viento());
 
 		comboViento = comboViento();
 		grid2.setWidget(1, 2, lblNewLabel4);
@@ -391,14 +393,14 @@ public class VentanaCarga extends Grid {
 
 		setWidget(4, 1, grid2);
 
-		Label lblNewLabel6 = new Label(Messages.getString("VentanaCarga.observaciones")); //$NON-NLS-1$
+		Label lblNewLabel6 = new Label(constantes.observaciones());
 
 		setWidget(5, 0, lblNewLabel6);
 		observaciones = new TextArea();
 
 		setWidget(5, 1, observaciones);
 
-		Label lblNewLabel5 = new Label(Messages.getString("VentanaCarga.fotos")); //$NON-NLS-1$
+		Label lblNewLabel5 = new Label(constantes.fotos());
 
 		setWidget(6, 0, lblNewLabel5);
 
@@ -413,7 +415,7 @@ public class VentanaCarga extends Grid {
 
 		setWidget(7, 1, panelImages);
 
-		final Button sendButton = new Button(Messages.getString("VentanaCarga.enviar")); //$NON-NLS-1$
+		final Button sendButton = new Button(constantes.enviar());
 		sendButton.addStyleName("sendButton");
 		sendButton.addClickHandler(new ClickHandler() {
 
@@ -425,13 +427,13 @@ public class VentanaCarga extends Grid {
 							@Override
 							public void onFailure(Throwable caught) {
 								errorLabel
-										.setText(Messages.getString("VentanaCarga.errorGuardarObservacion")); //$NON-NLS-1$
+										.setText(constantes.errorGuardarObservacion());
 
 							}
 
 							@Override
 							public void onSuccess(Void result) {
-								errorLabel.setText(Messages.getString("VentanaCarga.observacionGuardada")); //$NON-NLS-1$
+								errorLabel.setText(constantes.observacionGuardada());
 
 							}
 						});
@@ -442,13 +444,13 @@ public class VentanaCarga extends Grid {
 	}
 
 	private void agregarItemsCombo(final ListBox comboBox, Set<String> list) {
-		comboBox.addItem(Messages.getString("VentanaCarga.seleccionar")); //$NON-NLS-1$
+		comboBox.addItem(constantes.seleccionar());
 		for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
 			String especie = iterator.next();
 			comboBox.addItem(especie);
 		}
 		comboBox.setItemSelected(0, true);
-		comboBox.addItem(Messages.getString("VentanaCarga.otra")); //$NON-NLS-1$
+		comboBox.addItem(constantes.otra());
 	}
 	private void agregarObservacionEspecie(final VerticalPanel verticalPanel_1) {
 		VerticalPanel verticalPanel = new VerticalPanel();
@@ -505,7 +507,7 @@ public class VentanaCarga extends Grid {
 		archivosService.borrar(imagen, new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				Label errorLabel =(Label) RootPanel.get("errorLabelContainer").getWidget(0);
-				errorLabel.setText(Messages.getString("VentanaCarga.errorEliminarArchivo")); //$NON-NLS-1$
+				errorLabel.setText(constantes.errorEliminarArchivo());
 			}
 
 			@Override
@@ -520,7 +522,7 @@ public class VentanaCarga extends Grid {
 		ListBox conteo = new ListBox();
 		for (int i = 0; i < ConteoEnum.values().length; i++) {
 			ConteoEnum e=ConteoEnum.values()[i];
-			conteo.addItem(Messages.getString("ConteoEnum."+e), e.toString());
+			conteo.addItem(constantes.getString("ConteoEnum_"+e), e.toString());
 		}
 		return conteo;
 	}
@@ -529,7 +531,7 @@ public class VentanaCarga extends Grid {
 		ListBox distancia = new ListBox();
 		for (int i = 0; i < DistanciaEnum.values().length; i++) {
 			DistanciaEnum e=DistanciaEnum.values()[i];
-			distancia.addItem(Messages.getString("DistanciaEnum."+e), e.toString());
+			distancia.addItem(constantes.getString("DistanciaEnum_"+e), e.toString());
 		}
 		return distancia;
 	}
@@ -538,7 +540,7 @@ public class VentanaCarga extends Grid {
 		ListBox edad = new ListBox();
 		for (int i = 0; i < EdadEnum.values().length; i++) {
 			EdadEnum e=EdadEnum.values()[i];
-			edad.addItem(Messages.getString("EdadEnum."+e), e.toString());
+			edad.addItem(constantes.getString("EdadEnum_"+e), e.toString());
 		}
 		edad.setSelectedIndex(2);
 		return edad;
@@ -548,7 +550,7 @@ public class VentanaCarga extends Grid {
 		ListBox comboNuves = new ListBox();
 		for (int i = 0; i < NubesEnum.values().length; i++) {
 			NubesEnum ne=NubesEnum.values()[i];
-			comboNuves.addItem(Messages.getString("NubesEnum."+ne), ne.toString());
+			comboNuves.addItem(constantes.getString("NubesEnum_"+ne), ne.toString());
 		}
 		comboNuves.setSelectedIndex(1);
 		return comboNuves;
@@ -558,7 +560,7 @@ public class VentanaCarga extends Grid {
 		ListBox comboViento = new ListBox();
 		for (int i = 0; i < VientoEnum.values().length; i++) {
 			VientoEnum ve=VientoEnum.values()[i];
-			comboViento.addItem(Messages.getString("VientoEnum."+ve.toString()), ve.toString());
+			comboViento.addItem(constantes.getString("VientoEnum_"+ve.toString()), ve.toString());
 		}
 		comboViento.setSelectedIndex(1);
 		return comboViento;
@@ -578,7 +580,7 @@ public class VentanaCarga extends Grid {
 			public void onChange(ChangeEvent event) {
 
 				if (comboBox.getItemText(comboBox.getSelectedIndex()).equals(
-						Messages.getString("VentanaCarga.otra"))) { //$NON-NLS-1$
+						constantes.otra())) {
 
 					dlg.setCombo(comboBox);
 					dlg.center();
@@ -681,14 +683,14 @@ public class VentanaCarga extends Grid {
 
 		Date fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
 				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
-				.getFormat(Messages.getString("VentanaCarga.formatoHora")).parse(horaInicio.getValue()).getHours(), //$NON-NLS-1$
-				DateTimeFormat.getFormat(Messages.getString("VentanaCarga.formatoHora")).parse(horaInicio.getValue()) //$NON-NLS-1$
+				.getFormat(constantes.formatoHora()).parse(horaInicio.getValue()).getHours(),
+				DateTimeFormat.getFormat(constantes.formatoHora()).parse(horaInicio.getValue())
 						.getMinutes());
 		observacion.setInicio(fecha);
 		fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
 				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
-				.getFormat(Messages.getString("VentanaCarga.formatoHora")).parse(horaFin.getValue()).getHours(), //$NON-NLS-1$
-				DateTimeFormat.getFormat(Messages.getString("VentanaCarga.formatoHora")).parse(horaFin.getValue()) //$NON-NLS-1$
+				.getFormat(constantes.formatoHora()).parse(horaFin.getValue()).getHours(),
+				DateTimeFormat.getFormat(constantes.formatoHora()).parse(horaFin.getValue())
 						.getMinutes());
 		observacion.setFin(fecha);
 
