@@ -1,6 +1,8 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -11,7 +13,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class AplicacionWeb implements EntryPoint {
-
+	AplicacionWebConstantes constantes = GWT.create(AplicacionWebConstantes.class);
 	/**
 	 * This is the entry point method.
 	 */
@@ -40,19 +42,35 @@ public class AplicacionWeb implements EntryPoint {
 				rootPanel.add(new VentanaListado());
 			}
 		};
+		Command nadaCommand = new Command() {
+
+			public void execute() {
+				// TODO: hacer
+			}
+		};
+
 		// Create a menu bar
 		MenuBar menu = new MenuBar();
 		menu.setAutoOpen(true);
 		menu.setWidth("100%");
 		menu.setAnimationEnabled(true);
 
-		// Create a sub menu of recent documents
 		MenuBar observacionesMenu = new MenuBar(true);
+		MenuBar configuracionMenu = new MenuBar(true);
+		MenuBar ayudaMenu = new MenuBar(true);
 
-		observacionesMenu.addItem("Cargar", cargarCommand);
-		observacionesMenu.addItem("Ver", listarCommand);
+		observacionesMenu.addItem(constantes.cargar(), cargarCommand);
+		observacionesMenu.addItem(constantes.ver(), listarCommand);
+		menu.addItem(new MenuItem(constantes.observaciones(), observacionesMenu));
 
-		menu.addItem(new MenuItem("Observaciones", observacionesMenu));
+		configuracionMenu.addItem(constantes.preferencias(), nadaCommand);
+		menu.addItem(new MenuItem(constantes.configuracion(), configuracionMenu));
+
+		ayudaMenu.addItem(constantes.ayuda(), nadaCommand);
+		ayudaMenu.addItem(constantes.acercaDe(), nadaCommand);
+		menu.addItem(new MenuItem("Ayuda", ayudaMenu));
+
+		menu.addItem(constantes.cerrarSesion(), nadaCommand);
 
 		return menu;
 	}

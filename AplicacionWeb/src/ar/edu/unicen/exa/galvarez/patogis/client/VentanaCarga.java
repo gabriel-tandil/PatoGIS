@@ -58,7 +58,8 @@ import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
 public class VentanaCarga extends Grid {
 	  VentanaCargaConstantes constantes = GWT.create(VentanaCargaConstantes.class);
-	class AgregarEspecieDialog extends AgregarElementoDialog {
+	  EnumConstantes constantesEnum = GWT.create(EnumConstantes.class);
+	  class AgregarEspecieDialog extends AgregarElementoDialog {
 
 
 		public AgregarEspecieDialog() {
@@ -522,7 +523,7 @@ public class VentanaCarga extends Grid {
 		ListBox conteo = new ListBox();
 		for (int i = 0; i < ConteoEnum.values().length; i++) {
 			ConteoEnum e=ConteoEnum.values()[i];
-			conteo.addItem(constantes.getString("ConteoEnum_"+e), e.toString());
+			conteo.addItem(constantesEnum.getString("ConteoEnum_"+e), e.toString());
 		}
 		return conteo;
 	}
@@ -531,7 +532,7 @@ public class VentanaCarga extends Grid {
 		ListBox distancia = new ListBox();
 		for (int i = 0; i < DistanciaEnum.values().length; i++) {
 			DistanciaEnum e=DistanciaEnum.values()[i];
-			distancia.addItem(constantes.getString("DistanciaEnum_"+e), e.toString());
+			distancia.addItem(constantesEnum.getString("DistanciaEnum_"+e), e.toString());
 		}
 		return distancia;
 	}
@@ -540,7 +541,7 @@ public class VentanaCarga extends Grid {
 		ListBox edad = new ListBox();
 		for (int i = 0; i < EdadEnum.values().length; i++) {
 			EdadEnum e=EdadEnum.values()[i];
-			edad.addItem(constantes.getString("EdadEnum_"+e), e.toString());
+			edad.addItem(constantesEnum.getString("EdadEnum_"+e), e.toString());
 		}
 		edad.setSelectedIndex(2);
 		return edad;
@@ -550,7 +551,7 @@ public class VentanaCarga extends Grid {
 		ListBox comboNuves = new ListBox();
 		for (int i = 0; i < NubesEnum.values().length; i++) {
 			NubesEnum ne=NubesEnum.values()[i];
-			comboNuves.addItem(constantes.getString("NubesEnum_"+ne), ne.toString());
+			comboNuves.addItem(constantesEnum.getString("NubesEnum_"+ne), ne.toString());
 		}
 		comboNuves.setSelectedIndex(1);
 		return comboNuves;
@@ -560,7 +561,7 @@ public class VentanaCarga extends Grid {
 		ListBox comboViento = new ListBox();
 		for (int i = 0; i < VientoEnum.values().length; i++) {
 			VientoEnum ve=VientoEnum.values()[i];
-			comboViento.addItem(constantes.getString("VientoEnum_"+ve.toString()), ve.toString());
+			comboViento.addItem(constantesEnum.getString("VientoEnum_"+ve.toString()), ve.toString());
 		}
 		comboViento.setSelectedIndex(1);
 		return comboViento;

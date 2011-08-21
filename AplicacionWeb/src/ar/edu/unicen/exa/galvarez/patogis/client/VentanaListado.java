@@ -21,17 +21,25 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class VentanaListado extends FlexTable {
-
+	VentanaListadoConstantes constantes = GWT
+			.create(VentanaListadoConstantes.class);
 	final ObservacionServiceAsync observacionService = GWT
-	.create(ObservacionService.class);
+			.create(ObservacionService.class);
+
 	VentanaListado() {
 		super();
-		final Label errorLabel =(Label) RootPanel.get("errorLabelContainer").getWidget(0);
-		setText(0, 0, "Fecha");
-		setText(0, 1, "Inicio");
-		setText(0, 2, "Fin");
-		setText(0, 3, "Laguna");
-		setText(0, 4, "Detalles");
+		final Label errorLabel = (Label) RootPanel.get("errorLabelContainer")
+				.getWidget(0);
+		setText(0, 0, constantes.fecha());
+		;
+		setText(0, 1, constantes.inicio());
+		;
+		setText(0, 2, constantes.fin());
+		;
+		setText(0, 3, constantes.laguna());
+		;
+		setText(0, 4, constantes.detalles());
+		;
 		getRowFormatter().addStyleName(0, "watchListHeader");
 		addStyleName("watchList");
 		getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");
@@ -42,8 +50,8 @@ public class VentanaListado extends FlexTable {
 		observacionService.getElementos(new AsyncCallback<List<Observacion>>() {
 			@Override
 			public void onFailure(Throwable caught) {
-				errorLabel
-						.setText("Error al obtener observaciones del webservice");
+				errorLabel.setText(constantes.errorObtenerObservaciones());
+				;
 
 			}
 
@@ -53,17 +61,20 @@ public class VentanaListado extends FlexTable {
 						.hasNext();) {
 					final Observacion observacion = iterator.next();
 					int fila = getRowCount();
-					setText(fila, 0, DateTimeFormat.getFormat("dd/MM/yy")
-							.format(observacion.getInicio()));
+					setText(fila, 0,
+							DateTimeFormat.getFormat(constantes.formatoFecha())
+									.format(observacion.getInicio()));
 
-					setText(fila, 1, DateTimeFormat.getFormat("HH:mm")
-							.format(observacion.getInicio()));
+					setText(fila, 1,
+							DateTimeFormat.getFormat(constantes.formatoHora())
+									.format(observacion.getInicio()));
 
-					setText(fila, 2, DateTimeFormat.getFormat("HH:mm")
-							.format(observacion.getFin()));
-					setText(fila, 3, observacion.getUbicacion()
-							.getNombre());
-					Button detalles = new Button("Detalles");
+					setText(fila, 2,
+							DateTimeFormat.getFormat(constantes.formatoHora())
+									.format(observacion.getFin()));
+					setText(fila, 3, observacion.getUbicacion().getNombre());
+					Button detalles = new Button(constantes.detalles());
+					;
 					detalles.addClickHandler(new ClickHandler() {
 						public void onClick(ClickEvent event) {
 							mostrarDetalles(observacion);
@@ -82,15 +93,16 @@ public class VentanaListado extends FlexTable {
 
 		});
 
-
 	}
 
 	class DetallesObservacionDialog extends DialogBox {
 
 		public DetallesObservacionDialog(Observacion obs) {
-			setText("Detalles Observación");
+			setText(constantes.detallesObservacion());
+			;
 			setAnimationEnabled(true);
-			Button closeButton = new Button("Cancelar");
+			Button closeButton = new Button(constantes.cancelar());
+			;
 			closeButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
@@ -102,8 +114,10 @@ public class VentanaListado extends FlexTable {
 			botones.add(closeButton);
 			FlexTable tabla = new FlexTable();
 
-			tabla.setText(0, 0, "Especie");
-			tabla.setText(0, 1, "Cantidad");
+			tabla.setText(0, 0, constantes.especie());
+			;
+			tabla.setText(0, 1, constantes.cantidad());
+			;
 			tabla.getRowFormatter().addStyleName(0, "watchListHeader");
 			tabla.addStyleName("watchList");
 			tabla.getCellFormatter().addStyleName(0, 1,
