@@ -1,7 +1,6 @@
 package ar.edu.unicen.exa.galvarez.patogis.servidor.modelo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class ObservacionClima implements Serializable {
 	/**
