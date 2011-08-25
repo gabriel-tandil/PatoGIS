@@ -38,7 +38,7 @@ public interface VentanaCargaConstantes extends Constants {
 
 	String fotos();
 
-	String IngresarNuevaEspecie();
+	String ingresarNuevaEspecie();
 
 	String ingresarNuevaUbicacion();
 
@@ -67,5 +67,9 @@ public interface VentanaCargaConstantes extends Constants {
 	String sol();
 
 	String viento();
+
+	String temperatura();
+
+	String grados();
 
 }

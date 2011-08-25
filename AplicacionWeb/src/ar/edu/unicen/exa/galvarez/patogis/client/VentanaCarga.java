@@ -43,6 +43,7 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -64,7 +65,7 @@ public class VentanaCarga extends Grid {
 
 		public AgregarEspecieDialog() {
 
-			setText(constantes.IngresarNuevaEspecie());
+			setText(constantes.ingresarNuevaEspecie());
 		}
 
 		protected void grabar() {
@@ -147,10 +148,11 @@ public class VentanaCarga extends Grid {
 	final ArchivosServiceAsync archivosService = GWT
 			.create(ArchivosService.class);
 	private CheckBox checkLluvia;
-
+	private DoubleBox temperatura;
 	private CheckBox checkSol;
 	private ListBox comboNuves;
 	private ListBox comboViento;
+	private ListBox alcance;
 	private DateBox dateBox;
 	Map<String, Especie> especies = new HashMap<String, Especie>();
 
@@ -320,7 +322,12 @@ public class VentanaCarga extends Grid {
 		horizontalPanel1.add(dateBox);
 		horizontalPanel1.add(horaInicio);
 		horizontalPanel1.add(horaFin);
-
+		
+		Label lblNewLabel_9 = new Label(constantes.conteoEspecie());
+		setWidget(2, 0, lblNewLabel_9);
+		
+		alcance = comboAlcance();
+		
 		Label lblNewLabel_2 = new Label(constantes.conteoEspecie());
 		setWidget(2, 0, lblNewLabel_2);
 
@@ -366,7 +373,7 @@ public class VentanaCarga extends Grid {
 
 		Label lblNewLabel0 = new Label(constantes.clima());
 		setWidget(4, 0, lblNewLabel0);
-		Grid grid2 = new Grid(2, 4);
+		Grid grid2 = new Grid(3, 4);
 
 		Label lblNewLabel1 = new Label(constantes.sol());
 		checkSol = new CheckBox();
@@ -391,19 +398,24 @@ public class VentanaCarga extends Grid {
 		comboViento = comboViento();
 		grid2.setWidget(1, 2, lblNewLabel4);
 		grid2.setWidget(1, 3, comboViento);
-
+		Label lblNewLabel5 = new Label(constantes.temperatura());
+		Label lblNewLabel6 = new Label(constantes.grados());
+		temperatura=new DoubleBox();
+		grid2.setWidget(2, 0, lblNewLabel5);
+		grid2.setWidget(2, 1, temperatura);
+		grid2.setWidget(2, 2, lblNewLabel6);
 		setWidget(4, 1, grid2);
 
-		Label lblNewLabel6 = new Label(constantes.observaciones());
+		Label lblNewLabel7 = new Label(constantes.observaciones());
 
-		setWidget(5, 0, lblNewLabel6);
+		setWidget(5, 0, lblNewLabel7);
 		observaciones = new TextArea();
 
 		setWidget(5, 1, observaciones);
 
-		Label lblNewLabel5 = new Label(constantes.fotos());
+		Label lblNewLabel8 = new Label(constantes.fotos());
 
-		setWidget(6, 0, lblNewLabel5);
+		setWidget(6, 0, lblNewLabel8);
 
 		SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
 		uploader.setI18Constants(new UploaderConstantsImpl());
@@ -461,10 +473,10 @@ public class VentanaCarga extends Grid {
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel);
 
-		final ListBox comboBox = generarComboItemsObservables(
+		final ListBox comboBox1 = generarComboItemsObservables(
 				especies.keySet(), new AgregarEspecieDialog());
 
-		horizontalPanel.add(comboBox);
+		horizontalPanel.add(comboBox1);
 
 		IntegerBox textBox_1 = new IntegerBox();
 		horizontalPanel.add(textBox_1);
@@ -566,7 +578,17 @@ public class VentanaCarga extends Grid {
 		comboViento.setSelectedIndex(1);
 		return comboViento;
 	}
-
+	
+	private ListBox comboAlcance() {
+		ListBox comboAlcance = new ListBox();
+		for (int i = 0; i < AlcanceEnum.values().length; i++) {
+			AlcanceEnum ve=AlcanceEnum.values()[i];
+			comboAlcance.addItem(constantesEnum.getString("AlcanceEnum_"+ve.toString()), ve.toString());
+		}
+		comboAlcance.setSelectedIndex(1);
+		return comboAlcance;
+	}
+	
 	void establecerElementoCombo(ListBox combo, String especie) {
 		combo.addItem(especie);
 		combo.setSelectedIndex(combo.getItemCount() - 1);
@@ -599,8 +621,9 @@ public class VentanaCarga extends Grid {
 		ObservacionClima oc = new ObservacionClima();
 		oc.setLluvia(checkLluvia.getValue());
 		oc.setSol(checkSol.getValue());
-		oc.setNuves(comboNuves.getValue(comboNuves.getSelectedIndex()));
+		oc.setNubes(comboNuves.getValue(comboNuves.getSelectedIndex()));
 		oc.setViento(comboViento.getValue(comboViento.getSelectedIndex()));
+		oc.setTemperatura(temperatura.getValue());
 		return oc;
 	}
 
@@ -654,7 +677,7 @@ public class VentanaCarga extends Grid {
 		Observacion observacion = new Observacion();
 		observacion.setObservaciones(observaciones.getValue());
 		observacion.setEstado(EstadoEnum.ARevisar.toString());// TODO: asociar al usuario
-		observacion.setAlcance(AlcanceEnum.Total.toString());// TODO: poner Combo
+		observacion.setAlcance(alcance.getValue(alcance.getSelectedIndex()));
 		observacion.setFiabilidad(FiabilidadEnum.Fiable.toString());// TODO: asociar al usuario
 		observacion.setIdUbicacion(getUbicacion().getId());
 		observacion.setObservacionClima(getObservacionClima());
