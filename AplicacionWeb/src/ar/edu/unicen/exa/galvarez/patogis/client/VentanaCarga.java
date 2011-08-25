@@ -58,14 +58,14 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
 public class VentanaCarga extends Grid {
-	  VentanaCargaConstantes constantes = GWT.create(VentanaCargaConstantes.class);
+	  VentanaCargaConstantes ctes = GWT.create(VentanaCargaConstantes.class);
 	  EnumConstantes constantesEnum = GWT.create(EnumConstantes.class);
 	  class AgregarEspecieDialog extends AgregarElementoDialog {
 
 
 		public AgregarEspecieDialog() {
 
-			setText(constantes.ingresarNuevaEspecie());
+			setText(ctes.ingresarNuevaEspecie());
 		}
 
 		protected void grabar() {
@@ -74,7 +74,7 @@ public class VentanaCarga extends Grid {
 			especiesService.addElemento(e, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					errorLabel
-							.setText(constantes.errorGuardarEspecie());
+							.setText(ctes.errorGuardarEspecie());
 				}
 
 				@Override
@@ -92,7 +92,7 @@ public class VentanaCarga extends Grid {
 
 		public AgregarTipoMatrizProductivaDialog() {
 
-			setText(constantes.ingresarNuevoTipoMatrizProductiva());
+			setText(ctes.ingresarNuevoTipoMatrizProductiva());
 		}
 
 		protected void grabar() {
@@ -102,7 +102,7 @@ public class VentanaCarga extends Grid {
 					new AsyncCallback<Void>() {
 						public void onFailure(Throwable caught) {
 							errorLabel
-									.setText(constantes.errorGuardarNuevoTipoMatrizProductiva());
+									.setText(ctes.errorGuardarNuevoTipoMatrizProductiva());
 						}
 
 						@Override
@@ -121,7 +121,7 @@ public class VentanaCarga extends Grid {
 
 		public AgregarUbicacionDialog() {
 
-			setText(constantes.ingresarNuevaUbicacion());
+			setText(ctes.ingresarNuevaUbicacion());
 		}
 
 		protected void grabar() {
@@ -130,7 +130,7 @@ public class VentanaCarga extends Grid {
 			ubicacionService.addElemento(u, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					errorLabel
-							.setText(constantes.errorGuardarNuevaUbicacion());
+							.setText(ctes.errorGuardarNuevaUbicacion());
 				}
 
 				@Override
@@ -195,9 +195,9 @@ public class VentanaCarga extends Grid {
 			VerticalPanel vp = new VerticalPanel();
 
 			CheckBox cb = new CheckBox();
-			cb.setText(constantes.panoramica());
+			cb.setText(ctes.panoramica());
 			vp.add(cb);
-			Button borrar = new Button(constantes.eliminarFoto());
+			Button borrar = new Button(ctes.eliminarFoto());
 			borrar.addClickHandler(new ClickHandler() {
 				String imagen = imagenes.get(imagenes.size() - 1);
 
@@ -233,15 +233,15 @@ public class VentanaCarga extends Grid {
 		final Label errorLabel =(Label) RootPanel.get("errorLabelContainer").getWidget(0);
 		setSize("100px", "100px");
 
-		Label lblNewLabel = new Label(constantes.laguna());
+		Label lblNewLabel = new Label(ctes.laguna());
 		setWidget(0, 0, lblNewLabel);
 		laguna = generarComboItemsObservables(ubicaciones.keySet(),
 				new AgregarUbicacionDialog());
 		laguna.addMouseListener(new TooltipListener(
-				constantes.lagunaTooltip(), 5000));
+				ctes.lagunaTooltip(), 5000));
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
-				errorLabel.setText(constantes.errorObtenerEspecies());
+				errorLabel.setText(ctes.errorObtenerEspecies());
 			}
 
 			@Override
@@ -262,7 +262,7 @@ public class VentanaCarga extends Grid {
 				.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
-								.setText(constantes.errorObtenerTiposMatrizProductiva());
+								.setText(ctes.errorObtenerTiposMatrizProductiva());
 					}
 
 					@Override
@@ -284,7 +284,7 @@ public class VentanaCarga extends Grid {
 				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 					public void onFailure(Throwable caught) {
 						errorLabel
-								.setText(constantes.errorObtenerUbicaciones());
+								.setText(ctes.errorObtenerUbicaciones());
 					}
 
 					@Override
@@ -302,42 +302,42 @@ public class VentanaCarga extends Grid {
 		// Focus the cursor on the name field when the app loads
 		laguna.setFocus(true);
 
-		Label lblNewLabel_1 = new Label(constantes.fechaYHoras());
+		Label lblNewLabel_1 = new Label(ctes.fechaYHoras());
 		setWidget(1, 0, lblNewLabel_1);
 		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
 		dateBox = new DateBox();
 		dateBox.setWidth("70px");
 		setWidget(1, 1, horizontalPanel1);
 		dateBox.setFormat(new DefaultFormat(DateTimeFormat
-				.getFormat(constantes.formatoFechaCorta())));
+				.getFormat(ctes.formatoFechaCorta())));
 		dateBox.setValue(new Date());
 		horaInicio = new TimeBox();
 		horaInicio.setWidth("45px");
-		horaInicio.setValue(DateTimeFormat.getFormat(constantes.formatoHora())
+		horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
 				.format(new Date()));
 		horaFin = new TimeBox();
 		horaFin.setWidth("45px");
-		horaFin.setValue(DateTimeFormat.getFormat(constantes.formatoHora()).format(new Date()));
+		horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(new Date()));
 
 		horizontalPanel1.add(dateBox);
 		horizontalPanel1.add(horaInicio);
 		horizontalPanel1.add(horaFin);
 		
-		Label lblNewLabel_9 = new Label(constantes.conteoEspecie());
+		Label lblNewLabel_9 = new Label(ctes.alcance());
 		setWidget(2, 0, lblNewLabel_9);
 		
 		alcance = comboAlcance();
-		
-		Label lblNewLabel_2 = new Label(constantes.conteoEspecie());
-		setWidget(2, 0, lblNewLabel_2);
+		setWidget(2, 1,alcance);
+		Label lblNewLabel_2 = new Label(ctes.conteoEspecie());
+		setWidget(3, 0, lblNewLabel_2);
 
 		final VerticalPanel verticalPanel_1 = new VerticalPanel();
-		setWidget(2, 1, verticalPanel_1);
+		setWidget(3, 1, verticalPanel_1);
 		agregarObservacionEspecie(verticalPanel_1);
 
-		Button button = new Button(constantes.agregar());
+		Button button = new Button(ctes.agregar());
 
-		setWidget(2, 2, button);
+		setWidget(3, 2, button);
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				agregarObservacionEspecie(verticalPanel_1);
@@ -350,16 +350,16 @@ public class VentanaCarga extends Grid {
 		getCellFormatter().setVerticalAlignment(2, 0,
 				HasVerticalAlignment.ALIGN_TOP);
 
-		Label lblNewLabel_3 = new Label(constantes.matrizProductiva());
-		setWidget(3, 0, lblNewLabel_3);
+		Label lblNewLabel_3 = new Label(ctes.matrizProductiva());
+		setWidget(4, 0, lblNewLabel_3);
 
 		final VerticalPanel verticalPanel_2 = new VerticalPanel();
-		setWidget(3, 1, verticalPanel_2);
+		setWidget(4, 1, verticalPanel_2);
 		agregarObservacionMatrizProductiva(verticalPanel_2);
 
-		Button button2 = new Button(constantes.agregar());
+		Button button2 = new Button(ctes.agregar());
 
-		setWidget(3, 2, button2);
+		setWidget(4, 2, button2);
 		button2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				agregarObservacionMatrizProductiva(verticalPanel_2);
@@ -371,51 +371,53 @@ public class VentanaCarga extends Grid {
 		getCellFormatter().setVerticalAlignment(3, 0,
 				HasVerticalAlignment.ALIGN_TOP);
 
-		Label lblNewLabel0 = new Label(constantes.clima());
-		setWidget(4, 0, lblNewLabel0);
+		Label lblNewLabel0 = new Label(ctes.clima());
+		setWidget(5, 0, lblNewLabel0);
 		Grid grid2 = new Grid(3, 4);
 
-		Label lblNewLabel1 = new Label(constantes.sol());
+		Label lblNewLabel1 = new Label(ctes.sol());
 		checkSol = new CheckBox();
 
 		grid2.setWidget(0, 0, lblNewLabel1);
 		grid2.setWidget(0, 1, checkSol);
 
-		Label lblNewLabel3 = new Label(constantes.nubes());
+		Label lblNewLabel3 = new Label(ctes.nubes());
 
 		comboNuves = comboNubes();
 
 		grid2.setWidget(0, 2, lblNewLabel3);
 		grid2.setWidget(0, 3, comboNuves);
 
-		Label lblNewLabel2 = new Label(constantes.lluvia());
+		Label lblNewLabel2 = new Label(ctes.lluvia());
 		checkLluvia = new CheckBox();
 		grid2.setWidget(1, 0, lblNewLabel2);
 		grid2.setWidget(1, 1, checkLluvia);
 
-		Label lblNewLabel4 = new Label(constantes.viento());
+		Label lblNewLabel4 = new Label(ctes.viento());
 
 		comboViento = comboViento();
 		grid2.setWidget(1, 2, lblNewLabel4);
 		grid2.setWidget(1, 3, comboViento);
-		Label lblNewLabel5 = new Label(constantes.temperatura());
-		Label lblNewLabel6 = new Label(constantes.grados());
+		Label lblNewLabel5 = new Label(ctes.temperatura());
+		Label lblNewLabel6 = new Label(ctes.grados());
 		temperatura=new DoubleBox();
+		temperatura.setWidth("20px");
+		temperatura.setValue(20.0);
 		grid2.setWidget(2, 0, lblNewLabel5);
-		grid2.setWidget(2, 1, temperatura);
-		grid2.setWidget(2, 2, lblNewLabel6);
-		setWidget(4, 1, grid2);
+		grid2.setWidget(2, 2, temperatura);
+		grid2.setWidget(2, 3, lblNewLabel6);
+		setWidget(5, 1, grid2);
 
-		Label lblNewLabel7 = new Label(constantes.observaciones());
+		Label lblNewLabel7 = new Label(ctes.observaciones());
 
-		setWidget(5, 0, lblNewLabel7);
+		setWidget(6, 0, lblNewLabel7);
 		observaciones = new TextArea();
 
-		setWidget(5, 1, observaciones);
+		setWidget(6, 1, observaciones);
 
-		Label lblNewLabel8 = new Label(constantes.fotos());
+		Label lblNewLabel8 = new Label(ctes.fotos());
 
-		setWidget(6, 0, lblNewLabel8);
+		setWidget(7, 0, lblNewLabel8);
 
 		SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
 		uploader.setI18Constants(new UploaderConstantsImpl());
@@ -424,11 +426,11 @@ public class VentanaCarga extends Grid {
 		uploader.setAvoidRepeatFiles(true);
 		uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
 		uploader.setValidExtensions("jpg", "jpeg", "png", "gif");
-		setWidget(6, 1, uploader);
+		setWidget(7, 1, uploader);
 
-		setWidget(7, 1, panelImages);
+		setWidget(8, 1, panelImages);
 
-		final Button sendButton = new Button(constantes.enviar());
+		final Button sendButton = new Button(ctes.enviar());
 		sendButton.addStyleName("sendButton");
 		sendButton.addClickHandler(new ClickHandler() {
 
@@ -440,30 +442,30 @@ public class VentanaCarga extends Grid {
 							@Override
 							public void onFailure(Throwable caught) {
 								errorLabel
-										.setText(constantes.errorGuardarObservacion());
+										.setText(ctes.errorGuardarObservacion());
 
 							}
 
 							@Override
 							public void onSuccess(Void result) {
-								errorLabel.setText(constantes.observacionGuardada());
+								errorLabel.setText(ctes.observacionGuardada());
 
 							}
 						});
 			}
 		});
-		setWidget(8, 1, sendButton);
+		setWidget(9, 1, sendButton);
 	
 	}
 
 	private void agregarItemsCombo(final ListBox comboBox, Set<String> list) {
-		comboBox.addItem(constantes.seleccionar());
+		comboBox.addItem(ctes.seleccionar());
 		for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
 			String especie = iterator.next();
 			comboBox.addItem(especie);
 		}
 		comboBox.setItemSelected(0, true);
-		comboBox.addItem(constantes.otra());
+		comboBox.addItem(ctes.otra());
 	}
 	private void agregarObservacionEspecie(final VerticalPanel verticalPanel_1) {
 		VerticalPanel verticalPanel = new VerticalPanel();
@@ -520,7 +522,7 @@ public class VentanaCarga extends Grid {
 		archivosService.borrar(imagen, new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				Label errorLabel =(Label) RootPanel.get("errorLabelContainer").getWidget(0);
-				errorLabel.setText(constantes.errorEliminarArchivo());
+				errorLabel.setText(ctes.errorEliminarArchivo());
 			}
 
 			@Override
@@ -603,7 +605,7 @@ public class VentanaCarga extends Grid {
 			public void onChange(ChangeEvent event) {
 
 				if (comboBox.getItemText(comboBox.getSelectedIndex()).equals(
-						constantes.otra())) {
+						ctes.otra())) {
 
 					dlg.setCombo(comboBox);
 					dlg.center();
@@ -707,14 +709,14 @@ public class VentanaCarga extends Grid {
 
 		Date fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
 				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
-				.getFormat(constantes.formatoHora()).parse(horaInicio.getValue()).getHours(),
-				DateTimeFormat.getFormat(constantes.formatoHora()).parse(horaInicio.getValue())
+				.getFormat(ctes.formatoHora()).parse(horaInicio.getValue()).getHours(),
+				DateTimeFormat.getFormat(ctes.formatoHora()).parse(horaInicio.getValue())
 						.getMinutes());
 		observacion.setInicio(fecha);
 		fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
 				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
-				.getFormat(constantes.formatoHora()).parse(horaFin.getValue()).getHours(),
-				DateTimeFormat.getFormat(constantes.formatoHora()).parse(horaFin.getValue())
+				.getFormat(ctes.formatoHora()).parse(horaFin.getValue()).getHours(),
+				DateTimeFormat.getFormat(ctes.formatoHora()).parse(horaFin.getValue())
 						.getMinutes());
 		observacion.setFin(fecha);
 

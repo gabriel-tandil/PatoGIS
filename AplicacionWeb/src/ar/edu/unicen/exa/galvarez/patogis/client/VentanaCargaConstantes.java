@@ -72,4 +72,6 @@ public interface VentanaCargaConstantes extends Constants {
 
 	String grados();
 
+	String alcance();
+
 }
