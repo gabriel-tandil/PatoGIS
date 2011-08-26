@@ -74,4 +74,22 @@ public interface VentanaCargaConstantes extends Constants {
 
 	String alcance();
 
+	String alcanceTooltip();
+
+	String edadTooltip();
+
+	String distanciaTooltip();
+
+	String conteoTooltip();
+
+	String agregarObservacionEspecieTooltip();
+
+	String agregarObservacionMatrizProductivaTooltip();
+
+	String borrarImagenTooltip();
+
+	String panoramicaTooltip();
+
+	String enviarTooltip();
+
 }

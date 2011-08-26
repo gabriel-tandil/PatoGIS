@@ -188,6 +188,7 @@ public class VentanaCarga extends Grid {
 	private FlowPanel panelImages = new FlowPanel();
 	// Attach an image to the pictures viewer
 	private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
+		@SuppressWarnings("deprecation")
 		public void onLoad(PreloadedImage image) {
 			image.setWidth("75px");
 			final HorizontalPanel hp = new HorizontalPanel();
@@ -195,9 +196,13 @@ public class VentanaCarga extends Grid {
 			VerticalPanel vp = new VerticalPanel();
 
 			CheckBox cb = new CheckBox();
+			cb.addMouseListener(new TooltipListener(
+					ctes.panoramicaTooltip(), 5000));
 			cb.setText(ctes.panoramica());
 			vp.add(cb);
 			Button borrar = new Button(ctes.eliminarFoto());
+			borrar.addMouseListener(new TooltipListener(
+					ctes.borrarImagenTooltip(), 5000));
 			borrar.addClickHandler(new ClickHandler() {
 				String imagen = imagenes.get(imagenes.size() - 1);
 
@@ -253,7 +258,12 @@ public class VentanaCarga extends Grid {
 					ListBox combo = (ListBox) ((HorizontalPanel) hp
 							.getWidget(0)).getWidget(0);
 					if (combo.getItemCount() == 0)
-						agregarItemsCombo(combo, especies.keySet());
+						agregarItemsCombo(combo, especies.keySet(),new ObtenerTexto() {
+							@Override
+							public String getValor(String clave) {
+								return clave+" ("+especies.get(clave).getNombreCientifico()+")";
+							}
+						});
 				}
 			}
 		});
@@ -311,6 +321,7 @@ public class VentanaCarga extends Grid {
 		dateBox.setFormat(new DefaultFormat(DateTimeFormat
 				.getFormat(ctes.formatoFechaCorta())));
 		dateBox.setValue(new Date());
+
 		horaInicio = new TimeBox();
 		horaInicio.setWidth("45px");
 		horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
@@ -327,6 +338,8 @@ public class VentanaCarga extends Grid {
 		setWidget(2, 0, lblNewLabel_9);
 		
 		alcance = comboAlcance();
+		alcance.addMouseListener(new TooltipListener(
+				ctes.alcanceTooltip(), 5000));
 		setWidget(2, 1,alcance);
 		Label lblNewLabel_2 = new Label(ctes.conteoEspecie());
 		setWidget(3, 0, lblNewLabel_2);
@@ -336,7 +349,8 @@ public class VentanaCarga extends Grid {
 		agregarObservacionEspecie(verticalPanel_1);
 
 		Button button = new Button(ctes.agregar());
-
+		button.addMouseListener(new TooltipListener(
+				ctes.agregarObservacionEspecieTooltip(), 5000));
 		setWidget(3, 2, button);
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -358,7 +372,8 @@ public class VentanaCarga extends Grid {
 		agregarObservacionMatrizProductiva(verticalPanel_2);
 
 		Button button2 = new Button(ctes.agregar());
-
+		button2.addMouseListener(new TooltipListener(
+				ctes.agregarObservacionMatrizProductivaTooltip(), 5000));
 		setWidget(4, 2, button2);
 		button2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -420,6 +435,7 @@ public class VentanaCarga extends Grid {
 		setWidget(7, 0, lblNewLabel8);
 
 		SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
+		
 		uploader.setI18Constants(new UploaderConstantsImpl());
 		uploader.setAutoSubmit(true);
 		uploader.setEnabled(true);
@@ -431,6 +447,8 @@ public class VentanaCarga extends Grid {
 		setWidget(8, 1, panelImages);
 
 		final Button sendButton = new Button(ctes.enviar());
+		sendButton.addMouseListener(new TooltipListener(
+				ctes.enviarTooltip(), 5000));
 		sendButton.addStyleName("sendButton");
 		sendButton.addClickHandler(new ClickHandler() {
 
@@ -449,7 +467,9 @@ public class VentanaCarga extends Grid {
 							@Override
 							public void onSuccess(Void result) {
 								errorLabel.setText(ctes.observacionGuardada());
-
+								RootPanel rootPanel = RootPanel.get("principalContainer");
+								rootPanel.clear();
+								rootPanel.add(new VentanaCarga());
 							}
 						});
 			}
@@ -458,15 +478,29 @@ public class VentanaCarga extends Grid {
 	
 	}
 
+	interface ObtenerTexto{
+		public abstract String getValor(String clave);
+	}
 	private void agregarItemsCombo(final ListBox comboBox, Set<String> list) {
+		agregarItemsCombo(comboBox,list,new ObtenerTexto() {
+			
+			@Override
+			public String getValor(String clave) {
+				return clave;
+			}
+		});
+	}
+	
+	private void agregarItemsCombo(final ListBox comboBox, Set<String> list,ObtenerTexto obtenerPropiedad) {
 		comboBox.addItem(ctes.seleccionar());
 		for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
 			String especie = iterator.next();
-			comboBox.addItem(especie);
+			comboBox.addItem(obtenerPropiedad.getValor(especie), especie);
 		}
 		comboBox.setItemSelected(0, true);
 		comboBox.addItem(ctes.otra());
 	}
+	@SuppressWarnings("deprecation")
 	private void agregarObservacionEspecie(final VerticalPanel verticalPanel_1) {
 		VerticalPanel verticalPanel = new VerticalPanel();
 		if (widgetsObsEspecie.size() > 0)
@@ -486,11 +520,17 @@ public class VentanaCarga extends Grid {
 		HorizontalPanel horizontalPanel2 = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel2);
 		ListBox edad = comboEdad();
+		edad.addMouseListener(new TooltipListener(
+				ctes.edadTooltip(), 5000));
 		horizontalPanel2.add(edad);
 		ListBox distancia = comboDistancia();
+		distancia.addMouseListener(new TooltipListener(
+				ctes.distanciaTooltip(), 5000));
 		horizontalPanel2.add(distancia);
 
 		ListBox conteo = comboConteo();
+		conteo.addMouseListener(new TooltipListener(
+				ctes.conteoTooltip(), 5000));
 		horizontalPanel2.add(conteo);
 
 		widgetsObsEspecie.add(verticalPanel);
