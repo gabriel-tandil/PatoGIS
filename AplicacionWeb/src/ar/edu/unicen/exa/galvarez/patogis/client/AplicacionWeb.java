@@ -4,6 +4,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -21,7 +22,23 @@ public class AplicacionWeb implements EntryPoint {
 
 		RootPanel rootPanel = RootPanel.get("menuContainer");
 		rootPanel.add(crearMenu());
-		RootPanel.get("errorLabelContainer").add(new Label());
+		RootPanel.get("errorLabelContainer").add(new Label(){
+			private void limpiar() {
+			super.setText("");
+				
+			}
+			public void setText(String texto){
+				super.setText(texto);
+				Timer t = new Timer() {
+
+			          public void run() {
+			        	  limpiar();
+			          }
+
+			        };
+			        t.schedule(5000);
+			}
+		});
 	}
 
 	private MenuBar crearMenu() {

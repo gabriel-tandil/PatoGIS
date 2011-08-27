@@ -15,6 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import com.google.gwt.user.client.Timer;
+
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.AlcanceEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ConteoEnum;
@@ -467,6 +469,7 @@ public class VentanaCarga extends Grid {
 							@Override
 							public void onSuccess(Void result) {
 								errorLabel.setText(ctes.observacionGuardada());
+
 								RootPanel rootPanel = RootPanel.get("principalContainer");
 								rootPanel.clear();
 								rootPanel.add(new VentanaCarga());
