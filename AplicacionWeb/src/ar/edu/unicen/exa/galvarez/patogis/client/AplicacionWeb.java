@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class AplicacionWeb implements EntryPoint {
 	AplicacionWebConstantes constantes = GWT.create(AplicacionWebConstantes.class);
+	public static Configuracion configuracion=new Configuracion();
 	/**
 	 * This is the entry point method.
 	 */
@@ -81,6 +82,17 @@ public class AplicacionWeb implements EntryPoint {
 		menu.addItem(new MenuItem(constantes.observaciones(), observacionesMenu));
 
 		configuracionMenu.addItem(constantes.preferencias(), nadaCommand);
+		final MenuItem mi=new MenuItem(constantes.nombreComun(), nadaCommand);
+		mi.setCommand(new Command() {
+			
+			@Override
+			public void execute() {
+				configuracion.setNombreCientifico(!configuracion.isNombreCientifico());
+				mi.setText(configuracion.isNombreCientifico()?constantes.nombreCientifico():constantes.nombreComun());
+			}
+		});
+		configuracionMenu.addItem(mi);
+		
 		menu.addItem(new MenuItem(constantes.configuracion(), configuracionMenu));
 
 		ayudaMenu.addItem(constantes.ayuda(), nadaCommand);

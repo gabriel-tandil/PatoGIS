@@ -263,7 +263,7 @@ public class VentanaCarga extends Grid {
 						agregarItemsCombo(combo, especies.keySet(),new ObtenerTexto() {
 							@Override
 							public String getValor(String clave) {
-								return clave+" ("+especies.get(clave).getNombreCientifico()+")";
+								return (AplicacionWeb.configuracion.isNombreCientifico()?especies.get(clave).getNombreCientifico():clave);
 							}
 						});
 				}
