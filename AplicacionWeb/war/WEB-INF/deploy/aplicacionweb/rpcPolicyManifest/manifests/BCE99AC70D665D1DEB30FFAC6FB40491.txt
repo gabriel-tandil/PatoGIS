@@ -1,0 +1,2 @@
+serviceClass: ar.edu.unicen.exa.galvarez.patogis.client.EspeciesService
+path: C549BF8CB618E32B0C0BCC5BE99497EF.gwt.rpc
