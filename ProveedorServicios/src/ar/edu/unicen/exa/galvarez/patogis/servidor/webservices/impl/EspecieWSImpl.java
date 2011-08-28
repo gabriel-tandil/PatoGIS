@@ -1,7 +1,11 @@
 package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.EspecieMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.EspecieWS;
 
@@ -23,5 +27,24 @@ public class EspecieWSImpl extends PatoGisWSAbstractImpl<Especie> implements
 	public void addElemento(Especie elemento, Integer idUsuario)
 			throws RemoteException {
 		super.addElementoGenerico(elemento, idUsuario);
+	}
+	
+	@Override
+	public Especie[] getElementosOrdenadosCantidadObs() throws RemoteException {
+		SqlSession sqlSession = null;
+		Especie[] resultado =null;
+		try {
+			sqlSession = obtenerSesion();
+		EspecieMapper oem = sqlSession
+		.getMapper(EspecieMapper.class);
+		List<Especie> loe=oem.selectOrdenadosCantidadObs();
+		resultado= loe.toArray(new Especie[loe.size()]);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return resultado;
 	}
 }

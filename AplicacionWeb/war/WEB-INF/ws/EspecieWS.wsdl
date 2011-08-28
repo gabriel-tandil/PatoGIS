@@ -5,6 +5,16 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar"/>
+   <element name="getElementos">
+    <complexType/>
+   </element>
+   <element name="getElementosResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getElementosReturn" type="tns1:Especie"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="addElemento">
     <complexType>
      <sequence>
@@ -16,13 +26,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="addElementoResponse">
     <complexType/>
    </element>
-   <element name="getElementos">
+   <element name="getElementosOrdenadosCantidadObs">
     <complexType/>
    </element>
-   <element name="getElementosResponse">
+   <element name="getElementosOrdenadosCantidadObsResponse">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="getElementosReturn" type="tns1:Especie"/>
+      <element maxOccurs="unbounded" name="getElementosOrdenadosCantidadObsReturn" type="tns1:Especie"/>
      </sequence>
     </complexType>
    </element>
@@ -30,8 +40,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   <schema elementFormDefault="qualified" targetNamespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
    <complexType name="Especie">
     <sequence>
+     <element name="familia" nillable="true" type="xsd:string"/>
+     <element name="grupo" nillable="true" type="xsd:string"/>
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="nombre" nillable="true" type="xsd:string"/>
+     <element name="nombreCientifico" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
   </schema>
@@ -69,19 +82,23 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getElementosOrdenadosCantidadObsResponse">
+
+      <wsdl:part element="impl:getElementosOrdenadosCantidadObsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElementosOrdenadosCantidadObsRequest">
+
+      <wsdl:part element="impl:getElementosOrdenadosCantidadObs" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:portType name="EspecieWSImpl">
-
-      <wsdl:operation name="addElemento">
-
-         <wsdl:input message="impl:addElementoRequest" name="addElementoRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:addElementoResponse" name="addElementoResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="getElementos">
 
@@ -95,11 +112,53 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="addElemento">
+
+         <wsdl:input message="impl:addElementoRequest" name="addElementoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addElementoResponse" name="addElementoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElementosOrdenadosCantidadObs">
+
+         <wsdl:input message="impl:getElementosOrdenadosCantidadObsRequest" name="getElementosOrdenadosCantidadObsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getElementosOrdenadosCantidadObsResponse" name="getElementosOrdenadosCantidadObsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="EspecieWSImplSoapBinding" type="impl:EspecieWSImpl">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getElementos">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElementosRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElementosResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="addElemento">
 
@@ -119,17 +178,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getElementos">
+      <wsdl:operation name="getElementosOrdenadosCantidadObs">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getElementosRequest">
+         <wsdl:input name="getElementosOrdenadosCantidadObsRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getElementosResponse">
+         <wsdl:output name="getElementosOrdenadosCantidadObsResponse">
 
             <wsdlsoap:body use="literal"/>
 

@@ -75,4 +75,6 @@ public interface EspecieMapper {
 	 * @mbggenerated  Fri Aug 26 17:14:52 ART 2011
 	 */
 	int updateByPrimaryKey(Especie record);
+
+	List<Especie> selectOrdenadosCantidadObs();
 }

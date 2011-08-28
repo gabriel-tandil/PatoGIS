@@ -9,14 +9,12 @@ import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
 import gwtupload.client.SingleUploader;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import com.google.gwt.user.client.Timer;
-
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.AlcanceEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ConteoEnum;
@@ -35,6 +33,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoFotoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.VientoEnum;
+import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -156,7 +155,7 @@ public class VentanaCarga extends Grid {
 	private ListBox comboViento;
 	private ListBox alcance;
 	private DateBox dateBox;
-	Map<String, Especie> especies = new HashMap<String, Especie>();
+	MapaOrdenado<String, Especie> especies = new MapaOrdenado<String, Especie>();
 
 	final EspeciesServiceAsync especiesService = GWT
 			.create(EspeciesService.class);
@@ -223,9 +222,9 @@ public class VentanaCarga extends Grid {
 
 
 
-	Map<String, TipoMatrizProductiva> tiposMatrizProductiva = new HashMap<String, TipoMatrizProductiva>();
+	MapaOrdenado<String, TipoMatrizProductiva> tiposMatrizProductiva = new MapaOrdenado<String, TipoMatrizProductiva>();
 
-	Map<String, Ubicacion> ubicaciones = new HashMap<String, Ubicacion>();
+	MapaOrdenado<String, Ubicacion> ubicaciones = new MapaOrdenado<String, Ubicacion>();
 
 	final UbicacionServiceAsync ubicacionService = GWT
 			.create(UbicacionService.class);
@@ -253,14 +252,14 @@ public class VentanaCarga extends Grid {
 
 			@Override
 			public void onSuccess(Map<String, Especie> result) {
-				especies = result;
+				especies = (MapaOrdenado<String, Especie>) result;
 				for (Iterator<VerticalPanel> iterator = widgetsObsEspecie
 						.iterator(); iterator.hasNext();) {
 					VerticalPanel hp = iterator.next();
 					ListBox combo = (ListBox) ((HorizontalPanel) hp
 							.getWidget(0)).getWidget(0);
 					if (combo.getItemCount() == 0)
-						agregarItemsCombo(combo, especies.keySet(),new ObtenerTexto() {
+						agregarItemsCombo(combo, especies.keyList(),new ObtenerTexto() {
 							@Override
 							public String getValor(String clave) {
 								return (AplicacionWeb.configuracion.isNombreCientifico()?especies.get(clave).getNombreCientifico():clave);
@@ -280,7 +279,7 @@ public class VentanaCarga extends Grid {
 					@Override
 					public void onSuccess(
 							Map<String, TipoMatrizProductiva> result) {
-						tiposMatrizProductiva = result;
+						tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
 						for (Iterator<HorizontalPanel> iterator = widgetsObsMatrizProductiva
 								.iterator(); iterator.hasNext();) {
 							HorizontalPanel hp = iterator.next();
@@ -301,7 +300,7 @@ public class VentanaCarga extends Grid {
 
 					@Override
 					public void onSuccess(Map<String, Ubicacion> result) {
-						ubicaciones = result;
+						ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
 
 						if (laguna.getItemCount() == 0)
 							agregarItemsCombo(laguna, ubicaciones.keySet());
@@ -494,7 +493,7 @@ public class VentanaCarga extends Grid {
 		});
 	}
 	
-	private void agregarItemsCombo(final ListBox comboBox, Set<String> list,ObtenerTexto obtenerPropiedad) {
+	private void agregarItemsCombo(final ListBox comboBox, Collection<String> list,ObtenerTexto obtenerPropiedad) {
 		comboBox.addItem(ctes.seleccionar());
 		for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
 			String especie = iterator.next();

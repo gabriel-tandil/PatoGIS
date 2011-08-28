@@ -1,7 +1,6 @@
 package ar.edu.unicen.exa.galvarez.patogis.server;
 
 import java.rmi.RemoteException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
@@ -10,6 +9,7 @@ import ar.edu.unicen.exa.galvarez.patogis.client.TipoMatrizProductivaService;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.TipoMatrizProductivaWSImpl;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.TipoMatrizProductivaWSImplServiceLocator;
+import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -22,7 +22,7 @@ TipoMatrizProductivaService {
 
 	public Map<String, TipoMatrizProductiva> getElementos() throws IllegalArgumentException {
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
-		Map<String, TipoMatrizProductiva> l = new HashMap<String, TipoMatrizProductiva>();
+		Map<String, TipoMatrizProductiva> l = new MapaOrdenado<String, TipoMatrizProductiva>();
 
 		try {
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator

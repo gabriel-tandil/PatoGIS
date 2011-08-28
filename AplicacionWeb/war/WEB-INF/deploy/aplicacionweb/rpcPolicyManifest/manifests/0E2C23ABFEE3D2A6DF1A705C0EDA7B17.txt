@@ -1,2 +1,2 @@
 serviceClass: ar.edu.unicen.exa.galvarez.patogis.client.UbicacionService
-path: F2C93589542FB065E38819CDFB15BFC9.gwt.rpc
+path: DCCCE3ADDA7B1A2C352EEE40D8B46936.gwt.rpc
