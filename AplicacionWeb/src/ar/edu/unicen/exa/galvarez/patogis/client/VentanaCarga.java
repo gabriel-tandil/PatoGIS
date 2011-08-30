@@ -41,6 +41,11 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONBoolean;
+import com.google.gwt.json.client.JSONNumber;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONString;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -59,10 +64,10 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
 public class VentanaCarga extends Grid {
-	  VentanaCargaConstantes ctes = GWT.create(VentanaCargaConstantes.class);
-	  EnumConstantes constantesEnum = GWT.create(EnumConstantes.class);
-	  class AgregarEspecieDialog extends AgregarElementoDialog {
+	VentanaCargaConstantes ctes = GWT.create(VentanaCargaConstantes.class);
+	EnumConstantes constantesEnum = GWT.create(EnumConstantes.class);
 
+	class AgregarEspecieDialog extends AgregarElementoDialog {
 
 		public AgregarEspecieDialog() {
 
@@ -74,8 +79,7 @@ public class VentanaCarga extends Grid {
 			e.setNombre(text.getValue());
 			especiesService.addElemento(e, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
-					errorLabel
-							.setText(ctes.errorGuardarEspecie());
+					errorLabel.setText(ctes.errorGuardarEspecie());
 				}
 
 				@Override
@@ -89,6 +93,7 @@ public class VentanaCarga extends Grid {
 			hide();
 		}
 	}
+
 	class AgregarTipoMatrizProductivaDialog extends AgregarElementoDialog {
 
 		public AgregarTipoMatrizProductivaDialog() {
@@ -102,8 +107,8 @@ public class VentanaCarga extends Grid {
 			tipoMatrizProductivaService.addElemento(tmp,
 					new AsyncCallback<Void>() {
 						public void onFailure(Throwable caught) {
-							errorLabel
-									.setText(ctes.errorGuardarNuevoTipoMatrizProductiva());
+							errorLabel.setText(ctes
+									.errorGuardarNuevoTipoMatrizProductiva());
 						}
 
 						@Override
@@ -118,6 +123,7 @@ public class VentanaCarga extends Grid {
 		}
 
 	}
+
 	class AgregarUbicacionDialog extends AgregarElementoDialog {
 
 		public AgregarUbicacionDialog() {
@@ -130,8 +136,7 @@ public class VentanaCarga extends Grid {
 			u.setNombre(text.getValue());
 			ubicacionService.addElemento(u, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
-					errorLabel
-							.setText(ctes.errorGuardarNuevaUbicacion());
+					errorLabel.setText(ctes.errorGuardarNuevaUbicacion());
 				}
 
 				@Override
@@ -146,6 +151,7 @@ public class VentanaCarga extends Grid {
 		}
 
 	}
+
 	final ArchivosServiceAsync archivosService = GWT
 			.create(ArchivosService.class);
 	private CheckBox checkLluvia;
@@ -197,13 +203,13 @@ public class VentanaCarga extends Grid {
 			VerticalPanel vp = new VerticalPanel();
 
 			CheckBox cb = new CheckBox();
-			cb.addMouseListener(new TooltipListener(
-					ctes.panoramicaTooltip(), 5000));
+			cb.addMouseListener(new TooltipListener(ctes.panoramicaTooltip(),
+					5000));
 			cb.setText(ctes.panoramica());
 			vp.add(cb);
 			Button borrar = new Button(ctes.eliminarFoto());
-			borrar.addMouseListener(new TooltipListener(
-					ctes.borrarImagenTooltip(), 5000));
+			borrar.addMouseListener(new TooltipListener(ctes
+					.borrarImagenTooltip(), 5000));
 			borrar.addClickHandler(new ClickHandler() {
 				String imagen = imagenes.get(imagenes.size() - 1);
 
@@ -220,8 +226,6 @@ public class VentanaCarga extends Grid {
 	final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
 			.create(TipoMatrizProductivaService.class);
 
-
-
 	MapaOrdenado<String, TipoMatrizProductiva> tiposMatrizProductiva = new MapaOrdenado<String, TipoMatrizProductiva>();
 
 	MapaOrdenado<String, Ubicacion> ubicaciones = new MapaOrdenado<String, Ubicacion>();
@@ -236,15 +240,15 @@ public class VentanaCarga extends Grid {
 	@SuppressWarnings("deprecation")
 	VentanaCarga() {
 		super(12, 3);
-		final Label errorLabel =(Label) RootPanel.get("errorLabelContainer").getWidget(0);
+		final Label errorLabel = (Label) RootPanel.get("errorLabelContainer")
+				.getWidget(0);
 		setSize("100px", "100px");
 
 		Label lblNewLabel = new Label(ctes.laguna());
 		setWidget(0, 0, lblNewLabel);
 		laguna = generarComboItemsObservables(ubicaciones.keySet(),
 				new AgregarUbicacionDialog());
-		laguna.addMouseListener(new TooltipListener(
-				ctes.lagunaTooltip(), 5000));
+		laguna.addMouseListener(new TooltipListener(ctes.lagunaTooltip(), 5000));
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel.setText(ctes.errorObtenerEspecies());
@@ -259,12 +263,16 @@ public class VentanaCarga extends Grid {
 					ListBox combo = (ListBox) ((HorizontalPanel) hp
 							.getWidget(0)).getWidget(0);
 					if (combo.getItemCount() == 0)
-						agregarItemsCombo(combo, especies.keyList(),new ObtenerTexto() {
-							@Override
-							public String getValor(String clave) {
-								return (AplicacionWeb.configuracion.isNombreCientifico()?especies.get(clave).getNombreCientifico():clave);
-							}
-						});
+						agregarItemsCombo(combo, especies.keyList(),
+								new ObtenerTexto() {
+									@Override
+									public String getValor(String clave) {
+										return (AplicacionWeb.configuracion
+												.isNombreCientifico() ? especies
+												.get(clave)
+												.getNombreCientifico() : clave);
+									}
+								});
 				}
 			}
 		});
@@ -272,8 +280,8 @@ public class VentanaCarga extends Grid {
 		tipoMatrizProductivaService
 				.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
-						errorLabel
-								.setText(ctes.errorObtenerTiposMatrizProductiva());
+						errorLabel.setText(ctes
+								.errorObtenerTiposMatrizProductiva());
 					}
 
 					@Override
@@ -294,8 +302,7 @@ public class VentanaCarga extends Grid {
 		ubicacionService
 				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 					public void onFailure(Throwable caught) {
-						errorLabel
-								.setText(ctes.errorObtenerUbicaciones());
+						errorLabel.setText(ctes.errorObtenerUbicaciones());
 					}
 
 					@Override
@@ -319,8 +326,8 @@ public class VentanaCarga extends Grid {
 		dateBox = new DateBox();
 		dateBox.setWidth("70px");
 		setWidget(1, 1, horizontalPanel1);
-		dateBox.setFormat(new DefaultFormat(DateTimeFormat
-				.getFormat(ctes.formatoFechaCorta())));
+		dateBox.setFormat(new DefaultFormat(DateTimeFormat.getFormat(ctes
+				.formatoFechaCorta())));
 		dateBox.setValue(new Date());
 
 		horaInicio = new TimeBox();
@@ -329,19 +336,20 @@ public class VentanaCarga extends Grid {
 				.format(new Date()));
 		horaFin = new TimeBox();
 		horaFin.setWidth("45px");
-		horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(new Date()));
+		horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(
+				new Date()));
 
 		horizontalPanel1.add(dateBox);
 		horizontalPanel1.add(horaInicio);
 		horizontalPanel1.add(horaFin);
-		
+
 		Label lblNewLabel_9 = new Label(ctes.alcance());
 		setWidget(2, 0, lblNewLabel_9);
-		
+
 		alcance = comboAlcance();
-		alcance.addMouseListener(new TooltipListener(
-				ctes.alcanceTooltip(), 5000));
-		setWidget(2, 1,alcance);
+		alcance.addMouseListener(new TooltipListener(ctes.alcanceTooltip(),
+				5000));
+		setWidget(2, 1, alcance);
 		Label lblNewLabel_2 = new Label(ctes.conteoEspecie());
 		setWidget(3, 0, lblNewLabel_2);
 
@@ -350,8 +358,8 @@ public class VentanaCarga extends Grid {
 		agregarObservacionEspecie(verticalPanel_1);
 
 		Button button = new Button(ctes.agregar());
-		button.addMouseListener(new TooltipListener(
-				ctes.agregarObservacionEspecieTooltip(), 5000));
+		button.addMouseListener(new TooltipListener(ctes
+				.agregarObservacionEspecieTooltip(), 5000));
 		setWidget(3, 2, button);
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -373,8 +381,8 @@ public class VentanaCarga extends Grid {
 		agregarObservacionMatrizProductiva(verticalPanel_2);
 
 		Button button2 = new Button(ctes.agregar());
-		button2.addMouseListener(new TooltipListener(
-				ctes.agregarObservacionMatrizProductivaTooltip(), 5000));
+		button2.addMouseListener(new TooltipListener(ctes
+				.agregarObservacionMatrizProductivaTooltip(), 5000));
 		setWidget(4, 2, button2);
 		button2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -416,7 +424,7 @@ public class VentanaCarga extends Grid {
 		grid2.setWidget(1, 3, comboViento);
 		Label lblNewLabel5 = new Label(ctes.temperatura());
 		Label lblNewLabel6 = new Label(ctes.grados());
-		temperatura=new DoubleBox();
+		temperatura = new DoubleBox();
 		temperatura.setWidth("20px");
 		temperatura.setValue(20.0);
 		grid2.setWidget(2, 0, lblNewLabel5);
@@ -436,7 +444,7 @@ public class VentanaCarga extends Grid {
 		setWidget(7, 0, lblNewLabel8);
 
 		SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
-		
+
 		uploader.setI18Constants(new UploaderConstantsImpl());
 		uploader.setAutoSubmit(true);
 		uploader.setEnabled(true);
@@ -448,20 +456,22 @@ public class VentanaCarga extends Grid {
 		setWidget(8, 1, panelImages);
 
 		final Button sendButton = new Button(ctes.enviar());
-		sendButton.addMouseListener(new TooltipListener(
-				ctes.enviarTooltip(), 5000));
+		sendButton.addMouseListener(new TooltipListener(ctes.enviarTooltip(),
+				5000));
 		sendButton.addStyleName("sendButton");
 		sendButton.addClickHandler(new ClickHandler() {
 
 			public void onClick(ClickEvent event) {
+
 				Observacion observacion = getObservacion();
+				observacionAJson(observacion);
 				observacionService.addElemento(observacion,
 						new AsyncCallback<Void>() {
 
 							@Override
 							public void onFailure(Throwable caught) {
-								errorLabel
-										.setText(ctes.errorGuardarObservacion());
+								errorLabel.setText(ctes
+										.errorGuardarObservacion());
 
 							}
 
@@ -469,7 +479,8 @@ public class VentanaCarga extends Grid {
 							public void onSuccess(Void result) {
 								errorLabel.setText(ctes.observacionGuardada());
 
-								RootPanel rootPanel = RootPanel.get("principalContainer");
+								RootPanel rootPanel = RootPanel
+										.get("principalContainer");
 								rootPanel.clear();
 								rootPanel.add(new VentanaCarga());
 							}
@@ -477,23 +488,25 @@ public class VentanaCarga extends Grid {
 			}
 		});
 		setWidget(9, 1, sendButton);
-	
+
 	}
 
-	interface ObtenerTexto{
+	interface ObtenerTexto {
 		public abstract String getValor(String clave);
 	}
+
 	private void agregarItemsCombo(final ListBox comboBox, Set<String> list) {
-		agregarItemsCombo(comboBox,list,new ObtenerTexto() {
-			
+		agregarItemsCombo(comboBox, list, new ObtenerTexto() {
+
 			@Override
 			public String getValor(String clave) {
 				return clave;
 			}
 		});
 	}
-	
-	private void agregarItemsCombo(final ListBox comboBox, Collection<String> list,ObtenerTexto obtenerPropiedad) {
+
+	private void agregarItemsCombo(final ListBox comboBox,
+			Collection<String> list, ObtenerTexto obtenerPropiedad) {
 		comboBox.addItem(ctes.seleccionar());
 		for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
 			String especie = iterator.next();
@@ -502,6 +515,7 @@ public class VentanaCarga extends Grid {
 		comboBox.setItemSelected(0, true);
 		comboBox.addItem(ctes.otra());
 	}
+
 	@SuppressWarnings("deprecation")
 	private void agregarObservacionEspecie(final VerticalPanel verticalPanel_1) {
 		VerticalPanel verticalPanel = new VerticalPanel();
@@ -522,22 +536,21 @@ public class VentanaCarga extends Grid {
 		HorizontalPanel horizontalPanel2 = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel2);
 		ListBox edad = comboEdad();
-		edad.addMouseListener(new TooltipListener(
-				ctes.edadTooltip(), 5000));
+		edad.addMouseListener(new TooltipListener(ctes.edadTooltip(), 5000));
 		horizontalPanel2.add(edad);
 		ListBox distancia = comboDistancia();
-		distancia.addMouseListener(new TooltipListener(
-				ctes.distanciaTooltip(), 5000));
+		distancia.addMouseListener(new TooltipListener(ctes.distanciaTooltip(),
+				5000));
 		horizontalPanel2.add(distancia);
 
 		ListBox conteo = comboConteo();
-		conteo.addMouseListener(new TooltipListener(
-				ctes.conteoTooltip(), 5000));
+		conteo.addMouseListener(new TooltipListener(ctes.conteoTooltip(), 5000));
 		horizontalPanel2.add(conteo);
 
 		widgetsObsEspecie.add(verticalPanel);
 		textBox_1.setWidth("60px");
 	}
+
 	private void agregarObservacionMatrizProductiva(
 			final VerticalPanel verticalPanel_1) {
 		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
@@ -563,7 +576,8 @@ public class VentanaCarga extends Grid {
 
 		archivosService.borrar(imagen, new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
-				Label errorLabel =(Label) RootPanel.get("errorLabelContainer").getWidget(0);
+				Label errorLabel = (Label) RootPanel.get("errorLabelContainer")
+						.getWidget(0);
 				errorLabel.setText(ctes.errorEliminarArchivo());
 			}
 
@@ -578,8 +592,9 @@ public class VentanaCarga extends Grid {
 	private ListBox comboConteo() {
 		ListBox conteo = new ListBox();
 		for (int i = 0; i < ConteoEnum.values().length; i++) {
-			ConteoEnum e=ConteoEnum.values()[i];
-			conteo.addItem(constantesEnum.getString("ConteoEnum_"+e), e.toString());
+			ConteoEnum e = ConteoEnum.values()[i];
+			conteo.addItem(constantesEnum.getString("ConteoEnum_" + e),
+					e.toString());
 		}
 		return conteo;
 	}
@@ -587,8 +602,9 @@ public class VentanaCarga extends Grid {
 	private ListBox comboDistancia() {
 		ListBox distancia = new ListBox();
 		for (int i = 0; i < DistanciaEnum.values().length; i++) {
-			DistanciaEnum e=DistanciaEnum.values()[i];
-			distancia.addItem(constantesEnum.getString("DistanciaEnum_"+e), e.toString());
+			DistanciaEnum e = DistanciaEnum.values()[i];
+			distancia.addItem(constantesEnum.getString("DistanciaEnum_" + e),
+					e.toString());
 		}
 		return distancia;
 	}
@@ -596,8 +612,9 @@ public class VentanaCarga extends Grid {
 	private ListBox comboEdad() {
 		ListBox edad = new ListBox();
 		for (int i = 0; i < EdadEnum.values().length; i++) {
-			EdadEnum e=EdadEnum.values()[i];
-			edad.addItem(constantesEnum.getString("EdadEnum_"+e), e.toString());
+			EdadEnum e = EdadEnum.values()[i];
+			edad.addItem(constantesEnum.getString("EdadEnum_" + e),
+					e.toString());
 		}
 		edad.setSelectedIndex(2);
 		return edad;
@@ -606,8 +623,9 @@ public class VentanaCarga extends Grid {
 	private ListBox comboNubes() {
 		ListBox comboNuves = new ListBox();
 		for (int i = 0; i < NubesEnum.values().length; i++) {
-			NubesEnum ne=NubesEnum.values()[i];
-			comboNuves.addItem(constantesEnum.getString("NubesEnum_"+ne), ne.toString());
+			NubesEnum ne = NubesEnum.values()[i];
+			comboNuves.addItem(constantesEnum.getString("NubesEnum_" + ne),
+					ne.toString());
 		}
 		comboNuves.setSelectedIndex(1);
 		return comboNuves;
@@ -616,23 +634,27 @@ public class VentanaCarga extends Grid {
 	private ListBox comboViento() {
 		ListBox comboViento = new ListBox();
 		for (int i = 0; i < VientoEnum.values().length; i++) {
-			VientoEnum ve=VientoEnum.values()[i];
-			comboViento.addItem(constantesEnum.getString("VientoEnum_"+ve.toString()), ve.toString());
+			VientoEnum ve = VientoEnum.values()[i];
+			comboViento.addItem(
+					constantesEnum.getString("VientoEnum_" + ve.toString()),
+					ve.toString());
 		}
 		comboViento.setSelectedIndex(1);
 		return comboViento;
 	}
-	
+
 	private ListBox comboAlcance() {
 		ListBox comboAlcance = new ListBox();
 		for (int i = 0; i < AlcanceEnum.values().length; i++) {
-			AlcanceEnum ve=AlcanceEnum.values()[i];
-			comboAlcance.addItem(constantesEnum.getString("AlcanceEnum_"+ve.toString()), ve.toString());
+			AlcanceEnum ve = AlcanceEnum.values()[i];
+			comboAlcance.addItem(
+					constantesEnum.getString("AlcanceEnum_" + ve.toString()),
+					ve.toString());
 		}
 		comboAlcance.setSelectedIndex(1);
 		return comboAlcance;
 	}
-	
+
 	void establecerElementoCombo(ListBox combo, String especie) {
 		combo.addItem(especie);
 		combo.setSelectedIndex(combo.getItemCount() - 1);
@@ -697,8 +719,8 @@ public class VentanaCarga extends Grid {
 		observacionFoto.setNombreArchivo(imagenes.get(i));
 		observacionFoto
 				.setTipo((((CheckBox) ((VerticalPanel) ((HorizontalPanel) panelImages
-						.getWidget(i)).getWidget(1)).getWidget(0)).getValue() == Boolean.TRUE ? TipoFotoEnum.Panoramica.toString()
-						: TipoFotoEnum.Normal.toString()));
+						.getWidget(i)).getWidget(1)).getWidget(0)).getValue() == Boolean.TRUE ? TipoFotoEnum.Panoramica
+						.toString() : TipoFotoEnum.Normal.toString()));
 		return (observacionFoto);
 	}
 
@@ -720,9 +742,13 @@ public class VentanaCarga extends Grid {
 	private Observacion getObservacion() {
 		Observacion observacion = new Observacion();
 		observacion.setObservaciones(observaciones.getValue());
-		observacion.setEstado(EstadoEnum.ARevisar.toString());// TODO: asociar al usuario
+		observacion.setEstado(EstadoEnum.ARevisar.toString());// TODO: asociar
+																// al usuario
 		observacion.setAlcance(alcance.getValue(alcance.getSelectedIndex()));
-		observacion.setFiabilidad(FiabilidadEnum.Fiable.toString());// TODO: asociar al usuario
+		observacion.setFiabilidad(FiabilidadEnum.Fiable.toString());// TODO:
+																	// asociar
+																	// al
+																	// usuario
 		observacion.setIdUbicacion(getUbicacion().getId());
 		observacion.setObservacionClima(getObservacionClima());
 
@@ -751,17 +777,146 @@ public class VentanaCarga extends Grid {
 
 		Date fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
 				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
-				.getFormat(ctes.formatoHora()).parse(horaInicio.getValue()).getHours(),
-				DateTimeFormat.getFormat(ctes.formatoHora()).parse(horaInicio.getValue())
-						.getMinutes());
+				.getFormat(ctes.formatoHora()).parse(horaInicio.getValue())
+				.getHours(), DateTimeFormat.getFormat(ctes.formatoHora())
+				.parse(horaInicio.getValue()).getMinutes());
 		observacion.setInicio(fecha);
 		fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
 				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
-				.getFormat(ctes.formatoHora()).parse(horaFin.getValue()).getHours(),
-				DateTimeFormat.getFormat(ctes.formatoHora()).parse(horaFin.getValue())
-						.getMinutes());
+				.getFormat(ctes.formatoHora()).parse(horaFin.getValue())
+				.getHours(), DateTimeFormat.getFormat(ctes.formatoHora())
+				.parse(horaFin.getValue()).getMinutes());
 		observacion.setFin(fecha);
 
 		return observacion;
 	}
+
+	public JSONObject observacionAJson(Observacion obs) {
+		JSONObject result = new JSONObject();
+		result.put("alcance", new JSONString(obs.getAlcance()));
+
+		result.put("estado", new JSONString(obs.getEstado()));
+		result.put("fiabilidad", new JSONString(obs.getFiabilidad()));
+		result.put("fin",
+				new JSONString(DateTimeFormat.getFormat("YYYYMMDD HH:MM")
+						.format(obs.getFin())));
+
+		result.put("idCampana", new JSONNumber(obs.getIdCampana()));
+		result.put("idUbicacion", new JSONNumber(obs.getIdUbicacion()));
+		result.put("idUsuario", new JSONNumber(obs.getIdUsuario()));
+		result.put("idUsuarioApoyo", new JSONNumber(obs.getIdUsuarioApoyo()));
+		result.put("inicio",
+				new JSONString(DateTimeFormat.getFormat("YYYYMMDD HH:MM")
+						.format(obs.getInicio())));
+
+		result.put("observaciones", new JSONString(obs.getObservaciones()));
+		JSONObject observacionClima = new JSONObject();
+		observacionClima.put("temperatura", new JSONNumber(obs
+				.getObservacionClima().getTemperatura()));
+		observacionClima.put("nubes", new JSONString(obs.getObservacionClima()
+				.getNubes()));
+		 
+		observacionClima.put("lluvia", JSONBoolean.getInstance((obs.getObservacionClima()
+				.getLluvia())));
+		observacionClima.put("viento", new JSONString(obs.getObservacionClima()
+				.getViento()));
+		observacionClima.put("sol", JSONBoolean.getInstance((obs.getObservacionClima()
+				.getSol())));
+		result.put("observacionClima", observacionClima);
+		JSONArray observacionesEspecie = new JSONArray();
+		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
+			ObservacionEspecie obsEspecie = obs.getObservacionesEspecie()[i];
+			JSONObject observacionEspecie = new JSONObject();
+			observacionesEspecie.set(i, observacionEspecie);
+			observacionEspecie.put("idEspecie",
+					new JSONNumber(obsEspecie.getIdEspecie()));
+			observacionEspecie.put("cantidad",
+					new JSONNumber(obsEspecie.getCantidad()));
+			observacionEspecie
+					.put("edad", new JSONString(obsEspecie.getEdad()));
+			observacionEspecie.put("conteo",
+					new JSONString(obsEspecie.getConteo()));
+			observacionEspecie.put("distancia",
+					new JSONString(obsEspecie.getDistancia()));
+		}
+		result.put("observacionesEspecie", observacionesEspecie);
+
+		JSONArray observacionesMatrizProductiva = new JSONArray();
+		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
+			ObservacionMatrizProductiva obsMatrizProductiva = obs
+					.getObservacionesMatrizProductiva()[i];
+			JSONObject observacionMatrizProductiva = new JSONObject();
+			observacionesMatrizProductiva.set(i, observacionMatrizProductiva);
+			observacionMatrizProductiva.put(
+					"idTipoMatrizProductiva",
+					new JSONNumber(obsMatrizProductiva
+							.getIdTipoMatrizProductiva()));
+			observacionMatrizProductiva.put("porcentaje", new JSONNumber(
+					obsMatrizProductiva.getPorcentaje()));
+		}
+		result.put("observacionesTipoMatrizProductiva", observacionesMatrizProductiva);
+		return result;
+	}
+
+	public Observacion observacionDesdeJson(JSONObject value) {
+		Observacion obs = new Observacion();
+		
+		obs.setAlcance(value.get("alcance").toString());
+
+		obs.setEstado(value.get("estado").toString());
+		obs.setFiabilidad(value.get("fiabilidad").toString());
+		obs.setFin(DateTimeFormat.getFormat("YYYYMMDD HH:MM").parse(value.get("fin").toString()));
+		obs.setIdCampana(new Integer(value.get("idCampana").toString()));
+		obs.setIdUbicacion(new Integer(value.get("idUbicacion").toString()));
+		obs.setIdUsuario(new Integer(value.get("idUsuario").toString()));
+		obs.setIdUsuarioApoyo(new Integer(value.get("idUsuarioApoyo").toString()));
+		obs.setInicio(DateTimeFormat.getFormat("YYYYMMDD HH:MM").parse(value.get("inicio").toString()));
+		obs.setObservaciones(value.get("observaciones").toString());
+
+		ObservacionClima observacionClima = new ObservacionClima();
+		observacionClima.setTemperatura(new Double(value.get("temperatura").toString()));
+		observacionClima.setNubes(value.get("nubes").toString());
+		observacionClima.setLluvia(((JSONBoolean)value.get("lluvia")).booleanValue());
+		observacionClima.setViento(value.get("viento").toString());
+		observacionClima.setSol(((JSONBoolean)value.get("sol")).booleanValue());
+		obs.setObservacionClima(observacionClima);
+		JSONArray obsEspecie=(JSONArray) value.get("observacionesEspecie");
+//		ObservacionEspecie[] observacionesEspecie=new ObservacionEspecie[];
+//		
+//		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
+//			ObservacionEspecie obsEspecie = obs.getObservacionesEspecie()[i];
+//			JSONObject observacionEspecie = new JSONObject();
+//			observacionesEspecie.set(i, observacionEspecie);
+//			observacionEspecie.put("idEspecie",
+//					new JSONNumber(obsEspecie.getIdEspecie()));
+//			observacionEspecie.put("cantidad",
+//					new JSONNumber(obsEspecie.getCantidad()));
+//			observacionEspecie
+//					.put("edad", new JSONString(obsEspecie.getEdad()));
+//			observacionEspecie.put("conteo",
+//					new JSONString(obsEspecie.getConteo()));
+//			observacionEspecie.put("distancia",
+//					new JSONString(obsEspecie.getDistancia()));
+//		}
+//		result.put("observacionesEspecie", observacionesEspecie);
+//
+//		JSONArray observacionesMatrizProductiva = new JSONArray();
+//		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
+//			ObservacionMatrizProductiva obsMatrizProductiva = obs
+//					.getObservacionesMatrizProductiva()[i];
+//			JSONObject observacionMatrizProductiva = new JSONObject();
+//			observacionesMatrizProductiva.set(i, observacionMatrizProductiva);
+//			observacionMatrizProductiva.put(
+//					"idTipoMatrizProductiva",
+//					new JSONNumber(obsMatrizProductiva
+//							.getIdTipoMatrizProductiva()));
+//			observacionMatrizProductiva.put("porcentaje", new JSONNumber(
+//					obsMatrizProductiva.getPorcentaje()));
+//		}
+//		result.put("observacionesEspecie", observacionesMatrizProductiva);
+		
+		return obs;
+
+	}
+
 }
