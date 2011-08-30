@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.bind.ValidationException;
+
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.AlcanceEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ConteoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.DistanciaEnum;
@@ -46,6 +48,7 @@ import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -463,28 +466,39 @@ public class VentanaCarga extends Grid {
 
 			public void onClick(ClickEvent event) {
 
-				Observacion observacion = getObservacion();
-				observacionAJson(observacion);
-				observacionService.addElemento(observacion,
-						new AsyncCallback<Void>() {
+				Observacion observacion;
+				try {
+					observacion = getObservacion();
 
-							@Override
-							public void onFailure(Throwable caught) {
-								errorLabel.setText(ctes
-										.errorGuardarObservacion());
+					JSONObject jo = observacionAJson(observacion);
+					Storage storage = Storage.getLocalStorageIfSupported();
+					storage.setItem("observacion" + 1, jo.toString());
+					observacion = observacionDesdeJson(jo);
+					observacionService.addElemento(observacion,
+							new AsyncCallback<Void>() {
 
-							}
+								@Override
+								public void onFailure(Throwable caught) {
+									errorLabel.setText(ctes
+											.errorGuardarObservacion());
 
-							@Override
-							public void onSuccess(Void result) {
-								errorLabel.setText(ctes.observacionGuardada());
+								}
 
-								RootPanel rootPanel = RootPanel
-										.get("principalContainer");
-								rootPanel.clear();
-								rootPanel.add(new VentanaCarga());
-							}
-						});
+								@Override
+								public void onSuccess(Void result) {
+									errorLabel.setText(ctes
+											.observacionGuardada());
+
+									RootPanel rootPanel = RootPanel
+											.get("principalContainer");
+									rootPanel.clear();
+									rootPanel.add(new VentanaCarga());
+								}
+							});
+
+				} catch (ValidationException e) {
+					errorLabel.setText(e.getMessage());
+				}
 			}
 		});
 		setWidget(9, 1, sendButton);
@@ -693,25 +707,36 @@ public class VentanaCarga extends Grid {
 		return oc;
 	}
 
-	private ObservacionEspecie getObservacionEspecie(VerticalPanel vp) {
-		ObservacionEspecie oe = new ObservacionEspecie();
-		oe.setCantidad(((IntegerBox) ((HorizontalPanel) vp.getWidget(0))
-				.getWidget(1)).getValue());
-		oe.setIdEspecie(especies
-				.get((((ListBox) ((HorizontalPanel) vp.getWidget(0))
-						.getWidget(0))
-						.getValue(((ListBox) ((HorizontalPanel) vp.getWidget(0))
-								.getWidget(0)).getSelectedIndex()))).getId());
-		oe.setEdad(((ListBox) ((HorizontalPanel) vp.getWidget(1)).getWidget(0))
-				.getValue(((ListBox) ((HorizontalPanel) vp.getWidget(1))
-						.getWidget(0)).getSelectedIndex()));
-		oe.setConteo(((ListBox) ((HorizontalPanel) vp.getWidget(1))
-				.getWidget(1)).getValue(((ListBox) ((HorizontalPanel) vp
-				.getWidget(1)).getWidget(1)).getSelectedIndex()));
-		oe.setConteo(((ListBox) ((HorizontalPanel) vp.getWidget(1))
-				.getWidget(2)).getValue(((ListBox) ((HorizontalPanel) vp
-				.getWidget(1)).getWidget(2)).getSelectedIndex()));
-		return oe;
+	private ObservacionEspecie getObservacionEspecie(VerticalPanel vp)
+			throws ValidationException {
+		if (((IntegerBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(1))
+				.getValue() != null) {
+			ObservacionEspecie oe = new ObservacionEspecie();
+
+			if (((ListBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(0))
+					.getSelectedIndex() <= 0)// debe seleccionar especie
+				throw new ValidationException(ctes.validacionEspecie());
+
+			oe.setCantidad(((IntegerBox) ((HorizontalPanel) vp.getWidget(0))
+					.getWidget(1)).getValue());
+			oe.setIdEspecie(especies.get(
+					(((ListBox) ((HorizontalPanel) vp.getWidget(0))
+							.getWidget(0))
+							.getValue(((ListBox) ((HorizontalPanel) vp
+									.getWidget(0)).getWidget(0))
+									.getSelectedIndex()))).getId());
+			oe.setEdad(((ListBox) ((HorizontalPanel) vp.getWidget(1))
+					.getWidget(0)).getValue(((ListBox) ((HorizontalPanel) vp
+					.getWidget(1)).getWidget(0)).getSelectedIndex()));
+			oe.setDistancia(((ListBox) ((HorizontalPanel) vp.getWidget(1))
+					.getWidget(1)).getValue(((ListBox) ((HorizontalPanel) vp
+					.getWidget(1)).getWidget(1)).getSelectedIndex()));
+			oe.setConteo(((ListBox) ((HorizontalPanel) vp.getWidget(1))
+					.getWidget(2)).getValue(((ListBox) ((HorizontalPanel) vp
+					.getWidget(1)).getWidget(2)).getSelectedIndex()));
+			return oe;
+		}
+		return null;
 	}
 
 	private ObservacionFoto getObservacionFoto(int i) {
@@ -725,21 +750,30 @@ public class VentanaCarga extends Grid {
 	}
 
 	private ObservacionMatrizProductiva getObservacionMatrizProductiva(
-			HorizontalPanel hp) {
+			HorizontalPanel hp) throws ValidationException {
+		if (((IntegerBox) hp.getWidget(1)).getValue() !=null) {
+			if (((ListBox) hp
+					.getWidget(0)).getSelectedIndex()<=0) throw new ValidationException(ctes.validacionTipoMatrizProductiva());
+			
 		ObservacionMatrizProductiva omp = new ObservacionMatrizProductiva();
 		omp.setIdTipoMatrizProductiva(tiposMatrizProductiva.get(
 				(((ListBox) hp.getWidget(0)).getValue(((ListBox) hp
 						.getWidget(0)).getSelectedIndex()))).getId());
 		omp.setPorcentaje(((IntegerBox) hp.getWidget(1)).getValue());
-		return omp;
+		
+		return omp;}
+		return null;
 	}
 
-	private Ubicacion getUbicacion() {
+	private Ubicacion getUbicacion() throws ValidationException {
+		if (laguna.getSelectedIndex() <= 0)
+			throw new ValidationException(ctes.validacionLaguna());
 		return ubicaciones.get(laguna.getValue(laguna.getSelectedIndex()));
 	}
 
 	@SuppressWarnings("deprecation")
-	private Observacion getObservacion() {
+	private Observacion getObservacion() throws ValidationException {
+
 		Observacion observacion = new Observacion();
 		observacion.setObservaciones(observaciones.getValue());
 		observacion.setEstado(EstadoEnum.ARevisar.toString());// TODO: asociar
@@ -749,22 +783,29 @@ public class VentanaCarga extends Grid {
 																	// asociar
 																	// al
 																	// usuario
+		observacion.setIdCampana(1);
+		observacion.setIdUsuario(1);
+		observacion.setIdUsuarioApoyo(1);
+
 		observacion.setIdUbicacion(getUbicacion().getId());
+
 		observacion.setObservacionClima(getObservacionClima());
 
 		ObservacionEspecie[] observacionesEspecie = new ObservacionEspecie[widgetsObsEspecie
 				.size()];
-		for (int i = 0; i < widgetsObsEspecie.size(); i++) {
-			observacionesEspecie[i] = getObservacionEspecie(widgetsObsEspecie
+		for (int i=0,ii = 0; i < widgetsObsEspecie.size(); i++) {
+			observacionesEspecie[ii] = getObservacionEspecie(widgetsObsEspecie
 					.get(i));
+			if (observacionesEspecie[ii]!=null) ii++;
 		}
 		observacion.setObservacionesEspecie(observacionesEspecie);
 
 		ObservacionMatrizProductiva[] obsMatrizProductiva = new ObservacionMatrizProductiva[widgetsObsMatrizProductiva
 				.size()];
-		for (int i = 0; i < widgetsObsMatrizProductiva.size(); i++) {
-			obsMatrizProductiva[i] = getObservacionMatrizProductiva(widgetsObsMatrizProductiva
+		for (int i = 0,ii = 0; i < widgetsObsMatrizProductiva.size(); i++) {
+			obsMatrizProductiva[ii] = getObservacionMatrizProductiva(widgetsObsMatrizProductiva
 					.get(i));
+			if (obsMatrizProductiva[ii]!=null) ii++;
 		}
 		observacion.setObservacionesMatrizProductiva(obsMatrizProductiva);
 
@@ -798,7 +839,7 @@ public class VentanaCarga extends Grid {
 		result.put("estado", new JSONString(obs.getEstado()));
 		result.put("fiabilidad", new JSONString(obs.getFiabilidad()));
 		result.put("fin",
-				new JSONString(DateTimeFormat.getFormat("YYYYMMDD HH:MM")
+				new JSONString(DateTimeFormat.getFormat("YYYY-MM-DD HH:MM")
 						.format(obs.getFin())));
 
 		result.put("idCampana", new JSONNumber(obs.getIdCampana()));
@@ -806,7 +847,7 @@ public class VentanaCarga extends Grid {
 		result.put("idUsuario", new JSONNumber(obs.getIdUsuario()));
 		result.put("idUsuarioApoyo", new JSONNumber(obs.getIdUsuarioApoyo()));
 		result.put("inicio",
-				new JSONString(DateTimeFormat.getFormat("YYYYMMDD HH:MM")
+				new JSONString(DateTimeFormat.getFormat("YYYY-MM-DD HH:MM")
 						.format(obs.getInicio())));
 
 		result.put("observaciones", new JSONString(obs.getObservaciones()));
@@ -815,13 +856,13 @@ public class VentanaCarga extends Grid {
 				.getObservacionClima().getTemperatura()));
 		observacionClima.put("nubes", new JSONString(obs.getObservacionClima()
 				.getNubes()));
-		 
-		observacionClima.put("lluvia", JSONBoolean.getInstance((obs.getObservacionClima()
-				.getLluvia())));
+
+		observacionClima.put("lluvia", JSONBoolean.getInstance((obs
+				.getObservacionClima().getLluvia())));
 		observacionClima.put("viento", new JSONString(obs.getObservacionClima()
 				.getViento()));
-		observacionClima.put("sol", JSONBoolean.getInstance((obs.getObservacionClima()
-				.getSol())));
+		observacionClima.put("sol",
+				JSONBoolean.getInstance((obs.getObservacionClima().getSol())));
 		result.put("observacionClima", observacionClima);
 		JSONArray observacionesEspecie = new JSONArray();
 		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
@@ -854,67 +895,72 @@ public class VentanaCarga extends Grid {
 			observacionMatrizProductiva.put("porcentaje", new JSONNumber(
 					obsMatrizProductiva.getPorcentaje()));
 		}
-		result.put("observacionesTipoMatrizProductiva", observacionesMatrizProductiva);
+		result.put("observacionesTipoMatrizProductiva",
+				observacionesMatrizProductiva);
 		return result;
 	}
 
 	public Observacion observacionDesdeJson(JSONObject value) {
 		Observacion obs = new Observacion();
-		
+
 		obs.setAlcance(value.get("alcance").toString());
 
 		obs.setEstado(value.get("estado").toString());
 		obs.setFiabilidad(value.get("fiabilidad").toString());
-		obs.setFin(DateTimeFormat.getFormat("YYYYMMDD HH:MM").parse(value.get("fin").toString()));
+		obs.setFin(DateTimeFormat.getFormat("YYYY-MM-DD HH:MM").parse(
+				value.get("fin").toString()));
 		obs.setIdCampana(new Integer(value.get("idCampana").toString()));
 		obs.setIdUbicacion(new Integer(value.get("idUbicacion").toString()));
 		obs.setIdUsuario(new Integer(value.get("idUsuario").toString()));
-		obs.setIdUsuarioApoyo(new Integer(value.get("idUsuarioApoyo").toString()));
-		obs.setInicio(DateTimeFormat.getFormat("YYYYMMDD HH:MM").parse(value.get("inicio").toString()));
+		obs.setIdUsuarioApoyo(new Integer(value.get("idUsuarioApoyo")
+				.toString()));
+		obs.setInicio(DateTimeFormat.getFormat("YYYY-MM-DD HH:MM").parse(
+				value.get("inicio").toString()));
 		obs.setObservaciones(value.get("observaciones").toString());
 
 		ObservacionClima observacionClima = new ObservacionClima();
-		observacionClima.setTemperatura(new Double(value.get("temperatura").toString()));
+		observacionClima.setTemperatura(new Double(value.get("temperatura")
+				.toString()));
 		observacionClima.setNubes(value.get("nubes").toString());
-		observacionClima.setLluvia(((JSONBoolean)value.get("lluvia")).booleanValue());
+		observacionClima.setLluvia(((JSONBoolean) value.get("lluvia"))
+				.booleanValue());
 		observacionClima.setViento(value.get("viento").toString());
-		observacionClima.setSol(((JSONBoolean)value.get("sol")).booleanValue());
+		observacionClima
+				.setSol(((JSONBoolean) value.get("sol")).booleanValue());
 		obs.setObservacionClima(observacionClima);
-		JSONArray obsEspecie=(JSONArray) value.get("observacionesEspecie");
-//		ObservacionEspecie[] observacionesEspecie=new ObservacionEspecie[];
-//		
-//		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
-//			ObservacionEspecie obsEspecie = obs.getObservacionesEspecie()[i];
-//			JSONObject observacionEspecie = new JSONObject();
-//			observacionesEspecie.set(i, observacionEspecie);
-//			observacionEspecie.put("idEspecie",
-//					new JSONNumber(obsEspecie.getIdEspecie()));
-//			observacionEspecie.put("cantidad",
-//					new JSONNumber(obsEspecie.getCantidad()));
-//			observacionEspecie
-//					.put("edad", new JSONString(obsEspecie.getEdad()));
-//			observacionEspecie.put("conteo",
-//					new JSONString(obsEspecie.getConteo()));
-//			observacionEspecie.put("distancia",
-//					new JSONString(obsEspecie.getDistancia()));
-//		}
-//		result.put("observacionesEspecie", observacionesEspecie);
-//
-//		JSONArray observacionesMatrizProductiva = new JSONArray();
-//		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
-//			ObservacionMatrizProductiva obsMatrizProductiva = obs
-//					.getObservacionesMatrizProductiva()[i];
-//			JSONObject observacionMatrizProductiva = new JSONObject();
-//			observacionesMatrizProductiva.set(i, observacionMatrizProductiva);
-//			observacionMatrizProductiva.put(
-//					"idTipoMatrizProductiva",
-//					new JSONNumber(obsMatrizProductiva
-//							.getIdTipoMatrizProductiva()));
-//			observacionMatrizProductiva.put("porcentaje", new JSONNumber(
-//					obsMatrizProductiva.getPorcentaje()));
-//		}
-//		result.put("observacionesEspecie", observacionesMatrizProductiva);
-		
+		JSONArray obsEspecie = (JSONArray) value.get("observacionesEspecie");
+		ObservacionEspecie[] observacionesEspecie = new ObservacionEspecie[obsEspecie
+				.size()];
+
+		for (int i = 0; i < obsEspecie.size(); i++) {
+			ObservacionEspecie observacionEspecie = new ObservacionEspecie();
+			JSONObject obsEsp = (JSONObject) obsEspecie.get(i);
+			observacionesEspecie[i] = observacionEspecie;
+			observacionEspecie.setIdEspecie(new Integer(obsEsp.get("idEspecie")
+					.toString()));
+			observacionEspecie.setCantidad(new Integer(obsEsp.get("cantidad")
+					.toString()));
+			observacionEspecie.setEdad(obsEsp.get("edad").toString());
+			observacionEspecie.setConteo(obsEsp.get("conteo").toString());
+			observacionEspecie.setDistancia(obsEsp.get("distancia").toString());
+		}
+		obs.setObservacionesEspecie(observacionesEspecie);
+
+		JSONArray obsMatrizProductiva = (JSONArray) value
+				.get("observacionesMatrizProductiva");
+		ObservacionMatrizProductiva[] observacionesMatrizProductiva = new ObservacionMatrizProductiva[obsMatrizProductiva
+				.size()];
+		for (int i = 0; i < obsMatrizProductiva.size(); i++) {
+			ObservacionMatrizProductiva observacionMatrizProductiva = new ObservacionMatrizProductiva();
+			JSONObject obsMatProd = (JSONObject) obsMatrizProductiva.get(i);
+			observacionesMatrizProductiva[i] = observacionMatrizProductiva;
+			observacionMatrizProductiva.setIdTipoMatrizProductiva(new Integer(
+					obsMatProd.get("idTipoMatrizProductiva").toString()));
+			observacionMatrizProductiva.setPorcentaje(new Integer(obsMatProd
+					.get("porcentaje").toString()));
+		}
+		obs.setObservacionesMatrizProductiva(observacionesMatrizProductiva);
+
 		return obs;
 
 	}

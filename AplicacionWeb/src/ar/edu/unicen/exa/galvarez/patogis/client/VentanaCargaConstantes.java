@@ -92,4 +92,10 @@ public interface VentanaCargaConstantes extends Constants {
 
 	String enviarTooltip();
 
+	String validacionLaguna();
+
+	String validacionEspecie();
+
+	String validacionTipoMatrizProductiva();
+
 }
