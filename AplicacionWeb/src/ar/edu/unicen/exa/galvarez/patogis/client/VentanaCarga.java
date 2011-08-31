@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.xml.bind.ValidationException;
-
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.AlcanceEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ConteoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.DistanciaEnum;
@@ -496,7 +494,7 @@ public class VentanaCarga extends Grid {
 								}
 							});
 
-				} catch (ValidationException e) {
+				} catch (ValidacionException e) {
 					errorLabel.setText(e.getMessage());
 				}
 			}
@@ -708,14 +706,14 @@ public class VentanaCarga extends Grid {
 	}
 
 	private ObservacionEspecie getObservacionEspecie(VerticalPanel vp)
-			throws ValidationException {
+			throws ValidacionException {
 		if (((IntegerBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(1))
 				.getValue() != null) {
 			ObservacionEspecie oe = new ObservacionEspecie();
 
 			if (((ListBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(0))
 					.getSelectedIndex() <= 0)// debe seleccionar especie
-				throw new ValidationException(ctes.validacionEspecie());
+				throw new ValidacionException(ctes.validacionEspecie());
 
 			oe.setCantidad(((IntegerBox) ((HorizontalPanel) vp.getWidget(0))
 					.getWidget(1)).getValue());
@@ -750,10 +748,10 @@ public class VentanaCarga extends Grid {
 	}
 
 	private ObservacionMatrizProductiva getObservacionMatrizProductiva(
-			HorizontalPanel hp) throws ValidationException {
+			HorizontalPanel hp) throws ValidacionException {
 		if (((IntegerBox) hp.getWidget(1)).getValue() !=null) {
 			if (((ListBox) hp
-					.getWidget(0)).getSelectedIndex()<=0) throw new ValidationException(ctes.validacionTipoMatrizProductiva());
+					.getWidget(0)).getSelectedIndex()<=0) throw new ValidacionException(ctes.validacionTipoMatrizProductiva());
 			
 		ObservacionMatrizProductiva omp = new ObservacionMatrizProductiva();
 		omp.setIdTipoMatrizProductiva(tiposMatrizProductiva.get(
@@ -765,14 +763,14 @@ public class VentanaCarga extends Grid {
 		return null;
 	}
 
-	private Ubicacion getUbicacion() throws ValidationException {
+	private Ubicacion getUbicacion() throws ValidacionException {
 		if (laguna.getSelectedIndex() <= 0)
-			throw new ValidationException(ctes.validacionLaguna());
+			throw new ValidacionException(ctes.validacionLaguna());
 		return ubicaciones.get(laguna.getValue(laguna.getSelectedIndex()));
 	}
 
 	@SuppressWarnings("deprecation")
-	private Observacion getObservacion() throws ValidationException {
+	private Observacion getObservacion() throws ValidacionException {
 
 		Observacion observacion = new Observacion();
 		observacion.setObservaciones(observaciones.getValue());

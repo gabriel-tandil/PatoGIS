@@ -1,7 +1,6 @@
 package ar.edu.unicen.exa.galvarez.patogis.server;
 
 import java.rmi.RemoteException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
