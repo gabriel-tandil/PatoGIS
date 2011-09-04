@@ -26,13 +26,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="addElementoResponse">
     <complexType/>
    </element>
-   <element name="getElementosOrdenadosCantidadObs">
+   <element name="getElementosConCantidadObs">
     <complexType/>
    </element>
-   <element name="getElementosOrdenadosCantidadObsResponse">
+   <element name="getElementosConCantidadObsResponse">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="getElementosOrdenadosCantidadObsReturn" type="tns1:Especie"/>
+      <element maxOccurs="unbounded" name="getElementosConCantidadObsReturn" type="tns1:Especie"/>
      </sequence>
     </complexType>
    </element>
@@ -40,6 +40,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   <schema elementFormDefault="qualified" targetNamespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
    <complexType name="Especie">
     <sequence>
+     <element name="cantidadObservaciones" nillable="true" type="xsd:int"/>
      <element name="familia" nillable="true" type="xsd:string"/>
      <element name="grupo" nillable="true" type="xsd:string"/>
      <element name="id" nillable="true" type="xsd:int"/>
@@ -53,6 +54,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="addElementoResponse">
 
       <wsdl:part element="impl:addElementoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElementosConCantidadObsResponse">
+
+      <wsdl:part element="impl:getElementosConCantidadObsResponse" name="parameters">
 
       </wsdl:part>
 
@@ -82,17 +91,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getElementosOrdenadosCantidadObsResponse">
+   <wsdl:message name="getElementosConCantidadObsRequest">
 
-      <wsdl:part element="impl:getElementosOrdenadosCantidadObsResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getElementosOrdenadosCantidadObsRequest">
-
-      <wsdl:part element="impl:getElementosOrdenadosCantidadObs" name="parameters">
+      <wsdl:part element="impl:getElementosConCantidadObs" name="parameters">
 
       </wsdl:part>
 
@@ -124,13 +125,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getElementosOrdenadosCantidadObs">
+      <wsdl:operation name="getElementosConCantidadObs">
 
-         <wsdl:input message="impl:getElementosOrdenadosCantidadObsRequest" name="getElementosOrdenadosCantidadObsRequest">
+         <wsdl:input message="impl:getElementosConCantidadObsRequest" name="getElementosConCantidadObsRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getElementosOrdenadosCantidadObsResponse" name="getElementosOrdenadosCantidadObsResponse">
+         <wsdl:output message="impl:getElementosConCantidadObsResponse" name="getElementosConCantidadObsResponse">
 
        </wsdl:output>
 
@@ -178,17 +179,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getElementosOrdenadosCantidadObs">
+      <wsdl:operation name="getElementosConCantidadObs">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getElementosOrdenadosCantidadObsRequest">
+         <wsdl:input name="getElementosConCantidadObsRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getElementosOrdenadosCantidadObsResponse">
+         <wsdl:output name="getElementosConCantidadObsResponse">
 
             <wsdlsoap:body use="literal"/>
 

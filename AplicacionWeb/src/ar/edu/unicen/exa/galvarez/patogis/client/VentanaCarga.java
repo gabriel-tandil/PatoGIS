@@ -10,6 +10,7 @@ import gwtupload.client.SingleUploader;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -46,7 +47,6 @@ import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -238,6 +238,44 @@ public class VentanaCarga extends Grid {
 
 	private List<HorizontalPanel> widgetsObsMatrizProductiva = new ArrayList<HorizontalPanel>();
 
+	class ObtenerPropiedadEspecie implements ObtenerTexto {
+		@Override
+		public String getValor(String clave) {
+			return (AplicacionWeb.configuracion.isNombreCientifico() ? especies
+					.get(clave).getNombreCientifico() : clave);
+		}
+	};
+
+	class ComparadorEspecies implements Comparator<String> {
+		public int compare(String arg0, String arg1) {
+			// TODO: poner try/catch
+			Especie argE0 = especies.get(arg0);
+			Especie argE1 = especies.get(arg1);
+			if (argE0.getGrupo().compareTo(argE1.getGrupo()) != 0)
+				return argE0.getGrupo().compareTo(argE1.getGrupo());
+			if (argE0.getFamilia().compareTo(argE1.getFamilia()) != 0)
+				return argE0.getFamilia().compareTo(argE1.getFamilia());
+			if (argE0.getCantidadObservaciones() == null
+					&& argE1.getCantidadObservaciones() == null)
+				return new ObtenerPropiedadEspecie().getValor(arg0).compareTo(
+						new ObtenerPropiedadEspecie().getValor(arg1));
+			if (argE1.getCantidadObservaciones() == null)
+				return 0;
+			if (argE0.getCantidadObservaciones() == null)
+				return 1;
+
+			if (argE0.getCantidadObservaciones() > argE1
+					.getCantidadObservaciones())
+				return 0;
+			if (argE0.getCantidadObservaciones() < argE1
+					.getCantidadObservaciones())
+				return 1;
+			return new ObtenerPropiedadEspecie().getValor(arg0).compareTo(
+					new ObtenerPropiedadEspecie().getValor(arg1));
+
+		}
+	};
+
 	@SuppressWarnings("deprecation")
 	VentanaCarga() {
 		super(12, 3);
@@ -247,7 +285,7 @@ public class VentanaCarga extends Grid {
 
 		Label lblNewLabel = new Label(ctes.laguna());
 		setWidget(0, 0, lblNewLabel);
-		laguna = generarComboItemsObservables(ubicaciones.keySet(),
+		laguna = generarComboItemsObservables(ubicaciones.keyList(),
 				new AgregarUbicacionDialog());
 		laguna.addMouseListener(new TooltipListener(ctes.lagunaTooltip(), 5000));
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
@@ -258,6 +296,7 @@ public class VentanaCarga extends Grid {
 			@Override
 			public void onSuccess(Map<String, Especie> result) {
 				especies = (MapaOrdenado<String, Especie>) result;
+				especies.ordenarClaves(new ComparadorEspecies());
 				for (Iterator<VerticalPanel> iterator = widgetsObsEspecie
 						.iterator(); iterator.hasNext();) {
 					VerticalPanel hp = iterator.next();
@@ -265,15 +304,7 @@ public class VentanaCarga extends Grid {
 							.getWidget(0)).getWidget(0);
 					if (combo.getItemCount() == 0)
 						agregarItemsCombo(combo, especies.keyList(),
-								new ObtenerTexto() {
-									@Override
-									public String getValor(String clave) {
-										return (AplicacionWeb.configuracion
-												.isNombreCientifico() ? especies
-												.get(clave)
-												.getNombreCientifico() : clave);
-									}
-								});
+								new ObtenerPropiedadEspecie());
 				}
 			}
 		});
@@ -468,10 +499,10 @@ public class VentanaCarga extends Grid {
 				try {
 					observacion = getObservacion();
 
-					JSONObject jo = observacionAJson(observacion);
-					Storage storage = Storage.getLocalStorageIfSupported();
-					storage.setItem("observacion" + 1, jo.toString());
-					observacion = observacionDesdeJson(jo);
+					// JSONObject jo = observacionAJson(observacion);
+					// Storage storage = Storage.getLocalStorageIfSupported();
+					// storage.setItem("observacion" + 1, jo.toString());
+					// observacion = observacionDesdeJson(jo);
 					observacionService.addElemento(observacion,
 							new AsyncCallback<Void>() {
 
@@ -507,14 +538,14 @@ public class VentanaCarga extends Grid {
 		public abstract String getValor(String clave);
 	}
 
-	private void agregarItemsCombo(final ListBox comboBox, Set<String> list) {
-		agregarItemsCombo(comboBox, list, new ObtenerTexto() {
+	class ObtenerMismoTexto implements ObtenerTexto {
+		public String getValor(String clave) {
+			return clave;
+		}
+	}
 
-			@Override
-			public String getValor(String clave) {
-				return clave;
-			}
-		});
+	private void agregarItemsCombo(final ListBox comboBox, Set<String> list) {
+		agregarItemsCombo(comboBox, list, new ObtenerMismoTexto());
 	}
 
 	private void agregarItemsCombo(final ListBox comboBox,
@@ -536,9 +567,10 @@ public class VentanaCarga extends Grid {
 		verticalPanel_1.add(verticalPanel);
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel);
-
+		especies.ordenarClaves(new ComparadorEspecies());
 		final ListBox comboBox1 = generarComboItemsObservables(
-				especies.keySet(), new AgregarEspecieDialog());
+				especies.keyList(), new AgregarEspecieDialog(),
+				new ObtenerPropiedadEspecie());
 
 		horizontalPanel.add(comboBox1);
 
@@ -571,7 +603,7 @@ public class VentanaCarga extends Grid {
 		verticalPanel_1.add(horizontalPanel1);
 
 		final ListBox comboBox = generarComboItemsObservables(
-				tiposMatrizProductiva.keySet(),
+				tiposMatrizProductiva.keyList(),
 				new AgregarTipoMatrizProductivaDialog());
 
 		horizontalPanel1.add(comboBox);
@@ -672,8 +704,13 @@ public class VentanaCarga extends Grid {
 		combo.setSelectedIndex(combo.getItemCount() - 1);
 	}
 
-	private ListBox generarComboItemsObservables(Set<String> items,
+	private ListBox generarComboItemsObservables(List<String> items,
 			final AgregarElementoDialog dlg) {
+		return generarComboItemsObservables(items, dlg, new ObtenerMismoTexto());
+	}
+
+	private ListBox generarComboItemsObservables(List<String> items,
+			final AgregarElementoDialog dlg, ObtenerTexto obtenerPropiedad) {
 		final ListBox comboBox = new ListBox();
 
 		comboBox.addChangeHandler(new ChangeHandler() {
@@ -690,7 +727,7 @@ public class VentanaCarga extends Grid {
 			}
 		});
 		if (!items.isEmpty()) {
-			agregarItemsCombo(comboBox, items);
+			agregarItemsCombo(comboBox, items, obtenerPropiedad);
 		}
 		return comboBox;
 	}
@@ -749,17 +786,19 @@ public class VentanaCarga extends Grid {
 
 	private ObservacionMatrizProductiva getObservacionMatrizProductiva(
 			HorizontalPanel hp) throws ValidacionException {
-		if (((IntegerBox) hp.getWidget(1)).getValue() !=null) {
-			if (((ListBox) hp
-					.getWidget(0)).getSelectedIndex()<=0) throw new ValidacionException(ctes.validacionTipoMatrizProductiva());
-			
-		ObservacionMatrizProductiva omp = new ObservacionMatrizProductiva();
-		omp.setIdTipoMatrizProductiva(tiposMatrizProductiva.get(
-				(((ListBox) hp.getWidget(0)).getValue(((ListBox) hp
-						.getWidget(0)).getSelectedIndex()))).getId());
-		omp.setPorcentaje(((IntegerBox) hp.getWidget(1)).getValue());
-		
-		return omp;}
+		if (((IntegerBox) hp.getWidget(1)).getValue() != null) {
+			if (((ListBox) hp.getWidget(0)).getSelectedIndex() <= 0)
+				throw new ValidacionException(
+						ctes.validacionTipoMatrizProductiva());
+
+			ObservacionMatrizProductiva omp = new ObservacionMatrizProductiva();
+			omp.setIdTipoMatrizProductiva(tiposMatrizProductiva.get(
+					(((ListBox) hp.getWidget(0)).getValue(((ListBox) hp
+							.getWidget(0)).getSelectedIndex()))).getId());
+			omp.setPorcentaje(((IntegerBox) hp.getWidget(1)).getValue());
+
+			return omp;
+		}
 		return null;
 	}
 
@@ -791,19 +830,21 @@ public class VentanaCarga extends Grid {
 
 		ObservacionEspecie[] observacionesEspecie = new ObservacionEspecie[widgetsObsEspecie
 				.size()];
-		for (int i=0,ii = 0; i < widgetsObsEspecie.size(); i++) {
+		for (int i = 0, ii = 0; i < widgetsObsEspecie.size(); i++) {
 			observacionesEspecie[ii] = getObservacionEspecie(widgetsObsEspecie
 					.get(i));
-			if (observacionesEspecie[ii]!=null) ii++;
+			if (observacionesEspecie[ii] != null)
+				ii++;
 		}
 		observacion.setObservacionesEspecie(observacionesEspecie);
 
 		ObservacionMatrizProductiva[] obsMatrizProductiva = new ObservacionMatrizProductiva[widgetsObsMatrizProductiva
 				.size()];
-		for (int i = 0,ii = 0; i < widgetsObsMatrizProductiva.size(); i++) {
+		for (int i = 0, ii = 0; i < widgetsObsMatrizProductiva.size(); i++) {
 			obsMatrizProductiva[ii] = getObservacionMatrizProductiva(widgetsObsMatrizProductiva
 					.get(i));
-			if (obsMatrizProductiva[ii]!=null) ii++;
+			if (obsMatrizProductiva[ii] != null)
+				ii++;
 		}
 		observacion.setObservacionesMatrizProductiva(obsMatrizProductiva);
 

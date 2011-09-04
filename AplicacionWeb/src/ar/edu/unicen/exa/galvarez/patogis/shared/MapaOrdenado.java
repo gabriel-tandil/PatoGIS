@@ -1,6 +1,8 @@
 package ar.edu.unicen.exa.galvarez.patogis.shared;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,21 +15,31 @@ public class MapaOrdenado<K, V> extends HashMap<K, V> implements Map<K, V> {
 	List<K> claves;
 
 	public MapaOrdenado() {
-		claves = new ArrayList<K>();
+
 	}
 
 	public V put(K key, V value) {
-		claves.add(key);
+		if (claves!=null && !containsKey(key))
+			claves.add(key);
 		return super.put(key, value);
 	};
 
 	@Override
 	public V remove(Object key) {
-		claves.remove(key);
+		if (claves!=null)
+			claves.remove(key);
 		return super.remove(key);
 	}
 
 	public List<K> keyList() {
+		if (claves==null)
+			claves=new ArrayList<K>(keySet());
 		return claves;
 	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void ordenarClaves(Comparator c){
+		Collections.sort(keyList(), c);
+	}
+	
 }

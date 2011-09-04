@@ -76,5 +76,5 @@ public interface EspecieMapper {
 	 */
 	int updateByPrimaryKey(Especie record);
 
-	List<Especie> selectOrdenadosCantidadObs();
+	List<Especie> selectConCantidadObs();
 }

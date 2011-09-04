@@ -56,10 +56,10 @@ public class EspecieWSImplProxy implements ar.edu.unicen.exa.galvarez.patogis.se
     especieWSImpl.addElemento(elemento, idUsuario);
   }
   
-  public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementosOrdenadosCantidadObs() throws java.rmi.RemoteException{
+  public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementosConCantidadObs() throws java.rmi.RemoteException{
     if (especieWSImpl == null)
       _initEspecieWSImplProxy();
-    return especieWSImpl.getElementosOrdenadosCantidadObs();
+    return especieWSImpl.getElementosConCantidadObs();
   }
   
   

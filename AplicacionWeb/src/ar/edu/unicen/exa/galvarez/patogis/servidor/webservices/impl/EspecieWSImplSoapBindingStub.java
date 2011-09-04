@@ -44,10 +44,10 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
         _operations[1] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("getElementosOrdenadosCantidadObs");
+        oper.setName("getElementosConCantidadObs");
         oper.setReturnType(new javax.xml.namespace.QName("http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar", "Especie"));
         oper.setReturnClass(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[].class);
-        oper.setReturnQName(new javax.xml.namespace.QName("http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar", "getElementosOrdenadosCantidadObsReturn"));
+        oper.setReturnQName(new javax.xml.namespace.QName("http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar", "getElementosConCantidadObsReturn"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[2] = oper;
@@ -217,7 +217,7 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
 }
     }
 
-    public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementosOrdenadosCantidadObs() throws java.rmi.RemoteException {
+    public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementosConCantidadObs() throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -229,7 +229,7 @@ public class EspecieWSImplSoapBindingStub extends org.apache.axis.client.Stub im
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar", "getElementosOrdenadosCantidadObs"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar", "getElementosConCantidadObs"));
 
         setRequestHeaders(_call);
         setAttachments(_call);

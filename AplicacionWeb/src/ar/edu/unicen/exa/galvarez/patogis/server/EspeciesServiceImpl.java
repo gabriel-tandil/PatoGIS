@@ -27,7 +27,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 		try {
 			EspecieWSImpl especieWS = especieWSServiceLocator
 					.getEspecieWSImpl();
-			Especie[] especies = especieWS.getElementosOrdenadosCantidadObs();
+			Especie[] especies = especieWS.getElementosConCantidadObs();
 			if (especies != null) {
 				
 				for (int i = 0; i < especies.length; i++) {

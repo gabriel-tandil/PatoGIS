@@ -272,13 +272,22 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<select id="selectOrdenadosCantidadObs" resultMap="BaseResultMap">
+
+	<resultMap id="ConCantidadObsResultMap"
+		type="ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="nombre" jdbcType="VARCHAR" property="nombre" />
+		<result column="nombre_cientifico" jdbcType="VARCHAR" property="nombreCientifico" />
+		<result column="familia" jdbcType="VARCHAR" property="familia" />
+		<result column="grupo" jdbcType="VARCHAR" property="grupo" />
+		<result column="cantidad" jdbcType="VARCHAR" property="cantidadObservaciones" />
+	</resultMap>
+	<select id="selectConCantidadObs" resultMap="ConCantidadObsResultMap">
 		select
-		<include refid="Base_Column_List" />
+		<include refid="Base_Column_List" />, cantidad.cantidad
 		from
 		especie LEFT OUTER JOIN
 		(select count(*) cantidad,id_especie from observacion_especie group by
 		id_especie) cantidad on especie.id=cantidad.id_especie
-		order by cantidad.cantidad, especie.nombre
 	</select>
 </mapper>

@@ -127,4 +127,14 @@ public class Especie   implements Dominio, Serializable {
 	public Especie() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void setCantidadObservaciones(Integer cantidadObservaciones) {
+		this.cantidadObservaciones = cantidadObservaciones;
+	}
+
+	public Integer getCantidadObservaciones() {
+		return cantidadObservaciones;
+	}
+
+	private Integer cantidadObservaciones;	
 }

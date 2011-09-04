@@ -30,14 +30,14 @@ public class EspecieWSImpl extends PatoGisWSAbstractImpl<Especie> implements
 	}
 	
 	@Override
-	public Especie[] getElementosOrdenadosCantidadObs() throws RemoteException {
+	public Especie[] getElementosConCantidadObs() throws RemoteException {
 		SqlSession sqlSession = null;
 		Especie[] resultado =null;
 		try {
 			sqlSession = obtenerSesion();
 		EspecieMapper oem = sqlSession
 		.getMapper(EspecieMapper.class);
-		List<Especie> loe=oem.selectOrdenadosCantidadObs();
+		List<Especie> loe=oem.selectConCantidadObs();
 		resultado= loe.toArray(new Especie[loe.size()]);
 		} catch (Exception e) {
 
