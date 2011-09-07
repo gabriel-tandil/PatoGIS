@@ -17,7 +17,6 @@ import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 
 public class VentanaListado extends FlexTable {
 	VentanaListadoConstantes constantes = GWT
@@ -27,7 +26,6 @@ public class VentanaListado extends FlexTable {
 
 	VentanaListado() {
 		super();
-		final Label errorLabel = (Label) AplicacionWeb.alertaPopup.getWidget();
 		setText(0, 0, constantes.fecha());
 		;
 		setText(0, 1, constantes.inicio());
@@ -48,7 +46,7 @@ public class VentanaListado extends FlexTable {
 		observacionService.getElementos(new AsyncCallback<List<Observacion>>() {
 			@Override
 			public void onFailure(Throwable caught) {
-				errorLabel.setText(constantes.errorObtenerObservaciones());
+				AplicacionWeb.setMensajeAlerta(constantes.errorObtenerObservaciones());
 				;
 
 			}

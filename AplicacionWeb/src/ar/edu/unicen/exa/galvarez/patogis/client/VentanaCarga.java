@@ -41,6 +41,8 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONBoolean;
@@ -82,7 +84,7 @@ public class VentanaCarga extends Grid {
 			e.setNombre(text.getValue());
 			especiesService.addElemento(e, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
-					errorLabel.setText(ctes.errorGuardarEspecie());
+					AplicacionWeb.setMensajeAlerta(ctes.errorGuardarEspecie());
 				}
 
 				@Override
@@ -110,7 +112,7 @@ public class VentanaCarga extends Grid {
 			tipoMatrizProductivaService.addElemento(tmp,
 					new AsyncCallback<Void>() {
 						public void onFailure(Throwable caught) {
-							errorLabel.setText(ctes
+							AplicacionWeb.setMensajeAlerta(ctes
 									.errorGuardarNuevoTipoMatrizProductiva());
 						}
 
@@ -139,7 +141,8 @@ public class VentanaCarga extends Grid {
 			u.setNombre(text.getValue());
 			ubicacionService.addElemento(u, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
-					errorLabel.setText(ctes.errorGuardarNuevaUbicacion());
+					AplicacionWeb.setMensajeAlerta(ctes
+							.errorGuardarNuevaUbicacion());
 				}
 
 				@Override
@@ -166,48 +169,57 @@ public class VentanaCarga extends Grid {
 	private DateBox dateBox;
 	MapaOrdenado<String, Especie> especies = new MapaOrdenado<String, Especie>();
 
-	private void persistirMapaEspecies(
-			MapaOrdenado<String, Especie> especies) {
+	private void persistirMapaEspecies(MapaOrdenado<String, Especie> especies) {
 		Storage storage = Storage.getLocalStorageIfSupported();
-		JSONArray arreglo=new JSONArray();
-		int i=0;
-		for (Iterator<String> iterator = especies.keySet().iterator(); iterator.hasNext();) {
-			String clave=iterator.next();
+		JSONArray arreglo = new JSONArray();
+		int i = 0;
+		for (Iterator<String> iterator = especies.keySet().iterator(); iterator
+				.hasNext();) {
+			String clave = iterator.next();
 			Especie especie = especies.get(clave);
-			JSONObject elemento=new JSONObject();
+			JSONObject elemento = new JSONObject();
 			elemento.put("clave", new JSONString(clave));
-			JSONObject valor=new JSONObject();
-			valor.put("cantidadObservaciones", new JSONNumber(especie.getCantidadObservaciones()==null?0:especie.getCantidadObservaciones()));
+			JSONObject valor = new JSONObject();
+			valor.put("cantidadObservaciones",
+					new JSONNumber(
+							especie.getCantidadObservaciones() == null ? 0
+									: especie.getCantidadObservaciones()));
 			valor.put("id", new JSONNumber(especie.getId()));
 			valor.put("nombre", new JSONString(especie.getNombre()));
-			valor.put("nombreCientifico", new JSONString(especie.getNombreCientifico()));
+			valor.put("nombreCientifico",
+					new JSONString(especie.getNombreCientifico()));
 			valor.put("familia", new JSONString(especie.getFamilia()));
 			valor.put("grupo", new JSONString(especie.getGrupo()));
 			elemento.put("valor", valor);
-			
+
 			arreglo.set(i, elemento);
 			i++;
 		}
 		storage.setItem("mapaEspecies", arreglo.toString());
 	}
-	private MapaOrdenado<String, Especie> obtenerMapaEspecies(){
+
+	private MapaOrdenado<String, Especie> obtenerMapaEspecies() {
 
 		Storage storage = Storage.getLocalStorageIfSupported();
 		MapaOrdenado<String, Especie> salida = new MapaOrdenado<String, Especie>();
 		String cadenaMapaEspecies = storage.getItem("mapaEspecies");
 		if (cadenaMapaEspecies != null) {
-			JSONArray arreglo=(JSONArray) JSONParser.parseStrict(cadenaMapaEspecies);
+			JSONArray arreglo = (JSONArray) JSONParser
+					.parseStrict(cadenaMapaEspecies);
 			for (int i = 0; i < arreglo.size(); i++) {
-				JSONObject elemento=(JSONObject) arreglo.get(i);
-				String clave=elemento.get("clave").toString();
-				JSONObject valor=(JSONObject) elemento.get("valor");
-				Especie especie=new Especie();
-				especie.setCantidadObservaciones((int) ((JSONNumber)valor.get("cantidadObservaciones")).doubleValue());
-				especie.setId((int) ((JSONNumber)valor.get("id")).doubleValue());
+				JSONObject elemento = (JSONObject) arreglo.get(i);
+				String clave = elemento.get("clave").toString();
+				JSONObject valor = (JSONObject) elemento.get("valor");
+				Especie especie = new Especie();
+				especie.setCantidadObservaciones((int) ((JSONNumber) valor
+						.get("cantidadObservaciones")).doubleValue());
+				especie.setId((int) ((JSONNumber) valor.get("id"))
+						.doubleValue());
 				especie.setFamilia(valor.get("familia").toString());
 				especie.setGrupo(valor.get("grupo").toString());
 				especie.setNombre(valor.get("nombre").toString());
-				especie.setNombreCientifico(valor.get("nombreCientifico").toString());
+				especie.setNombreCientifico(valor.get("nombreCientifico")
+						.toString());
 				salida.put(clave, especie);
 			}
 		}
@@ -329,7 +341,6 @@ public class VentanaCarga extends Grid {
 	@SuppressWarnings("deprecation")
 	VentanaCarga() {
 		super(12, 3);
-		final Label errorLabel = (Label) AplicacionWeb.alertaPopup.getWidget();
 		setSize("100px", "100px");
 
 		Label lblNewLabel = new Label(ctes.laguna());
@@ -339,9 +350,9 @@ public class VentanaCarga extends Grid {
 		laguna.addMouseListener(new TooltipListener(ctes.lagunaTooltip(), 5000));
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
-				errorLabel.setText(ctes.errorObtenerEspecies());
+				AplicacionWeb.setMensajeAlerta(ctes.errorObtenerEspecies());
 				especies = obtenerMapaEspecies();
-	
+
 				llenarcombosEspecies();
 			}
 
@@ -370,7 +381,7 @@ public class VentanaCarga extends Grid {
 		tipoMatrizProductivaService
 				.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
-						errorLabel.setText(ctes
+						AplicacionWeb.setMensajeAlerta(ctes
 								.errorObtenerTiposMatrizProductiva());
 					}
 
@@ -392,7 +403,8 @@ public class VentanaCarga extends Grid {
 		ubicacionService
 				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 					public void onFailure(Throwable caught) {
-						errorLabel.setText(ctes.errorObtenerUbicaciones());
+						AplicacionWeb.setMensajeAlerta(ctes
+								.errorObtenerUbicaciones());
 					}
 
 					@Override
@@ -526,7 +538,17 @@ public class VentanaCarga extends Grid {
 
 		setWidget(6, 0, lblNewLabel7);
 		observaciones = new TextArea();
+		observaciones.addKeyPressHandler(new KeyPressHandler() {
 
+			@Override
+			public void onKeyPress(KeyPressEvent event) {
+				if (observaciones.getText().length() > 100) {
+					observaciones.setText(observaciones.getText().substring(0,
+							99));
+				}
+
+			};
+		});
 		setWidget(6, 1, observaciones);
 
 		Label lblNewLabel8 = new Label(ctes.fotos());
@@ -566,14 +588,14 @@ public class VentanaCarga extends Grid {
 
 								@Override
 								public void onFailure(Throwable caught) {
-									errorLabel.setText(ctes
+									AplicacionWeb.setMensajeAlerta(ctes
 											.errorGuardarObservacion());
 
 								}
 
 								@Override
 								public void onSuccess(Void result) {
-									errorLabel.setText(ctes
+									AplicacionWeb.setMensajeAlerta(ctes
 											.observacionGuardada());
 
 									RootPanel rootPanel = RootPanel
@@ -584,7 +606,7 @@ public class VentanaCarga extends Grid {
 							});
 
 				} catch (ValidacionException e) {
-					errorLabel.setText(e.getMessage());
+					AplicacionWeb.setMensajeAlerta(e.getMensaje());
 				}
 			}
 		});
@@ -679,8 +701,8 @@ public class VentanaCarga extends Grid {
 
 		archivosService.borrar(imagen, new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
-				Label errorLabel = (Label) AplicacionWeb.alertaPopup.getWidget();
-				errorLabel.setText(ctes.errorEliminarArchivo());
+
+				AplicacionWeb.setMensajeAlerta(ctes.errorEliminarArchivo());
 			}
 
 			@Override
