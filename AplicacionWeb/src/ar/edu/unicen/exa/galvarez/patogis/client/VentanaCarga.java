@@ -208,18 +208,18 @@ public class VentanaCarga extends Grid {
 					.parseStrict(cadenaMapaEspecies);
 			for (int i = 0; i < arreglo.size(); i++) {
 				JSONObject elemento = (JSONObject) arreglo.get(i);
-				String clave = elemento.get("clave").toString();
+				String clave = ((JSONString)elemento.get("clave")).stringValue();
 				JSONObject valor = (JSONObject) elemento.get("valor");
 				Especie especie = new Especie();
 				especie.setCantidadObservaciones((int) ((JSONNumber) valor
 						.get("cantidadObservaciones")).doubleValue());
 				especie.setId((int) ((JSONNumber) valor.get("id"))
 						.doubleValue());
-				especie.setFamilia(valor.get("familia").toString());
-				especie.setGrupo(valor.get("grupo").toString());
-				especie.setNombre(valor.get("nombre").toString());
-				especie.setNombreCientifico(valor.get("nombreCientifico")
-						.toString());
+				especie.setFamilia(((JSONString)valor.get("familia")).stringValue());
+				especie.setGrupo(((JSONString)valor.get("grupo")).stringValue());
+				especie.setNombre(((JSONString)valor.get("nombre")).stringValue());
+				especie.setNombreCientifico(((JSONString)valor.get("nombreCientifico"))
+						.stringValue());
 				salida.put(clave, especie);
 			}
 		}
@@ -353,24 +353,24 @@ public class VentanaCarga extends Grid {
 				AplicacionWeb.setMensajeAlerta(ctes.errorObtenerEspecies());
 				especies = obtenerMapaEspecies();
 
-				llenarcombosEspecies();
+				llenarCombosEspecies();
 			}
 
 			@Override
 			public void onSuccess(Map<String, Especie> result) {
 				especies = (MapaOrdenado<String, Especie>) result;
 				persistirMapaEspecies(especies);
-				llenarcombosEspecies();
+				llenarCombosEspecies();
 			}
 
-			private void llenarcombosEspecies() {
+			private void llenarCombosEspecies() {
 				especies.ordenarClaves(new ComparadorEspecies());
 				for (Iterator<VerticalPanel> iterator = widgetsObsEspecie
 						.iterator(); iterator.hasNext();) {
 					VerticalPanel hp = iterator.next();
 					ListBox combo = (ListBox) ((HorizontalPanel) hp
 							.getWidget(0)).getWidget(0);
-					if (combo.getSelectedIndex() == 0)
+					if (combo.getSelectedIndex() <= 0)
 						agregarItemsCombo(combo, especies.keyList(),
 								new ObtenerPropiedadEspecie());
 				}
