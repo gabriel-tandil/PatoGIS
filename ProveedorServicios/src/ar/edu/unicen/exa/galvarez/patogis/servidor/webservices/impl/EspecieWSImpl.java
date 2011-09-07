@@ -42,6 +42,7 @@ public class EspecieWSImpl extends PatoGisWSAbstractImpl<Especie> implements
 		} catch (Exception e) {
 
 			e.printStackTrace();
+			throw new RemoteException();
 		} finally {
 			sqlSession.close();
 		}

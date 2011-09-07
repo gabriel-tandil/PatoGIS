@@ -20,11 +20,11 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class EspeciesServiceImpl extends RemoteServiceServlet implements
 		EspeciesService {
 
-	public Map<String, Especie> getElementos() throws IllegalArgumentException {
+	public Map<String, Especie> getElementos() throws IllegalArgumentException, ServiceException, RemoteException {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
 		Map<String,Especie> l = new MapaOrdenado<String,Especie>();
 
-		try {
+//		try {
 			EspecieWSImpl especieWS = especieWSServiceLocator
 					.getEspecieWSImpl();
 			Especie[] especies = especieWS.getElementosConCantidadObs();
@@ -34,13 +34,14 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 					l.put(especies[i].getNombre(),especies[i]);
 				}
 			}
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		} catch (ServiceException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			tr
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return l;
 	}
 

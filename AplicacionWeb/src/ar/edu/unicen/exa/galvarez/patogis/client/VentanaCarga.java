@@ -37,6 +37,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.VientoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dev.json.JsonArray;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -46,7 +47,10 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.json.client.JSONValue;
+import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -163,6 +167,54 @@ public class VentanaCarga extends Grid {
 	private ListBox alcance;
 	private DateBox dateBox;
 	MapaOrdenado<String, Especie> especies = new MapaOrdenado<String, Especie>();
+
+	private void persistirMapaEspecies(
+			MapaOrdenado<String, Especie> especies) {
+		Storage storage = Storage.getLocalStorageIfSupported();
+		JSONArray arreglo=new JSONArray();
+		int i=0;
+		for (Iterator<String> iterator = especies.keySet().iterator(); iterator.hasNext();) {
+			String clave=iterator.next();
+			Especie especie = especies.get(clave);
+			JSONObject elemento=new JSONObject();
+			elemento.put("clave", new JSONString(clave));
+			JSONObject valor=new JSONObject();
+			valor.put("cantidadObservaciones", new JSONNumber(especie.getCantidadObservaciones()==null?0:especie.getCantidadObservaciones()));
+			valor.put("id", new JSONNumber(especie.getId()));
+			valor.put("nombre", new JSONString(especie.getNombre()));
+			valor.put("nombreCientifico", new JSONString(especie.getNombreCientifico()));
+			valor.put("familia", new JSONString(especie.getFamilia()));
+			valor.put("grupo", new JSONString(especie.getGrupo()));
+			elemento.put("valor", valor);
+			
+			arreglo.set(i, elemento);
+			i++;
+		}
+		storage.setItem("mapaEspecies", arreglo.toString());
+	}
+	
+	private MapaOrdenado<String, Especie> obtenerMapaEspecies() {
+		Storage storage = Storage.getLocalStorageIfSupported();
+		MapaOrdenado<String, Especie> salida = new MapaOrdenado<String, Especie>();
+		String cadenaMapaEspecies = storage.getItem("mapaEspecies");
+		if (cadenaMapaEspecies != null) {
+			JSONArray arreglo=(JSONArray) JSONParser.parseStrict(cadenaMapaEspecies);
+			for (int i = 0; i < arreglo.size(); i++) {
+				JSONObject elemento=(JSONObject) arreglo.get(i);
+				String clave=elemento.get("clave").toString();
+				JSONObject valor=(JSONObject) elemento.get("valor");
+				Especie especie=new Especie();
+				especie.setCantidadObservaciones((int) ((JSONNumber)valor.get("cantidadObservaciones")).doubleValue());
+				especie.setId((int) ((JSONNumber)valor.get("id")).doubleValue());
+				especie.setFamilia(valor.get("familia").toString());
+				especie.setGrupo(valor.get("grupo").toString());
+				especie.setNombre(valor.get("nombre").toString());
+				especie.setNombreCientifico(valor.get("nombreCientifico").toString());
+				salida.put(clave, especie);
+			}
+		}
+		return salida;
+	}
 
 	final EspeciesServiceAsync especiesService = GWT
 			.create(EspeciesService.class);
@@ -291,22 +343,31 @@ public class VentanaCarga extends Grid {
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
 				errorLabel.setText(ctes.errorObtenerEspecies());
+				especies = obtenerMapaEspecies();
+	
+				llenarcombosEspecies();
 			}
 
 			@Override
 			public void onSuccess(Map<String, Especie> result) {
 				especies = (MapaOrdenado<String, Especie>) result;
+				persistirMapaEspecies(especies);
+				llenarcombosEspecies();
+			}
+
+			private void llenarcombosEspecies() {
 				especies.ordenarClaves(new ComparadorEspecies());
 				for (Iterator<VerticalPanel> iterator = widgetsObsEspecie
 						.iterator(); iterator.hasNext();) {
 					VerticalPanel hp = iterator.next();
 					ListBox combo = (ListBox) ((HorizontalPanel) hp
 							.getWidget(0)).getWidget(0);
-					if (combo.getItemCount() == 0)
+					if (combo.getSelectedIndex() == 0)
 						agregarItemsCombo(combo, especies.keyList(),
 								new ObtenerPropiedadEspecie());
 				}
 			}
+
 		});
 
 		tipoMatrizProductivaService
@@ -550,6 +611,7 @@ public class VentanaCarga extends Grid {
 
 	private void agregarItemsCombo(final ListBox comboBox,
 			Collection<String> list, ObtenerTexto obtenerPropiedad) {
+		comboBox.clear();
 		comboBox.addItem(ctes.seleccionar());
 		for (Iterator<String> iterator = list.iterator(); iterator.hasNext();) {
 			String especie = iterator.next();

@@ -70,7 +70,7 @@ public class AplicacionWeb implements EntryPoint {
 		// Create a menu bar
 		MenuBar menu = new MenuBar();
 		menu.setAutoOpen(true);
-		menu.setWidth("100%");
+		menu.setWidth("365px");
 		menu.setAnimationEnabled(true);
 
 		MenuBar observacionesMenu = new MenuBar(true);
