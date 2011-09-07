@@ -1,6 +1,5 @@
 package ar.edu.unicen.exa.galvarez.patogis.server;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
@@ -20,7 +19,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class UbicacionServiceImpl extends RemoteServiceServlet implements
 UbicacionService {
 
-	public Map<String, Ubicacion> getElementos() throws IllegalArgumentException {
+	public Map<String, Ubicacion> getElementos() throws ServiceException {
 		UbicacionWSImplServiceLocator UbicacionWSImplServiceLocator = new UbicacionWSImplServiceLocator();
 		Map<String, Ubicacion> l = new MapaOrdenado<String, Ubicacion>();
 
@@ -28,23 +27,21 @@ UbicacionService {
 			UbicacionWSImpl UbicacionWS = UbicacionWSImplServiceLocator
 			.getUbicacionWSImpl();
 			Ubicacion[] ubicaciones = UbicacionWS.getElementos();
-			if (ubicaciones!=null){
+		
 				for (int i = 0; i < ubicaciones.length; i++) {
 					l.put(ubicaciones[i].getNombre(),ubicaciones[i]);
 				}
-			}
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
+			
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException();
+
 		}
 		return l;
 	}
 
 	@Override
-	public void addElemento(Ubicacion ubicacion) {
+	public void addElemento(Ubicacion ubicacion)  throws ServiceException{
 		UbicacionWSImplServiceLocator UbicacionWSImplServiceLocator = new UbicacionWSImplServiceLocator();
 
 		try {
@@ -52,13 +49,11 @@ UbicacionService {
 			UbicacionWSImpl UbicacionWS = UbicacionWSImplServiceLocator
 					.getUbicacionWSImpl();
 			UbicacionWS.addElemento(ubicacion,1);
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+			throw new ServiceException();
+
+		}
 	}
 
 }

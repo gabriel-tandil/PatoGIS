@@ -1,6 +1,5 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
@@ -15,6 +14,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("especies")
 public interface EspeciesService extends RemoteService {
-	Map<String, Especie> getElementos() throws IllegalArgumentException, ServiceException, RemoteException;
-	void addElemento(Especie especie);
+	Map<String, Especie> getElementos() throws ServiceException;
+	void addElemento(Especie especie) throws ServiceException;
 }

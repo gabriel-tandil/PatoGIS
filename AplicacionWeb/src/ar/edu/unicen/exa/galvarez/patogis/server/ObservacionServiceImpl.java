@@ -1,6 +1,5 @@
 package ar.edu.unicen.exa.galvarez.patogis.server;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,31 +18,29 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  */
 @SuppressWarnings("serial")
 public class ObservacionServiceImpl extends RemoteServiceServlet implements
-ObservacionService {
+		ObservacionService {
 
-	public List<Observacion> getElementos() throws IllegalArgumentException {
+	public List<Observacion> getElementos() throws ServiceException {
 		ObservacionWSImplServiceLocator ObservacionWSImplServiceLocator = new ObservacionWSImplServiceLocator();
-		List<Observacion> l = new ArrayList<Observacion>() ;
+		List<Observacion> l = new ArrayList<Observacion>();
 
 		try {
 			ObservacionWSImpl ObservacionWS = ObservacionWSImplServiceLocator
-			.getObservacionWSImpl();
+					.getObservacionWSImpl();
 			Observacion[] observaciones = ObservacionWS.getElementos();
-			if (observaciones!=null){
-l=Arrays.asList(observaciones);
-			}
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
+
+			l = Arrays.asList(observaciones);
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException();
+
 		}
 		return l;
 	}
 
 	@Override
-	public void addElemento(Observacion observacion) {
+	public void addElemento(Observacion observacion) throws ServiceException {
 		ObservacionWSImplServiceLocator ObservacionWSImplServiceLocator = new ObservacionWSImplServiceLocator();
 
 		try {
@@ -51,14 +48,12 @@ l=Arrays.asList(observaciones);
 			ObservacionWSImpl ObservacionWS = ObservacionWSImplServiceLocator
 					.getObservacionWSImpl();
 
-			ObservacionWS.addElemento(observacion,1);
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
+			ObservacionWS.addElemento(observacion, 1);
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+			throw new ServiceException();
+
+		}
 	}
 
 }

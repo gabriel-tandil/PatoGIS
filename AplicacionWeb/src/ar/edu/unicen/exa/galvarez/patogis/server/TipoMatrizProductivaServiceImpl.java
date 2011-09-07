@@ -1,6 +1,5 @@
 package ar.edu.unicen.exa.galvarez.patogis.server;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
@@ -20,7 +19,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class TipoMatrizProductivaServiceImpl extends RemoteServiceServlet implements
 TipoMatrizProductivaService {
 
-	public Map<String, TipoMatrizProductiva> getElementos() throws IllegalArgumentException {
+	public Map<String, TipoMatrizProductiva> getElementos()
+			throws ServiceException {
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
 		Map<String, TipoMatrizProductiva> l = new MapaOrdenado<String, TipoMatrizProductiva>();
 
@@ -28,36 +28,32 @@ TipoMatrizProductivaService {
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator
 			.getTipoMatrizProductivaWSImpl();
 			TipoMatrizProductiva[] tiposMatrizProductiva = tipoMatrizProductivaWS.getElementos();
-			if (tiposMatrizProductiva!=null){
+
 				for (int i = 0; i < tiposMatrizProductiva.length; i++) {
 					l.put(tiposMatrizProductiva[i].getNombre(),tiposMatrizProductiva[i]);
 				}
-			}
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
+			
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException();
+
 		}
 		return l;
 	}
 
 	@Override
-	public void addElemento(TipoMatrizProductiva tipoMatrizProductiva) {
+	public void addElemento(TipoMatrizProductiva tipoMatrizProductiva)throws ServiceException {
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
 
 		try {
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator
 					.getTipoMatrizProductivaWSImpl();
 			tipoMatrizProductivaWS.addElemento(tipoMatrizProductiva,1);
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+			throw new ServiceException();
+
+		}
 	}
 
 }

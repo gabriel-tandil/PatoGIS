@@ -20,47 +20,40 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class EspeciesServiceImpl extends RemoteServiceServlet implements
 		EspeciesService {
 
-	public Map<String, Especie> getElementos() throws IllegalArgumentException, ServiceException, RemoteException {
+	public Map<String, Especie> getElementos() throws ServiceException {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
-		Map<String,Especie> l = new MapaOrdenado<String,Especie>();
+		Map<String, Especie> l = new MapaOrdenado<String, Especie>();
 
-//		try {
-			EspecieWSImpl especieWS = especieWSServiceLocator
-					.getEspecieWSImpl();
-			Especie[] especies = especieWS.getElementosConCantidadObs();
-			if (especies != null) {
-				
-				for (int i = 0; i < especies.length; i++) {
-					l.put(especies[i].getNombre(),especies[i]);
-				}
+		EspecieWSImpl especieWS = especieWSServiceLocator.getEspecieWSImpl();
+		Especie[] especies;
+		try {
+			especies = especieWS.getElementosConCantidadObs();
+
+			for (int i = 0; i < especies.length; i++) {
+				l.put(especies[i].getNombre(), especies[i]);
 			}
-//		} catch (ServiceException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			tr
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServiceException();
+
+		}
+
 		return l;
 	}
 
 	@Override
-	public void addElemento(Especie especie) {
+	public void addElemento(Especie especie) throws ServiceException  {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
 
 		try {
 
 			EspecieWSImpl especieWS = especieWSServiceLocator
 					.getEspecieWSImpl();
-			
+
 			especieWS.addElemento(especie, 1);
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException();
 		}
 	}
 
