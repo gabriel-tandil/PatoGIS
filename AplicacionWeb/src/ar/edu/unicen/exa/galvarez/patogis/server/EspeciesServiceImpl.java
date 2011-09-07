@@ -1,15 +1,13 @@
 package ar.edu.unicen.exa.galvarez.patogis.server;
 
-import java.rmi.RemoteException;
 import java.util.Map;
-
-import javax.xml.rpc.ServiceException;
 
 import ar.edu.unicen.exa.galvarez.patogis.client.EspeciesService;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.EspecieWSImpl;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.EspecieWSImplServiceLocator;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
+import ar.edu.unicen.exa.galvarez.patogis.shared.ServicioRemotoException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -20,13 +18,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class EspeciesServiceImpl extends RemoteServiceServlet implements
 		EspeciesService {
 
-	public Map<String, Especie> getElementos() throws ServiceException {
+	public Map<String, Especie> getElementos() throws ServicioRemotoException {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
 		Map<String, Especie> l = new MapaOrdenado<String, Especie>();
-
-		EspecieWSImpl especieWS = especieWSServiceLocator.getEspecieWSImpl();
-		Especie[] especies;
 		try {
+			EspecieWSImpl especieWS = especieWSServiceLocator
+					.getEspecieWSImpl();
+			Especie[] especies;
+
 			especies = especieWS.getElementosConCantidadObs();
 
 			for (int i = 0; i < especies.length; i++) {
@@ -34,7 +33,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ServiceException();
+			throw new ServicioRemotoException();
 
 		}
 
@@ -42,7 +41,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public void addElemento(Especie especie) throws ServiceException  {
+	public void addElemento(Especie especie) throws ServicioRemotoException {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
 
 		try {
@@ -53,7 +52,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 			especieWS.addElemento(especie, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ServiceException();
+			throw new ServicioRemotoException();
 		}
 	}
 

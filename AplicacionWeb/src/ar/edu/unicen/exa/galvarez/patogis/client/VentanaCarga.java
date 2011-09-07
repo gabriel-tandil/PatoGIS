@@ -37,7 +37,6 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.VientoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dev.json.JsonArray;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -49,7 +48,6 @@ import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
-import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -192,8 +190,8 @@ public class VentanaCarga extends Grid {
 		}
 		storage.setItem("mapaEspecies", arreglo.toString());
 	}
-	
-	private MapaOrdenado<String, Especie> obtenerMapaEspecies() {
+	private MapaOrdenado<String, Especie> obtenerMapaEspecies(){
+
 		Storage storage = Storage.getLocalStorageIfSupported();
 		MapaOrdenado<String, Especie> salida = new MapaOrdenado<String, Especie>();
 		String cadenaMapaEspecies = storage.getItem("mapaEspecies");
@@ -331,8 +329,7 @@ public class VentanaCarga extends Grid {
 	@SuppressWarnings("deprecation")
 	VentanaCarga() {
 		super(12, 3);
-		final Label errorLabel = (Label) RootPanel.get("errorLabelContainer")
-				.getWidget(0);
+		final Label errorLabel = (Label) AplicacionWeb.alertaPopup.getWidget();
 		setSize("100px", "100px");
 
 		Label lblNewLabel = new Label(ctes.laguna());
@@ -682,8 +679,7 @@ public class VentanaCarga extends Grid {
 
 		archivosService.borrar(imagen, new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
-				Label errorLabel = (Label) RootPanel.get("errorLabelContainer")
-						.getWidget(0);
+				Label errorLabel = (Label) AplicacionWeb.alertaPopup.getWidget();
 				errorLabel.setText(ctes.errorEliminarArchivo());
 			}
 

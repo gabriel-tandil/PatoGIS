@@ -2,9 +2,8 @@ package ar.edu.unicen.exa.galvarez.patogis.client;
 
 import java.util.Map;
 
-import javax.xml.rpc.ServiceException;
-
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
+import ar.edu.unicen.exa.galvarez.patogis.shared.ServicioRemotoException;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -14,6 +13,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("especies")
 public interface EspeciesService extends RemoteService {
-	Map<String, Especie> getElementos() throws ServiceException;
-	void addElemento(Especie especie) throws ServiceException;
+	Map<String, Especie> getElementos() throws ServicioRemotoException;
+	void addElemento(Especie especie) throws ServicioRemotoException;
 }

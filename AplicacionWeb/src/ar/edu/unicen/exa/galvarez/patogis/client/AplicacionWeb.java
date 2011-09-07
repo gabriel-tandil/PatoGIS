@@ -1,10 +1,12 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
+import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -16,6 +18,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class AplicacionWeb implements EntryPoint {
 	AplicacionWebConstantes constantes = GWT.create(AplicacionWebConstantes.class);
 	public static Configuracion configuracion=new Configuracion();
+	public static DecoratedPopupPanel alertaPopup = new DecoratedPopupPanel(true);
 	/**
 	 * This is the entry point method.
 	 */
@@ -23,23 +26,26 @@ public class AplicacionWeb implements EntryPoint {
 
 		RootPanel rootPanel = RootPanel.get("menuContainer");
 		rootPanel.add(crearMenu());
-		RootPanel.get("errorLabelContainer").add(new Label(){
+		 
+	    alertaPopup.setWidth("150px");
+	    alertaPopup.setWidget(new Label(){
 			private void limpiar() {
-			super.setText("");
-				
-			}
-			public void setText(String texto){
-				super.setText(texto);
-				Timer t = new Timer() {
+				super.setText("");
+				alertaPopup.hide();
+				}
+				public void setText(String texto){
+					super.setText(texto);
+					alertaPopup.center();
+					Timer t = new Timer() {
 
-			          public void run() {
-			        	  limpiar();
-			          }
+				          public void run() {
+				        	  limpiar();
+				          }
 
-			        };
-			        t.schedule(5000);
-			}
-		});
+				        };
+				        t.schedule(5000);
+				}
+			});
 	}
 
 	private MenuBar crearMenu() {

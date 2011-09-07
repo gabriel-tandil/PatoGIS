@@ -2,13 +2,12 @@ package ar.edu.unicen.exa.galvarez.patogis.server;
 
 import java.util.Map;
 
-import javax.xml.rpc.ServiceException;
-
 import ar.edu.unicen.exa.galvarez.patogis.client.TipoMatrizProductivaService;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.TipoMatrizProductivaWSImpl;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.TipoMatrizProductivaWSImplServiceLocator;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
+import ar.edu.unicen.exa.galvarez.patogis.shared.ServicioRemotoException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -20,7 +19,7 @@ public class TipoMatrizProductivaServiceImpl extends RemoteServiceServlet implem
 TipoMatrizProductivaService {
 
 	public Map<String, TipoMatrizProductiva> getElementos()
-			throws ServiceException {
+			throws ServicioRemotoException {
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
 		Map<String, TipoMatrizProductiva> l = new MapaOrdenado<String, TipoMatrizProductiva>();
 
@@ -35,14 +34,14 @@ TipoMatrizProductivaService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ServiceException();
+			throw new ServicioRemotoException();
 
 		}
 		return l;
 	}
 
 	@Override
-	public void addElemento(TipoMatrizProductiva tipoMatrizProductiva)throws ServiceException {
+	public void addElemento(TipoMatrizProductiva tipoMatrizProductiva)throws ServicioRemotoException {
 		TipoMatrizProductivaWSImplServiceLocator tipoMatrizProductivaWSImplServiceLocator = new TipoMatrizProductivaWSImplServiceLocator();
 
 		try {
@@ -51,7 +50,7 @@ TipoMatrizProductivaService {
 			tipoMatrizProductivaWS.addElemento(tipoMatrizProductiva,1);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ServiceException();
+			throw new ServicioRemotoException();
 
 		}
 	}
