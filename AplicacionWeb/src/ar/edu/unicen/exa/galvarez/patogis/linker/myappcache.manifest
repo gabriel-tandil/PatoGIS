@@ -1,0 +1,15 @@
+CACHE MANIFEST
+# Unique id #$UNIQUEID$
+# Note: must change this every time for cache to invalidate
+# L.Pelov - myappcache.manifest
+
+CACHE:
+# Static app files
+$STATICAPPFILES$
+
+# Generated app files
+$GENAPPFILES$
+
+# All other resources require the user to be online.
+NETWORK:
+*

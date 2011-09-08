@@ -16,6 +16,10 @@
 	<inherits name="com.google.gwt.json.JSON" /> 
 	<inherits name="com.google.gwt.i18n.I18N"/>
 	
+	<define-linker name="manifest"
+		class="ar.edu.unicen.exa.galvarez.patogis.linker.AppCacheManifestLinker" />
+	<add-linker name="manifest" />	
+	
 	<!-- Specify the app entry point class.                         -->
 	<entry-point
 		class='ar.edu.unicen.exa.galvarez.patogis.client.AplicacionWeb' />

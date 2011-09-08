@@ -4,84 +4,89 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
-  <context-param>
-    <!-- max size of the upload request -->
-    <param-name>maxSize</param-name>
-    <param-value>3145728</param-value>
-  </context-param>
-  <context-param>
-    <!-- Useful in development mode to slow down the uploads in fast networks.
-         Put the number of milliseconds to sleep in each block received in the server.
-         false or 0, means don't use slow uploads  -->
-    <param-name>slowUploads</param-name>
-    <param-value>50</param-value>
-  </context-param>
 
-  <servlet>
-    <servlet-name>uploadServlet</servlet-name>
-    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.UploadServlet</servlet-class>
-  </servlet>
+	<context-param>
+		<!-- max size of the upload request -->
+		<param-name>maxSize</param-name>
+		<param-value>3145728</param-value>
+	</context-param>
+	<context-param>
+		<!-- Useful in development mode to slow down the uploads in fast networks. 
+			Put the number of milliseconds to sleep in each block received in the server. 
+			false or 0, means don't use slow uploads -->
+		<param-name>slowUploads</param-name>
+		<param-value>50</param-value>
+	</context-param>
 
-  <servlet-mapping>
-    <servlet-name>uploadServlet</servlet-name>
-    <url-pattern>*.gupld</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>especiesServlet</servlet-name>
-    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.EspeciesServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>especiesServlet</servlet-name>
-    <url-pattern>/aplicacionweb/especies</url-pattern>
-  </servlet-mapping>  
+	<servlet>
+		<servlet-name>uploadServlet</servlet-name>
+		<servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.UploadServlet</servlet-class>
+	</servlet>
 
-  <servlet>
-    <servlet-name>tipoMatrizProductivaServlet</servlet-name>
-    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.TipoMatrizProductivaServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>tipoMatrizProductivaServlet</servlet-name>
-    <url-pattern>/aplicacionweb/tipoMatrizProductiva</url-pattern>
-  </servlet-mapping>  
+	<servlet-mapping>
+		<servlet-name>uploadServlet</servlet-name>
+		<url-pattern>*.gupld</url-pattern>
+	</servlet-mapping>
 
-  <servlet>
-    <servlet-name>ubicacionServlet</servlet-name>
-    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.UbicacionServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>ubicacionServlet</servlet-name>
-    <url-pattern>/aplicacionweb/ubicacion</url-pattern>
-  </servlet-mapping>  
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>especiesServlet</servlet-name>
+		<servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.EspeciesServiceImpl</servlet-class>
+	</servlet>
 
-  <servlet>
-    <servlet-name>archivosServlet</servlet-name>
-    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.ArchivosServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>archivosServlet</servlet-name>
-    <url-pattern>/aplicacionweb/archivos</url-pattern>
-  </servlet-mapping>  
+	<servlet-mapping>
+		<servlet-name>especiesServlet</servlet-name>
+		<url-pattern>/aplicacionweb/especies</url-pattern>
+	</servlet-mapping>
 
-  <servlet>
-    <servlet-name>observacionServlet</servlet-name>
-    <servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.ObservacionServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>observacionServlet</servlet-name>
-    <url-pattern>/aplicacionweb/observacion</url-pattern>
-  </servlet-mapping>  
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>AplicacionWeb.html</welcome-file>
-  </welcome-file-list>
+	<servlet>
+		<servlet-name>tipoMatrizProductivaServlet</servlet-name>
+		<servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.TipoMatrizProductivaServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>tipoMatrizProductivaServlet</servlet-name>
+		<url-pattern>/aplicacionweb/tipoMatrizProductiva</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ubicacionServlet</servlet-name>
+		<servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.UbicacionServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ubicacionServlet</servlet-name>
+		<url-pattern>/aplicacionweb/ubicacion</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>archivosServlet</servlet-name>
+		<servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.ArchivosServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>archivosServlet</servlet-name>
+		<url-pattern>/aplicacionweb/archivos</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>observacionServlet</servlet-name>
+		<servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.ObservacionServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>observacionServlet</servlet-name>
+		<url-pattern>/aplicacionweb/observacion</url-pattern>
+	</servlet-mapping>
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>AplicacionWeb.html</welcome-file>
+	</welcome-file-list>
+
+	<mime-mapping>
+		<extension>manifest</extension>
+		<mime-type>text/cache-manifest</mime-type>
+	</mime-mapping>
 
 </web-app>
