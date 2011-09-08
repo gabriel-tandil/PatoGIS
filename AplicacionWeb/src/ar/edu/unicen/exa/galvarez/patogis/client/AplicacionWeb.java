@@ -4,7 +4,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -18,22 +17,30 @@ public class AplicacionWeb implements EntryPoint {
 	AplicacionWebConstantes constantes = GWT
 			.create(AplicacionWebConstantes.class);
 	public static Configuracion configuracion = new Configuracion();
-	public static PopupPanel alertaPopup= new PopupPanel() ;
-			
-public static void setMensajeAlerta(String mensaje){
-	alertaPopup.setWidget(
-        new HTML(mensaje));
-	alertaPopup.center();
-	
-	Timer t = new Timer() {
+	public static PopupPanel alertaPopup = new PopupPanel();
+	private static String mensajeActual;
+	private static Timer t = new Timer() {
 
 		public void run() {
 			alertaPopup.hide();
 		}
 
 	};
-	t.schedule(5000);
-}
+
+	public static void setMensajeAlerta(String mensaje) {
+		if (alertaPopup.isShowing()) {
+
+			mensajeActual += "<p>" + mensaje + "</p>";
+
+			alertaPopup.setWidget(new HTML(mensajeActual));
+		} else {
+			mensajeActual = "<p>" + mensaje + "</p>";
+			alertaPopup.setWidget(new HTML(mensajeActual));
+			alertaPopup.center();
+		}
+
+		t.schedule(5000);
+	}
 
 	/**
 	 * This is the entry point method.
@@ -42,13 +49,13 @@ public static void setMensajeAlerta(String mensaje){
 
 		RootPanel rootPanel = RootPanel.get("menuContainer");
 		rootPanel.add(crearMenu());
-		 
+
 		alertaPopup.setWidth("250px");
 		alertaPopup.setHeight("100px");
 		alertaPopup.setAnimationEnabled(true);
 		alertaPopup.setAutoHideEnabled(true);
 		alertaPopup.setModal(true);
-		//alertaPopup.
+		// alertaPopup.
 	}
 
 	private MenuBar crearMenu() {
