@@ -27,25 +27,30 @@ public class ManejadorAlmacenamientoLocal {
 				.hasNext();) {
 			String clave = iterator.next();
 			Especie especie = especies.get(clave);
-			JSONObject elemento = new JSONObject();
-			elemento.put("clave", new JSONString(clave));
-			JSONObject valor = new JSONObject();
-			valor.put("cantidadObservaciones",
-					new JSONNumber(
-							especie.getCantidadObservaciones() == null ? 0
-									: especie.getCantidadObservaciones()));
-			valor.put("id", new JSONNumber(especie.getId()));
-			valor.put("nombre", new JSONString(especie.getNombre()));
-			valor.put("nombreCientifico",
-					new JSONString(especie.getNombreCientifico()));
-			valor.put("familia", new JSONString(especie.getFamilia()));
-			valor.put("grupo", new JSONString(especie.getGrupo()));
-			elemento.put("valor", valor);
+			JSONObject elemento = especieAJSON(clave, especie);
 
 			arreglo.set(i, elemento);
 			i++;
 		}
 		storage.setItem("mapaEspecies", arreglo.toString());
+	}
+
+	private static JSONObject especieAJSON(String clave, Especie especie) {
+		JSONObject elemento = new JSONObject();
+		elemento.put("clave", new JSONString(clave));
+		JSONObject valor = new JSONObject();
+		valor.put("cantidadObservaciones",
+				new JSONNumber(
+						especie.getCantidadObservaciones() == null ? 0
+								: especie.getCantidadObservaciones()));
+		valor.put("id", new JSONNumber(especie.getId()));
+		valor.put("nombre", new JSONString(especie.getNombre()));
+		valor.put("nombreCientifico",
+				new JSONString(especie.getNombreCientifico()));
+		valor.put("familia", new JSONString(especie.getFamilia()));
+		valor.put("grupo", new JSONString(especie.getGrupo()));
+		elemento.put("valor", valor);
+		return elemento;
 	}
 
 	public static MapaOrdenado<String, Especie> obtenerMapaEspecies() {
@@ -60,20 +65,25 @@ public class ManejadorAlmacenamientoLocal {
 				JSONObject elemento = (JSONObject) arreglo.get(i);
 				String clave = ((JSONString)elemento.get("clave")).stringValue();
 				JSONObject valor = (JSONObject) elemento.get("valor");
-				Especie especie = new Especie();
-				especie.setCantidadObservaciones((int) ((JSONNumber) valor
-						.get("cantidadObservaciones")).doubleValue());
-				especie.setId((int) ((JSONNumber) valor.get("id"))
-						.doubleValue());
-				especie.setFamilia(((JSONString)valor.get("familia")).stringValue());
-				especie.setGrupo(((JSONString)valor.get("grupo")).stringValue());
-				especie.setNombre(((JSONString)valor.get("nombre")).stringValue());
-				especie.setNombreCientifico(((JSONString)valor.get("nombreCientifico"))
-						.stringValue());
+				Especie especie = jSONAEspecie(valor);
 				salida.put(clave, especie);
 			}
 		}
 		return salida;
+	}
+
+	private static Especie jSONAEspecie(JSONObject valor) {
+		Especie especie = new Especie();
+		especie.setCantidadObservaciones((int) ((JSONNumber) valor
+				.get("cantidadObservaciones")).doubleValue());
+		especie.setId((int) ((JSONNumber) valor.get("id"))
+				.doubleValue());
+		especie.setFamilia(((JSONString)valor.get("familia")).stringValue());
+		especie.setGrupo(((JSONString)valor.get("grupo")).stringValue());
+		especie.setNombre(((JSONString)valor.get("nombre")).stringValue());
+		especie.setNombreCientifico(((JSONString)valor.get("nombreCientifico"))
+				.stringValue());
+		return especie;
 	}
 	
 	public JSONObject observacionAJson(Observacion obs) {
