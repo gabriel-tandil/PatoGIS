@@ -22,15 +22,15 @@ import com.google.gwt.storage.client.Storage;
 
 public class ManejadorAlmacenamientoLocal {
 	
-	public static void persistirMapaTiposMatrizProductiva(MapaOrdenado<String, TipoMatrizProductiva> TiposMatrizProductiva) {
+	public static void persistirMapaTiposMatrizProductiva(MapaOrdenado<String, TipoMatrizProductiva> tiposMatrizProductiva) {
 		Storage storage = Storage.getLocalStorageIfSupported();
 		JSONArray arreglo = new JSONArray();
 		int i = 0;
-		for (Iterator<String> iterator = TiposMatrizProductiva.keySet().iterator(); iterator
+		for (Iterator<String> iterator = tiposMatrizProductiva.keySet().iterator(); iterator
 				.hasNext();) {
 			String clave = iterator.next();
-			TipoMatrizProductiva TipoMatrizProductiva = TiposMatrizProductiva.get(clave);
-			JSONObject elemento = TipoMatrizProductivaAJSON(clave, TipoMatrizProductiva);
+			TipoMatrizProductiva tipoMatrizProductiva = tiposMatrizProductiva.get(clave);
+			JSONObject elemento = tipoMatrizProductivaAJSON(clave, tipoMatrizProductiva);
 
 			arreglo.set(i, elemento);
 			i++;
@@ -38,12 +38,12 @@ public class ManejadorAlmacenamientoLocal {
 		storage.setItem("mapaTiposMatrizProductiva", arreglo.toString());
 	}
 
-	private static JSONObject TipoMatrizProductivaAJSON(String clave, TipoMatrizProductiva TipoMatrizProductiva) {
+	private static JSONObject tipoMatrizProductivaAJSON(String clave, TipoMatrizProductiva tipoMatrizProductiva) {
 		JSONObject elemento = new JSONObject();
 		elemento.put("clave", new JSONString(clave));
 		JSONObject valor = new JSONObject();
-		valor.put("id", new JSONNumber(TipoMatrizProductiva.getId()));
-		valor.put("nombre", new JSONString(TipoMatrizProductiva.getNombre()));
+		valor.put("id", new JSONNumber(tipoMatrizProductiva.getId()));
+		valor.put("nombre", new JSONString(tipoMatrizProductiva.getNombre()));
 		elemento.put("valor", valor);
 		return elemento;
 	}
@@ -60,31 +60,31 @@ public class ManejadorAlmacenamientoLocal {
 				JSONObject elemento = (JSONObject) arreglo.get(i);
 				String clave = ((JSONString)elemento.get("clave")).stringValue();
 				JSONObject valor = (JSONObject) elemento.get("valor");
-				TipoMatrizProductiva TipoMatrizProductiva = jSONATipoMatrizProductiva(valor);
-				salida.put(clave, TipoMatrizProductiva);
+				TipoMatrizProductiva tipoMatrizProductiva = jSONATipoMatrizProductiva(valor);
+				salida.put(clave, tipoMatrizProductiva);
 			}
 		}
 		return salida;
 	}
 
 	private static TipoMatrizProductiva jSONATipoMatrizProductiva(JSONObject valor) {
-		TipoMatrizProductiva TipoMatrizProductiva = new TipoMatrizProductiva();
+		TipoMatrizProductiva tipoMatrizProductiva = new TipoMatrizProductiva();
 
-		TipoMatrizProductiva.setId((int) ((JSONNumber) valor.get("id"))
+		tipoMatrizProductiva.setId((int) ((JSONNumber) valor.get("id"))
 				.doubleValue());
-		TipoMatrizProductiva.setNombre(((JSONString)valor.get("nombre")).stringValue());
-		return TipoMatrizProductiva;
+		tipoMatrizProductiva.setNombre(((JSONString)valor.get("nombre")).stringValue());
+		return tipoMatrizProductiva;
 	}
 	
-	public static void persistirMapaUbicacions(MapaOrdenado<String, Ubicacion> Ubicacions) {
+	public static void persistirMapaUbicacions(MapaOrdenado<String, Ubicacion> ubicacions) {
 		Storage storage = Storage.getLocalStorageIfSupported();
 		JSONArray arreglo = new JSONArray();
 		int i = 0;
-		for (Iterator<String> iterator = Ubicacions.keySet().iterator(); iterator
+		for (Iterator<String> iterator = ubicacions.keySet().iterator(); iterator
 				.hasNext();) {
 			String clave = iterator.next();
-			Ubicacion Ubicacion = Ubicacions.get(clave);
-			JSONObject elemento = UbicacionAJSON(clave, Ubicacion);
+			Ubicacion ubicacion = ubicacions.get(clave);
+			JSONObject elemento = ubicacionAJSON(clave, ubicacion);
 
 			arreglo.set(i, elemento);
 			i++;
@@ -92,14 +92,14 @@ public class ManejadorAlmacenamientoLocal {
 		storage.setItem("mapaUbicacions", arreglo.toString());
 	}
 
-	private static JSONObject UbicacionAJSON(String clave, Ubicacion Ubicacion) {
+	private static JSONObject ubicacionAJSON(String clave, Ubicacion ubicacion) {
 		JSONObject elemento = new JSONObject();
 		elemento.put("clave", new JSONString(clave));
 		JSONObject valor = new JSONObject();
-		valor.put("id", new JSONNumber(Ubicacion.getId()));
-		valor.put("nombre", new JSONString(Ubicacion.getNombre()));
-		valor.put("altura", new JSONNumber(Ubicacion.getAltura()));
-		valor.put("coordenadas", new JSONString(Ubicacion.getCoordenadas()));
+		valor.put("id", new JSONNumber(ubicacion.getId()));
+		valor.put("nombre", new JSONString(ubicacion.getNombre()));
+		valor.put("altura", new JSONNumber(ubicacion.getAltura()==null?0:ubicacion.getAltura()));
+		valor.put("coordenadas", new JSONString(ubicacion.getCoordenadas()==null?"":ubicacion.getCoordenadas()));
 		elemento.put("valor", valor);
 		return elemento;
 	}
@@ -116,23 +116,23 @@ public class ManejadorAlmacenamientoLocal {
 				JSONObject elemento = (JSONObject) arreglo.get(i);
 				String clave = ((JSONString)elemento.get("clave")).stringValue();
 				JSONObject valor = (JSONObject) elemento.get("valor");
-				Ubicacion Ubicacion = jSONAUbicacion(valor);
-				salida.put(clave, Ubicacion);
+				Ubicacion ubicacion = jSONAUbicacion(valor);
+				salida.put(clave, ubicacion);
 			}
 		}
 		return salida;
 	}
 
 	private static Ubicacion jSONAUbicacion(JSONObject valor) {
-		Ubicacion Ubicacion = new Ubicacion();
-		Ubicacion.setId((int) ((JSONNumber) valor.get("id"))
+		Ubicacion ubicacion = new Ubicacion();
+		ubicacion.setId((int) ((JSONNumber) valor.get("id"))
 				.doubleValue());
-		Ubicacion.setAltura((int) ((JSONNumber) valor.get("altura"))
+		ubicacion.setAltura((int) ((JSONNumber) valor.get("altura"))
 				.doubleValue());
-		Ubicacion.setNombre(((JSONString)valor.get("nombre")).stringValue());
-		Ubicacion.setCoordenadas(((JSONString)valor.get("coordenadas"))
+		ubicacion.setNombre(((JSONString)valor.get("nombre")).stringValue());
+		ubicacion.setCoordenadas(((JSONString)valor.get("coordenadas"))
 				.stringValue());
-		return Ubicacion;
+		return ubicacion;
 	}
 	
 	public static void persistirMapaEspecies(MapaOrdenado<String, Especie> especies) {

@@ -613,6 +613,8 @@ public class VentanaCarga extends Grid {
 		horizontalPanel.add(comboBox1);
 
 		IntegerBox textBox_1 = new IntegerBox();
+		textBox_1.setWidth("35px");
+		textBox_1.setMaxLength(4);
 		horizontalPanel.add(textBox_1);
 
 		HorizontalPanel horizontalPanel2 = new HorizontalPanel();
@@ -630,7 +632,6 @@ public class VentanaCarga extends Grid {
 		horizontalPanel2.add(conteo);
 
 		widgetsObsEspecie.add(verticalPanel);
-		textBox_1.setWidth("60px");
 	}
 
 	private void agregarObservacionMatrizProductiva(
@@ -647,9 +648,10 @@ public class VentanaCarga extends Grid {
 		horizontalPanel1.add(comboBox);
 
 		IntegerBox textBox_1 = new IntegerBox();
+		textBox_1.setWidth("25px");
+		textBox_1.setMaxLength(3);
 		horizontalPanel1.add(textBox_1);
 		widgetsObsMatrizProductiva.add(horizontalPanel1);
-		textBox_1.setWidth("50px");
 		Label l = new Label("%");
 		horizontalPanel1.add(l);
 	}
