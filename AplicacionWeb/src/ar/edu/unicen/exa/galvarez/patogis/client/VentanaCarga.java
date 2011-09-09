@@ -235,6 +235,7 @@ public class VentanaCarga extends Grid {
 	private List<VerticalPanel> widgetsObsEspecie = new ArrayList<VerticalPanel>();
 
 	private List<HorizontalPanel> widgetsObsMatrizProductiva = new ArrayList<HorizontalPanel>();
+	private boolean online=true;
 
 	class ObtenerPropiedadEspecie implements ObtenerTexto {
 		@Override
@@ -246,30 +247,33 @@ public class VentanaCarga extends Grid {
 
 	class ComparadorEspecies implements Comparator<String> {
 		public int compare(String arg0, String arg1) {
-			// TODO: poner try/catch
-			Especie argE0 = especies.get(arg0);
-			Especie argE1 = especies.get(arg1);
-			if (argE0.getGrupo().compareTo(argE1.getGrupo()) != 0)
-				return argE0.getGrupo().compareTo(argE1.getGrupo());
-			if (argE0.getFamilia().compareTo(argE1.getFamilia()) != 0)
-				return argE0.getFamilia().compareTo(argE1.getFamilia());
-			if (argE0.getCantidadObservaciones() == null
-					&& argE1.getCantidadObservaciones() == null)
+			try {
+				Especie argE0 = especies.get(arg0);
+				Especie argE1 = especies.get(arg1);
+				if (argE0.getGrupo().compareTo(argE1.getGrupo()) != 0)
+					return argE0.getGrupo().compareTo(argE1.getGrupo());
+				if (argE0.getFamilia().compareTo(argE1.getFamilia()) != 0)
+					return argE0.getFamilia().compareTo(argE1.getFamilia());
+				if (argE0.getCantidadObservaciones() == null
+						&& argE1.getCantidadObservaciones() == null)
+					return new ObtenerPropiedadEspecie().getValor(arg0).compareTo(
+							new ObtenerPropiedadEspecie().getValor(arg1));
+				if (argE1.getCantidadObservaciones() == null)
+					return 0;
+				if (argE0.getCantidadObservaciones() == null)
+					return 1;
+
+				if (argE0.getCantidadObservaciones() > argE1
+						.getCantidadObservaciones())
+					return 0;
+				if (argE0.getCantidadObservaciones() < argE1
+						.getCantidadObservaciones())
+					return 1;
 				return new ObtenerPropiedadEspecie().getValor(arg0).compareTo(
 						new ObtenerPropiedadEspecie().getValor(arg1));
-			if (argE1.getCantidadObservaciones() == null)
-				return 0;
-			if (argE0.getCantidadObservaciones() == null)
-				return 1;
-
-			if (argE0.getCantidadObservaciones() > argE1
-					.getCantidadObservaciones())
-				return 0;
-			if (argE0.getCantidadObservaciones() < argE1
-					.getCantidadObservaciones())
-				return 1;
-			return new ObtenerPropiedadEspecie().getValor(arg0).compareTo(
-					new ObtenerPropiedadEspecie().getValor(arg1));
+			} catch (Exception e) {
+				return 0; //por las dudas
+			}
 
 		}
 	};
@@ -288,6 +292,7 @@ public class VentanaCarga extends Grid {
 			public void onFailure(Throwable caught) {
 				AplicacionWeb.setMensajeAlerta(ctes.errorObtenerEspecies());
 				especies = ManejadorAlmacenamientoLocal.obtenerMapaEspecies();
+				online=false;
 				llenarCombosEspecies();
 			}
 
@@ -320,6 +325,7 @@ public class VentanaCarga extends Grid {
 								.errorObtenerTiposMatrizProductiva());
 						tiposMatrizProductiva = ManejadorAlmacenamientoLocal
 								.obtenerMapaTiposMatrizProductiva();
+						online=false;
 						llenarCombosTipoMatrizProductiva();
 					}
 
@@ -351,6 +357,7 @@ public class VentanaCarga extends Grid {
 								.errorObtenerUbicaciones());
 						ubicaciones = ManejadorAlmacenamientoLocal
 								.obtenerMapaUbicacions();
+						online=false;
 						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keySet());
 					}
@@ -586,7 +593,8 @@ public class VentanaCarga extends Grid {
 			comboBox.addItem(obtenerPropiedad.getValor(especie), especie);
 		}
 		comboBox.setItemSelected(0, true);
-		comboBox.addItem(ctes.otra());
+		if (online)
+			comboBox.addItem(ctes.otra());
 	}
 
 	@SuppressWarnings("deprecation")
