@@ -7,6 +7,8 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -19,6 +21,120 @@ import com.google.gwt.json.client.JSONString;
 import com.google.gwt.storage.client.Storage;
 
 public class ManejadorAlmacenamientoLocal {
+	
+	public static void persistirMapaTiposMatrizProductiva(MapaOrdenado<String, TipoMatrizProductiva> TiposMatrizProductiva) {
+		Storage storage = Storage.getLocalStorageIfSupported();
+		JSONArray arreglo = new JSONArray();
+		int i = 0;
+		for (Iterator<String> iterator = TiposMatrizProductiva.keySet().iterator(); iterator
+				.hasNext();) {
+			String clave = iterator.next();
+			TipoMatrizProductiva TipoMatrizProductiva = TiposMatrizProductiva.get(clave);
+			JSONObject elemento = TipoMatrizProductivaAJSON(clave, TipoMatrizProductiva);
+
+			arreglo.set(i, elemento);
+			i++;
+		}
+		storage.setItem("mapaTiposMatrizProductiva", arreglo.toString());
+	}
+
+	private static JSONObject TipoMatrizProductivaAJSON(String clave, TipoMatrizProductiva TipoMatrizProductiva) {
+		JSONObject elemento = new JSONObject();
+		elemento.put("clave", new JSONString(clave));
+		JSONObject valor = new JSONObject();
+		valor.put("id", new JSONNumber(TipoMatrizProductiva.getId()));
+		valor.put("nombre", new JSONString(TipoMatrizProductiva.getNombre()));
+		elemento.put("valor", valor);
+		return elemento;
+	}
+
+	public static MapaOrdenado<String, TipoMatrizProductiva> obtenerMapaTiposMatrizProductiva() {
+
+		Storage storage = Storage.getLocalStorageIfSupported();
+		MapaOrdenado<String, TipoMatrizProductiva> salida = new MapaOrdenado<String, TipoMatrizProductiva>();
+		String cadenaMapaTiposMatrizProductiva = storage.getItem("mapaTiposMatrizProductiva");
+		if (cadenaMapaTiposMatrizProductiva != null) {
+			JSONArray arreglo = (JSONArray) JSONParser
+					.parseStrict(cadenaMapaTiposMatrizProductiva);
+			for (int i = 0; i < arreglo.size(); i++) {
+				JSONObject elemento = (JSONObject) arreglo.get(i);
+				String clave = ((JSONString)elemento.get("clave")).stringValue();
+				JSONObject valor = (JSONObject) elemento.get("valor");
+				TipoMatrizProductiva TipoMatrizProductiva = jSONATipoMatrizProductiva(valor);
+				salida.put(clave, TipoMatrizProductiva);
+			}
+		}
+		return salida;
+	}
+
+	private static TipoMatrizProductiva jSONATipoMatrizProductiva(JSONObject valor) {
+		TipoMatrizProductiva TipoMatrizProductiva = new TipoMatrizProductiva();
+
+		TipoMatrizProductiva.setId((int) ((JSONNumber) valor.get("id"))
+				.doubleValue());
+		TipoMatrizProductiva.setNombre(((JSONString)valor.get("nombre")).stringValue());
+		return TipoMatrizProductiva;
+	}
+	
+	public static void persistirMapaUbicacions(MapaOrdenado<String, Ubicacion> Ubicacions) {
+		Storage storage = Storage.getLocalStorageIfSupported();
+		JSONArray arreglo = new JSONArray();
+		int i = 0;
+		for (Iterator<String> iterator = Ubicacions.keySet().iterator(); iterator
+				.hasNext();) {
+			String clave = iterator.next();
+			Ubicacion Ubicacion = Ubicacions.get(clave);
+			JSONObject elemento = UbicacionAJSON(clave, Ubicacion);
+
+			arreglo.set(i, elemento);
+			i++;
+		}
+		storage.setItem("mapaUbicacions", arreglo.toString());
+	}
+
+	private static JSONObject UbicacionAJSON(String clave, Ubicacion Ubicacion) {
+		JSONObject elemento = new JSONObject();
+		elemento.put("clave", new JSONString(clave));
+		JSONObject valor = new JSONObject();
+		valor.put("id", new JSONNumber(Ubicacion.getId()));
+		valor.put("nombre", new JSONString(Ubicacion.getNombre()));
+		valor.put("altura", new JSONNumber(Ubicacion.getAltura()));
+		valor.put("coordenadas", new JSONString(Ubicacion.getCoordenadas()));
+		elemento.put("valor", valor);
+		return elemento;
+	}
+
+	public static MapaOrdenado<String, Ubicacion> obtenerMapaUbicacions() {
+
+		Storage storage = Storage.getLocalStorageIfSupported();
+		MapaOrdenado<String, Ubicacion> salida = new MapaOrdenado<String, Ubicacion>();
+		String cadenaMapaUbicacions = storage.getItem("mapaUbicacions");
+		if (cadenaMapaUbicacions != null) {
+			JSONArray arreglo = (JSONArray) JSONParser
+					.parseStrict(cadenaMapaUbicacions);
+			for (int i = 0; i < arreglo.size(); i++) {
+				JSONObject elemento = (JSONObject) arreglo.get(i);
+				String clave = ((JSONString)elemento.get("clave")).stringValue();
+				JSONObject valor = (JSONObject) elemento.get("valor");
+				Ubicacion Ubicacion = jSONAUbicacion(valor);
+				salida.put(clave, Ubicacion);
+			}
+		}
+		return salida;
+	}
+
+	private static Ubicacion jSONAUbicacion(JSONObject valor) {
+		Ubicacion Ubicacion = new Ubicacion();
+		Ubicacion.setId((int) ((JSONNumber) valor.get("id"))
+				.doubleValue());
+		Ubicacion.setAltura((int) ((JSONNumber) valor.get("altura"))
+				.doubleValue());
+		Ubicacion.setNombre(((JSONString)valor.get("nombre")).stringValue());
+		Ubicacion.setCoordenadas(((JSONString)valor.get("coordenadas"))
+				.stringValue());
+		return Ubicacion;
+	}
+	
 	public static void persistirMapaEspecies(MapaOrdenado<String, Especie> especies) {
 		Storage storage = Storage.getLocalStorageIfSupported();
 		JSONArray arreglo = new JSONArray();

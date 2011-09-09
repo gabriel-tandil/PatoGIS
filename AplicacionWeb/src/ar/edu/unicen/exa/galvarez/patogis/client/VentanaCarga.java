@@ -162,8 +162,6 @@ public class VentanaCarga extends Grid {
 	private DateBox dateBox;
 	MapaOrdenado<String, Especie> especies = new MapaOrdenado<String, Especie>();
 
-
-
 	final EspeciesServiceAsync especiesService = GWT
 			.create(EspeciesService.class);
 	private TimeBox horaFin;
@@ -290,7 +288,6 @@ public class VentanaCarga extends Grid {
 			public void onFailure(Throwable caught) {
 				AplicacionWeb.setMensajeAlerta(ctes.errorObtenerEspecies());
 				especies = ManejadorAlmacenamientoLocal.obtenerMapaEspecies();
-
 				llenarCombosEspecies();
 			}
 
@@ -321,17 +318,26 @@ public class VentanaCarga extends Grid {
 					public void onFailure(Throwable caught) {
 						AplicacionWeb.setMensajeAlerta(ctes
 								.errorObtenerTiposMatrizProductiva());
+						tiposMatrizProductiva = ManejadorAlmacenamientoLocal
+								.obtenerMapaTiposMatrizProductiva();
+						llenarCombosTipoMatrizProductiva();
 					}
 
 					@Override
 					public void onSuccess(
 							Map<String, TipoMatrizProductiva> result) {
 						tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
+						ManejadorAlmacenamientoLocal
+								.persistirMapaTiposMatrizProductiva(tiposMatrizProductiva);
+						llenarCombosTipoMatrizProductiva();
+					}
+
+					private void llenarCombosTipoMatrizProductiva() {
 						for (Iterator<HorizontalPanel> iterator = widgetsObsMatrizProductiva
 								.iterator(); iterator.hasNext();) {
 							HorizontalPanel hp = iterator.next();
 							ListBox combo = (ListBox) hp.getWidget(0);
-							if (combo.getItemCount() == 0)
+							if (combo.getSelectedIndex() <= 0)
 								agregarItemsCombo(combo,
 										tiposMatrizProductiva.keySet());
 						}
@@ -343,13 +349,18 @@ public class VentanaCarga extends Grid {
 					public void onFailure(Throwable caught) {
 						AplicacionWeb.setMensajeAlerta(ctes
 								.errorObtenerUbicaciones());
+						ubicaciones = ManejadorAlmacenamientoLocal
+								.obtenerMapaUbicacions();
+						if (laguna.getSelectedIndex() <= 0)
+							agregarItemsCombo(laguna, ubicaciones.keySet());
 					}
 
 					@Override
 					public void onSuccess(Map<String, Ubicacion> result) {
 						ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
-
-						if (laguna.getItemCount() == 0)
+						ManejadorAlmacenamientoLocal
+								.persistirMapaUbicacions(ubicaciones);
+						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keySet());
 					}
 
