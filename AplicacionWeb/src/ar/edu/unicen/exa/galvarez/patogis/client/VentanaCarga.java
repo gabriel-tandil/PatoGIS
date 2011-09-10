@@ -55,7 +55,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -235,7 +234,6 @@ public class VentanaCarga extends Grid {
 	private List<VerticalPanel> widgetsObsEspecie = new ArrayList<VerticalPanel>();
 
 	private List<HorizontalPanel> widgetsObsMatrizProductiva = new ArrayList<HorizontalPanel>();
-	private boolean online=true;
 
 	class ObtenerPropiedadEspecie implements ObtenerTexto {
 		@Override
@@ -256,8 +254,10 @@ public class VentanaCarga extends Grid {
 					return argE0.getFamilia().compareTo(argE1.getFamilia());
 				if (argE0.getCantidadObservaciones() == null
 						&& argE1.getCantidadObservaciones() == null)
-					return new ObtenerPropiedadEspecie().getValor(arg0).compareTo(
-							new ObtenerPropiedadEspecie().getValor(arg1));
+					return new ObtenerPropiedadEspecie().getValor(arg0)
+							.compareTo(
+									new ObtenerPropiedadEspecie()
+											.getValor(arg1));
 				if (argE1.getCantidadObservaciones() == null)
 					return 0;
 				if (argE0.getCantidadObservaciones() == null)
@@ -272,7 +272,7 @@ public class VentanaCarga extends Grid {
 				return new ObtenerPropiedadEspecie().getValor(arg0).compareTo(
 						new ObtenerPropiedadEspecie().getValor(arg1));
 			} catch (Exception e) {
-				return 0; //por las dudas
+				return 0; // por las dudas
 			}
 
 		}
@@ -290,9 +290,12 @@ public class VentanaCarga extends Grid {
 		laguna.addMouseListener(new TooltipListener(ctes.lagunaTooltip(), 5000));
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
-				AplicacionWeb.setMensajeAlerta(ctes.errorObtenerEspecies());
+				if (AplicacionWeb.online) // si estaba AplicacionWeb.online
+											// aviso que tomare las locales
+					AplicacionWeb.setMensajeAlerta(ctes.errorObtenerEspecies());
+
 				especies = ManejadorAlmacenamientoLocal.obtenerMapaEspecies();
-				online=false;
+				AplicacionWeb.online = false;
 				llenarCombosEspecies();
 			}
 
@@ -321,11 +324,15 @@ public class VentanaCarga extends Grid {
 		tipoMatrizProductivaService
 				.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
-						AplicacionWeb.setMensajeAlerta(ctes
-								.errorObtenerTiposMatrizProductiva());
+						if (AplicacionWeb.online) // si estaba
+													// AplicacionWeb.online
+													// aviso que tomare las
+													// locales
+							AplicacionWeb.setMensajeAlerta(ctes
+									.errorObtenerTiposMatrizProductiva());
 						tiposMatrizProductiva = ManejadorAlmacenamientoLocal
 								.obtenerMapaTiposMatrizProductiva();
-						online=false;
+						AplicacionWeb.online = false;
 						llenarCombosTipoMatrizProductiva();
 					}
 
@@ -353,11 +360,15 @@ public class VentanaCarga extends Grid {
 		ubicacionService
 				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 					public void onFailure(Throwable caught) {
-						AplicacionWeb.setMensajeAlerta(ctes
-								.errorObtenerUbicaciones());
+						if (AplicacionWeb.online) // si estaba
+													// AplicacionWeb.online
+													// aviso que tomare las
+													// locales
+							AplicacionWeb.setMensajeAlerta(ctes
+									.errorObtenerUbicaciones());
 						ubicaciones = ManejadorAlmacenamientoLocal
 								.obtenerMapaUbicacions();
-						online=false;
+						AplicacionWeb.online = false;
 						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keySet());
 					}
@@ -530,11 +541,9 @@ public class VentanaCarga extends Grid {
 		sendButton.addClickHandler(new ClickHandler() {
 
 			public void onClick(ClickEvent event) {
-
-				Observacion observacion;
+				final Observacion observacion;
 				try {
 					observacion = getObservacion();
-
 
 					observacionService.addElemento(observacion,
 							new AsyncCallback<Void>() {
@@ -542,19 +551,20 @@ public class VentanaCarga extends Grid {
 								@Override
 								public void onFailure(Throwable caught) {
 									AplicacionWeb.setMensajeAlerta(ctes
-											.errorGuardarObservacion());
-
+											.observacionGuardadaLocalmente());
+									ManejadorAlmacenamientoLocal
+											.persistirObservacion(observacion);
+									AplicacionWeb
+											.actualizarObservacionesLocales();
+									AplicacionWeb.cargarObservacion();
 								}
 
 								@Override
 								public void onSuccess(Void result) {
 									AplicacionWeb.setMensajeAlerta(ctes
 											.observacionGuardada());
+									AplicacionWeb.cargarObservacion();
 
-									RootPanel rootPanel = RootPanel
-											.get("principalContainer");
-									rootPanel.clear();
-									rootPanel.add(new VentanaCarga());
 								}
 							});
 
@@ -590,7 +600,7 @@ public class VentanaCarga extends Grid {
 			comboBox.addItem(obtenerPropiedad.getValor(especie), especie);
 		}
 		comboBox.setItemSelected(0, true);
-		if (online)
+		if (AplicacionWeb.online)
 			comboBox.addItem(ctes.otra());
 	}
 

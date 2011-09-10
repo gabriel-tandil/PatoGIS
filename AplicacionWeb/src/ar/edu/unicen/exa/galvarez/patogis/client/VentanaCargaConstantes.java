@@ -22,8 +22,6 @@ public interface VentanaCargaConstantes extends Constants {
 
 	String errorGuardarNuevoTipoMatrizProductiva();
 
-	String errorGuardarObservacion();
-
 	String errorObtenerEspecies();
 
 	String errorObtenerTiposMatrizProductiva();
@@ -97,5 +95,7 @@ public interface VentanaCargaConstantes extends Constants {
 	String validacionEspecie();
 
 	String validacionTipoMatrizProductiva();
+
+	String observacionGuardadaLocalmente();
 
 }

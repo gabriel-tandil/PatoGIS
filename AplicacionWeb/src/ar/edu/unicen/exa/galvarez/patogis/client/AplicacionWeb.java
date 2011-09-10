@@ -1,10 +1,16 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
+import java.util.List;
+
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -14,13 +20,16 @@ import com.google.gwt.user.client.ui.RootPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class AplicacionWeb implements EntryPoint {
-	AplicacionWebConstantes constantes = GWT
+	static AplicacionWebConstantes constantes = GWT
 			.create(AplicacionWebConstantes.class);
 	public static Configuracion configuracion = new Configuracion();
 	public static PopupPanel alertaPopup = new PopupPanel();
 	private static String mensajeActual;
+	public static boolean online = true;	
+	
+	final ObservacionServiceAsync observacionService = GWT
+			.create(ObservacionService.class);
 	private static Timer t = new Timer() {
-
 		public void run() {
 			alertaPopup.hide();
 		}
@@ -29,55 +38,88 @@ public class AplicacionWeb implements EntryPoint {
 
 	public static void setMensajeAlerta(String mensaje) {
 		if (alertaPopup.isShowing()) {
-
 			mensajeActual += "<p>" + mensaje + "</p>";
-
 			alertaPopup.setWidget(new HTML(mensajeActual));
 		} else {
 			mensajeActual = "<p>" + mensaje + "</p>";
 			alertaPopup.setWidget(new HTML(mensajeActual));
 			alertaPopup.center();
 		}
-
-		t.schedule(5000);
+		t.schedule(7000);
 	}
 
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-
 		RootPanel rootPanel = RootPanel.get("menuContainer");
 		rootPanel.add(crearMenu());
-
+		actualizarObservacionesLocales();
 		alertaPopup.setWidth("250px");
 		alertaPopup.setHeight("100px");
 		alertaPopup.setAnimationEnabled(true);
 		alertaPopup.setAutoHideEnabled(true);
 		alertaPopup.setModal(true);
-		// alertaPopup.
+	}
+
+	public static void actualizarObservacionesLocales() {
+		RootPanel rootPanel = RootPanel.get("indicadorObservacionesContainer");
+		rootPanel.clear();
+		int cantidadObservacionesLocales = ManejadorAlmacenamientoLocal
+				.getCantidadObservacionesPersistidas();
+		if (cantidadObservacionesLocales > 0)
+			rootPanel.add(new Label(constantes.cantidadObservacionesLocales()
+					+ cantidadObservacionesLocales));
+	}
+
+	public static void cargarObservacion() {
+		RootPanel rootPanel = RootPanel.get("principalContainer");
+		rootPanel.clear();
+		rootPanel.add(new VentanaCarga());
 	}
 
 	private MenuBar crearMenu() {
 		// Create a command that will execute on menu item selection
 		Command cargarCommand = new Command() {
-
 			public void execute() {
-				RootPanel rootPanel = RootPanel.get("principalContainer");
-				rootPanel.clear();
-				rootPanel.add(new VentanaCarga());
+				cargarObservacion();
 			}
 		};
-		Command listarCommand = new Command() {
 
+		Command listarCommand = new Command() {
 			public void execute() {
 				RootPanel rootPanel = RootPanel.get("principalContainer");
 				rootPanel.clear();
 				rootPanel.add(new VentanaListado());
 			}
 		};
-		Command nadaCommand = new Command() {
 
+		Command persistirLocalesCommand = new Command() {
+			public void execute() {
+				List<Observacion> observaciones = ManejadorAlmacenamientoLocal
+						.obtenerObservacionesPersistidas();
+				for (Observacion observacion : observaciones) {
+					observacionService.addElemento(observacion,
+							new AsyncCallback<Void>() {
+
+								@Override
+								public void onFailure(Throwable caught) {
+									AplicacionWeb.setMensajeAlerta(constantes
+											.errorGuardarObservacion());
+								}
+
+								@Override
+								public void onSuccess(Void result) {
+									AplicacionWeb.setMensajeAlerta(constantes
+											.observacionGuardada());
+									ManejadorAlmacenamientoLocal.setCantidadObservacionesPersistidas(0);
+								}
+							});
+				}
+			}
+		};
+
+		Command nadaCommand = new Command() {
 			public void execute() {
 				// TODO: hacer
 			}
@@ -95,6 +137,8 @@ public class AplicacionWeb implements EntryPoint {
 
 		observacionesMenu.addItem(constantes.cargar(), cargarCommand);
 		observacionesMenu.addItem(constantes.ver(), listarCommand);
+		observacionesMenu.addItem(constantes.persistirLocales(),
+				persistirLocalesCommand);
 		menu.addItem(new MenuItem(constantes.observaciones(), observacionesMenu));
 
 		configuracionMenu.addItem(constantes.preferencias(), nadaCommand);

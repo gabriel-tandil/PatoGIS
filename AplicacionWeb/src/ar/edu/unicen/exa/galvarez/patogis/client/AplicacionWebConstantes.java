@@ -14,4 +14,8 @@ public interface AplicacionWebConstantes extends Constants {
 	String ver();
 	String nombreComun();
 	String nombreCientifico();
+	String cantidadObservacionesLocales();
+	String persistirLocales();
+	String observacionGuardada();
+	String errorGuardarObservacion();
 }
