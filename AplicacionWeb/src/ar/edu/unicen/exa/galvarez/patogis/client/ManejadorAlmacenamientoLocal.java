@@ -1,6 +1,8 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
@@ -21,16 +23,20 @@ import com.google.gwt.json.client.JSONString;
 import com.google.gwt.storage.client.Storage;
 
 public class ManejadorAlmacenamientoLocal {
-	
-	public static void persistirMapaTiposMatrizProductiva(MapaOrdenado<String, TipoMatrizProductiva> tiposMatrizProductiva) {
-		Storage storage = Storage.getLocalStorageIfSupported();
+	private static Storage storage = Storage.getLocalStorageIfSupported();
+
+	public static void persistirMapaTiposMatrizProductiva(
+			MapaOrdenado<String, TipoMatrizProductiva> tiposMatrizProductiva) {
+
 		JSONArray arreglo = new JSONArray();
 		int i = 0;
-		for (Iterator<String> iterator = tiposMatrizProductiva.keySet().iterator(); iterator
-				.hasNext();) {
+		for (Iterator<String> iterator = tiposMatrizProductiva.keySet()
+				.iterator(); iterator.hasNext();) {
 			String clave = iterator.next();
-			TipoMatrizProductiva tipoMatrizProductiva = tiposMatrizProductiva.get(clave);
-			JSONObject elemento = tipoMatrizProductivaAJSON(clave, tipoMatrizProductiva);
+			TipoMatrizProductiva tipoMatrizProductiva = tiposMatrizProductiva
+					.get(clave);
+			JSONObject elemento = tipoMatrizProductivaAJSON(clave,
+					tipoMatrizProductiva);
 
 			arreglo.set(i, elemento);
 			i++;
@@ -38,7 +44,8 @@ public class ManejadorAlmacenamientoLocal {
 		storage.setItem("mapaTiposMatrizProductiva", arreglo.toString());
 	}
 
-	private static JSONObject tipoMatrizProductivaAJSON(String clave, TipoMatrizProductiva tipoMatrizProductiva) {
+	private static JSONObject tipoMatrizProductivaAJSON(String clave,
+			TipoMatrizProductiva tipoMatrizProductiva) {
 		JSONObject elemento = new JSONObject();
 		elemento.put("clave", new JSONString(clave));
 		JSONObject valor = new JSONObject();
@@ -49,16 +56,16 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static MapaOrdenado<String, TipoMatrizProductiva> obtenerMapaTiposMatrizProductiva() {
-
-		Storage storage = Storage.getLocalStorageIfSupported();
 		MapaOrdenado<String, TipoMatrizProductiva> salida = new MapaOrdenado<String, TipoMatrizProductiva>();
-		String cadenaMapaTiposMatrizProductiva = storage.getItem("mapaTiposMatrizProductiva");
+		String cadenaMapaTiposMatrizProductiva = storage
+				.getItem("mapaTiposMatrizProductiva");
 		if (cadenaMapaTiposMatrizProductiva != null) {
 			JSONArray arreglo = (JSONArray) JSONParser
 					.parseStrict(cadenaMapaTiposMatrizProductiva);
 			for (int i = 0; i < arreglo.size(); i++) {
 				JSONObject elemento = (JSONObject) arreglo.get(i);
-				String clave = ((JSONString)elemento.get("clave")).stringValue();
+				String clave = ((JSONString) elemento.get("clave"))
+						.stringValue();
 				JSONObject valor = (JSONObject) elemento.get("valor");
 				TipoMatrizProductiva tipoMatrizProductiva = jSONATipoMatrizProductiva(valor);
 				salida.put(clave, tipoMatrizProductiva);
@@ -67,17 +74,20 @@ public class ManejadorAlmacenamientoLocal {
 		return salida;
 	}
 
-	private static TipoMatrizProductiva jSONATipoMatrizProductiva(JSONObject valor) {
+	private static TipoMatrizProductiva jSONATipoMatrizProductiva(
+			JSONObject valor) {
 		TipoMatrizProductiva tipoMatrizProductiva = new TipoMatrizProductiva();
 
 		tipoMatrizProductiva.setId((int) ((JSONNumber) valor.get("id"))
 				.doubleValue());
-		tipoMatrizProductiva.setNombre(((JSONString)valor.get("nombre")).stringValue());
+		tipoMatrizProductiva.setNombre(((JSONString) valor.get("nombre"))
+				.stringValue());
 		return tipoMatrizProductiva;
 	}
-	
-	public static void persistirMapaUbicacions(MapaOrdenado<String, Ubicacion> ubicacions) {
-		Storage storage = Storage.getLocalStorageIfSupported();
+
+	public static void persistirMapaUbicacions(
+			MapaOrdenado<String, Ubicacion> ubicacions) {
+
 		JSONArray arreglo = new JSONArray();
 		int i = 0;
 		for (Iterator<String> iterator = ubicacions.keySet().iterator(); iterator
@@ -98,15 +108,16 @@ public class ManejadorAlmacenamientoLocal {
 		JSONObject valor = new JSONObject();
 		valor.put("id", new JSONNumber(ubicacion.getId()));
 		valor.put("nombre", new JSONString(ubicacion.getNombre()));
-		valor.put("altura", new JSONNumber(ubicacion.getAltura()==null?0:ubicacion.getAltura()));
-		valor.put("coordenadas", new JSONString(ubicacion.getCoordenadas()==null?"":ubicacion.getCoordenadas()));
+		valor.put("altura", new JSONNumber(ubicacion.getAltura() == null ? 0
+				: ubicacion.getAltura()));
+		valor.put("coordenadas",
+				new JSONString(ubicacion.getCoordenadas() == null ? ""
+						: ubicacion.getCoordenadas()));
 		elemento.put("valor", valor);
 		return elemento;
 	}
 
 	public static MapaOrdenado<String, Ubicacion> obtenerMapaUbicacions() {
-
-		Storage storage = Storage.getLocalStorageIfSupported();
 		MapaOrdenado<String, Ubicacion> salida = new MapaOrdenado<String, Ubicacion>();
 		String cadenaMapaUbicacions = storage.getItem("mapaUbicacions");
 		if (cadenaMapaUbicacions != null) {
@@ -114,7 +125,8 @@ public class ManejadorAlmacenamientoLocal {
 					.parseStrict(cadenaMapaUbicacions);
 			for (int i = 0; i < arreglo.size(); i++) {
 				JSONObject elemento = (JSONObject) arreglo.get(i);
-				String clave = ((JSONString)elemento.get("clave")).stringValue();
+				String clave = ((JSONString) elemento.get("clave"))
+						.stringValue();
 				JSONObject valor = (JSONObject) elemento.get("valor");
 				Ubicacion ubicacion = jSONAUbicacion(valor);
 				salida.put(clave, ubicacion);
@@ -125,18 +137,17 @@ public class ManejadorAlmacenamientoLocal {
 
 	private static Ubicacion jSONAUbicacion(JSONObject valor) {
 		Ubicacion ubicacion = new Ubicacion();
-		ubicacion.setId((int) ((JSONNumber) valor.get("id"))
-				.doubleValue());
+		ubicacion.setId((int) ((JSONNumber) valor.get("id")).doubleValue());
 		ubicacion.setAltura((int) ((JSONNumber) valor.get("altura"))
 				.doubleValue());
-		ubicacion.setNombre(((JSONString)valor.get("nombre")).stringValue());
-		ubicacion.setCoordenadas(((JSONString)valor.get("coordenadas"))
+		ubicacion.setNombre(((JSONString) valor.get("nombre")).stringValue());
+		ubicacion.setCoordenadas(((JSONString) valor.get("coordenadas"))
 				.stringValue());
 		return ubicacion;
 	}
-	
-	public static void persistirMapaEspecies(MapaOrdenado<String, Especie> especies) {
-		Storage storage = Storage.getLocalStorageIfSupported();
+
+	public static void persistirMapaEspecies(
+			MapaOrdenado<String, Especie> especies) {
 		JSONArray arreglo = new JSONArray();
 		int i = 0;
 		for (Iterator<String> iterator = especies.keySet().iterator(); iterator
@@ -156,9 +167,8 @@ public class ManejadorAlmacenamientoLocal {
 		elemento.put("clave", new JSONString(clave));
 		JSONObject valor = new JSONObject();
 		valor.put("cantidadObservaciones",
-				new JSONNumber(
-						especie.getCantidadObservaciones() == null ? 0
-								: especie.getCantidadObservaciones()));
+				new JSONNumber(especie.getCantidadObservaciones() == null ? 0
+						: especie.getCantidadObservaciones()));
 		valor.put("id", new JSONNumber(especie.getId()));
 		valor.put("nombre", new JSONString(especie.getNombre()));
 		valor.put("nombreCientifico",
@@ -170,8 +180,6 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static MapaOrdenado<String, Especie> obtenerMapaEspecies() {
-
-		Storage storage = Storage.getLocalStorageIfSupported();
 		MapaOrdenado<String, Especie> salida = new MapaOrdenado<String, Especie>();
 		String cadenaMapaEspecies = storage.getItem("mapaEspecies");
 		if (cadenaMapaEspecies != null) {
@@ -179,7 +187,8 @@ public class ManejadorAlmacenamientoLocal {
 					.parseStrict(cadenaMapaEspecies);
 			for (int i = 0; i < arreglo.size(); i++) {
 				JSONObject elemento = (JSONObject) arreglo.get(i);
-				String clave = ((JSONString)elemento.get("clave")).stringValue();
+				String clave = ((JSONString) elemento.get("clave"))
+						.stringValue();
 				JSONObject valor = (JSONObject) elemento.get("valor");
 				Especie especie = jSONAEspecie(valor);
 				salida.put(clave, especie);
@@ -192,17 +201,47 @@ public class ManejadorAlmacenamientoLocal {
 		Especie especie = new Especie();
 		especie.setCantidadObservaciones((int) ((JSONNumber) valor
 				.get("cantidadObservaciones")).doubleValue());
-		especie.setId((int) ((JSONNumber) valor.get("id"))
-				.doubleValue());
-		especie.setFamilia(((JSONString)valor.get("familia")).stringValue());
-		especie.setGrupo(((JSONString)valor.get("grupo")).stringValue());
-		especie.setNombre(((JSONString)valor.get("nombre")).stringValue());
-		especie.setNombreCientifico(((JSONString)valor.get("nombreCientifico"))
+		especie.setId((int) ((JSONNumber) valor.get("id")).doubleValue());
+		especie.setFamilia(((JSONString) valor.get("familia")).stringValue());
+		especie.setGrupo(((JSONString) valor.get("grupo")).stringValue());
+		especie.setNombre(((JSONString) valor.get("nombre")).stringValue());
+		especie.setNombreCientifico(((JSONString) valor.get("nombreCientifico"))
 				.stringValue());
 		return especie;
 	}
-	
-	public JSONObject observacionAJson(Observacion obs) {
+
+	public static void persistirObservacion(Observacion observacion) {
+
+		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
+
+		JSONObject jo = observacionAJson(observacion);
+
+		storage.setItem("observacion" + cantidadObservacionesPersistidas,
+				jo.toString());
+
+	}
+
+	public static List<Observacion> obtenerObservacionesPersistidas() {
+		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
+		List<Observacion> observaciones = new ArrayList<Observacion>(
+				cantidadObservacionesPersistidas);
+		for (int i = 0; i < cantidadObservacionesPersistidas; i++) {
+			observaciones.add(jSONAObservacion((JSONObject) JSONParser
+					.parseStrict(storage.getItem("observacion" + i))));
+		}
+
+		return observaciones;
+	}
+
+	private static int getCantidadObservacionesPersistidas() {
+		String s = storage.getItem("cantidadObservacionesPersistidas");
+		if (s == null || s == "")
+			s = "0";
+		int cantidadObservacionesPersistidas = Integer.parseInt(s);
+		return cantidadObservacionesPersistidas;
+	}
+
+	public static JSONObject observacionAJson(Observacion obs) {
 		JSONObject result = new JSONObject();
 		result.put("alcance", new JSONString(obs.getAlcance()));
 
@@ -270,31 +309,37 @@ public class ManejadorAlmacenamientoLocal {
 		return result;
 	}
 
-	public Observacion observacionDesdeJson(JSONObject value) {
+	private static Observacion jSONAObservacion(JSONObject value) {
 		Observacion obs = new Observacion();
 
-		obs.setAlcance(value.get("alcance").toString());
+		obs.setAlcance(((JSONString) value.get("alcance")).stringValue());
 
-		obs.setEstado(value.get("estado").toString());
-		obs.setFiabilidad(value.get("fiabilidad").toString());
+		obs.setEstado(((JSONString) value.get("estado")).stringValue());
+		obs.setFiabilidad(((JSONString) value.get("fiabilidad")).stringValue());
 		obs.setFin(DateTimeFormat.getFormat("YYYY-MM-DD HH:MM").parse(
-				value.get("fin").toString()));
-		obs.setIdCampana(new Integer(value.get("idCampana").toString()));
-		obs.setIdUbicacion(new Integer(value.get("idUbicacion").toString()));
-		obs.setIdUsuario(new Integer(value.get("idUsuario").toString()));
-		obs.setIdUsuarioApoyo(new Integer(value.get("idUsuarioApoyo")
-				.toString()));
+				((JSONString) value.get("fin")).stringValue()));
+		obs.setIdCampana((int) ((JSONNumber) value.get("idCampana"))
+				.doubleValue());
+		obs.setIdUbicacion((int) ((JSONNumber) value.get("idUbicacion"))
+				.doubleValue());
+		obs.setIdUsuario((int) ((JSONNumber) value.get("idUsuario"))
+				.doubleValue());
+		obs.setIdUsuarioApoyo((int) ((JSONNumber) value.get("idUsuarioApoyo"))
+				.doubleValue());
 		obs.setInicio(DateTimeFormat.getFormat("YYYY-MM-DD HH:MM").parse(
-				value.get("inicio").toString()));
-		obs.setObservaciones(value.get("observaciones").toString());
+				((JSONString) value.get("inicio")).stringValue()));
+		obs.setObservaciones(((JSONString) value.get("observaciones"))
+				.stringValue());
 
 		ObservacionClima observacionClima = new ObservacionClima();
-		observacionClima.setTemperatura(new Double(value.get("temperatura")
-				.toString()));
-		observacionClima.setNubes(value.get("nubes").toString());
+		observacionClima.setTemperatura(((JSONNumber) value.get("temperatura"))
+				.doubleValue());
+		observacionClima.setNubes(((JSONString) value.get("nubes"))
+				.stringValue());
 		observacionClima.setLluvia(((JSONBoolean) value.get("lluvia"))
 				.booleanValue());
-		observacionClima.setViento(value.get("viento").toString());
+		observacionClima.setViento(((JSONString) value.get("viento"))
+				.stringValue());
 		observacionClima
 				.setSol(((JSONBoolean) value.get("sol")).booleanValue());
 		obs.setObservacionClima(observacionClima);
@@ -306,13 +351,16 @@ public class ManejadorAlmacenamientoLocal {
 			ObservacionEspecie observacionEspecie = new ObservacionEspecie();
 			JSONObject obsEsp = (JSONObject) obsEspecie.get(i);
 			observacionesEspecie[i] = observacionEspecie;
-			observacionEspecie.setIdEspecie(new Integer(obsEsp.get("idEspecie")
-					.toString()));
-			observacionEspecie.setCantidad(new Integer(obsEsp.get("cantidad")
-					.toString()));
-			observacionEspecie.setEdad(obsEsp.get("edad").toString());
-			observacionEspecie.setConteo(obsEsp.get("conteo").toString());
-			observacionEspecie.setDistancia(obsEsp.get("distancia").toString());
+			observacionEspecie.setIdEspecie((int) ((JSONNumber) obsEsp
+					.get("idEspecie")).doubleValue());
+			observacionEspecie.setCantidad((int) ((JSONNumber) obsEsp
+					.get("cantidad")).doubleValue());
+			observacionEspecie.setEdad(((JSONString) obsEsp.get("edad"))
+					.stringValue());
+			observacionEspecie.setConteo(((JSONString) obsEsp.get("conteo"))
+					.stringValue());
+			observacionEspecie.setDistancia(((JSONString) obsEsp
+					.get("distancia")).stringValue());
 		}
 		obs.setObservacionesEspecie(observacionesEspecie);
 
@@ -324,15 +372,17 @@ public class ManejadorAlmacenamientoLocal {
 			ObservacionMatrizProductiva observacionMatrizProductiva = new ObservacionMatrizProductiva();
 			JSONObject obsMatProd = (JSONObject) obsMatrizProductiva.get(i);
 			observacionesMatrizProductiva[i] = observacionMatrizProductiva;
-			observacionMatrizProductiva.setIdTipoMatrizProductiva(new Integer(
-					obsMatProd.get("idTipoMatrizProductiva").toString()));
-			observacionMatrizProductiva.setPorcentaje(new Integer(obsMatProd
-					.get("porcentaje").toString()));
+			observacionMatrizProductiva
+					.setIdTipoMatrizProductiva((int) ((JSONNumber) obsMatProd
+							.get("idTipoMatrizProductiva")).doubleValue());
+			observacionMatrizProductiva
+					.setPorcentaje((int) ((JSONNumber) obsMatProd
+							.get("porcentaje")).doubleValue());
 		}
 		obs.setObservacionesMatrizProductiva(observacionesMatrizProductiva);
 
 		return obs;
 
-	}	
-	
+	}
+
 }

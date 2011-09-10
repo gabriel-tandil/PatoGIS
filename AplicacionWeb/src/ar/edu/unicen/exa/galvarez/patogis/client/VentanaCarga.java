@@ -535,10 +535,7 @@ public class VentanaCarga extends Grid {
 				try {
 					observacion = getObservacion();
 
-					// JSONObject jo = observacionAJson(observacion);
-					// Storage storage = Storage.getLocalStorageIfSupported();
-					// storage.setItem("observacion" + 1, jo.toString());
-					// observacion = observacionDesdeJson(jo);
+
 					observacionService.addElemento(observacion,
 							new AsyncCallback<Void>() {
 
