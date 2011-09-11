@@ -6,6 +6,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -52,9 +53,10 @@ public class AplicacionWeb implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+	//	Storage.getLocalStorageIfSupported().clear();
 		RootPanel rootPanel = RootPanel.get("menuContainer");
 		rootPanel.add(crearMenu());
-		actualizarObservacionesLocales();
+		actualizarCantidadObservacionesLocales();
 		alertaPopup.setWidth("250px");
 		alertaPopup.setHeight("100px");
 		alertaPopup.setAnimationEnabled(true);
@@ -62,7 +64,7 @@ public class AplicacionWeb implements EntryPoint {
 		alertaPopup.setModal(true);
 	}
 
-	public static void actualizarObservacionesLocales() {
+	public static void actualizarCantidadObservacionesLocales() {
 		RootPanel rootPanel = RootPanel.get("indicadorObservacionesContainer");
 		rootPanel.clear();
 		int cantidadObservacionesLocales = ManejadorAlmacenamientoLocal
@@ -93,7 +95,14 @@ public class AplicacionWeb implements EntryPoint {
 				rootPanel.add(new VentanaListado());
 			}
 		};
-
+		
+		Command eliminarObservacionesLocalesCommand= new Command() {
+			public void execute() {
+				ManejadorAlmacenamientoLocal.eliminarObservacionesLocales();
+				actualizarCantidadObservacionesLocales();
+			}
+		};
+		
 		Command persistirLocalesCommand = new Command() {
 			public void execute() {
 				List<Observacion> observaciones = ManejadorAlmacenamientoLocal
@@ -154,7 +163,9 @@ public class AplicacionWeb implements EntryPoint {
 			}
 		});
 		configuracionMenu.addItem(mi);
+		configuracionMenu.addItem(constantes.eliminarObservacionesLocales(), eliminarObservacionesLocalesCommand);
 
+		
 		menu.addItem(new MenuItem(constantes.configuracion(), configuracionMenu));
 
 		ayudaMenu.addItem(constantes.ayuda(), nadaCommand);

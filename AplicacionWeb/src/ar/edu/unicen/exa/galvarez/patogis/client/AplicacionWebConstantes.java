@@ -1,6 +1,7 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
 import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.safehtml.shared.SafeHtml;
 
 public interface AplicacionWebConstantes extends Constants {
 
@@ -18,4 +19,5 @@ public interface AplicacionWebConstantes extends Constants {
 	String persistirLocales();
 	String observacionGuardada();
 	String errorGuardarObservacion();
+	String eliminarObservacionesLocales();
 }

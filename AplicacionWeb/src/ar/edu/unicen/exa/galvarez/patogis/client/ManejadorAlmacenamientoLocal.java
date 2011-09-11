@@ -21,10 +21,19 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.storage.client.Storage;
+import com.google.gwt.storage.client.StorageMap;
 
 public class ManejadorAlmacenamientoLocal {
-	private static Storage storage = Storage.getLocalStorageIfSupported();
+	private static StorageMap storage =new StorageMap(Storage.getLocalStorageIfSupported());
 
+	public static void eliminarObservacionesLocales(){
+		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
+		for (int i = 0; i < cantidadObservacionesPersistidas; i++) {
+			storage.remove("observacion"+i);
+		}
+		setCantidadObservacionesPersistidas(0);
+	}
+	
 	public static void persistirMapaTiposMatrizProductiva(
 			MapaOrdenado<String, TipoMatrizProductiva> tiposMatrizProductiva) {
 
@@ -41,7 +50,7 @@ public class ManejadorAlmacenamientoLocal {
 			arreglo.set(i, elemento);
 			i++;
 		}
-		storage.setItem("mapaTiposMatrizProductiva", arreglo.toString());
+		storage.put("mapaTiposMatrizProductiva", arreglo.toString());
 	}
 
 	private static JSONObject tipoMatrizProductivaAJSON(String clave,
@@ -58,7 +67,7 @@ public class ManejadorAlmacenamientoLocal {
 	public static MapaOrdenado<String, TipoMatrizProductiva> obtenerMapaTiposMatrizProductiva() {
 		MapaOrdenado<String, TipoMatrizProductiva> salida = new MapaOrdenado<String, TipoMatrizProductiva>();
 		String cadenaMapaTiposMatrizProductiva = storage
-				.getItem("mapaTiposMatrizProductiva");
+				.get("mapaTiposMatrizProductiva");
 		if (cadenaMapaTiposMatrizProductiva != null) {
 			JSONArray arreglo = (JSONArray) JSONParser
 					.parseStrict(cadenaMapaTiposMatrizProductiva);
@@ -99,7 +108,7 @@ public class ManejadorAlmacenamientoLocal {
 			arreglo.set(i, elemento);
 			i++;
 		}
-		storage.setItem("mapaUbicacions", arreglo.toString());
+		storage.put("mapaUbicacions", arreglo.toString());
 	}
 
 	private static JSONObject ubicacionAJSON(String clave, Ubicacion ubicacion) {
@@ -119,7 +128,7 @@ public class ManejadorAlmacenamientoLocal {
 
 	public static MapaOrdenado<String, Ubicacion> obtenerMapaUbicacions() {
 		MapaOrdenado<String, Ubicacion> salida = new MapaOrdenado<String, Ubicacion>();
-		String cadenaMapaUbicacions = storage.getItem("mapaUbicacions");
+		String cadenaMapaUbicacions = storage.get("mapaUbicacions");
 		if (cadenaMapaUbicacions != null) {
 			JSONArray arreglo = (JSONArray) JSONParser
 					.parseStrict(cadenaMapaUbicacions);
@@ -159,7 +168,7 @@ public class ManejadorAlmacenamientoLocal {
 			arreglo.set(i, elemento);
 			i++;
 		}
-		storage.setItem("mapaEspecies", arreglo.toString());
+		storage.put("mapaEspecies", arreglo.toString());
 	}
 
 	private static JSONObject especieAJSON(String clave, Especie especie) {
@@ -181,7 +190,7 @@ public class ManejadorAlmacenamientoLocal {
 
 	public static MapaOrdenado<String, Especie> obtenerMapaEspecies() {
 		MapaOrdenado<String, Especie> salida = new MapaOrdenado<String, Especie>();
-		String cadenaMapaEspecies = storage.getItem("mapaEspecies");
+		String cadenaMapaEspecies = storage.get("mapaEspecies");
 		if (cadenaMapaEspecies != null) {
 			JSONArray arreglo = (JSONArray) JSONParser
 					.parseStrict(cadenaMapaEspecies);
@@ -214,7 +223,7 @@ public class ManejadorAlmacenamientoLocal {
 		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
 
 		JSONObject jo = observacionAJson(observacion);
-		storage.setItem("observacion" + cantidadObservacionesPersistidas,
+		storage.put("observacion" + cantidadObservacionesPersistidas,
 				jo.toString());
 		setCantidadObservacionesPersistidas(cantidadObservacionesPersistidas + 1);
 	}
@@ -225,14 +234,14 @@ public class ManejadorAlmacenamientoLocal {
 				cantidadObservacionesPersistidas);
 		for (int i = 0; i < cantidadObservacionesPersistidas; i++) {
 			observaciones.add(jSONAObservacion((JSONObject) JSONParser
-					.parseStrict(storage.getItem("observacion" + i))));
+					.parseStrict(storage.get("observacion" + i))));
 		}
 
 		return observaciones;
 	}
 
 	public static int getCantidadObservacionesPersistidas() {
-		String s = storage.getItem("cantidadObservacionesPersistidas");
+		String s = storage.get("cantidadObservacionesPersistidas");
 		if (s == null || s == "")
 			s = "0";
 		int cantidadObservacionesPersistidas = Integer.parseInt(s);
@@ -246,7 +255,7 @@ public class ManejadorAlmacenamientoLocal {
 		result.put("estado", new JSONString(obs.getEstado()));
 		result.put("fiabilidad", new JSONString(obs.getFiabilidad()));
 		result.put("fin",
-				new JSONString(DateTimeFormat.getFormat("YYYYMMDD HH:MM")
+				new JSONString(DateTimeFormat.getFormat("yyyyMMdd HH:MM")
 						.format(obs.getFin())));
 
 		result.put("idCampana", new JSONNumber(obs.getIdCampana()));
@@ -254,7 +263,7 @@ public class ManejadorAlmacenamientoLocal {
 		result.put("idUsuario", new JSONNumber(obs.getIdUsuario()));
 		result.put("idUsuarioApoyo", new JSONNumber(obs.getIdUsuarioApoyo()));
 		result.put("inicio",
-				new JSONString(DateTimeFormat.getFormat("YYYYMMDD HH:MM")
+				new JSONString(DateTimeFormat.getFormat("yyyyMMdd HH:MM")
 						.format(obs.getInicio())));
 
 		result.put("observaciones", new JSONString(obs.getObservaciones()));
@@ -314,7 +323,7 @@ public class ManejadorAlmacenamientoLocal {
 
 		obs.setEstado(((JSONString) value.get("estado")).stringValue());
 		obs.setFiabilidad(((JSONString) value.get("fiabilidad")).stringValue());
-		obs.setFin(DateTimeFormat.getFormat("YYYYMMDD HH:MM").parse(
+		obs.setFin(DateTimeFormat.getFormat("yyyyMMdd HH:MM").parse(
 				((JSONString) value.get("fin")).stringValue()));
 		obs.setIdCampana((int) ((JSONNumber) value.get("idCampana"))
 				.doubleValue());
@@ -324,23 +333,24 @@ public class ManejadorAlmacenamientoLocal {
 				.doubleValue());
 		obs.setIdUsuarioApoyo((int) ((JSONNumber) value.get("idUsuarioApoyo"))
 				.doubleValue());
-		obs.setInicio(DateTimeFormat.getFormat("YYYYMMDD HH:MM").parse(
+		obs.setInicio(DateTimeFormat.getFormat("yyyyMMdd HH:MM").parse(
 				((JSONString) value.get("inicio")).stringValue()));
 		obs.setObservaciones(((JSONString) value.get("observaciones"))
 				.stringValue());
-
+		JSONObject obsClima = (JSONObject) value.get("observacionClima");
 		ObservacionClima observacionClima = new ObservacionClima();
-		observacionClima.setTemperatura(((JSONNumber) value.get("temperatura"))
+		observacionClima.setTemperatura(((JSONNumber) obsClima.get("temperatura"))
 				.doubleValue());
-		observacionClima.setNubes(((JSONString) value.get("nubes"))
+		observacionClima.setNubes(((JSONString) obsClima.get("nubes"))
 				.stringValue());
-		observacionClima.setLluvia(((JSONBoolean) value.get("lluvia"))
+		observacionClima.setLluvia(((JSONBoolean) obsClima.get("lluvia"))
 				.booleanValue());
-		observacionClima.setViento(((JSONString) value.get("viento"))
+		observacionClima.setViento(((JSONString) obsClima.get("viento"))
 				.stringValue());
 		observacionClima
-				.setSol(((JSONBoolean) value.get("sol")).booleanValue());
+				.setSol(((JSONBoolean) obsClima.get("sol")).booleanValue());
 		obs.setObservacionClima(observacionClima);
+		
 		JSONArray obsEspecie = (JSONArray) value.get("observacionesEspecie");
 		ObservacionEspecie[] observacionesEspecie = new ObservacionEspecie[obsEspecie
 				.size()];
@@ -384,8 +394,8 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static void setCantidadObservacionesPersistidas(int i) {
-		storage.setItem("cantidadObservacionesPersistidas",
-				Integer.toString(i + 1));
+		storage.put("cantidadObservacionesPersistidas",
+				Integer.toString(i));
 	}
 
 }

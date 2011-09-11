@@ -304,6 +304,7 @@ public class VentanaCarga extends Grid {
 				especies = (MapaOrdenado<String, Especie>) result;
 				ManejadorAlmacenamientoLocal.persistirMapaEspecies(especies);
 				llenarCombosEspecies();
+				AplicacionWeb.online = true;				
 			}
 
 			private void llenarCombosEspecies() {
@@ -343,6 +344,7 @@ public class VentanaCarga extends Grid {
 						ManejadorAlmacenamientoLocal
 								.persistirMapaTiposMatrizProductiva(tiposMatrizProductiva);
 						llenarCombosTipoMatrizProductiva();
+						AplicacionWeb.online = true;
 					}
 
 					private void llenarCombosTipoMatrizProductiva() {
@@ -380,6 +382,7 @@ public class VentanaCarga extends Grid {
 								.persistirMapaUbicacions(ubicaciones);
 						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keySet());
+						AplicacionWeb.online = true;
 					}
 
 				});
@@ -555,7 +558,7 @@ public class VentanaCarga extends Grid {
 									ManejadorAlmacenamientoLocal
 											.persistirObservacion(observacion);
 									AplicacionWeb
-											.actualizarObservacionesLocales();
+											.actualizarCantidadObservacionesLocales();
 									AplicacionWeb.cargarObservacion();
 								}
 
