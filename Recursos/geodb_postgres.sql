@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2011-08-28 10:43:11 ART
+-- Started on 2011-09-11 19:17:40 ART
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -593,7 +593,7 @@ CREATE FUNCTION _st_within(geometry, geometry) RETURNS boolean
 
 --
 -- TOC entry 681 (class 1255 OID 32322)
--- Dependencies: 3 1080
+-- Dependencies: 1080 3
 -- Name: addauth(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -1526,7 +1526,7 @@ CREATE FUNCTION centroid(geometry) RETURNS geometry
 
 --
 -- TOC entry 682 (class 1255 OID 32323)
--- Dependencies: 1080 3
+-- Dependencies: 3 1080
 -- Name: checkauth(text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -1826,7 +1826,7 @@ $_$;
 
 --
 -- TOC entry 709 (class 1255 OID 32583)
--- Dependencies: 3 1080
+-- Dependencies: 1080 3
 -- Name: createtablesseguimiento(text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -1860,7 +1860,7 @@ $$;
 
 --
 -- TOC entry 711 (class 1255 OID 32601)
--- Dependencies: 1080 3
+-- Dependencies: 3 1080
 -- Name: createtablesseguimiento(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -2390,7 +2390,7 @@ CREATE FUNCTION equals(geometry, geometry) RETURNS boolean
 
 --
 -- TOC entry 718 (class 1255 OID 33570)
--- Dependencies: 3 1080
+-- Dependencies: 1080 3
 -- Name: especie_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -3564,7 +3564,7 @@ CREATE FUNCTION linefromtext(text, integer) RETURNS geometry
 
 --
 -- TOC entry 629 (class 1255 OID 32270)
--- Dependencies: 1005 3
+-- Dependencies: 3 1005
 -- Name: linefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -3795,7 +3795,7 @@ COMMENT ON FUNCTION lockrow(text, text, text, timestamp without time zone) IS 'a
 
 --
 -- TOC entry 687 (class 1255 OID 32328)
--- Dependencies: 1080 3
+-- Dependencies: 3 1080
 -- Name: longtransactionsenabled(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -4228,7 +4228,7 @@ CREATE FUNCTION multi(geometry) RETURNS geometry
 
 --
 -- TOC entry 653 (class 1255 OID 32294)
--- Dependencies: 3 1005
+-- Dependencies: 1005 3
 -- Name: multilinefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -4546,7 +4546,7 @@ $$;
 
 --
 -- TOC entry 716 (class 1255 OID 33519)
--- Dependencies: 3 1080
+-- Dependencies: 1080 3
 -- Name: observacion_foto_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -4620,7 +4620,7 @@ $$;
 
 --
 -- TOC entry 713 (class 1255 OID 33471)
--- Dependencies: 1080 3
+-- Dependencies: 3 1080
 -- Name: observacion_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -5854,7 +5854,7 @@ CREATE FUNCTION se_ismeasured(geometry) RETURNS boolean
 
 --
 -- TOC entry 700 (class 1255 OID 32341)
--- Dependencies: 1005 3 1005
+-- Dependencies: 1005 1005 3
 -- Name: se_locatealong(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -5876,7 +5876,7 @@ CREATE FUNCTION se_locatebetween(geometry, double precision, double precision) R
 
 --
 -- TOC entry 697 (class 1255 OID 32338)
--- Dependencies: 3 1005
+-- Dependencies: 1005 3
 -- Name: se_m(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -5887,7 +5887,7 @@ CREATE FUNCTION se_m(geometry) RETURNS double precision
 
 --
 -- TOC entry 696 (class 1255 OID 32337)
--- Dependencies: 1005 3
+-- Dependencies: 3 1005
 -- Name: se_z(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -6745,7 +6745,7 @@ COMMENT ON FUNCTION st_azimuth(geometry, geometry) IS 'args: pointA, pointB - Re
 
 --
 -- TOC entry 675 (class 1255 OID 32316)
--- Dependencies: 1080 1005 3
+-- Dependencies: 1005 3 1080
 -- Name: st_bdmpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -7399,7 +7399,7 @@ COMMENT ON FUNCTION st_crosses(geometry, geometry) IS 'args: g1, g2 - Returns TR
 
 --
 -- TOC entry 702 (class 1255 OID 32343)
--- Dependencies: 1005 3 1005
+-- Dependencies: 1005 1005 3
 -- Name: st_curvetoline(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -9727,7 +9727,7 @@ COMMENT ON FUNCTION st_minimumboundingcircle(inputgeom geometry, segs_per_quarte
 
 --
 -- TOC entry 707 (class 1255 OID 32349)
--- Dependencies: 1005 3 1005
+-- Dependencies: 1005 1005 3
 -- Name: st_minimumboundingcircle(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -10065,7 +10065,7 @@ CREATE FUNCTION st_multipointfromwkb(bytea, integer) RETURNS geometry
 
 --
 -- TOC entry 652 (class 1255 OID 32293)
--- Dependencies: 1005 3
+-- Dependencies: 3 1005
 -- Name: st_multipointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -10283,7 +10283,7 @@ COMMENT ON FUNCTION st_numpoints(geometry) IS 'args: g1 - Return the number of p
 
 --
 -- TOC entry 692 (class 1255 OID 32333)
--- Dependencies: 1005 1005 3
+-- Dependencies: 3 1005 1005
 -- Name: st_orderingequals(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -10603,7 +10603,7 @@ CREATE FUNCTION st_polyfromwkb(bytea) RETURNS geometry
 
 --
 -- TOC entry 698 (class 1255 OID 32339)
--- Dependencies: 1005 1005 3
+-- Dependencies: 3 1005 1005
 -- Name: st_polygon(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -11446,7 +11446,7 @@ COMMENT ON FUNCTION st_within(geometry, geometry) IS 'args: A, B - Returns true 
 
 --
 -- TOC entry 690 (class 1255 OID 32331)
--- Dependencies: 1005 3
+-- Dependencies: 3 1005
 -- Name: st_wkbtosql(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -11466,7 +11466,7 @@ COMMENT ON FUNCTION st_wkbtosql(bytea) IS 'args: WKB - Return a specified ST_Geo
 
 --
 -- TOC entry 689 (class 1255 OID 32330)
--- Dependencies: 1005 3
+-- Dependencies: 3 1005
 -- Name: st_wkttosql(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -11819,7 +11819,7 @@ CREATE FUNCTION unite_garray(geometry[]) RETURNS geometry
 
 --
 -- TOC entry 676 (class 1255 OID 32317)
--- Dependencies: 3 1080
+-- Dependencies: 1080 3
 -- Name: unlockrows(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -12444,7 +12444,7 @@ COMMENT ON AGGREGATE st_union(geometry) IS 'args: g1field - Returns a geometry t
 
 --
 -- TOC entry 1813 (class 2617 OID 31704)
--- Dependencies: 3 1005 1005 142 118 120
+-- Dependencies: 1005 3 1005 142 118 120
 -- Name: &&; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12460,7 +12460,7 @@ CREATE OPERATOR && (
 
 --
 -- TOC entry 1810 (class 2617 OID 31699)
--- Dependencies: 122 3 1005 1005
+-- Dependencies: 3 122 1005 1005
 -- Name: &<; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12476,7 +12476,7 @@ CREATE OPERATOR &< (
 
 --
 -- TOC entry 1812 (class 2617 OID 31703)
--- Dependencies: 1005 1005 128 3
+-- Dependencies: 3 1005 1005 128
 -- Name: &<|; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12492,7 +12492,7 @@ CREATE OPERATOR &<| (
 
 --
 -- TOC entry 1814 (class 2617 OID 31698)
--- Dependencies: 1005 3 124 1005
+-- Dependencies: 124 1005 1005 3
 -- Name: &>; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12508,7 +12508,7 @@ CREATE OPERATOR &> (
 
 --
 -- TOC entry 1804 (class 2617 OID 31657)
--- Dependencies: 3 1005 1005 106
+-- Dependencies: 1005 1005 106 3
 -- Name: <; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12541,7 +12541,7 @@ CREATE OPERATOR << (
 
 --
 -- TOC entry 1811 (class 2617 OID 31701)
--- Dependencies: 1005 1005 136 3
+-- Dependencies: 3 136 1005 1005
 -- Name: <<|; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12557,7 +12557,7 @@ CREATE OPERATOR <<| (
 
 --
 -- TOC entry 1805 (class 2617 OID 31658)
--- Dependencies: 108 3 1005 1005
+-- Dependencies: 3 108 1005 1005
 -- Name: <=; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12574,7 +12574,7 @@ CREATE OPERATOR <= (
 
 --
 -- TOC entry 1806 (class 2617 OID 31659)
--- Dependencies: 114 1005 1005 3
+-- Dependencies: 3 1005 114 1005
 -- Name: =; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12590,7 +12590,7 @@ CREATE OPERATOR = (
 
 --
 -- TOC entry 1808 (class 2617 OID 31655)
--- Dependencies: 110 1005 3 1005
+-- Dependencies: 1005 1005 3 110
 -- Name: >; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12607,7 +12607,7 @@ CREATE OPERATOR > (
 
 --
 -- TOC entry 1807 (class 2617 OID 31656)
--- Dependencies: 1005 3 112 1005
+-- Dependencies: 1005 1005 112 3
 -- Name: >=; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12624,7 +12624,7 @@ CREATE OPERATOR >= (
 
 --
 -- TOC entry 1815 (class 2617 OID 31696)
--- Dependencies: 1005 3 132 1005
+-- Dependencies: 1005 1005 132 3
 -- Name: >>; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12640,7 +12640,7 @@ CREATE OPERATOR >> (
 
 --
 -- TOC entry 1819 (class 2617 OID 31707)
--- Dependencies: 3 140 1005 1005
+-- Dependencies: 1005 3 140 1005
 -- Name: @; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12656,7 +12656,7 @@ CREATE OPERATOR @ (
 
 --
 -- TOC entry 1816 (class 2617 OID 31702)
--- Dependencies: 1005 1005 3 126
+-- Dependencies: 126 1005 1005 3
 -- Name: |&>; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12672,7 +12672,7 @@ CREATE OPERATOR |&> (
 
 --
 -- TOC entry 1817 (class 2617 OID 31700)
--- Dependencies: 134 1005 3 1005
+-- Dependencies: 1005 134 3 1005
 -- Name: |>>; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12688,7 +12688,7 @@ CREATE OPERATOR |>> (
 
 --
 -- TOC entry 1820 (class 2617 OID 31706)
--- Dependencies: 1005 1005 3 138
+-- Dependencies: 138 1005 1005 3
 -- Name: ~; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12704,7 +12704,7 @@ CREATE OPERATOR ~ (
 
 --
 -- TOC entry 1818 (class 2617 OID 31705)
--- Dependencies: 1005 1005 3 144
+-- Dependencies: 1005 1005 144 3
 -- Name: ~=; Type: OPERATOR; Schema: public; Owner: -
 --
 
@@ -12720,7 +12720,7 @@ CREATE OPERATOR ~= (
 
 --
 -- TOC entry 1932 (class 2616 OID 31661)
--- Dependencies: 2040 1005 3
+-- Dependencies: 1005 2040 3
 -- Name: btree_geometry_ops; Type: OPERATOR CLASS; Schema: public; Owner: -
 --
 
@@ -12736,7 +12736,7 @@ CREATE OPERATOR CLASS btree_geometry_ops
 
 --
 -- TOC entry 1933 (class 2616 OID 31716)
--- Dependencies: 1005 3 1017 2041
+-- Dependencies: 1017 3 2041 1005
 -- Name: gist_geometry_ops; Type: OPERATOR CLASS; Schema: public; Owner: -
 --
 
@@ -12768,7 +12768,7 @@ SET search_path = pg_catalog;
 
 --
 -- TOC entry 2627 (class 2605 OID 31992)
--- Dependencies: 337 1008 1017 337
+-- Dependencies: 337 1017 337 1008
 -- Name: CAST (public.box2d AS public.box3d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12777,7 +12777,7 @@ CREATE CAST (public.box2d AS public.box3d) WITH FUNCTION public.st_box3d(public.
 
 --
 -- TOC entry 2626 (class 2605 OID 31993)
--- Dependencies: 369 369 1005 1017
+-- Dependencies: 369 369 1017 1005
 -- Name: CAST (public.box2d AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12786,7 +12786,7 @@ CREATE CAST (public.box2d AS public.geometry) WITH FUNCTION public.st_geometry(p
 
 --
 -- TOC entry 2620 (class 2605 OID 31994)
--- Dependencies: 364 364 1008
+-- Dependencies: 364 1008 364
 -- Name: CAST (public.box3d AS box); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12795,7 +12795,7 @@ CREATE CAST (public.box3d AS box) WITH FUNCTION public.st_box(public.box3d) AS I
 
 --
 -- TOC entry 2622 (class 2605 OID 31991)
--- Dependencies: 335 1008 335 1017
+-- Dependencies: 335 335 1017 1008
 -- Name: CAST (public.box3d AS public.box2d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12804,7 +12804,7 @@ CREATE CAST (public.box3d AS public.box2d) WITH FUNCTION public.st_box2d(public.
 
 --
 -- TOC entry 2621 (class 2605 OID 31995)
--- Dependencies: 371 1005 1008 371
+-- Dependencies: 371 1008 1005 371
 -- Name: CAST (public.box3d AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12813,7 +12813,7 @@ CREATE CAST (public.box3d AS public.geometry) WITH FUNCTION public.st_geometry(p
 
 --
 -- TOC entry 2625 (class 2605 OID 32002)
--- Dependencies: 65 65 1011 1017
+-- Dependencies: 65 1011 65 1017
 -- Name: CAST (public.box3d_extent AS public.box2d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12822,7 +12822,7 @@ CREATE CAST (public.box3d_extent AS public.box2d) WITH FUNCTION public.st_box2d(
 
 --
 -- TOC entry 2624 (class 2605 OID 32001)
--- Dependencies: 64 1008 1011 64
+-- Dependencies: 64 1008 64 1011
 -- Name: CAST (public.box3d_extent AS public.box3d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12831,7 +12831,7 @@ CREATE CAST (public.box3d_extent AS public.box3d) WITH FUNCTION public.st_box3d_
 
 --
 -- TOC entry 2623 (class 2605 OID 32003)
--- Dependencies: 66 1011 66 1005
+-- Dependencies: 66 66 1011 1005
 -- Name: CAST (public.box3d_extent AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12840,7 +12840,7 @@ CREATE CAST (public.box3d_extent AS public.geometry) WITH FUNCTION public.st_geo
 
 --
 -- TOC entry 2426 (class 2605 OID 31999)
--- Dependencies: 377 1005 377
+-- Dependencies: 377 377 1005
 -- Name: CAST (bytea AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12849,7 +12849,7 @@ CREATE CAST (bytea AS public.geometry) WITH FUNCTION public.st_geometry(bytea) A
 
 --
 -- TOC entry 2628 (class 2605 OID 31998)
--- Dependencies: 375 375 1014 1005
+-- Dependencies: 375 375 1005 1014
 -- Name: CAST (public.chip AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12903,7 +12903,7 @@ CREATE CAST (public.geometry AS text) WITH FUNCTION public.st_text(public.geomet
 
 --
 -- TOC entry 2492 (class 2605 OID 31996)
--- Dependencies: 373 1005 373
+-- Dependencies: 373 373 1005
 -- Name: CAST (text AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
@@ -12935,7 +12935,7 @@ CREATE TABLE especie (
 
 --
 -- TOC entry 2330 (class 1259 OID 33550)
--- Dependencies: 2331 7
+-- Dependencies: 7 2331
 -- Name: especie_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
 --
 
@@ -13000,7 +13000,7 @@ CREATE TABLE campana (
 
 --
 -- TOC entry 2310 (class 1259 OID 32971)
--- Dependencies: 3 2311
+-- Dependencies: 2311 3
 -- Name: campana_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -13038,7 +13038,7 @@ CREATE TABLE especie (
 
 --
 -- TOC entry 2332 (class 1259 OID 33626)
--- Dependencies: 2333 3
+-- Dependencies: 3 2333
 -- Name: especie_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -13118,14 +13118,14 @@ CREATE TABLE observacion_clima (
     viento character varying(20),
     temperatura double precision,
     id_observacion integer,
-    CONSTRAINT observacion_clima_nubes_check CHECK (((nubes)::text = ANY (ARRAY[('Despejado'::character varying)::text, ('Parcialmente Nublado'::character varying)::text, ('MayormenteNublado'::character varying)::text, ('Cubierto'::character varying)::text]))),
+    CONSTRAINT observacion_clima_nubes_check CHECK (((nubes)::text = ANY (ARRAY[('Despejado'::character varying)::text, ('ParcialmenteNublado'::character varying)::text, ('MayormenteNublado'::character varying)::text, ('Cubierto'::character varying)::text]))),
     CONSTRAINT observacion_clima_viento_check CHECK (((viento)::text = ANY (ARRAY[('Calma'::character varying)::text, ('PocoVentoso'::character varying)::text, ('Ventoso'::character varying)::text, ('MuyVentoso'::character varying)::text])))
 );
 
 
 --
 -- TOC entry 2334 (class 1259 OID 33637)
--- Dependencies: 2335 3
+-- Dependencies: 3 2335
 -- Name: observacion_clima_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -13169,7 +13169,7 @@ CREATE TABLE observacion_especie (
 
 --
 -- TOC entry 2322 (class 1259 OID 33076)
--- Dependencies: 2323 3
+-- Dependencies: 3 2323
 -- Name: observacion_especie_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -13230,7 +13230,7 @@ ALTER SEQUENCE observacion_foto_id_seq OWNED BY observacion_foto.id;
 
 --
 -- TOC entry 2316 (class 1259 OID 33005)
--- Dependencies: 3 2317
+-- Dependencies: 2317 3
 -- Name: observacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -13469,7 +13469,7 @@ SET search_path = public, pg_catalog;
 
 --
 -- TOC entry 2629 (class 2604 OID 32976)
--- Dependencies: 2310 2311 2311
+-- Dependencies: 2311 2310 2311
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -13478,7 +13478,7 @@ ALTER TABLE campana ALTER COLUMN id SET DEFAULT nextval('campana_id_seq'::regcla
 
 --
 -- TOC entry 2654 (class 2604 OID 33631)
--- Dependencies: 2333 2332 2333
+-- Dependencies: 2332 2333 2333
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -13496,7 +13496,7 @@ ALTER TABLE observacion ALTER COLUMN id SET DEFAULT nextval('observacion_id_seq'
 
 --
 -- TOC entry 2655 (class 2604 OID 33642)
--- Dependencies: 2335 2334 2335
+-- Dependencies: 2334 2335 2335
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -13505,7 +13505,7 @@ ALTER TABLE observacion_clima ALTER COLUMN id SET DEFAULT nextval('observacion_c
 
 --
 -- TOC entry 2640 (class 2604 OID 33081)
--- Dependencies: 2322 2323 2323
+-- Dependencies: 2323 2322 2323
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -13514,7 +13514,7 @@ ALTER TABLE observacion_especie ALTER COLUMN id SET DEFAULT nextval('observacion
 
 --
 -- TOC entry 2637 (class 2604 OID 33055)
--- Dependencies: 2319 2318 2319
+-- Dependencies: 2318 2319 2319
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -13523,7 +13523,7 @@ ALTER TABLE observacion_foto ALTER COLUMN id SET DEFAULT nextval('observacion_fo
 
 --
 -- TOC entry 2644 (class 2604 OID 33120)
--- Dependencies: 2325 2324 2325
+-- Dependencies: 2324 2325 2325
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -13550,7 +13550,7 @@ ALTER TABLE tipo_matriz_productiva ALTER COLUMN id SET DEFAULT nextval('tipo_mat
 
 --
 -- TOC entry 2632 (class 2604 OID 32999)
--- Dependencies: 2314 2315 2315
+-- Dependencies: 2315 2314 2315
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -13559,7 +13559,7 @@ ALTER TABLE ubicacion ALTER COLUMN id SET DEFAULT nextval('ubicacion_id_seq'::re
 
 --
 -- TOC entry 2630 (class 2604 OID 32987)
--- Dependencies: 2313 2312 2313
+-- Dependencies: 2312 2313 2313
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -13737,7 +13737,7 @@ SET search_path = public, pg_catalog;
 
 --
 -- TOC entry 2691 (class 2606 OID 33090)
--- Dependencies: 2323 2317 2668
+-- Dependencies: 2668 2323 2317
 -- Name: observacion_especie_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13747,7 +13747,7 @@ ALTER TABLE ONLY observacion_especie
 
 --
 -- TOC entry 2690 (class 2606 OID 33060)
--- Dependencies: 2319 2317 2668
+-- Dependencies: 2319 2668 2317
 -- Name: observacion_foto_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13757,7 +13757,7 @@ ALTER TABLE ONLY observacion_foto
 
 --
 -- TOC entry 2687 (class 2606 OID 33024)
--- Dependencies: 2311 2317 2662
+-- Dependencies: 2317 2311 2662
 -- Name: observacion_id_campana_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13767,7 +13767,7 @@ ALTER TABLE ONLY observacion
 
 --
 -- TOC entry 2686 (class 2606 OID 33019)
--- Dependencies: 2666 2315 2317
+-- Dependencies: 2315 2666 2317
 -- Name: observacion_id_ubicacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13777,7 +13777,7 @@ ALTER TABLE ONLY observacion
 
 --
 -- TOC entry 2689 (class 2606 OID 33034)
--- Dependencies: 2317 2664 2313
+-- Dependencies: 2313 2664 2317
 -- Name: observacion_id_usuario_apoyo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13787,7 +13787,7 @@ ALTER TABLE ONLY observacion
 
 --
 -- TOC entry 2688 (class 2606 OID 33029)
--- Dependencies: 2664 2317 2313
+-- Dependencies: 2664 2313 2317
 -- Name: observacion_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13797,7 +13797,7 @@ ALTER TABLE ONLY observacion
 
 --
 -- TOC entry 2693 (class 2606 OID 33128)
--- Dependencies: 2317 2325 2668
+-- Dependencies: 2668 2317 2325
 -- Name: observacion_matriz_productiva_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13807,7 +13807,7 @@ ALTER TABLE ONLY observacion_matriz_productiva
 
 --
 -- TOC entry 2692 (class 2606 OID 33123)
--- Dependencies: 2670 2321 2325
+-- Dependencies: 2670 2325 2321
 -- Name: observacion_matriz_productiva_id_tipo_matriz_productiva_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13817,7 +13817,7 @@ ALTER TABLE ONLY observacion_matriz_productiva
 
 --
 -- TOC entry 2696 (class 2606 OID 33152)
--- Dependencies: 2662 2327 2311
+-- Dependencies: 2311 2327 2662
 -- Name: par_usuarios_id_campana_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13857,7 +13857,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2011-08-28 10:43:14 ART
+-- Completed on 2011-09-11 19:17:43 ART
 
 --
 -- PostgreSQL database dump complete
