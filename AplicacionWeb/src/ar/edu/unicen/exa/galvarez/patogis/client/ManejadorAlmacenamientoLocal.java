@@ -8,6 +8,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecie;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFoto;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
@@ -311,7 +312,7 @@ public class ManejadorAlmacenamientoLocal {
 			observacionMatrizProductiva.put("porcentaje", new JSONNumber(
 					obsMatrizProductiva.getPorcentaje()));
 		}
-		result.put("observacionesTipoMatrizProductiva",
+		result.put("observacionesMatrizProductiva",
 				observacionesMatrizProductiva);
 		return result;
 	}
@@ -388,7 +389,7 @@ public class ManejadorAlmacenamientoLocal {
 							.get("porcentaje")).doubleValue());
 		}
 		obs.setObservacionesMatrizProductiva(observacionesMatrizProductiva);
-
+		obs.setObservacionesFoto(new ObservacionFoto[0]);
 		return obs;
 
 	}
