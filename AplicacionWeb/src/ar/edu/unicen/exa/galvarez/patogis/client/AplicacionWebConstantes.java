@@ -20,4 +20,6 @@ public interface AplicacionWebConstantes extends Constants {
 	String observacionGuardada();
 	String errorGuardarObservacion();
 	String eliminarObservacionesLocales();
+	String confirmacion();
+	String seguroDeBorrarObsLocales();
 }

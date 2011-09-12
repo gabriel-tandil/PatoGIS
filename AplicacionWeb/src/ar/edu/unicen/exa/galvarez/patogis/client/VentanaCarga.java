@@ -48,6 +48,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DoubleBox;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -60,7 +61,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
-public class VentanaCarga extends Grid {
+public class VentanaCarga extends FlexTable {
 	VentanaCargaConstantes ctes = GWT.create(VentanaCargaConstantes.class);
 	EnumConstantes constantesEnum = GWT.create(EnumConstantes.class);
 
@@ -159,6 +160,8 @@ public class VentanaCarga extends Grid {
 	private ListBox comboViento;
 	private ListBox alcance;
 	private DateBox dateBox;
+	private SingleUploader uploader;
+	private Label labelFotos;
 	MapaOrdenado<String, Especie> especies = new MapaOrdenado<String, Especie>();
 
 	final EspeciesServiceAsync especiesService = GWT
@@ -280,7 +283,7 @@ public class VentanaCarga extends Grid {
 
 	@SuppressWarnings("deprecation")
 	VentanaCarga() {
-		super(12, 3);
+		super();
 		setSize("100px", "100px");
 
 		Label lblNewLabel = new Label(ctes.laguna());
@@ -290,12 +293,12 @@ public class VentanaCarga extends Grid {
 		laguna.addMouseListener(new TooltipListener(ctes.lagunaTooltip(), 5000));
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
-				if (AplicacionWeb.online) // si estaba AplicacionWeb.online
+				if (!AplicacionWeb.contexto.isMostroWarningEspeciesOffline()) // si estaba AplicacionWeb.online
 											// aviso que tomare las locales
 					AplicacionWeb.setMensajeAlerta(ctes.errorObtenerEspecies());
-
+				AplicacionWeb.contexto.setMostroWarningEspeciesOffline(true);
 				especies = ManejadorAlmacenamientoLocal.obtenerMapaEspecies();
-				AplicacionWeb.online = false;
+				cambiarAModoOffLine();
 				llenarCombosEspecies();
 			}
 
@@ -304,7 +307,7 @@ public class VentanaCarga extends Grid {
 				especies = (MapaOrdenado<String, Especie>) result;
 				ManejadorAlmacenamientoLocal.persistirMapaEspecies(especies);
 				llenarCombosEspecies();
-				AplicacionWeb.online = true;				
+				cambiarAModoOnLine();				
 			}
 
 			private void llenarCombosEspecies() {
@@ -325,15 +328,16 @@ public class VentanaCarga extends Grid {
 		tipoMatrizProductivaService
 				.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
-						if (AplicacionWeb.online) // si estaba
+						if (!AplicacionWeb.contexto.isMostroWarningTiposMatrizProductivaOffline()) // si estaba
 													// AplicacionWeb.online
 													// aviso que tomare las
 													// locales
 							AplicacionWeb.setMensajeAlerta(ctes
 									.errorObtenerTiposMatrizProductiva());
+						AplicacionWeb.contexto.setMostroWarningTiposMatrizProductivaOffline(true);
 						tiposMatrizProductiva = ManejadorAlmacenamientoLocal
 								.obtenerMapaTiposMatrizProductiva();
-						AplicacionWeb.online = false;
+						cambiarAModoOffLine();
 						llenarCombosTipoMatrizProductiva();
 					}
 
@@ -344,7 +348,7 @@ public class VentanaCarga extends Grid {
 						ManejadorAlmacenamientoLocal
 								.persistirMapaTiposMatrizProductiva(tiposMatrizProductiva);
 						llenarCombosTipoMatrizProductiva();
-						AplicacionWeb.online = true;
+						cambiarAModoOnLine();
 					}
 
 					private void llenarCombosTipoMatrizProductiva() {
@@ -362,15 +366,16 @@ public class VentanaCarga extends Grid {
 		ubicacionService
 				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 					public void onFailure(Throwable caught) {
-						if (AplicacionWeb.online) // si estaba
+						if (!AplicacionWeb.contexto.isMostroWarningUbicacionesOffline()) // si estaba
 													// AplicacionWeb.online
 													// aviso que tomare las
 													// locales
 							AplicacionWeb.setMensajeAlerta(ctes
 									.errorObtenerUbicaciones());
+						AplicacionWeb.contexto.setMostroWarningUbicacionesOffline(true);
 						ubicaciones = ManejadorAlmacenamientoLocal
 								.obtenerMapaUbicacions();
-						AplicacionWeb.online = false;
+						cambiarAModoOffLine();
 						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keySet());
 					}
@@ -382,15 +387,12 @@ public class VentanaCarga extends Grid {
 								.persistirMapaUbicacions(ubicaciones);
 						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keySet());
-						AplicacionWeb.online = true;
+						cambiarAModoOnLine();
 					}
 
 				});
 
 		setWidget(0, 1, laguna);
-
-		// Focus the cursor on the name field when the app loads
-		laguna.setFocus(true);
 
 		Label lblNewLabel_1 = new Label(ctes.fechaYHoras());
 		setWidget(1, 0, lblNewLabel_1);
@@ -521,11 +523,11 @@ public class VentanaCarga extends Grid {
 		});
 		setWidget(6, 1, observaciones);
 
-		Label lblNewLabel8 = new Label(ctes.fotos());
+		labelFotos = new Label(ctes.fotos());
 
-		setWidget(7, 0, lblNewLabel8);
+		setWidget(7, 0, labelFotos);
 
-		SingleUploader uploader = new SingleUploader(FileInputType.BUTTON);
+		uploader = new SingleUploader(FileInputType.BUTTON);
 
 		uploader.setI18Constants(new UploaderConstantsImpl());
 		uploader.setAutoSubmit(true);
@@ -578,6 +580,22 @@ public class VentanaCarga extends Grid {
 		});
 		setWidget(9, 1, sendButton);
 
+		laguna.setFocus(true);
+	}
+
+	protected void cambiarAModoOnLine() {
+		AplicacionWeb.contexto.setOnline(true);
+		AplicacionWeb.contexto.setMostroWarningEspeciesOffline(true);
+		AplicacionWeb.contexto.setMostroWarningTiposMatrizProductivaOffline(true);
+		AplicacionWeb.contexto.setMostroWarningUbicacionesOffline(true);
+		uploader.setVisible(true);
+		labelFotos.setVisible(true);
+	}
+
+	protected void cambiarAModoOffLine() {
+		AplicacionWeb.contexto.setOnline(false);
+		uploader.setVisible(false);
+		labelFotos.setVisible(false);
 	}
 
 	interface ObtenerTexto {
@@ -603,7 +621,7 @@ public class VentanaCarga extends Grid {
 			comboBox.addItem(obtenerPropiedad.getValor(especie), especie);
 		}
 		comboBox.setItemSelected(0, true);
-		if (AplicacionWeb.online)
+		if (AplicacionWeb.contexto.isOnline())
 			comboBox.addItem(ctes.otra());
 	}
 

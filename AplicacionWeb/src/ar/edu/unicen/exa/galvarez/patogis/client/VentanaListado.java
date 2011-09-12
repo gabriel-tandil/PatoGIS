@@ -27,15 +27,11 @@ public class VentanaListado extends FlexTable {
 	VentanaListado() {
 		super();
 		setText(0, 0, constantes.fecha());
-		;
 		setText(0, 1, constantes.inicio());
-		;
 		setText(0, 2, constantes.fin());
-		;
 		setText(0, 3, constantes.laguna());
-		;
 		setText(0, 4, constantes.detalles());
-		;
+		
 		getRowFormatter().addStyleName(0, "watchListHeader");
 		addStyleName("watchList");
 		getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");

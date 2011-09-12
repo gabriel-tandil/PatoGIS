@@ -6,11 +6,17 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.storage.client.Storage;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -26,7 +32,7 @@ public class AplicacionWeb implements EntryPoint {
 	public static Configuracion configuracion = new Configuracion();
 	public static PopupPanel alertaPopup = new PopupPanel();
 	private static String mensajeActual;
-	public static boolean online = true;	
+	public static Contexto contexto = new Contexto();
 	
 	final ObservacionServiceAsync observacionService = GWT
 			.create(ObservacionService.class);
@@ -98,8 +104,40 @@ public class AplicacionWeb implements EntryPoint {
 		
 		Command eliminarObservacionesLocalesCommand= new Command() {
 			public void execute() {
-				ManejadorAlmacenamientoLocal.eliminarObservacionesLocales();
-				actualizarCantidadObservacionesLocales();
+				final DialogBox dialogo=new DialogBox();
+				dialogo.setAnimationEnabled(true);
+				dialogo.setText(constantes.confirmacion());
+				Button aceptarButton = new Button("Aceptar");
+				Button closeButton = new Button("Cancelar");
+				closeButton.addClickHandler(new ClickHandler() {
+
+					@Override
+					public void onClick(ClickEvent event) {
+						dialogo.hide();
+					}
+				});
+				aceptarButton.addClickHandler(new ClickHandler() {
+
+					@Override
+					public void onClick(ClickEvent event) {
+						ManejadorAlmacenamientoLocal.eliminarObservacionesLocales();
+						actualizarCantidadObservacionesLocales();
+						dialogo.hide();
+					}
+				});
+				HorizontalPanel botones = new HorizontalPanel();
+				botones.add(closeButton);
+				botones.add(aceptarButton);
+				Label text = new Label(constantes.seguroDeBorrarObsLocales());
+
+				DockPanel dock = new DockPanel();
+				dock.setSpacing(4);
+				dock.add(botones, DockPanel.SOUTH);
+				dock.add(text, DockPanel.CENTER);
+				botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+				dock.setWidth("100%");
+				dialogo.setWidget(dock);
+				dialogo.center();
 			}
 		};
 		
@@ -137,7 +175,7 @@ public class AplicacionWeb implements EntryPoint {
 		// Create a menu bar
 		MenuBar menu = new MenuBar();
 		menu.setAutoOpen(true);
-		menu.setWidth("365px");
+		menu.setWidth("340px");
 		menu.setAnimationEnabled(true);
 
 		MenuBar observacionesMenu = new MenuBar(true);
@@ -148,6 +186,7 @@ public class AplicacionWeb implements EntryPoint {
 		observacionesMenu.addItem(constantes.ver(), listarCommand);
 		observacionesMenu.addItem(constantes.persistirLocales(),
 				persistirLocalesCommand);
+		observacionesMenu.addItem(constantes.cerrarSesion(), nadaCommand);
 		menu.addItem(new MenuItem(constantes.observaciones(), observacionesMenu));
 
 		configuracionMenu.addItem(constantes.preferencias(), nadaCommand);
@@ -172,7 +211,7 @@ public class AplicacionWeb implements EntryPoint {
 		ayudaMenu.addItem(constantes.acercaDe(), nadaCommand);
 		menu.addItem(new MenuItem("Ayuda", ayudaMenu));
 
-		menu.addItem(constantes.cerrarSesion(), nadaCommand);
+
 
 		return menu;
 	}
