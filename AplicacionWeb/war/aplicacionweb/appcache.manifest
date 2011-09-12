@@ -1,0 +1,49 @@
+CACHE MANIFEST
+# Unique id #1315867462001.0.7718427554016891
+# Note: must change this every time for cache to invalidate
+# L.Pelov - myappcache.manifest
+
+CACHE:
+# Static app files
+/AplicacionWeb.html
+/AplicacionWeb.css
+
+
+# Generated app files
+0A9476898799A150D840F0B1C3672921.cache.png
+32ADE51B02D5EF951227B8C50266DADC.cache.html
+396F806CD63ABD414BFBB9D57429F05B.cache.png
+3DBCBBF3BC7583F51DF8EB88305E5C84.cache.html
+6AF9556EA9DF8F90483D3B43F8098A74.cache.html
+924DF9B13C578D843D6BD180954A5166.cache.html
+9980EF771BE34DFA113FEC84C3B12C0A.cache.html
+DF7764EEC1903CD03C9545B354D8D8E4.cache.png
+E44767377485D18D6B6864F65BA8EF73.cache.png
+E53152BE2DD60BB8F7531ECB86F9EE74.cache.html
+EDC7827FEEA59EE44AD790B1C6430C45.cache.png
+Upload.css
+aplicacionweb.nocache.js
+clear.cache.gif
+gwt/standard/images/corner.png
+gwt/standard/images/corner_ie6.png
+gwt/standard/images/hborder.png
+gwt/standard/images/hborder_ie6.png
+gwt/standard/images/ie6/corner_dialog_topleft.png
+gwt/standard/images/ie6/corner_dialog_topright.png
+gwt/standard/images/ie6/hborder_blue_shadow.png
+gwt/standard/images/ie6/hborder_gray_shadow.png
+gwt/standard/images/ie6/vborder_blue_shadow.png
+gwt/standard/images/ie6/vborder_gray_shadow.png
+gwt/standard/images/splitPanelThumb.png
+gwt/standard/images/vborder.png
+gwt/standard/images/vborder_ie6.png
+gwt/standard/standard.css
+gwt/standard/standard_rtl.css
+hosted.html
+images/cancel-upld-hover.gif
+images/cancel-upld.gif
+
+
+# All other resources require the user to be online.
+NETWORK:
+*
