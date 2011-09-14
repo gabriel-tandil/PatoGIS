@@ -12,7 +12,7 @@ public class AppCacheManifestLinker extends ManifestLinker {
 
 	@Override
 	protected String[] otherCachedFiles() {
-		return new String[] { "/AplicacionWeb.html", "/AplicacionWeb.css" };
+		return new String[] { "../AplicacionWeb.html", "../AplicacionWeb.css","../imagenes/logoUnicen_chico.png" };
 	}
 
 	@Override

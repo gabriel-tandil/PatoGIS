@@ -1,12 +1,13 @@
 CACHE MANIFEST
-# Unique id #1315867462001.0.7718427554016891
+# Unique id #1315958460396.0.06722486950642392
 # Note: must change this every time for cache to invalidate
 # L.Pelov - myappcache.manifest
 
 CACHE:
 # Static app files
-/AplicacionWeb.html
-/AplicacionWeb.css
+../AplicacionWeb.html
+../AplicacionWeb.css
+../imagenes/logoUnicen_chico.png
 
 
 # Generated app files
