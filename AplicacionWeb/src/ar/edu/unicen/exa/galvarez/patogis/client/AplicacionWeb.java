@@ -13,6 +13,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -22,6 +23,7 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -86,7 +88,7 @@ public class AplicacionWeb implements EntryPoint {
 		rootPanel.add(new VentanaCarga());
 	}
 
-	private MenuBar crearMenu() {
+	private Widget crearMenu() {
 		// Create a command that will execute on menu item selection
 		Command cargarCommand = new Command() {
 			public void execute() {
@@ -171,11 +173,14 @@ public class AplicacionWeb implements EntryPoint {
 				// TODO: hacer
 			}
 		};
+DisclosurePanel dp=new DisclosurePanel("");
+dp.setAnimationEnabled(true);
+dp.setOpen(true);
 
 		// Create a menu bar
-		MenuBar menu = new MenuBar();
+		MenuBar menu = new MenuBar(true);
 		menu.setAutoOpen(true);
-		menu.setWidth("340px");
+		//menu.setWidth("340px");
 		menu.setAnimationEnabled(true);
 
 		MenuBar observacionesMenu = new MenuBar(true);
@@ -212,8 +217,10 @@ public class AplicacionWeb implements EntryPoint {
 		menu.addItem(new MenuItem("Ayuda", ayudaMenu));
 
 
+		dp.setContent(menu);
+		
 
-		return menu;
+		return dp;
 	}
 
 }
