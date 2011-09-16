@@ -8,8 +8,13 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.logical.shared.OpenEvent;
+import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -35,7 +40,6 @@ public class AplicacionWeb implements EntryPoint {
 	public static PopupPanel alertaPopup = new PopupPanel();
 	private static String mensajeActual;
 	public static Contexto contexto = new Contexto();
-	
 	final ObservacionServiceAsync observacionService = GWT
 			.create(ObservacionService.class);
 	private static Timer t = new Timer() {
@@ -52,7 +56,15 @@ public class AplicacionWeb implements EntryPoint {
 		} else {
 			mensajeActual = "<p>" + mensaje + "</p>";
 			alertaPopup.setWidget(new HTML(mensajeActual));
-			alertaPopup.center();
+			alertaPopup
+					.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+						public void setPosition(int offsetWidth,
+								int offsetHeight) {
+							int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
+							int top = ((Window.getClientHeight() - offsetHeight) / 2) >> 0;
+							alertaPopup.setPopupPosition(left, top);
+						}
+					});
 		}
 		t.schedule(7000);
 	}
@@ -61,12 +73,12 @@ public class AplicacionWeb implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-	//	Storage.getLocalStorageIfSupported().clear();
+		// Storage.getLocalStorageIfSupported().clear();
 		RootPanel rootPanel = RootPanel.get("menuContainer");
 		rootPanel.add(crearMenu());
 		actualizarCantidadObservacionesLocales();
 		alertaPopup.setWidth("250px");
-		alertaPopup.setHeight("100px");
+		alertaPopup.setHeight("170px");
 		alertaPopup.setAnimationEnabled(true);
 		alertaPopup.setAutoHideEnabled(true);
 		alertaPopup.setModal(true);
@@ -83,7 +95,7 @@ public class AplicacionWeb implements EntryPoint {
 	}
 
 	public static void cargarObservacion() {
-		RootPanel rootPanel = RootPanel.get("principalContainer");
+		RootPanel rootPanel = RootPanel.get("principalContainer2");
 		rootPanel.clear();
 		rootPanel.add(new VentanaCarga());
 	}
@@ -98,15 +110,15 @@ public class AplicacionWeb implements EntryPoint {
 
 		Command listarCommand = new Command() {
 			public void execute() {
-				RootPanel rootPanel = RootPanel.get("principalContainer");
+				RootPanel rootPanel = RootPanel.get("principalContainer2");
 				rootPanel.clear();
 				rootPanel.add(new VentanaListado());
 			}
 		};
-		
-		Command eliminarObservacionesLocalesCommand= new Command() {
+
+		Command eliminarObservacionesLocalesCommand = new Command() {
 			public void execute() {
-				final DialogBox dialogo=new DialogBox();
+				final DialogBox dialogo = new DialogBox();
 				dialogo.setAnimationEnabled(true);
 				dialogo.setText(constantes.confirmacion());
 				Button aceptarButton = new Button("Aceptar");
@@ -122,7 +134,8 @@ public class AplicacionWeb implements EntryPoint {
 
 					@Override
 					public void onClick(ClickEvent event) {
-						ManejadorAlmacenamientoLocal.eliminarObservacionesLocales();
+						ManejadorAlmacenamientoLocal
+								.eliminarObservacionesLocales();
 						actualizarCantidadObservacionesLocales();
 						dialogo.hide();
 					}
@@ -139,10 +152,16 @@ public class AplicacionWeb implements EntryPoint {
 				botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 				dock.setWidth("100%");
 				dialogo.setWidget(dock);
-				dialogo.center();
+				dialogo.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+					public void setPosition(int offsetWidth, int offsetHeight) {
+						int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
+						int top = ((Window.getClientHeight() - offsetHeight) / 2) >> 0;
+						dialogo.setPopupPosition(left, top);
+					}
+				});
 			}
 		};
-		
+
 		Command persistirLocalesCommand = new Command() {
 			public void execute() {
 				List<Observacion> observaciones = ManejadorAlmacenamientoLocal
@@ -161,7 +180,8 @@ public class AplicacionWeb implements EntryPoint {
 								public void onSuccess(Void result) {
 									AplicacionWeb.setMensajeAlerta(constantes
 											.observacionGuardada());
-									ManejadorAlmacenamientoLocal.setCantidadObservacionesPersistidas(0);
+									ManejadorAlmacenamientoLocal
+											.setCantidadObservacionesPersistidas(0);
 								}
 							});
 				}
@@ -173,14 +193,13 @@ public class AplicacionWeb implements EntryPoint {
 				// TODO: hacer
 			}
 		};
-DisclosurePanel dp=new DisclosurePanel("");
-dp.setAnimationEnabled(true);
-dp.setOpen(true);
+		final DisclosurePanel dp = new DisclosurePanel(constantes.menu());
+		dp.setAnimationEnabled(true);
+		dp.setOpen(true);
 
 		// Create a menu bar
 		MenuBar menu = new MenuBar(true);
 		menu.setAutoOpen(true);
-		//menu.setWidth("340px");
 		menu.setAnimationEnabled(true);
 
 		MenuBar observacionesMenu = new MenuBar(true);
@@ -207,19 +226,38 @@ dp.setOpen(true);
 			}
 		});
 		configuracionMenu.addItem(mi);
-		configuracionMenu.addItem(constantes.eliminarObservacionesLocales(), eliminarObservacionesLocalesCommand);
+		configuracionMenu.addItem(constantes.eliminarObservacionesLocales(),
+				eliminarObservacionesLocalesCommand);
 
-		
 		menu.addItem(new MenuItem(constantes.configuracion(), configuracionMenu));
 
 		ayudaMenu.addItem(constantes.ayuda(), nadaCommand);
 		ayudaMenu.addItem(constantes.acercaDe(), nadaCommand);
 		menu.addItem(new MenuItem("Ayuda", ayudaMenu));
 
-
 		dp.setContent(menu);
-		
+		dp.addOpenHandler(new OpenHandler<DisclosurePanel>() {
+			@Override
+			public void onOpen(OpenEvent<DisclosurePanel> event) {
+				RootPanel rootPanel = RootPanel.get("principalContainer");
+				RootPanel rootPanel2 = RootPanel.get("principalContainer2");
 
+				rootPanel2.add(rootPanel.getWidget(0));
+				rootPanel.clear();
+			}
+		});
+		dp.addCloseHandler(new CloseHandler<DisclosurePanel>() {
+
+			@Override
+			public void onClose(CloseEvent<DisclosurePanel> event) {
+				RootPanel rootPanel2 = RootPanel.get("principalContainer");
+				RootPanel rootPanel = RootPanel.get("principalContainer2");
+
+				rootPanel2.add(rootPanel.getWidget(0));
+				rootPanel.clear();
+
+			}
+		});
 		return dp;
 	}
 
