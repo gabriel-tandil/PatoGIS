@@ -293,8 +293,10 @@ public class VentanaCarga extends FlexTable {
 		laguna.addMouseListener(new TooltipListener(ctes.lagunaTooltip(), 5000));
 		especiesService.getElementos(new AsyncCallback<Map<String, Especie>>() {
 			public void onFailure(Throwable caught) {
-				if (!AplicacionWeb.contexto.isMostroWarningEspeciesOffline()) // si estaba AplicacionWeb.online
-											// aviso que tomare las locales
+				if (!AplicacionWeb.contexto.isMostroWarningEspeciesOffline()) // si
+																				// estaba
+																				// AplicacionWeb.online
+					// aviso que tomare las locales
 					AplicacionWeb.setMensajeAlerta(ctes.errorObtenerEspecies());
 				AplicacionWeb.contexto.setMostroWarningEspeciesOffline(true);
 				especies = ManejadorAlmacenamientoLocal.obtenerMapaEspecies();
@@ -307,7 +309,7 @@ public class VentanaCarga extends FlexTable {
 				especies = (MapaOrdenado<String, Especie>) result;
 				ManejadorAlmacenamientoLocal.persistirMapaEspecies(especies);
 				llenarCombosEspecies();
-				cambiarAModoOnLine();				
+				cambiarAModoOnLine();
 			}
 
 			private void llenarCombosEspecies() {
@@ -328,13 +330,16 @@ public class VentanaCarga extends FlexTable {
 		tipoMatrizProductivaService
 				.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
 					public void onFailure(Throwable caught) {
-						if (!AplicacionWeb.contexto.isMostroWarningTiposMatrizProductivaOffline()) // si estaba
-													// AplicacionWeb.online
-													// aviso que tomare las
-													// locales
+						if (!AplicacionWeb.contexto
+								.isMostroWarningTiposMatrizProductivaOffline()) // si
+																				// estaba
+							// AplicacionWeb.online
+							// aviso que tomare las
+							// locales
 							AplicacionWeb.setMensajeAlerta(ctes
 									.errorObtenerTiposMatrizProductiva());
-						AplicacionWeb.contexto.setMostroWarningTiposMatrizProductivaOffline(true);
+						AplicacionWeb.contexto
+								.setMostroWarningTiposMatrizProductivaOffline(true);
 						tiposMatrizProductiva = ManejadorAlmacenamientoLocal
 								.obtenerMapaTiposMatrizProductiva();
 						cambiarAModoOffLine();
@@ -366,13 +371,16 @@ public class VentanaCarga extends FlexTable {
 		ubicacionService
 				.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 					public void onFailure(Throwable caught) {
-						if (!AplicacionWeb.contexto.isMostroWarningUbicacionesOffline()) // si estaba
-													// AplicacionWeb.online
-													// aviso que tomare las
-													// locales
+						if (!AplicacionWeb.contexto
+								.isMostroWarningUbicacionesOffline()) // si
+																		// estaba
+							// AplicacionWeb.online
+							// aviso que tomare las
+							// locales
 							AplicacionWeb.setMensajeAlerta(ctes
 									.errorObtenerUbicaciones());
-						AplicacionWeb.contexto.setMostroWarningUbicacionesOffline(true);
+						AplicacionWeb.contexto
+								.setMostroWarningUbicacionesOffline(true);
 						ubicaciones = ManejadorAlmacenamientoLocal
 								.obtenerMapaUbicacions();
 						cambiarAModoOffLine();
@@ -406,12 +414,16 @@ public class VentanaCarga extends FlexTable {
 
 		horaInicio = new TimeBox();
 		horaInicio.setWidth("45px");
-		horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
-				.format(new Date()));
+		// horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
+		// .format(new Date()));
+		horaInicio.addMouseListener(new TooltipListener(ctes
+				.horaInicioTooltip(), 5000));
 		horaFin = new TimeBox();
 		horaFin.setWidth("45px");
 		horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(
 				new Date()));
+		horaFin.addMouseListener(new TooltipListener(ctes.horaFinTooltip(),
+				5000));
 
 		horizontalPanel1.add(dateBox);
 		horizontalPanel1.add(horaInicio);
@@ -586,7 +598,8 @@ public class VentanaCarga extends FlexTable {
 	protected void cambiarAModoOnLine() {
 		AplicacionWeb.contexto.setOnline(true);
 		AplicacionWeb.contexto.setMostroWarningEspeciesOffline(true);
-		AplicacionWeb.contexto.setMostroWarningTiposMatrizProductivaOffline(true);
+		AplicacionWeb.contexto
+				.setMostroWarningTiposMatrizProductivaOffline(true);
 		AplicacionWeb.contexto.setMostroWarningUbicacionesOffline(true);
 		uploader.setVisible(true);
 		labelFotos.setVisible(true);
@@ -921,19 +934,25 @@ public class VentanaCarga extends FlexTable {
 			observacionesFoto[i] = getObservacionFoto(i);
 		}
 		observacion.setObservacionesFoto(observacionesFoto);
-
-		Date fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
-				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
-				.getFormat(ctes.formatoHora()).parse(horaInicio.getValue())
-				.getHours(), DateTimeFormat.getFormat(ctes.formatoHora())
-				.parse(horaInicio.getValue()).getMinutes());
-		observacion.setInicio(fecha);
-		fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
-				.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
-				.getFormat(ctes.formatoHora()).parse(horaFin.getValue())
-				.getHours(), DateTimeFormat.getFormat(ctes.formatoHora())
-				.parse(horaFin.getValue()).getMinutes());
-		observacion.setFin(fecha);
+		if (ctes.formatoHora().equals(horaInicio.getValue()))
+			throw new ValidacionException(ctes.validacionHoraInicio());
+		try {
+			Date fecha = new Date(dateBox.getValue().getYear(), dateBox
+					.getValue().getMonth(), dateBox.getValue().getDate(),
+					DateTimeFormat.getFormat(ctes.formatoHora())
+							.parse(horaInicio.getValue()).getHours(),
+					DateTimeFormat.getFormat(ctes.formatoHora())
+							.parse(horaInicio.getValue()).getMinutes());
+			observacion.setInicio(fecha);
+			fecha = new Date(dateBox.getValue().getYear(), dateBox.getValue()
+					.getMonth(), dateBox.getValue().getDate(), DateTimeFormat
+					.getFormat(ctes.formatoHora()).parse(horaFin.getValue())
+					.getHours(), DateTimeFormat.getFormat(ctes.formatoHora())
+					.parse(horaFin.getValue()).getMinutes());
+			observacion.setFin(fecha);
+		} catch (Exception e) {
+			throw new ValidacionException(ctes.validacionFechaYHoras());
+		}
 
 		return observacion;
 	}

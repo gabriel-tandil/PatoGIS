@@ -40,6 +40,7 @@ public class AplicacionWeb implements EntryPoint {
 	public static PopupPanel alertaPopup = new PopupPanel();
 	private static String mensajeActual;
 	public static Contexto contexto = new Contexto();
+	final static DisclosurePanel dp = new DisclosurePanel(constantes.menu());;
 	final ObservacionServiceAsync observacionService = GWT
 			.create(ObservacionService.class);
 	private static Timer t = new Timer() {
@@ -95,7 +96,10 @@ public class AplicacionWeb implements EntryPoint {
 	}
 
 	public static void cargarObservacion() {
-		RootPanel rootPanel = RootPanel.get("principalContainer2");
+
+		RootPanel rootPanel = RootPanel
+				.get((dp.isOpen() ? "principalContainer2"
+						: "principalContainer"));
 		rootPanel.clear();
 		rootPanel.add(new VentanaCarga());
 	}
@@ -193,7 +197,7 @@ public class AplicacionWeb implements EntryPoint {
 				// TODO: hacer
 			}
 		};
-		final DisclosurePanel dp = new DisclosurePanel(constantes.menu());
+
 		dp.setAnimationEnabled(true);
 		dp.setOpen(true);
 
