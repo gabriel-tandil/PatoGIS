@@ -907,26 +907,30 @@ public class VentanaCarga extends FlexTable {
 		observacion.setIdUbicacion(getUbicacion().getId());
 
 		observacion.setObservacionClima(getObservacionClima());
+		List<ObservacionEspecie> observacionesEspecie = new ArrayList<ObservacionEspecie>();
 
-		ObservacionEspecie[] observacionesEspecie = new ObservacionEspecie[widgetsObsEspecie
-				.size()];
-		for (int i = 0, ii = 0; i < widgetsObsEspecie.size(); i++) {
-			observacionesEspecie[ii] = getObservacionEspecie(widgetsObsEspecie
+		for (int i = 0; i < widgetsObsEspecie.size(); i++) {
+			ObservacionEspecie oe = getObservacionEspecie(widgetsObsEspecie
 					.get(i));
-			if (observacionesEspecie[ii] != null)
-				ii++;
+			if (oe != null) {
+				observacionesEspecie.add(oe);
+			}
 		}
-		observacion.setObservacionesEspecie(observacionesEspecie);
+		observacion.setObservacionesEspecie(observacionesEspecie
+				.toArray(new ObservacionEspecie[observacionesEspecie.size()]));
 
-		ObservacionMatrizProductiva[] obsMatrizProductiva = new ObservacionMatrizProductiva[widgetsObsMatrizProductiva
-				.size()];
-		for (int i = 0, ii = 0; i < widgetsObsMatrizProductiva.size(); i++) {
-			obsMatrizProductiva[ii] = getObservacionMatrizProductiva(widgetsObsMatrizProductiva
+		List<ObservacionMatrizProductiva> obsMatrizProductiva = new ArrayList<ObservacionMatrizProductiva>();
+		for (int i = 0; i < widgetsObsMatrizProductiva.size(); i++) {
+			ObservacionMatrizProductiva omp = getObservacionMatrizProductiva(widgetsObsMatrizProductiva
 					.get(i));
-			if (obsMatrizProductiva[ii] != null)
-				ii++;
+
+			if (omp != null) {
+				obsMatrizProductiva.add(omp);
+			}
 		}
-		observacion.setObservacionesMatrizProductiva(obsMatrizProductiva);
+		observacion.setObservacionesMatrizProductiva(obsMatrizProductiva
+				.toArray(new ObservacionMatrizProductiva[obsMatrizProductiva
+						.size()]));
 
 		ObservacionFoto[] observacionesFoto = new ObservacionFoto[imagenes
 				.size()];

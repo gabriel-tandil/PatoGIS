@@ -300,7 +300,7 @@ public class ManejadorAlmacenamientoLocal {
 		result.put("observacionesEspecie", observacionesEspecie);
 
 		JSONArray observacionesMatrizProductiva = new JSONArray();
-		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
+		for (int i = 0; i < obs.getObservacionesMatrizProductiva().length; i++) {
 			ObservacionMatrizProductiva obsMatrizProductiva = obs
 					.getObservacionesMatrizProductiva()[i];
 			JSONObject observacionMatrizProductiva = new JSONObject();

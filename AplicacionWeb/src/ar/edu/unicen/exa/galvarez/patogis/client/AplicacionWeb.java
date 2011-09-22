@@ -186,6 +186,7 @@ public class AplicacionWeb implements EntryPoint {
 											.observacionGuardada());
 									ManejadorAlmacenamientoLocal
 											.setCantidadObservacionesPersistidas(0);
+									actualizarCantidadObservacionesLocales();
 								}
 							});
 				}
@@ -245,8 +246,8 @@ public class AplicacionWeb implements EntryPoint {
 			public void onOpen(OpenEvent<DisclosurePanel> event) {
 				RootPanel rootPanel = RootPanel.get("principalContainer");
 				RootPanel rootPanel2 = RootPanel.get("principalContainer2");
-
-				rootPanel2.add(rootPanel.getWidget(0));
+				if (rootPanel.getWidgetCount() > 0)
+					rootPanel2.add(rootPanel.getWidget(0));
 				rootPanel.clear();
 			}
 		});
@@ -256,7 +257,7 @@ public class AplicacionWeb implements EntryPoint {
 			public void onClose(CloseEvent<DisclosurePanel> event) {
 				RootPanel rootPanel2 = RootPanel.get("principalContainer");
 				RootPanel rootPanel = RootPanel.get("principalContainer2");
-
+				if (rootPanel.getWidgetCount() > 0)
 				rootPanel2.add(rootPanel.getWidget(0));
 				rootPanel.clear();
 
