@@ -221,14 +221,17 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static void persistirObservacion(Observacion observacion) {
-		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
-
 		JSONObject jo = observacionAJson(observacion);
-		storage.put("observacion" + cantidadObservacionesPersistidas,
-				jo.toString());
-		setCantidadObservacionesPersistidas(cantidadObservacionesPersistidas + 1);
+		persistirObservacionString(jo.toString());
 	}
 
+	public static void persistirObservacionString(String observacion){
+		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
+		storage.put("observacion" + cantidadObservacionesPersistidas,
+				observacion);
+		setCantidadObservacionesPersistidas(cantidadObservacionesPersistidas + 1);
+	}
+	
 	public static List<Observacion> obtenerObservacionesPersistidas() {
 		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
 		List<Observacion> observaciones = new ArrayList<Observacion>(
@@ -256,7 +259,7 @@ public class ManejadorAlmacenamientoLocal {
 		result.put("estado", new JSONString(obs.getEstado()));
 		result.put("fiabilidad", new JSONString(obs.getFiabilidad()));
 		result.put("fin",
-				new JSONString(DateTimeFormat.getFormat("yyyyMMdd HH:MM")
+				new JSONString(DateTimeFormat.getFormat("yyyyMMdd hh:mm")
 						.format(obs.getFin())));
 
 		result.put("idCampana", new JSONNumber(obs.getIdCampana()));
@@ -264,7 +267,7 @@ public class ManejadorAlmacenamientoLocal {
 		result.put("idUsuario", new JSONNumber(obs.getIdUsuario()));
 		result.put("idUsuarioApoyo", new JSONNumber(obs.getIdUsuarioApoyo()));
 		result.put("inicio",
-				new JSONString(DateTimeFormat.getFormat("yyyyMMdd HH:MM")
+				new JSONString(DateTimeFormat.getFormat("yyyyMMdd hh:mm")
 						.format(obs.getInicio())));
 
 		result.put("observaciones", new JSONString(obs.getObservaciones()));
@@ -324,7 +327,7 @@ public class ManejadorAlmacenamientoLocal {
 
 		obs.setEstado(((JSONString) value.get("estado")).stringValue());
 		obs.setFiabilidad(((JSONString) value.get("fiabilidad")).stringValue());
-		obs.setFin(DateTimeFormat.getFormat("yyyyMMdd HH:MM").parse(
+		obs.setFin(DateTimeFormat.getFormat("yyyyMMdd hh:mm").parse(
 				((JSONString) value.get("fin")).stringValue()));
 		obs.setIdCampana((int) ((JSONNumber) value.get("idCampana"))
 				.doubleValue());
@@ -334,7 +337,7 @@ public class ManejadorAlmacenamientoLocal {
 				.doubleValue());
 		obs.setIdUsuarioApoyo((int) ((JSONNumber) value.get("idUsuarioApoyo"))
 				.doubleValue());
-		obs.setInicio(DateTimeFormat.getFormat("yyyyMMdd HH:MM").parse(
+		obs.setInicio(DateTimeFormat.getFormat("yyyyMMdd hh:mm").parse(
 				((JSONString) value.get("inicio")).stringValue()));
 		obs.setObservaciones(((JSONString) value.get("observaciones"))
 				.stringValue());
@@ -398,5 +401,5 @@ public class ManejadorAlmacenamientoLocal {
 		storage.put("cantidadObservacionesPersistidas",
 				Integer.toString(i));
 	}
-
+	
 }

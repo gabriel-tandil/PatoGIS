@@ -124,7 +124,7 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 		ObservacionMapper om = sqlSession
 				.getMapper(ObservacionMapper.class);
 		List<Observacion> lo = om.selectByExample(oe);
-		elemento.setId(lo.get(lo.size()-1).getId());
+		elemento.setId(lo.get(0).getId());
 		
 		} catch (Exception e) {
 

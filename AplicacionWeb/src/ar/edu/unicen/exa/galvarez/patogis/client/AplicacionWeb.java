@@ -83,6 +83,7 @@ public class AplicacionWeb implements EntryPoint {
 		alertaPopup.setAnimationEnabled(true);
 		alertaPopup.setAutoHideEnabled(true);
 		alertaPopup.setModal(true);
+
 	}
 
 	public static void actualizarCantidadObservacionesLocales() {
@@ -168,9 +169,14 @@ public class AplicacionWeb implements EntryPoint {
 
 		Command persistirLocalesCommand = new Command() {
 			public void execute() {
+				persistirObservacionesLocales();
+			}
+
+			private void persistirObservacionesLocales() {
 				List<Observacion> observaciones = ManejadorAlmacenamientoLocal
 						.obtenerObservacionesPersistidas();
-				for (Observacion observacion : observaciones) {
+				if (observaciones.size() > 0) {
+					Observacion observacion = observaciones.get(observaciones.size()-1);
 					observacionService.addElemento(observacion,
 							new AsyncCallback<Void>() {
 
@@ -185,12 +191,15 @@ public class AplicacionWeb implements EntryPoint {
 									AplicacionWeb.setMensajeAlerta(constantes
 											.observacionGuardada());
 									ManejadorAlmacenamientoLocal
-											.setCantidadObservacionesPersistidas(0);
+											.setCantidadObservacionesPersistidas(ManejadorAlmacenamientoLocal
+													.getCantidadObservacionesPersistidas() - 1);
 									actualizarCantidadObservacionesLocales();
+									persistirObservacionesLocales();
 								}
 							});
 				}
 			}
+
 		};
 
 		Command nadaCommand = new Command() {
@@ -258,9 +267,8 @@ public class AplicacionWeb implements EntryPoint {
 				RootPanel rootPanel2 = RootPanel.get("principalContainer");
 				RootPanel rootPanel = RootPanel.get("principalContainer2");
 				if (rootPanel.getWidgetCount() > 0)
-				rootPanel2.add(rootPanel.getWidget(0));
+					rootPanel2.add(rootPanel.getWidget(0));
 				rootPanel.clear();
-
 			}
 		});
 		return dp;
