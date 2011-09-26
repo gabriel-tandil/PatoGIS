@@ -1,2 +1,7 @@
 # Module aplicacionweb
 # RPC service class, partial path of RPC policy file
+ar.edu.unicen.exa.galvarez.patogis.client.ArchivosService, FDD6834791EE1D2CFB1158B38A6B8646.gwt.rpc
+ar.edu.unicen.exa.galvarez.patogis.client.TipoMatrizProductivaService, C439D96DD6FF272D869F86D20F0A9D89.gwt.rpc
+ar.edu.unicen.exa.galvarez.patogis.client.UbicacionService, 71EFA43D64FA735B87B5EFDF36D0A544.gwt.rpc
+ar.edu.unicen.exa.galvarez.patogis.client.ObservacionService, 04ED2E9BDD7A939A65E32294B630B873.gwt.rpc
+ar.edu.unicen.exa.galvarez.patogis.client.EspeciesService, 203151B46F0C18CF30F74797C7A29853.gwt.rpc
