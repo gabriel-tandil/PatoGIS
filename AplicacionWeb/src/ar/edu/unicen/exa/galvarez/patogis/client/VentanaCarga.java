@@ -432,7 +432,7 @@ public class VentanaCarga extends FlexTable {
 						ManejadorAlmacenamientoLocal
 								.persistirMapaUbicacions(ubicaciones);
 						if (laguna.getSelectedIndex() <= 0)
-							agregarItemsCombo(laguna, ubicaciones.keyList());
+							agregarItemsCombo(laguna, ubicaciones.keyList(), new ObtenerTextoUbicacion());
 						cambiarAModoOnLine();
 					}
 
