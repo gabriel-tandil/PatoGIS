@@ -12,4 +12,6 @@ public interface TipoMatrizProductivaWS extends Remote {
 
 	public void addElemento(TipoMatrizProductiva elemento, Integer idUsuario)
 			throws RemoteException;
+	
+	public TipoMatrizProductiva[] getElementosConCantidadObs() throws RemoteException;
 }

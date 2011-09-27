@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.AlcanceEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ConteoEnum;
@@ -245,7 +244,44 @@ public class VentanaCarga extends FlexTable {
 					.get(clave).getNombreCientifico() : clave);
 		}
 	};
+	class ObtenerTextoUbicacion implements ObtenerTexto {
+		@Override
+		public String getValor(String clave) {
+			return (ubicaciones.get(clave).getNombre()+" ("+ ubicaciones.get(clave).getCoordenadas()+")");
+		}
+	};
+	
+	class ComparadorTipoMatrizProductiva implements Comparator<String> {
+		public int compare(String arg0, String arg1) {
+			try {
+				TipoMatrizProductiva argE0 = tiposMatrizProductiva.get(arg0);
+				TipoMatrizProductiva argE1 = tiposMatrizProductiva.get(arg1);
+				if (argE0.getCantidadObservaciones() == null
+						&& argE1.getCantidadObservaciones() == null)
+					return argE0.getNombre()
+							.compareTo(
+									argE1.getNombre());
+				if (argE1.getCantidadObservaciones() == null)
+					return 0;
+				if (argE0.getCantidadObservaciones() == null)
+					return 1;
 
+				if (argE0.getCantidadObservaciones() > argE1
+						.getCantidadObservaciones())
+					return 0;
+				if (argE0.getCantidadObservaciones() < argE1
+						.getCantidadObservaciones())
+					return 1;
+				return argE0.getNombre()
+				.compareTo(
+						argE1.getNombre());
+			} catch (Exception e) {
+				return 0; // por las dudas
+			}
+
+		}
+	};	
+	
 	class ComparadorEspecies implements Comparator<String> {
 		public int compare(String arg0, String arg1) {
 			try {
@@ -357,13 +393,14 @@ public class VentanaCarga extends FlexTable {
 					}
 
 					private void llenarCombosTipoMatrizProductiva() {
+						tiposMatrizProductiva.ordenarClaves(new ComparadorTipoMatrizProductiva());
 						for (Iterator<HorizontalPanel> iterator = widgetsObsMatrizProductiva
 								.iterator(); iterator.hasNext();) {
 							HorizontalPanel hp = iterator.next();
 							ListBox combo = (ListBox) hp.getWidget(0);
 							if (combo.getSelectedIndex() <= 0)
 								agregarItemsCombo(combo,
-										tiposMatrizProductiva.keySet());
+										tiposMatrizProductiva.keyList());
 						}
 					}
 
@@ -385,16 +422,17 @@ public class VentanaCarga extends FlexTable {
 								.obtenerMapaUbicacions();
 						cambiarAModoOffLine();
 						if (laguna.getSelectedIndex() <= 0)
-							agregarItemsCombo(laguna, ubicaciones.keySet());
+							agregarItemsCombo(laguna, ubicaciones.keyList(), new ObtenerTextoUbicacion());
 					}
 
 					@Override
 					public void onSuccess(Map<String, Ubicacion> result) {
 						ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
+						ubicaciones.ordenarClaves();
 						ManejadorAlmacenamientoLocal
 								.persistirMapaUbicacions(ubicaciones);
 						if (laguna.getSelectedIndex() <= 0)
-							agregarItemsCombo(laguna, ubicaciones.keySet());
+							agregarItemsCombo(laguna, ubicaciones.keyList());
 						cambiarAModoOnLine();
 					}
 
@@ -621,7 +659,7 @@ public class VentanaCarga extends FlexTable {
 		}
 	}
 
-	private void agregarItemsCombo(final ListBox comboBox, Set<String> list) {
+	private void agregarItemsCombo(final ListBox comboBox, Collection<String> list) {
 		agregarItemsCombo(comboBox, list, new ObtenerMismoTexto());
 	}
 

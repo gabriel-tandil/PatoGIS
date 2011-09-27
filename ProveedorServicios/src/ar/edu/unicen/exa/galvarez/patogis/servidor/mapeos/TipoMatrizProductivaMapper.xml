@@ -236,4 +236,22 @@
     set nombre = #{nombre,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+	<resultMap id="ConCantidadObsResultMap"
+		type="ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="nombre" jdbcType="VARCHAR" property="nombre" />
+		<result column="cantidad" jdbcType="VARCHAR" property="cantidadObservaciones" />
+	</resultMap>
+	<select id="selectConCantidadObs" resultMap="ConCantidadObsResultMap">
+		select
+		<include refid="Base_Column_List" />
+		, cantidad.cantidad
+		from
+		tipo_matriz_productiva LEFT OUTER JOIN
+		(select count(*)
+		cantidad,id_tipo_matriz_productiva from observacion_matriz_productiva group by
+		id_tipo_matriz_productiva)
+		cantidad on tipo_matriz_productiva.id=cantidad.id_tipo_matriz_productiva
+	</select>
 </mapper>

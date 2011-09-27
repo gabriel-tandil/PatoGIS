@@ -5,17 +5,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar"/>
-   <element name="addElemento">
-    <complexType>
-     <sequence>
-      <element name="elemento" type="tns1:TipoMatrizProductiva"/>
-      <element name="idUsuario" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="addElementoResponse">
-    <complexType/>
-   </element>
    <element name="getElementos">
     <complexType/>
    </element>
@@ -26,10 +15,32 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="addElemento">
+    <complexType>
+     <sequence>
+      <element name="in0" type="tns1:TipoMatrizProductiva"/>
+      <element name="in1" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addElementoResponse">
+    <complexType/>
+   </element>
+   <element name="getElementosConCantidadObs">
+    <complexType/>
+   </element>
+   <element name="getElementosConCantidadObsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getElementosConCantidadObsReturn" type="tns1:TipoMatrizProductiva"/>
+     </sequence>
+    </complexType>
+   </element>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
    <complexType name="TipoMatrizProductiva">
     <sequence>
+     <element name="cantidadObservaciones" nillable="true" type="xsd:int"/>
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="nombre" nillable="true" type="xsd:string"/>
     </sequence>
@@ -40,6 +51,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="addElementoResponse">
 
       <wsdl:part element="impl:addElementoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElementosConCantidadObsResponse">
+
+      <wsdl:part element="impl:getElementosConCantidadObsResponse" name="parameters">
 
       </wsdl:part>
 
@@ -69,19 +88,15 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getElementosConCantidadObsRequest">
+
+      <wsdl:part element="impl:getElementosConCantidadObs" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:portType name="TipoMatrizProductivaWSImpl">
-
-      <wsdl:operation name="addElemento">
-
-         <wsdl:input message="impl:addElementoRequest" name="addElementoRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:addElementoResponse" name="addElementoResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="getElementos">
 
@@ -95,11 +110,53 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="addElemento">
+
+         <wsdl:input message="impl:addElementoRequest" name="addElementoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addElementoResponse" name="addElementoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElementosConCantidadObs">
+
+         <wsdl:input message="impl:getElementosConCantidadObsRequest" name="getElementosConCantidadObsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getElementosConCantidadObsResponse" name="getElementosConCantidadObsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="TipoMatrizProductivaWSImplSoapBinding" type="impl:TipoMatrizProductivaWSImpl">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getElementos">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElementosRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElementosResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="addElemento">
 
@@ -119,17 +176,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getElementos">
+      <wsdl:operation name="getElementosConCantidadObs">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getElementosRequest">
+         <wsdl:input name="getElementosConCantidadObsRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getElementosResponse">
+         <wsdl:output name="getElementosConCantidadObsResponse">
 
             <wsdlsoap:body use="literal"/>
 

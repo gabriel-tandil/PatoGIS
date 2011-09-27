@@ -41,5 +41,10 @@ public class MapaOrdenado<K, V> extends HashMap<K, V> implements Map<K, V> {
 	public void ordenarClaves(Comparator c){
 		Collections.sort(keyList(), c);
 	}
+
+	@SuppressWarnings("unchecked")
+	public void ordenarClaves() {
+		Collections.sort(((List<String>)keyList()) );
+	}
 	
 }

@@ -76,4 +76,6 @@ public interface TipoMatrizProductivaMapper {
 	 * @mbggenerated  Sun Jun 12 16:42:33 ART 2011
 	 */
 	int updateByPrimaryKey(TipoMatrizProductiva record);
+
+	List<TipoMatrizProductiva> selectConCantidadObs();
 }
