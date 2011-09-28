@@ -11,10 +11,12 @@ public class TimeBox extends TextBox {
 	private String format = DEFAULT_TIME_FORMAT;
 
 	public TimeBox() {
+		setFormat(DEFAULT_TIME_FORMAT);
 		super.sinkEvents(Event.ONKEYDOWN);
 	}
 
 	public TimeBox(String format) {
+		setFormat(format);
 		super.sinkEvents(Event.ONKEYDOWN);
 	}
 
