@@ -26,7 +26,7 @@ TipoMatrizProductivaService {
 		try {
 			TipoMatrizProductivaWSImpl tipoMatrizProductivaWS = tipoMatrizProductivaWSImplServiceLocator
 			.getTipoMatrizProductivaWSImpl();
-			TipoMatrizProductiva[] tiposMatrizProductiva = tipoMatrizProductivaWS.getElementos();
+			TipoMatrizProductiva[] tiposMatrizProductiva = tipoMatrizProductivaWS.getElementosConCantidadObs();
 
 				for (int i = 0; i < tiposMatrizProductiva.length; i++) {
 					l.put(tiposMatrizProductiva[i].getNombre(),tiposMatrizProductiva[i]);

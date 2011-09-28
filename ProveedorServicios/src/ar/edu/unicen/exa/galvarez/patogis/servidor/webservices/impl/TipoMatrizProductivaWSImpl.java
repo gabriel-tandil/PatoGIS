@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.EspecieMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.TipoMatrizProductivaMapper;
-import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.TipoMatrizProductivaWS;
 
