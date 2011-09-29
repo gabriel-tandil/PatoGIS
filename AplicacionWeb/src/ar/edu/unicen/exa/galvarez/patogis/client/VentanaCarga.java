@@ -35,6 +35,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.VientoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
+import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -43,19 +44,27 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
@@ -452,14 +461,14 @@ public class VentanaCarga extends FlexTable {
 
 		horaInicio = new TimeBox();
 		horaInicio.setWidth("45px");
-		// horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
-		// .format(new Date()));
+		horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
+		 .format(new Date()));
 		horaInicio.addMouseListener(new TooltipListener(ctes
 				.horaInicioTooltip(), 5000));
 		horaFin = new TimeBox();
 		horaFin.setWidth("45px");
-		horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(
-				new Date()));
+	//	horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(
+	//			new Date()));
 		horaFin.addMouseListener(new TooltipListener(ctes.horaFinTooltip(),
 				5000));
 
@@ -596,36 +605,7 @@ public class VentanaCarga extends FlexTable {
 		sendButton.addClickHandler(new ClickHandler() {
 
 			public void onClick(ClickEvent event) {
-				final Observacion observacion;
-				try {
-					observacion = getObservacion();
-
-					observacionService.addElemento(observacion,
-							new AsyncCallback<Void>() {
-
-								@Override
-								public void onFailure(Throwable caught) {
-									AplicacionWeb.setMensajeAlerta(ctes
-											.observacionGuardadaLocalmente());
-									ManejadorAlmacenamientoLocal
-											.persistirObservacion(observacion);
-									AplicacionWeb
-											.actualizarCantidadObservacionesLocales();
-									AplicacionWeb.cargarObservacion();
-								}
-
-								@Override
-								public void onSuccess(Void result) {
-									AplicacionWeb.setMensajeAlerta(ctes
-											.observacionGuardada());
-									AplicacionWeb.cargarObservacion();
-
-								}
-							});
-
-				} catch (ValidacionException e) {
-					AplicacionWeb.setMensajeAlerta(e.getMensaje());
-				}
+				grabarObservacion();
 			}
 		});
 		setWidget(9, 1, sendButton);
@@ -976,8 +956,6 @@ public class VentanaCarga extends FlexTable {
 			observacionesFoto[i] = getObservacionFoto(i);
 		}
 		observacion.setObservacionesFoto(observacionesFoto);
-		if (ctes.formatoHora().equals(horaInicio.getValue()))
-			throw new ValidacionException(ctes.validacionHoraInicio());
 		try {
 			Date fecha = new Date(dateBox.getValue().getYear(), dateBox
 					.getValue().getMonth(), dateBox.getValue().getDate(),
@@ -997,6 +975,97 @@ public class VentanaCarga extends FlexTable {
 		}
 
 		return observacion;
+	}
+
+	private void grabarObservacion() {
+		final Observacion observacion;
+		if ("".equals(horaFin.getText())){
+			class NoHoraFinDialog extends DialogBox {
+
+				public NoHoraFinDialog() {
+					setText("No selecciono hora de Fin ¿desea establecer la actual?");
+					
+					setAnimationEnabled(true);
+					Button aceptarButton = new Button("Aceptar");
+					Button closeButton = new Button("Cancelar");
+					closeButton.addClickHandler(new ClickHandler() {
+
+						@Override
+						public void onClick(ClickEvent event) {
+							hide();
+						}
+					});
+					aceptarButton.addClickHandler(new ClickHandler() {
+
+						@Override
+						public void onClick(ClickEvent event) {
+								horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(
+										new Date()));
+								hide();
+								grabarObservacion();
+						}
+					});
+					HorizontalPanel botones = new HorizontalPanel();
+					botones.add(closeButton);
+					botones.add(aceptarButton);
+
+					DockPanel dock = new DockPanel();
+					dock.setSpacing(4);
+
+					dock.add(botones, DockPanel.SOUTH);
+
+					botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+					dock.setWidth("100%");
+					setWidget(dock);
+
+
+				}
+
+				@Override
+				public void center() {
+					setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+						public void setPosition(int offsetWidth, int offsetHeight) {
+							int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
+							int top = (Window.getScrollTop()+(Window.getClientHeight() - offsetHeight) / 2) >> 0;
+							setPopupPosition(left, top);
+						}
+					});
+				}
+			}
+			DialogBox db=new NoHoraFinDialog();
+			db.center();
+		}
+		else
+		
+		try {
+			observacion = getObservacion();
+
+			observacionService.addElemento(observacion,
+					new AsyncCallback<Void>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							AplicacionWeb.setMensajeAlerta(ctes
+									.observacionGuardadaLocalmente());
+							ManejadorAlmacenamientoLocal
+									.persistirObservacion(observacion);
+							AplicacionWeb
+									.actualizarCantidadObservacionesLocales();
+							AplicacionWeb.cargarObservacion();
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							AplicacionWeb.setMensajeAlerta(ctes
+									.observacionGuardada());
+							AplicacionWeb.cargarObservacion();
+
+						}
+					});
+
+		} catch (ValidacionException e) {
+			AplicacionWeb.setMensajeAlerta(e.getMensaje());
+		}
 	}
 
 }

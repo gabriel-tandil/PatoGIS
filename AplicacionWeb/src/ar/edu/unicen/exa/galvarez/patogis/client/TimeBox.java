@@ -44,7 +44,7 @@ public class TimeBox extends TextBox {
 		// convert 0 - 9 keys on number pad down into normal 0 - 9 range
 		if (keyCode >= 96 && keyCode <= 105) {
 			return keyCode - 48;
-		} else if (keyCode == 81) {
+		} else if (keyCode == 81) {  //qwertyuiop -> 0-9
 			keyCode = 49;
 		} else if (keyCode == 87) {
 			keyCode = 50;
@@ -77,7 +77,7 @@ public class TimeBox extends TextBox {
 		if (keyCode >= 96 && keyCode <= 105) {
 			return true;
 		}
-		// A, M, P keys
+		// QWERTYUIOP keys
 		if (keyCode == 81 || keyCode == 87 || keyCode == 69 || keyCode == 82
 				|| keyCode == 84 || keyCode == 89 || keyCode == 85
 				|| keyCode == 37 || keyCode == 79 || keyCode == 80) {
