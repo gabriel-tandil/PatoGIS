@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2011-09-26 20:23:15 ART
+-- Started on 2011-09-30 20:02:05 ART
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -13,29 +13,25 @@ SET escape_string_warning = off;
 
 --
 -- TOC entry 7 (class 2615 OID 33538)
--- Name: auditoria; Type: SCHEMA; Schema: -; Owner: postgres
+-- Name: auditoria; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA auditoria;
 
 
-ALTER SCHEMA auditoria OWNER TO postgres;
-
 --
--- TOC entry 1080 (class 2612 OID 31545)
--- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: postgres
+-- TOC entry 1123 (class 2612 OID 31545)
+-- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: -
 --
 
 CREATE PROCEDURAL LANGUAGE plpgsql;
 
 
-ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO postgres;
-
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 1018 (class 0 OID 0)
--- Name: box2d; Type: SHELL TYPE; Schema: public; Owner: postgres
+-- TOC entry 1021 (class 0 OID 0)
+-- Name: box2d; Type: SHELL TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE box2d;
@@ -43,8 +39,8 @@ CREATE TYPE box2d;
 
 --
 -- TOC entry 84 (class 1255 OID 31621)
--- Dependencies: 3 1018
--- Name: st_box2d_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1021
+-- Name: st_box2d_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_in(cstring) RETURNS box2d
@@ -52,12 +48,10 @@ CREATE FUNCTION st_box2d_in(cstring) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_in';
 
 
-ALTER FUNCTION public.st_box2d_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 86 (class 1255 OID 31623)
--- Dependencies: 3 1018
--- Name: st_box2d_out(box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1021
+-- Name: st_box2d_out(box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_out(box2d) RETURNS cstring
@@ -65,12 +59,10 @@ CREATE FUNCTION st_box2d_out(box2d) RETURNS cstring
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_out';
 
 
-ALTER FUNCTION public.st_box2d_out(box2d) OWNER TO postgres;
-
 --
--- TOC entry 1017 (class 1247 OID 31599)
--- Dependencies: 86 84 3
--- Name: box2d; Type: TYPE; Schema: public; Owner: postgres
+-- TOC entry 1020 (class 1247 OID 31599)
+-- Dependencies: 3 86 84
+-- Name: box2d; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE box2d (
@@ -82,11 +74,9 @@ CREATE TYPE box2d (
 );
 
 
-ALTER TYPE public.box2d OWNER TO postgres;
-
 --
--- TOC entry 1009 (class 0 OID 0)
--- Name: box3d; Type: SHELL TYPE; Schema: public; Owner: postgres
+-- TOC entry 1012 (class 0 OID 0)
+-- Name: box3d; Type: SHELL TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE box3d;
@@ -94,8 +84,8 @@ CREATE TYPE box3d;
 
 --
 -- TOC entry 60 (class 1255 OID 31591)
--- Dependencies: 3 1009
--- Name: st_box3d_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1012
+-- Name: st_box3d_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box3d_in(cstring) RETURNS box3d
@@ -103,12 +93,10 @@ CREATE FUNCTION st_box3d_in(cstring) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_in';
 
 
-ALTER FUNCTION public.st_box3d_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 61 (class 1255 OID 31592)
--- Dependencies: 3 1009
--- Name: st_box3d_out(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1012
+-- Name: st_box3d_out(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box3d_out(box3d) RETURNS cstring
@@ -116,12 +104,10 @@ CREATE FUNCTION st_box3d_out(box3d) RETURNS cstring
     AS '$libdir/postgis-1.4', 'BOX3D_out';
 
 
-ALTER FUNCTION public.st_box3d_out(box3d) OWNER TO postgres;
-
 --
--- TOC entry 1008 (class 1247 OID 31588)
--- Dependencies: 3 61 60
--- Name: box3d; Type: TYPE; Schema: public; Owner: postgres
+-- TOC entry 1011 (class 1247 OID 31588)
+-- Dependencies: 60 61 3
+-- Name: box3d; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE box3d (
@@ -133,11 +119,9 @@ CREATE TYPE box3d (
 );
 
 
-ALTER TYPE public.box3d OWNER TO postgres;
-
 --
--- TOC entry 1012 (class 0 OID 0)
--- Name: box3d_extent; Type: SHELL TYPE; Schema: public; Owner: postgres
+-- TOC entry 1015 (class 0 OID 0)
+-- Name: box3d_extent; Type: SHELL TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE box3d_extent;
@@ -145,8 +129,8 @@ CREATE TYPE box3d_extent;
 
 --
 -- TOC entry 62 (class 1255 OID 31595)
--- Dependencies: 3 1012
--- Name: box3d_extent_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1015
+-- Name: box3d_extent_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box3d_extent_in(cstring) RETURNS box3d_extent
@@ -154,12 +138,10 @@ CREATE FUNCTION box3d_extent_in(cstring) RETURNS box3d_extent
     AS '$libdir/postgis-1.4', 'BOX3D_in';
 
 
-ALTER FUNCTION public.box3d_extent_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 63 (class 1255 OID 31596)
--- Dependencies: 3 1012
--- Name: box3d_extent_out(box3d_extent); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1015
+-- Name: box3d_extent_out(box3d_extent); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box3d_extent_out(box3d_extent) RETURNS cstring
@@ -167,12 +149,10 @@ CREATE FUNCTION box3d_extent_out(box3d_extent) RETURNS cstring
     AS '$libdir/postgis-1.4', 'BOX3D_extent_out';
 
 
-ALTER FUNCTION public.box3d_extent_out(box3d_extent) OWNER TO postgres;
-
 --
--- TOC entry 1011 (class 1247 OID 31594)
--- Dependencies: 3 62 63
--- Name: box3d_extent; Type: TYPE; Schema: public; Owner: postgres
+-- TOC entry 1014 (class 1247 OID 31594)
+-- Dependencies: 62 63 3
+-- Name: box3d_extent; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE box3d_extent (
@@ -184,11 +164,9 @@ CREATE TYPE box3d_extent (
 );
 
 
-ALTER TYPE public.box3d_extent OWNER TO postgres;
-
 --
--- TOC entry 1015 (class 0 OID 0)
--- Name: chip; Type: SHELL TYPE; Schema: public; Owner: postgres
+-- TOC entry 1018 (class 0 OID 0)
+-- Name: chip; Type: SHELL TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE chip;
@@ -196,8 +174,8 @@ CREATE TYPE chip;
 
 --
 -- TOC entry 80 (class 1255 OID 31616)
--- Dependencies: 3 1015
--- Name: st_chip_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1018
+-- Name: st_chip_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_chip_in(cstring) RETURNS chip
@@ -205,12 +183,10 @@ CREATE FUNCTION st_chip_in(cstring) RETURNS chip
     AS '$libdir/postgis-1.4', 'CHIP_in';
 
 
-ALTER FUNCTION public.st_chip_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 82 (class 1255 OID 31618)
--- Dependencies: 3 1015
--- Name: st_chip_out(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1018
+-- Name: st_chip_out(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_chip_out(chip) RETURNS cstring
@@ -218,12 +194,10 @@ CREATE FUNCTION st_chip_out(chip) RETURNS cstring
     AS '$libdir/postgis-1.4', 'CHIP_out';
 
 
-ALTER FUNCTION public.st_chip_out(chip) OWNER TO postgres;
-
 --
--- TOC entry 1014 (class 1247 OID 31614)
--- Dependencies: 82 3 80
--- Name: chip; Type: TYPE; Schema: public; Owner: postgres
+-- TOC entry 1017 (class 1247 OID 31614)
+-- Dependencies: 3 82 80
+-- Name: chip; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE chip (
@@ -235,11 +209,9 @@ CREATE TYPE chip (
 );
 
 
-ALTER TYPE public.chip OWNER TO postgres;
-
 --
--- TOC entry 1006 (class 0 OID 0)
--- Name: geometry; Type: SHELL TYPE; Schema: public; Owner: postgres
+-- TOC entry 1009 (class 0 OID 0)
+-- Name: geometry; Type: SHELL TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE geometry;
@@ -248,7 +220,7 @@ CREATE TYPE geometry;
 --
 -- TOC entry 30 (class 1255 OID 31558)
 -- Dependencies: 3
--- Name: st_geometry_analyze(internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: st_geometry_analyze(internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_analyze(internal) RETURNS boolean
@@ -256,12 +228,10 @@ CREATE FUNCTION st_geometry_analyze(internal) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_analyze';
 
 
-ALTER FUNCTION public.st_geometry_analyze(internal) OWNER TO postgres;
-
 --
 -- TOC entry 26 (class 1255 OID 31554)
--- Dependencies: 3 1006
--- Name: st_geometry_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1009
+-- Name: st_geometry_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_in(cstring) RETURNS geometry
@@ -269,12 +239,10 @@ CREATE FUNCTION st_geometry_in(cstring) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_in';
 
 
-ALTER FUNCTION public.st_geometry_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 28 (class 1255 OID 31556)
--- Dependencies: 3 1006
--- Name: st_geometry_out(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1009
+-- Name: st_geometry_out(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_out(geometry) RETURNS cstring
@@ -282,12 +250,10 @@ CREATE FUNCTION st_geometry_out(geometry) RETURNS cstring
     AS '$libdir/postgis-1.4', 'LWGEOM_out';
 
 
-ALTER FUNCTION public.st_geometry_out(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 32 (class 1255 OID 31560)
--- Dependencies: 3 1006
--- Name: st_geometry_recv(internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1009
+-- Name: st_geometry_recv(internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_recv(internal) RETURNS geometry
@@ -295,12 +261,10 @@ CREATE FUNCTION st_geometry_recv(internal) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_recv';
 
 
-ALTER FUNCTION public.st_geometry_recv(internal) OWNER TO postgres;
-
 --
 -- TOC entry 34 (class 1255 OID 31562)
--- Dependencies: 3 1006
--- Name: st_geometry_send(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1009
+-- Name: st_geometry_send(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_send(geometry) RETURNS bytea
@@ -308,12 +272,10 @@ CREATE FUNCTION st_geometry_send(geometry) RETURNS bytea
     AS '$libdir/postgis-1.4', 'LWGEOM_send';
 
 
-ALTER FUNCTION public.st_geometry_send(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1005 (class 1247 OID 31552)
--- Dependencies: 30 3 26 28 32 34
--- Name: geometry; Type: TYPE; Schema: public; Owner: postgres
+-- TOC entry 1008 (class 1247 OID 31552)
+-- Dependencies: 30 34 3 32 28 26
+-- Name: geometry; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE geometry (
@@ -329,12 +291,10 @@ CREATE TYPE geometry (
 );
 
 
-ALTER TYPE public.geometry OWNER TO postgres;
-
 --
--- TOC entry 1020 (class 1247 OID 31889)
--- Dependencies: 3 2307
--- Name: geometry_dump; Type: TYPE; Schema: public; Owner: postgres
+-- TOC entry 1023 (class 1247 OID 31889)
+-- Dependencies: 3 2350
+-- Name: geometry_dump; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE geometry_dump AS (
@@ -343,11 +303,9 @@ CREATE TYPE geometry_dump AS (
 );
 
 
-ALTER TYPE public.geometry_dump OWNER TO postgres;
-
 --
--- TOC entry 1029 (class 0 OID 0)
--- Name: pgis_abs; Type: SHELL TYPE; Schema: public; Owner: postgres
+-- TOC entry 1032 (class 0 OID 0)
+-- Name: pgis_abs; Type: SHELL TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE pgis_abs;
@@ -355,8 +313,8 @@ CREATE TYPE pgis_abs;
 
 --
 -- TOC entry 434 (class 1255 OID 32063)
--- Dependencies: 3 1029
--- Name: pgis_abs_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1032
+-- Name: pgis_abs_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pgis_abs_in(cstring) RETURNS pgis_abs
@@ -364,12 +322,10 @@ CREATE FUNCTION pgis_abs_in(cstring) RETURNS pgis_abs
     AS '$libdir/postgis-1.4', 'pgis_abs_in';
 
 
-ALTER FUNCTION public.pgis_abs_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 435 (class 1255 OID 32064)
--- Dependencies: 3 1029
--- Name: pgis_abs_out(pgis_abs); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1032
+-- Name: pgis_abs_out(pgis_abs); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pgis_abs_out(pgis_abs) RETURNS cstring
@@ -377,12 +333,10 @@ CREATE FUNCTION pgis_abs_out(pgis_abs) RETURNS cstring
     AS '$libdir/postgis-1.4', 'pgis_abs_out';
 
 
-ALTER FUNCTION public.pgis_abs_out(pgis_abs) OWNER TO postgres;
-
 --
--- TOC entry 1028 (class 1247 OID 32062)
--- Dependencies: 3 434 435
--- Name: pgis_abs; Type: TYPE; Schema: public; Owner: postgres
+-- TOC entry 1031 (class 1247 OID 32062)
+-- Dependencies: 435 3 434
+-- Name: pgis_abs; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE pgis_abs (
@@ -394,11 +348,9 @@ CREATE TYPE pgis_abs (
 );
 
 
-ALTER TYPE public.pgis_abs OWNER TO postgres;
-
 --
--- TOC entry 1003 (class 0 OID 0)
--- Name: spheroid; Type: SHELL TYPE; Schema: public; Owner: postgres
+-- TOC entry 1006 (class 0 OID 0)
+-- Name: spheroid; Type: SHELL TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE spheroid;
@@ -406,8 +358,8 @@ CREATE TYPE spheroid;
 
 --
 -- TOC entry 22 (class 1255 OID 31548)
--- Dependencies: 3 1003
--- Name: st_spheroid_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1006
+-- Name: st_spheroid_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_spheroid_in(cstring) RETURNS spheroid
@@ -415,12 +367,10 @@ CREATE FUNCTION st_spheroid_in(cstring) RETURNS spheroid
     AS '$libdir/postgis-1.4', 'ellipsoid_in';
 
 
-ALTER FUNCTION public.st_spheroid_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 24 (class 1255 OID 31550)
--- Dependencies: 3 1003
--- Name: st_spheroid_out(spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1006
+-- Name: st_spheroid_out(spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_spheroid_out(spheroid) RETURNS cstring
@@ -428,12 +378,10 @@ CREATE FUNCTION st_spheroid_out(spheroid) RETURNS cstring
     AS '$libdir/postgis-1.4', 'ellipsoid_out';
 
 
-ALTER FUNCTION public.st_spheroid_out(spheroid) OWNER TO postgres;
-
 --
--- TOC entry 1002 (class 1247 OID 31546)
--- Dependencies: 3 22 24
--- Name: spheroid; Type: TYPE; Schema: public; Owner: postgres
+-- TOC entry 1005 (class 1247 OID 31546)
+-- Dependencies: 22 3 24
+-- Name: spheroid; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE spheroid (
@@ -445,14 +393,12 @@ CREATE TYPE spheroid (
 );
 
 
-ALTER TYPE public.spheroid OWNER TO postgres;
-
 SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 717 (class 1255 OID 33568)
--- Dependencies: 1080 7
--- Name: fallar_on_insert_usuario_tmp(); Type: FUNCTION; Schema: auditoria; Owner: postgres
+-- TOC entry 708 (class 1255 OID 33568)
+-- Dependencies: 1123 7
+-- Name: fallar_on_insert_usuario_tmp(); Type: FUNCTION; Schema: auditoria; Owner: -
 --
 
 CREATE FUNCTION fallar_on_insert_usuario_tmp() RETURNS trigger
@@ -463,12 +409,10 @@ end
 $$;
 
 
-ALTER FUNCTION auditoria.fallar_on_insert_usuario_tmp() OWNER TO postgres;
-
 --
--- TOC entry 2719 (class 0 OID 0)
--- Dependencies: 717
--- Name: FUNCTION fallar_on_insert_usuario_tmp(); Type: COMMENT; Schema: auditoria; Owner: postgres
+-- TOC entry 2863 (class 0 OID 0)
+-- Dependencies: 708
+-- Name: FUNCTION fallar_on_insert_usuario_tmp(); Type: COMMENT; Schema: auditoria; Owner: -
 --
 
 COMMENT ON FUNCTION fallar_on_insert_usuario_tmp() IS 'para que no deje insertar';
@@ -478,8 +422,8 @@ SET search_path = public, pg_catalog;
 
 --
 -- TOC entry 513 (class 1255 OID 32154)
--- Dependencies: 3 1005
--- Name: _st_asgeojson(integer, geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: _st_asgeojson(integer, geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_asgeojson(integer, geometry, integer, integer) RETURNS text
@@ -487,12 +431,10 @@ CREATE FUNCTION _st_asgeojson(integer, geometry, integer, integer) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asGeoJson';
 
 
-ALTER FUNCTION public._st_asgeojson(integer, geometry, integer, integer) OWNER TO postgres;
-
 --
 -- TOC entry 496 (class 1255 OID 32137)
--- Dependencies: 3 1005
--- Name: _st_asgml(integer, geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: _st_asgml(integer, geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_asgml(integer, geometry, integer, integer) RETURNS text
@@ -500,12 +442,10 @@ CREATE FUNCTION _st_asgml(integer, geometry, integer, integer) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asGML';
 
 
-ALTER FUNCTION public._st_asgml(integer, geometry, integer, integer) OWNER TO postgres;
-
 --
 -- TOC entry 505 (class 1255 OID 32146)
--- Dependencies: 3 1005
--- Name: _st_askml(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: _st_askml(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_askml(integer, geometry, integer) RETURNS text
@@ -513,12 +453,10 @@ CREATE FUNCTION _st_askml(integer, geometry, integer) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asKML';
 
 
-ALTER FUNCTION public._st_askml(integer, geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 466 (class 1255 OID 32107)
--- Dependencies: 3 1005 1005
--- Name: _st_contains(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_contains(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_contains(geometry, geometry) RETURNS boolean
@@ -526,12 +464,10 @@ CREATE FUNCTION _st_contains(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'contains';
 
 
-ALTER FUNCTION public._st_contains(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 472 (class 1255 OID 32113)
--- Dependencies: 3 1005 1005
--- Name: _st_containsproperly(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_containsproperly(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_containsproperly(geometry, geometry) RETURNS boolean
@@ -539,12 +475,10 @@ CREATE FUNCTION _st_containsproperly(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'containsproperly';
 
 
-ALTER FUNCTION public._st_containsproperly(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 468 (class 1255 OID 32109)
--- Dependencies: 3 1005 1005
--- Name: _st_coveredby(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_coveredby(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_coveredby(geometry, geometry) RETURNS boolean
@@ -552,12 +486,10 @@ CREATE FUNCTION _st_coveredby(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'coveredby';
 
 
-ALTER FUNCTION public._st_coveredby(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 470 (class 1255 OID 32111)
--- Dependencies: 3 1005 1005
--- Name: _st_covers(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_covers(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_covers(geometry, geometry) RETURNS boolean
@@ -565,12 +497,10 @@ CREATE FUNCTION _st_covers(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'covers';
 
 
-ALTER FUNCTION public._st_covers(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 460 (class 1255 OID 32101)
--- Dependencies: 3 1005 1005
--- Name: _st_crosses(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_crosses(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_crosses(geometry, geometry) RETURNS boolean
@@ -578,12 +508,10 @@ CREATE FUNCTION _st_crosses(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'crosses';
 
 
-ALTER FUNCTION public._st_crosses(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 454 (class 1255 OID 32095)
--- Dependencies: 3 1005 1005
--- Name: _st_dwithin(geometry, geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_dwithin(geometry, geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_dwithin(geometry, geometry, double precision) RETURNS boolean
@@ -591,12 +519,10 @@ CREATE FUNCTION _st_dwithin(geometry, geometry, double precision) RETURNS boolea
     AS '$libdir/postgis-1.4', 'LWGEOM_dwithin';
 
 
-ALTER FUNCTION public._st_dwithin(geometry, geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 457 (class 1255 OID 32098)
--- Dependencies: 3 1005 1005
--- Name: _st_intersects(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_intersects(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_intersects(geometry, geometry) RETURNS boolean
@@ -604,12 +530,10 @@ CREATE FUNCTION _st_intersects(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'intersects';
 
 
-ALTER FUNCTION public._st_intersects(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 410 (class 1255 OID 32034)
--- Dependencies: 3 1005 1005
--- Name: _st_linecrossingdirection(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_linecrossingdirection(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_linecrossingdirection(geometry, geometry) RETURNS integer
@@ -617,12 +541,10 @@ CREATE FUNCTION _st_linecrossingdirection(geometry, geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'ST_LineCrossingDirection';
 
 
-ALTER FUNCTION public._st_linecrossingdirection(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 475 (class 1255 OID 32116)
--- Dependencies: 3 1005 1005
--- Name: _st_overlaps(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_overlaps(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_overlaps(geometry, geometry) RETURNS boolean
@@ -630,12 +552,10 @@ CREATE FUNCTION _st_overlaps(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'overlaps';
 
 
-ALTER FUNCTION public._st_overlaps(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 452 (class 1255 OID 32093)
--- Dependencies: 3 1005 1005
--- Name: _st_touches(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_touches(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_touches(geometry, geometry) RETURNS boolean
@@ -643,12 +563,10 @@ CREATE FUNCTION _st_touches(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'touches';
 
 
-ALTER FUNCTION public._st_touches(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 463 (class 1255 OID 32104)
--- Dependencies: 3 1005 1005
--- Name: _st_within(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: _st_within(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION _st_within(geometry, geometry) RETURNS boolean
@@ -656,12 +574,10 @@ CREATE FUNCTION _st_within(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'within';
 
 
-ALTER FUNCTION public._st_within(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 681 (class 1255 OID 32322)
--- Dependencies: 3 1080
--- Name: addauth(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: addauth(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION addauth(text) RETURNS boolean
@@ -696,12 +612,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.addauth(text) OWNER TO postgres;
-
 --
--- TOC entry 2720 (class 0 OID 0)
+-- TOC entry 2864 (class 0 OID 0)
 -- Dependencies: 681
--- Name: FUNCTION addauth(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION addauth(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION addauth(text) IS 'args: auth_token - Add an authorization token to be used in current transaction.';
@@ -709,8 +623,8 @@ COMMENT ON FUNCTION addauth(text) IS 'args: auth_token - Add an authorization to
 
 --
 -- TOC entry 152 (class 1255 OID 31736)
--- Dependencies: 1005 1005 3
--- Name: addbbox(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: addbbox(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION addbbox(geometry) RETURNS geometry
@@ -718,12 +632,10 @@ CREATE FUNCTION addbbox(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_addBBOX';
 
 
-ALTER FUNCTION public.addbbox(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 326 (class 1255 OID 31934)
--- Dependencies: 1080 3
--- Name: addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer) RETURNS text
@@ -919,12 +831,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer) OWNER TO postgres;
-
 --
--- TOC entry 2721 (class 0 OID 0)
+-- TOC entry 2865 (class 0 OID 0)
 -- Dependencies: 326
--- Name: FUNCTION addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer) IS 'args: catalog_name, schema_name, table_name, column_name, srid, type, dimension - Adds a geometry column to an existing table of attributes.';
@@ -932,8 +842,8 @@ COMMENT ON FUNCTION addgeometrycolumn(character varying, character varying, char
 
 --
 -- TOC entry 327 (class 1255 OID 31935)
--- Dependencies: 3 1080
--- Name: addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer) RETURNS text
@@ -948,12 +858,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer) OWNER TO postgres;
-
 --
--- TOC entry 2722 (class 0 OID 0)
+-- TOC entry 2866 (class 0 OID 0)
 -- Dependencies: 327
--- Name: FUNCTION addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer) IS 'args: schema_name, table_name, column_name, srid, type, dimension - Adds a geometry column to an existing table of attributes.';
@@ -961,8 +869,8 @@ COMMENT ON FUNCTION addgeometrycolumn(character varying, character varying, char
 
 --
 -- TOC entry 328 (class 1255 OID 31936)
--- Dependencies: 3 1080
--- Name: addgeometrycolumn(character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: addgeometrycolumn(character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION addgeometrycolumn(character varying, character varying, integer, character varying, integer) RETURNS text
@@ -977,12 +885,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.addgeometrycolumn(character varying, character varying, integer, character varying, integer) OWNER TO postgres;
-
 --
--- TOC entry 2723 (class 0 OID 0)
+-- TOC entry 2867 (class 0 OID 0)
 -- Dependencies: 328
--- Name: FUNCTION addgeometrycolumn(character varying, character varying, integer, character varying, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION addgeometrycolumn(character varying, character varying, integer, character varying, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION addgeometrycolumn(character varying, character varying, integer, character varying, integer) IS 'args: table_name, column_name, srid, type, dimension - Adds a geometry column to an existing table of attributes.';
@@ -990,8 +896,8 @@ COMMENT ON FUNCTION addgeometrycolumn(character varying, character varying, inte
 
 --
 -- TOC entry 284 (class 1255 OID 31868)
--- Dependencies: 1005 1005 1005 3
--- Name: addpoint(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: addpoint(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION addpoint(geometry, geometry) RETURNS geometry
@@ -999,12 +905,10 @@ CREATE FUNCTION addpoint(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_addpoint';
 
 
-ALTER FUNCTION public.addpoint(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 286 (class 1255 OID 31870)
--- Dependencies: 1005 3 1005 1005
--- Name: addpoint(geometry, geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3 1008
+-- Name: addpoint(geometry, geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION addpoint(geometry, geometry, integer) RETURNS geometry
@@ -1012,12 +916,10 @@ CREATE FUNCTION addpoint(geometry, geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_addpoint';
 
 
-ALTER FUNCTION public.addpoint(geometry, geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 35 (class 1255 OID 31564)
--- Dependencies: 1005 1005 3
--- Name: affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -1025,12 +927,10 @@ CREATE FUNCTION affine(geometry, double precision, double precision, double prec
     AS '$libdir/postgis-1.4', 'LWGEOM_affine';
 
 
-ALTER FUNCTION public.affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 37 (class 1255 OID 31566)
--- Dependencies: 3 1005 1005
--- Name: affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -1038,12 +938,10 @@ CREATE FUNCTION affine(geometry, double precision, double precision, double prec
     AS $_$SELECT affine($1,  $2, $3, 0,  $4, $5, 0,  0, 0, 1,  $6, $7, 0)$_$;
 
 
-ALTER FUNCTION public.affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 201 (class 1255 OID 31785)
--- Dependencies: 1005 3
--- Name: area(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: area(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION area(geometry) RETURNS double precision
@@ -1051,12 +949,10 @@ CREATE FUNCTION area(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_area_polygon';
 
 
-ALTER FUNCTION public.area(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 199 (class 1255 OID 31783)
--- Dependencies: 3 1005
--- Name: area2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: area2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION area2d(geometry) RETURNS double precision
@@ -1064,12 +960,10 @@ CREATE FUNCTION area2d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_area_polygon';
 
 
-ALTER FUNCTION public.area2d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 563 (class 1255 OID 32203)
--- Dependencies: 3 1005
--- Name: asbinary(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: asbinary(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION asbinary(geometry) RETURNS bytea
@@ -1077,12 +971,10 @@ CREATE FUNCTION asbinary(geometry) RETURNS bytea
     AS '$libdir/postgis-1.4', 'LWGEOM_asBinary';
 
 
-ALTER FUNCTION public.asbinary(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 565 (class 1255 OID 32205)
--- Dependencies: 3 1005
--- Name: asbinary(geometry, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: asbinary(geometry, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION asbinary(geometry, text) RETURNS bytea
@@ -1090,12 +982,10 @@ CREATE FUNCTION asbinary(geometry, text) RETURNS bytea
     AS '$libdir/postgis-1.4', 'LWGEOM_asBinary';
 
 
-ALTER FUNCTION public.asbinary(geometry, text) OWNER TO postgres;
-
 --
 -- TOC entry 251 (class 1255 OID 31835)
--- Dependencies: 1005 3
--- Name: asewkb(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: asewkb(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION asewkb(geometry) RETURNS bytea
@@ -1103,12 +993,10 @@ CREATE FUNCTION asewkb(geometry) RETURNS bytea
     AS '$libdir/postgis-1.4', 'WKBFromLWGEOM';
 
 
-ALTER FUNCTION public.asewkb(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 257 (class 1255 OID 31841)
--- Dependencies: 3 1005
--- Name: asewkb(geometry, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: asewkb(geometry, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION asewkb(geometry, text) RETURNS bytea
@@ -1116,12 +1004,10 @@ CREATE FUNCTION asewkb(geometry, text) RETURNS bytea
     AS '$libdir/postgis-1.4', 'WKBFromLWGEOM';
 
 
-ALTER FUNCTION public.asewkb(geometry, text) OWNER TO postgres;
-
 --
 -- TOC entry 249 (class 1255 OID 31833)
--- Dependencies: 1005 3
--- Name: asewkt(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: asewkt(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION asewkt(geometry) RETURNS text
@@ -1129,12 +1015,10 @@ CREATE FUNCTION asewkt(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asEWKT';
 
 
-ALTER FUNCTION public.asewkt(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 497 (class 1255 OID 32138)
--- Dependencies: 3 1005
--- Name: asgml(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: asgml(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION asgml(geometry, integer) RETURNS text
@@ -1142,12 +1026,10 @@ CREATE FUNCTION asgml(geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsGML(2, $1, $2, 0)$_$;
 
 
-ALTER FUNCTION public.asgml(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 499 (class 1255 OID 32140)
--- Dependencies: 3 1005
--- Name: asgml(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: asgml(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION asgml(geometry) RETURNS text
@@ -1155,12 +1037,10 @@ CREATE FUNCTION asgml(geometry) RETURNS text
     AS $_$SELECT _ST_AsGML(2, $1, 15, 0)$_$;
 
 
-ALTER FUNCTION public.asgml(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 253 (class 1255 OID 31837)
--- Dependencies: 1005 3
--- Name: ashexewkb(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: ashexewkb(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION ashexewkb(geometry) RETURNS text
@@ -1168,12 +1048,10 @@ CREATE FUNCTION ashexewkb(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asHEXEWKB';
 
 
-ALTER FUNCTION public.ashexewkb(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 255 (class 1255 OID 31839)
--- Dependencies: 1005 3
--- Name: ashexewkb(geometry, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: ashexewkb(geometry, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION ashexewkb(geometry, text) RETURNS text
@@ -1181,12 +1059,10 @@ CREATE FUNCTION ashexewkb(geometry, text) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asHEXEWKB';
 
 
-ALTER FUNCTION public.ashexewkb(geometry, text) OWNER TO postgres;
-
 --
 -- TOC entry 506 (class 1255 OID 32147)
--- Dependencies: 3 1005
--- Name: askml(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: askml(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION askml(geometry, integer) RETURNS text
@@ -1194,12 +1070,10 @@ CREATE FUNCTION askml(geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsKML(2, transform($1,4326), $2)$_$;
 
 
-ALTER FUNCTION public.askml(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 508 (class 1255 OID 32149)
--- Dependencies: 3 1005
--- Name: askml(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: askml(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION askml(geometry) RETURNS text
@@ -1207,12 +1081,10 @@ CREATE FUNCTION askml(geometry) RETURNS text
     AS $_$SELECT _ST_AsKML(2, transform($1,4326), 15)$_$;
 
 
-ALTER FUNCTION public.askml(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 509 (class 1255 OID 32150)
--- Dependencies: 3 1005
--- Name: askml(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: askml(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION askml(integer, geometry, integer) RETURNS text
@@ -1220,12 +1092,10 @@ CREATE FUNCTION askml(integer, geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsKML($1, transform($2,4326), $3)$_$;
 
 
-ALTER FUNCTION public.askml(integer, geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 490 (class 1255 OID 32131)
--- Dependencies: 3 1005
--- Name: assvg(geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: assvg(geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION assvg(geometry, integer, integer) RETURNS text
@@ -1233,12 +1103,10 @@ CREATE FUNCTION assvg(geometry, integer, integer) RETURNS text
     AS '$libdir/postgis-1.4', 'assvg_geometry';
 
 
-ALTER FUNCTION public.assvg(geometry, integer, integer) OWNER TO postgres;
-
 --
 -- TOC entry 492 (class 1255 OID 32133)
--- Dependencies: 3 1005
--- Name: assvg(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: assvg(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION assvg(geometry, integer) RETURNS text
@@ -1246,12 +1114,10 @@ CREATE FUNCTION assvg(geometry, integer) RETURNS text
     AS '$libdir/postgis-1.4', 'assvg_geometry';
 
 
-ALTER FUNCTION public.assvg(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 494 (class 1255 OID 32135)
--- Dependencies: 3 1005
--- Name: assvg(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: assvg(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION assvg(geometry) RETURNS text
@@ -1259,12 +1125,10 @@ CREATE FUNCTION assvg(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'assvg_geometry';
 
 
-ALTER FUNCTION public.assvg(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 567 (class 1255 OID 32207)
--- Dependencies: 3 1005
--- Name: astext(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: astext(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION astext(geometry) RETURNS text
@@ -1272,12 +1136,10 @@ CREATE FUNCTION astext(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asText';
 
 
-ALTER FUNCTION public.astext(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 213 (class 1255 OID 31797)
--- Dependencies: 1005 3 1005
--- Name: azimuth(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: azimuth(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION azimuth(geometry, geometry) RETURNS double precision
@@ -1285,12 +1147,10 @@ CREATE FUNCTION azimuth(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_azimuth';
 
 
-ALTER FUNCTION public.azimuth(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 674 (class 1255 OID 32315)
--- Dependencies: 3 1080 1005
--- Name: bdmpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1123
+-- Name: bdmpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION bdmpolyfromtext(text, integer) RETURNS geometry
@@ -1316,12 +1176,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.bdmpolyfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 672 (class 1255 OID 32313)
--- Dependencies: 3 1080 1005
--- Name: bdpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1123 3 1008
+-- Name: bdpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION bdpolyfromtext(text, integer) RETURNS geometry
@@ -1352,12 +1210,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.bdpolyfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 417 (class 1255 OID 32041)
--- Dependencies: 3 1005 1005
--- Name: boundary(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: boundary(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION boundary(geometry) RETURNS geometry
@@ -1365,12 +1221,10 @@ CREATE FUNCTION boundary(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'boundary';
 
 
-ALTER FUNCTION public.boundary(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 360 (class 1255 OID 31965)
--- Dependencies: 3 1005
--- Name: box(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: box(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box(geometry) RETURNS box
@@ -1378,12 +1232,10 @@ CREATE FUNCTION box(geometry) RETURNS box
     AS '$libdir/postgis-1.4', 'LWGEOM_to_BOX';
 
 
-ALTER FUNCTION public.box(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 363 (class 1255 OID 31971)
--- Dependencies: 3 1008
--- Name: box(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: box(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box(box3d) RETURNS box
@@ -1391,12 +1243,10 @@ CREATE FUNCTION box(box3d) RETURNS box
     AS '$libdir/postgis-1.4', 'BOX3D_to_BOX';
 
 
-ALTER FUNCTION public.box(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 356 (class 1255 OID 31961)
--- Dependencies: 3 1017 1005
--- Name: box2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1008
+-- Name: box2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d(geometry) RETURNS box2d
@@ -1404,12 +1254,10 @@ CREATE FUNCTION box2d(geometry) RETURNS box2d
     AS '$libdir/postgis-1.4', 'LWGEOM_to_BOX2DFLOAT4';
 
 
-ALTER FUNCTION public.box2d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 362 (class 1255 OID 31967)
--- Dependencies: 3 1017 1008
--- Name: box2d(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1011
+-- Name: box2d(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d(box3d) RETURNS box2d
@@ -1417,12 +1265,10 @@ CREATE FUNCTION box2d(box3d) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX3D_to_BOX2DFLOAT4';
 
 
-ALTER FUNCTION public.box2d(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 95 (class 1255 OID 31633)
--- Dependencies: 1017 1017 3
--- Name: box2d_contain(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: box2d_contain(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_contain(box2d, box2d) RETURNS boolean
@@ -1430,12 +1276,10 @@ CREATE FUNCTION box2d_contain(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_contain';
 
 
-ALTER FUNCTION public.box2d_contain(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 97 (class 1255 OID 31635)
--- Dependencies: 3 1017 1017
--- Name: box2d_contained(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1020
+-- Name: box2d_contained(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_contained(box2d, box2d) RETURNS boolean
@@ -1443,12 +1287,10 @@ CREATE FUNCTION box2d_contained(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_contained';
 
 
-ALTER FUNCTION public.box2d_contained(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 83 (class 1255 OID 31620)
--- Dependencies: 3 1017
--- Name: box2d_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020
+-- Name: box2d_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_in(cstring) RETURNS box2d
@@ -1456,12 +1298,10 @@ CREATE FUNCTION box2d_in(cstring) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_in';
 
 
-ALTER FUNCTION public.box2d_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 103 (class 1255 OID 31641)
--- Dependencies: 1017 1017 3
--- Name: box2d_intersects(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: box2d_intersects(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_intersects(box2d, box2d) RETURNS boolean
@@ -1469,12 +1309,10 @@ CREATE FUNCTION box2d_intersects(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_intersects';
 
 
-ALTER FUNCTION public.box2d_intersects(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 91 (class 1255 OID 31629)
--- Dependencies: 3 1017 1017
--- Name: box2d_left(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1020
+-- Name: box2d_left(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_left(box2d, box2d) RETURNS boolean
@@ -1482,12 +1320,10 @@ CREATE FUNCTION box2d_left(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_left';
 
 
-ALTER FUNCTION public.box2d_left(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 85 (class 1255 OID 31622)
--- Dependencies: 1017 3
--- Name: box2d_out(box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020
+-- Name: box2d_out(box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_out(box2d) RETURNS cstring
@@ -1495,12 +1331,10 @@ CREATE FUNCTION box2d_out(box2d) RETURNS cstring
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_out';
 
 
-ALTER FUNCTION public.box2d_out(box2d) OWNER TO postgres;
-
 --
 -- TOC entry 99 (class 1255 OID 31637)
--- Dependencies: 3 1017 1017
--- Name: box2d_overlap(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1020
+-- Name: box2d_overlap(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_overlap(box2d, box2d) RETURNS boolean
@@ -1508,12 +1342,10 @@ CREATE FUNCTION box2d_overlap(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_overlap';
 
 
-ALTER FUNCTION public.box2d_overlap(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 87 (class 1255 OID 31625)
--- Dependencies: 3 1017 1017
--- Name: box2d_overleft(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: box2d_overleft(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_overleft(box2d, box2d) RETURNS boolean
@@ -1521,12 +1353,10 @@ CREATE FUNCTION box2d_overleft(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_overleft';
 
 
-ALTER FUNCTION public.box2d_overleft(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 89 (class 1255 OID 31627)
--- Dependencies: 3 1017 1017
--- Name: box2d_overright(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: box2d_overright(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_overright(box2d, box2d) RETURNS boolean
@@ -1534,12 +1364,10 @@ CREATE FUNCTION box2d_overright(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_overright';
 
 
-ALTER FUNCTION public.box2d_overright(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 93 (class 1255 OID 31631)
--- Dependencies: 3 1017 1017
--- Name: box2d_right(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1020
+-- Name: box2d_right(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_right(box2d, box2d) RETURNS boolean
@@ -1547,12 +1375,10 @@ CREATE FUNCTION box2d_right(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_right';
 
 
-ALTER FUNCTION public.box2d_right(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 101 (class 1255 OID 31639)
--- Dependencies: 3 1017 1017
--- Name: box2d_same(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1020
+-- Name: box2d_same(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box2d_same(box2d, box2d) RETURNS boolean
@@ -1560,12 +1386,10 @@ CREATE FUNCTION box2d_same(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_same';
 
 
-ALTER FUNCTION public.box2d_same(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 358 (class 1255 OID 31963)
--- Dependencies: 3 1008 1005
--- Name: box3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011 1008
+-- Name: box3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box3d(geometry) RETURNS box3d
@@ -1573,12 +1397,10 @@ CREATE FUNCTION box3d(geometry) RETURNS box3d
     AS '$libdir/postgis-1.4', 'LWGEOM_to_BOX3D';
 
 
-ALTER FUNCTION public.box3d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 336 (class 1255 OID 31969)
--- Dependencies: 3 1008 1017
--- Name: box3d(box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011 1020
+-- Name: box3d(box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box3d(box2d) RETURNS box3d
@@ -1586,12 +1408,10 @@ CREATE FUNCTION box3d(box2d) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_to_BOX3D';
 
 
-ALTER FUNCTION public.box3d(box2d) OWNER TO postgres;
-
 --
 -- TOC entry 58 (class 1255 OID 31589)
--- Dependencies: 1008 3
--- Name: box3d_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1011 3
+-- Name: box3d_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box3d_in(cstring) RETURNS box3d
@@ -1599,12 +1419,10 @@ CREATE FUNCTION box3d_in(cstring) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_in';
 
 
-ALTER FUNCTION public.box3d_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 59 (class 1255 OID 31590)
--- Dependencies: 1008 3
--- Name: box3d_out(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1011 3
+-- Name: box3d_out(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box3d_out(box3d) RETURNS cstring
@@ -1612,12 +1430,10 @@ CREATE FUNCTION box3d_out(box3d) RETURNS cstring
     AS '$libdir/postgis-1.4', 'BOX3D_out';
 
 
-ALTER FUNCTION public.box3d_out(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 367 (class 1255 OID 31975)
--- Dependencies: 3 1008
--- Name: box3dtobox(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: box3dtobox(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION box3dtobox(box3d) RETURNS box
@@ -1625,12 +1441,10 @@ CREATE FUNCTION box3dtobox(box3d) RETURNS box
     AS $_$SELECT box($1)$_$;
 
 
-ALTER FUNCTION public.box3dtobox(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 404 (class 1255 OID 32028)
--- Dependencies: 3 1005 1005
--- Name: buffer(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: buffer(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION buffer(geometry, double precision) RETURNS geometry
@@ -1638,12 +1452,10 @@ CREATE FUNCTION buffer(geometry, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'buffer';
 
 
-ALTER FUNCTION public.buffer(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 406 (class 1255 OID 32030)
--- Dependencies: 3 1005 1005
--- Name: buffer(geometry, double precision, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: buffer(geometry, double precision, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION buffer(geometry, double precision, integer) RETURNS geometry
@@ -1651,12 +1463,10 @@ CREATE FUNCTION buffer(geometry, double precision, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'buffer';
 
 
-ALTER FUNCTION public.buffer(geometry, double precision, integer) OWNER TO postgres;
-
 --
 -- TOC entry 296 (class 1255 OID 31880)
--- Dependencies: 3 1005 1005
--- Name: buildarea(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: buildarea(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION buildarea(geometry) RETURNS geometry
@@ -1664,12 +1474,10 @@ CREATE FUNCTION buildarea(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_buildarea';
 
 
-ALTER FUNCTION public.buildarea(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 378 (class 1255 OID 31986)
--- Dependencies: 3 1005
--- Name: bytea(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: bytea(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION bytea(geometry) RETURNS bytea
@@ -1677,12 +1485,10 @@ CREATE FUNCTION bytea(geometry) RETURNS bytea
     AS '$libdir/postgis-1.4', 'LWGEOM_to_bytea';
 
 
-ALTER FUNCTION public.bytea(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 263 (class 1255 OID 31847)
 -- Dependencies: 3
--- Name: cache_bbox(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: cache_bbox(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION cache_bbox() RETURNS trigger
@@ -1690,12 +1496,46 @@ CREATE FUNCTION cache_bbox() RETURNS trigger
     AS '$libdir/postgis-1.4', 'cache_bbox';
 
 
-ALTER FUNCTION public.cache_bbox() OWNER TO postgres;
+--
+-- TOC entry 712 (class 1255 OID 33864)
+-- Dependencies: 3 1123
+-- Name: campana_trigauto(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION campana_trigauto() RETURNS trigger
+    LANGUAGE plpgsql STRICT
+    AS $$
+DECLARE rows_affected INTEGER;
+BEGIN
+IF TG_OP ='INSERT' THEN
+INSERT INTO "auditoria".campana (accion, newmovimiento,usuarioapl)
+select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='UPDATE' THEN
+INSERT INTO "auditoria".campana (accion, oldmovimiento, newmovimiento, usuarioapl)
+select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='DELETE' THEN
+INSERT INTO "auditoria".campana (accion,oldmovimiento, usuarioapl)
+select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
+ELSE
+RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
+END IF;
+GET DIAGNOSTICS rows_affected = ROW_COUNT;
+IF rows_affected = 1 THEN
+IF TG_OP IN ('INSERT','UPDATE') THEN
+RETURN NEW;
+ELSE
+RETURN OLD;
+END IF;
+ELSE RAISE EXCEPTION 'Fallo el insert en auditoria. campana.';
+END IF;
+END;
+$$;
+
 
 --
 -- TOC entry 480 (class 1255 OID 32121)
--- Dependencies: 3 1005 1005
--- Name: centroid(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: centroid(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION centroid(geometry) RETURNS geometry
@@ -1703,12 +1543,10 @@ CREATE FUNCTION centroid(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'centroid';
 
 
-ALTER FUNCTION public.centroid(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 682 (class 1255 OID 32323)
--- Dependencies: 1080 3
--- Name: checkauth(text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: checkauth(text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION checkauth(text, text, text) RETURNS integer
@@ -1739,12 +1577,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.checkauth(text, text, text) OWNER TO postgres;
-
 --
--- TOC entry 2724 (class 0 OID 0)
+-- TOC entry 2868 (class 0 OID 0)
 -- Dependencies: 682
--- Name: FUNCTION checkauth(text, text, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION checkauth(text, text, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION checkauth(text, text, text) IS 'args: a_schema_name, a_table_name, a_key_column_name - Creates trigger on a table to prevent/allow updates and deletes of rows based on authorization token.';
@@ -1753,7 +1589,7 @@ COMMENT ON FUNCTION checkauth(text, text, text) IS 'args: a_schema_name, a_table
 --
 -- TOC entry 683 (class 1255 OID 32324)
 -- Dependencies: 3
--- Name: checkauth(text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: checkauth(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION checkauth(text, text) RETURNS integer
@@ -1761,12 +1597,10 @@ CREATE FUNCTION checkauth(text, text) RETURNS integer
     AS $_$ SELECT CheckAuth('', $1, $2) $_$;
 
 
-ALTER FUNCTION public.checkauth(text, text) OWNER TO postgres;
-
 --
--- TOC entry 2725 (class 0 OID 0)
+-- TOC entry 2869 (class 0 OID 0)
 -- Dependencies: 683
--- Name: FUNCTION checkauth(text, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION checkauth(text, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION checkauth(text, text) IS 'args: a_table_name, a_key_column_name - Creates trigger on a table to prevent/allow updates and deletes of rows based on authorization token.';
@@ -1775,7 +1609,7 @@ COMMENT ON FUNCTION checkauth(text, text) IS 'args: a_table_name, a_key_column_n
 --
 -- TOC entry 684 (class 1255 OID 32325)
 -- Dependencies: 3
--- Name: checkauthtrigger(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: checkauthtrigger(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION checkauthtrigger() RETURNS trigger
@@ -1783,12 +1617,10 @@ CREATE FUNCTION checkauthtrigger() RETURNS trigger
     AS '$libdir/postgis-1.4', 'check_authorization';
 
 
-ALTER FUNCTION public.checkauthtrigger() OWNER TO postgres;
-
 --
 -- TOC entry 79 (class 1255 OID 31615)
--- Dependencies: 1014 3
--- Name: chip_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1017
+-- Name: chip_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION chip_in(cstring) RETURNS chip
@@ -1796,12 +1628,10 @@ CREATE FUNCTION chip_in(cstring) RETURNS chip
     AS '$libdir/postgis-1.4', 'CHIP_in';
 
 
-ALTER FUNCTION public.chip_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 81 (class 1255 OID 31617)
--- Dependencies: 1014 3
--- Name: chip_out(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: chip_out(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION chip_out(chip) RETURNS cstring
@@ -1809,12 +1639,10 @@ CREATE FUNCTION chip_out(chip) RETURNS cstring
     AS '$libdir/postgis-1.4', 'CHIP_out';
 
 
-ALTER FUNCTION public.chip_out(chip) OWNER TO postgres;
-
 --
 -- TOC entry 427 (class 1255 OID 32051)
--- Dependencies: 3 1005 1005 1005
--- Name: collect(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: collect(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION collect(geometry, geometry) RETURNS geometry
@@ -1822,12 +1650,10 @@ CREATE FUNCTION collect(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_collect';
 
 
-ALTER FUNCTION public.collect(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 431 (class 1255 OID 32057)
--- Dependencies: 3 1005 1007
--- Name: collect_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1010
+-- Name: collect_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION collect_garray(geometry[]) RETURNS geometry
@@ -1835,12 +1661,10 @@ CREATE FUNCTION collect_garray(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_collect_garray';
 
 
-ALTER FUNCTION public.collect_garray(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 425 (class 1255 OID 32049)
--- Dependencies: 3 1005 1005 1005
--- Name: collector(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: collector(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION collector(geometry, geometry) RETURNS geometry
@@ -1848,12 +1672,10 @@ CREATE FUNCTION collector(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_collect';
 
 
-ALTER FUNCTION public.collector(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 307 (class 1255 OID 31894)
--- Dependencies: 1005 1017 3 1017
--- Name: combine_bbox(box2d, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1020 1008
+-- Name: combine_bbox(box2d, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION combine_bbox(box2d, geometry) RETURNS box2d
@@ -1861,12 +1683,10 @@ CREATE FUNCTION combine_bbox(box2d, geometry) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_combine';
 
 
-ALTER FUNCTION public.combine_bbox(box2d, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 309 (class 1255 OID 31896)
--- Dependencies: 3 1005 1011 1011
--- Name: combine_bbox(box3d_extent, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1014 1014 1008
+-- Name: combine_bbox(box3d_extent, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION combine_bbox(box3d_extent, geometry) RETURNS box3d_extent
@@ -1874,12 +1694,10 @@ CREATE FUNCTION combine_bbox(box3d_extent, geometry) RETURNS box3d_extent
     AS '$libdir/postgis-1.4', 'BOX3D_combine';
 
 
-ALTER FUNCTION public.combine_bbox(box3d_extent, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 311 (class 1255 OID 31900)
--- Dependencies: 3 1005 1008 1008
--- Name: combine_bbox(box3d, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011 1011 1008
+-- Name: combine_bbox(box3d, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION combine_bbox(box3d, geometry) RETURNS box3d
@@ -1887,12 +1705,10 @@ CREATE FUNCTION combine_bbox(box3d, geometry) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_combine';
 
 
-ALTER FUNCTION public.combine_bbox(box3d, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 168 (class 1255 OID 31752)
--- Dependencies: 1014 3
--- Name: compression(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: compression(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION compression(chip) RETURNS integer
@@ -1900,12 +1716,10 @@ CREATE FUNCTION compression(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getCompression';
 
 
-ALTER FUNCTION public.compression(chip) OWNER TO postgres;
-
 --
 -- TOC entry 465 (class 1255 OID 32106)
--- Dependencies: 3 1005 1005
--- Name: contains(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: contains(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION contains(geometry, geometry) RETURNS boolean
@@ -1913,12 +1727,10 @@ CREATE FUNCTION contains(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'contains';
 
 
-ALTER FUNCTION public.contains(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 408 (class 1255 OID 32032)
--- Dependencies: 3 1005 1005
--- Name: convexhull(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: convexhull(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION convexhull(geometry) RETURNS geometry
@@ -1926,69 +1738,10 @@ CREATE FUNCTION convexhull(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'convexhull';
 
 
-ALTER FUNCTION public.convexhull(geometry) OWNER TO postgres;
-
 --
--- TOC entry 708 (class 1255 OID 32582)
--- Dependencies: 1080 3
--- Name: creartrigger(text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
---
-
-CREATE FUNCTION creartrigger(nombretabla text, esquema text, db text) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE QQ text;
-BEGIN
-QQ := 'CREATE OR REPLACE FUNCTION ' || nombretabla || '_trigAUTO()
-RETURNS trigger AS
-$BODY$
-DECLARE rows_affected INTEGER;
-BEGIN IF TG_OP =''INSERT'' THEN
-INSERT INTO "auditoria".' || nombretabla || ' (accion, newmovimiento,consulta)
-SELECT TG_OP , NEW , current_query
-FROM pg_stat_activity
-WHERE datname=''' || db ||''' AND current_query <> '''';
-ELSIF TG_OP =''UPDATE'' THEN
-INSERT INTO "auditoria".' || nombretabla || ' (accion, oldmovimiento, newmovimiento,consulta)
-SELECT TG_OP ,OLD ,NEW , current_query
-FROM pg_stat_activity
-WHERE datname='''|| db ||''' AND current_query <> '''';
-ELSIF TG_OP =''DELETE'' THEN
-INSERT INTO "auditoria".' || nombretabla || ' (accion,oldmovimiento ,consulta)
-SELECT TG_OP ,OLD , current_query
-FROM pg_stat_activity
-WHERE datname=''' || db ||''' AND current_query <> '''';
-ELSE
-RAISE EXCEPTION ''TG_OP % es uno de INSERT, UPDATE or DELETE.'', TG_OP;
-END IF;
-GET DIAGNOSTICS rows_affected = ROW_COUNT;
-IF rows_affected = 1 THEN
-IF TG_OP IN (''INSERT'',''UPDATE'') THEN
-RETURN NEW;
-ELSE
-RETURN OLD;
-END IF;
-ELSE RAISE EXCEPTION ''Fallo el insert en auditoria. || '|| nombretabla ||' ||'';
-END IF;
-END;
-$BODY$
-LANGUAGE ''plpgsql'' VOLATILE STRICT;
-
-CREATE TRIGGER tg_' || esquema || '_' || nombretabla || '
-AFTER INSERT OR UPDATE OR DELETE ON '|| nombretabla || '
-FOR EACH ROW EXECUTE PROCEDURE public.' || nombretabla || '_trigauto();'
-;
-RETURN QQ;
-End;
-$_$;
-
-
-ALTER FUNCTION public.creartrigger(nombretabla text, esquema text, db text) OWNER TO postgres;
-
---
--- TOC entry 710 (class 1255 OID 32600)
--- Dependencies: 3 1080
--- Name: creartrigger(text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- TOC entry 709 (class 1255 OID 33827)
+-- Dependencies: 3 1123
+-- Name: creartrigger(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION creartrigger(nombretabla text, esquema text) RETURNS text
@@ -2005,10 +1758,10 @@ IF TG_OP =''INSERT'' THEN
 INSERT INTO "auditoria".' || nombretabla || ' (accion, newmovimiento,usuarioapl)
 select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP =''UPDATE'' THEN
-INSERT INTO "auditoria".' || nombretabla || ' (accion, oldmovimiento, newmovimiento,usuarioapl)
+INSERT INTO "auditoria".' || nombretabla || ' (accion, oldmovimiento, newmovimiento, usuarioapl)
 select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP =''DELETE'' THEN
-INSERT INTO "auditoria".' || nombretabla || ' (accion,oldmovimiento ,consulta,usuarioapl)
+INSERT INTO "auditoria".' || nombretabla || ' (accion,oldmovimiento, usuarioapl)
 select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
 ELSE
 RAISE EXCEPTION ''TG_OP % es uno de INSERT, UPDATE or DELETE.'', TG_OP;
@@ -2035,48 +1788,10 @@ End;
 $_$;
 
 
-ALTER FUNCTION public.creartrigger(nombretabla text, esquema text) OWNER TO postgres;
-
 --
--- TOC entry 709 (class 1255 OID 32583)
--- Dependencies: 3 1080
--- Name: createtablesseguimiento(text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
---
-
-CREATE FUNCTION createtablesseguimiento(nombtabla text, esquema text, db text) RETURNS void
-    LANGUAGE plpgsql
-    AS $$
-DECLARE QQ text;
-BEGIN
-QQ:= 'DROP TABLE IF EXISTS "auditoria". ' || nombtabla || ';
-CREATE TABLE "auditoria".' || nombtabla || ' (
-idmovimiento serial NOT NULL,
-usuariodb text NOT NULL DEFAULT "current_user"(),
-accion text NOT NULL,
-acciontimestamp timestamp WITH TIME ZONE NOT NULL DEFAULT now(),
-oldmovimiento ' || esquema ||'.' || nombtabla || ',
-newmovimiento ' || esquema ||'.' || nombtabla || ',
-consulta varchar,
-/* Keys */
-CONSTRAINT ' || nombtabla || '_pkey
-PRIMARY KEY (idmovimiento),
-/* Checks */
-CONSTRAINT ' || nombtabla || '_check CHECK (accion = ANY (ARRAY[''INSERT''::text, ''UPDATE''::text, ''DELETE''::text]))
-) ;
-ALTER TABLE "auditoria".' || nombtabla || '
-OWNER TO postgres;';
-EXECUTE QQ;
-execute public.CrearTrigger(nombtabla,esquema,db);
-END;
-$$;
-
-
-ALTER FUNCTION public.createtablesseguimiento(nombtabla text, esquema text, db text) OWNER TO postgres;
-
---
--- TOC entry 711 (class 1255 OID 32601)
--- Dependencies: 3 1080
--- Name: createtablesseguimiento(text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- TOC entry 710 (class 1255 OID 33833)
+-- Dependencies: 3 1123
+-- Name: createtablesseguimiento(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION createtablesseguimiento(nombtabla text, esquema text) RETURNS void
@@ -2093,7 +1808,6 @@ accion text NOT NULL,
 acciontimestamp timestamp WITH TIME ZONE NOT NULL DEFAULT now(),
 oldmovimiento ' || esquema ||'.' || nombtabla || ',
 newmovimiento ' || esquema ||'.' || nombtabla || ',
-consulta varchar,
 /* Keys */
 CONSTRAINT ' || nombtabla || '_pkey
 PRIMARY KEY (idmovimiento),
@@ -2108,12 +1822,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.createtablesseguimiento(nombtabla text, esquema text) OWNER TO postgres;
-
 --
 -- TOC entry 459 (class 1255 OID 32100)
--- Dependencies: 3 1005 1005
--- Name: crosses(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: crosses(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION crosses(geometry, geometry) RETURNS boolean
@@ -2121,12 +1833,10 @@ CREATE FUNCTION crosses(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'crosses';
 
 
-ALTER FUNCTION public.crosses(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 166 (class 1255 OID 31750)
--- Dependencies: 3 1014
--- Name: datatype(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: datatype(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION datatype(chip) RETURNS integer
@@ -2134,12 +1844,10 @@ CREATE FUNCTION datatype(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getDatatype';
 
 
-ALTER FUNCTION public.datatype(chip) OWNER TO postgres;
-
 --
 -- TOC entry 415 (class 1255 OID 32039)
--- Dependencies: 3 1005 1005 1005
--- Name: difference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: difference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION difference(geometry, geometry) RETURNS geometry
@@ -2147,12 +1855,10 @@ CREATE FUNCTION difference(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'difference';
 
 
-ALTER FUNCTION public.difference(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 528 (class 1255 OID 32169)
--- Dependencies: 3 1005
--- Name: dimension(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: dimension(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dimension(geometry) RETURNS integer
@@ -2160,12 +1866,10 @@ CREATE FUNCTION dimension(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_dimension';
 
 
-ALTER FUNCTION public.dimension(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 688 (class 1255 OID 32329)
--- Dependencies: 3 1080
--- Name: disablelongtransactions(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: disablelongtransactions(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION disablelongtransactions() RETURNS text
@@ -2206,12 +1910,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.disablelongtransactions() OWNER TO postgres;
-
 --
--- TOC entry 2726 (class 0 OID 0)
+-- TOC entry 2870 (class 0 OID 0)
 -- Dependencies: 688
--- Name: FUNCTION disablelongtransactions(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION disablelongtransactions(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION disablelongtransactions() IS 'Disable long transaction support. This function removes the long transaction support metadata tables, and drops all triggers attached to lock-checked tables.';
@@ -2219,8 +1921,8 @@ COMMENT ON FUNCTION disablelongtransactions() IS 'Disable long transaction suppo
 
 --
 -- TOC entry 449 (class 1255 OID 32090)
--- Dependencies: 3 1005 1005
--- Name: disjoint(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: disjoint(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION disjoint(geometry, geometry) RETURNS boolean
@@ -2228,12 +1930,10 @@ CREATE FUNCTION disjoint(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'disjoint';
 
 
-ALTER FUNCTION public.disjoint(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 207 (class 1255 OID 31791)
--- Dependencies: 1005 3 1005
--- Name: distance(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: distance(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION distance(geometry, geometry) RETURNS double precision
@@ -2241,12 +1941,10 @@ CREATE FUNCTION distance(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_mindistance2d';
 
 
-ALTER FUNCTION public.distance(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 205 (class 1255 OID 31789)
--- Dependencies: 3 1005 1005
--- Name: distance_sphere(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: distance_sphere(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION distance_sphere(geometry, geometry) RETURNS double precision
@@ -2254,12 +1952,10 @@ CREATE FUNCTION distance_sphere(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_distance_sphere';
 
 
-ALTER FUNCTION public.distance_sphere(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 203 (class 1255 OID 31787)
--- Dependencies: 1002 3 1005 1005
--- Name: distance_spheroid(geometry, geometry, spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008 1005
+-- Name: distance_spheroid(geometry, geometry, spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION distance_spheroid(geometry, geometry, spheroid) RETURNS double precision
@@ -2267,12 +1963,10 @@ CREATE FUNCTION distance_spheroid(geometry, geometry, spheroid) RETURNS double p
     AS '$libdir/postgis-1.4', 'LWGEOM_distance_ellipsoid_point';
 
 
-ALTER FUNCTION public.distance_spheroid(geometry, geometry, spheroid) OWNER TO postgres;
-
 --
 -- TOC entry 154 (class 1255 OID 31738)
--- Dependencies: 3 1005 1005
--- Name: dropbbox(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: dropbbox(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dropbbox(geometry) RETURNS geometry
@@ -2280,12 +1974,10 @@ CREATE FUNCTION dropbbox(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_dropBBOX';
 
 
-ALTER FUNCTION public.dropbbox(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 329 (class 1255 OID 31937)
--- Dependencies: 1080 3
--- Name: dropgeometrycolumn(character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: dropgeometrycolumn(character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dropgeometrycolumn(character varying, character varying, character varying, character varying) RETURNS text
@@ -2348,12 +2040,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.dropgeometrycolumn(character varying, character varying, character varying, character varying) OWNER TO postgres;
-
 --
--- TOC entry 2727 (class 0 OID 0)
+-- TOC entry 2871 (class 0 OID 0)
 -- Dependencies: 329
--- Name: FUNCTION dropgeometrycolumn(character varying, character varying, character varying, character varying); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION dropgeometrycolumn(character varying, character varying, character varying, character varying); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION dropgeometrycolumn(character varying, character varying, character varying, character varying) IS 'args: catalog_name, schema_name, table_name, column_name - Removes a geometry column from a spatial table.';
@@ -2361,8 +2051,8 @@ COMMENT ON FUNCTION dropgeometrycolumn(character varying, character varying, cha
 
 --
 -- TOC entry 330 (class 1255 OID 31938)
--- Dependencies: 3 1080
--- Name: dropgeometrycolumn(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: dropgeometrycolumn(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dropgeometrycolumn(character varying, character varying, character varying) RETURNS text
@@ -2377,12 +2067,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.dropgeometrycolumn(character varying, character varying, character varying) OWNER TO postgres;
-
 --
--- TOC entry 2728 (class 0 OID 0)
+-- TOC entry 2872 (class 0 OID 0)
 -- Dependencies: 330
--- Name: FUNCTION dropgeometrycolumn(character varying, character varying, character varying); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION dropgeometrycolumn(character varying, character varying, character varying); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION dropgeometrycolumn(character varying, character varying, character varying) IS 'args: schema_name, table_name, column_name - Removes a geometry column from a spatial table.';
@@ -2390,8 +2078,8 @@ COMMENT ON FUNCTION dropgeometrycolumn(character varying, character varying, cha
 
 --
 -- TOC entry 331 (class 1255 OID 31939)
--- Dependencies: 3 1080
--- Name: dropgeometrycolumn(character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: dropgeometrycolumn(character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dropgeometrycolumn(character varying, character varying) RETURNS text
@@ -2406,12 +2094,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.dropgeometrycolumn(character varying, character varying) OWNER TO postgres;
-
 --
--- TOC entry 2729 (class 0 OID 0)
+-- TOC entry 2873 (class 0 OID 0)
 -- Dependencies: 331
--- Name: FUNCTION dropgeometrycolumn(character varying, character varying); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION dropgeometrycolumn(character varying, character varying); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION dropgeometrycolumn(character varying, character varying) IS 'args: table_name, column_name - Removes a geometry column from a spatial table.';
@@ -2419,8 +2105,8 @@ COMMENT ON FUNCTION dropgeometrycolumn(character varying, character varying) IS 
 
 --
 -- TOC entry 332 (class 1255 OID 31940)
--- Dependencies: 3 1080
--- Name: dropgeometrytable(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: dropgeometrytable(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dropgeometrytable(character varying, character varying, character varying) RETURNS text
@@ -2459,12 +2145,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.dropgeometrytable(character varying, character varying, character varying) OWNER TO postgres;
-
 --
--- TOC entry 2730 (class 0 OID 0)
+-- TOC entry 2874 (class 0 OID 0)
 -- Dependencies: 332
--- Name: FUNCTION dropgeometrytable(character varying, character varying, character varying); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION dropgeometrytable(character varying, character varying, character varying); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION dropgeometrytable(character varying, character varying, character varying) IS 'args: catalog_name, schema_name, table_name - Drops a table and all its references in geometry_columns.';
@@ -2473,7 +2157,7 @@ COMMENT ON FUNCTION dropgeometrytable(character varying, character varying, char
 --
 -- TOC entry 333 (class 1255 OID 31941)
 -- Dependencies: 3
--- Name: dropgeometrytable(character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: dropgeometrytable(character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dropgeometrytable(character varying, character varying) RETURNS text
@@ -2481,12 +2165,10 @@ CREATE FUNCTION dropgeometrytable(character varying, character varying) RETURNS 
     AS $_$ SELECT DropGeometryTable('',$1,$2) $_$;
 
 
-ALTER FUNCTION public.dropgeometrytable(character varying, character varying) OWNER TO postgres;
-
 --
--- TOC entry 2731 (class 0 OID 0)
+-- TOC entry 2875 (class 0 OID 0)
 -- Dependencies: 333
--- Name: FUNCTION dropgeometrytable(character varying, character varying); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION dropgeometrytable(character varying, character varying); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION dropgeometrytable(character varying, character varying) IS 'args: schema_name, table_name - Drops a table and all its references in geometry_columns.';
@@ -2495,7 +2177,7 @@ COMMENT ON FUNCTION dropgeometrytable(character varying, character varying) IS '
 --
 -- TOC entry 334 (class 1255 OID 31942)
 -- Dependencies: 3
--- Name: dropgeometrytable(character varying); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: dropgeometrytable(character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dropgeometrytable(character varying) RETURNS text
@@ -2503,12 +2185,10 @@ CREATE FUNCTION dropgeometrytable(character varying) RETURNS text
     AS $_$ SELECT DropGeometryTable('','',$1) $_$;
 
 
-ALTER FUNCTION public.dropgeometrytable(character varying) OWNER TO postgres;
-
 --
--- TOC entry 2732 (class 0 OID 0)
+-- TOC entry 2876 (class 0 OID 0)
 -- Dependencies: 334
--- Name: FUNCTION dropgeometrytable(character varying); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION dropgeometrytable(character varying); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION dropgeometrytable(character varying) IS 'args: table_name - Drops a table and all its references in geometry_columns.';
@@ -2516,8 +2196,8 @@ COMMENT ON FUNCTION dropgeometrytable(character varying) IS 'args: table_name - 
 
 --
 -- TOC entry 303 (class 1255 OID 31890)
--- Dependencies: 1005 3 1020
--- Name: dump(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1023 1008
+-- Name: dump(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dump(geometry) RETURNS SETOF geometry_dump
@@ -2525,12 +2205,10 @@ CREATE FUNCTION dump(geometry) RETURNS SETOF geometry_dump
     AS '$libdir/postgis-1.4', 'LWGEOM_dump';
 
 
-ALTER FUNCTION public.dump(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 305 (class 1255 OID 31892)
--- Dependencies: 1005 3 1020
--- Name: dumprings(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1023 1008
+-- Name: dumprings(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION dumprings(geometry) RETURNS SETOF geometry_dump
@@ -2538,12 +2216,10 @@ CREATE FUNCTION dumprings(geometry) RETURNS SETOF geometry_dump
     AS '$libdir/postgis-1.4', 'LWGEOM_dump_rings';
 
 
-ALTER FUNCTION public.dumprings(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 686 (class 1255 OID 32327)
--- Dependencies: 3 1080
--- Name: enablelongtransactions(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: enablelongtransactions(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION enablelongtransactions() RETURNS text
@@ -2599,12 +2275,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.enablelongtransactions() OWNER TO postgres;
-
 --
--- TOC entry 2733 (class 0 OID 0)
+-- TOC entry 2877 (class 0 OID 0)
 -- Dependencies: 686
--- Name: FUNCTION enablelongtransactions(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION enablelongtransactions(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION enablelongtransactions() IS 'Enable long transaction support. This function creates the required metadata tables, needs to be called once before using the other functions in this section. Calling it twice is harmless.';
@@ -2612,8 +2286,8 @@ COMMENT ON FUNCTION enablelongtransactions() IS 'Enable long transaction support
 
 --
 -- TOC entry 553 (class 1255 OID 32193)
--- Dependencies: 3 1005 1005
--- Name: endpoint(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: endpoint(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION endpoint(geometry) RETURNS geometry
@@ -2621,12 +2295,10 @@ CREATE FUNCTION endpoint(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_endpoint_linestring';
 
 
-ALTER FUNCTION public.endpoint(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 235 (class 1255 OID 31819)
--- Dependencies: 1005 3 1005
--- Name: envelope(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: envelope(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION envelope(geometry) RETURNS geometry
@@ -2634,12 +2306,10 @@ CREATE FUNCTION envelope(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_envelope';
 
 
-ALTER FUNCTION public.envelope(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 488 (class 1255 OID 32129)
--- Dependencies: 3 1005 1005
--- Name: equals(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: equals(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION equals(geometry, geometry) RETURNS boolean
@@ -2647,12 +2317,10 @@ CREATE FUNCTION equals(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'geomequals';
 
 
-ALTER FUNCTION public.equals(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 718 (class 1255 OID 33570)
--- Dependencies: 3 1080
--- Name: especie_trigauto(); Type: FUNCTION; Schema: public; Owner: postgres
+-- TOC entry 711 (class 1255 OID 33848)
+-- Dependencies: 3 1123
+-- Name: especie_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION especie_trigauto() RETURNS trigger
@@ -2664,10 +2332,10 @@ IF TG_OP ='INSERT' THEN
 INSERT INTO "auditoria".especie (accion, newmovimiento,usuarioapl)
 select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='UPDATE' THEN
-INSERT INTO "auditoria".especie (accion, oldmovimiento, newmovimiento,usuarioapl)
+INSERT INTO "auditoria".especie (accion, oldmovimiento, newmovimiento, usuarioapl)
 select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='DELETE' THEN
-INSERT INTO "auditoria".especie (accion,oldmovimiento ,usuarioapl)
+INSERT INTO "auditoria".especie (accion,oldmovimiento, usuarioapl)
 select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
 ELSE
 RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
@@ -2685,12 +2353,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.especie_trigauto() OWNER TO postgres;
-
 --
 -- TOC entry 313 (class 1255 OID 31904)
--- Dependencies: 1017 3
--- Name: estimated_extent(text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020
+-- Name: estimated_extent(text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION estimated_extent(text, text, text) RETURNS box2d
@@ -2698,12 +2364,10 @@ CREATE FUNCTION estimated_extent(text, text, text) RETURNS box2d
     AS '$libdir/postgis-1.4', 'LWGEOM_estimated_extent';
 
 
-ALTER FUNCTION public.estimated_extent(text, text, text) OWNER TO postgres;
-
 --
 -- TOC entry 315 (class 1255 OID 31906)
--- Dependencies: 3 1017
--- Name: estimated_extent(text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020
+-- Name: estimated_extent(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION estimated_extent(text, text) RETURNS box2d
@@ -2711,12 +2375,10 @@ CREATE FUNCTION estimated_extent(text, text) RETURNS box2d
     AS '$libdir/postgis-1.4', 'LWGEOM_estimated_extent';
 
 
-ALTER FUNCTION public.estimated_extent(text, text) OWNER TO postgres;
-
 --
 -- TOC entry 229 (class 1255 OID 31813)
--- Dependencies: 1008 1008 3
--- Name: expand(box3d, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1011 1011 3
+-- Name: expand(box3d, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION expand(box3d, double precision) RETURNS box3d
@@ -2724,12 +2386,10 @@ CREATE FUNCTION expand(box3d, double precision) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_expand';
 
 
-ALTER FUNCTION public.expand(box3d, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 231 (class 1255 OID 31815)
--- Dependencies: 3 1017 1017
--- Name: expand(box2d, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1020
+-- Name: expand(box2d, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION expand(box2d, double precision) RETURNS box2d
@@ -2737,12 +2397,10 @@ CREATE FUNCTION expand(box2d, double precision) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_expand';
 
 
-ALTER FUNCTION public.expand(box2d, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 233 (class 1255 OID 31817)
--- Dependencies: 1005 3 1005
--- Name: expand(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: expand(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION expand(geometry, double precision) RETURNS geometry
@@ -2750,12 +2408,10 @@ CREATE FUNCTION expand(geometry, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_expand';
 
 
-ALTER FUNCTION public.expand(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 530 (class 1255 OID 32171)
--- Dependencies: 3 1005 1005
--- Name: exteriorring(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: exteriorring(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION exteriorring(geometry) RETURNS geometry
@@ -2763,12 +2419,10 @@ CREATE FUNCTION exteriorring(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_exteriorring_polygon';
 
 
-ALTER FUNCTION public.exteriorring(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 162 (class 1255 OID 31746)
--- Dependencies: 3 1014
--- Name: factor(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: factor(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION factor(chip) RETURNS real
@@ -2776,12 +2430,10 @@ CREATE FUNCTION factor(chip) RETURNS real
     AS '$libdir/postgis-1.4', 'CHIP_getFactor';
 
 
-ALTER FUNCTION public.factor(chip) OWNER TO postgres;
-
 --
 -- TOC entry 317 (class 1255 OID 31908)
--- Dependencies: 3 1080 1017
--- Name: find_extent(text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123 1020
+-- Name: find_extent(text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION find_extent(text, text, text) RETURNS box2d
@@ -2801,12 +2453,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.find_extent(text, text, text) OWNER TO postgres;
-
 --
 -- TOC entry 319 (class 1255 OID 31910)
--- Dependencies: 3 1080 1017
--- Name: find_extent(text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123 1020
+-- Name: find_extent(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION find_extent(text, text) RETURNS box2d
@@ -2825,12 +2475,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.find_extent(text, text) OWNER TO postgres;
-
 --
 -- TOC entry 341 (class 1255 OID 31946)
--- Dependencies: 3 1080
--- Name: find_srid(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: find_srid(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION find_srid(character varying, character varying, character varying) RETURNS integer
@@ -2871,12 +2519,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.find_srid(character varying, character varying, character varying) OWNER TO postgres;
-
 --
--- TOC entry 2734 (class 0 OID 0)
+-- TOC entry 2878 (class 0 OID 0)
 -- Dependencies: 341
--- Name: FUNCTION find_srid(character varying, character varying, character varying); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION find_srid(character varying, character varying, character varying); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION find_srid(character varying, character varying, character varying) IS 'args: a_schema_name, a_table_name, a_geomfield_name - The syntax is find_srid(<db/schema>, <table>, <column>) and the function returns the integer SRID of the specified column by searching through the GEOMETRY_COLUMNS table.';
@@ -2884,8 +2530,8 @@ COMMENT ON FUNCTION find_srid(character varying, character varying, character va
 
 --
 -- TOC entry 322 (class 1255 OID 31929)
--- Dependencies: 3 1080
--- Name: fix_geometry_columns(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: fix_geometry_columns(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION fix_geometry_columns() RETURNS text
@@ -2946,12 +2592,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.fix_geometry_columns() OWNER TO postgres;
-
 --
 -- TOC entry 215 (class 1255 OID 31799)
--- Dependencies: 3 1005 1005
--- Name: force_2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: force_2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION force_2d(geometry) RETURNS geometry
@@ -2959,12 +2603,10 @@ CREATE FUNCTION force_2d(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_2d';
 
 
-ALTER FUNCTION public.force_2d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 219 (class 1255 OID 31803)
--- Dependencies: 3 1005 1005
--- Name: force_3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: force_3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION force_3d(geometry) RETURNS geometry
@@ -2972,12 +2614,10 @@ CREATE FUNCTION force_3d(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_3dz';
 
 
-ALTER FUNCTION public.force_3d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 221 (class 1255 OID 31805)
--- Dependencies: 3 1005 1005
--- Name: force_3dm(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: force_3dm(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION force_3dm(geometry) RETURNS geometry
@@ -2985,12 +2625,10 @@ CREATE FUNCTION force_3dm(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_3dm';
 
 
-ALTER FUNCTION public.force_3dm(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 217 (class 1255 OID 31801)
--- Dependencies: 1005 1005 3
--- Name: force_3dz(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: force_3dz(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION force_3dz(geometry) RETURNS geometry
@@ -2998,12 +2636,10 @@ CREATE FUNCTION force_3dz(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_3dz';
 
 
-ALTER FUNCTION public.force_3dz(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 223 (class 1255 OID 31807)
--- Dependencies: 3 1005 1005
--- Name: force_4d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: force_4d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION force_4d(geometry) RETURNS geometry
@@ -3011,12 +2647,10 @@ CREATE FUNCTION force_4d(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_4d';
 
 
-ALTER FUNCTION public.force_4d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 225 (class 1255 OID 31809)
--- Dependencies: 3 1005 1005
--- Name: force_collection(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: force_collection(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION force_collection(geometry) RETURNS geometry
@@ -3024,12 +2658,10 @@ CREATE FUNCTION force_collection(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_collection';
 
 
-ALTER FUNCTION public.force_collection(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 239 (class 1255 OID 31823)
--- Dependencies: 3 1005 1005
--- Name: forcerhr(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: forcerhr(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION forcerhr(geometry) RETURNS geometry
@@ -3037,12 +2669,10 @@ CREATE FUNCTION forcerhr(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_forceRHR_poly';
 
 
-ALTER FUNCTION public.forcerhr(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 429 (class 1255 OID 32055)
--- Dependencies: 3 1007 1007 1005
--- Name: geom_accum(geometry[], geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1010 1010 1008
+-- Name: geom_accum(geometry[], geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geom_accum(geometry[], geometry) RETURNS geometry[]
@@ -3050,12 +2680,10 @@ CREATE FUNCTION geom_accum(geometry[], geometry) RETURNS geometry[]
     AS '$libdir/postgis-1.4', 'LWGEOM_accum';
 
 
-ALTER FUNCTION public.geom_accum(geometry[], geometry) OWNER TO postgres;
-
 --
 -- TOC entry 617 (class 1255 OID 32258)
--- Dependencies: 3 1005
--- Name: geomcollfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geomcollfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomcollfromtext(text, integer) RETURNS geometry
@@ -3068,12 +2696,10 @@ CREATE FUNCTION geomcollfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.geomcollfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 619 (class 1255 OID 32260)
--- Dependencies: 3 1005
--- Name: geomcollfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: geomcollfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomcollfromtext(text) RETURNS geometry
@@ -3086,12 +2712,10 @@ CREATE FUNCTION geomcollfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.geomcollfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 668 (class 1255 OID 32309)
--- Dependencies: 3 1005
--- Name: geomcollfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: geomcollfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomcollfromwkb(bytea, integer) RETURNS geometry
@@ -3104,12 +2728,10 @@ CREATE FUNCTION geomcollfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.geomcollfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 670 (class 1255 OID 32311)
--- Dependencies: 3 1005
--- Name: geomcollfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: geomcollfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomcollfromwkb(bytea) RETURNS geometry
@@ -3122,12 +2744,10 @@ CREATE FUNCTION geomcollfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.geomcollfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 368 (class 1255 OID 31976)
--- Dependencies: 3 1005 1017
--- Name: geometry(box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1020
+-- Name: geometry(box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry(box2d) RETURNS geometry
@@ -3135,12 +2755,10 @@ CREATE FUNCTION geometry(box2d) RETURNS geometry
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_to_LWGEOM';
 
 
-ALTER FUNCTION public.geometry(box2d) OWNER TO postgres;
-
 --
 -- TOC entry 370 (class 1255 OID 31978)
--- Dependencies: 3 1005 1008
--- Name: geometry(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1011
+-- Name: geometry(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry(box3d) RETURNS geometry
@@ -3148,12 +2766,10 @@ CREATE FUNCTION geometry(box3d) RETURNS geometry
     AS '$libdir/postgis-1.4', 'BOX3D_to_LWGEOM';
 
 
-ALTER FUNCTION public.geometry(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 372 (class 1255 OID 31980)
--- Dependencies: 3 1005
--- Name: geometry(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geometry(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry(text) RETURNS geometry
@@ -3161,12 +2777,10 @@ CREATE FUNCTION geometry(text) RETURNS geometry
     AS '$libdir/postgis-1.4', 'parse_WKT_lwgeom';
 
 
-ALTER FUNCTION public.geometry(text) OWNER TO postgres;
-
 --
 -- TOC entry 374 (class 1255 OID 31982)
--- Dependencies: 3 1005 1014
--- Name: geometry(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1017
+-- Name: geometry(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry(chip) RETURNS geometry
@@ -3174,12 +2788,10 @@ CREATE FUNCTION geometry(chip) RETURNS geometry
     AS '$libdir/postgis-1.4', 'CHIP_to_LWGEOM';
 
 
-ALTER FUNCTION public.geometry(chip) OWNER TO postgres;
-
 --
 -- TOC entry 376 (class 1255 OID 31984)
--- Dependencies: 3 1005
--- Name: geometry(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geometry(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry(bytea) RETURNS geometry
@@ -3187,12 +2799,10 @@ CREATE FUNCTION geometry(bytea) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_bytea';
 
 
-ALTER FUNCTION public.geometry(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 133 (class 1255 OID 31684)
--- Dependencies: 1005 3 1005
--- Name: geometry_above(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: geometry_above(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_above(geometry, geometry) RETURNS boolean
@@ -3200,12 +2810,10 @@ CREATE FUNCTION geometry_above(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_above';
 
 
-ALTER FUNCTION public.geometry_above(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 29 (class 1255 OID 31557)
 -- Dependencies: 3
--- Name: geometry_analyze(internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: geometry_analyze(internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_analyze(internal) RETURNS boolean
@@ -3213,12 +2821,10 @@ CREATE FUNCTION geometry_analyze(internal) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_analyze';
 
 
-ALTER FUNCTION public.geometry_analyze(internal) OWNER TO postgres;
-
 --
 -- TOC entry 135 (class 1255 OID 31686)
--- Dependencies: 3 1005 1005
--- Name: geometry_below(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometry_below(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_below(geometry, geometry) RETURNS boolean
@@ -3226,12 +2832,10 @@ CREATE FUNCTION geometry_below(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_below';
 
 
-ALTER FUNCTION public.geometry_below(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 115 (class 1255 OID 31653)
--- Dependencies: 3 1005 1005
--- Name: geometry_cmp(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: geometry_cmp(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_cmp(geometry, geometry) RETURNS integer
@@ -3239,12 +2843,10 @@ CREATE FUNCTION geometry_cmp(geometry, geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'lwgeom_cmp';
 
 
-ALTER FUNCTION public.geometry_cmp(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 137 (class 1255 OID 31688)
--- Dependencies: 3 1005 1005
--- Name: geometry_contain(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometry_contain(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_contain(geometry, geometry) RETURNS boolean
@@ -3252,12 +2854,10 @@ CREATE FUNCTION geometry_contain(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_contain';
 
 
-ALTER FUNCTION public.geometry_contain(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 139 (class 1255 OID 31690)
--- Dependencies: 1005 1005 3
--- Name: geometry_contained(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometry_contained(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_contained(geometry, geometry) RETURNS boolean
@@ -3265,12 +2865,10 @@ CREATE FUNCTION geometry_contained(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_contained';
 
 
-ALTER FUNCTION public.geometry_contained(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 113 (class 1255 OID 31651)
--- Dependencies: 1005 3 1005
--- Name: geometry_eq(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: geometry_eq(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_eq(geometry, geometry) RETURNS boolean
@@ -3278,12 +2876,10 @@ CREATE FUNCTION geometry_eq(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_eq';
 
 
-ALTER FUNCTION public.geometry_eq(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 111 (class 1255 OID 31649)
--- Dependencies: 3 1005 1005
--- Name: geometry_ge(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: geometry_ge(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_ge(geometry, geometry) RETURNS boolean
@@ -3291,12 +2887,10 @@ CREATE FUNCTION geometry_ge(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_ge';
 
 
-ALTER FUNCTION public.geometry_ge(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 109 (class 1255 OID 31647)
--- Dependencies: 3 1005 1005
--- Name: geometry_gt(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: geometry_gt(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_gt(geometry, geometry) RETURNS boolean
@@ -3304,12 +2898,10 @@ CREATE FUNCTION geometry_gt(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_gt';
 
 
-ALTER FUNCTION public.geometry_gt(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 25 (class 1255 OID 31553)
--- Dependencies: 1005 3
--- Name: geometry_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: geometry_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_in(cstring) RETURNS geometry
@@ -3317,12 +2909,10 @@ CREATE FUNCTION geometry_in(cstring) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_in';
 
 
-ALTER FUNCTION public.geometry_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 107 (class 1255 OID 31645)
--- Dependencies: 3 1005 1005
--- Name: geometry_le(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometry_le(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_le(geometry, geometry) RETURNS boolean
@@ -3330,12 +2920,10 @@ CREATE FUNCTION geometry_le(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_le';
 
 
-ALTER FUNCTION public.geometry_le(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 129 (class 1255 OID 31680)
--- Dependencies: 1005 1005 3
--- Name: geometry_left(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometry_left(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_left(geometry, geometry) RETURNS boolean
@@ -3343,12 +2931,10 @@ CREATE FUNCTION geometry_left(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_left';
 
 
-ALTER FUNCTION public.geometry_left(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 105 (class 1255 OID 31643)
--- Dependencies: 3 1005 1005
--- Name: geometry_lt(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: geometry_lt(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_lt(geometry, geometry) RETURNS boolean
@@ -3356,12 +2942,10 @@ CREATE FUNCTION geometry_lt(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_lt';
 
 
-ALTER FUNCTION public.geometry_lt(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 27 (class 1255 OID 31555)
--- Dependencies: 3 1005
--- Name: geometry_out(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: geometry_out(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_out(geometry) RETURNS cstring
@@ -3369,12 +2953,10 @@ CREATE FUNCTION geometry_out(geometry) RETURNS cstring
     AS '$libdir/postgis-1.4', 'LWGEOM_out';
 
 
-ALTER FUNCTION public.geometry_out(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 125 (class 1255 OID 31676)
--- Dependencies: 1005 3 1005
--- Name: geometry_overabove(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: geometry_overabove(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_overabove(geometry, geometry) RETURNS boolean
@@ -3382,12 +2964,10 @@ CREATE FUNCTION geometry_overabove(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overabove';
 
 
-ALTER FUNCTION public.geometry_overabove(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 127 (class 1255 OID 31678)
--- Dependencies: 3 1005 1005
--- Name: geometry_overbelow(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: geometry_overbelow(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_overbelow(geometry, geometry) RETURNS boolean
@@ -3395,12 +2975,10 @@ CREATE FUNCTION geometry_overbelow(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overbelow';
 
 
-ALTER FUNCTION public.geometry_overbelow(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 141 (class 1255 OID 31692)
--- Dependencies: 1005 3 1005
--- Name: geometry_overlap(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: geometry_overlap(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_overlap(geometry, geometry) RETURNS boolean
@@ -3408,12 +2986,10 @@ CREATE FUNCTION geometry_overlap(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overlap';
 
 
-ALTER FUNCTION public.geometry_overlap(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 121 (class 1255 OID 31672)
--- Dependencies: 3 1005 1005
--- Name: geometry_overleft(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometry_overleft(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_overleft(geometry, geometry) RETURNS boolean
@@ -3421,12 +2997,10 @@ CREATE FUNCTION geometry_overleft(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overleft';
 
 
-ALTER FUNCTION public.geometry_overleft(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 123 (class 1255 OID 31674)
--- Dependencies: 1005 1005 3
--- Name: geometry_overright(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometry_overright(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_overright(geometry, geometry) RETURNS boolean
@@ -3434,12 +3008,10 @@ CREATE FUNCTION geometry_overright(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overright';
 
 
-ALTER FUNCTION public.geometry_overright(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 31 (class 1255 OID 31559)
--- Dependencies: 3 1005
--- Name: geometry_recv(internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geometry_recv(internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_recv(internal) RETURNS geometry
@@ -3447,12 +3019,10 @@ CREATE FUNCTION geometry_recv(internal) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_recv';
 
 
-ALTER FUNCTION public.geometry_recv(internal) OWNER TO postgres;
-
 --
 -- TOC entry 131 (class 1255 OID 31682)
--- Dependencies: 1005 1005 3
--- Name: geometry_right(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: geometry_right(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_right(geometry, geometry) RETURNS boolean
@@ -3460,12 +3030,10 @@ CREATE FUNCTION geometry_right(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_right';
 
 
-ALTER FUNCTION public.geometry_right(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 143 (class 1255 OID 31694)
--- Dependencies: 3 1005 1005
--- Name: geometry_same(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometry_same(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_same(geometry, geometry) RETURNS boolean
@@ -3473,12 +3041,10 @@ CREATE FUNCTION geometry_same(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_same';
 
 
-ALTER FUNCTION public.geometry_same(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 33 (class 1255 OID 31561)
--- Dependencies: 3 1005
--- Name: geometry_send(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geometry_send(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometry_send(geometry) RETURNS bytea
@@ -3486,12 +3052,10 @@ CREATE FUNCTION geometry_send(geometry) RETURNS bytea
     AS '$libdir/postgis-1.4', 'LWGEOM_send';
 
 
-ALTER FUNCTION public.geometry_send(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 569 (class 1255 OID 32209)
--- Dependencies: 3 1005
--- Name: geometryfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geometryfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometryfromtext(text) RETURNS geometry
@@ -3499,12 +3063,10 @@ CREATE FUNCTION geometryfromtext(text) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_text';
 
 
-ALTER FUNCTION public.geometryfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 571 (class 1255 OID 32211)
--- Dependencies: 3 1005
--- Name: geometryfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: geometryfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometryfromtext(text, integer) RETURNS geometry
@@ -3512,12 +3074,10 @@ CREATE FUNCTION geometryfromtext(text, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_text';
 
 
-ALTER FUNCTION public.geometryfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 526 (class 1255 OID 32167)
--- Dependencies: 3 1005 1005
--- Name: geometryn(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: geometryn(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometryn(geometry, integer) RETURNS geometry
@@ -3525,12 +3085,10 @@ CREATE FUNCTION geometryn(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_geometryn_collection';
 
 
-ALTER FUNCTION public.geometryn(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 538 (class 1255 OID 32179)
--- Dependencies: 3 1005
--- Name: geometrytype(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geometrytype(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geometrytype(geometry) RETURNS text
@@ -3538,12 +3096,10 @@ CREATE FUNCTION geometrytype(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_getTYPE';
 
 
-ALTER FUNCTION public.geometrytype(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2735 (class 0 OID 0)
+-- TOC entry 2879 (class 0 OID 0)
 -- Dependencies: 538
--- Name: FUNCTION geometrytype(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION geometrytype(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION geometrytype(geometry) IS 'args: geomA - Returns the type of the geometry as a string. Eg: LINESTRING, POLYGON, MULTIPOINT, etc.';
@@ -3551,8 +3107,8 @@ COMMENT ON FUNCTION geometrytype(geometry) IS 'args: geomA - Returns the type of
 
 --
 -- TOC entry 259 (class 1255 OID 31843)
--- Dependencies: 3 1005
--- Name: geomfromewkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: geomfromewkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomfromewkb(bytea) RETURNS geometry
@@ -3560,12 +3116,10 @@ CREATE FUNCTION geomfromewkb(bytea) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOMFromWKB';
 
 
-ALTER FUNCTION public.geomfromewkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 261 (class 1255 OID 31845)
--- Dependencies: 1005 3
--- Name: geomfromewkt(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geomfromewkt(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomfromewkt(text) RETURNS geometry
@@ -3573,12 +3127,10 @@ CREATE FUNCTION geomfromewkt(text) RETURNS geometry
     AS '$libdir/postgis-1.4', 'parse_WKT_lwgeom';
 
 
-ALTER FUNCTION public.geomfromewkt(text) OWNER TO postgres;
-
 --
 -- TOC entry 573 (class 1255 OID 32213)
--- Dependencies: 3 1005
--- Name: geomfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: geomfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomfromtext(text) RETURNS geometry
@@ -3586,12 +3138,10 @@ CREATE FUNCTION geomfromtext(text) RETURNS geometry
     AS $_$SELECT geometryfromtext($1)$_$;
 
 
-ALTER FUNCTION public.geomfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 575 (class 1255 OID 32215)
--- Dependencies: 3 1005
--- Name: geomfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geomfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomfromtext(text, integer) RETURNS geometry
@@ -3599,12 +3149,10 @@ CREATE FUNCTION geomfromtext(text, integer) RETURNS geometry
     AS $_$SELECT geometryfromtext($1, $2)$_$;
 
 
-ALTER FUNCTION public.geomfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 621 (class 1255 OID 32262)
--- Dependencies: 3 1005
--- Name: geomfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geomfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomfromwkb(bytea) RETURNS geometry
@@ -3612,12 +3160,10 @@ CREATE FUNCTION geomfromwkb(bytea) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_WKB';
 
 
-ALTER FUNCTION public.geomfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 623 (class 1255 OID 32264)
--- Dependencies: 3 1005
--- Name: geomfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: geomfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomfromwkb(bytea, integer) RETURNS geometry
@@ -3625,12 +3171,10 @@ CREATE FUNCTION geomfromwkb(bytea, integer) RETURNS geometry
     AS $_$SELECT setSRID(GeomFromWKB($1), $2)$_$;
 
 
-ALTER FUNCTION public.geomfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 423 (class 1255 OID 32047)
--- Dependencies: 3 1005 1005 1005
--- Name: geomunion(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: geomunion(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geomunion(geometry, geometry) RETURNS geometry
@@ -3638,12 +3182,10 @@ CREATE FUNCTION geomunion(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'geomunion';
 
 
-ALTER FUNCTION public.geomunion(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 479 (class 1255 OID 32120)
--- Dependencies: 3 1005 1005
--- Name: geosnoop(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: geosnoop(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION geosnoop(geometry) RETURNS geometry
@@ -3651,12 +3193,10 @@ CREATE FUNCTION geosnoop(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'GEOSnoop';
 
 
-ALTER FUNCTION public.geosnoop(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 342 (class 1255 OID 31947)
--- Dependencies: 3 1080
--- Name: get_proj4_from_srid(integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: get_proj4_from_srid(integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION get_proj4_from_srid(integer) RETURNS text
@@ -3668,12 +3208,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.get_proj4_from_srid(integer) OWNER TO postgres;
-
 --
 -- TOC entry 157 (class 1255 OID 31741)
--- Dependencies: 3 1017 1005
--- Name: getbbox(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1008
+-- Name: getbbox(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION getbbox(geometry) RETURNS box2d
@@ -3681,12 +3219,10 @@ CREATE FUNCTION getbbox(geometry) RETURNS box2d
     AS '$libdir/postgis-1.4', 'LWGEOM_to_BOX2DFLOAT4';
 
 
-ALTER FUNCTION public.getbbox(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 156 (class 1255 OID 31740)
--- Dependencies: 1005 3
--- Name: getsrid(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: getsrid(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION getsrid(geometry) RETURNS integer
@@ -3694,12 +3230,10 @@ CREATE FUNCTION getsrid(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_getSRID';
 
 
-ALTER FUNCTION public.getsrid(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 685 (class 1255 OID 32326)
 -- Dependencies: 3
--- Name: gettransactionid(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: gettransactionid(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION gettransactionid() RETURNS xid
@@ -3707,12 +3241,10 @@ CREATE FUNCTION gettransactionid() RETURNS xid
     AS '$libdir/postgis-1.4', 'getTransactionID';
 
 
-ALTER FUNCTION public.gettransactionid() OWNER TO postgres;
-
 --
 -- TOC entry 245 (class 1255 OID 31829)
--- Dependencies: 1005 3
--- Name: hasbbox(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: hasbbox(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION hasbbox(geometry) RETURNS boolean
@@ -3720,12 +3252,10 @@ CREATE FUNCTION hasbbox(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_hasBBOX';
 
 
-ALTER FUNCTION public.hasbbox(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 160 (class 1255 OID 31744)
--- Dependencies: 3 1014
--- Name: height(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1017
+-- Name: height(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION height(chip) RETURNS integer
@@ -3733,12 +3263,10 @@ CREATE FUNCTION height(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getHeight';
 
 
-ALTER FUNCTION public.height(chip) OWNER TO postgres;
-
 --
 -- TOC entry 536 (class 1255 OID 32177)
--- Dependencies: 3 1005 1005
--- Name: interiorringn(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: interiorringn(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION interiorringn(geometry, integer) RETURNS geometry
@@ -3746,12 +3274,10 @@ CREATE FUNCTION interiorringn(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_interiorringn_polygon';
 
 
-ALTER FUNCTION public.interiorringn(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 402 (class 1255 OID 32026)
--- Dependencies: 3 1005 1005 1005
--- Name: intersection(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: intersection(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION intersection(geometry, geometry) RETURNS geometry
@@ -3759,12 +3285,10 @@ CREATE FUNCTION intersection(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'intersection';
 
 
-ALTER FUNCTION public.intersection(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 456 (class 1255 OID 32097)
--- Dependencies: 3 1005 1005
--- Name: intersects(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: intersects(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION intersects(geometry, geometry) RETURNS boolean
@@ -3772,12 +3296,10 @@ CREATE FUNCTION intersects(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'intersects';
 
 
-ALTER FUNCTION public.intersects(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 555 (class 1255 OID 32195)
--- Dependencies: 3 1005
--- Name: isclosed(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: isclosed(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION isclosed(geometry) RETURNS boolean
@@ -3785,12 +3307,10 @@ CREATE FUNCTION isclosed(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_isclosed_linestring';
 
 
-ALTER FUNCTION public.isclosed(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 557 (class 1255 OID 32197)
--- Dependencies: 3 1005
--- Name: isempty(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: isempty(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION isempty(geometry) RETURNS boolean
@@ -3798,12 +3318,10 @@ CREATE FUNCTION isempty(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_isempty';
 
 
-ALTER FUNCTION public.isempty(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 482 (class 1255 OID 32123)
--- Dependencies: 3 1005
--- Name: isring(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: isring(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION isring(geometry) RETURNS boolean
@@ -3811,12 +3329,10 @@ CREATE FUNCTION isring(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'isring';
 
 
-ALTER FUNCTION public.isring(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 486 (class 1255 OID 32127)
--- Dependencies: 3 1005
--- Name: issimple(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: issimple(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION issimple(geometry) RETURNS boolean
@@ -3824,12 +3340,10 @@ CREATE FUNCTION issimple(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'issimple';
 
 
-ALTER FUNCTION public.issimple(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 477 (class 1255 OID 32118)
--- Dependencies: 3 1005
--- Name: isvalid(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: isvalid(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION isvalid(geometry) RETURNS boolean
@@ -3837,12 +3351,10 @@ CREATE FUNCTION isvalid(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'isvalid';
 
 
-ALTER FUNCTION public.isvalid(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 185 (class 1255 OID 31769)
--- Dependencies: 1005 3
--- Name: length(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: length(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION length(geometry) RETURNS double precision
@@ -3850,12 +3362,10 @@ CREATE FUNCTION length(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length_linestring';
 
 
-ALTER FUNCTION public.length(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 183 (class 1255 OID 31767)
--- Dependencies: 3 1005
--- Name: length2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: length2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION length2d(geometry) RETURNS double precision
@@ -3863,12 +3373,10 @@ CREATE FUNCTION length2d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length2d_linestring';
 
 
-ALTER FUNCTION public.length2d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 191 (class 1255 OID 31775)
--- Dependencies: 3 1002 1005
--- Name: length2d_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1005
+-- Name: length2d_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION length2d_spheroid(geometry, spheroid) RETURNS double precision
@@ -3876,12 +3384,10 @@ CREATE FUNCTION length2d_spheroid(geometry, spheroid) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length2d_ellipsoid_linestring';
 
 
-ALTER FUNCTION public.length2d_spheroid(geometry, spheroid) OWNER TO postgres;
-
 --
 -- TOC entry 181 (class 1255 OID 31765)
--- Dependencies: 3 1005
--- Name: length3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: length3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION length3d(geometry) RETURNS double precision
@@ -3889,12 +3395,10 @@ CREATE FUNCTION length3d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length_linestring';
 
 
-ALTER FUNCTION public.length3d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 187 (class 1255 OID 31771)
--- Dependencies: 1002 3 1005
--- Name: length3d_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1005 1008 3
+-- Name: length3d_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION length3d_spheroid(geometry, spheroid) RETURNS double precision
@@ -3902,12 +3406,10 @@ CREATE FUNCTION length3d_spheroid(geometry, spheroid) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length_ellipsoid_linestring';
 
 
-ALTER FUNCTION public.length3d_spheroid(geometry, spheroid) OWNER TO postgres;
-
 --
 -- TOC entry 189 (class 1255 OID 31773)
--- Dependencies: 1002 1005 3
--- Name: length_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1005 3
+-- Name: length_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION length_spheroid(geometry, spheroid) RETURNS double precision
@@ -3915,12 +3417,10 @@ CREATE FUNCTION length_spheroid(geometry, spheroid) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length_ellipsoid_linestring';
 
 
-ALTER FUNCTION public.length_spheroid(geometry, spheroid) OWNER TO postgres;
-
 --
 -- TOC entry 392 (class 1255 OID 32016)
--- Dependencies: 3 1005 1005
--- Name: line_interpolate_point(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: line_interpolate_point(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION line_interpolate_point(geometry, double precision) RETURNS geometry
@@ -3928,12 +3428,10 @@ CREATE FUNCTION line_interpolate_point(geometry, double precision) RETURNS geome
     AS '$libdir/postgis-1.4', 'LWGEOM_line_interpolate_point';
 
 
-ALTER FUNCTION public.line_interpolate_point(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 396 (class 1255 OID 32020)
--- Dependencies: 3 1005 1005
--- Name: line_locate_point(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: line_locate_point(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION line_locate_point(geometry, geometry) RETURNS double precision
@@ -3941,12 +3439,10 @@ CREATE FUNCTION line_locate_point(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_line_locate_point';
 
 
-ALTER FUNCTION public.line_locate_point(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 394 (class 1255 OID 32018)
--- Dependencies: 3 1005 1005
--- Name: line_substring(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: line_substring(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION line_substring(geometry, double precision, double precision) RETURNS geometry
@@ -3954,12 +3450,10 @@ CREATE FUNCTION line_substring(geometry, double precision, double precision) RET
     AS '$libdir/postgis-1.4', 'LWGEOM_line_substring';
 
 
-ALTER FUNCTION public.line_substring(geometry, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 280 (class 1255 OID 31864)
--- Dependencies: 3 1005 1005
--- Name: linefrommultipoint(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: linefrommultipoint(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linefrommultipoint(geometry) RETURNS geometry
@@ -3967,12 +3461,10 @@ CREATE FUNCTION linefrommultipoint(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_line_from_mpoint';
 
 
-ALTER FUNCTION public.linefrommultipoint(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 580 (class 1255 OID 32221)
--- Dependencies: 3 1005
--- Name: linefromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: linefromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linefromtext(text) RETURNS geometry
@@ -3984,12 +3476,10 @@ CREATE FUNCTION linefromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.linefromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 582 (class 1255 OID 32223)
--- Dependencies: 3 1005
--- Name: linefromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: linefromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linefromtext(text, integer) RETURNS geometry
@@ -4001,12 +3491,10 @@ CREATE FUNCTION linefromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.linefromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 629 (class 1255 OID 32270)
--- Dependencies: 1005 3
--- Name: linefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: linefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linefromwkb(bytea, integer) RETURNS geometry
@@ -4018,12 +3506,10 @@ CREATE FUNCTION linefromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.linefromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 631 (class 1255 OID 32272)
--- Dependencies: 3 1005
--- Name: linefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: linefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linefromwkb(bytea) RETURNS geometry
@@ -4035,12 +3521,10 @@ CREATE FUNCTION linefromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.linefromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 301 (class 1255 OID 31885)
--- Dependencies: 3 1005 1005
--- Name: linemerge(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: linemerge(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linemerge(geometry) RETURNS geometry
@@ -4048,12 +3532,10 @@ CREATE FUNCTION linemerge(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'linemerge';
 
 
-ALTER FUNCTION public.linemerge(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 584 (class 1255 OID 32225)
--- Dependencies: 3 1005
--- Name: linestringfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: linestringfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linestringfromtext(text) RETURNS geometry
@@ -4061,12 +3543,10 @@ CREATE FUNCTION linestringfromtext(text) RETURNS geometry
     AS $_$SELECT LineFromText($1)$_$;
 
 
-ALTER FUNCTION public.linestringfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 585 (class 1255 OID 32226)
--- Dependencies: 3 1005
--- Name: linestringfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: linestringfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linestringfromtext(text, integer) RETURNS geometry
@@ -4074,12 +3554,10 @@ CREATE FUNCTION linestringfromtext(text, integer) RETURNS geometry
     AS $_$SELECT LineFromText($1, $2)$_$;
 
 
-ALTER FUNCTION public.linestringfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 633 (class 1255 OID 32274)
--- Dependencies: 3 1005
--- Name: linestringfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: linestringfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linestringfromwkb(bytea, integer) RETURNS geometry
@@ -4091,12 +3569,10 @@ CREATE FUNCTION linestringfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.linestringfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 635 (class 1255 OID 32276)
--- Dependencies: 3 1005
--- Name: linestringfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: linestringfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION linestringfromwkb(bytea) RETURNS geometry
@@ -4108,12 +3584,10 @@ CREATE FUNCTION linestringfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.linestringfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 400 (class 1255 OID 32024)
--- Dependencies: 3 1005 1005
--- Name: locate_along_measure(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: locate_along_measure(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION locate_along_measure(geometry, double precision) RETURNS geometry
@@ -4121,12 +3595,10 @@ CREATE FUNCTION locate_along_measure(geometry, double precision) RETURNS geometr
     AS $_$ SELECT locate_between_measures($1, $2, $2) $_$;
 
 
-ALTER FUNCTION public.locate_along_measure(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 398 (class 1255 OID 32022)
--- Dependencies: 3 1005 1005
--- Name: locate_between_measures(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: locate_between_measures(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION locate_between_measures(geometry, double precision, double precision) RETURNS geometry
@@ -4134,12 +3606,10 @@ CREATE FUNCTION locate_between_measures(geometry, double precision, double preci
     AS '$libdir/postgis-1.4', 'LWGEOM_locate_between_m';
 
 
-ALTER FUNCTION public.locate_between_measures(geometry, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 677 (class 1255 OID 32318)
--- Dependencies: 3 1080
--- Name: lockrow(text, text, text, text, timestamp without time zone); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: lockrow(text, text, text, text, timestamp without time zone); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lockrow(text, text, text, text, timestamp without time zone) RETURNS integer
@@ -4192,12 +3662,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.lockrow(text, text, text, text, timestamp without time zone) OWNER TO postgres;
-
 --
--- TOC entry 2736 (class 0 OID 0)
+-- TOC entry 2880 (class 0 OID 0)
 -- Dependencies: 677
--- Name: FUNCTION lockrow(text, text, text, text, timestamp without time zone); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION lockrow(text, text, text, text, timestamp without time zone); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION lockrow(text, text, text, text, timestamp without time zone) IS 'args: a_schema_name, a_table_name, a_row_key, an_auth_token, expire_dt - Set lock/authorization for specific row in table';
@@ -4206,7 +3674,7 @@ COMMENT ON FUNCTION lockrow(text, text, text, text, timestamp without time zone)
 --
 -- TOC entry 678 (class 1255 OID 32319)
 -- Dependencies: 3
--- Name: lockrow(text, text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: lockrow(text, text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lockrow(text, text, text, text) RETURNS integer
@@ -4214,12 +3682,10 @@ CREATE FUNCTION lockrow(text, text, text, text) RETURNS integer
     AS $_$ SELECT LockRow($1, $2, $3, $4, now()::timestamp+'1:00'); $_$;
 
 
-ALTER FUNCTION public.lockrow(text, text, text, text) OWNER TO postgres;
-
 --
 -- TOC entry 679 (class 1255 OID 32320)
 -- Dependencies: 3
--- Name: lockrow(text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: lockrow(text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lockrow(text, text, text) RETURNS integer
@@ -4227,12 +3693,10 @@ CREATE FUNCTION lockrow(text, text, text) RETURNS integer
     AS $_$ SELECT LockRow(current_schema(), $1, $2, $3, now()::timestamp+'1:00'); $_$;
 
 
-ALTER FUNCTION public.lockrow(text, text, text) OWNER TO postgres;
-
 --
--- TOC entry 2737 (class 0 OID 0)
+-- TOC entry 2881 (class 0 OID 0)
 -- Dependencies: 679
--- Name: FUNCTION lockrow(text, text, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION lockrow(text, text, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION lockrow(text, text, text) IS 'args: a_table_name, a_row_key, an_auth_token - Set lock/authorization for specific row in table';
@@ -4241,7 +3705,7 @@ COMMENT ON FUNCTION lockrow(text, text, text) IS 'args: a_table_name, a_row_key,
 --
 -- TOC entry 680 (class 1255 OID 32321)
 -- Dependencies: 3
--- Name: lockrow(text, text, text, timestamp without time zone); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: lockrow(text, text, text, timestamp without time zone); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lockrow(text, text, text, timestamp without time zone) RETURNS integer
@@ -4249,12 +3713,10 @@ CREATE FUNCTION lockrow(text, text, text, timestamp without time zone) RETURNS i
     AS $_$ SELECT LockRow(current_schema(), $1, $2, $3, $4); $_$;
 
 
-ALTER FUNCTION public.lockrow(text, text, text, timestamp without time zone) OWNER TO postgres;
-
 --
--- TOC entry 2738 (class 0 OID 0)
+-- TOC entry 2882 (class 0 OID 0)
 -- Dependencies: 680
--- Name: FUNCTION lockrow(text, text, text, timestamp without time zone); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION lockrow(text, text, text, timestamp without time zone); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION lockrow(text, text, text, timestamp without time zone) IS 'args: a_table_name, a_row_key, an_auth_token, expire_dt - Set lock/authorization for specific row in table';
@@ -4262,8 +3724,8 @@ COMMENT ON FUNCTION lockrow(text, text, text, timestamp without time zone) IS 'a
 
 --
 -- TOC entry 687 (class 1255 OID 32328)
--- Dependencies: 3 1080
--- Name: longtransactionsenabled(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1123 3
+-- Name: longtransactionsenabled(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION longtransactionsenabled() RETURNS boolean
@@ -4281,12 +3743,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.longtransactionsenabled() OWNER TO postgres;
-
 --
 -- TOC entry 146 (class 1255 OID 31709)
 -- Dependencies: 3
--- Name: lwgeom_gist_compress(internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: lwgeom_gist_compress(internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lwgeom_gist_compress(internal) RETURNS internal
@@ -4294,12 +3754,10 @@ CREATE FUNCTION lwgeom_gist_compress(internal) RETURNS internal
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_compress';
 
 
-ALTER FUNCTION public.lwgeom_gist_compress(internal) OWNER TO postgres;
-
 --
 -- TOC entry 145 (class 1255 OID 31708)
--- Dependencies: 3 1005
--- Name: lwgeom_gist_consistent(internal, geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: lwgeom_gist_consistent(internal, geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lwgeom_gist_consistent(internal, geometry, integer) RETURNS boolean
@@ -4307,12 +3765,10 @@ CREATE FUNCTION lwgeom_gist_consistent(internal, geometry, integer) RETURNS bool
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_consistent';
 
 
-ALTER FUNCTION public.lwgeom_gist_consistent(internal, geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 151 (class 1255 OID 31714)
 -- Dependencies: 3
--- Name: lwgeom_gist_decompress(internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: lwgeom_gist_decompress(internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lwgeom_gist_decompress(internal) RETURNS internal
@@ -4320,12 +3776,10 @@ CREATE FUNCTION lwgeom_gist_decompress(internal) RETURNS internal
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_decompress';
 
 
-ALTER FUNCTION public.lwgeom_gist_decompress(internal) OWNER TO postgres;
-
 --
 -- TOC entry 147 (class 1255 OID 31710)
 -- Dependencies: 3
--- Name: lwgeom_gist_penalty(internal, internal, internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: lwgeom_gist_penalty(internal, internal, internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lwgeom_gist_penalty(internal, internal, internal) RETURNS internal
@@ -4333,12 +3787,10 @@ CREATE FUNCTION lwgeom_gist_penalty(internal, internal, internal) RETURNS intern
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_penalty';
 
 
-ALTER FUNCTION public.lwgeom_gist_penalty(internal, internal, internal) OWNER TO postgres;
-
 --
 -- TOC entry 148 (class 1255 OID 31711)
 -- Dependencies: 3
--- Name: lwgeom_gist_picksplit(internal, internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: lwgeom_gist_picksplit(internal, internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lwgeom_gist_picksplit(internal, internal) RETURNS internal
@@ -4346,12 +3798,10 @@ CREATE FUNCTION lwgeom_gist_picksplit(internal, internal) RETURNS internal
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_picksplit';
 
 
-ALTER FUNCTION public.lwgeom_gist_picksplit(internal, internal) OWNER TO postgres;
-
 --
 -- TOC entry 150 (class 1255 OID 31713)
--- Dependencies: 1017 3 1017
--- Name: lwgeom_gist_same(box2d, box2d, internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1020
+-- Name: lwgeom_gist_same(box2d, box2d, internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lwgeom_gist_same(box2d, box2d, internal) RETURNS internal
@@ -4359,12 +3809,10 @@ CREATE FUNCTION lwgeom_gist_same(box2d, box2d, internal) RETURNS internal
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_same';
 
 
-ALTER FUNCTION public.lwgeom_gist_same(box2d, box2d, internal) OWNER TO postgres;
-
 --
 -- TOC entry 149 (class 1255 OID 31712)
 -- Dependencies: 3
--- Name: lwgeom_gist_union(bytea, internal); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: lwgeom_gist_union(bytea, internal); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION lwgeom_gist_union(bytea, internal) RETURNS internal
@@ -4372,12 +3820,10 @@ CREATE FUNCTION lwgeom_gist_union(bytea, internal) RETURNS internal
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_union';
 
 
-ALTER FUNCTION public.lwgeom_gist_union(bytea, internal) OWNER TO postgres;
-
 --
 -- TOC entry 549 (class 1255 OID 32189)
--- Dependencies: 3 1005
--- Name: m(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: m(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION m(geometry) RETURNS double precision
@@ -4385,12 +3831,10 @@ CREATE FUNCTION m(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_m_point';
 
 
-ALTER FUNCTION public.m(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 273 (class 1255 OID 31857)
--- Dependencies: 3 1017 1005 1005
--- Name: makebox2d(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1020
+-- Name: makebox2d(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makebox2d(geometry, geometry) RETURNS box2d
@@ -4398,12 +3842,10 @@ CREATE FUNCTION makebox2d(geometry, geometry) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_construct';
 
 
-ALTER FUNCTION public.makebox2d(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 275 (class 1255 OID 31859)
--- Dependencies: 1005 3 1008 1005
--- Name: makebox3d(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1011 3 1008
+-- Name: makebox3d(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makebox3d(geometry, geometry) RETURNS box3d
@@ -4411,12 +3853,10 @@ CREATE FUNCTION makebox3d(geometry, geometry) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_construct';
 
 
-ALTER FUNCTION public.makebox3d(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 282 (class 1255 OID 31866)
--- Dependencies: 1005 1005 1005 3
--- Name: makeline(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: makeline(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makeline(geometry, geometry) RETURNS geometry
@@ -4424,12 +3864,10 @@ CREATE FUNCTION makeline(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makeline';
 
 
-ALTER FUNCTION public.makeline(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 277 (class 1255 OID 31861)
--- Dependencies: 3 1005 1007
--- Name: makeline_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1010
+-- Name: makeline_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makeline_garray(geometry[]) RETURNS geometry
@@ -4437,12 +3875,10 @@ CREATE FUNCTION makeline_garray(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makeline_garray';
 
 
-ALTER FUNCTION public.makeline_garray(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 265 (class 1255 OID 31849)
--- Dependencies: 3 1005
--- Name: makepoint(double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: makepoint(double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makepoint(double precision, double precision) RETURNS geometry
@@ -4450,12 +3886,10 @@ CREATE FUNCTION makepoint(double precision, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint';
 
 
-ALTER FUNCTION public.makepoint(double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 267 (class 1255 OID 31851)
--- Dependencies: 1005 3
--- Name: makepoint(double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: makepoint(double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makepoint(double precision, double precision, double precision) RETURNS geometry
@@ -4463,12 +3897,10 @@ CREATE FUNCTION makepoint(double precision, double precision, double precision) 
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint';
 
 
-ALTER FUNCTION public.makepoint(double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 269 (class 1255 OID 31853)
--- Dependencies: 3 1005
--- Name: makepoint(double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: makepoint(double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makepoint(double precision, double precision, double precision, double precision) RETURNS geometry
@@ -4476,12 +3908,10 @@ CREATE FUNCTION makepoint(double precision, double precision, double precision, 
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint';
 
 
-ALTER FUNCTION public.makepoint(double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 271 (class 1255 OID 31855)
--- Dependencies: 3 1005
--- Name: makepointm(double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: makepointm(double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makepointm(double precision, double precision, double precision) RETURNS geometry
@@ -4489,12 +3919,10 @@ CREATE FUNCTION makepointm(double precision, double precision, double precision)
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint3dm';
 
 
-ALTER FUNCTION public.makepointm(double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 292 (class 1255 OID 31876)
--- Dependencies: 1005 1007 1005 3
--- Name: makepolygon(geometry, geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1010
+-- Name: makepolygon(geometry, geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makepolygon(geometry, geometry[]) RETURNS geometry
@@ -4502,12 +3930,10 @@ CREATE FUNCTION makepolygon(geometry, geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoly';
 
 
-ALTER FUNCTION public.makepolygon(geometry, geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 294 (class 1255 OID 31878)
--- Dependencies: 3 1005 1005
--- Name: makepolygon(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: makepolygon(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION makepolygon(geometry) RETURNS geometry
@@ -4515,12 +3941,10 @@ CREATE FUNCTION makepolygon(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoly';
 
 
-ALTER FUNCTION public.makepolygon(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 209 (class 1255 OID 31793)
--- Dependencies: 1005 1005 3
--- Name: max_distance(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: max_distance(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION max_distance(geometry, geometry) RETURNS double precision
@@ -4528,12 +3952,10 @@ CREATE FUNCTION max_distance(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_maxdistance2d_linestring';
 
 
-ALTER FUNCTION public.max_distance(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 173 (class 1255 OID 31757)
--- Dependencies: 3 1005
--- Name: mem_size(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: mem_size(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mem_size(geometry) RETURNS integer
@@ -4541,12 +3963,10 @@ CREATE FUNCTION mem_size(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_mem_size';
 
 
-ALTER FUNCTION public.mem_size(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 594 (class 1255 OID 32235)
--- Dependencies: 3 1005
--- Name: mlinefromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: mlinefromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mlinefromtext(text, integer) RETURNS geometry
@@ -4559,12 +3979,10 @@ CREATE FUNCTION mlinefromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mlinefromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 596 (class 1255 OID 32237)
--- Dependencies: 3 1005
--- Name: mlinefromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: mlinefromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mlinefromtext(text) RETURNS geometry
@@ -4576,12 +3994,10 @@ CREATE FUNCTION mlinefromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mlinefromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 656 (class 1255 OID 32297)
--- Dependencies: 3 1005
--- Name: mlinefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: mlinefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mlinefromwkb(bytea, integer) RETURNS geometry
@@ -4593,12 +4009,10 @@ CREATE FUNCTION mlinefromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mlinefromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 658 (class 1255 OID 32299)
--- Dependencies: 3 1005
--- Name: mlinefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: mlinefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mlinefromwkb(bytea) RETURNS geometry
@@ -4610,12 +4024,10 @@ CREATE FUNCTION mlinefromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mlinefromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 602 (class 1255 OID 32243)
--- Dependencies: 3 1005
--- Name: mpointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: mpointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mpointfromtext(text, integer) RETURNS geometry
@@ -4627,12 +4039,10 @@ CREATE FUNCTION mpointfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mpointfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 604 (class 1255 OID 32245)
--- Dependencies: 3 1005
--- Name: mpointfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: mpointfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mpointfromtext(text) RETURNS geometry
@@ -4644,12 +4054,10 @@ CREATE FUNCTION mpointfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mpointfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 645 (class 1255 OID 32286)
--- Dependencies: 3 1005
--- Name: mpointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: mpointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mpointfromwkb(bytea, integer) RETURNS geometry
@@ -4661,12 +4069,10 @@ CREATE FUNCTION mpointfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mpointfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 647 (class 1255 OID 32288)
--- Dependencies: 3 1005
--- Name: mpointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: mpointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mpointfromwkb(bytea) RETURNS geometry
@@ -4678,12 +4084,10 @@ CREATE FUNCTION mpointfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mpointfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 609 (class 1255 OID 32250)
--- Dependencies: 3 1005
--- Name: mpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: mpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mpolyfromtext(text, integer) RETURNS geometry
@@ -4695,12 +4099,10 @@ CREATE FUNCTION mpolyfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mpolyfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 611 (class 1255 OID 32252)
--- Dependencies: 3 1005
--- Name: mpolyfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: mpolyfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mpolyfromtext(text) RETURNS geometry
@@ -4712,12 +4114,10 @@ CREATE FUNCTION mpolyfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mpolyfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 660 (class 1255 OID 32301)
--- Dependencies: 3 1005
--- Name: mpolyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: mpolyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mpolyfromwkb(bytea, integer) RETURNS geometry
@@ -4729,12 +4129,10 @@ CREATE FUNCTION mpolyfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mpolyfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 662 (class 1255 OID 32303)
--- Dependencies: 3 1005
--- Name: mpolyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: mpolyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION mpolyfromwkb(bytea) RETURNS geometry
@@ -4746,12 +4144,10 @@ CREATE FUNCTION mpolyfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.mpolyfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 227 (class 1255 OID 31811)
--- Dependencies: 3 1005 1005
--- Name: multi(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: multi(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multi(geometry) RETURNS geometry
@@ -4759,12 +4155,10 @@ CREATE FUNCTION multi(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_multi';
 
 
-ALTER FUNCTION public.multi(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 653 (class 1255 OID 32294)
--- Dependencies: 3 1005
--- Name: multilinefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: multilinefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multilinefromwkb(bytea, integer) RETURNS geometry
@@ -4776,12 +4170,10 @@ CREATE FUNCTION multilinefromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.multilinefromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 654 (class 1255 OID 32295)
--- Dependencies: 3 1005
--- Name: multilinefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: multilinefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multilinefromwkb(bytea) RETURNS geometry
@@ -4793,12 +4185,10 @@ CREATE FUNCTION multilinefromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.multilinefromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 598 (class 1255 OID 32239)
--- Dependencies: 3 1005
--- Name: multilinestringfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: multilinestringfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multilinestringfromtext(text) RETURNS geometry
@@ -4806,12 +4196,10 @@ CREATE FUNCTION multilinestringfromtext(text) RETURNS geometry
     AS $_$SELECT ST_MLineFromText($1)$_$;
 
 
-ALTER FUNCTION public.multilinestringfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 600 (class 1255 OID 32241)
--- Dependencies: 3 1005
--- Name: multilinestringfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: multilinestringfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multilinestringfromtext(text, integer) RETURNS geometry
@@ -4819,12 +4207,10 @@ CREATE FUNCTION multilinestringfromtext(text, integer) RETURNS geometry
     AS $_$SELECT MLineFromText($1, $2)$_$;
 
 
-ALTER FUNCTION public.multilinestringfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 606 (class 1255 OID 32247)
--- Dependencies: 3 1005
--- Name: multipointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: multipointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multipointfromtext(text, integer) RETURNS geometry
@@ -4832,12 +4218,10 @@ CREATE FUNCTION multipointfromtext(text, integer) RETURNS geometry
     AS $_$SELECT MPointFromText($1, $2)$_$;
 
 
-ALTER FUNCTION public.multipointfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 607 (class 1255 OID 32248)
--- Dependencies: 3 1005
--- Name: multipointfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: multipointfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multipointfromtext(text) RETURNS geometry
@@ -4845,12 +4229,10 @@ CREATE FUNCTION multipointfromtext(text) RETURNS geometry
     AS $_$SELECT MPointFromText($1)$_$;
 
 
-ALTER FUNCTION public.multipointfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 649 (class 1255 OID 32290)
--- Dependencies: 3 1005
--- Name: multipointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: multipointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multipointfromwkb(bytea, integer) RETURNS geometry
@@ -4862,12 +4244,10 @@ CREATE FUNCTION multipointfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.multipointfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 651 (class 1255 OID 32292)
--- Dependencies: 3 1005
--- Name: multipointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: multipointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multipointfromwkb(bytea) RETURNS geometry
@@ -4879,12 +4259,10 @@ CREATE FUNCTION multipointfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.multipointfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 664 (class 1255 OID 32305)
--- Dependencies: 3 1005
--- Name: multipolyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: multipolyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multipolyfromwkb(bytea, integer) RETURNS geometry
@@ -4896,12 +4274,10 @@ CREATE FUNCTION multipolyfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.multipolyfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 666 (class 1255 OID 32307)
--- Dependencies: 3 1005
--- Name: multipolyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: multipolyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multipolyfromwkb(bytea) RETURNS geometry
@@ -4913,12 +4289,10 @@ CREATE FUNCTION multipolyfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.multipolyfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 613 (class 1255 OID 32254)
--- Dependencies: 3 1005
--- Name: multipolygonfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: multipolygonfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multipolygonfromtext(text, integer) RETURNS geometry
@@ -4926,12 +4300,10 @@ CREATE FUNCTION multipolygonfromtext(text, integer) RETURNS geometry
     AS $_$SELECT MPolyFromText($1, $2)$_$;
 
 
-ALTER FUNCTION public.multipolygonfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 615 (class 1255 OID 32256)
--- Dependencies: 3 1005
--- Name: multipolygonfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: multipolygonfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION multipolygonfromtext(text) RETURNS geometry
@@ -4939,12 +4311,10 @@ CREATE FUNCTION multipolygonfromtext(text) RETURNS geometry
     AS $_$SELECT MPolyFromText($1)$_$;
 
 
-ALTER FUNCTION public.multipolygonfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 247 (class 1255 OID 31831)
--- Dependencies: 1005 3
--- Name: ndims(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: ndims(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION ndims(geometry) RETURNS smallint
@@ -4952,12 +4322,10 @@ CREATE FUNCTION ndims(geometry) RETURNS smallint
     AS '$libdir/postgis-1.4', 'LWGEOM_ndims';
 
 
-ALTER FUNCTION public.ndims(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 241 (class 1255 OID 31825)
--- Dependencies: 1005 3 1005
--- Name: noop(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: noop(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION noop(geometry) RETURNS geometry
@@ -4965,12 +4333,10 @@ CREATE FUNCTION noop(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_noop';
 
 
-ALTER FUNCTION public.noop(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 177 (class 1255 OID 31761)
--- Dependencies: 3 1005
--- Name: npoints(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: npoints(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION npoints(geometry) RETURNS integer
@@ -4978,12 +4344,10 @@ CREATE FUNCTION npoints(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_npoints';
 
 
-ALTER FUNCTION public.npoints(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 179 (class 1255 OID 31763)
--- Dependencies: 1005 3
--- Name: nrings(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: nrings(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION nrings(geometry) RETURNS integer
@@ -4991,12 +4355,10 @@ CREATE FUNCTION nrings(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_nrings';
 
 
-ALTER FUNCTION public.nrings(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 524 (class 1255 OID 32165)
--- Dependencies: 3 1005
--- Name: numgeometries(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: numgeometries(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION numgeometries(geometry) RETURNS integer
@@ -5004,12 +4366,10 @@ CREATE FUNCTION numgeometries(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_numgeometries_collection';
 
 
-ALTER FUNCTION public.numgeometries(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 534 (class 1255 OID 32175)
--- Dependencies: 3 1005
--- Name: numinteriorring(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: numinteriorring(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION numinteriorring(geometry) RETURNS integer
@@ -5017,12 +4377,10 @@ CREATE FUNCTION numinteriorring(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_numinteriorrings_polygon';
 
 
-ALTER FUNCTION public.numinteriorring(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 532 (class 1255 OID 32173)
--- Dependencies: 3 1005
--- Name: numinteriorrings(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: numinteriorrings(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION numinteriorrings(geometry) RETURNS integer
@@ -5030,12 +4388,10 @@ CREATE FUNCTION numinteriorrings(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_numinteriorrings_polygon';
 
 
-ALTER FUNCTION public.numinteriorrings(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 522 (class 1255 OID 32163)
--- Dependencies: 3 1005
--- Name: numpoints(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: numpoints(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION numpoints(geometry) RETURNS integer
@@ -5043,12 +4399,10 @@ CREATE FUNCTION numpoints(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_numpoints_linestring';
 
 
-ALTER FUNCTION public.numpoints(geometry) OWNER TO postgres;
-
 --
--- TOC entry 714 (class 1255 OID 33487)
--- Dependencies: 1080 3
--- Name: observacion_clima_trigauto(); Type: FUNCTION; Schema: public; Owner: postgres
+-- TOC entry 714 (class 1255 OID 33896)
+-- Dependencies: 1123 3
+-- Name: observacion_clima_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION observacion_clima_trigauto() RETURNS trigger
@@ -5056,15 +4410,14 @@ CREATE FUNCTION observacion_clima_trigauto() RETURNS trigger
     AS $$
 DECLARE rows_affected INTEGER;
 BEGIN
-select usuario from "auditoria".tmp_usuario ;
 IF TG_OP ='INSERT' THEN
 INSERT INTO "auditoria".observacion_clima (accion, newmovimiento,usuarioapl)
 select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='UPDATE' THEN
-INSERT INTO "auditoria".observacion_clima (accion, oldmovimiento, newmovimiento,usuarioapl)
+INSERT INTO "auditoria".observacion_clima (accion, oldmovimiento, newmovimiento, usuarioapl)
 select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='DELETE' THEN
-INSERT INTO "auditoria".observacion_clima (accion,oldmovimiento ,consulta,usuarioapl)
+INSERT INTO "auditoria".observacion_clima (accion,oldmovimiento, usuarioapl)
 select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
 ELSE
 RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
@@ -5082,12 +4435,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.observacion_clima_trigauto() OWNER TO postgres;
-
 --
--- TOC entry 715 (class 1255 OID 33503)
--- Dependencies: 1080 3
--- Name: observacion_especie_trigauto(); Type: FUNCTION; Schema: public; Owner: postgres
+-- TOC entry 715 (class 1255 OID 33912)
+-- Dependencies: 3 1123
+-- Name: observacion_especie_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION observacion_especie_trigauto() RETURNS trigger
@@ -5095,15 +4446,14 @@ CREATE FUNCTION observacion_especie_trigauto() RETURNS trigger
     AS $$
 DECLARE rows_affected INTEGER;
 BEGIN
-select usuario from "auditoria".tmp_usuario ;
 IF TG_OP ='INSERT' THEN
 INSERT INTO "auditoria".observacion_especie (accion, newmovimiento,usuarioapl)
 select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='UPDATE' THEN
-INSERT INTO "auditoria".observacion_especie (accion, oldmovimiento, newmovimiento,usuarioapl)
+INSERT INTO "auditoria".observacion_especie (accion, oldmovimiento, newmovimiento, usuarioapl)
 select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='DELETE' THEN
-INSERT INTO "auditoria".observacion_especie (accion,oldmovimiento ,consulta,usuarioapl)
+INSERT INTO "auditoria".observacion_especie (accion,oldmovimiento, usuarioapl)
 select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
 ELSE
 RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
@@ -5121,12 +4471,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.observacion_especie_trigauto() OWNER TO postgres;
-
 --
--- TOC entry 716 (class 1255 OID 33519)
--- Dependencies: 3 1080
--- Name: observacion_foto_trigauto(); Type: FUNCTION; Schema: public; Owner: postgres
+-- TOC entry 716 (class 1255 OID 33928)
+-- Dependencies: 1123 3
+-- Name: observacion_foto_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION observacion_foto_trigauto() RETURNS trigger
@@ -5134,15 +4482,14 @@ CREATE FUNCTION observacion_foto_trigauto() RETURNS trigger
     AS $$
 DECLARE rows_affected INTEGER;
 BEGIN
-select usuario from "auditoria".tmp_usuario ;
 IF TG_OP ='INSERT' THEN
 INSERT INTO "auditoria".observacion_foto (accion, newmovimiento,usuarioapl)
 select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='UPDATE' THEN
-INSERT INTO "auditoria".observacion_foto (accion, oldmovimiento, newmovimiento,usuarioapl)
+INSERT INTO "auditoria".observacion_foto (accion, oldmovimiento, newmovimiento, usuarioapl)
 select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='DELETE' THEN
-INSERT INTO "auditoria".observacion_foto (accion,oldmovimiento ,consulta,usuarioapl)
+INSERT INTO "auditoria".observacion_foto (accion,oldmovimiento, usuarioapl)
 select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
 ELSE
 RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
@@ -5160,12 +4507,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.observacion_foto_trigauto() OWNER TO postgres;
-
 --
--- TOC entry 712 (class 1255 OID 33535)
--- Dependencies: 1080 3
--- Name: observacion_matriz_productiva_trigauto(); Type: FUNCTION; Schema: public; Owner: postgres
+-- TOC entry 717 (class 1255 OID 33944)
+-- Dependencies: 1123 3
+-- Name: observacion_matriz_productiva_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION observacion_matriz_productiva_trigauto() RETURNS trigger
@@ -5173,15 +4518,14 @@ CREATE FUNCTION observacion_matriz_productiva_trigauto() RETURNS trigger
     AS $$
 DECLARE rows_affected INTEGER;
 BEGIN
-select usuario from "auditoria".tmp_usuario ;
 IF TG_OP ='INSERT' THEN
 INSERT INTO "auditoria".observacion_matriz_productiva (accion, newmovimiento,usuarioapl)
 select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='UPDATE' THEN
-INSERT INTO "auditoria".observacion_matriz_productiva (accion, oldmovimiento, newmovimiento,usuarioapl)
+INSERT INTO "auditoria".observacion_matriz_productiva (accion, oldmovimiento, newmovimiento, usuarioapl)
 select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='DELETE' THEN
-INSERT INTO "auditoria".observacion_matriz_productiva (accion,oldmovimiento ,consulta,usuarioapl)
+INSERT INTO "auditoria".observacion_matriz_productiva (accion,oldmovimiento, usuarioapl)
 select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
 ELSE
 RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
@@ -5199,12 +4543,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.observacion_matriz_productiva_trigauto() OWNER TO postgres;
-
 --
--- TOC entry 713 (class 1255 OID 33471)
--- Dependencies: 1080 3
--- Name: observacion_trigauto(); Type: FUNCTION; Schema: public; Owner: postgres
+-- TOC entry 713 (class 1255 OID 33880)
+-- Dependencies: 1123 3
+-- Name: observacion_trigauto(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION observacion_trigauto() RETURNS trigger
@@ -5212,15 +4554,14 @@ CREATE FUNCTION observacion_trigauto() RETURNS trigger
     AS $$
 DECLARE rows_affected INTEGER;
 BEGIN
-select usuario from "auditoria".tmp_usuario ;
 IF TG_OP ='INSERT' THEN
 INSERT INTO "auditoria".observacion (accion, newmovimiento,usuarioapl)
 select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='UPDATE' THEN
-INSERT INTO "auditoria".observacion (accion, oldmovimiento, newmovimiento,usuarioapl)
+INSERT INTO "auditoria".observacion (accion, oldmovimiento, newmovimiento, usuarioapl)
 select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
 ELSIF TG_OP ='DELETE' THEN
-INSERT INTO "auditoria".observacion (accion,oldmovimiento ,consulta,usuarioapl)
+INSERT INTO "auditoria".observacion (accion,oldmovimiento, usuarioapl)
 select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
 ELSE
 RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
@@ -5238,12 +4579,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.observacion_trigauto() OWNER TO postgres;
-
 --
 -- TOC entry 474 (class 1255 OID 32115)
--- Dependencies: 3 1005 1005
--- Name: overlaps(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: overlaps(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION "overlaps"(geometry, geometry) RETURNS boolean
@@ -5251,12 +4590,46 @@ CREATE FUNCTION "overlaps"(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'overlaps';
 
 
-ALTER FUNCTION public."overlaps"(geometry, geometry) OWNER TO postgres;
+--
+-- TOC entry 718 (class 1255 OID 33960)
+-- Dependencies: 1123 3
+-- Name: par_usuarios_trigauto(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION par_usuarios_trigauto() RETURNS trigger
+    LANGUAGE plpgsql STRICT
+    AS $$
+DECLARE rows_affected INTEGER;
+BEGIN
+IF TG_OP ='INSERT' THEN
+INSERT INTO "auditoria".par_usuarios (accion, newmovimiento,usuarioapl)
+select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='UPDATE' THEN
+INSERT INTO "auditoria".par_usuarios (accion, oldmovimiento, newmovimiento, usuarioapl)
+select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='DELETE' THEN
+INSERT INTO "auditoria".par_usuarios (accion,oldmovimiento, usuarioapl)
+select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
+ELSE
+RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
+END IF;
+GET DIAGNOSTICS rows_affected = ROW_COUNT;
+IF rows_affected = 1 THEN
+IF TG_OP IN ('INSERT','UPDATE') THEN
+RETURN NEW;
+ELSE
+RETURN OLD;
+END IF;
+ELSE RAISE EXCEPTION 'Fallo el insert en auditoria. par_usuarios.';
+END IF;
+END;
+$$;
+
 
 --
 -- TOC entry 197 (class 1255 OID 31781)
--- Dependencies: 1005 3
--- Name: perimeter(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: perimeter(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION perimeter(geometry) RETURNS double precision
@@ -5264,12 +4637,10 @@ CREATE FUNCTION perimeter(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_perimeter_poly';
 
 
-ALTER FUNCTION public.perimeter(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 195 (class 1255 OID 31779)
--- Dependencies: 3 1005
--- Name: perimeter2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: perimeter2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION perimeter2d(geometry) RETURNS double precision
@@ -5277,12 +4648,10 @@ CREATE FUNCTION perimeter2d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_perimeter2d_poly';
 
 
-ALTER FUNCTION public.perimeter2d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 193 (class 1255 OID 31777)
--- Dependencies: 1005 3
--- Name: perimeter3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: perimeter3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION perimeter3d(geometry) RETURNS double precision
@@ -5290,12 +4659,10 @@ CREATE FUNCTION perimeter3d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_perimeter_poly';
 
 
-ALTER FUNCTION public.perimeter3d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 437 (class 1255 OID 32067)
--- Dependencies: 3 1007 1028
--- Name: pgis_geometry_accum_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1010 1031
+-- Name: pgis_geometry_accum_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pgis_geometry_accum_finalfn(pgis_abs) RETURNS geometry[]
@@ -5303,12 +4670,10 @@ CREATE FUNCTION pgis_geometry_accum_finalfn(pgis_abs) RETURNS geometry[]
     AS '$libdir/postgis-1.4', 'pgis_geometry_accum_finalfn';
 
 
-ALTER FUNCTION public.pgis_geometry_accum_finalfn(pgis_abs) OWNER TO postgres;
-
 --
 -- TOC entry 436 (class 1255 OID 32066)
--- Dependencies: 3 1028 1028 1005
--- Name: pgis_geometry_accum_transfn(pgis_abs, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1031 1031 1008
+-- Name: pgis_geometry_accum_transfn(pgis_abs, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pgis_geometry_accum_transfn(pgis_abs, geometry) RETURNS pgis_abs
@@ -5316,12 +4681,10 @@ CREATE FUNCTION pgis_geometry_accum_transfn(pgis_abs, geometry) RETURNS pgis_abs
     AS '$libdir/postgis-1.4', 'pgis_geometry_accum_transfn';
 
 
-ALTER FUNCTION public.pgis_geometry_accum_transfn(pgis_abs, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 439 (class 1255 OID 32069)
--- Dependencies: 3 1005 1028
--- Name: pgis_geometry_collect_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1031
+-- Name: pgis_geometry_collect_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pgis_geometry_collect_finalfn(pgis_abs) RETURNS geometry
@@ -5329,12 +4692,10 @@ CREATE FUNCTION pgis_geometry_collect_finalfn(pgis_abs) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pgis_geometry_collect_finalfn';
 
 
-ALTER FUNCTION public.pgis_geometry_collect_finalfn(pgis_abs) OWNER TO postgres;
-
 --
 -- TOC entry 441 (class 1255 OID 32071)
--- Dependencies: 3 1005 1028
--- Name: pgis_geometry_makeline_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1031
+-- Name: pgis_geometry_makeline_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pgis_geometry_makeline_finalfn(pgis_abs) RETURNS geometry
@@ -5342,12 +4703,10 @@ CREATE FUNCTION pgis_geometry_makeline_finalfn(pgis_abs) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pgis_geometry_makeline_finalfn';
 
 
-ALTER FUNCTION public.pgis_geometry_makeline_finalfn(pgis_abs) OWNER TO postgres;
-
 --
 -- TOC entry 440 (class 1255 OID 32070)
--- Dependencies: 3 1005 1028
--- Name: pgis_geometry_polygonize_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1031
+-- Name: pgis_geometry_polygonize_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pgis_geometry_polygonize_finalfn(pgis_abs) RETURNS geometry
@@ -5355,12 +4714,10 @@ CREATE FUNCTION pgis_geometry_polygonize_finalfn(pgis_abs) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pgis_geometry_polygonize_finalfn';
 
 
-ALTER FUNCTION public.pgis_geometry_polygonize_finalfn(pgis_abs) OWNER TO postgres;
-
 --
 -- TOC entry 438 (class 1255 OID 32068)
--- Dependencies: 3 1005 1028
--- Name: pgis_geometry_union_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1031
+-- Name: pgis_geometry_union_finalfn(pgis_abs); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pgis_geometry_union_finalfn(pgis_abs) RETURNS geometry
@@ -5368,12 +4725,10 @@ CREATE FUNCTION pgis_geometry_union_finalfn(pgis_abs) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pgis_geometry_union_finalfn';
 
 
-ALTER FUNCTION public.pgis_geometry_union_finalfn(pgis_abs) OWNER TO postgres;
-
 --
 -- TOC entry 211 (class 1255 OID 31795)
--- Dependencies: 3 1005
--- Name: point_inside_circle(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: point_inside_circle(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION point_inside_circle(geometry, double precision, double precision, double precision) RETURNS boolean
@@ -5381,12 +4736,10 @@ CREATE FUNCTION point_inside_circle(geometry, double precision, double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_inside_circle_point';
 
 
-ALTER FUNCTION public.point_inside_circle(geometry, double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 576 (class 1255 OID 32217)
--- Dependencies: 3 1005
--- Name: pointfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: pointfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pointfromtext(text) RETURNS geometry
@@ -5398,12 +4751,10 @@ CREATE FUNCTION pointfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.pointfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 578 (class 1255 OID 32219)
--- Dependencies: 3 1005
--- Name: pointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: pointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pointfromtext(text, integer) RETURNS geometry
@@ -5415,12 +4766,10 @@ CREATE FUNCTION pointfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.pointfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 625 (class 1255 OID 32266)
--- Dependencies: 3 1005
--- Name: pointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: pointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pointfromwkb(bytea, integer) RETURNS geometry
@@ -5432,12 +4781,10 @@ CREATE FUNCTION pointfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.pointfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 627 (class 1255 OID 32268)
--- Dependencies: 3 1005
--- Name: pointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: pointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pointfromwkb(bytea) RETURNS geometry
@@ -5449,12 +4796,10 @@ CREATE FUNCTION pointfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.pointfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 541 (class 1255 OID 32181)
--- Dependencies: 3 1005 1005
--- Name: pointn(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: pointn(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pointn(geometry, integer) RETURNS geometry
@@ -5462,12 +4807,10 @@ CREATE FUNCTION pointn(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_pointn_linestring';
 
 
-ALTER FUNCTION public.pointn(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 484 (class 1255 OID 32125)
--- Dependencies: 3 1005 1005
--- Name: pointonsurface(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: pointonsurface(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION pointonsurface(geometry) RETURNS geometry
@@ -5475,12 +4818,10 @@ CREATE FUNCTION pointonsurface(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pointonsurface';
 
 
-ALTER FUNCTION public.pointonsurface(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 586 (class 1255 OID 32227)
--- Dependencies: 3 1005
--- Name: polyfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: polyfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polyfromtext(text) RETURNS geometry
@@ -5492,12 +4833,10 @@ CREATE FUNCTION polyfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.polyfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 588 (class 1255 OID 32229)
--- Dependencies: 3 1005
--- Name: polyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: polyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polyfromtext(text, integer) RETURNS geometry
@@ -5509,12 +4848,10 @@ CREATE FUNCTION polyfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.polyfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 637 (class 1255 OID 32278)
--- Dependencies: 3 1005
--- Name: polyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: polyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polyfromwkb(bytea, integer) RETURNS geometry
@@ -5526,12 +4863,10 @@ CREATE FUNCTION polyfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.polyfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 639 (class 1255 OID 32280)
--- Dependencies: 3 1005
--- Name: polyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: polyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polyfromwkb(bytea) RETURNS geometry
@@ -5543,12 +4878,10 @@ CREATE FUNCTION polyfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.polyfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 590 (class 1255 OID 32231)
--- Dependencies: 3 1005
--- Name: polygonfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: polygonfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polygonfromtext(text, integer) RETURNS geometry
@@ -5556,12 +4889,10 @@ CREATE FUNCTION polygonfromtext(text, integer) RETURNS geometry
     AS $_$SELECT PolyFromText($1, $2)$_$;
 
 
-ALTER FUNCTION public.polygonfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 592 (class 1255 OID 32233)
--- Dependencies: 3 1005
--- Name: polygonfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: polygonfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polygonfromtext(text) RETURNS geometry
@@ -5569,12 +4900,10 @@ CREATE FUNCTION polygonfromtext(text) RETURNS geometry
     AS $_$SELECT PolyFromText($1)$_$;
 
 
-ALTER FUNCTION public.polygonfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 641 (class 1255 OID 32282)
--- Dependencies: 3 1005
--- Name: polygonfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: polygonfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polygonfromwkb(bytea, integer) RETURNS geometry
@@ -5586,12 +4915,10 @@ CREATE FUNCTION polygonfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.polygonfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 643 (class 1255 OID 32284)
--- Dependencies: 3 1005
--- Name: polygonfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: polygonfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polygonfromwkb(bytea) RETURNS geometry
@@ -5603,12 +4930,10 @@ CREATE FUNCTION polygonfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.polygonfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 298 (class 1255 OID 31882)
--- Dependencies: 1007 3 1005
--- Name: polygonize_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1010
+-- Name: polygonize_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION polygonize_garray(geometry[]) RETURNS geometry
@@ -5616,12 +4941,10 @@ CREATE FUNCTION polygonize_garray(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'polygonize_garray';
 
 
-ALTER FUNCTION public.polygonize_garray(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 323 (class 1255 OID 31930)
--- Dependencies: 3 1080
--- Name: populate_geometry_columns(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: populate_geometry_columns(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION populate_geometry_columns() RETURNS text
@@ -5712,12 +5035,10 @@ END
 $$;
 
 
-ALTER FUNCTION public.populate_geometry_columns() OWNER TO postgres;
-
 --
--- TOC entry 2739 (class 0 OID 0)
+-- TOC entry 2883 (class 0 OID 0)
 -- Dependencies: 323
--- Name: FUNCTION populate_geometry_columns(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION populate_geometry_columns(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION populate_geometry_columns() IS 'Ensures geometry columns have appropriate spatial constraints and exist in the geometry_columns table.';
@@ -5725,8 +5046,8 @@ COMMENT ON FUNCTION populate_geometry_columns() IS 'Ensures geometry columns hav
 
 --
 -- TOC entry 324 (class 1255 OID 31931)
--- Dependencies: 1080 3
--- Name: populate_geometry_columns(oid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: populate_geometry_columns(oid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION populate_geometry_columns(tbl_oid oid) RETURNS integer
@@ -5948,12 +5269,10 @@ END
 $$;
 
 
-ALTER FUNCTION public.populate_geometry_columns(tbl_oid oid) OWNER TO postgres;
-
 --
--- TOC entry 2740 (class 0 OID 0)
+-- TOC entry 2884 (class 0 OID 0)
 -- Dependencies: 324
--- Name: FUNCTION populate_geometry_columns(tbl_oid oid); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION populate_geometry_columns(tbl_oid oid); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION populate_geometry_columns(tbl_oid oid) IS 'args: relation_oid - Ensures geometry columns have appropriate spatial constraints and exist in the geometry_columns table.';
@@ -5961,8 +5280,8 @@ COMMENT ON FUNCTION populate_geometry_columns(tbl_oid oid) IS 'args: relation_oi
 
 --
 -- TOC entry 355 (class 1255 OID 31960)
--- Dependencies: 3 1080
--- Name: postgis_full_version(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: postgis_full_version(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_full_version() RETURNS text
@@ -6010,12 +5329,10 @@ END
 $$;
 
 
-ALTER FUNCTION public.postgis_full_version() OWNER TO postgres;
-
 --
--- TOC entry 2741 (class 0 OID 0)
+-- TOC entry 2885 (class 0 OID 0)
 -- Dependencies: 355
--- Name: FUNCTION postgis_full_version(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_full_version(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_full_version() IS 'Reports full postgis version and build configuration infos.';
@@ -6024,7 +5341,7 @@ COMMENT ON FUNCTION postgis_full_version() IS 'Reports full postgis version and 
 --
 -- TOC entry 352 (class 1255 OID 31957)
 -- Dependencies: 3
--- Name: postgis_geos_version(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_geos_version(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_geos_version() RETURNS text
@@ -6032,12 +5349,10 @@ CREATE FUNCTION postgis_geos_version() RETURNS text
     AS '$libdir/postgis-1.4', 'postgis_geos_version';
 
 
-ALTER FUNCTION public.postgis_geos_version() OWNER TO postgres;
-
 --
--- TOC entry 2742 (class 0 OID 0)
+-- TOC entry 2886 (class 0 OID 0)
 -- Dependencies: 352
--- Name: FUNCTION postgis_geos_version(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_geos_version(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_geos_version() IS 'Returns the version number of the GEOS library.';
@@ -6046,7 +5361,7 @@ COMMENT ON FUNCTION postgis_geos_version() IS 'Returns the version number of the
 --
 -- TOC entry 119 (class 1255 OID 31670)
 -- Dependencies: 3
--- Name: postgis_gist_joinsel(internal, oid, internal, smallint); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_gist_joinsel(internal, oid, internal, smallint); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_gist_joinsel(internal, oid, internal, smallint) RETURNS double precision
@@ -6054,12 +5369,10 @@ CREATE FUNCTION postgis_gist_joinsel(internal, oid, internal, smallint) RETURNS 
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_joinsel';
 
 
-ALTER FUNCTION public.postgis_gist_joinsel(internal, oid, internal, smallint) OWNER TO postgres;
-
 --
 -- TOC entry 117 (class 1255 OID 31668)
 -- Dependencies: 3
--- Name: postgis_gist_sel(internal, oid, internal, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_gist_sel(internal, oid, internal, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_gist_sel(internal, oid, internal, integer) RETURNS double precision
@@ -6067,12 +5380,10 @@ CREATE FUNCTION postgis_gist_sel(internal, oid, internal, integer) RETURNS doubl
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_sel';
 
 
-ALTER FUNCTION public.postgis_gist_sel(internal, oid, internal, integer) OWNER TO postgres;
-
 --
 -- TOC entry 354 (class 1255 OID 31959)
 -- Dependencies: 3
--- Name: postgis_lib_build_date(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_lib_build_date(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_lib_build_date() RETURNS text
@@ -6080,12 +5391,10 @@ CREATE FUNCTION postgis_lib_build_date() RETURNS text
     AS '$libdir/postgis-1.4', 'postgis_lib_build_date';
 
 
-ALTER FUNCTION public.postgis_lib_build_date() OWNER TO postgres;
-
 --
--- TOC entry 2743 (class 0 OID 0)
+-- TOC entry 2887 (class 0 OID 0)
 -- Dependencies: 354
--- Name: FUNCTION postgis_lib_build_date(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_lib_build_date(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_lib_build_date() IS 'Returns build date of the PostGIS library.';
@@ -6094,7 +5403,7 @@ COMMENT ON FUNCTION postgis_lib_build_date() IS 'Returns build date of the PostG
 --
 -- TOC entry 349 (class 1255 OID 31954)
 -- Dependencies: 3
--- Name: postgis_lib_version(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_lib_version(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_lib_version() RETURNS text
@@ -6102,12 +5411,10 @@ CREATE FUNCTION postgis_lib_version() RETURNS text
     AS '$libdir/postgis-1.4', 'postgis_lib_version';
 
 
-ALTER FUNCTION public.postgis_lib_version() OWNER TO postgres;
-
 --
--- TOC entry 2744 (class 0 OID 0)
+-- TOC entry 2888 (class 0 OID 0)
 -- Dependencies: 349
--- Name: FUNCTION postgis_lib_version(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_lib_version(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_lib_version() IS 'Returns the version number of the PostGIS library.';
@@ -6116,7 +5423,7 @@ COMMENT ON FUNCTION postgis_lib_version() IS 'Returns the version number of the 
 --
 -- TOC entry 347 (class 1255 OID 31952)
 -- Dependencies: 3
--- Name: postgis_proj_version(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_proj_version(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_proj_version() RETURNS text
@@ -6124,12 +5431,10 @@ CREATE FUNCTION postgis_proj_version() RETURNS text
     AS '$libdir/postgis-1.4', 'postgis_proj_version';
 
 
-ALTER FUNCTION public.postgis_proj_version() OWNER TO postgres;
-
 --
--- TOC entry 2745 (class 0 OID 0)
+-- TOC entry 2889 (class 0 OID 0)
 -- Dependencies: 347
--- Name: FUNCTION postgis_proj_version(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_proj_version(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_proj_version() IS 'Returns the version number of the PROJ4 library.';
@@ -6138,7 +5443,7 @@ COMMENT ON FUNCTION postgis_proj_version() IS 'Returns the version number of the
 --
 -- TOC entry 353 (class 1255 OID 31958)
 -- Dependencies: 3
--- Name: postgis_scripts_build_date(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_scripts_build_date(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_scripts_build_date() RETURNS text
@@ -6146,12 +5451,10 @@ CREATE FUNCTION postgis_scripts_build_date() RETURNS text
     AS $$SELECT '2009-12-22 07:02:21'::text AS version$$;
 
 
-ALTER FUNCTION public.postgis_scripts_build_date() OWNER TO postgres;
-
 --
--- TOC entry 2746 (class 0 OID 0)
+-- TOC entry 2890 (class 0 OID 0)
 -- Dependencies: 353
--- Name: FUNCTION postgis_scripts_build_date(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_scripts_build_date(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_scripts_build_date() IS 'Returns build date of the PostGIS scripts.';
@@ -6160,7 +5463,7 @@ COMMENT ON FUNCTION postgis_scripts_build_date() IS 'Returns build date of the P
 --
 -- TOC entry 348 (class 1255 OID 31953)
 -- Dependencies: 3
--- Name: postgis_scripts_installed(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_scripts_installed(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_scripts_installed() RETURNS text
@@ -6168,12 +5471,10 @@ CREATE FUNCTION postgis_scripts_installed() RETURNS text
     AS $$SELECT '1.4.0'::text AS version$$;
 
 
-ALTER FUNCTION public.postgis_scripts_installed() OWNER TO postgres;
-
 --
--- TOC entry 2747 (class 0 OID 0)
+-- TOC entry 2891 (class 0 OID 0)
 -- Dependencies: 348
--- Name: FUNCTION postgis_scripts_installed(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_scripts_installed(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_scripts_installed() IS 'Returns version of the postgis scripts installed in this database.';
@@ -6182,7 +5483,7 @@ COMMENT ON FUNCTION postgis_scripts_installed() IS 'Returns version of the postg
 --
 -- TOC entry 350 (class 1255 OID 31955)
 -- Dependencies: 3
--- Name: postgis_scripts_released(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_scripts_released(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_scripts_released() RETURNS text
@@ -6190,12 +5491,10 @@ CREATE FUNCTION postgis_scripts_released() RETURNS text
     AS '$libdir/postgis-1.4', 'postgis_scripts_released';
 
 
-ALTER FUNCTION public.postgis_scripts_released() OWNER TO postgres;
-
 --
--- TOC entry 2748 (class 0 OID 0)
+-- TOC entry 2892 (class 0 OID 0)
 -- Dependencies: 350
--- Name: FUNCTION postgis_scripts_released(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_scripts_released(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_scripts_released() IS 'Returns the version number of the lwpostgis.sql script released with the installed postgis lib.';
@@ -6204,7 +5503,7 @@ COMMENT ON FUNCTION postgis_scripts_released() IS 'Returns the version number of
 --
 -- TOC entry 351 (class 1255 OID 31956)
 -- Dependencies: 3
--- Name: postgis_uses_stats(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_uses_stats(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_uses_stats() RETURNS boolean
@@ -6212,12 +5511,10 @@ CREATE FUNCTION postgis_uses_stats() RETURNS boolean
     AS '$libdir/postgis-1.4', 'postgis_uses_stats';
 
 
-ALTER FUNCTION public.postgis_uses_stats() OWNER TO postgres;
-
 --
--- TOC entry 2749 (class 0 OID 0)
+-- TOC entry 2893 (class 0 OID 0)
 -- Dependencies: 351
--- Name: FUNCTION postgis_uses_stats(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_uses_stats(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_uses_stats() IS 'Returns TRUE if STATS usage has been enabled.';
@@ -6226,7 +5523,7 @@ COMMENT ON FUNCTION postgis_uses_stats() IS 'Returns TRUE if STATS usage has bee
 --
 -- TOC entry 346 (class 1255 OID 31951)
 -- Dependencies: 3
--- Name: postgis_version(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: postgis_version(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION postgis_version() RETURNS text
@@ -6234,12 +5531,10 @@ CREATE FUNCTION postgis_version() RETURNS text
     AS '$libdir/postgis-1.4', 'postgis_version';
 
 
-ALTER FUNCTION public.postgis_version() OWNER TO postgres;
-
 --
--- TOC entry 2750 (class 0 OID 0)
+-- TOC entry 2894 (class 0 OID 0)
 -- Dependencies: 346
--- Name: FUNCTION postgis_version(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION postgis_version(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION postgis_version() IS 'Returns PostGIS version number and compile-time options.';
@@ -6247,8 +5542,8 @@ COMMENT ON FUNCTION postgis_version() IS 'Returns PostGIS version number and com
 
 --
 -- TOC entry 325 (class 1255 OID 31933)
--- Dependencies: 1080 3
--- Name: probe_geometry_columns(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: probe_geometry_columns(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION probe_geometry_columns() RETURNS text
@@ -6334,12 +5629,10 @@ END
 $$;
 
 
-ALTER FUNCTION public.probe_geometry_columns() OWNER TO postgres;
-
 --
--- TOC entry 2751 (class 0 OID 0)
+-- TOC entry 2895 (class 0 OID 0)
 -- Dependencies: 325
--- Name: FUNCTION probe_geometry_columns(); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION probe_geometry_columns(); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION probe_geometry_columns() IS 'Scans all tables with PostGIS geometry constraints and adds them to the geometry_columns table if they are not there.';
@@ -6347,8 +5640,8 @@ COMMENT ON FUNCTION probe_geometry_columns() IS 'Scans all tables with PostGIS g
 
 --
 -- TOC entry 445 (class 1255 OID 32086)
--- Dependencies: 3 1005 1005
--- Name: relate(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: relate(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION relate(geometry, geometry) RETURNS text
@@ -6356,12 +5649,10 @@ CREATE FUNCTION relate(geometry, geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'relate_full';
 
 
-ALTER FUNCTION public.relate(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 447 (class 1255 OID 32088)
--- Dependencies: 3 1005 1005
--- Name: relate(geometry, geometry, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: relate(geometry, geometry, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION relate(geometry, geometry, text) RETURNS boolean
@@ -6369,12 +5660,10 @@ CREATE FUNCTION relate(geometry, geometry, text) RETURNS boolean
     AS '$libdir/postgis-1.4', 'relate_pattern';
 
 
-ALTER FUNCTION public.relate(geometry, geometry, text) OWNER TO postgres;
-
 --
 -- TOC entry 288 (class 1255 OID 31872)
--- Dependencies: 1005 1005 3
--- Name: removepoint(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: removepoint(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION removepoint(geometry, integer) RETURNS geometry
@@ -6382,12 +5671,10 @@ CREATE FUNCTION removepoint(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_removepoint';
 
 
-ALTER FUNCTION public.removepoint(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 321 (class 1255 OID 31928)
 -- Dependencies: 3
--- Name: rename_geometry_table_constraints(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: rename_geometry_table_constraints(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION rename_geometry_table_constraints() RETURNS text
@@ -6397,12 +5684,10 @@ SELECT 'rename_geometry_table_constraint() is obsoleted'::text
 $$;
 
 
-ALTER FUNCTION public.rename_geometry_table_constraints() OWNER TO postgres;
-
 --
 -- TOC entry 237 (class 1255 OID 31821)
--- Dependencies: 1005 1005 3
--- Name: reverse(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: reverse(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION reverse(geometry) RETURNS geometry
@@ -6410,12 +5695,10 @@ CREATE FUNCTION reverse(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_reverse';
 
 
-ALTER FUNCTION public.reverse(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 41 (class 1255 OID 31570)
--- Dependencies: 1005 3 1005
--- Name: rotate(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: rotate(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION rotate(geometry, double precision) RETURNS geometry
@@ -6423,12 +5706,10 @@ CREATE FUNCTION rotate(geometry, double precision) RETURNS geometry
     AS $_$SELECT rotateZ($1, $2)$_$;
 
 
-ALTER FUNCTION public.rotate(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 42 (class 1255 OID 31572)
--- Dependencies: 1005 3 1005
--- Name: rotatex(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: rotatex(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION rotatex(geometry, double precision) RETURNS geometry
@@ -6436,12 +5717,10 @@ CREATE FUNCTION rotatex(geometry, double precision) RETURNS geometry
     AS $_$SELECT affine($1, 1, 0, 0, 0, cos($2), -sin($2), 0, sin($2), cos($2), 0, 0, 0)$_$;
 
 
-ALTER FUNCTION public.rotatex(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 44 (class 1255 OID 31574)
--- Dependencies: 1005 3 1005
--- Name: rotatey(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: rotatey(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION rotatey(geometry, double precision) RETURNS geometry
@@ -6449,12 +5728,10 @@ CREATE FUNCTION rotatey(geometry, double precision) RETURNS geometry
     AS $_$SELECT affine($1,  cos($2), 0, sin($2),  0, 1, 0,  -sin($2), 0, cos($2), 0,  0, 0)$_$;
 
 
-ALTER FUNCTION public.rotatey(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 39 (class 1255 OID 31568)
--- Dependencies: 1005 3 1005
--- Name: rotatez(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: rotatez(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION rotatez(geometry, double precision) RETURNS geometry
@@ -6462,12 +5739,10 @@ CREATE FUNCTION rotatez(geometry, double precision) RETURNS geometry
     AS $_$SELECT affine($1,  cos($2), -sin($2), 0,  sin($2), cos($2), 0,  0, 0, 1,  0, 0, 0)$_$;
 
 
-ALTER FUNCTION public.rotatez(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 50 (class 1255 OID 31580)
--- Dependencies: 3 1005 1005
--- Name: scale(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: scale(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION scale(geometry, double precision, double precision, double precision) RETURNS geometry
@@ -6475,12 +5750,10 @@ CREATE FUNCTION scale(geometry, double precision, double precision, double preci
     AS $_$SELECT affine($1,  $2, 0, 0,  0, $3, 0,  0, 0, $4,  0, 0, 0)$_$;
 
 
-ALTER FUNCTION public.scale(geometry, double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 52 (class 1255 OID 31582)
--- Dependencies: 1005 3 1005
--- Name: scale(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: scale(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION scale(geometry, double precision, double precision) RETURNS geometry
@@ -6488,12 +5761,10 @@ CREATE FUNCTION scale(geometry, double precision, double precision) RETURNS geom
     AS $_$SELECT scale($1, $2, $3, 1)$_$;
 
 
-ALTER FUNCTION public.scale(geometry, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 699 (class 1255 OID 32340)
--- Dependencies: 3 1005 1005
--- Name: se_envelopesintersect(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: se_envelopesintersect(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION se_envelopesintersect(geometry, geometry) RETURNS boolean
@@ -6503,12 +5774,10 @@ CREATE FUNCTION se_envelopesintersect(geometry, geometry) RETURNS boolean
 	$_$;
 
 
-ALTER FUNCTION public.se_envelopesintersect(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 693 (class 1255 OID 32334)
--- Dependencies: 1005 3
--- Name: se_is3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: se_is3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION se_is3d(geometry) RETURNS boolean
@@ -6524,12 +5793,10 @@ CREATE FUNCTION se_is3d(geometry) RETURNS boolean
 	$_$;
 
 
-ALTER FUNCTION public.se_is3d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 694 (class 1255 OID 32335)
--- Dependencies: 3 1005
--- Name: se_ismeasured(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: se_ismeasured(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION se_ismeasured(geometry) RETURNS boolean
@@ -6545,12 +5812,10 @@ CREATE FUNCTION se_ismeasured(geometry) RETURNS boolean
 	$_$;
 
 
-ALTER FUNCTION public.se_ismeasured(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 700 (class 1255 OID 32341)
--- Dependencies: 3 1005 1005
--- Name: se_locatealong(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: se_locatealong(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION se_locatealong(geometry, double precision) RETURNS geometry
@@ -6558,12 +5823,10 @@ CREATE FUNCTION se_locatealong(geometry, double precision) RETURNS geometry
     AS $_$ SELECT locate_between_measures($1, $2, $2) $_$;
 
 
-ALTER FUNCTION public.se_locatealong(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 701 (class 1255 OID 32342)
--- Dependencies: 1005 3 1005
--- Name: se_locatebetween(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: se_locatebetween(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION se_locatebetween(geometry, double precision, double precision) RETURNS geometry
@@ -6571,12 +5834,10 @@ CREATE FUNCTION se_locatebetween(geometry, double precision, double precision) R
     AS '$libdir/postgis-1.4', 'LWGEOM_locate_between_m';
 
 
-ALTER FUNCTION public.se_locatebetween(geometry, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 697 (class 1255 OID 32338)
--- Dependencies: 1005 3
--- Name: se_m(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: se_m(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION se_m(geometry) RETURNS double precision
@@ -6584,12 +5845,10 @@ CREATE FUNCTION se_m(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_m_point';
 
 
-ALTER FUNCTION public.se_m(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 696 (class 1255 OID 32337)
--- Dependencies: 1005 3
--- Name: se_z(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: se_z(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION se_z(geometry) RETURNS double precision
@@ -6597,12 +5856,10 @@ CREATE FUNCTION se_z(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_z_point';
 
 
-ALTER FUNCTION public.se_z(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 390 (class 1255 OID 32014)
--- Dependencies: 3 1005 1005
--- Name: segmentize(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: segmentize(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION segmentize(geometry, double precision) RETURNS geometry
@@ -6610,12 +5867,10 @@ CREATE FUNCTION segmentize(geometry, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_segmentize2d';
 
 
-ALTER FUNCTION public.segmentize(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 171 (class 1255 OID 31755)
--- Dependencies: 1014 3 1014
--- Name: setfactor(chip, real); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1017 1017
+-- Name: setfactor(chip, real); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION setfactor(chip, real) RETURNS chip
@@ -6623,12 +5878,10 @@ CREATE FUNCTION setfactor(chip, real) RETURNS chip
     AS '$libdir/postgis-1.4', 'CHIP_setFactor';
 
 
-ALTER FUNCTION public.setfactor(chip, real) OWNER TO postgres;
-
 --
 -- TOC entry 290 (class 1255 OID 31874)
--- Dependencies: 1005 1005 3 1005
--- Name: setpoint(geometry, integer, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: setpoint(geometry, integer, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION setpoint(geometry, integer, geometry) RETURNS geometry
@@ -6636,12 +5889,10 @@ CREATE FUNCTION setpoint(geometry, integer, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_setpoint_linestring';
 
 
-ALTER FUNCTION public.setpoint(geometry, integer, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 170 (class 1255 OID 31754)
--- Dependencies: 3 1014 1014
--- Name: setsrid(chip, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 1017 3
+-- Name: setsrid(chip, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION setsrid(chip, integer) RETURNS chip
@@ -6649,12 +5900,10 @@ CREATE FUNCTION setsrid(chip, integer) RETURNS chip
     AS '$libdir/postgis-1.4', 'CHIP_setSRID';
 
 
-ALTER FUNCTION public.setsrid(chip, integer) OWNER TO postgres;
-
 --
 -- TOC entry 561 (class 1255 OID 32201)
--- Dependencies: 3 1005 1005
--- Name: setsrid(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: setsrid(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION setsrid(geometry, integer) RETURNS geometry
@@ -6662,12 +5911,10 @@ CREATE FUNCTION setsrid(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_setSRID';
 
 
-ALTER FUNCTION public.setsrid(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 56 (class 1255 OID 31586)
--- Dependencies: 1005 3 1005
--- Name: shift_longitude(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: shift_longitude(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION shift_longitude(geometry) RETURNS geometry
@@ -6675,12 +5922,10 @@ CREATE FUNCTION shift_longitude(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_longitude_shift';
 
 
-ALTER FUNCTION public.shift_longitude(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 380 (class 1255 OID 32004)
--- Dependencies: 3 1005 1005
--- Name: simplify(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: simplify(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION simplify(geometry, double precision) RETURNS geometry
@@ -6688,12 +5933,10 @@ CREATE FUNCTION simplify(geometry, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_simplify2d';
 
 
-ALTER FUNCTION public.simplify(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 382 (class 1255 OID 32006)
--- Dependencies: 3 1005 1005
--- Name: snaptogrid(geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: snaptogrid(geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION snaptogrid(geometry, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -6701,12 +5944,10 @@ CREATE FUNCTION snaptogrid(geometry, double precision, double precision, double 
     AS '$libdir/postgis-1.4', 'LWGEOM_snaptogrid';
 
 
-ALTER FUNCTION public.snaptogrid(geometry, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 384 (class 1255 OID 32008)
--- Dependencies: 3 1005 1005
--- Name: snaptogrid(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: snaptogrid(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION snaptogrid(geometry, double precision, double precision) RETURNS geometry
@@ -6714,12 +5955,10 @@ CREATE FUNCTION snaptogrid(geometry, double precision, double precision) RETURNS
     AS $_$SELECT SnapToGrid($1, 0, 0, $2, $3)$_$;
 
 
-ALTER FUNCTION public.snaptogrid(geometry, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 386 (class 1255 OID 32010)
--- Dependencies: 3 1005 1005
--- Name: snaptogrid(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: snaptogrid(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION snaptogrid(geometry, double precision) RETURNS geometry
@@ -6727,12 +5966,10 @@ CREATE FUNCTION snaptogrid(geometry, double precision) RETURNS geometry
     AS $_$SELECT SnapToGrid($1, 0, 0, $2, $2)$_$;
 
 
-ALTER FUNCTION public.snaptogrid(geometry, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 388 (class 1255 OID 32012)
--- Dependencies: 3 1005 1005 1005
--- Name: snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -6740,12 +5977,10 @@ CREATE FUNCTION snaptogrid(geometry, geometry, double precision, double precisio
     AS '$libdir/postgis-1.4', 'LWGEOM_snaptogrid_pointoff';
 
 
-ALTER FUNCTION public.snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 21 (class 1255 OID 31547)
--- Dependencies: 3 1002
--- Name: spheroid_in(cstring); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1005 3
+-- Name: spheroid_in(cstring); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION spheroid_in(cstring) RETURNS spheroid
@@ -6753,12 +5988,10 @@ CREATE FUNCTION spheroid_in(cstring) RETURNS spheroid
     AS '$libdir/postgis-1.4', 'ellipsoid_in';
 
 
-ALTER FUNCTION public.spheroid_in(cstring) OWNER TO postgres;
-
 --
 -- TOC entry 23 (class 1255 OID 31549)
--- Dependencies: 3 1002
--- Name: spheroid_out(spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1005 3
+-- Name: spheroid_out(spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION spheroid_out(spheroid) RETURNS cstring
@@ -6766,12 +5999,10 @@ CREATE FUNCTION spheroid_out(spheroid) RETURNS cstring
     AS '$libdir/postgis-1.4', 'ellipsoid_out';
 
 
-ALTER FUNCTION public.spheroid_out(spheroid) OWNER TO postgres;
-
 --
 -- TOC entry 158 (class 1255 OID 31742)
--- Dependencies: 3 1014
--- Name: srid(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: srid(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION srid(chip) RETURNS integer
@@ -6779,12 +6010,10 @@ CREATE FUNCTION srid(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getSRID';
 
 
-ALTER FUNCTION public.srid(chip) OWNER TO postgres;
-
 --
 -- TOC entry 559 (class 1255 OID 32199)
--- Dependencies: 3 1005
--- Name: srid(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: srid(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION srid(geometry) RETURNS integer
@@ -6792,12 +6021,10 @@ CREATE FUNCTION srid(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_getSRID';
 
 
-ALTER FUNCTION public.srid(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 153 (class 1255 OID 31737)
--- Dependencies: 1005 3 1005
--- Name: st_addbbox(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_addbbox(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_addbbox(geometry) RETURNS geometry
@@ -6805,12 +6032,10 @@ CREATE FUNCTION st_addbbox(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_addBBOX';
 
 
-ALTER FUNCTION public.st_addbbox(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2752 (class 0 OID 0)
+-- TOC entry 2896 (class 0 OID 0)
 -- Dependencies: 153
--- Name: FUNCTION st_addbbox(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_addbbox(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_addbbox(geometry) IS 'args: geomA - Add bounding box to the geometry.';
@@ -6818,8 +6043,8 @@ COMMENT ON FUNCTION st_addbbox(geometry) IS 'args: geomA - Add bounding box to t
 
 --
 -- TOC entry 285 (class 1255 OID 31869)
--- Dependencies: 1005 1005 3 1005
--- Name: st_addpoint(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 1008 3
+-- Name: st_addpoint(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_addpoint(geometry, geometry) RETURNS geometry
@@ -6827,12 +6052,10 @@ CREATE FUNCTION st_addpoint(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_addpoint';
 
 
-ALTER FUNCTION public.st_addpoint(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2753 (class 0 OID 0)
+-- TOC entry 2897 (class 0 OID 0)
 -- Dependencies: 285
--- Name: FUNCTION st_addpoint(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_addpoint(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_addpoint(geometry, geometry) IS 'args: linestring, point - Adds a point to a LineString before point <position> (0-based index).';
@@ -6840,8 +6063,8 @@ COMMENT ON FUNCTION st_addpoint(geometry, geometry) IS 'args: linestring, point 
 
 --
 -- TOC entry 287 (class 1255 OID 31871)
--- Dependencies: 1005 1005 3 1005
--- Name: st_addpoint(geometry, geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3 1008
+-- Name: st_addpoint(geometry, geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_addpoint(geometry, geometry, integer) RETURNS geometry
@@ -6849,12 +6072,10 @@ CREATE FUNCTION st_addpoint(geometry, geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_addpoint';
 
 
-ALTER FUNCTION public.st_addpoint(geometry, geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2754 (class 0 OID 0)
+-- TOC entry 2898 (class 0 OID 0)
 -- Dependencies: 287
--- Name: FUNCTION st_addpoint(geometry, geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_addpoint(geometry, geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_addpoint(geometry, geometry, integer) IS 'args: linestring, point, position - Adds a point to a LineString before point <position> (0-based index).';
@@ -6862,8 +6083,8 @@ COMMENT ON FUNCTION st_addpoint(geometry, geometry, integer) IS 'args: linestrin
 
 --
 -- TOC entry 36 (class 1255 OID 31565)
--- Dependencies: 3 1005 1005
--- Name: st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -6871,12 +6092,10 @@ CREATE FUNCTION st_affine(geometry, double precision, double precision, double p
     AS '$libdir/postgis-1.4', 'LWGEOM_affine';
 
 
-ALTER FUNCTION public.st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2755 (class 0 OID 0)
+-- TOC entry 2899 (class 0 OID 0)
 -- Dependencies: 36
--- Name: FUNCTION st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision, double precision) IS 'args: geomA, a, b, c, d, e, f, g, h, i, xoff, yoff, zoff - Applies a 3d affine transformation to the geometry to do things like translate, rotate, scale in one step.';
@@ -6884,8 +6103,8 @@ COMMENT ON FUNCTION st_affine(geometry, double precision, double precision, doub
 
 --
 -- TOC entry 38 (class 1255 OID 31567)
--- Dependencies: 1005 3 1005
--- Name: st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -6893,12 +6112,10 @@ CREATE FUNCTION st_affine(geometry, double precision, double precision, double p
     AS $_$SELECT affine($1,  $2, $3, 0,  $4, $5, 0,  0, 0, 1,  $6, $7, 0)$_$;
 
 
-ALTER FUNCTION public.st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2756 (class 0 OID 0)
+-- TOC entry 2900 (class 0 OID 0)
 -- Dependencies: 38
--- Name: FUNCTION st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_affine(geometry, double precision, double precision, double precision, double precision, double precision, double precision) IS 'args: geomA, a, b, d, e, xoff, yoff - Applies a 3d affine transformation to the geometry to do things like translate, rotate, scale in one step.';
@@ -6906,8 +6123,8 @@ COMMENT ON FUNCTION st_affine(geometry, double precision, double precision, doub
 
 --
 -- TOC entry 202 (class 1255 OID 31786)
--- Dependencies: 1005 3
--- Name: st_area(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_area(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_area(geometry) RETURNS double precision
@@ -6915,12 +6132,10 @@ CREATE FUNCTION st_area(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_area_polygon';
 
 
-ALTER FUNCTION public.st_area(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2757 (class 0 OID 0)
+-- TOC entry 2901 (class 0 OID 0)
 -- Dependencies: 202
--- Name: FUNCTION st_area(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_area(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_area(geometry) IS 'args: g1 - Returns the area of the geometry if it is a polygon or multi-polygon.';
@@ -6928,8 +6143,8 @@ COMMENT ON FUNCTION st_area(geometry) IS 'args: g1 - Returns the area of the geo
 
 --
 -- TOC entry 200 (class 1255 OID 31784)
--- Dependencies: 3 1005
--- Name: st_area2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_area2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_area2d(geometry) RETURNS double precision
@@ -6937,12 +6152,10 @@ CREATE FUNCTION st_area2d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_area_polygon';
 
 
-ALTER FUNCTION public.st_area2d(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 564 (class 1255 OID 32204)
--- Dependencies: 3 1005
--- Name: st_asbinary(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_asbinary(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asbinary(geometry) RETURNS bytea
@@ -6950,12 +6163,10 @@ CREATE FUNCTION st_asbinary(geometry) RETURNS bytea
     AS '$libdir/postgis-1.4', 'LWGEOM_asBinary';
 
 
-ALTER FUNCTION public.st_asbinary(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2758 (class 0 OID 0)
+-- TOC entry 2902 (class 0 OID 0)
 -- Dependencies: 564
--- Name: FUNCTION st_asbinary(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asbinary(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asbinary(geometry) IS 'args: g1 - Return the Well-Known Binary (WKB) representation of the geometry without SRID meta data.';
@@ -6963,8 +6174,8 @@ COMMENT ON FUNCTION st_asbinary(geometry) IS 'args: g1 - Return the Well-Known B
 
 --
 -- TOC entry 566 (class 1255 OID 32206)
--- Dependencies: 3 1005
--- Name: st_asbinary(geometry, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asbinary(geometry, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asbinary(geometry, text) RETURNS bytea
@@ -6972,12 +6183,10 @@ CREATE FUNCTION st_asbinary(geometry, text) RETURNS bytea
     AS '$libdir/postgis-1.4', 'LWGEOM_asBinary';
 
 
-ALTER FUNCTION public.st_asbinary(geometry, text) OWNER TO postgres;
-
 --
--- TOC entry 2759 (class 0 OID 0)
+-- TOC entry 2903 (class 0 OID 0)
 -- Dependencies: 566
--- Name: FUNCTION st_asbinary(geometry, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asbinary(geometry, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asbinary(geometry, text) IS 'args: g1, NDR_or_XDR - Return the Well-Known Binary (WKB) representation of the geometry without SRID meta data.';
@@ -6985,8 +6194,8 @@ COMMENT ON FUNCTION st_asbinary(geometry, text) IS 'args: g1, NDR_or_XDR - Retur
 
 --
 -- TOC entry 252 (class 1255 OID 31836)
--- Dependencies: 3 1005
--- Name: st_asewkb(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asewkb(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asewkb(geometry) RETURNS bytea
@@ -6994,12 +6203,10 @@ CREATE FUNCTION st_asewkb(geometry) RETURNS bytea
     AS '$libdir/postgis-1.4', 'WKBFromLWGEOM';
 
 
-ALTER FUNCTION public.st_asewkb(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2760 (class 0 OID 0)
+-- TOC entry 2904 (class 0 OID 0)
 -- Dependencies: 252
--- Name: FUNCTION st_asewkb(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asewkb(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asewkb(geometry) IS 'args: g1 - Return the Well-Known Binary (WKB) representation of the geometry with SRID meta data.';
@@ -7007,8 +6214,8 @@ COMMENT ON FUNCTION st_asewkb(geometry) IS 'args: g1 - Return the Well-Known Bin
 
 --
 -- TOC entry 258 (class 1255 OID 31842)
--- Dependencies: 3 1005
--- Name: st_asewkb(geometry, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_asewkb(geometry, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asewkb(geometry, text) RETURNS bytea
@@ -7016,12 +6223,10 @@ CREATE FUNCTION st_asewkb(geometry, text) RETURNS bytea
     AS '$libdir/postgis-1.4', 'WKBFromLWGEOM';
 
 
-ALTER FUNCTION public.st_asewkb(geometry, text) OWNER TO postgres;
-
 --
--- TOC entry 2761 (class 0 OID 0)
+-- TOC entry 2905 (class 0 OID 0)
 -- Dependencies: 258
--- Name: FUNCTION st_asewkb(geometry, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asewkb(geometry, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asewkb(geometry, text) IS 'args: g1, NDR_or_XDR - Return the Well-Known Binary (WKB) representation of the geometry with SRID meta data.';
@@ -7029,8 +6234,8 @@ COMMENT ON FUNCTION st_asewkb(geometry, text) IS 'args: g1, NDR_or_XDR - Return 
 
 --
 -- TOC entry 250 (class 1255 OID 31834)
--- Dependencies: 3 1005
--- Name: st_asewkt(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asewkt(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asewkt(geometry) RETURNS text
@@ -7038,12 +6243,10 @@ CREATE FUNCTION st_asewkt(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asEWKT';
 
 
-ALTER FUNCTION public.st_asewkt(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2762 (class 0 OID 0)
+-- TOC entry 2906 (class 0 OID 0)
 -- Dependencies: 250
--- Name: FUNCTION st_asewkt(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asewkt(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asewkt(geometry) IS 'args: g1 - Return the Well-Known Text (WKT) representation of the geometry with SRID meta data.';
@@ -7051,8 +6254,8 @@ COMMENT ON FUNCTION st_asewkt(geometry) IS 'args: g1 - Return the Well-Known Tex
 
 --
 -- TOC entry 514 (class 1255 OID 32155)
--- Dependencies: 3 1005
--- Name: st_asgeojson(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgeojson(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgeojson(geometry, integer) RETURNS text
@@ -7060,12 +6263,10 @@ CREATE FUNCTION st_asgeojson(geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsGeoJson(1, $1, $2, 0)$_$;
 
 
-ALTER FUNCTION public.st_asgeojson(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2763 (class 0 OID 0)
+-- TOC entry 2907 (class 0 OID 0)
 -- Dependencies: 514
--- Name: FUNCTION st_asgeojson(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgeojson(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgeojson(geometry, integer) IS 'args: g1, max_decimal_digits - Return the geometry as a GeoJSON element.';
@@ -7073,8 +6274,8 @@ COMMENT ON FUNCTION st_asgeojson(geometry, integer) IS 'args: g1, max_decimal_di
 
 --
 -- TOC entry 515 (class 1255 OID 32156)
--- Dependencies: 3 1005
--- Name: st_asgeojson(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_asgeojson(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgeojson(geometry) RETURNS text
@@ -7082,12 +6283,10 @@ CREATE FUNCTION st_asgeojson(geometry) RETURNS text
     AS $_$SELECT _ST_AsGeoJson(1, $1, 15, 0)$_$;
 
 
-ALTER FUNCTION public.st_asgeojson(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2764 (class 0 OID 0)
+-- TOC entry 2908 (class 0 OID 0)
 -- Dependencies: 515
--- Name: FUNCTION st_asgeojson(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgeojson(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgeojson(geometry) IS 'args: g1 - Return the geometry as a GeoJSON element.';
@@ -7095,8 +6294,8 @@ COMMENT ON FUNCTION st_asgeojson(geometry) IS 'args: g1 - Return the geometry as
 
 --
 -- TOC entry 516 (class 1255 OID 32157)
--- Dependencies: 3 1005
--- Name: st_asgeojson(integer, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgeojson(integer, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgeojson(integer, geometry) RETURNS text
@@ -7104,12 +6303,10 @@ CREATE FUNCTION st_asgeojson(integer, geometry) RETURNS text
     AS $_$SELECT _ST_AsGeoJson($1, $2, 15, 0)$_$;
 
 
-ALTER FUNCTION public.st_asgeojson(integer, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2765 (class 0 OID 0)
+-- TOC entry 2909 (class 0 OID 0)
 -- Dependencies: 516
--- Name: FUNCTION st_asgeojson(integer, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgeojson(integer, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgeojson(integer, geometry) IS 'args: version, g1 - Return the geometry as a GeoJSON element.';
@@ -7117,8 +6314,8 @@ COMMENT ON FUNCTION st_asgeojson(integer, geometry) IS 'args: version, g1 - Retu
 
 --
 -- TOC entry 517 (class 1255 OID 32158)
--- Dependencies: 3 1005
--- Name: st_asgeojson(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgeojson(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgeojson(integer, geometry, integer) RETURNS text
@@ -7126,12 +6323,10 @@ CREATE FUNCTION st_asgeojson(integer, geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsGeoJson($1, $2, $3, 0)$_$;
 
 
-ALTER FUNCTION public.st_asgeojson(integer, geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2766 (class 0 OID 0)
+-- TOC entry 2910 (class 0 OID 0)
 -- Dependencies: 517
--- Name: FUNCTION st_asgeojson(integer, geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgeojson(integer, geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgeojson(integer, geometry, integer) IS 'args: version, g1, max_decimal_digits - Return the geometry as a GeoJSON element.';
@@ -7139,8 +6334,8 @@ COMMENT ON FUNCTION st_asgeojson(integer, geometry, integer) IS 'args: version, 
 
 --
 -- TOC entry 518 (class 1255 OID 32159)
--- Dependencies: 3 1005
--- Name: st_asgeojson(geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgeojson(geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgeojson(geometry, integer, integer) RETURNS text
@@ -7148,12 +6343,10 @@ CREATE FUNCTION st_asgeojson(geometry, integer, integer) RETURNS text
     AS $_$SELECT _ST_AsGeoJson(1, $1, $2, $3)$_$;
 
 
-ALTER FUNCTION public.st_asgeojson(geometry, integer, integer) OWNER TO postgres;
-
 --
--- TOC entry 2767 (class 0 OID 0)
+-- TOC entry 2911 (class 0 OID 0)
 -- Dependencies: 518
--- Name: FUNCTION st_asgeojson(geometry, integer, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgeojson(geometry, integer, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgeojson(geometry, integer, integer) IS 'args: g1, max_decimal_digits, options - Return the geometry as a GeoJSON element.';
@@ -7161,8 +6354,8 @@ COMMENT ON FUNCTION st_asgeojson(geometry, integer, integer) IS 'args: g1, max_d
 
 --
 -- TOC entry 519 (class 1255 OID 32160)
--- Dependencies: 3 1005
--- Name: st_asgeojson(integer, geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgeojson(integer, geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgeojson(integer, geometry, integer, integer) RETURNS text
@@ -7170,12 +6363,10 @@ CREATE FUNCTION st_asgeojson(integer, geometry, integer, integer) RETURNS text
     AS $_$SELECT _ST_AsGeoJson($1, $2, $3, $4)$_$;
 
 
-ALTER FUNCTION public.st_asgeojson(integer, geometry, integer, integer) OWNER TO postgres;
-
 --
--- TOC entry 2768 (class 0 OID 0)
+-- TOC entry 2912 (class 0 OID 0)
 -- Dependencies: 519
--- Name: FUNCTION st_asgeojson(integer, geometry, integer, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgeojson(integer, geometry, integer, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgeojson(integer, geometry, integer, integer) IS 'args: version, g1, max_decimal_digits, options - Return the geometry as a GeoJSON element.';
@@ -7183,8 +6374,8 @@ COMMENT ON FUNCTION st_asgeojson(integer, geometry, integer, integer) IS 'args: 
 
 --
 -- TOC entry 498 (class 1255 OID 32139)
--- Dependencies: 3 1005
--- Name: st_asgml(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgml(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgml(geometry, integer) RETURNS text
@@ -7192,12 +6383,10 @@ CREATE FUNCTION st_asgml(geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsGML(2, $1, $2, 0)$_$;
 
 
-ALTER FUNCTION public.st_asgml(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2769 (class 0 OID 0)
+-- TOC entry 2913 (class 0 OID 0)
 -- Dependencies: 498
--- Name: FUNCTION st_asgml(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgml(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgml(geometry, integer) IS 'args: g1, precision - Return the geometry as a GML version 2 or 3 element.';
@@ -7205,8 +6394,8 @@ COMMENT ON FUNCTION st_asgml(geometry, integer) IS 'args: g1, precision - Return
 
 --
 -- TOC entry 500 (class 1255 OID 32141)
--- Dependencies: 3 1005
--- Name: st_asgml(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgml(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgml(geometry) RETURNS text
@@ -7214,12 +6403,10 @@ CREATE FUNCTION st_asgml(geometry) RETURNS text
     AS $_$SELECT _ST_AsGML(2, $1, 15, 0)$_$;
 
 
-ALTER FUNCTION public.st_asgml(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2770 (class 0 OID 0)
+-- TOC entry 2914 (class 0 OID 0)
 -- Dependencies: 500
--- Name: FUNCTION st_asgml(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgml(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgml(geometry) IS 'args: g1 - Return the geometry as a GML version 2 or 3 element.';
@@ -7227,8 +6414,8 @@ COMMENT ON FUNCTION st_asgml(geometry) IS 'args: g1 - Return the geometry as a G
 
 --
 -- TOC entry 501 (class 1255 OID 32142)
--- Dependencies: 3 1005
--- Name: st_asgml(integer, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgml(integer, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgml(integer, geometry) RETURNS text
@@ -7236,12 +6423,10 @@ CREATE FUNCTION st_asgml(integer, geometry) RETURNS text
     AS $_$SELECT _ST_AsGML($1, $2, 15, 0)$_$;
 
 
-ALTER FUNCTION public.st_asgml(integer, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2771 (class 0 OID 0)
+-- TOC entry 2915 (class 0 OID 0)
 -- Dependencies: 501
--- Name: FUNCTION st_asgml(integer, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgml(integer, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgml(integer, geometry) IS 'args: version, g1 - Return the geometry as a GML version 2 or 3 element.';
@@ -7249,8 +6434,8 @@ COMMENT ON FUNCTION st_asgml(integer, geometry) IS 'args: version, g1 - Return t
 
 --
 -- TOC entry 502 (class 1255 OID 32143)
--- Dependencies: 3 1005
--- Name: st_asgml(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgml(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgml(integer, geometry, integer) RETURNS text
@@ -7258,12 +6443,10 @@ CREATE FUNCTION st_asgml(integer, geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsGML($1, $2, $3, 0)$_$;
 
 
-ALTER FUNCTION public.st_asgml(integer, geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2772 (class 0 OID 0)
+-- TOC entry 2916 (class 0 OID 0)
 -- Dependencies: 502
--- Name: FUNCTION st_asgml(integer, geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgml(integer, geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgml(integer, geometry, integer) IS 'args: version, g1, precision - Return the geometry as a GML version 2 or 3 element.';
@@ -7271,8 +6454,8 @@ COMMENT ON FUNCTION st_asgml(integer, geometry, integer) IS 'args: version, g1, 
 
 --
 -- TOC entry 503 (class 1255 OID 32144)
--- Dependencies: 3 1005
--- Name: st_asgml(geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgml(geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgml(geometry, integer, integer) RETURNS text
@@ -7280,12 +6463,10 @@ CREATE FUNCTION st_asgml(geometry, integer, integer) RETURNS text
     AS $_$SELECT _ST_AsGML(2, $1, $2, $3)$_$;
 
 
-ALTER FUNCTION public.st_asgml(geometry, integer, integer) OWNER TO postgres;
-
 --
 -- TOC entry 504 (class 1255 OID 32145)
--- Dependencies: 3 1005
--- Name: st_asgml(integer, geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_asgml(integer, geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_asgml(integer, geometry, integer, integer) RETURNS text
@@ -7293,12 +6474,10 @@ CREATE FUNCTION st_asgml(integer, geometry, integer, integer) RETURNS text
     AS $_$SELECT _ST_AsGML($1, $2, $3, $4)$_$;
 
 
-ALTER FUNCTION public.st_asgml(integer, geometry, integer, integer) OWNER TO postgres;
-
 --
--- TOC entry 2773 (class 0 OID 0)
+-- TOC entry 2917 (class 0 OID 0)
 -- Dependencies: 504
--- Name: FUNCTION st_asgml(integer, geometry, integer, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_asgml(integer, geometry, integer, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_asgml(integer, geometry, integer, integer) IS 'args: version, g1, precision, options - Return the geometry as a GML version 2 or 3 element.';
@@ -7306,8 +6485,8 @@ COMMENT ON FUNCTION st_asgml(integer, geometry, integer, integer) IS 'args: vers
 
 --
 -- TOC entry 254 (class 1255 OID 31838)
--- Dependencies: 1005 3
--- Name: st_ashexewkb(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_ashexewkb(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_ashexewkb(geometry) RETURNS text
@@ -7315,12 +6494,10 @@ CREATE FUNCTION st_ashexewkb(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asHEXEWKB';
 
 
-ALTER FUNCTION public.st_ashexewkb(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2774 (class 0 OID 0)
+-- TOC entry 2918 (class 0 OID 0)
 -- Dependencies: 254
--- Name: FUNCTION st_ashexewkb(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_ashexewkb(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_ashexewkb(geometry) IS 'args: g1 - Returns a Geometry in HEXEWKB format (as text) using either little-endian (NDR) or big-endian (XDR) encoding.';
@@ -7328,8 +6505,8 @@ COMMENT ON FUNCTION st_ashexewkb(geometry) IS 'args: g1 - Returns a Geometry in 
 
 --
 -- TOC entry 256 (class 1255 OID 31840)
--- Dependencies: 1005 3
--- Name: st_ashexewkb(geometry, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_ashexewkb(geometry, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_ashexewkb(geometry, text) RETURNS text
@@ -7337,12 +6514,10 @@ CREATE FUNCTION st_ashexewkb(geometry, text) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asHEXEWKB';
 
 
-ALTER FUNCTION public.st_ashexewkb(geometry, text) OWNER TO postgres;
-
 --
--- TOC entry 2775 (class 0 OID 0)
+-- TOC entry 2919 (class 0 OID 0)
 -- Dependencies: 256
--- Name: FUNCTION st_ashexewkb(geometry, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_ashexewkb(geometry, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_ashexewkb(geometry, text) IS 'args: g1, NDRorXDR - Returns a Geometry in HEXEWKB format (as text) using either little-endian (NDR) or big-endian (XDR) encoding.';
@@ -7350,8 +6525,8 @@ COMMENT ON FUNCTION st_ashexewkb(geometry, text) IS 'args: g1, NDRorXDR - Return
 
 --
 -- TOC entry 507 (class 1255 OID 32148)
--- Dependencies: 3 1005
--- Name: st_askml(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_askml(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_askml(geometry, integer) RETURNS text
@@ -7359,12 +6534,10 @@ CREATE FUNCTION st_askml(geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsKML(2, ST_Transform($1,4326), $2)$_$;
 
 
-ALTER FUNCTION public.st_askml(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2776 (class 0 OID 0)
+-- TOC entry 2920 (class 0 OID 0)
 -- Dependencies: 507
--- Name: FUNCTION st_askml(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_askml(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_askml(geometry, integer) IS 'args: g1, precision - Return the geometry as a KML element. Several variants. Default version=2, default precision=15';
@@ -7372,8 +6545,8 @@ COMMENT ON FUNCTION st_askml(geometry, integer) IS 'args: g1, precision - Return
 
 --
 -- TOC entry 510 (class 1255 OID 32151)
--- Dependencies: 3 1005
--- Name: st_askml(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_askml(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_askml(geometry) RETURNS text
@@ -7381,12 +6554,10 @@ CREATE FUNCTION st_askml(geometry) RETURNS text
     AS $_$SELECT _ST_AsKML(2, ST_Transform($1,4326), 15)$_$;
 
 
-ALTER FUNCTION public.st_askml(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2777 (class 0 OID 0)
+-- TOC entry 2921 (class 0 OID 0)
 -- Dependencies: 510
--- Name: FUNCTION st_askml(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_askml(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_askml(geometry) IS 'args: g1 - Return the geometry as a KML element. Several variants. Default version=2, default precision=15';
@@ -7394,8 +6565,8 @@ COMMENT ON FUNCTION st_askml(geometry) IS 'args: g1 - Return the geometry as a K
 
 --
 -- TOC entry 511 (class 1255 OID 32152)
--- Dependencies: 3 1005
--- Name: st_askml(integer, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_askml(integer, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_askml(integer, geometry) RETURNS text
@@ -7403,12 +6574,10 @@ CREATE FUNCTION st_askml(integer, geometry) RETURNS text
     AS $_$SELECT _ST_AsKML($1, ST_Transform($2,4326), 15)$_$;
 
 
-ALTER FUNCTION public.st_askml(integer, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2778 (class 0 OID 0)
+-- TOC entry 2922 (class 0 OID 0)
 -- Dependencies: 511
--- Name: FUNCTION st_askml(integer, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_askml(integer, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_askml(integer, geometry) IS 'args: version, geom1 - Return the geometry as a KML element. Several variants. Default version=2, default precision=15';
@@ -7416,8 +6585,8 @@ COMMENT ON FUNCTION st_askml(integer, geometry) IS 'args: version, geom1 - Retur
 
 --
 -- TOC entry 512 (class 1255 OID 32153)
--- Dependencies: 3 1005
--- Name: st_askml(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_askml(integer, geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_askml(integer, geometry, integer) RETURNS text
@@ -7425,12 +6594,10 @@ CREATE FUNCTION st_askml(integer, geometry, integer) RETURNS text
     AS $_$SELECT _ST_AsKML($1, ST_Transform($2,4326), $3)$_$;
 
 
-ALTER FUNCTION public.st_askml(integer, geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2779 (class 0 OID 0)
+-- TOC entry 2923 (class 0 OID 0)
 -- Dependencies: 512
--- Name: FUNCTION st_askml(integer, geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_askml(integer, geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_askml(integer, geometry, integer) IS 'args: version, geom1, precision - Return the geometry as a KML element. Several variants. Default version=2, default precision=15';
@@ -7438,8 +6605,8 @@ COMMENT ON FUNCTION st_askml(integer, geometry, integer) IS 'args: version, geom
 
 --
 -- TOC entry 491 (class 1255 OID 32132)
--- Dependencies: 3 1005
--- Name: st_assvg(geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_assvg(geometry, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_assvg(geometry, integer, integer) RETURNS text
@@ -7447,12 +6614,10 @@ CREATE FUNCTION st_assvg(geometry, integer, integer) RETURNS text
     AS '$libdir/postgis-1.4', 'assvg_geometry';
 
 
-ALTER FUNCTION public.st_assvg(geometry, integer, integer) OWNER TO postgres;
-
 --
--- TOC entry 2780 (class 0 OID 0)
+-- TOC entry 2924 (class 0 OID 0)
 -- Dependencies: 491
--- Name: FUNCTION st_assvg(geometry, integer, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_assvg(geometry, integer, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_assvg(geometry, integer, integer) IS 'args: g1, rel, maxdecimaldigits - Returns a Geometry in SVG path data.';
@@ -7460,8 +6625,8 @@ COMMENT ON FUNCTION st_assvg(geometry, integer, integer) IS 'args: g1, rel, maxd
 
 --
 -- TOC entry 493 (class 1255 OID 32134)
--- Dependencies: 3 1005
--- Name: st_assvg(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_assvg(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_assvg(geometry, integer) RETURNS text
@@ -7469,12 +6634,10 @@ CREATE FUNCTION st_assvg(geometry, integer) RETURNS text
     AS '$libdir/postgis-1.4', 'assvg_geometry';
 
 
-ALTER FUNCTION public.st_assvg(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2781 (class 0 OID 0)
+-- TOC entry 2925 (class 0 OID 0)
 -- Dependencies: 493
--- Name: FUNCTION st_assvg(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_assvg(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_assvg(geometry, integer) IS 'args: g1, rel - Returns a Geometry in SVG path data.';
@@ -7482,8 +6645,8 @@ COMMENT ON FUNCTION st_assvg(geometry, integer) IS 'args: g1, rel - Returns a Ge
 
 --
 -- TOC entry 495 (class 1255 OID 32136)
--- Dependencies: 3 1005
--- Name: st_assvg(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_assvg(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_assvg(geometry) RETURNS text
@@ -7491,12 +6654,10 @@ CREATE FUNCTION st_assvg(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'assvg_geometry';
 
 
-ALTER FUNCTION public.st_assvg(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2782 (class 0 OID 0)
+-- TOC entry 2926 (class 0 OID 0)
 -- Dependencies: 495
--- Name: FUNCTION st_assvg(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_assvg(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_assvg(geometry) IS 'args: g1 - Returns a Geometry in SVG path data.';
@@ -7504,8 +6665,8 @@ COMMENT ON FUNCTION st_assvg(geometry) IS 'args: g1 - Returns a Geometry in SVG 
 
 --
 -- TOC entry 568 (class 1255 OID 32208)
--- Dependencies: 3 1005
--- Name: st_astext(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_astext(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_astext(geometry) RETURNS text
@@ -7513,12 +6674,10 @@ CREATE FUNCTION st_astext(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_asText';
 
 
-ALTER FUNCTION public.st_astext(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2783 (class 0 OID 0)
+-- TOC entry 2927 (class 0 OID 0)
 -- Dependencies: 568
--- Name: FUNCTION st_astext(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_astext(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_astext(geometry) IS 'args: g1 - Return the Well-Known Text (WKT) representation of the geometry without SRID metadata.';
@@ -7526,8 +6685,8 @@ COMMENT ON FUNCTION st_astext(geometry) IS 'args: g1 - Return the Well-Known Tex
 
 --
 -- TOC entry 214 (class 1255 OID 31798)
--- Dependencies: 1005 1005 3
--- Name: st_azimuth(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_azimuth(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_azimuth(geometry, geometry) RETURNS double precision
@@ -7535,12 +6694,10 @@ CREATE FUNCTION st_azimuth(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_azimuth';
 
 
-ALTER FUNCTION public.st_azimuth(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2784 (class 0 OID 0)
+-- TOC entry 2928 (class 0 OID 0)
 -- Dependencies: 214
--- Name: FUNCTION st_azimuth(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_azimuth(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_azimuth(geometry, geometry) IS 'args: pointA, pointB - Returns the angle in radians from the horizontal of the vector defined by pointA and pointB';
@@ -7548,8 +6705,8 @@ COMMENT ON FUNCTION st_azimuth(geometry, geometry) IS 'args: pointA, pointB - Re
 
 --
 -- TOC entry 675 (class 1255 OID 32316)
--- Dependencies: 1080 1005 3
--- Name: st_bdmpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1123 3
+-- Name: st_bdmpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_bdmpolyfromtext(text, integer) RETURNS geometry
@@ -7575,12 +6732,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.st_bdmpolyfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2785 (class 0 OID 0)
+-- TOC entry 2929 (class 0 OID 0)
 -- Dependencies: 675
--- Name: FUNCTION st_bdmpolyfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_bdmpolyfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_bdmpolyfromtext(text, integer) IS 'args: WKT, srid - Construct a MultiPolygon given an arbitrary collection of closed linestrings as a MultiLineString text representation Well-Known text representation.';
@@ -7588,8 +6743,8 @@ COMMENT ON FUNCTION st_bdmpolyfromtext(text, integer) IS 'args: WKT, srid - Cons
 
 --
 -- TOC entry 673 (class 1255 OID 32314)
--- Dependencies: 3 1080 1005
--- Name: st_bdpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1123 3
+-- Name: st_bdpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_bdpolyfromtext(text, integer) RETURNS geometry
@@ -7620,12 +6775,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.st_bdpolyfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2786 (class 0 OID 0)
+-- TOC entry 2930 (class 0 OID 0)
 -- Dependencies: 673
--- Name: FUNCTION st_bdpolyfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_bdpolyfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_bdpolyfromtext(text, integer) IS 'args: WKT, srid - Construct a Polygon given an arbitrary collection of closed linestrings as a MultiLineString Well-Known text representation.';
@@ -7633,8 +6786,8 @@ COMMENT ON FUNCTION st_bdpolyfromtext(text, integer) IS 'args: WKT, srid - Const
 
 --
 -- TOC entry 418 (class 1255 OID 32042)
--- Dependencies: 3 1005 1005
--- Name: st_boundary(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_boundary(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_boundary(geometry) RETURNS geometry
@@ -7642,12 +6795,10 @@ CREATE FUNCTION st_boundary(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'boundary';
 
 
-ALTER FUNCTION public.st_boundary(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2787 (class 0 OID 0)
+-- TOC entry 2931 (class 0 OID 0)
 -- Dependencies: 418
--- Name: FUNCTION st_boundary(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_boundary(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_boundary(geometry) IS 'args: geomA - Returns the closure of the combinatorial boundary of this Geometry.';
@@ -7655,8 +6806,8 @@ COMMENT ON FUNCTION st_boundary(geometry) IS 'args: geomA - Returns the closure 
 
 --
 -- TOC entry 361 (class 1255 OID 31966)
--- Dependencies: 3 1005
--- Name: st_box(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_box(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box(geometry) RETURNS box
@@ -7664,12 +6815,10 @@ CREATE FUNCTION st_box(geometry) RETURNS box
     AS '$libdir/postgis-1.4', 'LWGEOM_to_BOX';
 
 
-ALTER FUNCTION public.st_box(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 364 (class 1255 OID 31972)
--- Dependencies: 3 1008
--- Name: st_box(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: st_box(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box(box3d) RETURNS box
@@ -7677,12 +6826,10 @@ CREATE FUNCTION st_box(box3d) RETURNS box
     AS '$libdir/postgis-1.4', 'BOX3D_to_BOX';
 
 
-ALTER FUNCTION public.st_box(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 65 (class 1255 OID 31600)
--- Dependencies: 1017 1011 3
--- Name: st_box2d(box3d_extent); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1014
+-- Name: st_box2d(box3d_extent); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d(box3d_extent) RETURNS box2d
@@ -7690,12 +6837,10 @@ CREATE FUNCTION st_box2d(box3d_extent) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX3D_to_BOX2DFLOAT4';
 
 
-ALTER FUNCTION public.st_box2d(box3d_extent) OWNER TO postgres;
-
 --
 -- TOC entry 357 (class 1255 OID 31962)
--- Dependencies: 3 1017 1005
--- Name: st_box2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1008
+-- Name: st_box2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d(geometry) RETURNS box2d
@@ -7703,12 +6848,10 @@ CREATE FUNCTION st_box2d(geometry) RETURNS box2d
     AS '$libdir/postgis-1.4', 'LWGEOM_to_BOX2DFLOAT4';
 
 
-ALTER FUNCTION public.st_box2d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2788 (class 0 OID 0)
+-- TOC entry 2932 (class 0 OID 0)
 -- Dependencies: 357
--- Name: FUNCTION st_box2d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_box2d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_box2d(geometry) IS 'args: geomA - Returns a BOX2D representing the maximum extents of the geometry.';
@@ -7716,8 +6859,8 @@ COMMENT ON FUNCTION st_box2d(geometry) IS 'args: geomA - Returns a BOX2D represe
 
 --
 -- TOC entry 335 (class 1255 OID 31968)
--- Dependencies: 3 1017 1008
--- Name: st_box2d(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1011
+-- Name: st_box2d(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d(box3d) RETURNS box2d
@@ -7725,12 +6868,10 @@ CREATE FUNCTION st_box2d(box3d) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX3D_to_BOX2DFLOAT4';
 
 
-ALTER FUNCTION public.st_box2d(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 96 (class 1255 OID 31634)
--- Dependencies: 1017 1017 3
--- Name: st_box2d_contain(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1020
+-- Name: st_box2d_contain(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_contain(box2d, box2d) RETURNS boolean
@@ -7738,12 +6879,10 @@ CREATE FUNCTION st_box2d_contain(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_contain';
 
 
-ALTER FUNCTION public.st_box2d_contain(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 98 (class 1255 OID 31636)
--- Dependencies: 3 1017 1017
--- Name: st_box2d_contained(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1020
+-- Name: st_box2d_contained(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_contained(box2d, box2d) RETURNS boolean
@@ -7751,12 +6890,10 @@ CREATE FUNCTION st_box2d_contained(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_contained';
 
 
-ALTER FUNCTION public.st_box2d_contained(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 104 (class 1255 OID 31642)
--- Dependencies: 1017 1017 3
--- Name: st_box2d_intersects(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: st_box2d_intersects(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_intersects(box2d, box2d) RETURNS boolean
@@ -7764,12 +6901,10 @@ CREATE FUNCTION st_box2d_intersects(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_intersects';
 
 
-ALTER FUNCTION public.st_box2d_intersects(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 92 (class 1255 OID 31630)
--- Dependencies: 1017 3 1017
--- Name: st_box2d_left(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1020
+-- Name: st_box2d_left(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_left(box2d, box2d) RETURNS boolean
@@ -7777,12 +6912,10 @@ CREATE FUNCTION st_box2d_left(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_left';
 
 
-ALTER FUNCTION public.st_box2d_left(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 100 (class 1255 OID 31638)
--- Dependencies: 3 1017 1017
--- Name: st_box2d_overlap(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 3 1020
+-- Name: st_box2d_overlap(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_overlap(box2d, box2d) RETURNS boolean
@@ -7790,12 +6923,10 @@ CREATE FUNCTION st_box2d_overlap(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_overlap';
 
 
-ALTER FUNCTION public.st_box2d_overlap(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 88 (class 1255 OID 31626)
--- Dependencies: 1017 3 1017
--- Name: st_box2d_overleft(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1020
+-- Name: st_box2d_overleft(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_overleft(box2d, box2d) RETURNS boolean
@@ -7803,12 +6934,10 @@ CREATE FUNCTION st_box2d_overleft(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_overleft';
 
 
-ALTER FUNCTION public.st_box2d_overleft(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 90 (class 1255 OID 31628)
--- Dependencies: 1017 3 1017
--- Name: st_box2d_overright(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: st_box2d_overright(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_overright(box2d, box2d) RETURNS boolean
@@ -7816,12 +6945,10 @@ CREATE FUNCTION st_box2d_overright(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_overright';
 
 
-ALTER FUNCTION public.st_box2d_overright(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 94 (class 1255 OID 31632)
--- Dependencies: 1017 1017 3
--- Name: st_box2d_right(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: st_box2d_right(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_right(box2d, box2d) RETURNS boolean
@@ -7829,12 +6956,10 @@ CREATE FUNCTION st_box2d_right(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_right';
 
 
-ALTER FUNCTION public.st_box2d_right(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 102 (class 1255 OID 31640)
--- Dependencies: 3 1017 1017
--- Name: st_box2d_same(box2d, box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: st_box2d_same(box2d, box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box2d_same(box2d, box2d) RETURNS boolean
@@ -7842,12 +6967,10 @@ CREATE FUNCTION st_box2d_same(box2d, box2d) RETURNS boolean
     AS '$libdir/postgis-1.4', 'BOX2D_same';
 
 
-ALTER FUNCTION public.st_box2d_same(box2d, box2d) OWNER TO postgres;
-
 --
 -- TOC entry 359 (class 1255 OID 31964)
--- Dependencies: 3 1008 1005
--- Name: st_box3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011 1008
+-- Name: st_box3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box3d(geometry) RETURNS box3d
@@ -7855,12 +6978,10 @@ CREATE FUNCTION st_box3d(geometry) RETURNS box3d
     AS '$libdir/postgis-1.4', 'LWGEOM_to_BOX3D';
 
 
-ALTER FUNCTION public.st_box3d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2789 (class 0 OID 0)
+-- TOC entry 2933 (class 0 OID 0)
 -- Dependencies: 359
--- Name: FUNCTION st_box3d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_box3d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_box3d(geometry) IS 'args: geomA - Returns a BOX3D representing the maximum extents of the geometry.';
@@ -7868,8 +6989,8 @@ COMMENT ON FUNCTION st_box3d(geometry) IS 'args: geomA - Returns a BOX3D represe
 
 --
 -- TOC entry 337 (class 1255 OID 31970)
--- Dependencies: 3 1008 1017
--- Name: st_box3d(box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011 1020
+-- Name: st_box3d(box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box3d(box2d) RETURNS box3d
@@ -7877,12 +6998,10 @@ CREATE FUNCTION st_box3d(box2d) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_to_BOX3D';
 
 
-ALTER FUNCTION public.st_box3d(box2d) OWNER TO postgres;
-
 --
 -- TOC entry 64 (class 1255 OID 31598)
--- Dependencies: 1008 1011 3
--- Name: st_box3d_extent(box3d_extent); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1011 1014 3
+-- Name: st_box3d_extent(box3d_extent); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_box3d_extent(box3d_extent) RETURNS box3d
@@ -7890,12 +7009,10 @@ CREATE FUNCTION st_box3d_extent(box3d_extent) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_extent_to_BOX3D';
 
 
-ALTER FUNCTION public.st_box3d_extent(box3d_extent) OWNER TO postgres;
-
 --
 -- TOC entry 405 (class 1255 OID 32029)
--- Dependencies: 3 1005 1005
--- Name: st_buffer(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_buffer(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_buffer(geometry, double precision) RETURNS geometry
@@ -7903,12 +7020,10 @@ CREATE FUNCTION st_buffer(geometry, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'buffer';
 
 
-ALTER FUNCTION public.st_buffer(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2790 (class 0 OID 0)
+-- TOC entry 2934 (class 0 OID 0)
 -- Dependencies: 405
--- Name: FUNCTION st_buffer(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_buffer(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_buffer(geometry, double precision) IS 'args: g1, radius_of_buffer - Returns a geometry that represents all points whose distance from this Geometry is less than or equal to distance. Calculations are in the Spatial Reference System of this Geometry. The optional third parameter sets the number of segments used to approximate a quarter circle (defaults to 8).';
@@ -7916,8 +7031,8 @@ COMMENT ON FUNCTION st_buffer(geometry, double precision) IS 'args: g1, radius_o
 
 --
 -- TOC entry 407 (class 1255 OID 32031)
--- Dependencies: 3 1005 1005
--- Name: st_buffer(geometry, double precision, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_buffer(geometry, double precision, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_buffer(geometry, double precision, integer) RETURNS geometry
@@ -7925,12 +7040,10 @@ CREATE FUNCTION st_buffer(geometry, double precision, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'buffer';
 
 
-ALTER FUNCTION public.st_buffer(geometry, double precision, integer) OWNER TO postgres;
-
 --
--- TOC entry 2791 (class 0 OID 0)
+-- TOC entry 2935 (class 0 OID 0)
 -- Dependencies: 407
--- Name: FUNCTION st_buffer(geometry, double precision, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_buffer(geometry, double precision, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_buffer(geometry, double precision, integer) IS 'args: g1, radius_of_buffer, num_seg_quarter_circle - Returns a geometry that represents all points whose distance from this Geometry is less than or equal to distance. Calculations are in the Spatial Reference System of this Geometry. The optional third parameter sets the number of segments used to approximate a quarter circle (defaults to 8).';
@@ -7938,8 +7051,8 @@ COMMENT ON FUNCTION st_buffer(geometry, double precision, integer) IS 'args: g1,
 
 --
 -- TOC entry 297 (class 1255 OID 31881)
--- Dependencies: 1005 1005 3
--- Name: st_buildarea(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_buildarea(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_buildarea(geometry) RETURNS geometry
@@ -7947,12 +7060,10 @@ CREATE FUNCTION st_buildarea(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_buildarea';
 
 
-ALTER FUNCTION public.st_buildarea(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2792 (class 0 OID 0)
+-- TOC entry 2936 (class 0 OID 0)
 -- Dependencies: 297
--- Name: FUNCTION st_buildarea(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_buildarea(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_buildarea(geometry) IS 'args: A - Creates an areal geometry formed by the constituent linework of given geometry';
@@ -7960,8 +7071,8 @@ COMMENT ON FUNCTION st_buildarea(geometry) IS 'args: A - Creates an areal geomet
 
 --
 -- TOC entry 379 (class 1255 OID 31987)
--- Dependencies: 3 1005
--- Name: st_bytea(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_bytea(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_bytea(geometry) RETURNS bytea
@@ -7969,12 +7080,10 @@ CREATE FUNCTION st_bytea(geometry) RETURNS bytea
     AS '$libdir/postgis-1.4', 'LWGEOM_to_bytea';
 
 
-ALTER FUNCTION public.st_bytea(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 264 (class 1255 OID 31848)
 -- Dependencies: 3
--- Name: st_cache_bbox(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: st_cache_bbox(); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_cache_bbox() RETURNS trigger
@@ -7982,12 +7091,10 @@ CREATE FUNCTION st_cache_bbox() RETURNS trigger
     AS '$libdir/postgis-1.4', 'cache_bbox';
 
 
-ALTER FUNCTION public.st_cache_bbox() OWNER TO postgres;
-
 --
 -- TOC entry 481 (class 1255 OID 32122)
--- Dependencies: 3 1005 1005
--- Name: st_centroid(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_centroid(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_centroid(geometry) RETURNS geometry
@@ -7995,12 +7102,10 @@ CREATE FUNCTION st_centroid(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'centroid';
 
 
-ALTER FUNCTION public.st_centroid(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2793 (class 0 OID 0)
+-- TOC entry 2937 (class 0 OID 0)
 -- Dependencies: 481
--- Name: FUNCTION st_centroid(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_centroid(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_centroid(geometry) IS 'args: g1 - Returns the geometric center of a geometry.';
@@ -8008,8 +7113,8 @@ COMMENT ON FUNCTION st_centroid(geometry) IS 'args: g1 - Returns the geometric c
 
 --
 -- TOC entry 428 (class 1255 OID 32052)
--- Dependencies: 3 1005 1005 1005
--- Name: st_collect(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_collect(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_collect(geometry, geometry) RETURNS geometry
@@ -8017,12 +7122,10 @@ CREATE FUNCTION st_collect(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_collect';
 
 
-ALTER FUNCTION public.st_collect(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2794 (class 0 OID 0)
+-- TOC entry 2938 (class 0 OID 0)
 -- Dependencies: 428
--- Name: FUNCTION st_collect(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_collect(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_collect(geometry, geometry) IS 'args: g1, g2 - Return a specified ST_Geometry value from a collection of other geometries.';
@@ -8030,8 +7133,8 @@ COMMENT ON FUNCTION st_collect(geometry, geometry) IS 'args: g1, g2 - Return a s
 
 --
 -- TOC entry 433 (class 1255 OID 32059)
--- Dependencies: 3 1005 1007
--- Name: st_collect(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1010
+-- Name: st_collect(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_collect(geometry[]) RETURNS geometry
@@ -8039,12 +7142,10 @@ CREATE FUNCTION st_collect(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_collect_garray';
 
 
-ALTER FUNCTION public.st_collect(geometry[]) OWNER TO postgres;
-
 --
--- TOC entry 2795 (class 0 OID 0)
+-- TOC entry 2939 (class 0 OID 0)
 -- Dependencies: 433
--- Name: FUNCTION st_collect(geometry[]); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_collect(geometry[]); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_collect(geometry[]) IS 'args: g1_array - Return a specified ST_Geometry value from a collection of other geometries.';
@@ -8052,8 +7153,8 @@ COMMENT ON FUNCTION st_collect(geometry[]) IS 'args: g1_array - Return a specifi
 
 --
 -- TOC entry 432 (class 1255 OID 32058)
--- Dependencies: 3 1005 1007
--- Name: st_collect_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1010
+-- Name: st_collect_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_collect_garray(geometry[]) RETURNS geometry
@@ -8061,12 +7162,10 @@ CREATE FUNCTION st_collect_garray(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_collect_garray';
 
 
-ALTER FUNCTION public.st_collect_garray(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 426 (class 1255 OID 32050)
--- Dependencies: 3 1005 1005 1005
--- Name: st_collector(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_collector(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_collector(geometry, geometry) RETURNS geometry
@@ -8074,12 +7173,10 @@ CREATE FUNCTION st_collector(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_collect';
 
 
-ALTER FUNCTION public.st_collector(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 308 (class 1255 OID 31895)
--- Dependencies: 1005 1017 3 1017
--- Name: st_combine_bbox(box2d, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020 1020 1008
+-- Name: st_combine_bbox(box2d, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_combine_bbox(box2d, geometry) RETURNS box2d
@@ -8087,12 +7184,10 @@ CREATE FUNCTION st_combine_bbox(box2d, geometry) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_combine';
 
 
-ALTER FUNCTION public.st_combine_bbox(box2d, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 310 (class 1255 OID 31897)
--- Dependencies: 1011 3 1005 1011
--- Name: st_combine_bbox(box3d_extent, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1014 1014 1008
+-- Name: st_combine_bbox(box3d_extent, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_combine_bbox(box3d_extent, geometry) RETURNS box3d_extent
@@ -8100,12 +7195,10 @@ CREATE FUNCTION st_combine_bbox(box3d_extent, geometry) RETURNS box3d_extent
     AS '$libdir/postgis-1.4', 'BOX3D_combine';
 
 
-ALTER FUNCTION public.st_combine_bbox(box3d_extent, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 312 (class 1255 OID 31901)
--- Dependencies: 3 1008 1008 1005
--- Name: st_combine_bbox(box3d, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011 1011 1008
+-- Name: st_combine_bbox(box3d, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_combine_bbox(box3d, geometry) RETURNS box3d
@@ -8113,12 +7206,10 @@ CREATE FUNCTION st_combine_bbox(box3d, geometry) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_combine';
 
 
-ALTER FUNCTION public.st_combine_bbox(box3d, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 169 (class 1255 OID 31753)
--- Dependencies: 3 1014
--- Name: st_compression(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: st_compression(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_compression(chip) RETURNS integer
@@ -8126,12 +7217,10 @@ CREATE FUNCTION st_compression(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getCompression';
 
 
-ALTER FUNCTION public.st_compression(chip) OWNER TO postgres;
-
 --
 -- TOC entry 467 (class 1255 OID 32108)
--- Dependencies: 3 1005 1005
--- Name: st_contains(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_contains(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_contains(geometry, geometry) RETURNS boolean
@@ -8139,12 +7228,10 @@ CREATE FUNCTION st_contains(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_Contains($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_contains(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2796 (class 0 OID 0)
+-- TOC entry 2940 (class 0 OID 0)
 -- Dependencies: 467
--- Name: FUNCTION st_contains(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_contains(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_contains(geometry, geometry) IS 'args: geomA, geomB - Returns true if and only if no points of B lie in the exterior of A, and at least one point of the interior of B lies in the interior of A.';
@@ -8152,8 +7239,8 @@ COMMENT ON FUNCTION st_contains(geometry, geometry) IS 'args: geomA, geomB - Ret
 
 --
 -- TOC entry 473 (class 1255 OID 32114)
--- Dependencies: 3 1005 1005
--- Name: st_containsproperly(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_containsproperly(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_containsproperly(geometry, geometry) RETURNS boolean
@@ -8161,12 +7248,10 @@ CREATE FUNCTION st_containsproperly(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_ContainsProperly($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_containsproperly(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2797 (class 0 OID 0)
+-- TOC entry 2941 (class 0 OID 0)
 -- Dependencies: 473
--- Name: FUNCTION st_containsproperly(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_containsproperly(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_containsproperly(geometry, geometry) IS 'args: geomA, geomB - Returns true if B intersects the interior of A but not the boundary (or exterior). A does not contain properly itself, but does contain itself.';
@@ -8174,8 +7259,8 @@ COMMENT ON FUNCTION st_containsproperly(geometry, geometry) IS 'args: geomA, geo
 
 --
 -- TOC entry 409 (class 1255 OID 32033)
--- Dependencies: 3 1005 1005
--- Name: st_convexhull(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_convexhull(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_convexhull(geometry) RETURNS geometry
@@ -8183,12 +7268,10 @@ CREATE FUNCTION st_convexhull(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'convexhull';
 
 
-ALTER FUNCTION public.st_convexhull(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2798 (class 0 OID 0)
+-- TOC entry 2942 (class 0 OID 0)
 -- Dependencies: 409
--- Name: FUNCTION st_convexhull(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_convexhull(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_convexhull(geometry) IS 'args: geomA - The convex hull of a geometry represents the minimum convex geometry that encloses all geometries within the set.';
@@ -8196,8 +7279,8 @@ COMMENT ON FUNCTION st_convexhull(geometry) IS 'args: geomA - The convex hull of
 
 --
 -- TOC entry 691 (class 1255 OID 32332)
--- Dependencies: 1005 3
--- Name: st_coorddim(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_coorddim(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_coorddim(geometry) RETURNS smallint
@@ -8205,12 +7288,10 @@ CREATE FUNCTION st_coorddim(geometry) RETURNS smallint
     AS '$libdir/postgis-1.4', 'LWGEOM_ndims';
 
 
-ALTER FUNCTION public.st_coorddim(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2799 (class 0 OID 0)
+-- TOC entry 2943 (class 0 OID 0)
 -- Dependencies: 691
--- Name: FUNCTION st_coorddim(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_coorddim(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_coorddim(geometry) IS 'args: geomA - Return the coordinate dimension of the ST_Geometry value.';
@@ -8218,8 +7299,8 @@ COMMENT ON FUNCTION st_coorddim(geometry) IS 'args: geomA - Return the coordinat
 
 --
 -- TOC entry 469 (class 1255 OID 32110)
--- Dependencies: 3 1005 1005
--- Name: st_coveredby(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_coveredby(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_coveredby(geometry, geometry) RETURNS boolean
@@ -8227,12 +7308,10 @@ CREATE FUNCTION st_coveredby(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_CoveredBy($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_coveredby(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2800 (class 0 OID 0)
+-- TOC entry 2944 (class 0 OID 0)
 -- Dependencies: 469
--- Name: FUNCTION st_coveredby(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_coveredby(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_coveredby(geometry, geometry) IS 'args: geomA, geomB - Returns 1 (TRUE) if no point in Geometry A is outside Geometry B';
@@ -8240,8 +7319,8 @@ COMMENT ON FUNCTION st_coveredby(geometry, geometry) IS 'args: geomA, geomB - Re
 
 --
 -- TOC entry 471 (class 1255 OID 32112)
--- Dependencies: 3 1005 1005
--- Name: st_covers(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_covers(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_covers(geometry, geometry) RETURNS boolean
@@ -8249,12 +7328,10 @@ CREATE FUNCTION st_covers(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_Covers($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_covers(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2801 (class 0 OID 0)
+-- TOC entry 2945 (class 0 OID 0)
 -- Dependencies: 471
--- Name: FUNCTION st_covers(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_covers(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_covers(geometry, geometry) IS 'args: geomA, geomB - Returns 1 (TRUE) if no point in Geometry B is outside Geometry A';
@@ -8262,8 +7339,8 @@ COMMENT ON FUNCTION st_covers(geometry, geometry) IS 'args: geomA, geomB - Retur
 
 --
 -- TOC entry 461 (class 1255 OID 32102)
--- Dependencies: 3 1005 1005
--- Name: st_crosses(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_crosses(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_crosses(geometry, geometry) RETURNS boolean
@@ -8271,12 +7348,10 @@ CREATE FUNCTION st_crosses(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_Crosses($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_crosses(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2802 (class 0 OID 0)
+-- TOC entry 2946 (class 0 OID 0)
 -- Dependencies: 461
--- Name: FUNCTION st_crosses(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_crosses(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_crosses(geometry, geometry) IS 'args: g1, g2 - Returns TRUE if the supplied geometries have some, but not all, interior points in common.';
@@ -8284,8 +7359,8 @@ COMMENT ON FUNCTION st_crosses(geometry, geometry) IS 'args: g1, g2 - Returns TR
 
 --
 -- TOC entry 702 (class 1255 OID 32343)
--- Dependencies: 1005 3 1005
--- Name: st_curvetoline(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_curvetoline(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_curvetoline(geometry, integer) RETURNS geometry
@@ -8293,12 +7368,10 @@ CREATE FUNCTION st_curvetoline(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_curve_segmentize';
 
 
-ALTER FUNCTION public.st_curvetoline(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2803 (class 0 OID 0)
+-- TOC entry 2947 (class 0 OID 0)
 -- Dependencies: 702
--- Name: FUNCTION st_curvetoline(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_curvetoline(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_curvetoline(geometry, integer) IS 'args: curveGeom, segments_per_qtr_circle - Converts a CIRCULARSTRING/CURVEDPOLYGON to a LINESTRING/POLYGON';
@@ -8306,8 +7379,8 @@ COMMENT ON FUNCTION st_curvetoline(geometry, integer) IS 'args: curveGeom, segme
 
 --
 -- TOC entry 703 (class 1255 OID 32344)
--- Dependencies: 3 1005 1005
--- Name: st_curvetoline(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_curvetoline(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_curvetoline(geometry) RETURNS geometry
@@ -8315,12 +7388,10 @@ CREATE FUNCTION st_curvetoline(geometry) RETURNS geometry
     AS $_$SELECT ST_CurveToLine($1, 32)$_$;
 
 
-ALTER FUNCTION public.st_curvetoline(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2804 (class 0 OID 0)
+-- TOC entry 2948 (class 0 OID 0)
 -- Dependencies: 703
--- Name: FUNCTION st_curvetoline(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_curvetoline(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_curvetoline(geometry) IS 'args: curveGeom - Converts a CIRCULARSTRING/CURVEDPOLYGON to a LINESTRING/POLYGON';
@@ -8328,8 +7399,8 @@ COMMENT ON FUNCTION st_curvetoline(geometry) IS 'args: curveGeom - Converts a CI
 
 --
 -- TOC entry 167 (class 1255 OID 31751)
--- Dependencies: 3 1014
--- Name: st_datatype(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: st_datatype(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_datatype(chip) RETURNS integer
@@ -8337,12 +7408,10 @@ CREATE FUNCTION st_datatype(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getDatatype';
 
 
-ALTER FUNCTION public.st_datatype(chip) OWNER TO postgres;
-
 --
 -- TOC entry 416 (class 1255 OID 32040)
--- Dependencies: 3 1005 1005 1005
--- Name: st_difference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_difference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_difference(geometry, geometry) RETURNS geometry
@@ -8350,12 +7419,10 @@ CREATE FUNCTION st_difference(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'difference';
 
 
-ALTER FUNCTION public.st_difference(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2805 (class 0 OID 0)
+-- TOC entry 2949 (class 0 OID 0)
 -- Dependencies: 416
--- Name: FUNCTION st_difference(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_difference(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_difference(geometry, geometry) IS 'args: geomA, geomB - Returns a geometry that represents that part of geometry A that does not intersect with geometry B.';
@@ -8363,8 +7430,8 @@ COMMENT ON FUNCTION st_difference(geometry, geometry) IS 'args: geomA, geomB - R
 
 --
 -- TOC entry 529 (class 1255 OID 32170)
--- Dependencies: 3 1005
--- Name: st_dimension(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_dimension(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_dimension(geometry) RETURNS integer
@@ -8372,12 +7439,10 @@ CREATE FUNCTION st_dimension(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_dimension';
 
 
-ALTER FUNCTION public.st_dimension(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2806 (class 0 OID 0)
+-- TOC entry 2950 (class 0 OID 0)
 -- Dependencies: 529
--- Name: FUNCTION st_dimension(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_dimension(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_dimension(geometry) IS 'args: g - The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.';
@@ -8385,8 +7450,8 @@ COMMENT ON FUNCTION st_dimension(geometry) IS 'args: g - The inherent dimension 
 
 --
 -- TOC entry 450 (class 1255 OID 32091)
--- Dependencies: 3 1005 1005
--- Name: st_disjoint(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_disjoint(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_disjoint(geometry, geometry) RETURNS boolean
@@ -8394,12 +7459,10 @@ CREATE FUNCTION st_disjoint(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'disjoint';
 
 
-ALTER FUNCTION public.st_disjoint(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2807 (class 0 OID 0)
+-- TOC entry 2951 (class 0 OID 0)
 -- Dependencies: 450
--- Name: FUNCTION st_disjoint(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_disjoint(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_disjoint(geometry, geometry) IS 'args: A, B - Returns TRUE if the Geometries do not "spatially intersect" - if they do not share any space together.';
@@ -8407,8 +7470,8 @@ COMMENT ON FUNCTION st_disjoint(geometry, geometry) IS 'args: A, B - Returns TRU
 
 --
 -- TOC entry 208 (class 1255 OID 31792)
--- Dependencies: 1005 1005 3
--- Name: st_distance(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_distance(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_distance(geometry, geometry) RETURNS double precision
@@ -8416,12 +7479,10 @@ CREATE FUNCTION st_distance(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_mindistance2d';
 
 
-ALTER FUNCTION public.st_distance(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2808 (class 0 OID 0)
+-- TOC entry 2952 (class 0 OID 0)
 -- Dependencies: 208
--- Name: FUNCTION st_distance(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_distance(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_distance(geometry, geometry) IS 'args: g1, g2 - Returns the 2-dimensional cartesian minimum distance between two geometries in projected units.';
@@ -8429,8 +7490,8 @@ COMMENT ON FUNCTION st_distance(geometry, geometry) IS 'args: g1, g2 - Returns t
 
 --
 -- TOC entry 206 (class 1255 OID 31790)
--- Dependencies: 1005 3 1005
--- Name: st_distance_sphere(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_distance_sphere(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_distance_sphere(geometry, geometry) RETURNS double precision
@@ -8438,12 +7499,10 @@ CREATE FUNCTION st_distance_sphere(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_distance_sphere';
 
 
-ALTER FUNCTION public.st_distance_sphere(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2809 (class 0 OID 0)
+-- TOC entry 2953 (class 0 OID 0)
 -- Dependencies: 206
--- Name: FUNCTION st_distance_sphere(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_distance_sphere(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_distance_sphere(geometry, geometry) IS 'args: pointlonlatA, pointlonlatB - Returns linear distance in meters between two lon/lat points. Uses a spherical earth and radius of 6370986 meters. Faster than , but less accurate. Only implemented for points.';
@@ -8451,8 +7510,8 @@ COMMENT ON FUNCTION st_distance_sphere(geometry, geometry) IS 'args: pointlonlat
 
 --
 -- TOC entry 204 (class 1255 OID 31788)
--- Dependencies: 1005 3 1005 1002
--- Name: st_distance_spheroid(geometry, geometry, spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1005 3 1008 1008
+-- Name: st_distance_spheroid(geometry, geometry, spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_distance_spheroid(geometry, geometry, spheroid) RETURNS double precision
@@ -8460,12 +7519,10 @@ CREATE FUNCTION st_distance_spheroid(geometry, geometry, spheroid) RETURNS doubl
     AS '$libdir/postgis-1.4', 'LWGEOM_distance_ellipsoid_point';
 
 
-ALTER FUNCTION public.st_distance_spheroid(geometry, geometry, spheroid) OWNER TO postgres;
-
 --
--- TOC entry 2810 (class 0 OID 0)
+-- TOC entry 2954 (class 0 OID 0)
 -- Dependencies: 204
--- Name: FUNCTION st_distance_spheroid(geometry, geometry, spheroid); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_distance_spheroid(geometry, geometry, spheroid); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_distance_spheroid(geometry, geometry, spheroid) IS 'args: pointlonlatA, pointlonlatB, measurement_spheroid - Returns linear distance between two lon/lat points given a particular spheroid. Currently only implemented for points.';
@@ -8473,8 +7530,8 @@ COMMENT ON FUNCTION st_distance_spheroid(geometry, geometry, spheroid) IS 'args:
 
 --
 -- TOC entry 155 (class 1255 OID 31739)
--- Dependencies: 1005 3 1005
--- Name: st_dropbbox(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_dropbbox(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_dropbbox(geometry) RETURNS geometry
@@ -8482,12 +7539,10 @@ CREATE FUNCTION st_dropbbox(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_dropBBOX';
 
 
-ALTER FUNCTION public.st_dropbbox(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2811 (class 0 OID 0)
+-- TOC entry 2955 (class 0 OID 0)
 -- Dependencies: 155
--- Name: FUNCTION st_dropbbox(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_dropbbox(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_dropbbox(geometry) IS 'args: geomA - Drop the bounding box cache from the geometry.';
@@ -8495,8 +7550,8 @@ COMMENT ON FUNCTION st_dropbbox(geometry) IS 'args: geomA - Drop the bounding bo
 
 --
 -- TOC entry 304 (class 1255 OID 31891)
--- Dependencies: 3 1020 1005
--- Name: st_dump(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1023 1008
+-- Name: st_dump(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_dump(geometry) RETURNS SETOF geometry_dump
@@ -8504,12 +7559,10 @@ CREATE FUNCTION st_dump(geometry) RETURNS SETOF geometry_dump
     AS '$libdir/postgis-1.4', 'LWGEOM_dump';
 
 
-ALTER FUNCTION public.st_dump(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2812 (class 0 OID 0)
+-- TOC entry 2956 (class 0 OID 0)
 -- Dependencies: 304
--- Name: FUNCTION st_dump(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_dump(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_dump(geometry) IS 'args: g1 - Returns a set of geometry_dump (geom,path) rows, that make up a geometry g1.';
@@ -8517,8 +7570,8 @@ COMMENT ON FUNCTION st_dump(geometry) IS 'args: g1 - Returns a set of geometry_d
 
 --
 -- TOC entry 306 (class 1255 OID 31893)
--- Dependencies: 1005 1020 3
--- Name: st_dumprings(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1023 1008
+-- Name: st_dumprings(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_dumprings(geometry) RETURNS SETOF geometry_dump
@@ -8526,12 +7579,10 @@ CREATE FUNCTION st_dumprings(geometry) RETURNS SETOF geometry_dump
     AS '$libdir/postgis-1.4', 'LWGEOM_dump_rings';
 
 
-ALTER FUNCTION public.st_dumprings(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2813 (class 0 OID 0)
+-- TOC entry 2957 (class 0 OID 0)
 -- Dependencies: 306
--- Name: FUNCTION st_dumprings(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_dumprings(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_dumprings(geometry) IS 'args: a_polygon - Returns a set of geometry_dump rows, representing the exterior and interior rings of a polygon.';
@@ -8539,8 +7590,8 @@ COMMENT ON FUNCTION st_dumprings(geometry) IS 'args: a_polygon - Returns a set o
 
 --
 -- TOC entry 455 (class 1255 OID 32096)
--- Dependencies: 3 1005 1005
--- Name: st_dwithin(geometry, geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_dwithin(geometry, geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_dwithin(geometry, geometry, double precision) RETURNS boolean
@@ -8548,12 +7599,10 @@ CREATE FUNCTION st_dwithin(geometry, geometry, double precision) RETURNS boolean
     AS $_$SELECT $1 && ST_Expand($2,$3) AND $2 && ST_Expand($1,$3) AND _ST_DWithin($1, $2, $3)$_$;
 
 
-ALTER FUNCTION public.st_dwithin(geometry, geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2814 (class 0 OID 0)
+-- TOC entry 2958 (class 0 OID 0)
 -- Dependencies: 455
--- Name: FUNCTION st_dwithin(geometry, geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_dwithin(geometry, geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_dwithin(geometry, geometry, double precision) IS 'args: g1, g2, distance - Returns true if the geometries are within the specified distance of one another';
@@ -8561,8 +7610,8 @@ COMMENT ON FUNCTION st_dwithin(geometry, geometry, double precision) IS 'args: g
 
 --
 -- TOC entry 554 (class 1255 OID 32194)
--- Dependencies: 3 1005 1005
--- Name: st_endpoint(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_endpoint(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_endpoint(geometry) RETURNS geometry
@@ -8570,12 +7619,10 @@ CREATE FUNCTION st_endpoint(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_endpoint_linestring';
 
 
-ALTER FUNCTION public.st_endpoint(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2815 (class 0 OID 0)
+-- TOC entry 2959 (class 0 OID 0)
 -- Dependencies: 554
--- Name: FUNCTION st_endpoint(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_endpoint(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_endpoint(geometry) IS 'args: g - Returns the last point of a LINESTRING geometry as a POINT.';
@@ -8583,8 +7630,8 @@ COMMENT ON FUNCTION st_endpoint(geometry) IS 'args: g - Returns the last point o
 
 --
 -- TOC entry 236 (class 1255 OID 31820)
--- Dependencies: 1005 3 1005
--- Name: st_envelope(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_envelope(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_envelope(geometry) RETURNS geometry
@@ -8592,12 +7639,10 @@ CREATE FUNCTION st_envelope(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_envelope';
 
 
-ALTER FUNCTION public.st_envelope(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2816 (class 0 OID 0)
+-- TOC entry 2960 (class 0 OID 0)
 -- Dependencies: 236
--- Name: FUNCTION st_envelope(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_envelope(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_envelope(geometry) IS 'args: g1 - Returns a geometry representing the bounding box of the supplied geometry.';
@@ -8605,8 +7650,8 @@ COMMENT ON FUNCTION st_envelope(geometry) IS 'args: g1 - Returns a geometry repr
 
 --
 -- TOC entry 489 (class 1255 OID 32130)
--- Dependencies: 3 1005 1005
--- Name: st_equals(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_equals(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_equals(geometry, geometry) RETURNS boolean
@@ -8614,12 +7659,10 @@ CREATE FUNCTION st_equals(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'geomequals';
 
 
-ALTER FUNCTION public.st_equals(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2817 (class 0 OID 0)
+-- TOC entry 2961 (class 0 OID 0)
 -- Dependencies: 489
--- Name: FUNCTION st_equals(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_equals(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_equals(geometry, geometry) IS 'args: A, B - Returns true if the given geometries represent the same geometry. Directionality is ignored.';
@@ -8627,8 +7670,8 @@ COMMENT ON FUNCTION st_equals(geometry, geometry) IS 'args: A, B - Returns true 
 
 --
 -- TOC entry 314 (class 1255 OID 31905)
--- Dependencies: 1017 3
--- Name: st_estimated_extent(text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020
+-- Name: st_estimated_extent(text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_estimated_extent(text, text, text) RETURNS box2d
@@ -8636,12 +7679,10 @@ CREATE FUNCTION st_estimated_extent(text, text, text) RETURNS box2d
     AS '$libdir/postgis-1.4', 'LWGEOM_estimated_extent';
 
 
-ALTER FUNCTION public.st_estimated_extent(text, text, text) OWNER TO postgres;
-
 --
--- TOC entry 2818 (class 0 OID 0)
+-- TOC entry 2962 (class 0 OID 0)
 -- Dependencies: 314
--- Name: FUNCTION st_estimated_extent(text, text, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_estimated_extent(text, text, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_estimated_extent(text, text, text) IS 'args: schema_name, table_name, geocolumn_name - Return the estimated extent of the given spatial table. The estimated is taken from the geometry columns statistics. The current schema will be used if not specified.';
@@ -8649,8 +7690,8 @@ COMMENT ON FUNCTION st_estimated_extent(text, text, text) IS 'args: schema_name,
 
 --
 -- TOC entry 316 (class 1255 OID 31907)
--- Dependencies: 3 1017
--- Name: st_estimated_extent(text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1020
+-- Name: st_estimated_extent(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_estimated_extent(text, text) RETURNS box2d
@@ -8658,12 +7699,10 @@ CREATE FUNCTION st_estimated_extent(text, text) RETURNS box2d
     AS '$libdir/postgis-1.4', 'LWGEOM_estimated_extent';
 
 
-ALTER FUNCTION public.st_estimated_extent(text, text) OWNER TO postgres;
-
 --
--- TOC entry 2819 (class 0 OID 0)
+-- TOC entry 2963 (class 0 OID 0)
 -- Dependencies: 316
--- Name: FUNCTION st_estimated_extent(text, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_estimated_extent(text, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_estimated_extent(text, text) IS 'args: table_name, geocolumn_name - Return the estimated extent of the given spatial table. The estimated is taken from the geometry columns statistics. The current schema will be used if not specified.';
@@ -8671,8 +7710,8 @@ COMMENT ON FUNCTION st_estimated_extent(text, text) IS 'args: table_name, geocol
 
 --
 -- TOC entry 230 (class 1255 OID 31814)
--- Dependencies: 1008 3 1008
--- Name: st_expand(box3d, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1011 3 1011
+-- Name: st_expand(box3d, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_expand(box3d, double precision) RETURNS box3d
@@ -8680,12 +7719,10 @@ CREATE FUNCTION st_expand(box3d, double precision) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_expand';
 
 
-ALTER FUNCTION public.st_expand(box3d, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2820 (class 0 OID 0)
+-- TOC entry 2964 (class 0 OID 0)
 -- Dependencies: 230
--- Name: FUNCTION st_expand(box3d, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_expand(box3d, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_expand(box3d, double precision) IS 'args: g1, units_to_expand - Returns bounding box expanded in all directions from the bounding box of the input geometry';
@@ -8693,8 +7730,8 @@ COMMENT ON FUNCTION st_expand(box3d, double precision) IS 'args: g1, units_to_ex
 
 --
 -- TOC entry 232 (class 1255 OID 31816)
--- Dependencies: 1017 1017 3
--- Name: st_expand(box2d, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1020 1020 3
+-- Name: st_expand(box2d, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_expand(box2d, double precision) RETURNS box2d
@@ -8702,12 +7739,10 @@ CREATE FUNCTION st_expand(box2d, double precision) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_expand';
 
 
-ALTER FUNCTION public.st_expand(box2d, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2821 (class 0 OID 0)
+-- TOC entry 2965 (class 0 OID 0)
 -- Dependencies: 232
--- Name: FUNCTION st_expand(box2d, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_expand(box2d, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_expand(box2d, double precision) IS 'args: g1, units_to_expand - Returns bounding box expanded in all directions from the bounding box of the input geometry';
@@ -8715,8 +7750,8 @@ COMMENT ON FUNCTION st_expand(box2d, double precision) IS 'args: g1, units_to_ex
 
 --
 -- TOC entry 234 (class 1255 OID 31818)
--- Dependencies: 3 1005 1005
--- Name: st_expand(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_expand(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_expand(geometry, double precision) RETURNS geometry
@@ -8724,12 +7759,10 @@ CREATE FUNCTION st_expand(geometry, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_expand';
 
 
-ALTER FUNCTION public.st_expand(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2822 (class 0 OID 0)
+-- TOC entry 2966 (class 0 OID 0)
 -- Dependencies: 234
--- Name: FUNCTION st_expand(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_expand(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_expand(geometry, double precision) IS 'args: g1, units_to_expand - Returns bounding box expanded in all directions from the bounding box of the input geometry';
@@ -8737,8 +7770,8 @@ COMMENT ON FUNCTION st_expand(geometry, double precision) IS 'args: g1, units_to
 
 --
 -- TOC entry 531 (class 1255 OID 32172)
--- Dependencies: 3 1005 1005
--- Name: st_exteriorring(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_exteriorring(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_exteriorring(geometry) RETURNS geometry
@@ -8746,12 +7779,10 @@ CREATE FUNCTION st_exteriorring(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_exteriorring_polygon';
 
 
-ALTER FUNCTION public.st_exteriorring(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2823 (class 0 OID 0)
+-- TOC entry 2967 (class 0 OID 0)
 -- Dependencies: 531
--- Name: FUNCTION st_exteriorring(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_exteriorring(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_exteriorring(geometry) IS 'args: a_polygon - Returns a line string representing the exterior ring of the POLYGON geometry. Return NULL if the geometry is not a polygon. Will not work with MULTIPOLYGON';
@@ -8759,8 +7790,8 @@ COMMENT ON FUNCTION st_exteriorring(geometry) IS 'args: a_polygon - Returns a li
 
 --
 -- TOC entry 163 (class 1255 OID 31747)
--- Dependencies: 3 1014
--- Name: st_factor(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1017
+-- Name: st_factor(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_factor(chip) RETURNS real
@@ -8768,12 +7799,10 @@ CREATE FUNCTION st_factor(chip) RETURNS real
     AS '$libdir/postgis-1.4', 'CHIP_getFactor';
 
 
-ALTER FUNCTION public.st_factor(chip) OWNER TO postgres;
-
 --
 -- TOC entry 318 (class 1255 OID 31909)
--- Dependencies: 1080 3 1017
--- Name: st_find_extent(text, text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123 1020
+-- Name: st_find_extent(text, text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_find_extent(text, text, text) RETURNS box2d
@@ -8793,12 +7822,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.st_find_extent(text, text, text) OWNER TO postgres;
-
 --
 -- TOC entry 320 (class 1255 OID 31911)
--- Dependencies: 1017 3 1080
--- Name: st_find_extent(text, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123 1020
+-- Name: st_find_extent(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_find_extent(text, text) RETURNS box2d
@@ -8817,12 +7844,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.st_find_extent(text, text) OWNER TO postgres;
-
 --
 -- TOC entry 216 (class 1255 OID 31800)
--- Dependencies: 1005 1005 3
--- Name: st_force_2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_force_2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_force_2d(geometry) RETURNS geometry
@@ -8830,12 +7855,10 @@ CREATE FUNCTION st_force_2d(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_2d';
 
 
-ALTER FUNCTION public.st_force_2d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2824 (class 0 OID 0)
+-- TOC entry 2968 (class 0 OID 0)
 -- Dependencies: 216
--- Name: FUNCTION st_force_2d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_force_2d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_force_2d(geometry) IS 'args: geomA - Forces the geometries into a "2-dimensional mode" so that all output representations will only have the X and Y coordinates.';
@@ -8843,8 +7866,8 @@ COMMENT ON FUNCTION st_force_2d(geometry) IS 'args: geomA - Forces the geometrie
 
 --
 -- TOC entry 220 (class 1255 OID 31804)
--- Dependencies: 1005 3 1005
--- Name: st_force_3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_force_3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_force_3d(geometry) RETURNS geometry
@@ -8852,12 +7875,10 @@ CREATE FUNCTION st_force_3d(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_3dz';
 
 
-ALTER FUNCTION public.st_force_3d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2825 (class 0 OID 0)
+-- TOC entry 2969 (class 0 OID 0)
 -- Dependencies: 220
--- Name: FUNCTION st_force_3d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_force_3d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_force_3d(geometry) IS 'args: geomA - Forces the geometries into XYZ mode. This is an alias for ST_Force_3DZ.';
@@ -8865,8 +7886,8 @@ COMMENT ON FUNCTION st_force_3d(geometry) IS 'args: geomA - Forces the geometrie
 
 --
 -- TOC entry 222 (class 1255 OID 31806)
--- Dependencies: 1005 1005 3
--- Name: st_force_3dm(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_force_3dm(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_force_3dm(geometry) RETURNS geometry
@@ -8874,12 +7895,10 @@ CREATE FUNCTION st_force_3dm(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_3dm';
 
 
-ALTER FUNCTION public.st_force_3dm(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2826 (class 0 OID 0)
+-- TOC entry 2970 (class 0 OID 0)
 -- Dependencies: 222
--- Name: FUNCTION st_force_3dm(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_force_3dm(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_force_3dm(geometry) IS 'args: geomA - Forces the geometries into XYM mode.';
@@ -8887,8 +7906,8 @@ COMMENT ON FUNCTION st_force_3dm(geometry) IS 'args: geomA - Forces the geometri
 
 --
 -- TOC entry 218 (class 1255 OID 31802)
--- Dependencies: 1005 1005 3
--- Name: st_force_3dz(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_force_3dz(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_force_3dz(geometry) RETURNS geometry
@@ -8896,12 +7915,10 @@ CREATE FUNCTION st_force_3dz(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_3dz';
 
 
-ALTER FUNCTION public.st_force_3dz(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2827 (class 0 OID 0)
+-- TOC entry 2971 (class 0 OID 0)
 -- Dependencies: 218
--- Name: FUNCTION st_force_3dz(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_force_3dz(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_force_3dz(geometry) IS 'args: geomA - Forces the geometries into XYZ mode. This is a synonym for ST_Force_3D.';
@@ -8909,8 +7926,8 @@ COMMENT ON FUNCTION st_force_3dz(geometry) IS 'args: geomA - Forces the geometri
 
 --
 -- TOC entry 224 (class 1255 OID 31808)
--- Dependencies: 3 1005 1005
--- Name: st_force_4d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_force_4d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_force_4d(geometry) RETURNS geometry
@@ -8918,12 +7935,10 @@ CREATE FUNCTION st_force_4d(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_4d';
 
 
-ALTER FUNCTION public.st_force_4d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2828 (class 0 OID 0)
+-- TOC entry 2972 (class 0 OID 0)
 -- Dependencies: 224
--- Name: FUNCTION st_force_4d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_force_4d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_force_4d(geometry) IS 'args: geomA - Forces the geometries into XYZM mode.';
@@ -8931,8 +7946,8 @@ COMMENT ON FUNCTION st_force_4d(geometry) IS 'args: geomA - Forces the geometrie
 
 --
 -- TOC entry 226 (class 1255 OID 31810)
--- Dependencies: 1005 1005 3
--- Name: st_force_collection(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_force_collection(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_force_collection(geometry) RETURNS geometry
@@ -8940,12 +7955,10 @@ CREATE FUNCTION st_force_collection(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_collection';
 
 
-ALTER FUNCTION public.st_force_collection(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2829 (class 0 OID 0)
+-- TOC entry 2973 (class 0 OID 0)
 -- Dependencies: 226
--- Name: FUNCTION st_force_collection(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_force_collection(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_force_collection(geometry) IS 'args: geomA - Converts the geometry into a GEOMETRYCOLLECTION.';
@@ -8953,8 +7966,8 @@ COMMENT ON FUNCTION st_force_collection(geometry) IS 'args: geomA - Converts the
 
 --
 -- TOC entry 240 (class 1255 OID 31824)
--- Dependencies: 3 1005 1005
--- Name: st_forcerhr(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_forcerhr(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_forcerhr(geometry) RETURNS geometry
@@ -8962,12 +7975,10 @@ CREATE FUNCTION st_forcerhr(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_forceRHR_poly';
 
 
-ALTER FUNCTION public.st_forcerhr(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2830 (class 0 OID 0)
+-- TOC entry 2974 (class 0 OID 0)
 -- Dependencies: 240
--- Name: FUNCTION st_forcerhr(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_forcerhr(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_forcerhr(geometry) IS 'args: g - Forces the orientation of the vertices in a polygon to follow the Right-Hand-Rule.';
@@ -8975,8 +7986,8 @@ COMMENT ON FUNCTION st_forcerhr(geometry) IS 'args: g - Forces the orientation o
 
 --
 -- TOC entry 520 (class 1255 OID 32161)
--- Dependencies: 3 1005
--- Name: st_geohash(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geohash(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geohash(geometry, integer) RETURNS text
@@ -8984,12 +7995,10 @@ CREATE FUNCTION st_geohash(geometry, integer) RETURNS text
     AS '$libdir/postgis-1.4', 'ST_GeoHash';
 
 
-ALTER FUNCTION public.st_geohash(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2831 (class 0 OID 0)
+-- TOC entry 2975 (class 0 OID 0)
 -- Dependencies: 520
--- Name: FUNCTION st_geohash(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geohash(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geohash(geometry, integer) IS 'args: g1, precision - Return a GeoHash representation (geohash.org) of the geometry.';
@@ -8997,8 +8006,8 @@ COMMENT ON FUNCTION st_geohash(geometry, integer) IS 'args: g1, precision - Retu
 
 --
 -- TOC entry 521 (class 1255 OID 32162)
--- Dependencies: 3 1005
--- Name: st_geohash(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geohash(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geohash(geometry) RETURNS text
@@ -9006,12 +8015,10 @@ CREATE FUNCTION st_geohash(geometry) RETURNS text
     AS $_$SELECT ST_GeoHash($1, 0)$_$;
 
 
-ALTER FUNCTION public.st_geohash(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2832 (class 0 OID 0)
+-- TOC entry 2976 (class 0 OID 0)
 -- Dependencies: 521
--- Name: FUNCTION st_geohash(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geohash(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geohash(geometry) IS 'args: g1 - Return a GeoHash representation (geohash.org) of the geometry.';
@@ -9019,8 +8026,8 @@ COMMENT ON FUNCTION st_geohash(geometry) IS 'args: g1 - Return a GeoHash represe
 
 --
 -- TOC entry 430 (class 1255 OID 32056)
--- Dependencies: 3 1007 1007 1005
--- Name: st_geom_accum(geometry[], geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1010 1010 1008
+-- Name: st_geom_accum(geometry[], geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geom_accum(geometry[], geometry) RETURNS geometry[]
@@ -9028,12 +8035,10 @@ CREATE FUNCTION st_geom_accum(geometry[], geometry) RETURNS geometry[]
     AS '$libdir/postgis-1.4', 'LWGEOM_accum';
 
 
-ALTER FUNCTION public.st_geom_accum(geometry[], geometry) OWNER TO postgres;
-
 --
 -- TOC entry 618 (class 1255 OID 32259)
--- Dependencies: 3 1005
--- Name: st_geomcollfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geomcollfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomcollfromtext(text, integer) RETURNS geometry
@@ -9046,12 +8051,10 @@ CREATE FUNCTION st_geomcollfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_geomcollfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2833 (class 0 OID 0)
+-- TOC entry 2977 (class 0 OID 0)
 -- Dependencies: 618
--- Name: FUNCTION st_geomcollfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geomcollfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geomcollfromtext(text, integer) IS 'args: WKT, srid - Makes a collection Geometry from collection WKT with the given SRID. If SRID is not give, it defaults to -1.';
@@ -9059,8 +8062,8 @@ COMMENT ON FUNCTION st_geomcollfromtext(text, integer) IS 'args: WKT, srid - Mak
 
 --
 -- TOC entry 620 (class 1255 OID 32261)
--- Dependencies: 3 1005
--- Name: st_geomcollfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geomcollfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomcollfromtext(text) RETURNS geometry
@@ -9073,12 +8076,10 @@ CREATE FUNCTION st_geomcollfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_geomcollfromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2834 (class 0 OID 0)
+-- TOC entry 2978 (class 0 OID 0)
 -- Dependencies: 620
--- Name: FUNCTION st_geomcollfromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geomcollfromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geomcollfromtext(text) IS 'args: WKT - Makes a collection Geometry from collection WKT with the given SRID. If SRID is not give, it defaults to -1.';
@@ -9086,8 +8087,8 @@ COMMENT ON FUNCTION st_geomcollfromtext(text) IS 'args: WKT - Makes a collection
 
 --
 -- TOC entry 669 (class 1255 OID 32310)
--- Dependencies: 3 1005
--- Name: st_geomcollfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_geomcollfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomcollfromwkb(bytea, integer) RETURNS geometry
@@ -9100,12 +8101,10 @@ CREATE FUNCTION st_geomcollfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_geomcollfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 671 (class 1255 OID 32312)
--- Dependencies: 3 1005
--- Name: st_geomcollfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geomcollfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomcollfromwkb(bytea) RETURNS geometry
@@ -9118,12 +8117,10 @@ CREATE FUNCTION st_geomcollfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_geomcollfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 66 (class 1255 OID 31601)
--- Dependencies: 1011 3 1005
--- Name: st_geometry(box3d_extent); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1014
+-- Name: st_geometry(box3d_extent); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry(box3d_extent) RETURNS geometry
@@ -9131,12 +8128,10 @@ CREATE FUNCTION st_geometry(box3d_extent) RETURNS geometry
     AS '$libdir/postgis-1.4', 'BOX3D_to_LWGEOM';
 
 
-ALTER FUNCTION public.st_geometry(box3d_extent) OWNER TO postgres;
-
 --
 -- TOC entry 369 (class 1255 OID 31977)
--- Dependencies: 3 1005 1017
--- Name: st_geometry(box2d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1020
+-- Name: st_geometry(box2d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry(box2d) RETURNS geometry
@@ -9144,12 +8139,10 @@ CREATE FUNCTION st_geometry(box2d) RETURNS geometry
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_to_LWGEOM';
 
 
-ALTER FUNCTION public.st_geometry(box2d) OWNER TO postgres;
-
 --
 -- TOC entry 371 (class 1255 OID 31979)
--- Dependencies: 3 1005 1008
--- Name: st_geometry(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1011
+-- Name: st_geometry(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry(box3d) RETURNS geometry
@@ -9157,12 +8150,10 @@ CREATE FUNCTION st_geometry(box3d) RETURNS geometry
     AS '$libdir/postgis-1.4', 'BOX3D_to_LWGEOM';
 
 
-ALTER FUNCTION public.st_geometry(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 373 (class 1255 OID 31981)
--- Dependencies: 3 1005
--- Name: st_geometry(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geometry(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry(text) RETURNS geometry
@@ -9170,12 +8161,10 @@ CREATE FUNCTION st_geometry(text) RETURNS geometry
     AS '$libdir/postgis-1.4', 'parse_WKT_lwgeom';
 
 
-ALTER FUNCTION public.st_geometry(text) OWNER TO postgres;
-
 --
 -- TOC entry 375 (class 1255 OID 31983)
--- Dependencies: 3 1005 1014
--- Name: st_geometry(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1017
+-- Name: st_geometry(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry(chip) RETURNS geometry
@@ -9183,12 +8172,10 @@ CREATE FUNCTION st_geometry(chip) RETURNS geometry
     AS '$libdir/postgis-1.4', 'CHIP_to_LWGEOM';
 
 
-ALTER FUNCTION public.st_geometry(chip) OWNER TO postgres;
-
 --
 -- TOC entry 377 (class 1255 OID 31985)
--- Dependencies: 3 1005
--- Name: st_geometry(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geometry(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry(bytea) RETURNS geometry
@@ -9196,12 +8183,10 @@ CREATE FUNCTION st_geometry(bytea) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_bytea';
 
 
-ALTER FUNCTION public.st_geometry(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 134 (class 1255 OID 31685)
--- Dependencies: 1005 3 1005
--- Name: st_geometry_above(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_geometry_above(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_above(geometry, geometry) RETURNS boolean
@@ -9209,12 +8194,10 @@ CREATE FUNCTION st_geometry_above(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_above';
 
 
-ALTER FUNCTION public.st_geometry_above(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 136 (class 1255 OID 31687)
--- Dependencies: 3 1005 1005
--- Name: st_geometry_below(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_geometry_below(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_below(geometry, geometry) RETURNS boolean
@@ -9222,12 +8205,10 @@ CREATE FUNCTION st_geometry_below(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_below';
 
 
-ALTER FUNCTION public.st_geometry_below(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 116 (class 1255 OID 31654)
--- Dependencies: 3 1005 1005
--- Name: st_geometry_cmp(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_geometry_cmp(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_cmp(geometry, geometry) RETURNS integer
@@ -9235,12 +8216,10 @@ CREATE FUNCTION st_geometry_cmp(geometry, geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'lwgeom_cmp';
 
 
-ALTER FUNCTION public.st_geometry_cmp(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 138 (class 1255 OID 31689)
--- Dependencies: 1005 1005 3
--- Name: st_geometry_contain(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_geometry_contain(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_contain(geometry, geometry) RETURNS boolean
@@ -9248,12 +8227,10 @@ CREATE FUNCTION st_geometry_contain(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_contain';
 
 
-ALTER FUNCTION public.st_geometry_contain(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 140 (class 1255 OID 31691)
--- Dependencies: 1005 1005 3
--- Name: st_geometry_contained(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_geometry_contained(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_contained(geometry, geometry) RETURNS boolean
@@ -9261,12 +8238,10 @@ CREATE FUNCTION st_geometry_contained(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_contained';
 
 
-ALTER FUNCTION public.st_geometry_contained(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 114 (class 1255 OID 31652)
--- Dependencies: 3 1005 1005
--- Name: st_geometry_eq(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_geometry_eq(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_eq(geometry, geometry) RETURNS boolean
@@ -9274,12 +8249,10 @@ CREATE FUNCTION st_geometry_eq(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_eq';
 
 
-ALTER FUNCTION public.st_geometry_eq(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 112 (class 1255 OID 31650)
--- Dependencies: 3 1005 1005
--- Name: st_geometry_ge(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_geometry_ge(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_ge(geometry, geometry) RETURNS boolean
@@ -9287,12 +8260,10 @@ CREATE FUNCTION st_geometry_ge(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_ge';
 
 
-ALTER FUNCTION public.st_geometry_ge(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 110 (class 1255 OID 31648)
--- Dependencies: 3 1005 1005
--- Name: st_geometry_gt(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_geometry_gt(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_gt(geometry, geometry) RETURNS boolean
@@ -9300,12 +8271,10 @@ CREATE FUNCTION st_geometry_gt(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_gt';
 
 
-ALTER FUNCTION public.st_geometry_gt(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 108 (class 1255 OID 31646)
--- Dependencies: 3 1005 1005
--- Name: st_geometry_le(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_geometry_le(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_le(geometry, geometry) RETURNS boolean
@@ -9313,12 +8282,10 @@ CREATE FUNCTION st_geometry_le(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_le';
 
 
-ALTER FUNCTION public.st_geometry_le(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 130 (class 1255 OID 31681)
--- Dependencies: 1005 3 1005
--- Name: st_geometry_left(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_geometry_left(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_left(geometry, geometry) RETURNS boolean
@@ -9326,12 +8293,10 @@ CREATE FUNCTION st_geometry_left(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_left';
 
 
-ALTER FUNCTION public.st_geometry_left(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 106 (class 1255 OID 31644)
--- Dependencies: 3 1005 1005
--- Name: st_geometry_lt(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_geometry_lt(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_lt(geometry, geometry) RETURNS boolean
@@ -9339,12 +8304,10 @@ CREATE FUNCTION st_geometry_lt(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'lwgeom_lt';
 
 
-ALTER FUNCTION public.st_geometry_lt(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 126 (class 1255 OID 31677)
--- Dependencies: 3 1005 1005
--- Name: st_geometry_overabove(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_geometry_overabove(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_overabove(geometry, geometry) RETURNS boolean
@@ -9352,12 +8315,10 @@ CREATE FUNCTION st_geometry_overabove(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overabove';
 
 
-ALTER FUNCTION public.st_geometry_overabove(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 128 (class 1255 OID 31679)
--- Dependencies: 1005 1005 3
--- Name: st_geometry_overbelow(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_geometry_overbelow(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_overbelow(geometry, geometry) RETURNS boolean
@@ -9365,12 +8326,10 @@ CREATE FUNCTION st_geometry_overbelow(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overbelow';
 
 
-ALTER FUNCTION public.st_geometry_overbelow(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 142 (class 1255 OID 31693)
--- Dependencies: 1005 3 1005
--- Name: st_geometry_overlap(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_geometry_overlap(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_overlap(geometry, geometry) RETURNS boolean
@@ -9378,12 +8337,10 @@ CREATE FUNCTION st_geometry_overlap(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overlap';
 
 
-ALTER FUNCTION public.st_geometry_overlap(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 122 (class 1255 OID 31673)
--- Dependencies: 1005 1005 3
--- Name: st_geometry_overleft(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_geometry_overleft(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_overleft(geometry, geometry) RETURNS boolean
@@ -9391,12 +8348,10 @@ CREATE FUNCTION st_geometry_overleft(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overleft';
 
 
-ALTER FUNCTION public.st_geometry_overleft(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 124 (class 1255 OID 31675)
--- Dependencies: 1005 1005 3
--- Name: st_geometry_overright(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_geometry_overright(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_overright(geometry, geometry) RETURNS boolean
@@ -9404,12 +8359,10 @@ CREATE FUNCTION st_geometry_overright(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_overright';
 
 
-ALTER FUNCTION public.st_geometry_overright(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 132 (class 1255 OID 31683)
--- Dependencies: 1005 3 1005
--- Name: st_geometry_right(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_geometry_right(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_right(geometry, geometry) RETURNS boolean
@@ -9417,12 +8370,10 @@ CREATE FUNCTION st_geometry_right(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_right';
 
 
-ALTER FUNCTION public.st_geometry_right(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 144 (class 1255 OID 31695)
--- Dependencies: 1005 1005 3
--- Name: st_geometry_same(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_geometry_same(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometry_same(geometry, geometry) RETURNS boolean
@@ -9430,12 +8381,10 @@ CREATE FUNCTION st_geometry_same(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_same';
 
 
-ALTER FUNCTION public.st_geometry_same(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 570 (class 1255 OID 32210)
--- Dependencies: 3 1005
--- Name: st_geometryfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geometryfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometryfromtext(text) RETURNS geometry
@@ -9443,12 +8392,10 @@ CREATE FUNCTION st_geometryfromtext(text) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_text';
 
 
-ALTER FUNCTION public.st_geometryfromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2835 (class 0 OID 0)
+-- TOC entry 2979 (class 0 OID 0)
 -- Dependencies: 570
--- Name: FUNCTION st_geometryfromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geometryfromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geometryfromtext(text) IS 'args: WKT - Return a specified ST_Geometry value from Well-Known Text representation (WKT). This is an alias name for ST_GeomFromText';
@@ -9456,8 +8403,8 @@ COMMENT ON FUNCTION st_geometryfromtext(text) IS 'args: WKT - Return a specified
 
 --
 -- TOC entry 572 (class 1255 OID 32212)
--- Dependencies: 3 1005
--- Name: st_geometryfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_geometryfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometryfromtext(text, integer) RETURNS geometry
@@ -9465,12 +8412,10 @@ CREATE FUNCTION st_geometryfromtext(text, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_text';
 
 
-ALTER FUNCTION public.st_geometryfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2836 (class 0 OID 0)
+-- TOC entry 2980 (class 0 OID 0)
 -- Dependencies: 572
--- Name: FUNCTION st_geometryfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geometryfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geometryfromtext(text, integer) IS 'args: WKT, srid - Return a specified ST_Geometry value from Well-Known Text representation (WKT). This is an alias name for ST_GeomFromText';
@@ -9478,8 +8423,8 @@ COMMENT ON FUNCTION st_geometryfromtext(text, integer) IS 'args: WKT, srid - Ret
 
 --
 -- TOC entry 527 (class 1255 OID 32168)
--- Dependencies: 3 1005 1005
--- Name: st_geometryn(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_geometryn(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometryn(geometry, integer) RETURNS geometry
@@ -9487,12 +8432,10 @@ CREATE FUNCTION st_geometryn(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_geometryn_collection';
 
 
-ALTER FUNCTION public.st_geometryn(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2837 (class 0 OID 0)
+-- TOC entry 2981 (class 0 OID 0)
 -- Dependencies: 527
--- Name: FUNCTION st_geometryn(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geometryn(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geometryn(geometry, integer) IS 'args: geomA, n - Return the 1-based Nth geometry if the geometry is a GEOMETRYCOLLECTION, MULTIPOINT, MULTILINESTRING, MULTICURVE or MULTIPOLYGON. Otherwise, return NULL.';
@@ -9500,8 +8443,8 @@ COMMENT ON FUNCTION st_geometryn(geometry, integer) IS 'args: geomA, n - Return 
 
 --
 -- TOC entry 540 (class 1255 OID 32180)
--- Dependencies: 3 1080 1005
--- Name: st_geometrytype(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1123 3 1008
+-- Name: st_geometrytype(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geometrytype(geometry) RETURNS text
@@ -9530,12 +8473,10 @@ CREATE FUNCTION st_geometrytype(geometry) RETURNS text
 $_$;
 
 
-ALTER FUNCTION public.st_geometrytype(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2838 (class 0 OID 0)
+-- TOC entry 2982 (class 0 OID 0)
 -- Dependencies: 540
--- Name: FUNCTION st_geometrytype(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geometrytype(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geometrytype(geometry) IS 'args: g1 - Return the geometry type of the ST_Geometry value.';
@@ -9543,8 +8484,8 @@ COMMENT ON FUNCTION st_geometrytype(geometry) IS 'args: g1 - Return the geometry
 
 --
 -- TOC entry 260 (class 1255 OID 31844)
--- Dependencies: 3 1005
--- Name: st_geomfromewkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_geomfromewkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomfromewkb(bytea) RETURNS geometry
@@ -9552,12 +8493,10 @@ CREATE FUNCTION st_geomfromewkb(bytea) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOMFromWKB';
 
 
-ALTER FUNCTION public.st_geomfromewkb(bytea) OWNER TO postgres;
-
 --
--- TOC entry 2839 (class 0 OID 0)
+-- TOC entry 2983 (class 0 OID 0)
 -- Dependencies: 260
--- Name: FUNCTION st_geomfromewkb(bytea); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geomfromewkb(bytea); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geomfromewkb(bytea) IS 'args: EWKB - Return a specified ST_Geometry value from Extended Well-Known Binary representation (EWKB).';
@@ -9565,8 +8504,8 @@ COMMENT ON FUNCTION st_geomfromewkb(bytea) IS 'args: EWKB - Return a specified S
 
 --
 -- TOC entry 262 (class 1255 OID 31846)
--- Dependencies: 3 1005
--- Name: st_geomfromewkt(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_geomfromewkt(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomfromewkt(text) RETURNS geometry
@@ -9574,12 +8513,10 @@ CREATE FUNCTION st_geomfromewkt(text) RETURNS geometry
     AS '$libdir/postgis-1.4', 'parse_WKT_lwgeom';
 
 
-ALTER FUNCTION public.st_geomfromewkt(text) OWNER TO postgres;
-
 --
--- TOC entry 2840 (class 0 OID 0)
+-- TOC entry 2984 (class 0 OID 0)
 -- Dependencies: 262
--- Name: FUNCTION st_geomfromewkt(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geomfromewkt(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geomfromewkt(text) IS 'args: EWKT - Return a specified ST_Geometry value from Extended Well-Known Text representation (EWKT).';
@@ -9587,8 +8524,8 @@ COMMENT ON FUNCTION st_geomfromewkt(text) IS 'args: EWKT - Return a specified ST
 
 --
 -- TOC entry 574 (class 1255 OID 32214)
--- Dependencies: 3 1005
--- Name: st_geomfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geomfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomfromtext(text) RETURNS geometry
@@ -9596,12 +8533,10 @@ CREATE FUNCTION st_geomfromtext(text) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_text';
 
 
-ALTER FUNCTION public.st_geomfromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2841 (class 0 OID 0)
+-- TOC entry 2985 (class 0 OID 0)
 -- Dependencies: 574
--- Name: FUNCTION st_geomfromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geomfromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geomfromtext(text) IS 'args: WKT - Return a specified ST_Geometry value from Well-Known Text representation (WKT).';
@@ -9609,8 +8544,8 @@ COMMENT ON FUNCTION st_geomfromtext(text) IS 'args: WKT - Return a specified ST_
 
 --
 -- TOC entry 539 (class 1255 OID 32216)
--- Dependencies: 3 1005
--- Name: st_geomfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geomfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomfromtext(text, integer) RETURNS geometry
@@ -9618,12 +8553,10 @@ CREATE FUNCTION st_geomfromtext(text, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_text';
 
 
-ALTER FUNCTION public.st_geomfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2842 (class 0 OID 0)
+-- TOC entry 2986 (class 0 OID 0)
 -- Dependencies: 539
--- Name: FUNCTION st_geomfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geomfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geomfromtext(text, integer) IS 'args: WKT, srid - Return a specified ST_Geometry value from Well-Known Text representation (WKT).';
@@ -9631,8 +8564,8 @@ COMMENT ON FUNCTION st_geomfromtext(text, integer) IS 'args: WKT, srid - Return 
 
 --
 -- TOC entry 622 (class 1255 OID 32263)
--- Dependencies: 3 1005
--- Name: st_geomfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_geomfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomfromwkb(bytea) RETURNS geometry
@@ -9640,12 +8573,10 @@ CREATE FUNCTION st_geomfromwkb(bytea) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_WKB';
 
 
-ALTER FUNCTION public.st_geomfromwkb(bytea) OWNER TO postgres;
-
 --
--- TOC entry 2843 (class 0 OID 0)
+-- TOC entry 2987 (class 0 OID 0)
 -- Dependencies: 622
--- Name: FUNCTION st_geomfromwkb(bytea); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geomfromwkb(bytea); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geomfromwkb(bytea) IS 'args: geom - Makes a geometry from WKB with the given SRID';
@@ -9653,8 +8584,8 @@ COMMENT ON FUNCTION st_geomfromwkb(bytea) IS 'args: geom - Makes a geometry from
 
 --
 -- TOC entry 624 (class 1255 OID 32265)
--- Dependencies: 3 1005
--- Name: st_geomfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_geomfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_geomfromwkb(bytea, integer) RETURNS geometry
@@ -9662,12 +8593,10 @@ CREATE FUNCTION st_geomfromwkb(bytea, integer) RETURNS geometry
     AS $_$SELECT ST_SetSRID(ST_GeomFromWKB($1), $2)$_$;
 
 
-ALTER FUNCTION public.st_geomfromwkb(bytea, integer) OWNER TO postgres;
-
 --
--- TOC entry 2844 (class 0 OID 0)
+-- TOC entry 2988 (class 0 OID 0)
 -- Dependencies: 624
--- Name: FUNCTION st_geomfromwkb(bytea, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_geomfromwkb(bytea, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_geomfromwkb(bytea, integer) IS 'args: geom, srid - Makes a geometry from WKB with the given SRID';
@@ -9675,8 +8604,8 @@ COMMENT ON FUNCTION st_geomfromwkb(bytea, integer) IS 'args: geom, srid - Makes 
 
 --
 -- TOC entry 704 (class 1255 OID 32345)
--- Dependencies: 3 1005
--- Name: st_hasarc(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_hasarc(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_hasarc(geometry) RETURNS boolean
@@ -9684,12 +8613,10 @@ CREATE FUNCTION st_hasarc(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_has_arc';
 
 
-ALTER FUNCTION public.st_hasarc(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2845 (class 0 OID 0)
+-- TOC entry 2989 (class 0 OID 0)
 -- Dependencies: 704
--- Name: FUNCTION st_hasarc(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_hasarc(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_hasarc(geometry) IS 'args: geomA - Returns true if a geometry or geometry collection contains a circular string';
@@ -9697,8 +8624,8 @@ COMMENT ON FUNCTION st_hasarc(geometry) IS 'args: geomA - Returns true if a geom
 
 --
 -- TOC entry 246 (class 1255 OID 31830)
--- Dependencies: 3 1005
--- Name: st_hasbbox(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_hasbbox(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_hasbbox(geometry) RETURNS boolean
@@ -9706,12 +8633,10 @@ CREATE FUNCTION st_hasbbox(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_hasBBOX';
 
 
-ALTER FUNCTION public.st_hasbbox(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2846 (class 0 OID 0)
+-- TOC entry 2990 (class 0 OID 0)
 -- Dependencies: 246
--- Name: FUNCTION st_hasbbox(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_hasbbox(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_hasbbox(geometry) IS 'args: geomA - Returns TRUE if the bbox of this geometry is cached, FALSE otherwise.';
@@ -9719,8 +8644,8 @@ COMMENT ON FUNCTION st_hasbbox(geometry) IS 'args: geomA - Returns TRUE if the b
 
 --
 -- TOC entry 161 (class 1255 OID 31745)
--- Dependencies: 3 1014
--- Name: st_height(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: st_height(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_height(chip) RETURNS integer
@@ -9728,12 +8653,10 @@ CREATE FUNCTION st_height(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getHeight';
 
 
-ALTER FUNCTION public.st_height(chip) OWNER TO postgres;
-
 --
 -- TOC entry 537 (class 1255 OID 32178)
--- Dependencies: 3 1005 1005
--- Name: st_interiorringn(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_interiorringn(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_interiorringn(geometry, integer) RETURNS geometry
@@ -9741,12 +8664,10 @@ CREATE FUNCTION st_interiorringn(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_interiorringn_polygon';
 
 
-ALTER FUNCTION public.st_interiorringn(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2847 (class 0 OID 0)
+-- TOC entry 2991 (class 0 OID 0)
 -- Dependencies: 537
--- Name: FUNCTION st_interiorringn(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_interiorringn(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_interiorringn(geometry, integer) IS 'args: a_polygon, n - Return the Nth interior linestring ring of the polygon geometry. Return NULL if the geometry is not a polygon or the given N is out of range.';
@@ -9754,8 +8675,8 @@ COMMENT ON FUNCTION st_interiorringn(geometry, integer) IS 'args: a_polygon, n -
 
 --
 -- TOC entry 403 (class 1255 OID 32027)
--- Dependencies: 3 1005 1005 1005
--- Name: st_intersection(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_intersection(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_intersection(geometry, geometry) RETURNS geometry
@@ -9763,12 +8684,10 @@ CREATE FUNCTION st_intersection(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'intersection';
 
 
-ALTER FUNCTION public.st_intersection(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2848 (class 0 OID 0)
+-- TOC entry 2992 (class 0 OID 0)
 -- Dependencies: 403
--- Name: FUNCTION st_intersection(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_intersection(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_intersection(geometry, geometry) IS 'args: geomA, geomB - Returns a geometry that represents the shared portion of geomA and geomB';
@@ -9776,8 +8695,8 @@ COMMENT ON FUNCTION st_intersection(geometry, geometry) IS 'args: geomA, geomB -
 
 --
 -- TOC entry 458 (class 1255 OID 32099)
--- Dependencies: 3 1005 1005
--- Name: st_intersects(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_intersects(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_intersects(geometry, geometry) RETURNS boolean
@@ -9785,12 +8704,10 @@ CREATE FUNCTION st_intersects(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_Intersects($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_intersects(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2849 (class 0 OID 0)
+-- TOC entry 2993 (class 0 OID 0)
 -- Dependencies: 458
--- Name: FUNCTION st_intersects(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_intersects(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_intersects(geometry, geometry) IS 'args: A, B - Returns TRUE if the Geometries "spatially intersect" - (share any portion of space) and FALSE if they dont (they are Disjoint).';
@@ -9798,8 +8715,8 @@ COMMENT ON FUNCTION st_intersects(geometry, geometry) IS 'args: A, B - Returns T
 
 --
 -- TOC entry 556 (class 1255 OID 32196)
--- Dependencies: 3 1005
--- Name: st_isclosed(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_isclosed(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_isclosed(geometry) RETURNS boolean
@@ -9807,12 +8724,10 @@ CREATE FUNCTION st_isclosed(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_isclosed_linestring';
 
 
-ALTER FUNCTION public.st_isclosed(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2850 (class 0 OID 0)
+-- TOC entry 2994 (class 0 OID 0)
 -- Dependencies: 556
--- Name: FUNCTION st_isclosed(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_isclosed(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_isclosed(geometry) IS 'args: g - Returns TRUE if the LINESTRINGs start and end points are coincident.';
@@ -9820,8 +8735,8 @@ COMMENT ON FUNCTION st_isclosed(geometry) IS 'args: g - Returns TRUE if the LINE
 
 --
 -- TOC entry 558 (class 1255 OID 32198)
--- Dependencies: 3 1005
--- Name: st_isempty(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_isempty(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_isempty(geometry) RETURNS boolean
@@ -9829,12 +8744,10 @@ CREATE FUNCTION st_isempty(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'LWGEOM_isempty';
 
 
-ALTER FUNCTION public.st_isempty(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2851 (class 0 OID 0)
+-- TOC entry 2995 (class 0 OID 0)
 -- Dependencies: 558
--- Name: FUNCTION st_isempty(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_isempty(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_isempty(geometry) IS 'args: geomA - Returns true if this Geometry is an empty geometry . If true, then this Geometry represents the empty point set - i.e. GEOMETRYCOLLECTION(EMPTY).';
@@ -9842,8 +8755,8 @@ COMMENT ON FUNCTION st_isempty(geometry) IS 'args: geomA - Returns true if this 
 
 --
 -- TOC entry 483 (class 1255 OID 32124)
--- Dependencies: 3 1005
--- Name: st_isring(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_isring(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_isring(geometry) RETURNS boolean
@@ -9851,12 +8764,10 @@ CREATE FUNCTION st_isring(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'isring';
 
 
-ALTER FUNCTION public.st_isring(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2852 (class 0 OID 0)
+-- TOC entry 2996 (class 0 OID 0)
 -- Dependencies: 483
--- Name: FUNCTION st_isring(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_isring(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_isring(geometry) IS 'args: g - Returns TRUE if this LINESTRING is both closed and simple.';
@@ -9864,8 +8775,8 @@ COMMENT ON FUNCTION st_isring(geometry) IS 'args: g - Returns TRUE if this LINES
 
 --
 -- TOC entry 487 (class 1255 OID 32128)
--- Dependencies: 3 1005
--- Name: st_issimple(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_issimple(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_issimple(geometry) RETURNS boolean
@@ -9873,12 +8784,10 @@ CREATE FUNCTION st_issimple(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'issimple';
 
 
-ALTER FUNCTION public.st_issimple(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2853 (class 0 OID 0)
+-- TOC entry 2997 (class 0 OID 0)
 -- Dependencies: 487
--- Name: FUNCTION st_issimple(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_issimple(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_issimple(geometry) IS 'args: geomA - Returns (TRUE) if this Geometry has no anomalous geometric points, such as self intersection or self tangency.';
@@ -9886,8 +8795,8 @@ COMMENT ON FUNCTION st_issimple(geometry) IS 'args: geomA - Returns (TRUE) if th
 
 --
 -- TOC entry 478 (class 1255 OID 32119)
--- Dependencies: 3 1005
--- Name: st_isvalid(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_isvalid(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_isvalid(geometry) RETURNS boolean
@@ -9895,12 +8804,10 @@ CREATE FUNCTION st_isvalid(geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'isvalid';
 
 
-ALTER FUNCTION public.st_isvalid(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2854 (class 0 OID 0)
+-- TOC entry 2998 (class 0 OID 0)
 -- Dependencies: 478
--- Name: FUNCTION st_isvalid(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_isvalid(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_isvalid(geometry) IS 'args: g - Returns true if the ST_Geometry is well formed.';
@@ -9908,8 +8815,8 @@ COMMENT ON FUNCTION st_isvalid(geometry) IS 'args: g - Returns true if the ST_Ge
 
 --
 -- TOC entry 414 (class 1255 OID 32038)
--- Dependencies: 3 1005
--- Name: st_isvalidreason(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_isvalidreason(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_isvalidreason(geometry) RETURNS text
@@ -9917,12 +8824,10 @@ CREATE FUNCTION st_isvalidreason(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'isvalidreason';
 
 
-ALTER FUNCTION public.st_isvalidreason(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2855 (class 0 OID 0)
+-- TOC entry 2999 (class 0 OID 0)
 -- Dependencies: 414
--- Name: FUNCTION st_isvalidreason(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_isvalidreason(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_isvalidreason(geometry) IS 'args: geomA - Returns text stating if a geometry is valid or not and if not valid, a reason why.';
@@ -9930,8 +8835,8 @@ COMMENT ON FUNCTION st_isvalidreason(geometry) IS 'args: geomA - Returns text st
 
 --
 -- TOC entry 186 (class 1255 OID 31770)
--- Dependencies: 1005 3
--- Name: st_length(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_length(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_length(geometry) RETURNS double precision
@@ -9939,12 +8844,10 @@ CREATE FUNCTION st_length(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length2d_linestring';
 
 
-ALTER FUNCTION public.st_length(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2856 (class 0 OID 0)
+-- TOC entry 3000 (class 0 OID 0)
 -- Dependencies: 186
--- Name: FUNCTION st_length(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_length(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_length(geometry) IS 'args: a_2dlinestring - Returns the 2d length of the geometry if it is a linestring or multilinestring.';
@@ -9952,8 +8855,8 @@ COMMENT ON FUNCTION st_length(geometry) IS 'args: a_2dlinestring - Returns the 2
 
 --
 -- TOC entry 184 (class 1255 OID 31768)
--- Dependencies: 1005 3
--- Name: st_length2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_length2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_length2d(geometry) RETURNS double precision
@@ -9961,12 +8864,10 @@ CREATE FUNCTION st_length2d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length2d_linestring';
 
 
-ALTER FUNCTION public.st_length2d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2857 (class 0 OID 0)
+-- TOC entry 3001 (class 0 OID 0)
 -- Dependencies: 184
--- Name: FUNCTION st_length2d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_length2d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_length2d(geometry) IS 'args: a_2dlinestring - Returns the 2-dimensional length of the geometry if it is a linestring or multi-linestring. This is an alias for ST_Length';
@@ -9974,8 +8875,8 @@ COMMENT ON FUNCTION st_length2d(geometry) IS 'args: a_2dlinestring - Returns the
 
 --
 -- TOC entry 192 (class 1255 OID 31776)
--- Dependencies: 1002 3 1005
--- Name: st_length2d_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1005
+-- Name: st_length2d_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_length2d_spheroid(geometry, spheroid) RETURNS double precision
@@ -9983,12 +8884,10 @@ CREATE FUNCTION st_length2d_spheroid(geometry, spheroid) RETURNS double precisio
     AS '$libdir/postgis-1.4', 'LWGEOM_length2d_ellipsoid_linestring';
 
 
-ALTER FUNCTION public.st_length2d_spheroid(geometry, spheroid) OWNER TO postgres;
-
 --
--- TOC entry 2858 (class 0 OID 0)
+-- TOC entry 3002 (class 0 OID 0)
 -- Dependencies: 192
--- Name: FUNCTION st_length2d_spheroid(geometry, spheroid); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_length2d_spheroid(geometry, spheroid); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_length2d_spheroid(geometry, spheroid) IS 'args: a_linestring, a_spheroid - Calculates the 2D length of a linestring/multilinestring on an ellipsoid. This is useful if the coordinates of the geometry are in longitude/latitude and a length is desired without reprojection.';
@@ -9996,8 +8895,8 @@ COMMENT ON FUNCTION st_length2d_spheroid(geometry, spheroid) IS 'args: a_linestr
 
 --
 -- TOC entry 182 (class 1255 OID 31766)
--- Dependencies: 3 1005
--- Name: st_length3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_length3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_length3d(geometry) RETURNS double precision
@@ -10005,12 +8904,10 @@ CREATE FUNCTION st_length3d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length_linestring';
 
 
-ALTER FUNCTION public.st_length3d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2859 (class 0 OID 0)
+-- TOC entry 3003 (class 0 OID 0)
 -- Dependencies: 182
--- Name: FUNCTION st_length3d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_length3d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_length3d(geometry) IS 'args: a_3dlinestring - Returns the 3-dimensional or 2-dimensional length of the geometry if it is a linestring or multi-linestring.';
@@ -10018,8 +8915,8 @@ COMMENT ON FUNCTION st_length3d(geometry) IS 'args: a_3dlinestring - Returns the
 
 --
 -- TOC entry 188 (class 1255 OID 31772)
--- Dependencies: 1002 1005 3
--- Name: st_length3d_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1005 3
+-- Name: st_length3d_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_length3d_spheroid(geometry, spheroid) RETURNS double precision
@@ -10027,12 +8924,10 @@ CREATE FUNCTION st_length3d_spheroid(geometry, spheroid) RETURNS double precisio
     AS '$libdir/postgis-1.4', 'LWGEOM_length_ellipsoid_linestring';
 
 
-ALTER FUNCTION public.st_length3d_spheroid(geometry, spheroid) OWNER TO postgres;
-
 --
--- TOC entry 2860 (class 0 OID 0)
+-- TOC entry 3004 (class 0 OID 0)
 -- Dependencies: 188
--- Name: FUNCTION st_length3d_spheroid(geometry, spheroid); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_length3d_spheroid(geometry, spheroid); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_length3d_spheroid(geometry, spheroid) IS 'args: a_linestring, a_spheroid - Calculates the length of a geometry on an ellipsoid, taking the elevation into account. This is just an alias for ST_Length_Spheroid.';
@@ -10040,8 +8935,8 @@ COMMENT ON FUNCTION st_length3d_spheroid(geometry, spheroid) IS 'args: a_linestr
 
 --
 -- TOC entry 190 (class 1255 OID 31774)
--- Dependencies: 1005 3 1002
--- Name: st_length_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1005 1008
+-- Name: st_length_spheroid(geometry, spheroid); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_length_spheroid(geometry, spheroid) RETURNS double precision
@@ -10049,12 +8944,10 @@ CREATE FUNCTION st_length_spheroid(geometry, spheroid) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_length_ellipsoid_linestring';
 
 
-ALTER FUNCTION public.st_length_spheroid(geometry, spheroid) OWNER TO postgres;
-
 --
--- TOC entry 2861 (class 0 OID 0)
+-- TOC entry 3005 (class 0 OID 0)
 -- Dependencies: 190
--- Name: FUNCTION st_length_spheroid(geometry, spheroid); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_length_spheroid(geometry, spheroid); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_length_spheroid(geometry, spheroid) IS 'args: a_linestring, a_spheroid - Calculates the 2D or 3D length of a linestring/multilinestring on an ellipsoid. This is useful if the coordinates of the geometry are in longitude/latitude and a length is desired without reprojection.';
@@ -10062,8 +8955,8 @@ COMMENT ON FUNCTION st_length_spheroid(geometry, spheroid) IS 'args: a_linestrin
 
 --
 -- TOC entry 393 (class 1255 OID 32017)
--- Dependencies: 3 1005 1005
--- Name: st_line_interpolate_point(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_line_interpolate_point(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_line_interpolate_point(geometry, double precision) RETURNS geometry
@@ -10071,12 +8964,10 @@ CREATE FUNCTION st_line_interpolate_point(geometry, double precision) RETURNS ge
     AS '$libdir/postgis-1.4', 'LWGEOM_line_interpolate_point';
 
 
-ALTER FUNCTION public.st_line_interpolate_point(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2862 (class 0 OID 0)
+-- TOC entry 3006 (class 0 OID 0)
 -- Dependencies: 393
--- Name: FUNCTION st_line_interpolate_point(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_line_interpolate_point(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_line_interpolate_point(geometry, double precision) IS 'args: a_linestring, a_fraction - Returns a point interpolated along a line. Second argument is a float8 between 0 and 1 representing fraction of total length of linestring the point has to be located.';
@@ -10084,8 +8975,8 @@ COMMENT ON FUNCTION st_line_interpolate_point(geometry, double precision) IS 'ar
 
 --
 -- TOC entry 397 (class 1255 OID 32021)
--- Dependencies: 3 1005 1005
--- Name: st_line_locate_point(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_line_locate_point(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_line_locate_point(geometry, geometry) RETURNS double precision
@@ -10093,12 +8984,10 @@ CREATE FUNCTION st_line_locate_point(geometry, geometry) RETURNS double precisio
     AS '$libdir/postgis-1.4', 'LWGEOM_line_locate_point';
 
 
-ALTER FUNCTION public.st_line_locate_point(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2863 (class 0 OID 0)
+-- TOC entry 3007 (class 0 OID 0)
 -- Dependencies: 397
--- Name: FUNCTION st_line_locate_point(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_line_locate_point(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_line_locate_point(geometry, geometry) IS 'args: a_linestring, a_point - Returns a float between 0 and 1 representing the location of the closest point on LineString to the given Point, as a fraction of total 2d line length.';
@@ -10106,8 +8995,8 @@ COMMENT ON FUNCTION st_line_locate_point(geometry, geometry) IS 'args: a_linestr
 
 --
 -- TOC entry 395 (class 1255 OID 32019)
--- Dependencies: 3 1005 1005
--- Name: st_line_substring(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_line_substring(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_line_substring(geometry, double precision, double precision) RETURNS geometry
@@ -10115,12 +9004,10 @@ CREATE FUNCTION st_line_substring(geometry, double precision, double precision) 
     AS '$libdir/postgis-1.4', 'LWGEOM_line_substring';
 
 
-ALTER FUNCTION public.st_line_substring(geometry, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2864 (class 0 OID 0)
+-- TOC entry 3008 (class 0 OID 0)
 -- Dependencies: 395
--- Name: FUNCTION st_line_substring(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_line_substring(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_line_substring(geometry, double precision, double precision) IS 'args: a_linestring, startfraction, endfraction - Return a linestring being a substring of the input one starting and ending at the given fractions of total 2d length. Second and third arguments are float8 values between 0 and 1.';
@@ -10128,8 +9015,8 @@ COMMENT ON FUNCTION st_line_substring(geometry, double precision, double precisi
 
 --
 -- TOC entry 411 (class 1255 OID 32035)
--- Dependencies: 3 1005 1005
--- Name: st_linecrossingdirection(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_linecrossingdirection(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linecrossingdirection(geometry, geometry) RETURNS integer
@@ -10137,12 +9024,10 @@ CREATE FUNCTION st_linecrossingdirection(geometry, geometry) RETURNS integer
     AS $_$ SELECT CASE WHEN NOT $1 && $2 THEN 0 ELSE _ST_LineCrossingDirection($1,$2) END $_$;
 
 
-ALTER FUNCTION public.st_linecrossingdirection(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2865 (class 0 OID 0)
+-- TOC entry 3009 (class 0 OID 0)
 -- Dependencies: 411
--- Name: FUNCTION st_linecrossingdirection(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linecrossingdirection(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linecrossingdirection(geometry, geometry) IS 'args: linestringA, linestringB - Given 2 linestrings, returns a number between -3 and 3 denoting what kind of crossing behavior. 0 is no crossing.';
@@ -10150,8 +9035,8 @@ COMMENT ON FUNCTION st_linecrossingdirection(geometry, geometry) IS 'args: lines
 
 --
 -- TOC entry 281 (class 1255 OID 31865)
--- Dependencies: 1005 1005 3
--- Name: st_linefrommultipoint(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_linefrommultipoint(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linefrommultipoint(geometry) RETURNS geometry
@@ -10159,12 +9044,10 @@ CREATE FUNCTION st_linefrommultipoint(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_line_from_mpoint';
 
 
-ALTER FUNCTION public.st_linefrommultipoint(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2866 (class 0 OID 0)
+-- TOC entry 3010 (class 0 OID 0)
 -- Dependencies: 281
--- Name: FUNCTION st_linefrommultipoint(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linefrommultipoint(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linefrommultipoint(geometry) IS 'args: aMultiPoint - Creates a LineString from a MultiPoint geometry.';
@@ -10172,8 +9055,8 @@ COMMENT ON FUNCTION st_linefrommultipoint(geometry) IS 'args: aMultiPoint - Crea
 
 --
 -- TOC entry 581 (class 1255 OID 32222)
--- Dependencies: 3 1005
--- Name: st_linefromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_linefromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linefromtext(text) RETURNS geometry
@@ -10185,12 +9068,10 @@ CREATE FUNCTION st_linefromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_linefromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2867 (class 0 OID 0)
+-- TOC entry 3011 (class 0 OID 0)
 -- Dependencies: 581
--- Name: FUNCTION st_linefromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linefromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linefromtext(text) IS 'args: WKT - Makes a Geometry from WKT representation with the given SRID. If SRID is not given, it defaults to -1.';
@@ -10198,8 +9079,8 @@ COMMENT ON FUNCTION st_linefromtext(text) IS 'args: WKT - Makes a Geometry from 
 
 --
 -- TOC entry 583 (class 1255 OID 32224)
--- Dependencies: 3 1005
--- Name: st_linefromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_linefromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linefromtext(text, integer) RETURNS geometry
@@ -10211,12 +9092,10 @@ CREATE FUNCTION st_linefromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_linefromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2868 (class 0 OID 0)
+-- TOC entry 3012 (class 0 OID 0)
 -- Dependencies: 583
--- Name: FUNCTION st_linefromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linefromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linefromtext(text, integer) IS 'args: WKT, srid - Makes a Geometry from WKT representation with the given SRID. If SRID is not given, it defaults to -1.';
@@ -10224,8 +9103,8 @@ COMMENT ON FUNCTION st_linefromtext(text, integer) IS 'args: WKT, srid - Makes a
 
 --
 -- TOC entry 630 (class 1255 OID 32271)
--- Dependencies: 3 1005
--- Name: st_linefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_linefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linefromwkb(bytea, integer) RETURNS geometry
@@ -10237,12 +9116,10 @@ CREATE FUNCTION st_linefromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_linefromwkb(bytea, integer) OWNER TO postgres;
-
 --
--- TOC entry 2869 (class 0 OID 0)
+-- TOC entry 3013 (class 0 OID 0)
 -- Dependencies: 630
--- Name: FUNCTION st_linefromwkb(bytea, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linefromwkb(bytea, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linefromwkb(bytea, integer) IS 'args: WKB, srid - Makes a LINESTRING from WKB with the given SRID';
@@ -10250,8 +9127,8 @@ COMMENT ON FUNCTION st_linefromwkb(bytea, integer) IS 'args: WKB, srid - Makes a
 
 --
 -- TOC entry 632 (class 1255 OID 32273)
--- Dependencies: 3 1005
--- Name: st_linefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_linefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linefromwkb(bytea) RETURNS geometry
@@ -10263,12 +9140,10 @@ CREATE FUNCTION st_linefromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_linefromwkb(bytea) OWNER TO postgres;
-
 --
--- TOC entry 2870 (class 0 OID 0)
+-- TOC entry 3014 (class 0 OID 0)
 -- Dependencies: 632
--- Name: FUNCTION st_linefromwkb(bytea); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linefromwkb(bytea); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linefromwkb(bytea) IS 'args: WKB - Makes a LINESTRING from WKB with the given SRID';
@@ -10276,8 +9151,8 @@ COMMENT ON FUNCTION st_linefromwkb(bytea) IS 'args: WKB - Makes a LINESTRING fro
 
 --
 -- TOC entry 302 (class 1255 OID 31886)
--- Dependencies: 1005 1005 3
--- Name: st_linemerge(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_linemerge(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linemerge(geometry) RETURNS geometry
@@ -10285,12 +9160,10 @@ CREATE FUNCTION st_linemerge(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'linemerge';
 
 
-ALTER FUNCTION public.st_linemerge(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2871 (class 0 OID 0)
+-- TOC entry 3015 (class 0 OID 0)
 -- Dependencies: 302
--- Name: FUNCTION st_linemerge(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linemerge(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linemerge(geometry) IS 'args: amultilinestring - Returns a (set of) LineString(s) formed by sewing together a MULTILINESTRING.';
@@ -10298,8 +9171,8 @@ COMMENT ON FUNCTION st_linemerge(geometry) IS 'args: amultilinestring - Returns 
 
 --
 -- TOC entry 634 (class 1255 OID 32275)
--- Dependencies: 3 1005
--- Name: st_linestringfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_linestringfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linestringfromwkb(bytea, integer) RETURNS geometry
@@ -10311,12 +9184,10 @@ CREATE FUNCTION st_linestringfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_linestringfromwkb(bytea, integer) OWNER TO postgres;
-
 --
--- TOC entry 2872 (class 0 OID 0)
+-- TOC entry 3016 (class 0 OID 0)
 -- Dependencies: 634
--- Name: FUNCTION st_linestringfromwkb(bytea, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linestringfromwkb(bytea, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linestringfromwkb(bytea, integer) IS 'args: WKB, srid - Makes a geometry from WKB with the given SRID.';
@@ -10324,8 +9195,8 @@ COMMENT ON FUNCTION st_linestringfromwkb(bytea, integer) IS 'args: WKB, srid - M
 
 --
 -- TOC entry 636 (class 1255 OID 32277)
--- Dependencies: 3 1005
--- Name: st_linestringfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_linestringfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linestringfromwkb(bytea) RETURNS geometry
@@ -10337,12 +9208,10 @@ CREATE FUNCTION st_linestringfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_linestringfromwkb(bytea) OWNER TO postgres;
-
 --
--- TOC entry 2873 (class 0 OID 0)
+-- TOC entry 3017 (class 0 OID 0)
 -- Dependencies: 636
--- Name: FUNCTION st_linestringfromwkb(bytea); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linestringfromwkb(bytea); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linestringfromwkb(bytea) IS 'args: WKB - Makes a geometry from WKB with the given SRID.';
@@ -10350,8 +9219,8 @@ COMMENT ON FUNCTION st_linestringfromwkb(bytea) IS 'args: WKB - Makes a geometry
 
 --
 -- TOC entry 705 (class 1255 OID 32346)
--- Dependencies: 1005 3 1005
--- Name: st_linetocurve(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_linetocurve(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_linetocurve(geometry) RETURNS geometry
@@ -10359,12 +9228,10 @@ CREATE FUNCTION st_linetocurve(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_line_desegmentize';
 
 
-ALTER FUNCTION public.st_linetocurve(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2874 (class 0 OID 0)
+-- TOC entry 3018 (class 0 OID 0)
 -- Dependencies: 705
--- Name: FUNCTION st_linetocurve(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_linetocurve(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_linetocurve(geometry) IS 'args: geomANoncircular - Converts a LINESTRING/POLYGON to a CIRCULARSTRING, CURVED POLYGON';
@@ -10372,8 +9239,8 @@ COMMENT ON FUNCTION st_linetocurve(geometry) IS 'args: geomANoncircular - Conver
 
 --
 -- TOC entry 401 (class 1255 OID 32025)
--- Dependencies: 3 1005 1005
--- Name: st_locate_along_measure(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_locate_along_measure(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_locate_along_measure(geometry, double precision) RETURNS geometry
@@ -10381,12 +9248,10 @@ CREATE FUNCTION st_locate_along_measure(geometry, double precision) RETURNS geom
     AS $_$ SELECT locate_between_measures($1, $2, $2) $_$;
 
 
-ALTER FUNCTION public.st_locate_along_measure(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2875 (class 0 OID 0)
+-- TOC entry 3019 (class 0 OID 0)
 -- Dependencies: 401
--- Name: FUNCTION st_locate_along_measure(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_locate_along_measure(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_locate_along_measure(geometry, double precision) IS 'args: ageom_with_measure, a_measure - Return a derived geometry collection value with elements that match the specified measure. Polygonal elements are not supported.';
@@ -10394,8 +9259,8 @@ COMMENT ON FUNCTION st_locate_along_measure(geometry, double precision) IS 'args
 
 --
 -- TOC entry 399 (class 1255 OID 32023)
--- Dependencies: 3 1005 1005
--- Name: st_locate_between_measures(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_locate_between_measures(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_locate_between_measures(geometry, double precision, double precision) RETURNS geometry
@@ -10403,12 +9268,10 @@ CREATE FUNCTION st_locate_between_measures(geometry, double precision, double pr
     AS '$libdir/postgis-1.4', 'LWGEOM_locate_between_m';
 
 
-ALTER FUNCTION public.st_locate_between_measures(geometry, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2876 (class 0 OID 0)
+-- TOC entry 3020 (class 0 OID 0)
 -- Dependencies: 399
--- Name: FUNCTION st_locate_between_measures(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_locate_between_measures(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_locate_between_measures(geometry, double precision, double precision) IS 'args: geomA, measure_start, measure_end - Return a derived geometry collection value with elements that match the specified range of measures inclusively. Polygonal elements are not supported.';
@@ -10416,8 +9279,8 @@ COMMENT ON FUNCTION st_locate_between_measures(geometry, double precision, doubl
 
 --
 -- TOC entry 412 (class 1255 OID 32036)
--- Dependencies: 3 1005 1005
--- Name: st_locatebetweenelevations(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_locatebetweenelevations(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_locatebetweenelevations(geometry, double precision, double precision) RETURNS geometry
@@ -10425,12 +9288,10 @@ CREATE FUNCTION st_locatebetweenelevations(geometry, double precision, double pr
     AS '$libdir/postgis-1.4', 'ST_LocateBetweenElevations';
 
 
-ALTER FUNCTION public.st_locatebetweenelevations(geometry, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2877 (class 0 OID 0)
+-- TOC entry 3021 (class 0 OID 0)
 -- Dependencies: 412
--- Name: FUNCTION st_locatebetweenelevations(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_locatebetweenelevations(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_locatebetweenelevations(geometry, double precision, double precision) IS 'args: geom_mline, elevation_start, elevation_end - Return a derived geometry (collection) value with elements that intersect the specified range of elevations inclusively. Only 3D, 4D LINESTRINGS and MULTILINESTRINGS are supported.';
@@ -10438,8 +9299,8 @@ COMMENT ON FUNCTION st_locatebetweenelevations(geometry, double precision, doubl
 
 --
 -- TOC entry 550 (class 1255 OID 32190)
--- Dependencies: 3 1005
--- Name: st_m(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_m(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_m(geometry) RETURNS double precision
@@ -10447,12 +9308,10 @@ CREATE FUNCTION st_m(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_m_point';
 
 
-ALTER FUNCTION public.st_m(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2878 (class 0 OID 0)
+-- TOC entry 3022 (class 0 OID 0)
 -- Dependencies: 550
--- Name: FUNCTION st_m(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_m(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_m(geometry) IS 'args: a_point - Return the M coordinate of the point, or NULL if not available. Input must be a point.';
@@ -10460,8 +9319,8 @@ COMMENT ON FUNCTION st_m(geometry) IS 'args: a_point - Return the M coordinate o
 
 --
 -- TOC entry 274 (class 1255 OID 31858)
--- Dependencies: 1005 3 1017 1005
--- Name: st_makebox2d(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1020 3 1008
+-- Name: st_makebox2d(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makebox2d(geometry, geometry) RETURNS box2d
@@ -10469,12 +9328,10 @@ CREATE FUNCTION st_makebox2d(geometry, geometry) RETURNS box2d
     AS '$libdir/postgis-1.4', 'BOX2DFLOAT4_construct';
 
 
-ALTER FUNCTION public.st_makebox2d(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2879 (class 0 OID 0)
+-- TOC entry 3023 (class 0 OID 0)
 -- Dependencies: 274
--- Name: FUNCTION st_makebox2d(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makebox2d(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makebox2d(geometry, geometry) IS 'args: pointLowLeft, pointUpRight - Creates a BOX2D defined by the given point geometries.';
@@ -10482,8 +9339,8 @@ COMMENT ON FUNCTION st_makebox2d(geometry, geometry) IS 'args: pointLowLeft, poi
 
 --
 -- TOC entry 276 (class 1255 OID 31860)
--- Dependencies: 3 1005 1005 1008
--- Name: st_makebox3d(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1011 3 1008
+-- Name: st_makebox3d(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makebox3d(geometry, geometry) RETURNS box3d
@@ -10491,12 +9348,10 @@ CREATE FUNCTION st_makebox3d(geometry, geometry) RETURNS box3d
     AS '$libdir/postgis-1.4', 'BOX3D_construct';
 
 
-ALTER FUNCTION public.st_makebox3d(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2880 (class 0 OID 0)
+-- TOC entry 3024 (class 0 OID 0)
 -- Dependencies: 276
--- Name: FUNCTION st_makebox3d(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makebox3d(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makebox3d(geometry, geometry) IS 'args: point3DLowLeftBottom, point3DUpRightTop - Creates a BOX3D defined by the given 3d point geometries.';
@@ -10504,8 +9359,8 @@ COMMENT ON FUNCTION st_makebox3d(geometry, geometry) IS 'args: point3DLowLeftBot
 
 --
 -- TOC entry 279 (class 1255 OID 31863)
--- Dependencies: 3 1007 1005
--- Name: st_makeline(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1010 1008 3
+-- Name: st_makeline(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makeline(geometry[]) RETURNS geometry
@@ -10513,12 +9368,10 @@ CREATE FUNCTION st_makeline(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makeline_garray';
 
 
-ALTER FUNCTION public.st_makeline(geometry[]) OWNER TO postgres;
-
 --
--- TOC entry 2881 (class 0 OID 0)
+-- TOC entry 3025 (class 0 OID 0)
 -- Dependencies: 279
--- Name: FUNCTION st_makeline(geometry[]); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makeline(geometry[]); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makeline(geometry[]) IS 'args: point_array - Creates a Linestring from point geometries.';
@@ -10526,8 +9379,8 @@ COMMENT ON FUNCTION st_makeline(geometry[]) IS 'args: point_array - Creates a Li
 
 --
 -- TOC entry 283 (class 1255 OID 31867)
--- Dependencies: 3 1005 1005 1005
--- Name: st_makeline(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_makeline(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makeline(geometry, geometry) RETURNS geometry
@@ -10535,12 +9388,10 @@ CREATE FUNCTION st_makeline(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makeline';
 
 
-ALTER FUNCTION public.st_makeline(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2882 (class 0 OID 0)
+-- TOC entry 3026 (class 0 OID 0)
 -- Dependencies: 283
--- Name: FUNCTION st_makeline(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makeline(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makeline(geometry, geometry) IS 'args: point1, point2 - Creates a Linestring from point geometries.';
@@ -10548,8 +9399,8 @@ COMMENT ON FUNCTION st_makeline(geometry, geometry) IS 'args: point1, point2 - C
 
 --
 -- TOC entry 278 (class 1255 OID 31862)
--- Dependencies: 1005 3 1007
--- Name: st_makeline_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1010 3 1008
+-- Name: st_makeline_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makeline_garray(geometry[]) RETURNS geometry
@@ -10557,12 +9408,10 @@ CREATE FUNCTION st_makeline_garray(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makeline_garray';
 
 
-ALTER FUNCTION public.st_makeline_garray(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 266 (class 1255 OID 31850)
--- Dependencies: 3 1005
--- Name: st_makepoint(double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_makepoint(double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makepoint(double precision, double precision) RETURNS geometry
@@ -10570,12 +9419,10 @@ CREATE FUNCTION st_makepoint(double precision, double precision) RETURNS geometr
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint';
 
 
-ALTER FUNCTION public.st_makepoint(double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2883 (class 0 OID 0)
+-- TOC entry 3027 (class 0 OID 0)
 -- Dependencies: 266
--- Name: FUNCTION st_makepoint(double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makepoint(double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makepoint(double precision, double precision) IS 'args: x, y - Creates a 2D,3DZ or 4D point geometry.';
@@ -10583,8 +9430,8 @@ COMMENT ON FUNCTION st_makepoint(double precision, double precision) IS 'args: x
 
 --
 -- TOC entry 268 (class 1255 OID 31852)
--- Dependencies: 1005 3
--- Name: st_makepoint(double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_makepoint(double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makepoint(double precision, double precision, double precision) RETURNS geometry
@@ -10592,12 +9439,10 @@ CREATE FUNCTION st_makepoint(double precision, double precision, double precisio
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint';
 
 
-ALTER FUNCTION public.st_makepoint(double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2884 (class 0 OID 0)
+-- TOC entry 3028 (class 0 OID 0)
 -- Dependencies: 268
--- Name: FUNCTION st_makepoint(double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makepoint(double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makepoint(double precision, double precision, double precision) IS 'args: x, y, z - Creates a 2D,3DZ or 4D point geometry.';
@@ -10605,8 +9450,8 @@ COMMENT ON FUNCTION st_makepoint(double precision, double precision, double prec
 
 --
 -- TOC entry 270 (class 1255 OID 31854)
--- Dependencies: 1005 3
--- Name: st_makepoint(double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_makepoint(double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makepoint(double precision, double precision, double precision, double precision) RETURNS geometry
@@ -10614,12 +9459,10 @@ CREATE FUNCTION st_makepoint(double precision, double precision, double precisio
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint';
 
 
-ALTER FUNCTION public.st_makepoint(double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2885 (class 0 OID 0)
+-- TOC entry 3029 (class 0 OID 0)
 -- Dependencies: 270
--- Name: FUNCTION st_makepoint(double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makepoint(double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makepoint(double precision, double precision, double precision, double precision) IS 'args: x, y, z, m - Creates a 2D,3DZ or 4D point geometry.';
@@ -10627,8 +9470,8 @@ COMMENT ON FUNCTION st_makepoint(double precision, double precision, double prec
 
 --
 -- TOC entry 272 (class 1255 OID 31856)
--- Dependencies: 3 1005
--- Name: st_makepointm(double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_makepointm(double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makepointm(double precision, double precision, double precision) RETURNS geometry
@@ -10636,12 +9479,10 @@ CREATE FUNCTION st_makepointm(double precision, double precision, double precisi
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint3dm';
 
 
-ALTER FUNCTION public.st_makepointm(double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2886 (class 0 OID 0)
+-- TOC entry 3030 (class 0 OID 0)
 -- Dependencies: 272
--- Name: FUNCTION st_makepointm(double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makepointm(double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makepointm(double precision, double precision, double precision) IS 'args: x, y, m - Creates a point geometry with an x y and m coordinate.';
@@ -10649,8 +9490,8 @@ COMMENT ON FUNCTION st_makepointm(double precision, double precision, double pre
 
 --
 -- TOC entry 293 (class 1255 OID 31877)
--- Dependencies: 1007 3 1005 1005
--- Name: st_makepolygon(geometry, geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1010
+-- Name: st_makepolygon(geometry, geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makepolygon(geometry, geometry[]) RETURNS geometry
@@ -10658,12 +9499,10 @@ CREATE FUNCTION st_makepolygon(geometry, geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoly';
 
 
-ALTER FUNCTION public.st_makepolygon(geometry, geometry[]) OWNER TO postgres;
-
 --
--- TOC entry 2887 (class 0 OID 0)
+-- TOC entry 3031 (class 0 OID 0)
 -- Dependencies: 293
--- Name: FUNCTION st_makepolygon(geometry, geometry[]); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makepolygon(geometry, geometry[]); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makepolygon(geometry, geometry[]) IS 'args: outerlinestring, interiorlinestrings - Creates a Polygon formed by the given shell. Input geometries must be closed LINESTRINGS.';
@@ -10671,8 +9510,8 @@ COMMENT ON FUNCTION st_makepolygon(geometry, geometry[]) IS 'args: outerlinestri
 
 --
 -- TOC entry 295 (class 1255 OID 31879)
--- Dependencies: 3 1005 1005
--- Name: st_makepolygon(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_makepolygon(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_makepolygon(geometry) RETURNS geometry
@@ -10680,12 +9519,10 @@ CREATE FUNCTION st_makepolygon(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoly';
 
 
-ALTER FUNCTION public.st_makepolygon(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2888 (class 0 OID 0)
+-- TOC entry 3032 (class 0 OID 0)
 -- Dependencies: 295
--- Name: FUNCTION st_makepolygon(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_makepolygon(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_makepolygon(geometry) IS 'args: linestring - Creates a Polygon formed by the given shell. Input geometries must be closed LINESTRINGS.';
@@ -10693,8 +9530,8 @@ COMMENT ON FUNCTION st_makepolygon(geometry) IS 'args: linestring - Creates a Po
 
 --
 -- TOC entry 210 (class 1255 OID 31794)
--- Dependencies: 1005 1005 3
--- Name: st_max_distance(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_max_distance(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_max_distance(geometry, geometry) RETURNS double precision
@@ -10702,12 +9539,10 @@ CREATE FUNCTION st_max_distance(geometry, geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_maxdistance2d_linestring';
 
 
-ALTER FUNCTION public.st_max_distance(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2889 (class 0 OID 0)
+-- TOC entry 3033 (class 0 OID 0)
 -- Dependencies: 210
--- Name: FUNCTION st_max_distance(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_max_distance(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_max_distance(geometry, geometry) IS 'args: g1, g2 - Returns the 2-dimensional largest distance between two geometries in projected units.';
@@ -10715,8 +9550,8 @@ COMMENT ON FUNCTION st_max_distance(geometry, geometry) IS 'args: g1, g2 - Retur
 
 --
 -- TOC entry 174 (class 1255 OID 31758)
--- Dependencies: 3 1005
--- Name: st_mem_size(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mem_size(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mem_size(geometry) RETURNS integer
@@ -10724,12 +9559,10 @@ CREATE FUNCTION st_mem_size(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_mem_size';
 
 
-ALTER FUNCTION public.st_mem_size(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2890 (class 0 OID 0)
+-- TOC entry 3034 (class 0 OID 0)
 -- Dependencies: 174
--- Name: FUNCTION st_mem_size(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_mem_size(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_mem_size(geometry) IS 'args: geomA - Returns the amount of space (in bytes) the geometry takes.';
@@ -10737,8 +9570,8 @@ COMMENT ON FUNCTION st_mem_size(geometry) IS 'args: geomA - Returns the amount o
 
 --
 -- TOC entry 706 (class 1255 OID 32347)
--- Dependencies: 3 1005 1005 1080
--- Name: st_minimumboundingcircle(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1123 1008
+-- Name: st_minimumboundingcircle(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_minimumboundingcircle(inputgeom geometry, segs_per_quarter integer) RETURNS geometry
@@ -10843,12 +9676,10 @@ CREATE FUNCTION st_minimumboundingcircle(inputgeom geometry, segs_per_quarter in
 $$;
 
 
-ALTER FUNCTION public.st_minimumboundingcircle(inputgeom geometry, segs_per_quarter integer) OWNER TO postgres;
-
 --
--- TOC entry 2891 (class 0 OID 0)
+-- TOC entry 3035 (class 0 OID 0)
 -- Dependencies: 706
--- Name: FUNCTION st_minimumboundingcircle(inputgeom geometry, segs_per_quarter integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_minimumboundingcircle(inputgeom geometry, segs_per_quarter integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_minimumboundingcircle(inputgeom geometry, segs_per_quarter integer) IS 'args: geomA, num_segs_per_qt_circ - Returns the smallest circle polygon that can fully contain a geometry. Default uses 48 segments per quarter circle.';
@@ -10856,8 +9687,8 @@ COMMENT ON FUNCTION st_minimumboundingcircle(inputgeom geometry, segs_per_quarte
 
 --
 -- TOC entry 707 (class 1255 OID 32349)
--- Dependencies: 1005 3 1005
--- Name: st_minimumboundingcircle(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_minimumboundingcircle(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_minimumboundingcircle(geometry) RETURNS geometry
@@ -10865,12 +9696,10 @@ CREATE FUNCTION st_minimumboundingcircle(geometry) RETURNS geometry
     AS $_$SELECT ST_MinimumBoundingCircle($1, 48)$_$;
 
 
-ALTER FUNCTION public.st_minimumboundingcircle(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2892 (class 0 OID 0)
+-- TOC entry 3036 (class 0 OID 0)
 -- Dependencies: 707
--- Name: FUNCTION st_minimumboundingcircle(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_minimumboundingcircle(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_minimumboundingcircle(geometry) IS 'args: geomA - Returns the smallest circle polygon that can fully contain a geometry. Default uses 48 segments per quarter circle.';
@@ -10878,8 +9707,8 @@ COMMENT ON FUNCTION st_minimumboundingcircle(geometry) IS 'args: geomA - Returns
 
 --
 -- TOC entry 595 (class 1255 OID 32236)
--- Dependencies: 3 1005
--- Name: st_mlinefromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_mlinefromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mlinefromtext(text, integer) RETURNS geometry
@@ -10892,12 +9721,10 @@ CREATE FUNCTION st_mlinefromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mlinefromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2893 (class 0 OID 0)
+-- TOC entry 3037 (class 0 OID 0)
 -- Dependencies: 595
--- Name: FUNCTION st_mlinefromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_mlinefromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_mlinefromtext(text, integer) IS 'args: WKT, srid - Return a specified ST_MultiLineString value from WKT representation.';
@@ -10905,8 +9732,8 @@ COMMENT ON FUNCTION st_mlinefromtext(text, integer) IS 'args: WKT, srid - Return
 
 --
 -- TOC entry 597 (class 1255 OID 32238)
--- Dependencies: 3 1005
--- Name: st_mlinefromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_mlinefromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mlinefromtext(text) RETURNS geometry
@@ -10918,12 +9745,10 @@ CREATE FUNCTION st_mlinefromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mlinefromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2894 (class 0 OID 0)
+-- TOC entry 3038 (class 0 OID 0)
 -- Dependencies: 597
--- Name: FUNCTION st_mlinefromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_mlinefromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_mlinefromtext(text) IS 'args: WKT - Return a specified ST_MultiLineString value from WKT representation.';
@@ -10931,8 +9756,8 @@ COMMENT ON FUNCTION st_mlinefromtext(text) IS 'args: WKT - Return a specified ST
 
 --
 -- TOC entry 657 (class 1255 OID 32298)
--- Dependencies: 3 1005
--- Name: st_mlinefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mlinefromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mlinefromwkb(bytea, integer) RETURNS geometry
@@ -10944,12 +9769,10 @@ CREATE FUNCTION st_mlinefromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mlinefromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 659 (class 1255 OID 32300)
--- Dependencies: 3 1005
--- Name: st_mlinefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mlinefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mlinefromwkb(bytea) RETURNS geometry
@@ -10961,12 +9784,10 @@ CREATE FUNCTION st_mlinefromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mlinefromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 603 (class 1255 OID 32244)
--- Dependencies: 3 1005
--- Name: st_mpointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_mpointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mpointfromtext(text, integer) RETURNS geometry
@@ -10978,12 +9799,10 @@ CREATE FUNCTION st_mpointfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mpointfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2895 (class 0 OID 0)
+-- TOC entry 3039 (class 0 OID 0)
 -- Dependencies: 603
--- Name: FUNCTION st_mpointfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_mpointfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_mpointfromtext(text, integer) IS 'args: WKT, srid - Makes a Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.';
@@ -10991,8 +9810,8 @@ COMMENT ON FUNCTION st_mpointfromtext(text, integer) IS 'args: WKT, srid - Makes
 
 --
 -- TOC entry 605 (class 1255 OID 32246)
--- Dependencies: 3 1005
--- Name: st_mpointfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mpointfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mpointfromtext(text) RETURNS geometry
@@ -11004,12 +9823,10 @@ CREATE FUNCTION st_mpointfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mpointfromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2896 (class 0 OID 0)
+-- TOC entry 3040 (class 0 OID 0)
 -- Dependencies: 605
--- Name: FUNCTION st_mpointfromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_mpointfromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_mpointfromtext(text) IS 'args: WKT - Makes a Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.';
@@ -11017,8 +9834,8 @@ COMMENT ON FUNCTION st_mpointfromtext(text) IS 'args: WKT - Makes a Geometry fro
 
 --
 -- TOC entry 646 (class 1255 OID 32287)
--- Dependencies: 3 1005
--- Name: st_mpointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mpointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mpointfromwkb(bytea, integer) RETURNS geometry
@@ -11030,12 +9847,10 @@ CREATE FUNCTION st_mpointfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mpointfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 648 (class 1255 OID 32289)
--- Dependencies: 3 1005
--- Name: st_mpointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mpointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mpointfromwkb(bytea) RETURNS geometry
@@ -11047,12 +9862,10 @@ CREATE FUNCTION st_mpointfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mpointfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 610 (class 1255 OID 32251)
--- Dependencies: 3 1005
--- Name: st_mpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mpolyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mpolyfromtext(text, integer) RETURNS geometry
@@ -11064,12 +9877,10 @@ CREATE FUNCTION st_mpolyfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mpolyfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2897 (class 0 OID 0)
+-- TOC entry 3041 (class 0 OID 0)
 -- Dependencies: 610
--- Name: FUNCTION st_mpolyfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_mpolyfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_mpolyfromtext(text, integer) IS 'args: WKT, srid - Makes a MultiPolygon Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.';
@@ -11077,8 +9888,8 @@ COMMENT ON FUNCTION st_mpolyfromtext(text, integer) IS 'args: WKT, srid - Makes 
 
 --
 -- TOC entry 612 (class 1255 OID 32253)
--- Dependencies: 3 1005
--- Name: st_mpolyfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mpolyfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mpolyfromtext(text) RETURNS geometry
@@ -11090,12 +9901,10 @@ CREATE FUNCTION st_mpolyfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mpolyfromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2898 (class 0 OID 0)
+-- TOC entry 3042 (class 0 OID 0)
 -- Dependencies: 612
--- Name: FUNCTION st_mpolyfromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_mpolyfromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_mpolyfromtext(text) IS 'args: WKT - Makes a MultiPolygon Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.';
@@ -11103,8 +9912,8 @@ COMMENT ON FUNCTION st_mpolyfromtext(text) IS 'args: WKT - Makes a MultiPolygon 
 
 --
 -- TOC entry 661 (class 1255 OID 32302)
--- Dependencies: 3 1005
--- Name: st_mpolyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_mpolyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mpolyfromwkb(bytea, integer) RETURNS geometry
@@ -11116,12 +9925,10 @@ CREATE FUNCTION st_mpolyfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mpolyfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 663 (class 1255 OID 32304)
--- Dependencies: 3 1005
--- Name: st_mpolyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_mpolyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_mpolyfromwkb(bytea) RETURNS geometry
@@ -11133,12 +9940,10 @@ CREATE FUNCTION st_mpolyfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_mpolyfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 228 (class 1255 OID 31812)
--- Dependencies: 1005 1005 3
--- Name: st_multi(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_multi(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multi(geometry) RETURNS geometry
@@ -11146,12 +9951,10 @@ CREATE FUNCTION st_multi(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_force_multi';
 
 
-ALTER FUNCTION public.st_multi(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2899 (class 0 OID 0)
+-- TOC entry 3043 (class 0 OID 0)
 -- Dependencies: 228
--- Name: FUNCTION st_multi(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_multi(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_multi(geometry) IS 'args: g1 - Returns the geometry as a MULTI* geometry. If the geometry is already a MULTI*, it is returned unchanged.';
@@ -11159,8 +9962,8 @@ COMMENT ON FUNCTION st_multi(geometry) IS 'args: g1 - Returns the geometry as a 
 
 --
 -- TOC entry 655 (class 1255 OID 32296)
--- Dependencies: 3 1005
--- Name: st_multilinefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_multilinefromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multilinefromwkb(bytea) RETURNS geometry
@@ -11172,12 +9975,10 @@ CREATE FUNCTION st_multilinefromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_multilinefromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 599 (class 1255 OID 32240)
--- Dependencies: 3 1005
--- Name: st_multilinestringfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_multilinestringfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multilinestringfromtext(text) RETURNS geometry
@@ -11185,12 +9986,10 @@ CREATE FUNCTION st_multilinestringfromtext(text) RETURNS geometry
     AS $_$SELECT ST_MLineFromText($1)$_$;
 
 
-ALTER FUNCTION public.st_multilinestringfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 601 (class 1255 OID 32242)
--- Dependencies: 3 1005
--- Name: st_multilinestringfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_multilinestringfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multilinestringfromtext(text, integer) RETURNS geometry
@@ -11198,12 +9997,10 @@ CREATE FUNCTION st_multilinestringfromtext(text, integer) RETURNS geometry
     AS $_$SELECT MLineFromText($1, $2)$_$;
 
 
-ALTER FUNCTION public.st_multilinestringfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 608 (class 1255 OID 32249)
--- Dependencies: 3 1005
--- Name: st_multipointfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_multipointfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multipointfromtext(text) RETURNS geometry
@@ -11211,12 +10008,10 @@ CREATE FUNCTION st_multipointfromtext(text) RETURNS geometry
     AS $_$SELECT MPointFromText($1)$_$;
 
 
-ALTER FUNCTION public.st_multipointfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 650 (class 1255 OID 32291)
--- Dependencies: 3 1005
--- Name: st_multipointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_multipointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multipointfromwkb(bytea, integer) RETURNS geometry
@@ -11228,12 +10023,10 @@ CREATE FUNCTION st_multipointfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_multipointfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 652 (class 1255 OID 32293)
--- Dependencies: 1005 3
--- Name: st_multipointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_multipointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multipointfromwkb(bytea) RETURNS geometry
@@ -11245,12 +10038,10 @@ CREATE FUNCTION st_multipointfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_multipointfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 665 (class 1255 OID 32306)
--- Dependencies: 3 1005
--- Name: st_multipolyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_multipolyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multipolyfromwkb(bytea, integer) RETURNS geometry
@@ -11262,12 +10053,10 @@ CREATE FUNCTION st_multipolyfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_multipolyfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 667 (class 1255 OID 32308)
--- Dependencies: 3 1005
--- Name: st_multipolyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_multipolyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multipolyfromwkb(bytea) RETURNS geometry
@@ -11279,12 +10068,10 @@ CREATE FUNCTION st_multipolyfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_multipolyfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 614 (class 1255 OID 32255)
--- Dependencies: 3 1005
--- Name: st_multipolygonfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_multipolygonfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multipolygonfromtext(text, integer) RETURNS geometry
@@ -11292,12 +10079,10 @@ CREATE FUNCTION st_multipolygonfromtext(text, integer) RETURNS geometry
     AS $_$SELECT MPolyFromText($1, $2)$_$;
 
 
-ALTER FUNCTION public.st_multipolygonfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 616 (class 1255 OID 32257)
--- Dependencies: 3 1005
--- Name: st_multipolygonfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_multipolygonfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_multipolygonfromtext(text) RETURNS geometry
@@ -11305,12 +10090,10 @@ CREATE FUNCTION st_multipolygonfromtext(text) RETURNS geometry
     AS $_$SELECT MPolyFromText($1)$_$;
 
 
-ALTER FUNCTION public.st_multipolygonfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 248 (class 1255 OID 31832)
--- Dependencies: 1005 3
--- Name: st_ndims(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_ndims(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_ndims(geometry) RETURNS smallint
@@ -11318,12 +10101,10 @@ CREATE FUNCTION st_ndims(geometry) RETURNS smallint
     AS '$libdir/postgis-1.4', 'LWGEOM_ndims';
 
 
-ALTER FUNCTION public.st_ndims(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2900 (class 0 OID 0)
+-- TOC entry 3044 (class 0 OID 0)
 -- Dependencies: 248
--- Name: FUNCTION st_ndims(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_ndims(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_ndims(geometry) IS 'args: g1 - Returns coordinate dimension of the geometry as a small int. Values are: 2,3 or 4.';
@@ -11331,8 +10112,8 @@ COMMENT ON FUNCTION st_ndims(geometry) IS 'args: g1 - Returns coordinate dimensi
 
 --
 -- TOC entry 242 (class 1255 OID 31826)
--- Dependencies: 3 1005 1005
--- Name: st_noop(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_noop(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_noop(geometry) RETURNS geometry
@@ -11340,12 +10121,10 @@ CREATE FUNCTION st_noop(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_noop';
 
 
-ALTER FUNCTION public.st_noop(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 178 (class 1255 OID 31762)
--- Dependencies: 3 1005
--- Name: st_npoints(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_npoints(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_npoints(geometry) RETURNS integer
@@ -11353,12 +10132,10 @@ CREATE FUNCTION st_npoints(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_npoints';
 
 
-ALTER FUNCTION public.st_npoints(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2901 (class 0 OID 0)
+-- TOC entry 3045 (class 0 OID 0)
 -- Dependencies: 178
--- Name: FUNCTION st_npoints(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_npoints(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_npoints(geometry) IS 'args: g1 - Return the number of points (vertexes) in a geometry.';
@@ -11366,8 +10143,8 @@ COMMENT ON FUNCTION st_npoints(geometry) IS 'args: g1 - Return the number of poi
 
 --
 -- TOC entry 180 (class 1255 OID 31764)
--- Dependencies: 3 1005
--- Name: st_nrings(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_nrings(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_nrings(geometry) RETURNS integer
@@ -11375,12 +10152,10 @@ CREATE FUNCTION st_nrings(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_nrings';
 
 
-ALTER FUNCTION public.st_nrings(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2902 (class 0 OID 0)
+-- TOC entry 3046 (class 0 OID 0)
 -- Dependencies: 180
--- Name: FUNCTION st_nrings(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_nrings(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_nrings(geometry) IS 'args: geomA - If the geometry is a polygon or multi-polygon returns the number of rings.';
@@ -11388,8 +10163,8 @@ COMMENT ON FUNCTION st_nrings(geometry) IS 'args: geomA - If the geometry is a p
 
 --
 -- TOC entry 525 (class 1255 OID 32166)
--- Dependencies: 3 1005
--- Name: st_numgeometries(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_numgeometries(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_numgeometries(geometry) RETURNS integer
@@ -11397,12 +10172,10 @@ CREATE FUNCTION st_numgeometries(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_numgeometries_collection';
 
 
-ALTER FUNCTION public.st_numgeometries(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2903 (class 0 OID 0)
+-- TOC entry 3047 (class 0 OID 0)
 -- Dependencies: 525
--- Name: FUNCTION st_numgeometries(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_numgeometries(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_numgeometries(geometry) IS 'args: a_multi_or_geomcollection - If geometry is a GEOMETRYCOLLECTION (or MULTI*) return the number of geometries, otherwise return NULL.';
@@ -11410,8 +10183,8 @@ COMMENT ON FUNCTION st_numgeometries(geometry) IS 'args: a_multi_or_geomcollecti
 
 --
 -- TOC entry 535 (class 1255 OID 32176)
--- Dependencies: 3 1005
--- Name: st_numinteriorring(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_numinteriorring(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_numinteriorring(geometry) RETURNS integer
@@ -11419,12 +10192,10 @@ CREATE FUNCTION st_numinteriorring(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_numinteriorrings_polygon';
 
 
-ALTER FUNCTION public.st_numinteriorring(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2904 (class 0 OID 0)
+-- TOC entry 3048 (class 0 OID 0)
 -- Dependencies: 535
--- Name: FUNCTION st_numinteriorring(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_numinteriorring(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_numinteriorring(geometry) IS 'args: a_polygon - Return the number of interior rings of the first polygon in the geometry. Synonym to ST_NumInteriorRings.';
@@ -11432,8 +10203,8 @@ COMMENT ON FUNCTION st_numinteriorring(geometry) IS 'args: a_polygon - Return th
 
 --
 -- TOC entry 533 (class 1255 OID 32174)
--- Dependencies: 3 1005
--- Name: st_numinteriorrings(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_numinteriorrings(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_numinteriorrings(geometry) RETURNS integer
@@ -11441,12 +10212,10 @@ CREATE FUNCTION st_numinteriorrings(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_numinteriorrings_polygon';
 
 
-ALTER FUNCTION public.st_numinteriorrings(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2905 (class 0 OID 0)
+-- TOC entry 3049 (class 0 OID 0)
 -- Dependencies: 533
--- Name: FUNCTION st_numinteriorrings(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_numinteriorrings(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_numinteriorrings(geometry) IS 'args: a_polygon - Return the number of interior rings of the first polygon in the geometry. This will work with both POLYGON and MULTIPOLYGON types but only looks at the first polygon. Return NULL if there is no polygon in the geometry.';
@@ -11454,8 +10223,8 @@ COMMENT ON FUNCTION st_numinteriorrings(geometry) IS 'args: a_polygon - Return t
 
 --
 -- TOC entry 523 (class 1255 OID 32164)
--- Dependencies: 3 1005
--- Name: st_numpoints(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_numpoints(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_numpoints(geometry) RETURNS integer
@@ -11463,12 +10232,10 @@ CREATE FUNCTION st_numpoints(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_numpoints_linestring';
 
 
-ALTER FUNCTION public.st_numpoints(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2906 (class 0 OID 0)
+-- TOC entry 3050 (class 0 OID 0)
 -- Dependencies: 523
--- Name: FUNCTION st_numpoints(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_numpoints(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_numpoints(geometry) IS 'args: g1 - Return the number of points in an ST_LineString or ST_CircularString value.';
@@ -11476,8 +10243,8 @@ COMMENT ON FUNCTION st_numpoints(geometry) IS 'args: g1 - Return the number of p
 
 --
 -- TOC entry 692 (class 1255 OID 32333)
--- Dependencies: 3 1005 1005
--- Name: st_orderingequals(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_orderingequals(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_orderingequals(geometry, geometry) RETURNS boolean
@@ -11487,12 +10254,10 @@ CREATE FUNCTION st_orderingequals(geometry, geometry) RETURNS boolean
 	$_$;
 
 
-ALTER FUNCTION public.st_orderingequals(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2907 (class 0 OID 0)
+-- TOC entry 3051 (class 0 OID 0)
 -- Dependencies: 692
--- Name: FUNCTION st_orderingequals(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_orderingequals(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_orderingequals(geometry, geometry) IS 'args: A, B - Returns true if the given geometries represent the same geometry and points are in the same directional order.';
@@ -11500,8 +10265,8 @@ COMMENT ON FUNCTION st_orderingequals(geometry, geometry) IS 'args: A, B - Retur
 
 --
 -- TOC entry 476 (class 1255 OID 32117)
--- Dependencies: 3 1005 1005
--- Name: st_overlaps(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_overlaps(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_overlaps(geometry, geometry) RETURNS boolean
@@ -11509,12 +10274,10 @@ CREATE FUNCTION st_overlaps(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_Overlaps($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_overlaps(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2908 (class 0 OID 0)
+-- TOC entry 3052 (class 0 OID 0)
 -- Dependencies: 476
--- Name: FUNCTION st_overlaps(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_overlaps(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_overlaps(geometry, geometry) IS 'args: A, B - Returns TRUE if the Geometries share space, are of the same dimension, but are not completely contained by each other.';
@@ -11522,8 +10285,8 @@ COMMENT ON FUNCTION st_overlaps(geometry, geometry) IS 'args: A, B - Returns TRU
 
 --
 -- TOC entry 198 (class 1255 OID 31782)
--- Dependencies: 1005 3
--- Name: st_perimeter(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_perimeter(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_perimeter(geometry) RETURNS double precision
@@ -11531,12 +10294,10 @@ CREATE FUNCTION st_perimeter(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_perimeter2d_poly';
 
 
-ALTER FUNCTION public.st_perimeter(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2909 (class 0 OID 0)
+-- TOC entry 3053 (class 0 OID 0)
 -- Dependencies: 198
--- Name: FUNCTION st_perimeter(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_perimeter(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_perimeter(geometry) IS 'args: g1 - Return the length measurement of the boundary of an ST_Surface or ST_MultiSurface value. (Polygon, Multipolygon)';
@@ -11544,8 +10305,8 @@ COMMENT ON FUNCTION st_perimeter(geometry) IS 'args: g1 - Return the length meas
 
 --
 -- TOC entry 196 (class 1255 OID 31780)
--- Dependencies: 1005 3
--- Name: st_perimeter2d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_perimeter2d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_perimeter2d(geometry) RETURNS double precision
@@ -11553,12 +10314,10 @@ CREATE FUNCTION st_perimeter2d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_perimeter2d_poly';
 
 
-ALTER FUNCTION public.st_perimeter2d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2910 (class 0 OID 0)
+-- TOC entry 3054 (class 0 OID 0)
 -- Dependencies: 196
--- Name: FUNCTION st_perimeter2d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_perimeter2d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_perimeter2d(geometry) IS 'args: geomA - Returns the 2-dimensional perimeter of the geometry, if it is a polygon or multi-polygon. This is currently an alias for ST_Perimeter.';
@@ -11566,8 +10325,8 @@ COMMENT ON FUNCTION st_perimeter2d(geometry) IS 'args: geomA - Returns the 2-dim
 
 --
 -- TOC entry 194 (class 1255 OID 31778)
--- Dependencies: 1005 3
--- Name: st_perimeter3d(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_perimeter3d(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_perimeter3d(geometry) RETURNS double precision
@@ -11575,12 +10334,10 @@ CREATE FUNCTION st_perimeter3d(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_perimeter_poly';
 
 
-ALTER FUNCTION public.st_perimeter3d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2911 (class 0 OID 0)
+-- TOC entry 3055 (class 0 OID 0)
 -- Dependencies: 194
--- Name: FUNCTION st_perimeter3d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_perimeter3d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_perimeter3d(geometry) IS 'args: geomA - Returns the 3-dimensional perimeter of the geometry, if it is a polygon or multi-polygon.';
@@ -11588,8 +10345,8 @@ COMMENT ON FUNCTION st_perimeter3d(geometry) IS 'args: geomA - Returns the 3-dim
 
 --
 -- TOC entry 695 (class 1255 OID 32336)
--- Dependencies: 1005 3
--- Name: st_point(double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_point(double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_point(double precision, double precision) RETURNS geometry
@@ -11597,12 +10354,10 @@ CREATE FUNCTION st_point(double precision, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_makepoint';
 
 
-ALTER FUNCTION public.st_point(double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2912 (class 0 OID 0)
+-- TOC entry 3056 (class 0 OID 0)
 -- Dependencies: 695
--- Name: FUNCTION st_point(double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_point(double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_point(double precision, double precision) IS 'args: x_lon, y_lat - Returns an ST_Point with the given coordinate values. OGC alias for ST_MakePoint.';
@@ -11610,8 +10365,8 @@ COMMENT ON FUNCTION st_point(double precision, double precision) IS 'args: x_lon
 
 --
 -- TOC entry 212 (class 1255 OID 31796)
--- Dependencies: 3 1005
--- Name: st_point_inside_circle(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_point_inside_circle(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_point_inside_circle(geometry, double precision, double precision, double precision) RETURNS boolean
@@ -11619,12 +10374,10 @@ CREATE FUNCTION st_point_inside_circle(geometry, double precision, double precis
     AS '$libdir/postgis-1.4', 'LWGEOM_inside_circle_point';
 
 
-ALTER FUNCTION public.st_point_inside_circle(geometry, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2913 (class 0 OID 0)
+-- TOC entry 3057 (class 0 OID 0)
 -- Dependencies: 212
--- Name: FUNCTION st_point_inside_circle(geometry, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_point_inside_circle(geometry, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_point_inside_circle(geometry, double precision, double precision, double precision) IS 'args: a_point, center_x, center_y, radius - Is the point geometry insert circle defined by center_x, center_y , radius';
@@ -11632,8 +10385,8 @@ COMMENT ON FUNCTION st_point_inside_circle(geometry, double precision, double pr
 
 --
 -- TOC entry 577 (class 1255 OID 32218)
--- Dependencies: 3 1005
--- Name: st_pointfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_pointfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_pointfromtext(text) RETURNS geometry
@@ -11645,12 +10398,10 @@ CREATE FUNCTION st_pointfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_pointfromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2914 (class 0 OID 0)
+-- TOC entry 3058 (class 0 OID 0)
 -- Dependencies: 577
--- Name: FUNCTION st_pointfromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_pointfromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_pointfromtext(text) IS 'args: WKT - Makes a point Geometry from WKT with the given SRID. If SRID is not given, it defaults to unknown.';
@@ -11658,8 +10409,8 @@ COMMENT ON FUNCTION st_pointfromtext(text) IS 'args: WKT - Makes a point Geometr
 
 --
 -- TOC entry 579 (class 1255 OID 32220)
--- Dependencies: 3 1005
--- Name: st_pointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_pointfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_pointfromtext(text, integer) RETURNS geometry
@@ -11671,12 +10422,10 @@ CREATE FUNCTION st_pointfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_pointfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2915 (class 0 OID 0)
+-- TOC entry 3059 (class 0 OID 0)
 -- Dependencies: 579
--- Name: FUNCTION st_pointfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_pointfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_pointfromtext(text, integer) IS 'args: WKT, srid - Makes a point Geometry from WKT with the given SRID. If SRID is not given, it defaults to unknown.';
@@ -11684,8 +10433,8 @@ COMMENT ON FUNCTION st_pointfromtext(text, integer) IS 'args: WKT, srid - Makes 
 
 --
 -- TOC entry 626 (class 1255 OID 32267)
--- Dependencies: 3 1005
--- Name: st_pointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_pointfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_pointfromwkb(bytea, integer) RETURNS geometry
@@ -11697,12 +10446,10 @@ CREATE FUNCTION st_pointfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_pointfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 628 (class 1255 OID 32269)
--- Dependencies: 3 1005
--- Name: st_pointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_pointfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_pointfromwkb(bytea) RETURNS geometry
@@ -11714,12 +10461,10 @@ CREATE FUNCTION st_pointfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_pointfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 542 (class 1255 OID 32182)
--- Dependencies: 3 1005 1005
--- Name: st_pointn(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_pointn(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_pointn(geometry, integer) RETURNS geometry
@@ -11727,12 +10472,10 @@ CREATE FUNCTION st_pointn(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_pointn_linestring';
 
 
-ALTER FUNCTION public.st_pointn(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2916 (class 0 OID 0)
+-- TOC entry 3060 (class 0 OID 0)
 -- Dependencies: 542
--- Name: FUNCTION st_pointn(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_pointn(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_pointn(geometry, integer) IS 'args: a_linestring, n - Return the Nth point in the first linestring or circular linestring in the geometry. Return NULL if there is no linestring in the geometry.';
@@ -11740,8 +10483,8 @@ COMMENT ON FUNCTION st_pointn(geometry, integer) IS 'args: a_linestring, n - Ret
 
 --
 -- TOC entry 485 (class 1255 OID 32126)
--- Dependencies: 3 1005 1005
--- Name: st_pointonsurface(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_pointonsurface(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_pointonsurface(geometry) RETURNS geometry
@@ -11749,12 +10492,10 @@ CREATE FUNCTION st_pointonsurface(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pointonsurface';
 
 
-ALTER FUNCTION public.st_pointonsurface(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2917 (class 0 OID 0)
+-- TOC entry 3061 (class 0 OID 0)
 -- Dependencies: 485
--- Name: FUNCTION st_pointonsurface(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_pointonsurface(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_pointonsurface(geometry) IS 'args: g1 - Returns a POINT guaranteed to lie on the surface.';
@@ -11762,8 +10503,8 @@ COMMENT ON FUNCTION st_pointonsurface(geometry) IS 'args: g1 - Returns a POINT g
 
 --
 -- TOC entry 587 (class 1255 OID 32228)
--- Dependencies: 3 1005
--- Name: st_polyfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_polyfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polyfromtext(text) RETURNS geometry
@@ -11775,12 +10516,10 @@ CREATE FUNCTION st_polyfromtext(text) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_polyfromtext(text) OWNER TO postgres;
-
 --
 -- TOC entry 589 (class 1255 OID 32230)
--- Dependencies: 3 1005
--- Name: st_polyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_polyfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polyfromtext(text, integer) RETURNS geometry
@@ -11792,12 +10531,10 @@ CREATE FUNCTION st_polyfromtext(text, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_polyfromtext(text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 638 (class 1255 OID 32279)
--- Dependencies: 3 1005
--- Name: st_polyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_polyfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polyfromwkb(bytea, integer) RETURNS geometry
@@ -11809,12 +10546,10 @@ CREATE FUNCTION st_polyfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_polyfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 640 (class 1255 OID 32281)
--- Dependencies: 3 1005
--- Name: st_polyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_polyfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polyfromwkb(bytea) RETURNS geometry
@@ -11826,12 +10561,10 @@ CREATE FUNCTION st_polyfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_polyfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 698 (class 1255 OID 32339)
--- Dependencies: 1005 3 1005
--- Name: st_polygon(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_polygon(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polygon(geometry, integer) RETURNS geometry
@@ -11841,12 +10574,10 @@ CREATE FUNCTION st_polygon(geometry, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_polygon(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2918 (class 0 OID 0)
+-- TOC entry 3062 (class 0 OID 0)
 -- Dependencies: 698
--- Name: FUNCTION st_polygon(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_polygon(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_polygon(geometry, integer) IS 'args: aLineString, srid - Returns a polygon built from the specified linestring and SRID.';
@@ -11854,8 +10585,8 @@ COMMENT ON FUNCTION st_polygon(geometry, integer) IS 'args: aLineString, srid - 
 
 --
 -- TOC entry 591 (class 1255 OID 32232)
--- Dependencies: 3 1005
--- Name: st_polygonfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_polygonfromtext(text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polygonfromtext(text, integer) RETURNS geometry
@@ -11863,12 +10594,10 @@ CREATE FUNCTION st_polygonfromtext(text, integer) RETURNS geometry
     AS $_$SELECT PolyFromText($1, $2)$_$;
 
 
-ALTER FUNCTION public.st_polygonfromtext(text, integer) OWNER TO postgres;
-
 --
--- TOC entry 2919 (class 0 OID 0)
+-- TOC entry 3063 (class 0 OID 0)
 -- Dependencies: 591
--- Name: FUNCTION st_polygonfromtext(text, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_polygonfromtext(text, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_polygonfromtext(text, integer) IS 'args: WKT, srid - Makes a Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.';
@@ -11876,8 +10605,8 @@ COMMENT ON FUNCTION st_polygonfromtext(text, integer) IS 'args: WKT, srid - Make
 
 --
 -- TOC entry 593 (class 1255 OID 32234)
--- Dependencies: 3 1005
--- Name: st_polygonfromtext(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_polygonfromtext(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polygonfromtext(text) RETURNS geometry
@@ -11885,12 +10614,10 @@ CREATE FUNCTION st_polygonfromtext(text) RETURNS geometry
     AS $_$SELECT ST_PolyFromText($1)$_$;
 
 
-ALTER FUNCTION public.st_polygonfromtext(text) OWNER TO postgres;
-
 --
--- TOC entry 2920 (class 0 OID 0)
+-- TOC entry 3064 (class 0 OID 0)
 -- Dependencies: 593
--- Name: FUNCTION st_polygonfromtext(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_polygonfromtext(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_polygonfromtext(text) IS 'args: WKT - Makes a Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.';
@@ -11898,8 +10625,8 @@ COMMENT ON FUNCTION st_polygonfromtext(text) IS 'args: WKT - Makes a Geometry fr
 
 --
 -- TOC entry 642 (class 1255 OID 32283)
--- Dependencies: 3 1005
--- Name: st_polygonfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_polygonfromwkb(bytea, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polygonfromwkb(bytea, integer) RETURNS geometry
@@ -11911,12 +10638,10 @@ CREATE FUNCTION st_polygonfromwkb(bytea, integer) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_polygonfromwkb(bytea, integer) OWNER TO postgres;
-
 --
 -- TOC entry 644 (class 1255 OID 32285)
--- Dependencies: 3 1005
--- Name: st_polygonfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_polygonfromwkb(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polygonfromwkb(bytea) RETURNS geometry
@@ -11928,12 +10653,10 @@ CREATE FUNCTION st_polygonfromwkb(bytea) RETURNS geometry
 	$_$;
 
 
-ALTER FUNCTION public.st_polygonfromwkb(bytea) OWNER TO postgres;
-
 --
 -- TOC entry 300 (class 1255 OID 31884)
--- Dependencies: 1007 3 1005
--- Name: st_polygonize(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1010 1008
+-- Name: st_polygonize(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polygonize(geometry[]) RETURNS geometry
@@ -11941,12 +10664,10 @@ CREATE FUNCTION st_polygonize(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'polygonize_garray';
 
 
-ALTER FUNCTION public.st_polygonize(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 299 (class 1255 OID 31883)
--- Dependencies: 1005 3 1007
--- Name: st_polygonize_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1010
+-- Name: st_polygonize_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_polygonize_garray(geometry[]) RETURNS geometry
@@ -11954,12 +10675,10 @@ CREATE FUNCTION st_polygonize_garray(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'polygonize_garray';
 
 
-ALTER FUNCTION public.st_polygonize_garray(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 120 (class 1255 OID 31671)
 -- Dependencies: 3
--- Name: st_postgis_gist_joinsel(internal, oid, internal, smallint); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: st_postgis_gist_joinsel(internal, oid, internal, smallint); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_postgis_gist_joinsel(internal, oid, internal, smallint) RETURNS double precision
@@ -11967,12 +10686,10 @@ CREATE FUNCTION st_postgis_gist_joinsel(internal, oid, internal, smallint) RETUR
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_joinsel';
 
 
-ALTER FUNCTION public.st_postgis_gist_joinsel(internal, oid, internal, smallint) OWNER TO postgres;
-
 --
 -- TOC entry 118 (class 1255 OID 31669)
 -- Dependencies: 3
--- Name: st_postgis_gist_sel(internal, oid, internal, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: st_postgis_gist_sel(internal, oid, internal, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_postgis_gist_sel(internal, oid, internal, integer) RETURNS double precision
@@ -11980,12 +10697,10 @@ CREATE FUNCTION st_postgis_gist_sel(internal, oid, internal, integer) RETURNS do
     AS '$libdir/postgis-1.4', 'LWGEOM_gist_sel';
 
 
-ALTER FUNCTION public.st_postgis_gist_sel(internal, oid, internal, integer) OWNER TO postgres;
-
 --
 -- TOC entry 446 (class 1255 OID 32087)
--- Dependencies: 3 1005 1005
--- Name: st_relate(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_relate(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_relate(geometry, geometry) RETURNS text
@@ -11993,12 +10708,10 @@ CREATE FUNCTION st_relate(geometry, geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'relate_full';
 
 
-ALTER FUNCTION public.st_relate(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2921 (class 0 OID 0)
+-- TOC entry 3065 (class 0 OID 0)
 -- Dependencies: 446
--- Name: FUNCTION st_relate(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_relate(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_relate(geometry, geometry) IS 'args: geomA, geomB - Returns true if this Geometry is spatially related to anotherGeometry, by testing for intersections between the Interior, Boundary and Exterior of the two geometries as specified by the values in the intersectionMatrixPattern. If no intersectionMatrixPattern is passed in, then returns the maximum intersectionMatrixPattern that relates the 2 geometries.';
@@ -12006,8 +10719,8 @@ COMMENT ON FUNCTION st_relate(geometry, geometry) IS 'args: geomA, geomB - Retur
 
 --
 -- TOC entry 448 (class 1255 OID 32089)
--- Dependencies: 3 1005 1005
--- Name: st_relate(geometry, geometry, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_relate(geometry, geometry, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_relate(geometry, geometry, text) RETURNS boolean
@@ -12015,12 +10728,10 @@ CREATE FUNCTION st_relate(geometry, geometry, text) RETURNS boolean
     AS '$libdir/postgis-1.4', 'relate_pattern';
 
 
-ALTER FUNCTION public.st_relate(geometry, geometry, text) OWNER TO postgres;
-
 --
--- TOC entry 2922 (class 0 OID 0)
+-- TOC entry 3066 (class 0 OID 0)
 -- Dependencies: 448
--- Name: FUNCTION st_relate(geometry, geometry, text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_relate(geometry, geometry, text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_relate(geometry, geometry, text) IS 'args: geomA, geomB, intersectionMatrixPattern - Returns true if this Geometry is spatially related to anotherGeometry, by testing for intersections between the Interior, Boundary and Exterior of the two geometries as specified by the values in the intersectionMatrixPattern. If no intersectionMatrixPattern is passed in, then returns the maximum intersectionMatrixPattern that relates the 2 geometries.';
@@ -12028,8 +10739,8 @@ COMMENT ON FUNCTION st_relate(geometry, geometry, text) IS 'args: geomA, geomB, 
 
 --
 -- TOC entry 289 (class 1255 OID 31873)
--- Dependencies: 1005 3 1005
--- Name: st_removepoint(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_removepoint(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_removepoint(geometry, integer) RETURNS geometry
@@ -12037,12 +10748,10 @@ CREATE FUNCTION st_removepoint(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_removepoint';
 
 
-ALTER FUNCTION public.st_removepoint(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2923 (class 0 OID 0)
+-- TOC entry 3067 (class 0 OID 0)
 -- Dependencies: 289
--- Name: FUNCTION st_removepoint(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_removepoint(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_removepoint(geometry, integer) IS 'args: linestring, offset - Removes point from a linestring. Offset is 0-based.';
@@ -12050,8 +10759,8 @@ COMMENT ON FUNCTION st_removepoint(geometry, integer) IS 'args: linestring, offs
 
 --
 -- TOC entry 238 (class 1255 OID 31822)
--- Dependencies: 3 1005 1005
--- Name: st_reverse(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_reverse(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_reverse(geometry) RETURNS geometry
@@ -12059,12 +10768,10 @@ CREATE FUNCTION st_reverse(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_reverse';
 
 
-ALTER FUNCTION public.st_reverse(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2924 (class 0 OID 0)
+-- TOC entry 3068 (class 0 OID 0)
 -- Dependencies: 238
--- Name: FUNCTION st_reverse(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_reverse(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_reverse(geometry) IS 'args: g1 - Returns the geometry with vertex order reversed.';
@@ -12072,8 +10779,8 @@ COMMENT ON FUNCTION st_reverse(geometry) IS 'args: g1 - Returns the geometry wit
 
 --
 -- TOC entry 9 (class 1255 OID 31571)
--- Dependencies: 1005 3 1005
--- Name: st_rotate(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_rotate(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_rotate(geometry, double precision) RETURNS geometry
@@ -12081,12 +10788,10 @@ CREATE FUNCTION st_rotate(geometry, double precision) RETURNS geometry
     AS $_$SELECT rotateZ($1, $2)$_$;
 
 
-ALTER FUNCTION public.st_rotate(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2925 (class 0 OID 0)
+-- TOC entry 3069 (class 0 OID 0)
 -- Dependencies: 9
--- Name: FUNCTION st_rotate(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_rotate(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_rotate(geometry, double precision) IS 'args: geomA, rotZRadians - This is a synonym for ST_RotateZ';
@@ -12094,8 +10799,8 @@ COMMENT ON FUNCTION st_rotate(geometry, double precision) IS 'args: geomA, rotZR
 
 --
 -- TOC entry 43 (class 1255 OID 31573)
--- Dependencies: 3 1005 1005
--- Name: st_rotatex(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_rotatex(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_rotatex(geometry, double precision) RETURNS geometry
@@ -12103,12 +10808,10 @@ CREATE FUNCTION st_rotatex(geometry, double precision) RETURNS geometry
     AS $_$SELECT affine($1, 1, 0, 0, 0, cos($2), -sin($2), 0, sin($2), cos($2), 0, 0, 0)$_$;
 
 
-ALTER FUNCTION public.st_rotatex(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2926 (class 0 OID 0)
+-- TOC entry 3070 (class 0 OID 0)
 -- Dependencies: 43
--- Name: FUNCTION st_rotatex(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_rotatex(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_rotatex(geometry, double precision) IS 'args: geomA, rotRadians - Rotate a geometry rotRadians about the X axis.';
@@ -12116,8 +10819,8 @@ COMMENT ON FUNCTION st_rotatex(geometry, double precision) IS 'args: geomA, rotR
 
 --
 -- TOC entry 45 (class 1255 OID 31575)
--- Dependencies: 3 1005 1005
--- Name: st_rotatey(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_rotatey(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_rotatey(geometry, double precision) RETURNS geometry
@@ -12125,12 +10828,10 @@ CREATE FUNCTION st_rotatey(geometry, double precision) RETURNS geometry
     AS $_$SELECT affine($1,  cos($2), 0, sin($2),  0, 1, 0,  -sin($2), 0, cos($2), 0,  0, 0)$_$;
 
 
-ALTER FUNCTION public.st_rotatey(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2927 (class 0 OID 0)
+-- TOC entry 3071 (class 0 OID 0)
 -- Dependencies: 45
--- Name: FUNCTION st_rotatey(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_rotatey(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_rotatey(geometry, double precision) IS 'args: geomA, rotRadians - Rotate a geometry rotRadians about the Y axis.';
@@ -12138,8 +10839,8 @@ COMMENT ON FUNCTION st_rotatey(geometry, double precision) IS 'args: geomA, rotR
 
 --
 -- TOC entry 40 (class 1255 OID 31569)
--- Dependencies: 1005 3 1005
--- Name: st_rotatez(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_rotatez(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_rotatez(geometry, double precision) RETURNS geometry
@@ -12147,12 +10848,10 @@ CREATE FUNCTION st_rotatez(geometry, double precision) RETURNS geometry
     AS $_$SELECT affine($1,  cos($2), -sin($2), 0,  sin($2), cos($2), 0,  0, 0, 1,  0, 0, 0)$_$;
 
 
-ALTER FUNCTION public.st_rotatez(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2928 (class 0 OID 0)
+-- TOC entry 3072 (class 0 OID 0)
 -- Dependencies: 40
--- Name: FUNCTION st_rotatez(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_rotatez(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_rotatez(geometry, double precision) IS 'args: geomA, rotRadians - Rotate a geometry rotRadians about the Z axis.';
@@ -12160,8 +10859,8 @@ COMMENT ON FUNCTION st_rotatez(geometry, double precision) IS 'args: geomA, rotR
 
 --
 -- TOC entry 51 (class 1255 OID 31581)
--- Dependencies: 1005 3 1005
--- Name: st_scale(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_scale(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_scale(geometry, double precision, double precision, double precision) RETURNS geometry
@@ -12169,12 +10868,10 @@ CREATE FUNCTION st_scale(geometry, double precision, double precision, double pr
     AS $_$SELECT affine($1,  $2, 0, 0,  0, $3, 0,  0, 0, $4,  0, 0, 0)$_$;
 
 
-ALTER FUNCTION public.st_scale(geometry, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2929 (class 0 OID 0)
+-- TOC entry 3073 (class 0 OID 0)
 -- Dependencies: 51
--- Name: FUNCTION st_scale(geometry, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_scale(geometry, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_scale(geometry, double precision, double precision, double precision) IS 'args: geomA, XFactor, YFactor, ZFactor - Scales the geometry to a new size by multiplying the ordinates with the parameters. Ie: ST_Scale(geom, Xfactor, Yfactor, Zfactor).';
@@ -12182,8 +10879,8 @@ COMMENT ON FUNCTION st_scale(geometry, double precision, double precision, doubl
 
 --
 -- TOC entry 53 (class 1255 OID 31583)
--- Dependencies: 1005 3 1005
--- Name: st_scale(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_scale(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_scale(geometry, double precision, double precision) RETURNS geometry
@@ -12191,12 +10888,10 @@ CREATE FUNCTION st_scale(geometry, double precision, double precision) RETURNS g
     AS $_$SELECT scale($1, $2, $3, 1)$_$;
 
 
-ALTER FUNCTION public.st_scale(geometry, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2930 (class 0 OID 0)
+-- TOC entry 3074 (class 0 OID 0)
 -- Dependencies: 53
--- Name: FUNCTION st_scale(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_scale(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_scale(geometry, double precision, double precision) IS 'args: geomA, XFactor, YFactor - Scales the geometry to a new size by multiplying the ordinates with the parameters. Ie: ST_Scale(geom, Xfactor, Yfactor, Zfactor).';
@@ -12204,8 +10899,8 @@ COMMENT ON FUNCTION st_scale(geometry, double precision, double precision) IS 'a
 
 --
 -- TOC entry 391 (class 1255 OID 32015)
--- Dependencies: 3 1005 1005
--- Name: st_segmentize(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_segmentize(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_segmentize(geometry, double precision) RETURNS geometry
@@ -12213,12 +10908,10 @@ CREATE FUNCTION st_segmentize(geometry, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_segmentize2d';
 
 
-ALTER FUNCTION public.st_segmentize(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2931 (class 0 OID 0)
+-- TOC entry 3075 (class 0 OID 0)
 -- Dependencies: 391
--- Name: FUNCTION st_segmentize(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_segmentize(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_segmentize(geometry, double precision) IS 'args: geomA, max_length - Return a modified geometry having no segment longer than the given distance. Distance computation is performed in 2d only.';
@@ -12226,8 +10919,8 @@ COMMENT ON FUNCTION st_segmentize(geometry, double precision) IS 'args: geomA, m
 
 --
 -- TOC entry 172 (class 1255 OID 31756)
--- Dependencies: 1014 3 1014
--- Name: st_setfactor(chip, real); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1017 1017
+-- Name: st_setfactor(chip, real); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_setfactor(chip, real) RETURNS chip
@@ -12235,12 +10928,10 @@ CREATE FUNCTION st_setfactor(chip, real) RETURNS chip
     AS '$libdir/postgis-1.4', 'CHIP_setFactor';
 
 
-ALTER FUNCTION public.st_setfactor(chip, real) OWNER TO postgres;
-
 --
 -- TOC entry 291 (class 1255 OID 31875)
--- Dependencies: 1005 1005 1005 3
--- Name: st_setpoint(geometry, integer, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_setpoint(geometry, integer, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_setpoint(geometry, integer, geometry) RETURNS geometry
@@ -12248,12 +10939,10 @@ CREATE FUNCTION st_setpoint(geometry, integer, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_setpoint_linestring';
 
 
-ALTER FUNCTION public.st_setpoint(geometry, integer, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2932 (class 0 OID 0)
+-- TOC entry 3076 (class 0 OID 0)
 -- Dependencies: 291
--- Name: FUNCTION st_setpoint(geometry, integer, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_setpoint(geometry, integer, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_setpoint(geometry, integer, geometry) IS 'args: linestring, zerobasedposition, point - Replace point N of linestring with given point. Index is 0-based.';
@@ -12261,8 +10950,8 @@ COMMENT ON FUNCTION st_setpoint(geometry, integer, geometry) IS 'args: linestrin
 
 --
 -- TOC entry 562 (class 1255 OID 32202)
--- Dependencies: 3 1005 1005
--- Name: st_setsrid(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_setsrid(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_setsrid(geometry, integer) RETURNS geometry
@@ -12270,12 +10959,10 @@ CREATE FUNCTION st_setsrid(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_setSRID';
 
 
-ALTER FUNCTION public.st_setsrid(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2933 (class 0 OID 0)
+-- TOC entry 3077 (class 0 OID 0)
 -- Dependencies: 562
--- Name: FUNCTION st_setsrid(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_setsrid(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_setsrid(geometry, integer) IS 'args: geom, srid - Sets the SRID on a geometry to a particular integer value.';
@@ -12283,8 +10970,8 @@ COMMENT ON FUNCTION st_setsrid(geometry, integer) IS 'args: geom, srid - Sets th
 
 --
 -- TOC entry 57 (class 1255 OID 31587)
--- Dependencies: 1005 1005 3
--- Name: st_shift_longitude(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_shift_longitude(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_shift_longitude(geometry) RETURNS geometry
@@ -12292,12 +10979,10 @@ CREATE FUNCTION st_shift_longitude(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_longitude_shift';
 
 
-ALTER FUNCTION public.st_shift_longitude(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2934 (class 0 OID 0)
+-- TOC entry 3078 (class 0 OID 0)
 -- Dependencies: 57
--- Name: FUNCTION st_shift_longitude(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_shift_longitude(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_shift_longitude(geometry) IS 'args: geomA - Reads every point/vertex in every component of every feature in a geometry, and if the longitude coordinate is <0, adds 360 to it. The result would be a 0-360 version of the data to be plotted in a 180 centric map';
@@ -12305,8 +10990,8 @@ COMMENT ON FUNCTION st_shift_longitude(geometry) IS 'args: geomA - Reads every p
 
 --
 -- TOC entry 381 (class 1255 OID 32005)
--- Dependencies: 3 1005 1005
--- Name: st_simplify(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_simplify(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_simplify(geometry, double precision) RETURNS geometry
@@ -12314,12 +10999,10 @@ CREATE FUNCTION st_simplify(geometry, double precision) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_simplify2d';
 
 
-ALTER FUNCTION public.st_simplify(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2935 (class 0 OID 0)
+-- TOC entry 3079 (class 0 OID 0)
 -- Dependencies: 381
--- Name: FUNCTION st_simplify(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_simplify(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_simplify(geometry, double precision) IS 'args: geomA, tolerance - Returns a "simplified" version of the given geometry using the Douglas-Peuker algorithm.';
@@ -12327,8 +11010,8 @@ COMMENT ON FUNCTION st_simplify(geometry, double precision) IS 'args: geomA, tol
 
 --
 -- TOC entry 413 (class 1255 OID 32037)
--- Dependencies: 3 1005 1005
--- Name: st_simplifypreservetopology(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_simplifypreservetopology(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_simplifypreservetopology(geometry, double precision) RETURNS geometry
@@ -12336,12 +11019,10 @@ CREATE FUNCTION st_simplifypreservetopology(geometry, double precision) RETURNS 
     AS '$libdir/postgis-1.4', 'topologypreservesimplify';
 
 
-ALTER FUNCTION public.st_simplifypreservetopology(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2936 (class 0 OID 0)
+-- TOC entry 3080 (class 0 OID 0)
 -- Dependencies: 413
--- Name: FUNCTION st_simplifypreservetopology(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_simplifypreservetopology(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_simplifypreservetopology(geometry, double precision) IS 'args: geomA, tolerance - Returns a "simplified" version of the given geometry using the Douglas-Peuker algorithm. Will avoid creating derived geometries (polygons in particular) that are invalid.';
@@ -12349,8 +11030,8 @@ COMMENT ON FUNCTION st_simplifypreservetopology(geometry, double precision) IS '
 
 --
 -- TOC entry 383 (class 1255 OID 32007)
--- Dependencies: 3 1005 1005
--- Name: st_snaptogrid(geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_snaptogrid(geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_snaptogrid(geometry, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -12358,12 +11039,10 @@ CREATE FUNCTION st_snaptogrid(geometry, double precision, double precision, doub
     AS '$libdir/postgis-1.4', 'LWGEOM_snaptogrid';
 
 
-ALTER FUNCTION public.st_snaptogrid(geometry, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2937 (class 0 OID 0)
+-- TOC entry 3081 (class 0 OID 0)
 -- Dependencies: 383
--- Name: FUNCTION st_snaptogrid(geometry, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_snaptogrid(geometry, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_snaptogrid(geometry, double precision, double precision, double precision, double precision) IS 'args: geomA, originX, originY, sizeX, sizeY - Snap all points of the input geometry to the grid defined by its origin and cell size. Remove consecutive points falling on the same cell, eventually returning NULL if output points are not enough to define a geometry of the given type. Collapsed geometries in a collection are stripped from it. Useful for reducing precision.';
@@ -12371,8 +11050,8 @@ COMMENT ON FUNCTION st_snaptogrid(geometry, double precision, double precision, 
 
 --
 -- TOC entry 385 (class 1255 OID 32009)
--- Dependencies: 3 1005 1005
--- Name: st_snaptogrid(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_snaptogrid(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_snaptogrid(geometry, double precision, double precision) RETURNS geometry
@@ -12380,12 +11059,10 @@ CREATE FUNCTION st_snaptogrid(geometry, double precision, double precision) RETU
     AS $_$SELECT ST_SnapToGrid($1, 0, 0, $2, $3)$_$;
 
 
-ALTER FUNCTION public.st_snaptogrid(geometry, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2938 (class 0 OID 0)
+-- TOC entry 3082 (class 0 OID 0)
 -- Dependencies: 385
--- Name: FUNCTION st_snaptogrid(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_snaptogrid(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_snaptogrid(geometry, double precision, double precision) IS 'args: geomA, sizeX, sizeY - Snap all points of the input geometry to the grid defined by its origin and cell size. Remove consecutive points falling on the same cell, eventually returning NULL if output points are not enough to define a geometry of the given type. Collapsed geometries in a collection are stripped from it. Useful for reducing precision.';
@@ -12393,8 +11070,8 @@ COMMENT ON FUNCTION st_snaptogrid(geometry, double precision, double precision) 
 
 --
 -- TOC entry 387 (class 1255 OID 32011)
--- Dependencies: 3 1005 1005
--- Name: st_snaptogrid(geometry, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_snaptogrid(geometry, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_snaptogrid(geometry, double precision) RETURNS geometry
@@ -12402,12 +11079,10 @@ CREATE FUNCTION st_snaptogrid(geometry, double precision) RETURNS geometry
     AS $_$SELECT ST_SnapToGrid($1, 0, 0, $2, $2)$_$;
 
 
-ALTER FUNCTION public.st_snaptogrid(geometry, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2939 (class 0 OID 0)
+-- TOC entry 3083 (class 0 OID 0)
 -- Dependencies: 387
--- Name: FUNCTION st_snaptogrid(geometry, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_snaptogrid(geometry, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_snaptogrid(geometry, double precision) IS 'args: geomA, size - Snap all points of the input geometry to the grid defined by its origin and cell size. Remove consecutive points falling on the same cell, eventually returning NULL if output points are not enough to define a geometry of the given type. Collapsed geometries in a collection are stripped from it. Useful for reducing precision.';
@@ -12415,8 +11090,8 @@ COMMENT ON FUNCTION st_snaptogrid(geometry, double precision) IS 'args: geomA, s
 
 --
 -- TOC entry 389 (class 1255 OID 32013)
--- Dependencies: 3 1005 1005 1005
--- Name: st_snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -12424,12 +11099,10 @@ CREATE FUNCTION st_snaptogrid(geometry, geometry, double precision, double preci
     AS '$libdir/postgis-1.4', 'LWGEOM_snaptogrid_pointoff';
 
 
-ALTER FUNCTION public.st_snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2940 (class 0 OID 0)
+-- TOC entry 3084 (class 0 OID 0)
 -- Dependencies: 389
--- Name: FUNCTION st_snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_snaptogrid(geometry, geometry, double precision, double precision, double precision, double precision) IS 'args: geomA, pointOrigin, sizeX, sizeY, sizeZ, sizeM - Snap all points of the input geometry to the grid defined by its origin and cell size. Remove consecutive points falling on the same cell, eventually returning NULL if output points are not enough to define a geometry of the given type. Collapsed geometries in a collection are stripped from it. Useful for reducing precision.';
@@ -12437,8 +11110,8 @@ COMMENT ON FUNCTION st_snaptogrid(geometry, geometry, double precision, double p
 
 --
 -- TOC entry 159 (class 1255 OID 31743)
--- Dependencies: 3 1014
--- Name: st_srid(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1017
+-- Name: st_srid(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_srid(chip) RETURNS integer
@@ -12446,12 +11119,10 @@ CREATE FUNCTION st_srid(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getSRID';
 
 
-ALTER FUNCTION public.st_srid(chip) OWNER TO postgres;
-
 --
 -- TOC entry 560 (class 1255 OID 32200)
--- Dependencies: 3 1005
--- Name: st_srid(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_srid(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_srid(geometry) RETURNS integer
@@ -12459,12 +11130,10 @@ CREATE FUNCTION st_srid(geometry) RETURNS integer
     AS '$libdir/postgis-1.4', 'LWGEOM_getSRID';
 
 
-ALTER FUNCTION public.st_srid(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2941 (class 0 OID 0)
+-- TOC entry 3085 (class 0 OID 0)
 -- Dependencies: 560
--- Name: FUNCTION st_srid(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_srid(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_srid(geometry) IS 'args: g1 - Returns the spatial reference identifier for the ST_Geometry as defined in spatial_ref_sys table.';
@@ -12472,8 +11141,8 @@ COMMENT ON FUNCTION st_srid(geometry) IS 'args: g1 - Returns the spatial referen
 
 --
 -- TOC entry 552 (class 1255 OID 32192)
--- Dependencies: 3 1005 1005
--- Name: st_startpoint(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_startpoint(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_startpoint(geometry) RETURNS geometry
@@ -12481,12 +11150,10 @@ CREATE FUNCTION st_startpoint(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_startpoint_linestring';
 
 
-ALTER FUNCTION public.st_startpoint(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2942 (class 0 OID 0)
+-- TOC entry 3086 (class 0 OID 0)
 -- Dependencies: 552
--- Name: FUNCTION st_startpoint(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_startpoint(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_startpoint(geometry) IS 'args: geomA - Returns the first point of a LINESTRING geometry as a POINT.';
@@ -12494,8 +11161,8 @@ COMMENT ON FUNCTION st_startpoint(geometry) IS 'args: geomA - Returns the first 
 
 --
 -- TOC entry 176 (class 1255 OID 31760)
--- Dependencies: 3 1005
--- Name: st_summary(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_summary(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_summary(geometry) RETURNS text
@@ -12503,12 +11170,10 @@ CREATE FUNCTION st_summary(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_summary';
 
 
-ALTER FUNCTION public.st_summary(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2943 (class 0 OID 0)
+-- TOC entry 3087 (class 0 OID 0)
 -- Dependencies: 176
--- Name: FUNCTION st_summary(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_summary(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_summary(geometry) IS 'args: g - Returns a text summary of the contents of the ST_Geometry.';
@@ -12516,8 +11181,8 @@ COMMENT ON FUNCTION st_summary(geometry) IS 'args: g - Returns a text summary of
 
 --
 -- TOC entry 420 (class 1255 OID 32044)
--- Dependencies: 3 1005 1005 1005
--- Name: st_symdifference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_symdifference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_symdifference(geometry, geometry) RETURNS geometry
@@ -12525,12 +11190,10 @@ CREATE FUNCTION st_symdifference(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'symdifference';
 
 
-ALTER FUNCTION public.st_symdifference(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2944 (class 0 OID 0)
+-- TOC entry 3088 (class 0 OID 0)
 -- Dependencies: 420
--- Name: FUNCTION st_symdifference(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_symdifference(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_symdifference(geometry, geometry) IS 'args: geomA, geomB - Returns a geometry that represents the portions of A and B that do not intersect. It is called a symmetric difference because ST_SymDifference(A,B) = ST_SymDifference(B,A).';
@@ -12538,8 +11201,8 @@ COMMENT ON FUNCTION st_symdifference(geometry, geometry) IS 'args: geomA, geomB 
 
 --
 -- TOC entry 422 (class 1255 OID 32046)
--- Dependencies: 3 1005 1005 1005
--- Name: st_symmetricdifference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_symmetricdifference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_symmetricdifference(geometry, geometry) RETURNS geometry
@@ -12547,12 +11210,10 @@ CREATE FUNCTION st_symmetricdifference(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'symdifference';
 
 
-ALTER FUNCTION public.st_symmetricdifference(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 366 (class 1255 OID 31974)
--- Dependencies: 3 1005
--- Name: st_text(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_text(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_text(geometry) RETURNS text
@@ -12560,12 +11221,10 @@ CREATE FUNCTION st_text(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_to_text';
 
 
-ALTER FUNCTION public.st_text(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 453 (class 1255 OID 32094)
--- Dependencies: 3 1005 1005
--- Name: st_touches(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_touches(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_touches(geometry, geometry) RETURNS boolean
@@ -12573,12 +11232,10 @@ CREATE FUNCTION st_touches(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_Touches($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_touches(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2945 (class 0 OID 0)
+-- TOC entry 3089 (class 0 OID 0)
 -- Dependencies: 453
--- Name: FUNCTION st_touches(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_touches(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_touches(geometry, geometry) IS 'args: g1, g2 - Returns TRUE if the geometries have at least one point in common, but their interiors do not intersect.';
@@ -12586,8 +11243,8 @@ COMMENT ON FUNCTION st_touches(geometry, geometry) IS 'args: g1, g2 - Returns TR
 
 --
 -- TOC entry 345 (class 1255 OID 31950)
--- Dependencies: 3 1005 1005
--- Name: st_transform(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_transform(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_transform(geometry, integer) RETURNS geometry
@@ -12595,12 +11252,10 @@ CREATE FUNCTION st_transform(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'transform';
 
 
-ALTER FUNCTION public.st_transform(geometry, integer) OWNER TO postgres;
-
 --
--- TOC entry 2946 (class 0 OID 0)
+-- TOC entry 3090 (class 0 OID 0)
 -- Dependencies: 345
--- Name: FUNCTION st_transform(geometry, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_transform(geometry, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_transform(geometry, integer) IS 'args: g1, srid - Returns a new geometry with its coordinates transformed to the SRID referenced by the integer parameter.';
@@ -12608,8 +11263,8 @@ COMMENT ON FUNCTION st_transform(geometry, integer) IS 'args: g1, srid - Returns
 
 --
 -- TOC entry 47 (class 1255 OID 31577)
--- Dependencies: 3 1005 1005
--- Name: st_translate(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: st_translate(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_translate(geometry, double precision, double precision, double precision) RETURNS geometry
@@ -12617,12 +11272,10 @@ CREATE FUNCTION st_translate(geometry, double precision, double precision, doubl
     AS $_$SELECT affine($1, 1, 0, 0, 0, 1, 0, 0, 0, 1, $2, $3, $4)$_$;
 
 
-ALTER FUNCTION public.st_translate(geometry, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2947 (class 0 OID 0)
+-- TOC entry 3091 (class 0 OID 0)
 -- Dependencies: 47
--- Name: FUNCTION st_translate(geometry, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_translate(geometry, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_translate(geometry, double precision, double precision, double precision) IS 'args: g1, deltax, deltay, deltaz - Translates the geometry to a new location using the numeric parameters as offsets. Ie: ST_Translate(geom, X, Y) or ST_Translate(geom, X, Y,Z).';
@@ -12630,8 +11283,8 @@ COMMENT ON FUNCTION st_translate(geometry, double precision, double precision, d
 
 --
 -- TOC entry 49 (class 1255 OID 31579)
--- Dependencies: 3 1005 1005
--- Name: st_translate(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_translate(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_translate(geometry, double precision, double precision) RETURNS geometry
@@ -12639,12 +11292,10 @@ CREATE FUNCTION st_translate(geometry, double precision, double precision) RETUR
     AS $_$SELECT translate($1, $2, $3, 0)$_$;
 
 
-ALTER FUNCTION public.st_translate(geometry, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2948 (class 0 OID 0)
+-- TOC entry 3092 (class 0 OID 0)
 -- Dependencies: 49
--- Name: FUNCTION st_translate(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_translate(geometry, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_translate(geometry, double precision, double precision) IS 'args: g1, deltax, deltay - Translates the geometry to a new location using the numeric parameters as offsets. Ie: ST_Translate(geom, X, Y) or ST_Translate(geom, X, Y,Z).';
@@ -12652,8 +11303,8 @@ COMMENT ON FUNCTION st_translate(geometry, double precision, double precision) I
 
 --
 -- TOC entry 55 (class 1255 OID 31585)
--- Dependencies: 1005 1005 3
--- Name: st_transscale(geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: st_transscale(geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_transscale(geometry, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -12662,12 +11313,10 @@ CREATE FUNCTION st_transscale(geometry, double precision, double precision, doub
 		0, 0, 1,  $2 * $4, $3 * $5, 0)$_$;
 
 
-ALTER FUNCTION public.st_transscale(geometry, double precision, double precision, double precision, double precision) OWNER TO postgres;
-
 --
--- TOC entry 2949 (class 0 OID 0)
+-- TOC entry 3093 (class 0 OID 0)
 -- Dependencies: 55
--- Name: FUNCTION st_transscale(geometry, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_transscale(geometry, double precision, double precision, double precision, double precision); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_transscale(geometry, double precision, double precision, double precision, double precision) IS 'args: geomA, deltaX, deltaY, XFactor, YFactor - Translates the geometry using the deltaX and deltaY args, then scales it using the XFactor, YFactor args, working in 2D only.';
@@ -12675,8 +11324,8 @@ COMMENT ON FUNCTION st_transscale(geometry, double precision, double precision, 
 
 --
 -- TOC entry 424 (class 1255 OID 32048)
--- Dependencies: 3 1005 1005 1005
--- Name: st_union(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: st_union(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_union(geometry, geometry) RETURNS geometry
@@ -12684,12 +11333,10 @@ CREATE FUNCTION st_union(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'geomunion';
 
 
-ALTER FUNCTION public.st_union(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2950 (class 0 OID 0)
+-- TOC entry 3094 (class 0 OID 0)
 -- Dependencies: 424
--- Name: FUNCTION st_union(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_union(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_union(geometry, geometry) IS 'args: g1, g2 - Returns a geometry that represents the point set union of the Geometries.';
@@ -12697,8 +11344,8 @@ COMMENT ON FUNCTION st_union(geometry, geometry) IS 'args: g1, g2 - Returns a ge
 
 --
 -- TOC entry 444 (class 1255 OID 32078)
--- Dependencies: 3 1005 1007
--- Name: st_union(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1010
+-- Name: st_union(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_union(geometry[]) RETURNS geometry
@@ -12706,12 +11353,10 @@ CREATE FUNCTION st_union(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pgis_union_geometry_array';
 
 
-ALTER FUNCTION public.st_union(geometry[]) OWNER TO postgres;
-
 --
--- TOC entry 2951 (class 0 OID 0)
+-- TOC entry 3095 (class 0 OID 0)
 -- Dependencies: 444
--- Name: FUNCTION st_union(geometry[]); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_union(geometry[]); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_union(geometry[]) IS 'args: g1_array - Returns a geometry that represents the point set union of the Geometries.';
@@ -12719,8 +11364,8 @@ COMMENT ON FUNCTION st_union(geometry[]) IS 'args: g1_array - Returns a geometry
 
 --
 -- TOC entry 443 (class 1255 OID 32077)
--- Dependencies: 3 1005 1007
--- Name: st_unite_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1010
+-- Name: st_unite_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_unite_garray(geometry[]) RETURNS geometry
@@ -12728,12 +11373,10 @@ CREATE FUNCTION st_unite_garray(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pgis_union_geometry_array';
 
 
-ALTER FUNCTION public.st_unite_garray(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 165 (class 1255 OID 31749)
--- Dependencies: 3 1014
--- Name: st_width(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1017 3
+-- Name: st_width(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_width(chip) RETURNS integer
@@ -12741,12 +11384,10 @@ CREATE FUNCTION st_width(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getWidth';
 
 
-ALTER FUNCTION public.st_width(chip) OWNER TO postgres;
-
 --
 -- TOC entry 464 (class 1255 OID 32105)
--- Dependencies: 3 1005 1005
--- Name: st_within(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: st_within(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_within(geometry, geometry) RETURNS boolean
@@ -12754,12 +11395,10 @@ CREATE FUNCTION st_within(geometry, geometry) RETURNS boolean
     AS $_$SELECT $1 && $2 AND _ST_Within($1,$2)$_$;
 
 
-ALTER FUNCTION public.st_within(geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 2952 (class 0 OID 0)
+-- TOC entry 3096 (class 0 OID 0)
 -- Dependencies: 464
--- Name: FUNCTION st_within(geometry, geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_within(geometry, geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_within(geometry, geometry) IS 'args: A, B - Returns true if the geometry A is completely inside geometry B';
@@ -12767,8 +11406,8 @@ COMMENT ON FUNCTION st_within(geometry, geometry) IS 'args: A, B - Returns true 
 
 --
 -- TOC entry 690 (class 1255 OID 32331)
--- Dependencies: 1005 3
--- Name: st_wkbtosql(bytea); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_wkbtosql(bytea); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_wkbtosql(bytea) RETURNS geometry
@@ -12776,12 +11415,10 @@ CREATE FUNCTION st_wkbtosql(bytea) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_WKB';
 
 
-ALTER FUNCTION public.st_wkbtosql(bytea) OWNER TO postgres;
-
 --
--- TOC entry 2953 (class 0 OID 0)
+-- TOC entry 3097 (class 0 OID 0)
 -- Dependencies: 690
--- Name: FUNCTION st_wkbtosql(bytea); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_wkbtosql(bytea); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_wkbtosql(bytea) IS 'args: WKB - Return a specified ST_Geometry value from Well-Known Binary representation (WKB). This is an alias name for ST_GeomFromWKB that takes no srid';
@@ -12789,8 +11426,8 @@ COMMENT ON FUNCTION st_wkbtosql(bytea) IS 'args: WKB - Return a specified ST_Geo
 
 --
 -- TOC entry 689 (class 1255 OID 32330)
--- Dependencies: 1005 3
--- Name: st_wkttosql(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_wkttosql(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_wkttosql(text) RETURNS geometry
@@ -12798,12 +11435,10 @@ CREATE FUNCTION st_wkttosql(text) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_from_text';
 
 
-ALTER FUNCTION public.st_wkttosql(text) OWNER TO postgres;
-
 --
--- TOC entry 2954 (class 0 OID 0)
+-- TOC entry 3098 (class 0 OID 0)
 -- Dependencies: 689
--- Name: FUNCTION st_wkttosql(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_wkttosql(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_wkttosql(text) IS 'args: WKT - Return a specified ST_Geometry value from Well-Known Text representation (WKT). This is an alias name for ST_GeomFromText';
@@ -12811,8 +11446,8 @@ COMMENT ON FUNCTION st_wkttosql(text) IS 'args: WKT - Return a specified ST_Geom
 
 --
 -- TOC entry 544 (class 1255 OID 32184)
--- Dependencies: 3 1005
--- Name: st_x(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_x(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_x(geometry) RETURNS double precision
@@ -12820,12 +11455,10 @@ CREATE FUNCTION st_x(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_x_point';
 
 
-ALTER FUNCTION public.st_x(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2955 (class 0 OID 0)
+-- TOC entry 3099 (class 0 OID 0)
 -- Dependencies: 544
--- Name: FUNCTION st_x(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_x(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_x(geometry) IS 'args: a_point - Return the X coordinate of the point, or NULL if not available. Input must be a point.';
@@ -12833,8 +11466,8 @@ COMMENT ON FUNCTION st_x(geometry) IS 'args: a_point - Return the X coordinate o
 
 --
 -- TOC entry 74 (class 1255 OID 31609)
--- Dependencies: 1008 3
--- Name: st_xmax(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: st_xmax(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_xmax(box3d) RETURNS double precision
@@ -12842,12 +11475,10 @@ CREATE FUNCTION st_xmax(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_xmax';
 
 
-ALTER FUNCTION public.st_xmax(box3d) OWNER TO postgres;
-
 --
--- TOC entry 2956 (class 0 OID 0)
+-- TOC entry 3100 (class 0 OID 0)
 -- Dependencies: 74
--- Name: FUNCTION st_xmax(box3d); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_xmax(box3d); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_xmax(box3d) IS 'args: aGeomorBox2DorBox3D - Returns X maxima of a bounding box 2d or 3d or a geometry.';
@@ -12855,8 +11486,8 @@ COMMENT ON FUNCTION st_xmax(box3d) IS 'args: aGeomorBox2DorBox3D - Returns X max
 
 --
 -- TOC entry 68 (class 1255 OID 31603)
--- Dependencies: 3 1008
--- Name: st_xmin(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: st_xmin(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_xmin(box3d) RETURNS double precision
@@ -12864,12 +11495,10 @@ CREATE FUNCTION st_xmin(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_xmin';
 
 
-ALTER FUNCTION public.st_xmin(box3d) OWNER TO postgres;
-
 --
--- TOC entry 2957 (class 0 OID 0)
+-- TOC entry 3101 (class 0 OID 0)
 -- Dependencies: 68
--- Name: FUNCTION st_xmin(box3d); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_xmin(box3d); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_xmin(box3d) IS 'args: aGeomorBox2DorBox3D - Returns X minima of a bounding box 2d or 3d or a geometry.';
@@ -12877,8 +11506,8 @@ COMMENT ON FUNCTION st_xmin(box3d) IS 'args: aGeomorBox2DorBox3D - Returns X min
 
 --
 -- TOC entry 546 (class 1255 OID 32186)
--- Dependencies: 3 1005
--- Name: st_y(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_y(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_y(geometry) RETURNS double precision
@@ -12886,12 +11515,10 @@ CREATE FUNCTION st_y(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_y_point';
 
 
-ALTER FUNCTION public.st_y(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2958 (class 0 OID 0)
+-- TOC entry 3102 (class 0 OID 0)
 -- Dependencies: 546
--- Name: FUNCTION st_y(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_y(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_y(geometry) IS 'args: a_point - Return the Y coordinate of the point, or NULL if not available. Input must be a point.';
@@ -12899,8 +11526,8 @@ COMMENT ON FUNCTION st_y(geometry) IS 'args: a_point - Return the Y coordinate o
 
 --
 -- TOC entry 76 (class 1255 OID 31611)
--- Dependencies: 1008 3
--- Name: st_ymax(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: st_ymax(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_ymax(box3d) RETURNS double precision
@@ -12908,12 +11535,10 @@ CREATE FUNCTION st_ymax(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_ymax';
 
 
-ALTER FUNCTION public.st_ymax(box3d) OWNER TO postgres;
-
 --
--- TOC entry 2959 (class 0 OID 0)
+-- TOC entry 3103 (class 0 OID 0)
 -- Dependencies: 76
--- Name: FUNCTION st_ymax(box3d); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_ymax(box3d); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_ymax(box3d) IS 'args: aGeomorBox2DorBox3D - Returns Y maxima of a bounding box 2d or 3d or a geometry.';
@@ -12921,8 +11546,8 @@ COMMENT ON FUNCTION st_ymax(box3d) IS 'args: aGeomorBox2DorBox3D - Returns Y max
 
 --
 -- TOC entry 70 (class 1255 OID 31605)
--- Dependencies: 3 1008
--- Name: st_ymin(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: st_ymin(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_ymin(box3d) RETURNS double precision
@@ -12930,12 +11555,10 @@ CREATE FUNCTION st_ymin(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_ymin';
 
 
-ALTER FUNCTION public.st_ymin(box3d) OWNER TO postgres;
-
 --
--- TOC entry 2960 (class 0 OID 0)
+-- TOC entry 3104 (class 0 OID 0)
 -- Dependencies: 70
--- Name: FUNCTION st_ymin(box3d); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_ymin(box3d); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_ymin(box3d) IS 'args: aGeomorBox2DorBox3D - Returns Y minima of a bounding box 2d or 3d or a geometry.';
@@ -12943,8 +11566,8 @@ COMMENT ON FUNCTION st_ymin(box3d) IS 'args: aGeomorBox2DorBox3D - Returns Y min
 
 --
 -- TOC entry 548 (class 1255 OID 32188)
--- Dependencies: 3 1005
--- Name: st_z(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: st_z(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_z(geometry) RETURNS double precision
@@ -12952,12 +11575,10 @@ CREATE FUNCTION st_z(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_z_point';
 
 
-ALTER FUNCTION public.st_z(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2961 (class 0 OID 0)
+-- TOC entry 3105 (class 0 OID 0)
 -- Dependencies: 548
--- Name: FUNCTION st_z(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_z(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_z(geometry) IS 'args: a_point - Return the Z coordinate of the point, or NULL if not available. Input must be a point.';
@@ -12965,8 +11586,8 @@ COMMENT ON FUNCTION st_z(geometry) IS 'args: a_point - Return the Z coordinate o
 
 --
 -- TOC entry 78 (class 1255 OID 31613)
--- Dependencies: 3 1008
--- Name: st_zmax(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: st_zmax(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_zmax(box3d) RETURNS double precision
@@ -12974,12 +11595,10 @@ CREATE FUNCTION st_zmax(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_zmax';
 
 
-ALTER FUNCTION public.st_zmax(box3d) OWNER TO postgres;
-
 --
--- TOC entry 2962 (class 0 OID 0)
+-- TOC entry 3106 (class 0 OID 0)
 -- Dependencies: 78
--- Name: FUNCTION st_zmax(box3d); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_zmax(box3d); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_zmax(box3d) IS 'args: aGeomorBox2DorBox3D - Returns Z minima of a bounding box 2d or 3d or a geometry.';
@@ -12987,8 +11606,8 @@ COMMENT ON FUNCTION st_zmax(box3d) IS 'args: aGeomorBox2DorBox3D - Returns Z min
 
 --
 -- TOC entry 244 (class 1255 OID 31828)
--- Dependencies: 3 1005
--- Name: st_zmflag(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: st_zmflag(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_zmflag(geometry) RETURNS smallint
@@ -12996,12 +11615,10 @@ CREATE FUNCTION st_zmflag(geometry) RETURNS smallint
     AS '$libdir/postgis-1.4', 'LWGEOM_zmflag';
 
 
-ALTER FUNCTION public.st_zmflag(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2963 (class 0 OID 0)
+-- TOC entry 3107 (class 0 OID 0)
 -- Dependencies: 244
--- Name: FUNCTION st_zmflag(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_zmflag(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_zmflag(geometry) IS 'args: geomA - Returns ZM (dimension semantic) flag of the geometries as a small int. Values are: 0=2d, 1=3dm, 2=3dz, 3=4d.';
@@ -13009,8 +11626,8 @@ COMMENT ON FUNCTION st_zmflag(geometry) IS 'args: geomA - Returns ZM (dimension 
 
 --
 -- TOC entry 72 (class 1255 OID 31607)
--- Dependencies: 1008 3
--- Name: st_zmin(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1011 3
+-- Name: st_zmin(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION st_zmin(box3d) RETURNS double precision
@@ -13018,12 +11635,10 @@ CREATE FUNCTION st_zmin(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_zmin';
 
 
-ALTER FUNCTION public.st_zmin(box3d) OWNER TO postgres;
-
 --
--- TOC entry 2964 (class 0 OID 0)
+-- TOC entry 3108 (class 0 OID 0)
 -- Dependencies: 72
--- Name: FUNCTION st_zmin(box3d); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION st_zmin(box3d); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION st_zmin(box3d) IS 'args: aGeomorBox2DorBox3D - Returns Z minima of a bounding box 2d or 3d or a geometry.';
@@ -13031,8 +11646,8 @@ COMMENT ON FUNCTION st_zmin(box3d) IS 'args: aGeomorBox2DorBox3D - Returns Z min
 
 --
 -- TOC entry 551 (class 1255 OID 32191)
--- Dependencies: 3 1005 1005
--- Name: startpoint(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3 1008
+-- Name: startpoint(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION startpoint(geometry) RETURNS geometry
@@ -13040,12 +11655,10 @@ CREATE FUNCTION startpoint(geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'LWGEOM_startpoint_linestring';
 
 
-ALTER FUNCTION public.startpoint(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 175 (class 1255 OID 31759)
--- Dependencies: 3 1005
--- Name: summary(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: summary(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION summary(geometry) RETURNS text
@@ -13053,12 +11666,10 @@ CREATE FUNCTION summary(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_summary';
 
 
-ALTER FUNCTION public.summary(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 419 (class 1255 OID 32043)
--- Dependencies: 3 1005 1005 1005
--- Name: symdifference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: symdifference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION symdifference(geometry, geometry) RETURNS geometry
@@ -13066,12 +11677,10 @@ CREATE FUNCTION symdifference(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'symdifference';
 
 
-ALTER FUNCTION public.symdifference(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 421 (class 1255 OID 32045)
--- Dependencies: 3 1005 1005 1005
--- Name: symmetricdifference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008 1008
+-- Name: symmetricdifference(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION symmetricdifference(geometry, geometry) RETURNS geometry
@@ -13079,12 +11688,10 @@ CREATE FUNCTION symmetricdifference(geometry, geometry) RETURNS geometry
     AS '$libdir/postgis-1.4', 'symdifference';
 
 
-ALTER FUNCTION public.symmetricdifference(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 365 (class 1255 OID 31973)
--- Dependencies: 3 1005
--- Name: text(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: text(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION text(geometry) RETURNS text
@@ -13092,12 +11699,46 @@ CREATE FUNCTION text(geometry) RETURNS text
     AS '$libdir/postgis-1.4', 'LWGEOM_to_text';
 
 
-ALTER FUNCTION public.text(geometry) OWNER TO postgres;
+--
+-- TOC entry 719 (class 1255 OID 33976)
+-- Dependencies: 1123 3
+-- Name: tipo_matriz_productiva_trigauto(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION tipo_matriz_productiva_trigauto() RETURNS trigger
+    LANGUAGE plpgsql STRICT
+    AS $$
+DECLARE rows_affected INTEGER;
+BEGIN
+IF TG_OP ='INSERT' THEN
+INSERT INTO "auditoria".tipo_matriz_productiva (accion, newmovimiento,usuarioapl)
+select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='UPDATE' THEN
+INSERT INTO "auditoria".tipo_matriz_productiva (accion, oldmovimiento, newmovimiento, usuarioapl)
+select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='DELETE' THEN
+INSERT INTO "auditoria".tipo_matriz_productiva (accion,oldmovimiento, usuarioapl)
+select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
+ELSE
+RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
+END IF;
+GET DIAGNOSTICS rows_affected = ROW_COUNT;
+IF rows_affected = 1 THEN
+IF TG_OP IN ('INSERT','UPDATE') THEN
+RETURN NEW;
+ELSE
+RETURN OLD;
+END IF;
+ELSE RAISE EXCEPTION 'Fallo el insert en auditoria. tipo_matriz_productiva.';
+END IF;
+END;
+$$;
+
 
 --
 -- TOC entry 451 (class 1255 OID 32092)
--- Dependencies: 3 1005 1005
--- Name: touches(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: touches(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION touches(geometry, geometry) RETURNS boolean
@@ -13105,12 +11746,10 @@ CREATE FUNCTION touches(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'touches';
 
 
-ALTER FUNCTION public.touches(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 344 (class 1255 OID 31949)
--- Dependencies: 1005 1005 3
--- Name: transform(geometry, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: transform(geometry, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION transform(geometry, integer) RETURNS geometry
@@ -13118,12 +11757,10 @@ CREATE FUNCTION transform(geometry, integer) RETURNS geometry
     AS '$libdir/postgis-1.4', 'transform';
 
 
-ALTER FUNCTION public.transform(geometry, integer) OWNER TO postgres;
-
 --
 -- TOC entry 343 (class 1255 OID 31948)
--- Dependencies: 1005 3 1005
--- Name: transform_geometry(geometry, text, text, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: transform_geometry(geometry, text, text, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION transform_geometry(geometry, text, text, integer) RETURNS geometry
@@ -13131,12 +11768,10 @@ CREATE FUNCTION transform_geometry(geometry, text, text, integer) RETURNS geomet
     AS '$libdir/postgis-1.4', 'transform_geom';
 
 
-ALTER FUNCTION public.transform_geometry(geometry, text, text, integer) OWNER TO postgres;
-
 --
 -- TOC entry 46 (class 1255 OID 31576)
--- Dependencies: 1005 3 1005
--- Name: translate(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: translate(geometry, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION translate(geometry, double precision, double precision, double precision) RETURNS geometry
@@ -13144,12 +11779,10 @@ CREATE FUNCTION translate(geometry, double precision, double precision, double p
     AS $_$SELECT affine($1, 1, 0, 0, 0, 1, 0, 0, 0, 1, $2, $3, $4)$_$;
 
 
-ALTER FUNCTION public.translate(geometry, double precision, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 48 (class 1255 OID 31578)
--- Dependencies: 1005 3 1005
--- Name: translate(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 1008 3
+-- Name: translate(geometry, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION translate(geometry, double precision, double precision) RETURNS geometry
@@ -13157,12 +11790,10 @@ CREATE FUNCTION translate(geometry, double precision, double precision) RETURNS 
     AS $_$SELECT translate($1, $2, $3, 0)$_$;
 
 
-ALTER FUNCTION public.translate(geometry, double precision, double precision) OWNER TO postgres;
-
 --
 -- TOC entry 54 (class 1255 OID 31584)
--- Dependencies: 1005 1005 3
--- Name: transscale(geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: transscale(geometry, double precision, double precision, double precision, double precision); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION transscale(geometry, double precision, double precision, double precision, double precision) RETURNS geometry
@@ -13171,12 +11802,46 @@ CREATE FUNCTION transscale(geometry, double precision, double precision, double 
 		0, 0, 1,  $2 * $4, $3 * $5, 0)$_$;
 
 
-ALTER FUNCTION public.transscale(geometry, double precision, double precision, double precision, double precision) OWNER TO postgres;
+--
+-- TOC entry 720 (class 1255 OID 33992)
+-- Dependencies: 1123 3
+-- Name: ubicacion_trigauto(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION ubicacion_trigauto() RETURNS trigger
+    LANGUAGE plpgsql STRICT
+    AS $$
+DECLARE rows_affected INTEGER;
+BEGIN
+IF TG_OP ='INSERT' THEN
+INSERT INTO "auditoria".ubicacion (accion, newmovimiento,usuarioapl)
+select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='UPDATE' THEN
+INSERT INTO "auditoria".ubicacion (accion, oldmovimiento, newmovimiento, usuarioapl)
+select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='DELETE' THEN
+INSERT INTO "auditoria".ubicacion (accion,oldmovimiento, usuarioapl)
+select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
+ELSE
+RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
+END IF;
+GET DIAGNOSTICS rows_affected = ROW_COUNT;
+IF rows_affected = 1 THEN
+IF TG_OP IN ('INSERT','UPDATE') THEN
+RETURN NEW;
+ELSE
+RETURN OLD;
+END IF;
+ELSE RAISE EXCEPTION 'Fallo el insert en auditoria. ubicacion.';
+END IF;
+END;
+$$;
+
 
 --
 -- TOC entry 442 (class 1255 OID 32076)
--- Dependencies: 3 1005 1007
--- Name: unite_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1010
+-- Name: unite_garray(geometry[]); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION unite_garray(geometry[]) RETURNS geometry
@@ -13184,12 +11849,10 @@ CREATE FUNCTION unite_garray(geometry[]) RETURNS geometry
     AS '$libdir/postgis-1.4', 'pgis_union_geometry_array';
 
 
-ALTER FUNCTION public.unite_garray(geometry[]) OWNER TO postgres;
-
 --
 -- TOC entry 676 (class 1255 OID 32317)
--- Dependencies: 1080 3
--- Name: unlockrows(text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1123 3
+-- Name: unlockrows(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION unlockrows(text) RETURNS integer
@@ -13213,12 +11876,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.unlockrows(text) OWNER TO postgres;
-
 --
--- TOC entry 2965 (class 0 OID 0)
+-- TOC entry 3109 (class 0 OID 0)
 -- Dependencies: 676
--- Name: FUNCTION unlockrows(text); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION unlockrows(text); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION unlockrows(text) IS 'args: auth_token - Remove all locks held by specified authorization id. Returns the number of locks released.';
@@ -13226,8 +11887,8 @@ COMMENT ON FUNCTION unlockrows(text) IS 'args: auth_token - Remove all locks hel
 
 --
 -- TOC entry 338 (class 1255 OID 31943)
--- Dependencies: 1080 3
--- Name: updategeometrysrid(character varying, character varying, character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: updategeometrysrid(character varying, character varying, character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION updategeometrysrid(character varying, character varying, character varying, character varying, integer) RETURNS text
@@ -13309,12 +11970,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.updategeometrysrid(character varying, character varying, character varying, character varying, integer) OWNER TO postgres;
-
 --
--- TOC entry 2966 (class 0 OID 0)
+-- TOC entry 3110 (class 0 OID 0)
 -- Dependencies: 338
--- Name: FUNCTION updategeometrysrid(character varying, character varying, character varying, character varying, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION updategeometrysrid(character varying, character varying, character varying, character varying, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION updategeometrysrid(character varying, character varying, character varying, character varying, integer) IS 'args: catalog_name, schema_name, table_name, column_name, srid - Updates the SRID of all features in a geometry column, geometry_columns metadata and srid table constraint';
@@ -13322,8 +11981,8 @@ COMMENT ON FUNCTION updategeometrysrid(character varying, character varying, cha
 
 --
 -- TOC entry 339 (class 1255 OID 31944)
--- Dependencies: 3 1080
--- Name: updategeometrysrid(character varying, character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: updategeometrysrid(character varying, character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION updategeometrysrid(character varying, character varying, character varying, integer) RETURNS text
@@ -13338,12 +11997,10 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.updategeometrysrid(character varying, character varying, character varying, integer) OWNER TO postgres;
-
 --
--- TOC entry 2967 (class 0 OID 0)
+-- TOC entry 3111 (class 0 OID 0)
 -- Dependencies: 339
--- Name: FUNCTION updategeometrysrid(character varying, character varying, character varying, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION updategeometrysrid(character varying, character varying, character varying, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION updategeometrysrid(character varying, character varying, character varying, integer) IS 'args: schema_name, table_name, column_name, srid - Updates the SRID of all features in a geometry column, geometry_columns metadata and srid table constraint';
@@ -13351,8 +12008,8 @@ COMMENT ON FUNCTION updategeometrysrid(character varying, character varying, cha
 
 --
 -- TOC entry 340 (class 1255 OID 31945)
--- Dependencies: 3 1080
--- Name: updategeometrysrid(character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1123
+-- Name: updategeometrysrid(character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION updategeometrysrid(character varying, character varying, integer) RETURNS text
@@ -13367,21 +12024,55 @@ END;
 $_$;
 
 
-ALTER FUNCTION public.updategeometrysrid(character varying, character varying, integer) OWNER TO postgres;
-
 --
--- TOC entry 2968 (class 0 OID 0)
+-- TOC entry 3112 (class 0 OID 0)
 -- Dependencies: 340
--- Name: FUNCTION updategeometrysrid(character varying, character varying, integer); Type: COMMENT; Schema: public; Owner: postgres
+-- Name: FUNCTION updategeometrysrid(character varying, character varying, integer); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON FUNCTION updategeometrysrid(character varying, character varying, integer) IS 'args: table_name, column_name, srid - Updates the SRID of all features in a geometry column, geometry_columns metadata and srid table constraint';
 
 
 --
+-- TOC entry 721 (class 1255 OID 34008)
+-- Dependencies: 1123 3
+-- Name: usuario_trigauto(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION usuario_trigauto() RETURNS trigger
+    LANGUAGE plpgsql STRICT
+    AS $$
+DECLARE rows_affected INTEGER;
+BEGIN
+IF TG_OP ='INSERT' THEN
+INSERT INTO "auditoria".usuario (accion, newmovimiento,usuarioapl)
+select TG_OP , NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='UPDATE' THEN
+INSERT INTO "auditoria".usuario (accion, oldmovimiento, newmovimiento, usuarioapl)
+select TG_OP ,OLD ,NEW, usuario from "auditoria".tmp_usuario;
+ELSIF TG_OP ='DELETE' THEN
+INSERT INTO "auditoria".usuario (accion,oldmovimiento, usuarioapl)
+select TG_OP ,OLD, usuario from "auditoria".tmp_usuario;
+ELSE
+RAISE EXCEPTION 'TG_OP % es uno de INSERT, UPDATE or DELETE.', TG_OP;
+END IF;
+GET DIAGNOSTICS rows_affected = ROW_COUNT;
+IF rows_affected = 1 THEN
+IF TG_OP IN ('INSERT','UPDATE') THEN
+RETURN NEW;
+ELSE
+RETURN OLD;
+END IF;
+ELSE RAISE EXCEPTION 'Fallo el insert en auditoria. usuario.';
+END IF;
+END;
+$$;
+
+
+--
 -- TOC entry 164 (class 1255 OID 31748)
--- Dependencies: 3 1014
--- Name: width(chip); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1017
+-- Name: width(chip); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION width(chip) RETURNS integer
@@ -13389,12 +12080,10 @@ CREATE FUNCTION width(chip) RETURNS integer
     AS '$libdir/postgis-1.4', 'CHIP_getWidth';
 
 
-ALTER FUNCTION public.width(chip) OWNER TO postgres;
-
 --
 -- TOC entry 462 (class 1255 OID 32103)
--- Dependencies: 3 1005 1005
--- Name: within(geometry, geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008 1008
+-- Name: within(geometry, geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION within(geometry, geometry) RETURNS boolean
@@ -13402,12 +12091,10 @@ CREATE FUNCTION within(geometry, geometry) RETURNS boolean
     AS '$libdir/postgis-1.4', 'within';
 
 
-ALTER FUNCTION public.within(geometry, geometry) OWNER TO postgres;
-
 --
 -- TOC entry 543 (class 1255 OID 32183)
--- Dependencies: 3 1005
--- Name: x(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: x(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION x(geometry) RETURNS double precision
@@ -13415,12 +12102,10 @@ CREATE FUNCTION x(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_x_point';
 
 
-ALTER FUNCTION public.x(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 73 (class 1255 OID 31608)
--- Dependencies: 1008 3
--- Name: xmax(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1011 3
+-- Name: xmax(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION xmax(box3d) RETURNS double precision
@@ -13428,12 +12113,10 @@ CREATE FUNCTION xmax(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_xmax';
 
 
-ALTER FUNCTION public.xmax(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 67 (class 1255 OID 31602)
--- Dependencies: 3 1008
--- Name: xmin(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: xmin(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION xmin(box3d) RETURNS double precision
@@ -13441,12 +12124,10 @@ CREATE FUNCTION xmin(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_xmin';
 
 
-ALTER FUNCTION public.xmin(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 545 (class 1255 OID 32185)
--- Dependencies: 3 1005
--- Name: y(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1008
+-- Name: y(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION y(geometry) RETURNS double precision
@@ -13454,12 +12135,10 @@ CREATE FUNCTION y(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_y_point';
 
 
-ALTER FUNCTION public.y(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 75 (class 1255 OID 31610)
--- Dependencies: 1008 3
--- Name: ymax(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1011 3
+-- Name: ymax(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION ymax(box3d) RETURNS double precision
@@ -13467,12 +12146,10 @@ CREATE FUNCTION ymax(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_ymax';
 
 
-ALTER FUNCTION public.ymax(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 69 (class 1255 OID 31604)
--- Dependencies: 3 1008
--- Name: ymin(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: ymin(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION ymin(box3d) RETURNS double precision
@@ -13480,12 +12157,10 @@ CREATE FUNCTION ymin(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_ymin';
 
 
-ALTER FUNCTION public.ymin(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 547 (class 1255 OID 32187)
--- Dependencies: 3 1005
--- Name: z(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: z(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION z(geometry) RETURNS double precision
@@ -13493,12 +12168,10 @@ CREATE FUNCTION z(geometry) RETURNS double precision
     AS '$libdir/postgis-1.4', 'LWGEOM_z_point';
 
 
-ALTER FUNCTION public.z(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 77 (class 1255 OID 31612)
--- Dependencies: 3 1008
--- Name: zmax(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: zmax(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION zmax(box3d) RETURNS double precision
@@ -13506,12 +12179,10 @@ CREATE FUNCTION zmax(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_zmax';
 
 
-ALTER FUNCTION public.zmax(box3d) OWNER TO postgres;
-
 --
 -- TOC entry 243 (class 1255 OID 31827)
--- Dependencies: 1005 3
--- Name: zmflag(geometry); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 1008 3
+-- Name: zmflag(geometry); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION zmflag(geometry) RETURNS smallint
@@ -13519,12 +12190,10 @@ CREATE FUNCTION zmflag(geometry) RETURNS smallint
     AS '$libdir/postgis-1.4', 'LWGEOM_zmflag';
 
 
-ALTER FUNCTION public.zmflag(geometry) OWNER TO postgres;
-
 --
 -- TOC entry 71 (class 1255 OID 31606)
--- Dependencies: 3 1008
--- Name: zmin(box3d); Type: FUNCTION; Schema: public; Owner: postgres
+-- Dependencies: 3 1011
+-- Name: zmin(box3d); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION zmin(box3d) RETURNS double precision
@@ -13532,12 +12201,10 @@ CREATE FUNCTION zmin(box3d) RETURNS double precision
     AS '$libdir/postgis-1.4', 'BOX3D_zmin';
 
 
-ALTER FUNCTION public.zmin(box3d) OWNER TO postgres;
-
 --
--- TOC entry 1089 (class 1255 OID 32072)
--- Dependencies: 3 1007 1005 436 437
--- Name: accum(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1132 (class 1255 OID 32072)
+-- Dependencies: 3 1010 1008 436 437
+-- Name: accum(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE accum(geometry) (
@@ -13547,12 +12214,10 @@ CREATE AGGREGATE accum(geometry) (
 );
 
 
-ALTER AGGREGATE public.accum(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1091 (class 1255 OID 32074)
--- Dependencies: 3 1007 1005 430
--- Name: accum_old(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1134 (class 1255 OID 32074)
+-- Dependencies: 3 1010 1008 430
+-- Name: accum_old(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE accum_old(geometry) (
@@ -13561,12 +12226,10 @@ CREATE AGGREGATE accum_old(geometry) (
 );
 
 
-ALTER AGGREGATE public.accum_old(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1094 (class 1255 OID 32080)
--- Dependencies: 3 1005 1005 436 439
--- Name: collect(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1137 (class 1255 OID 32080)
+-- Dependencies: 3 1008 1008 436 439
+-- Name: collect(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE collect(geometry) (
@@ -13576,12 +12239,10 @@ CREATE AGGREGATE collect(geometry) (
 );
 
 
-ALTER AGGREGATE public.collect(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1081 (class 1255 OID 31898)
--- Dependencies: 1011 3 1005 310
--- Name: extent(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1124 (class 1255 OID 31898)
+-- Dependencies: 3 1014 1008 310
+-- Name: extent(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE extent(geometry) (
@@ -13590,12 +12251,10 @@ CREATE AGGREGATE extent(geometry) (
 );
 
 
-ALTER AGGREGATE public.extent(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1083 (class 1255 OID 31902)
--- Dependencies: 1005 311 1008 3
--- Name: extent3d(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1126 (class 1255 OID 31902)
+-- Dependencies: 3 1011 1008 311
+-- Name: extent3d(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE extent3d(geometry) (
@@ -13604,12 +12263,10 @@ CREATE AGGREGATE extent3d(geometry) (
 );
 
 
-ALTER AGGREGATE public.extent3d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1098 (class 1255 OID 32084)
--- Dependencies: 3 1005 1005 436 441
--- Name: makeline(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1141 (class 1255 OID 32084)
+-- Dependencies: 3 1008 1008 436 441
+-- Name: makeline(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE makeline(geometry) (
@@ -13619,12 +12276,10 @@ CREATE AGGREGATE makeline(geometry) (
 );
 
 
-ALTER AGGREGATE public.makeline(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1085 (class 1255 OID 32053)
--- Dependencies: 3 1005 1005 428
--- Name: memcollect(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1128 (class 1255 OID 32053)
+-- Dependencies: 3 1008 1008 428
+-- Name: memcollect(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE memcollect(geometry) (
@@ -13633,12 +12288,10 @@ CREATE AGGREGATE memcollect(geometry) (
 );
 
 
-ALTER AGGREGATE public.memcollect(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1087 (class 1255 OID 32060)
--- Dependencies: 3 1005 1005 423
--- Name: memgeomunion(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1130 (class 1255 OID 32060)
+-- Dependencies: 3 1008 1008 423
+-- Name: memgeomunion(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE memgeomunion(geometry) (
@@ -13647,12 +12300,10 @@ CREATE AGGREGATE memgeomunion(geometry) (
 );
 
 
-ALTER AGGREGATE public.memgeomunion(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1096 (class 1255 OID 32082)
--- Dependencies: 3 1005 1005 436 440
--- Name: polygonize(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1139 (class 1255 OID 32082)
+-- Dependencies: 3 1008 1008 436 440
+-- Name: polygonize(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE polygonize(geometry) (
@@ -13662,12 +12313,10 @@ CREATE AGGREGATE polygonize(geometry) (
 );
 
 
-ALTER AGGREGATE public.polygonize(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1090 (class 1255 OID 32073)
--- Dependencies: 3 1007 1005 436 437
--- Name: st_accum(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1133 (class 1255 OID 32073)
+-- Dependencies: 3 1010 1008 436 437
+-- Name: st_accum(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_accum(geometry) (
@@ -13677,21 +12326,19 @@ CREATE AGGREGATE st_accum(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_accum(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2969 (class 0 OID 0)
--- Dependencies: 1090
--- Name: AGGREGATE st_accum(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- TOC entry 3113 (class 0 OID 0)
+-- Dependencies: 1133
+-- Name: AGGREGATE st_accum(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON AGGREGATE st_accum(geometry) IS 'args: geomfield - Aggregate. Constructs an array of geometries.';
 
 
 --
--- TOC entry 1092 (class 1255 OID 32075)
--- Dependencies: 3 1007 1005 430
--- Name: st_accum_old(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1135 (class 1255 OID 32075)
+-- Dependencies: 3 1010 1008 430
+-- Name: st_accum_old(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_accum_old(geometry) (
@@ -13700,12 +12347,10 @@ CREATE AGGREGATE st_accum_old(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_accum_old(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1095 (class 1255 OID 32081)
--- Dependencies: 3 1005 1005 436 439
--- Name: st_collect(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1138 (class 1255 OID 32081)
+-- Dependencies: 3 1008 1008 436 439
+-- Name: st_collect(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_collect(geometry) (
@@ -13715,21 +12360,19 @@ CREATE AGGREGATE st_collect(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_collect(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2970 (class 0 OID 0)
--- Dependencies: 1095
--- Name: AGGREGATE st_collect(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- TOC entry 3114 (class 0 OID 0)
+-- Dependencies: 1138
+-- Name: AGGREGATE st_collect(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON AGGREGATE st_collect(geometry) IS 'args: g1field - Return a specified ST_Geometry value from a collection of other geometries.';
 
 
 --
--- TOC entry 1082 (class 1255 OID 31899)
--- Dependencies: 3 1011 1005 310
--- Name: st_extent(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1125 (class 1255 OID 31899)
+-- Dependencies: 3 1014 1008 310
+-- Name: st_extent(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_extent(geometry) (
@@ -13738,21 +12381,19 @@ CREATE AGGREGATE st_extent(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_extent(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2971 (class 0 OID 0)
--- Dependencies: 1082
--- Name: AGGREGATE st_extent(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- TOC entry 3115 (class 0 OID 0)
+-- Dependencies: 1125
+-- Name: AGGREGATE st_extent(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON AGGREGATE st_extent(geometry) IS 'args: geomfield - an aggregate function that returns the bounding box that bounds rows of geometries.';
 
 
 --
--- TOC entry 1084 (class 1255 OID 31903)
--- Dependencies: 312 1008 3 1005
--- Name: st_extent3d(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1127 (class 1255 OID 31903)
+-- Dependencies: 3 1011 1008 312
+-- Name: st_extent3d(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_extent3d(geometry) (
@@ -13761,21 +12402,19 @@ CREATE AGGREGATE st_extent3d(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_extent3d(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2972 (class 0 OID 0)
--- Dependencies: 1084
--- Name: AGGREGATE st_extent3d(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- TOC entry 3116 (class 0 OID 0)
+-- Dependencies: 1127
+-- Name: AGGREGATE st_extent3d(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON AGGREGATE st_extent3d(geometry) IS 'args: geomfield - an aggregate function that returns the box3D bounding box that bounds rows of geometries.';
 
 
 --
--- TOC entry 1099 (class 1255 OID 32085)
--- Dependencies: 3 1005 1005 436 441
--- Name: st_makeline(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1142 (class 1255 OID 32085)
+-- Dependencies: 3 1008 1008 436 441
+-- Name: st_makeline(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_makeline(geometry) (
@@ -13785,21 +12424,19 @@ CREATE AGGREGATE st_makeline(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_makeline(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2973 (class 0 OID 0)
--- Dependencies: 1099
--- Name: AGGREGATE st_makeline(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- TOC entry 3117 (class 0 OID 0)
+-- Dependencies: 1142
+-- Name: AGGREGATE st_makeline(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON AGGREGATE st_makeline(geometry) IS 'args: pointfield - Creates a Linestring from point geometries.';
 
 
 --
--- TOC entry 1086 (class 1255 OID 32054)
--- Dependencies: 3 1005 1005 428
--- Name: st_memcollect(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1129 (class 1255 OID 32054)
+-- Dependencies: 3 1008 1008 428
+-- Name: st_memcollect(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_memcollect(geometry) (
@@ -13808,12 +12445,10 @@ CREATE AGGREGATE st_memcollect(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_memcollect(geometry) OWNER TO postgres;
-
 --
--- TOC entry 1088 (class 1255 OID 32061)
--- Dependencies: 3 1005 1005 424
--- Name: st_memunion(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1131 (class 1255 OID 32061)
+-- Dependencies: 3 1008 1008 424
+-- Name: st_memunion(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_memunion(geometry) (
@@ -13822,21 +12457,19 @@ CREATE AGGREGATE st_memunion(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_memunion(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2974 (class 0 OID 0)
--- Dependencies: 1088
--- Name: AGGREGATE st_memunion(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- TOC entry 3118 (class 0 OID 0)
+-- Dependencies: 1131
+-- Name: AGGREGATE st_memunion(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON AGGREGATE st_memunion(geometry) IS 'args: geomfield - Same as ST_Union, only memory-friendly (uses less memory and more processor time).';
 
 
 --
--- TOC entry 1097 (class 1255 OID 32083)
--- Dependencies: 3 1005 1005 436 440
--- Name: st_polygonize(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1140 (class 1255 OID 32083)
+-- Dependencies: 3 1008 1008 436 440
+-- Name: st_polygonize(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_polygonize(geometry) (
@@ -13846,21 +12479,19 @@ CREATE AGGREGATE st_polygonize(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_polygonize(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2975 (class 0 OID 0)
--- Dependencies: 1097
--- Name: AGGREGATE st_polygonize(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- TOC entry 3119 (class 0 OID 0)
+-- Dependencies: 1140
+-- Name: AGGREGATE st_polygonize(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON AGGREGATE st_polygonize(geometry) IS 'args: geomfield - Aggregate. Creates a GeometryCollection containing possible polygons formed from the constituent linework of a set of geometries.';
 
 
 --
--- TOC entry 1093 (class 1255 OID 32079)
--- Dependencies: 3 1005 1005 436 438
--- Name: st_union(geometry); Type: AGGREGATE; Schema: public; Owner: postgres
+-- TOC entry 1136 (class 1255 OID 32079)
+-- Dependencies: 3 1008 1008 436 438
+-- Name: st_union(geometry); Type: AGGREGATE; Schema: public; Owner: -
 --
 
 CREATE AGGREGATE st_union(geometry) (
@@ -13870,21 +12501,19 @@ CREATE AGGREGATE st_union(geometry) (
 );
 
 
-ALTER AGGREGATE public.st_union(geometry) OWNER TO postgres;
-
 --
--- TOC entry 2976 (class 0 OID 0)
--- Dependencies: 1093
--- Name: AGGREGATE st_union(geometry); Type: COMMENT; Schema: public; Owner: postgres
+-- TOC entry 3120 (class 0 OID 0)
+-- Dependencies: 1136
+-- Name: AGGREGATE st_union(geometry); Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON AGGREGATE st_union(geometry) IS 'args: g1field - Returns a geometry that represents the point set union of the Geometries.';
 
 
 --
--- TOC entry 1813 (class 2617 OID 31704)
--- Dependencies: 1005 3 120 118 142 1005
--- Name: &&; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1856 (class 2617 OID 31704)
+-- Dependencies: 120 142 1008 1008 3 118
+-- Name: &&; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR && (
@@ -13897,12 +12526,10 @@ CREATE OPERATOR && (
 );
 
 
-ALTER OPERATOR public.&& (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1810 (class 2617 OID 31699)
--- Dependencies: 1005 122 1005 3
--- Name: &<; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1853 (class 2617 OID 31699)
+-- Dependencies: 1008 3 1008 122
+-- Name: &<; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR &< (
@@ -13915,12 +12542,10 @@ CREATE OPERATOR &< (
 );
 
 
-ALTER OPERATOR public.&< (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1812 (class 2617 OID 31703)
--- Dependencies: 128 1005 3 1005
--- Name: &<|; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1855 (class 2617 OID 31703)
+-- Dependencies: 1008 128 1008 3
+-- Name: &<|; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR &<| (
@@ -13933,12 +12558,10 @@ CREATE OPERATOR &<| (
 );
 
 
-ALTER OPERATOR public.&<| (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1814 (class 2617 OID 31698)
--- Dependencies: 124 1005 1005 3
--- Name: &>; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1857 (class 2617 OID 31698)
+-- Dependencies: 3 124 1008 1008
+-- Name: &>; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR &> (
@@ -13951,12 +12574,10 @@ CREATE OPERATOR &> (
 );
 
 
-ALTER OPERATOR public.&> (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1804 (class 2617 OID 31657)
--- Dependencies: 106 3 1005 1005
--- Name: <; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1847 (class 2617 OID 31657)
+-- Dependencies: 1008 1008 3 106
+-- Name: <; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR < (
@@ -13970,12 +12591,10 @@ CREATE OPERATOR < (
 );
 
 
-ALTER OPERATOR public.< (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1809 (class 2617 OID 31697)
--- Dependencies: 1005 3 130 1005
--- Name: <<; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1852 (class 2617 OID 31697)
+-- Dependencies: 1008 1008 3 130
+-- Name: <<; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR << (
@@ -13988,12 +12607,10 @@ CREATE OPERATOR << (
 );
 
 
-ALTER OPERATOR public.<< (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1811 (class 2617 OID 31701)
--- Dependencies: 1005 3 1005 136
--- Name: <<|; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1854 (class 2617 OID 31701)
+-- Dependencies: 3 136 1008 1008
+-- Name: <<|; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR <<| (
@@ -14006,12 +12623,10 @@ CREATE OPERATOR <<| (
 );
 
 
-ALTER OPERATOR public.<<| (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1805 (class 2617 OID 31658)
--- Dependencies: 3 1005 108 1005
--- Name: <=; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1848 (class 2617 OID 31658)
+-- Dependencies: 3 108 1008 1008
+-- Name: <=; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR <= (
@@ -14025,12 +12640,10 @@ CREATE OPERATOR <= (
 );
 
 
-ALTER OPERATOR public.<= (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1806 (class 2617 OID 31659)
--- Dependencies: 1005 3 1005 114
--- Name: =; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1849 (class 2617 OID 31659)
+-- Dependencies: 114 1008 1008 3
+-- Name: =; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR = (
@@ -14043,12 +12656,10 @@ CREATE OPERATOR = (
 );
 
 
-ALTER OPERATOR public.= (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1808 (class 2617 OID 31655)
--- Dependencies: 110 1005 3 1005
--- Name: >; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1851 (class 2617 OID 31655)
+-- Dependencies: 1008 110 3 1008
+-- Name: >; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR > (
@@ -14062,12 +12673,10 @@ CREATE OPERATOR > (
 );
 
 
-ALTER OPERATOR public.> (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1807 (class 2617 OID 31656)
--- Dependencies: 3 1005 112 1005
--- Name: >=; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1850 (class 2617 OID 31656)
+-- Dependencies: 1008 112 1008 3
+-- Name: >=; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR >= (
@@ -14081,12 +12690,10 @@ CREATE OPERATOR >= (
 );
 
 
-ALTER OPERATOR public.>= (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1815 (class 2617 OID 31696)
--- Dependencies: 1005 1005 132 3
--- Name: >>; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1858 (class 2617 OID 31696)
+-- Dependencies: 132 3 1008 1008
+-- Name: >>; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR >> (
@@ -14099,12 +12706,10 @@ CREATE OPERATOR >> (
 );
 
 
-ALTER OPERATOR public.>> (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1819 (class 2617 OID 31707)
--- Dependencies: 3 140 1005 1005
--- Name: @; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1862 (class 2617 OID 31707)
+-- Dependencies: 3 140 1008 1008
+-- Name: @; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR @ (
@@ -14117,12 +12722,10 @@ CREATE OPERATOR @ (
 );
 
 
-ALTER OPERATOR public.@ (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1816 (class 2617 OID 31702)
--- Dependencies: 126 1005 1005 3
--- Name: |&>; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1859 (class 2617 OID 31702)
+-- Dependencies: 126 1008 1008 3
+-- Name: |&>; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR |&> (
@@ -14135,12 +12738,10 @@ CREATE OPERATOR |&> (
 );
 
 
-ALTER OPERATOR public.|&> (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1817 (class 2617 OID 31700)
--- Dependencies: 1005 1005 3 134
--- Name: |>>; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1860 (class 2617 OID 31700)
+-- Dependencies: 1008 134 1008 3
+-- Name: |>>; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR |>> (
@@ -14153,12 +12754,10 @@ CREATE OPERATOR |>> (
 );
 
 
-ALTER OPERATOR public.|>> (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1820 (class 2617 OID 31706)
--- Dependencies: 1005 1005 138 3
--- Name: ~; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1863 (class 2617 OID 31706)
+-- Dependencies: 3 138 1008 1008
+-- Name: ~; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR ~ (
@@ -14171,12 +12770,10 @@ CREATE OPERATOR ~ (
 );
 
 
-ALTER OPERATOR public.~ (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1818 (class 2617 OID 31705)
--- Dependencies: 1005 3 1005 144
--- Name: ~=; Type: OPERATOR; Schema: public; Owner: postgres
+-- TOC entry 1861 (class 2617 OID 31705)
+-- Dependencies: 144 1008 3 1008
+-- Name: ~=; Type: OPERATOR; Schema: public; Owner: -
 --
 
 CREATE OPERATOR ~= (
@@ -14189,12 +12786,10 @@ CREATE OPERATOR ~= (
 );
 
 
-ALTER OPERATOR public.~= (geometry, geometry) OWNER TO postgres;
-
 --
--- TOC entry 1932 (class 2616 OID 31661)
--- Dependencies: 3 2040 1005
--- Name: btree_geometry_ops; Type: OPERATOR CLASS; Schema: public; Owner: postgres
+-- TOC entry 1975 (class 2616 OID 31661)
+-- Dependencies: 1008 2083 3
+-- Name: btree_geometry_ops; Type: OPERATOR CLASS; Schema: public; Owner: -
 --
 
 CREATE OPERATOR CLASS btree_geometry_ops
@@ -14207,12 +12802,10 @@ CREATE OPERATOR CLASS btree_geometry_ops
     FUNCTION 1 geometry_cmp(geometry,geometry);
 
 
-ALTER OPERATOR CLASS public.btree_geometry_ops USING btree OWNER TO postgres;
-
 --
--- TOC entry 1933 (class 2616 OID 31716)
--- Dependencies: 2041 3 1017 1005
--- Name: gist_geometry_ops; Type: OPERATOR CLASS; Schema: public; Owner: postgres
+-- TOC entry 1976 (class 2616 OID 31716)
+-- Dependencies: 1008 1020 2084 3
+-- Name: gist_geometry_ops; Type: OPERATOR CLASS; Schema: public; Owner: -
 --
 
 CREATE OPERATOR CLASS gist_geometry_ops
@@ -14239,164 +12832,245 @@ CREATE OPERATOR CLASS gist_geometry_ops
     FUNCTION 7 lwgeom_gist_same(box2d,box2d,internal);
 
 
-ALTER OPERATOR CLASS public.gist_geometry_ops USING gist OWNER TO postgres;
-
 SET search_path = pg_catalog;
 
 --
--- TOC entry 2627 (class 2605 OID 31992)
--- Dependencies: 337 1017 337 1008
--- Name: CAST (public.box2d AS public.box3d); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2690 (class 2605 OID 31992)
+-- Dependencies: 337 337 1020 1011
+-- Name: CAST (public.box2d AS public.box3d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.box2d AS public.box3d) WITH FUNCTION public.st_box3d(public.box2d) AS IMPLICIT;
 
 
 --
--- TOC entry 2626 (class 2605 OID 31993)
--- Dependencies: 369 1017 1005 369
--- Name: CAST (public.box2d AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2689 (class 2605 OID 31993)
+-- Dependencies: 369 1008 1020 369
+-- Name: CAST (public.box2d AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.box2d AS public.geometry) WITH FUNCTION public.st_geometry(public.box2d) AS IMPLICIT;
 
 
 --
--- TOC entry 2620 (class 2605 OID 31994)
--- Dependencies: 364 1008 364
--- Name: CAST (public.box3d AS box); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2683 (class 2605 OID 31994)
+-- Dependencies: 364 1011 364
+-- Name: CAST (public.box3d AS box); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.box3d AS box) WITH FUNCTION public.st_box(public.box3d) AS IMPLICIT;
 
 
 --
--- TOC entry 2622 (class 2605 OID 31991)
--- Dependencies: 335 1008 335 1017
--- Name: CAST (public.box3d AS public.box2d); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2685 (class 2605 OID 31991)
+-- Dependencies: 335 1011 1020 335
+-- Name: CAST (public.box3d AS public.box2d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.box3d AS public.box2d) WITH FUNCTION public.st_box2d(public.box3d) AS IMPLICIT;
 
 
 --
--- TOC entry 2621 (class 2605 OID 31995)
--- Dependencies: 371 1005 1008 371
--- Name: CAST (public.box3d AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2684 (class 2605 OID 31995)
+-- Dependencies: 371 1008 1011 371
+-- Name: CAST (public.box3d AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.box3d AS public.geometry) WITH FUNCTION public.st_geometry(public.box3d) AS IMPLICIT;
 
 
 --
--- TOC entry 2625 (class 2605 OID 32002)
--- Dependencies: 65 1017 1011 65
--- Name: CAST (public.box3d_extent AS public.box2d); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2688 (class 2605 OID 32002)
+-- Dependencies: 65 1014 65 1020
+-- Name: CAST (public.box3d_extent AS public.box2d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.box3d_extent AS public.box2d) WITH FUNCTION public.st_box2d(public.box3d_extent) AS IMPLICIT;
 
 
 --
--- TOC entry 2624 (class 2605 OID 32001)
--- Dependencies: 64 1008 1011 64
--- Name: CAST (public.box3d_extent AS public.box3d); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2687 (class 2605 OID 32001)
+-- Dependencies: 64 1014 64 1011
+-- Name: CAST (public.box3d_extent AS public.box3d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.box3d_extent AS public.box3d) WITH FUNCTION public.st_box3d_extent(public.box3d_extent) AS IMPLICIT;
 
 
 --
--- TOC entry 2623 (class 2605 OID 32003)
--- Dependencies: 66 1011 66 1005
--- Name: CAST (public.box3d_extent AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2686 (class 2605 OID 32003)
+-- Dependencies: 66 1008 1014 66
+-- Name: CAST (public.box3d_extent AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.box3d_extent AS public.geometry) WITH FUNCTION public.st_geometry(public.box3d_extent) AS IMPLICIT;
 
 
 --
--- TOC entry 2426 (class 2605 OID 31999)
--- Dependencies: 377 1005 377
--- Name: CAST (bytea AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2489 (class 2605 OID 31999)
+-- Dependencies: 377 1008 377
+-- Name: CAST (bytea AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (bytea AS public.geometry) WITH FUNCTION public.st_geometry(bytea) AS IMPLICIT;
 
 
 --
--- TOC entry 2628 (class 2605 OID 31998)
--- Dependencies: 375 1005 1014 375
--- Name: CAST (public.chip AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2691 (class 2605 OID 31998)
+-- Dependencies: 375 1008 375 1017
+-- Name: CAST (public.chip AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.chip AS public.geometry) WITH FUNCTION public.st_geometry(public.chip) AS IMPLICIT;
 
 
 --
--- TOC entry 2617 (class 2605 OID 31990)
--- Dependencies: 361 361 1005
--- Name: CAST (public.geometry AS box); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2680 (class 2605 OID 31990)
+-- Dependencies: 361 1008 361
+-- Name: CAST (public.geometry AS box); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.geometry AS box) WITH FUNCTION public.st_box(public.geometry) AS IMPLICIT;
 
 
 --
--- TOC entry 2619 (class 2605 OID 31988)
--- Dependencies: 357 1017 1005 357
--- Name: CAST (public.geometry AS public.box2d); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2682 (class 2605 OID 31988)
+-- Dependencies: 357 357 1020 1008
+-- Name: CAST (public.geometry AS public.box2d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.geometry AS public.box2d) WITH FUNCTION public.st_box2d(public.geometry) AS IMPLICIT;
 
 
 --
--- TOC entry 2618 (class 2605 OID 31989)
--- Dependencies: 359 359 1005 1008
--- Name: CAST (public.geometry AS public.box3d); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2681 (class 2605 OID 31989)
+-- Dependencies: 359 359 1008 1011
+-- Name: CAST (public.geometry AS public.box3d); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.geometry AS public.box3d) WITH FUNCTION public.st_box3d(public.geometry) AS IMPLICIT;
 
 
 --
--- TOC entry 2615 (class 2605 OID 32000)
--- Dependencies: 379 1005 379
--- Name: CAST (public.geometry AS bytea); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2678 (class 2605 OID 32000)
+-- Dependencies: 379 379 1008
+-- Name: CAST (public.geometry AS bytea); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.geometry AS bytea) WITH FUNCTION public.st_bytea(public.geometry) AS IMPLICIT;
 
 
 --
--- TOC entry 2616 (class 2605 OID 31997)
--- Dependencies: 366 1005 366
--- Name: CAST (public.geometry AS text); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2679 (class 2605 OID 31997)
+-- Dependencies: 366 1008 366
+-- Name: CAST (public.geometry AS text); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (public.geometry AS text) WITH FUNCTION public.st_text(public.geometry) AS IMPLICIT;
 
 
 --
--- TOC entry 2492 (class 2605 OID 31996)
--- Dependencies: 373 373 1005
--- Name: CAST (text AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: 
+-- TOC entry 2555 (class 2605 OID 31996)
+-- Dependencies: 373 1008 373
+-- Name: CAST (text AS public.geometry); Type: CAST; Schema: pg_catalog; Owner: -
 --
 
 CREATE CAST (text AS public.geometry) WITH FUNCTION public.st_geometry(text) AS IMPLICIT;
 
 
-SET search_path = auditoria, pg_catalog;
+SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- TOC entry 2323 (class 1259 OID 33552)
--- Dependencies: 2640 2641 2642 7
--- Name: especie; Type: TABLE; Schema: auditoria; Owner: postgres; Tablespace: 
+-- TOC entry 2354 (class 1259 OID 32973)
+-- Dependencies: 3
+-- Name: campana; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE campana (
+    id integer NOT NULL,
+    nombre character varying
+);
+
+
+SET search_path = auditoria, pg_catalog;
+
+--
+-- TOC entry 2380 (class 1259 OID 33852)
+-- Dependencies: 2722 2723 2724 1094 7 1094
+-- Name: campana; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+CREATE TABLE campana (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.campana,
+    newmovimiento public.campana,
+    CONSTRAINT campana_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2379 (class 1259 OID 33850)
+-- Dependencies: 2380 7
+-- Name: campana_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE campana_idmovimiento_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3121 (class 0 OID 0)
+-- Dependencies: 2379
+-- Name: campana_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
+--
+
+ALTER SEQUENCE campana_idmovimiento_seq OWNED BY campana.idmovimiento;
+
+
+--
+-- TOC entry 3122 (class 0 OID 0)
+-- Dependencies: 2379
+-- Name: campana_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
+--
+
+SELECT pg_catalog.setval('campana_idmovimiento_seq', 1, false);
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2366 (class 1259 OID 33628)
+-- Dependencies: 3
+-- Name: especie; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE especie (
+    id integer NOT NULL,
+    nombre character varying,
+    nombre_cientifico character varying,
+    familia character varying,
+    grupo character varying
+);
+
+
+SET search_path = auditoria, pg_catalog;
+
+--
+-- TOC entry 2378 (class 1259 OID 33836)
+-- Dependencies: 2718 2719 2720 1055 7 1055
+-- Name: especie; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
 CREATE TABLE especie (
@@ -14405,17 +13079,16 @@ CREATE TABLE especie (
     usuarioapl integer NOT NULL,
     accion text NOT NULL,
     acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
-    consulta character varying,
+    oldmovimiento public.especie,
+    newmovimiento public.especie,
     CONSTRAINT especie_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
 );
 
 
-ALTER TABLE auditoria.especie OWNER TO postgres;
-
 --
--- TOC entry 2322 (class 1259 OID 33550)
--- Dependencies: 2323 7
--- Name: especie_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: postgres
+-- TOC entry 2377 (class 1259 OID 33834)
+-- Dependencies: 7 2378
+-- Name: especie_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
 --
 
 CREATE SEQUENCE especie_idmovimiento_seq
@@ -14426,30 +13099,28 @@ CREATE SEQUENCE especie_idmovimiento_seq
     CACHE 1;
 
 
-ALTER TABLE auditoria.especie_idmovimiento_seq OWNER TO postgres;
-
 --
--- TOC entry 2977 (class 0 OID 0)
--- Dependencies: 2322
--- Name: especie_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: postgres
+-- TOC entry 3123 (class 0 OID 0)
+-- Dependencies: 2377
+-- Name: especie_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
 ALTER SEQUENCE especie_idmovimiento_seq OWNED BY especie.idmovimiento;
 
 
 --
--- TOC entry 2978 (class 0 OID 0)
--- Dependencies: 2322
--- Name: especie_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: postgres
+-- TOC entry 3124 (class 0 OID 0)
+-- Dependencies: 2377
+-- Name: especie_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('especie_idmovimiento_seq', 8, true);
+SELECT pg_catalog.setval('especie_idmovimiento_seq', 1, false);
 
 
 --
--- TOC entry 2320 (class 1259 OID 33539)
--- Dependencies: 2636 2637 2638 7
--- Name: infseg; Type: TABLE; Schema: auditoria; Owner: postgres; Tablespace: 
+-- TOC entry 2363 (class 1259 OID 33539)
+-- Dependencies: 2699 2700 2701 7
+-- Name: infseg; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
 CREATE TABLE infseg (
@@ -14463,149 +13134,12 @@ CREATE TABLE infseg (
 );
 
 
-ALTER TABLE auditoria.infseg OWNER TO postgres;
-
---
--- TOC entry 2321 (class 1259 OID 33547)
--- Dependencies: 7
--- Name: tmp_usuario; Type: TABLE; Schema: auditoria; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE tmp_usuario (
-    usuario integer
-);
-
-
-ALTER TABLE auditoria.tmp_usuario OWNER TO postgres;
-
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2311 (class 1259 OID 32973)
--- Dependencies: 3
--- Name: campana; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE campana (
-    id integer NOT NULL,
-    nombre character varying
-);
-
-
-ALTER TABLE public.campana OWNER TO postgres;
-
---
--- TOC entry 2310 (class 1259 OID 32971)
--- Dependencies: 2311 3
--- Name: campana_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE campana_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.campana_id_seq OWNER TO postgres;
-
---
--- TOC entry 2979 (class 0 OID 0)
--- Dependencies: 2310
--- Name: campana_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE campana_id_seq OWNED BY campana.id;
-
-
---
--- TOC entry 2980 (class 0 OID 0)
--- Dependencies: 2310
--- Name: campana_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('campana_id_seq', 1, false);
-
-
---
--- TOC entry 2325 (class 1259 OID 33628)
--- Dependencies: 3
--- Name: especie; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE especie (
-    id integer NOT NULL,
-    nombre character varying,
-    nombre_cientifico character varying,
-    familia character varying,
-    grupo character varying
-);
-
-
-ALTER TABLE public.especie OWNER TO postgres;
-
---
--- TOC entry 2324 (class 1259 OID 33626)
--- Dependencies: 2325 3
--- Name: especie_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE especie_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.especie_id_seq OWNER TO postgres;
-
---
--- TOC entry 2981 (class 0 OID 0)
--- Dependencies: 2324
--- Name: especie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE especie_id_seq OWNED BY especie.id;
-
-
---
--- TOC entry 2982 (class 0 OID 0)
--- Dependencies: 2324
--- Name: especie_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('especie_id_seq', 311, true);
-
-
-SET default_with_oids = true;
-
---
--- TOC entry 2309 (class 1259 OID 31920)
--- Dependencies: 3
--- Name: geometry_columns; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE geometry_columns (
-    f_table_catalog character varying(256) NOT NULL,
-    f_table_schema character varying(256) NOT NULL,
-    f_table_name character varying(256) NOT NULL,
-    f_geometry_column character varying(256) NOT NULL,
-    coord_dimension integer NOT NULL,
-    srid integer NOT NULL,
-    type character varying(30) NOT NULL
-);
-
-
-ALTER TABLE public.geometry_columns OWNER TO postgres;
-
-SET default_with_oids = false;
-
---
--- TOC entry 2326 (class 1259 OID 33705)
--- Dependencies: 2645 2646 2647 3
--- Name: observacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2367 (class 1259 OID 33705)
+-- Dependencies: 2704 2705 2706 3
+-- Name: observacion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE observacion (
@@ -14626,12 +13160,32 @@ CREATE TABLE observacion (
 );
 
 
-ALTER TABLE public.observacion OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2327 (class 1259 OID 33714)
--- Dependencies: 2649 2650 3
--- Name: observacion_clima; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2382 (class 1259 OID 33868)
+-- Dependencies: 2726 2727 2728 7 1066 1066
+-- Name: observacion; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+CREATE TABLE observacion (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.observacion,
+    newmovimiento public.observacion,
+    CONSTRAINT observacion_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2368 (class 1259 OID 33714)
+-- Dependencies: 2708 2709 3
+-- Name: observacion_clima; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE observacion_clima (
@@ -14647,15 +13201,33 @@ CREATE TABLE observacion_clima (
 );
 
 
-ALTER TABLE public.observacion_clima OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2328 (class 1259 OID 33719)
--- Dependencies: 3 2327
--- Name: observacion_clima_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2384 (class 1259 OID 33884)
+-- Dependencies: 2730 2731 2732 1069 7 1069
+-- Name: observacion_clima; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
-CREATE SEQUENCE observacion_clima_id_seq
+CREATE TABLE observacion_clima (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.observacion_clima,
+    newmovimiento public.observacion_clima,
+    CONSTRAINT observacion_clima_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2383 (class 1259 OID 33882)
+-- Dependencies: 2384 7
+-- Name: observacion_clima_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE observacion_clima_idmovimiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
@@ -14663,30 +13235,30 @@ CREATE SEQUENCE observacion_clima_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.observacion_clima_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2983 (class 0 OID 0)
--- Dependencies: 2328
--- Name: observacion_clima_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3125 (class 0 OID 0)
+-- Dependencies: 2383
+-- Name: observacion_clima_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
-ALTER SEQUENCE observacion_clima_id_seq OWNED BY observacion_clima.id;
+ALTER SEQUENCE observacion_clima_idmovimiento_seq OWNED BY observacion_clima.idmovimiento;
 
 
 --
--- TOC entry 2984 (class 0 OID 0)
--- Dependencies: 2328
--- Name: observacion_clima_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3126 (class 0 OID 0)
+-- Dependencies: 2383
+-- Name: observacion_clima_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('observacion_clima_id_seq', 30, true);
+SELECT pg_catalog.setval('observacion_clima_idmovimiento_seq', 1, false);
 
+
+SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2329 (class 1259 OID 33721)
--- Dependencies: 2652 2653 2654 3
--- Name: observacion_especie; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2370 (class 1259 OID 33721)
+-- Dependencies: 2711 2712 2713 3
+-- Name: observacion_especie; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE observacion_especie (
@@ -14704,15 +13276,33 @@ CREATE TABLE observacion_especie (
 );
 
 
-ALTER TABLE public.observacion_especie OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2330 (class 1259 OID 33730)
--- Dependencies: 3 2329
--- Name: observacion_especie_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2386 (class 1259 OID 33900)
+-- Dependencies: 2734 2735 2736 7 1072 1072
+-- Name: observacion_especie; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
-CREATE SEQUENCE observacion_especie_id_seq
+CREATE TABLE observacion_especie (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.observacion_especie,
+    newmovimiento public.observacion_especie,
+    CONSTRAINT observacion_especie_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2385 (class 1259 OID 33898)
+-- Dependencies: 2386 7
+-- Name: observacion_especie_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE observacion_especie_idmovimiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
@@ -14720,30 +13310,30 @@ CREATE SEQUENCE observacion_especie_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.observacion_especie_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2985 (class 0 OID 0)
--- Dependencies: 2330
--- Name: observacion_especie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3127 (class 0 OID 0)
+-- Dependencies: 2385
+-- Name: observacion_especie_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
-ALTER SEQUENCE observacion_especie_id_seq OWNED BY observacion_especie.id;
+ALTER SEQUENCE observacion_especie_idmovimiento_seq OWNED BY observacion_especie.idmovimiento;
 
 
 --
--- TOC entry 2986 (class 0 OID 0)
--- Dependencies: 2330
--- Name: observacion_especie_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3128 (class 0 OID 0)
+-- Dependencies: 2385
+-- Name: observacion_especie_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('observacion_especie_id_seq', 112, true);
+SELECT pg_catalog.setval('observacion_especie_idmovimiento_seq', 1, false);
 
+
+SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2331 (class 1259 OID 33732)
--- Dependencies: 2656 3
--- Name: observacion_foto; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2372 (class 1259 OID 33732)
+-- Dependencies: 2715 3
+-- Name: observacion_foto; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE observacion_foto (
@@ -14755,15 +13345,33 @@ CREATE TABLE observacion_foto (
 );
 
 
-ALTER TABLE public.observacion_foto OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2332 (class 1259 OID 33739)
--- Dependencies: 3 2331
--- Name: observacion_foto_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2388 (class 1259 OID 33916)
+-- Dependencies: 2738 2739 2740 1076 1076 7
+-- Name: observacion_foto; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
-CREATE SEQUENCE observacion_foto_id_seq
+CREATE TABLE observacion_foto (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.observacion_foto,
+    newmovimiento public.observacion_foto,
+    CONSTRAINT observacion_foto_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2387 (class 1259 OID 33914)
+-- Dependencies: 2388 7
+-- Name: observacion_foto_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE observacion_foto_idmovimiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
@@ -14771,33 +13379,31 @@ CREATE SEQUENCE observacion_foto_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.observacion_foto_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2987 (class 0 OID 0)
--- Dependencies: 2332
--- Name: observacion_foto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3129 (class 0 OID 0)
+-- Dependencies: 2387
+-- Name: observacion_foto_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
-ALTER SEQUENCE observacion_foto_id_seq OWNED BY observacion_foto.id;
+ALTER SEQUENCE observacion_foto_idmovimiento_seq OWNED BY observacion_foto.idmovimiento;
 
 
 --
--- TOC entry 2988 (class 0 OID 0)
--- Dependencies: 2332
--- Name: observacion_foto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3130 (class 0 OID 0)
+-- Dependencies: 2387
+-- Name: observacion_foto_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('observacion_foto_id_seq', 1, false);
+SELECT pg_catalog.setval('observacion_foto_idmovimiento_seq', 1, false);
 
 
 --
--- TOC entry 2333 (class 1259 OID 33741)
--- Dependencies: 2326 3
--- Name: observacion_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2381 (class 1259 OID 33866)
+-- Dependencies: 2382 7
+-- Name: observacion_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
 --
 
-CREATE SEQUENCE observacion_id_seq
+CREATE SEQUENCE observacion_idmovimiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
@@ -14805,30 +13411,30 @@ CREATE SEQUENCE observacion_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.observacion_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2989 (class 0 OID 0)
--- Dependencies: 2333
--- Name: observacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3131 (class 0 OID 0)
+-- Dependencies: 2381
+-- Name: observacion_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
-ALTER SEQUENCE observacion_id_seq OWNED BY observacion.id;
+ALTER SEQUENCE observacion_idmovimiento_seq OWNED BY observacion.idmovimiento;
 
 
 --
--- TOC entry 2990 (class 0 OID 0)
--- Dependencies: 2333
--- Name: observacion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3132 (class 0 OID 0)
+-- Dependencies: 2381
+-- Name: observacion_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('observacion_id_seq', 30, true);
+SELECT pg_catalog.setval('observacion_idmovimiento_seq', 1, false);
 
+
+SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2334 (class 1259 OID 33743)
+-- TOC entry 2375 (class 1259 OID 33743)
 -- Dependencies: 3
--- Name: observacion_matriz_productiva; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: observacion_matriz_productiva; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE observacion_matriz_productiva (
@@ -14839,15 +13445,33 @@ CREATE TABLE observacion_matriz_productiva (
 );
 
 
-ALTER TABLE public.observacion_matriz_productiva OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2335 (class 1259 OID 33746)
--- Dependencies: 2334 3
--- Name: observacion_matriz_productiva_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2390 (class 1259 OID 33932)
+-- Dependencies: 2742 2743 2744 1081 7 1081
+-- Name: observacion_matriz_productiva; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
-CREATE SEQUENCE observacion_matriz_productiva_id_seq
+CREATE TABLE observacion_matriz_productiva (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.observacion_matriz_productiva,
+    newmovimiento public.observacion_matriz_productiva,
+    CONSTRAINT observacion_matriz_productiva_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2389 (class 1259 OID 33930)
+-- Dependencies: 7 2390
+-- Name: observacion_matriz_productiva_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE observacion_matriz_productiva_idmovimiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
@@ -14855,30 +13479,30 @@ CREATE SEQUENCE observacion_matriz_productiva_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.observacion_matriz_productiva_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2991 (class 0 OID 0)
--- Dependencies: 2335
--- Name: observacion_matriz_productiva_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3133 (class 0 OID 0)
+-- Dependencies: 2389
+-- Name: observacion_matriz_productiva_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
-ALTER SEQUENCE observacion_matriz_productiva_id_seq OWNED BY observacion_matriz_productiva.id;
+ALTER SEQUENCE observacion_matriz_productiva_idmovimiento_seq OWNED BY observacion_matriz_productiva.idmovimiento;
 
 
 --
--- TOC entry 2992 (class 0 OID 0)
--- Dependencies: 2335
--- Name: observacion_matriz_productiva_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3134 (class 0 OID 0)
+-- Dependencies: 2389
+-- Name: observacion_matriz_productiva_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('observacion_matriz_productiva_id_seq', 38, true);
+SELECT pg_catalog.setval('observacion_matriz_productiva_idmovimiento_seq', 1, false);
 
+
+SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2319 (class 1259 OID 33135)
--- Dependencies: 2635 3
--- Name: par_usuarios; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2362 (class 1259 OID 33135)
+-- Dependencies: 2698 3
+-- Name: par_usuarios; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE par_usuarios (
@@ -14891,15 +13515,33 @@ CREATE TABLE par_usuarios (
 );
 
 
-ALTER TABLE public.par_usuarios OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2318 (class 1259 OID 33133)
--- Dependencies: 3 2319
--- Name: par_usuarios_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2392 (class 1259 OID 33948)
+-- Dependencies: 2746 2747 2748 1110 1110 7
+-- Name: par_usuarios; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
-CREATE SEQUENCE par_usuarios_id_seq
+CREATE TABLE par_usuarios (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.par_usuarios,
+    newmovimiento public.par_usuarios,
+    CONSTRAINT par_usuarios_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2391 (class 1259 OID 33946)
+-- Dependencies: 7 2392
+-- Name: par_usuarios_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE par_usuarios_idmovimiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
@@ -14907,47 +13549,30 @@ CREATE SEQUENCE par_usuarios_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.par_usuarios_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2993 (class 0 OID 0)
--- Dependencies: 2318
--- Name: par_usuarios_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3135 (class 0 OID 0)
+-- Dependencies: 2391
+-- Name: par_usuarios_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
-ALTER SEQUENCE par_usuarios_id_seq OWNED BY par_usuarios.id;
+ALTER SEQUENCE par_usuarios_idmovimiento_seq OWNED BY par_usuarios.idmovimiento;
 
 
 --
--- TOC entry 2994 (class 0 OID 0)
--- Dependencies: 2318
--- Name: par_usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3136 (class 0 OID 0)
+-- Dependencies: 2391
+-- Name: par_usuarios_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('par_usuarios_id_seq', 1, false);
+SELECT pg_catalog.setval('par_usuarios_idmovimiento_seq', 1, false);
 
+
+SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2308 (class 1259 OID 31912)
+-- TOC entry 2360 (class 1259 OID 33067)
 -- Dependencies: 3
--- Name: spatial_ref_sys; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE spatial_ref_sys (
-    srid integer NOT NULL,
-    auth_name character varying(256),
-    auth_srid integer,
-    srtext character varying(2048),
-    proj4text character varying(2048)
-);
-
-
-ALTER TABLE public.spatial_ref_sys OWNER TO postgres;
-
---
--- TOC entry 2317 (class 1259 OID 33067)
--- Dependencies: 3
--- Name: tipo_matriz_productiva; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: tipo_matriz_productiva; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tipo_matriz_productiva (
@@ -14956,15 +13581,33 @@ CREATE TABLE tipo_matriz_productiva (
 );
 
 
-ALTER TABLE public.tipo_matriz_productiva OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2316 (class 1259 OID 33065)
--- Dependencies: 3 2317
--- Name: tipo_matriz_productiva_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2394 (class 1259 OID 33964)
+-- Dependencies: 2750 2751 2752 1106 1106 7
+-- Name: tipo_matriz_productiva; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
-CREATE SEQUENCE tipo_matriz_productiva_id_seq
+CREATE TABLE tipo_matriz_productiva (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.tipo_matriz_productiva,
+    newmovimiento public.tipo_matriz_productiva,
+    CONSTRAINT tipo_matriz_productiva_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2393 (class 1259 OID 33962)
+-- Dependencies: 7 2394
+-- Name: tipo_matriz_productiva_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE tipo_matriz_productiva_idmovimiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
@@ -14972,30 +13615,41 @@ CREATE SEQUENCE tipo_matriz_productiva_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.tipo_matriz_productiva_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2995 (class 0 OID 0)
--- Dependencies: 2316
--- Name: tipo_matriz_productiva_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3137 (class 0 OID 0)
+-- Dependencies: 2393
+-- Name: tipo_matriz_productiva_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
-ALTER SEQUENCE tipo_matriz_productiva_id_seq OWNED BY tipo_matriz_productiva.id;
+ALTER SEQUENCE tipo_matriz_productiva_idmovimiento_seq OWNED BY tipo_matriz_productiva.idmovimiento;
 
 
 --
--- TOC entry 2996 (class 0 OID 0)
--- Dependencies: 2316
--- Name: tipo_matriz_productiva_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3138 (class 0 OID 0)
+-- Dependencies: 2393
+-- Name: tipo_matriz_productiva_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('tipo_matriz_productiva_id_seq', 10, true);
+SELECT pg_catalog.setval('tipo_matriz_productiva_idmovimiento_seq', 1, false);
 
 
 --
--- TOC entry 2315 (class 1259 OID 32996)
+-- TOC entry 2364 (class 1259 OID 33547)
+-- Dependencies: 7
+-- Name: tmp_usuario; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tmp_usuario (
+    usuario integer
+);
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2358 (class 1259 OID 32996)
 -- Dependencies: 3
--- Name: ubicacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: ubicacion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ubicacion (
@@ -15006,15 +13660,33 @@ CREATE TABLE ubicacion (
 );
 
 
-ALTER TABLE public.ubicacion OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2314 (class 1259 OID 32994)
--- Dependencies: 2315 3
--- Name: ubicacion_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2396 (class 1259 OID 33980)
+-- Dependencies: 2754 2755 2756 1102 1102 7
+-- Name: ubicacion; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
 --
 
-CREATE SEQUENCE ubicacion_id_seq
+CREATE TABLE ubicacion (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.ubicacion,
+    newmovimiento public.ubicacion,
+    CONSTRAINT ubicacion_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2395 (class 1259 OID 33978)
+-- Dependencies: 2396 7
+-- Name: ubicacion_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE ubicacion_idmovimiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
@@ -15022,30 +13694,30 @@ CREATE SEQUENCE ubicacion_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.ubicacion_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2997 (class 0 OID 0)
--- Dependencies: 2314
--- Name: ubicacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3139 (class 0 OID 0)
+-- Dependencies: 2395
+-- Name: ubicacion_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
 --
 
-ALTER SEQUENCE ubicacion_id_seq OWNED BY ubicacion.id;
+ALTER SEQUENCE ubicacion_idmovimiento_seq OWNED BY ubicacion.idmovimiento;
 
 
 --
--- TOC entry 2998 (class 0 OID 0)
--- Dependencies: 2314
--- Name: ubicacion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3140 (class 0 OID 0)
+-- Dependencies: 2395
+-- Name: ubicacion_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
 --
 
-SELECT pg_catalog.setval('ubicacion_id_seq', 9, true);
+SELECT pg_catalog.setval('ubicacion_idmovimiento_seq', 1, false);
 
+
+SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2313 (class 1259 OID 32984)
--- Dependencies: 2631 3
--- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2356 (class 1259 OID 32984)
+-- Dependencies: 2694 3
+-- Name: usuario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE usuario (
@@ -15059,12 +13731,420 @@ CREATE TABLE usuario (
 );
 
 
-ALTER TABLE public.usuario OWNER TO postgres;
+SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2312 (class 1259 OID 32982)
--- Dependencies: 3 2313
--- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 2398 (class 1259 OID 33996)
+-- Dependencies: 2758 2759 2760 1098 1098 7
+-- Name: usuario; Type: TABLE; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+CREATE TABLE usuario (
+    idmovimiento integer NOT NULL,
+    usuariodb text DEFAULT "current_user"() NOT NULL,
+    usuarioapl integer NOT NULL,
+    accion text NOT NULL,
+    acciontimestamp timestamp with time zone DEFAULT now() NOT NULL,
+    oldmovimiento public.usuario,
+    newmovimiento public.usuario,
+    CONSTRAINT usuario_check CHECK ((accion = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])))
+);
+
+
+--
+-- TOC entry 2397 (class 1259 OID 33994)
+-- Dependencies: 7 2398
+-- Name: usuario_idmovimiento_seq; Type: SEQUENCE; Schema: auditoria; Owner: -
+--
+
+CREATE SEQUENCE usuario_idmovimiento_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3141 (class 0 OID 0)
+-- Dependencies: 2397
+-- Name: usuario_idmovimiento_seq; Type: SEQUENCE OWNED BY; Schema: auditoria; Owner: -
+--
+
+ALTER SEQUENCE usuario_idmovimiento_seq OWNED BY usuario.idmovimiento;
+
+
+--
+-- TOC entry 3142 (class 0 OID 0)
+-- Dependencies: 2397
+-- Name: usuario_idmovimiento_seq; Type: SEQUENCE SET; Schema: auditoria; Owner: -
+--
+
+SELECT pg_catalog.setval('usuario_idmovimiento_seq', 1, false);
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2353 (class 1259 OID 32971)
+-- Dependencies: 3 2354
+-- Name: campana_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE campana_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3143 (class 0 OID 0)
+-- Dependencies: 2353
+-- Name: campana_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE campana_id_seq OWNED BY campana.id;
+
+
+--
+-- TOC entry 3144 (class 0 OID 0)
+-- Dependencies: 2353
+-- Name: campana_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('campana_id_seq', 1, false);
+
+
+--
+-- TOC entry 2365 (class 1259 OID 33626)
+-- Dependencies: 2366 3
+-- Name: especie_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE especie_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3145 (class 0 OID 0)
+-- Dependencies: 2365
+-- Name: especie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE especie_id_seq OWNED BY especie.id;
+
+
+--
+-- TOC entry 3146 (class 0 OID 0)
+-- Dependencies: 2365
+-- Name: especie_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('especie_id_seq', 311, true);
+
+
+SET default_with_oids = true;
+
+--
+-- TOC entry 2352 (class 1259 OID 31920)
+-- Dependencies: 3
+-- Name: geometry_columns; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE geometry_columns (
+    f_table_catalog character varying(256) NOT NULL,
+    f_table_schema character varying(256) NOT NULL,
+    f_table_name character varying(256) NOT NULL,
+    f_geometry_column character varying(256) NOT NULL,
+    coord_dimension integer NOT NULL,
+    srid integer NOT NULL,
+    type character varying(30) NOT NULL
+);
+
+
+--
+-- TOC entry 2369 (class 1259 OID 33719)
+-- Dependencies: 2368 3
+-- Name: observacion_clima_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE observacion_clima_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3147 (class 0 OID 0)
+-- Dependencies: 2369
+-- Name: observacion_clima_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE observacion_clima_id_seq OWNED BY observacion_clima.id;
+
+
+--
+-- TOC entry 3148 (class 0 OID 0)
+-- Dependencies: 2369
+-- Name: observacion_clima_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('observacion_clima_id_seq', 42, true);
+
+
+--
+-- TOC entry 2371 (class 1259 OID 33730)
+-- Dependencies: 2370 3
+-- Name: observacion_especie_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE observacion_especie_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3149 (class 0 OID 0)
+-- Dependencies: 2371
+-- Name: observacion_especie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE observacion_especie_id_seq OWNED BY observacion_especie.id;
+
+
+--
+-- TOC entry 3150 (class 0 OID 0)
+-- Dependencies: 2371
+-- Name: observacion_especie_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('observacion_especie_id_seq', 137, true);
+
+
+--
+-- TOC entry 2373 (class 1259 OID 33739)
+-- Dependencies: 2372 3
+-- Name: observacion_foto_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE observacion_foto_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3151 (class 0 OID 0)
+-- Dependencies: 2373
+-- Name: observacion_foto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE observacion_foto_id_seq OWNED BY observacion_foto.id;
+
+
+--
+-- TOC entry 3152 (class 0 OID 0)
+-- Dependencies: 2373
+-- Name: observacion_foto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('observacion_foto_id_seq', 1, false);
+
+
+--
+-- TOC entry 2374 (class 1259 OID 33741)
+-- Dependencies: 3 2367
+-- Name: observacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE observacion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3153 (class 0 OID 0)
+-- Dependencies: 2374
+-- Name: observacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE observacion_id_seq OWNED BY observacion.id;
+
+
+--
+-- TOC entry 3154 (class 0 OID 0)
+-- Dependencies: 2374
+-- Name: observacion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('observacion_id_seq', 42, true);
+
+
+--
+-- TOC entry 2376 (class 1259 OID 33746)
+-- Dependencies: 3 2375
+-- Name: observacion_matriz_productiva_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE observacion_matriz_productiva_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3155 (class 0 OID 0)
+-- Dependencies: 2376
+-- Name: observacion_matriz_productiva_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE observacion_matriz_productiva_id_seq OWNED BY observacion_matriz_productiva.id;
+
+
+--
+-- TOC entry 3156 (class 0 OID 0)
+-- Dependencies: 2376
+-- Name: observacion_matriz_productiva_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('observacion_matriz_productiva_id_seq', 46, true);
+
+
+--
+-- TOC entry 2361 (class 1259 OID 33133)
+-- Dependencies: 3 2362
+-- Name: par_usuarios_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE par_usuarios_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3157 (class 0 OID 0)
+-- Dependencies: 2361
+-- Name: par_usuarios_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE par_usuarios_id_seq OWNED BY par_usuarios.id;
+
+
+--
+-- TOC entry 3158 (class 0 OID 0)
+-- Dependencies: 2361
+-- Name: par_usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('par_usuarios_id_seq', 1, false);
+
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 2351 (class 1259 OID 31912)
+-- Dependencies: 3
+-- Name: spatial_ref_sys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE spatial_ref_sys (
+    srid integer NOT NULL,
+    auth_name character varying(256),
+    auth_srid integer,
+    srtext character varying(2048),
+    proj4text character varying(2048)
+);
+
+
+--
+-- TOC entry 2359 (class 1259 OID 33065)
+-- Dependencies: 2360 3
+-- Name: tipo_matriz_productiva_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tipo_matriz_productiva_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3159 (class 0 OID 0)
+-- Dependencies: 2359
+-- Name: tipo_matriz_productiva_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tipo_matriz_productiva_id_seq OWNED BY tipo_matriz_productiva.id;
+
+
+--
+-- TOC entry 3160 (class 0 OID 0)
+-- Dependencies: 2359
+-- Name: tipo_matriz_productiva_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('tipo_matriz_productiva_id_seq', 15, true);
+
+
+--
+-- TOC entry 2357 (class 1259 OID 32994)
+-- Dependencies: 2358 3
+-- Name: ubicacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ubicacion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 3161 (class 0 OID 0)
+-- Dependencies: 2357
+-- Name: ubicacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ubicacion_id_seq OWNED BY ubicacion.id;
+
+
+--
+-- TOC entry 3162 (class 0 OID 0)
+-- Dependencies: 2357
+-- Name: ubicacion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('ubicacion_id_seq', 9, true);
+
+
+--
+-- TOC entry 2355 (class 1259 OID 32982)
+-- Dependencies: 3 2356
+-- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE usuario_id_seq
@@ -15075,21 +14155,19 @@ CREATE SEQUENCE usuario_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.usuario_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2999 (class 0 OID 0)
--- Dependencies: 2312
--- Name: usuario_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 3163 (class 0 OID 0)
+-- Dependencies: 2355
+-- Name: usuario_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE usuario_id_seq OWNED BY usuario.id;
 
 
 --
--- TOC entry 3000 (class 0 OID 0)
--- Dependencies: 2312
--- Name: usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 3164 (class 0 OID 0)
+-- Dependencies: 2355
+-- Name: usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('usuario_id_seq', 1, false);
@@ -15098,110 +14176,200 @@ SELECT pg_catalog.setval('usuario_id_seq', 1, false);
 SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2639 (class 2604 OID 33555)
--- Dependencies: 2322 2323 2323
--- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: postgres
+-- TOC entry 2721 (class 2604 OID 33855)
+-- Dependencies: 2379 2380 2380
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE campana ALTER COLUMN idmovimiento SET DEFAULT nextval('campana_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2717 (class 2604 OID 33839)
+-- Dependencies: 2378 2377 2378
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
 --
 
 ALTER TABLE especie ALTER COLUMN idmovimiento SET DEFAULT nextval('especie_idmovimiento_seq'::regclass);
 
 
+--
+-- TOC entry 2725 (class 2604 OID 33871)
+-- Dependencies: 2381 2382 2382
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE observacion ALTER COLUMN idmovimiento SET DEFAULT nextval('observacion_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2729 (class 2604 OID 33887)
+-- Dependencies: 2384 2383 2384
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE observacion_clima ALTER COLUMN idmovimiento SET DEFAULT nextval('observacion_clima_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2733 (class 2604 OID 33903)
+-- Dependencies: 2385 2386 2386
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE observacion_especie ALTER COLUMN idmovimiento SET DEFAULT nextval('observacion_especie_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2737 (class 2604 OID 33919)
+-- Dependencies: 2387 2388 2388
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE observacion_foto ALTER COLUMN idmovimiento SET DEFAULT nextval('observacion_foto_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2741 (class 2604 OID 33935)
+-- Dependencies: 2390 2389 2390
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE observacion_matriz_productiva ALTER COLUMN idmovimiento SET DEFAULT nextval('observacion_matriz_productiva_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2745 (class 2604 OID 33951)
+-- Dependencies: 2391 2392 2392
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE par_usuarios ALTER COLUMN idmovimiento SET DEFAULT nextval('par_usuarios_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2749 (class 2604 OID 33967)
+-- Dependencies: 2394 2393 2394
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE tipo_matriz_productiva ALTER COLUMN idmovimiento SET DEFAULT nextval('tipo_matriz_productiva_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2753 (class 2604 OID 33983)
+-- Dependencies: 2396 2395 2396
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE ubicacion ALTER COLUMN idmovimiento SET DEFAULT nextval('ubicacion_idmovimiento_seq'::regclass);
+
+
+--
+-- TOC entry 2757 (class 2604 OID 33999)
+-- Dependencies: 2398 2397 2398
+-- Name: idmovimiento; Type: DEFAULT; Schema: auditoria; Owner: -
+--
+
+ALTER TABLE usuario ALTER COLUMN idmovimiento SET DEFAULT nextval('usuario_idmovimiento_seq'::regclass);
+
+
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2629 (class 2604 OID 32976)
--- Dependencies: 2311 2310 2311
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2692 (class 2604 OID 32976)
+-- Dependencies: 2354 2353 2354
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE campana ALTER COLUMN id SET DEFAULT nextval('campana_id_seq'::regclass);
 
 
 --
--- TOC entry 2643 (class 2604 OID 33631)
--- Dependencies: 2324 2325 2325
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2702 (class 2604 OID 33631)
+-- Dependencies: 2366 2365 2366
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE especie ALTER COLUMN id SET DEFAULT nextval('especie_id_seq'::regclass);
 
 
 --
--- TOC entry 2644 (class 2604 OID 33748)
--- Dependencies: 2333 2326
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2703 (class 2604 OID 33748)
+-- Dependencies: 2374 2367
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE observacion ALTER COLUMN id SET DEFAULT nextval('observacion_id_seq'::regclass);
 
 
 --
--- TOC entry 2648 (class 2604 OID 33749)
--- Dependencies: 2328 2327
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2707 (class 2604 OID 33749)
+-- Dependencies: 2369 2368
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE observacion_clima ALTER COLUMN id SET DEFAULT nextval('observacion_clima_id_seq'::regclass);
 
 
 --
--- TOC entry 2651 (class 2604 OID 33750)
--- Dependencies: 2330 2329
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2710 (class 2604 OID 33750)
+-- Dependencies: 2371 2370
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE observacion_especie ALTER COLUMN id SET DEFAULT nextval('observacion_especie_id_seq'::regclass);
 
 
 --
--- TOC entry 2655 (class 2604 OID 33751)
--- Dependencies: 2332 2331
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2714 (class 2604 OID 33751)
+-- Dependencies: 2373 2372
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE observacion_foto ALTER COLUMN id SET DEFAULT nextval('observacion_foto_id_seq'::regclass);
 
 
 --
--- TOC entry 2657 (class 2604 OID 33752)
--- Dependencies: 2335 2334
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2716 (class 2604 OID 33752)
+-- Dependencies: 2376 2375
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE observacion_matriz_productiva ALTER COLUMN id SET DEFAULT nextval('observacion_matriz_productiva_id_seq'::regclass);
 
 
 --
--- TOC entry 2634 (class 2604 OID 33138)
--- Dependencies: 2318 2319 2319
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2697 (class 2604 OID 33138)
+-- Dependencies: 2361 2362 2362
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE par_usuarios ALTER COLUMN id SET DEFAULT nextval('par_usuarios_id_seq'::regclass);
 
 
 --
--- TOC entry 2633 (class 2604 OID 33070)
--- Dependencies: 2317 2316 2317
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2696 (class 2604 OID 33070)
+-- Dependencies: 2359 2360 2360
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE tipo_matriz_productiva ALTER COLUMN id SET DEFAULT nextval('tipo_matriz_productiva_id_seq'::regclass);
 
 
 --
--- TOC entry 2632 (class 2604 OID 32999)
--- Dependencies: 2315 2314 2315
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2695 (class 2604 OID 32999)
+-- Dependencies: 2357 2358 2358
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ubicacion ALTER COLUMN id SET DEFAULT nextval('ubicacion_id_seq'::regclass);
 
 
 --
--- TOC entry 2630 (class 2604 OID 32987)
--- Dependencies: 2313 2312 2313
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2693 (class 2604 OID 32987)
+-- Dependencies: 2355 2356 2356
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE usuario ALTER COLUMN id SET DEFAULT nextval('usuario_id_seq'::regclass);
@@ -15210,66 +14378,138 @@ ALTER TABLE usuario ALTER COLUMN id SET DEFAULT nextval('usuario_id_seq'::regcla
 SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2707 (class 0 OID 33552)
--- Dependencies: 2323
--- Data for Name: especie; Type: TABLE DATA; Schema: auditoria; Owner: postgres
+-- TOC entry 2848 (class 0 OID 33852)
+-- Dependencies: 2380
+-- Data for Name: campana; Type: TABLE DATA; Schema: auditoria; Owner: -
 --
 
-INSERT INTO especie (idmovimiento, usuariodb, usuarioapl, accion, acciontimestamp, consulta) VALUES (1, 'postgres', 1, 'INSERT', '2011-07-03 19:50:30.875894-03', NULL);
-INSERT INTO especie (idmovimiento, usuariodb, usuarioapl, accion, acciontimestamp, consulta) VALUES (2, 'postgres', 1, 'INSERT', '2011-07-03 23:48:47.268793-03', NULL);
-INSERT INTO especie (idmovimiento, usuariodb, usuarioapl, accion, acciontimestamp, consulta) VALUES (3, 'postgres', 1, 'INSERT', '2011-07-04 20:18:18.714423-03', NULL);
-INSERT INTO especie (idmovimiento, usuariodb, usuarioapl, accion, acciontimestamp, consulta) VALUES (4, 'postgres', 1, 'INSERT', '2011-07-27 18:14:33.619679-03', NULL);
-INSERT INTO especie (idmovimiento, usuariodb, usuarioapl, accion, acciontimestamp, consulta) VALUES (5, 'postgres', 1, 'INSERT', '2011-07-27 18:14:47.651613-03', NULL);
-INSERT INTO especie (idmovimiento, usuariodb, usuarioapl, accion, acciontimestamp, consulta) VALUES (6, 'postgres', 1, 'INSERT', '2011-07-27 18:32:13.772725-03', NULL);
-INSERT INTO especie (idmovimiento, usuariodb, usuarioapl, accion, acciontimestamp, consulta) VALUES (7, 'postgres', 1, 'INSERT', '2011-07-27 18:32:27.75488-03', NULL);
-INSERT INTO especie (idmovimiento, usuariodb, usuarioapl, accion, acciontimestamp, consulta) VALUES (8, 'postgres', 1, 'INSERT', '2011-07-27 18:32:43.556421-03', NULL);
 
 
 --
--- TOC entry 2705 (class 0 OID 33539)
--- Dependencies: 2320
--- Data for Name: infseg; Type: TABLE DATA; Schema: auditoria; Owner: postgres
+-- TOC entry 2847 (class 0 OID 33836)
+-- Dependencies: 2378
+-- Data for Name: especie; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2839 (class 0 OID 33539)
+-- Dependencies: 2363
+-- Data for Name: infseg; Type: TABLE DATA; Schema: auditoria; Owner: -
 --
 
 INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('spatial_ref_sys', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, false);
 INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('geometry_columns', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, false);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('campana', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion_especie', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion_foto', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('usuario', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion_matriz_productiva', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('par_usuarios', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('ubicacion', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('tipo_matriz_productiva', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
-INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion_clima', 'public', false, 1, '2011-07-03 19:45:54.863253', NULL, true);
 INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('especie', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('campana', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion_clima', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion_especie', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion_foto', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('observacion_matriz_productiva', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('par_usuarios', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('tipo_matriz_productiva', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('ubicacion', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
+INSERT INTO infseg (nombtabla, esquema, activar, version, fechageneracion, fechaactivacion, hastrigg) VALUES ('usuario', 'public', true, 1, '2011-07-03 19:45:54.863253', NULL, true);
 
 
 --
--- TOC entry 2706 (class 0 OID 33547)
--- Dependencies: 2321
--- Data for Name: tmp_usuario; Type: TABLE DATA; Schema: auditoria; Owner: postgres
+-- TOC entry 2849 (class 0 OID 33868)
+-- Dependencies: 2382
+-- Data for Name: observacion; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2850 (class 0 OID 33884)
+-- Dependencies: 2384
+-- Data for Name: observacion_clima; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2851 (class 0 OID 33900)
+-- Dependencies: 2386
+-- Data for Name: observacion_especie; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2852 (class 0 OID 33916)
+-- Dependencies: 2388
+-- Data for Name: observacion_foto; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2853 (class 0 OID 33932)
+-- Dependencies: 2390
+-- Data for Name: observacion_matriz_productiva; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2854 (class 0 OID 33948)
+-- Dependencies: 2392
+-- Data for Name: par_usuarios; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2855 (class 0 OID 33964)
+-- Dependencies: 2394
+-- Data for Name: tipo_matriz_productiva; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2840 (class 0 OID 33547)
+-- Dependencies: 2364
+-- Data for Name: tmp_usuario; Type: TABLE DATA; Schema: auditoria; Owner: -
 --
 
 INSERT INTO tmp_usuario (usuario) VALUES (0);
 
 
+--
+-- TOC entry 2856 (class 0 OID 33980)
+-- Dependencies: 2396
+-- Data for Name: ubicacion; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
+--
+-- TOC entry 2857 (class 0 OID 33996)
+-- Dependencies: 2398
+-- Data for Name: usuario; Type: TABLE DATA; Schema: auditoria; Owner: -
+--
+
+
+
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2700 (class 0 OID 32973)
--- Dependencies: 2311
--- Data for Name: campana; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2834 (class 0 OID 32973)
+-- Dependencies: 2354
+-- Data for Name: campana; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO campana (id, nombre) VALUES (1, 'Campaña Septiembre 2011');
 
 
 --
--- TOC entry 2708 (class 0 OID 33628)
--- Dependencies: 2325
--- Data for Name: especie; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2841 (class 0 OID 33628)
+-- Dependencies: 2366
+-- Data for Name: especie; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO especie (id, nombre, nombre_cientifico, familia, grupo) VALUES (222, 'Chajá', 'Chauna torquata', 'ANHIMIDAE', 'ANSERIFORMES');
@@ -15365,35 +14605,36 @@ INSERT INTO especie (id, nombre, nombre_cientifico, familia, grupo) VALUES (311,
 
 
 --
--- TOC entry 2699 (class 0 OID 31920)
--- Dependencies: 2309
--- Data for Name: geometry_columns; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2833 (class 0 OID 31920)
+-- Dependencies: 2352
+-- Data for Name: geometry_columns; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 
 
 --
--- TOC entry 2709 (class 0 OID 33705)
--- Dependencies: 2326
--- Data for Name: observacion; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2842 (class 0 OID 33705)
+-- Dependencies: 2367
+-- Data for Name: observacion; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (22, '2011-09-24 16:09:00', '2011-09-24 17:09:00', 'Total', 'Rastrojo indeterminado', 9, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (23, '2011-09-24 15:09:00', '2011-09-24 15:09:00', 'Parcial', 'Cultivo indererminado fino. Barro. Monte.', 8, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (24, '2011-09-24 14:09:00', '2011-09-24 14:09:00', 'Parcial', 'Casco cerca', 7, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (21, '2011-09-24 17:09:00', '2011-09-24 17:09:00', 'Parcial', 'Cultivo indeterminado', 10, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (30, '2011-09-24 09:15:00', '2011-09-24 09:36:00', 'Total', 'Avena a 300 metros', 1, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (29, '2011-09-24 09:40:00', '2011-09-24 09:56:00', 'Total', '', 2, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (28, '2011-09-24 10:04:00', '2011-09-24 10:06:00', 'Total', '', 3, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (27, '2011-09-24 10:39:00', '2011-09-24 10:45:00', 'Total', '', 4, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (26, '2011-09-24 11:04:00', '2011-09-24 11:19:00', 'Total', '', 5, 1, 'ARevisar', 'Fiable', 1, 1);
-INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (25, '2011-09-24 11:34:00', '2011-09-24 11:45:00', 'Total', '', 6, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (30, '2011-09-24 09:15:00', '2011-09-24 09:36:00', 'Total', 'Avena a 300 metros - AGREGAR CHAUNA 2', 1, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (24, '2011-09-24 14:09:00', '2011-09-24 14:09:00', 'Parcial', 'Casco cerca. mas de 30 m.
+foto 2764-2773 retoque 2776 a la 2785', 7, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (25, '2011-09-24 11:34:00', '2011-09-24 11:45:00', 'Total', NULL, 6, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (26, '2011-09-24 11:04:00', '2011-09-24 11:19:00', 'Total', NULL, 5, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (27, '2011-09-24 10:39:00', '2011-09-24 10:45:00', 'Total', NULL, 4, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (28, '2011-09-24 10:04:00', '2011-09-24 10:06:00', 'Total', 'pANORAMICA SI', 3, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (29, '2011-09-24 09:40:00', '2011-09-24 09:56:00', 'Total', NULL, 2, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (23, '2011-09-24 15:09:00', '2011-09-24 15:09:00', 'Parcial', 'Barro. Monte.', 8, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (22, '2011-09-24 16:09:00', '2011-09-24 17:09:00', 'Total', NULL, 9, 1, 'ARevisar', 'Fiable', 1, 1);
+INSERT INTO observacion (id, inicio, fin, alcance, observaciones, id_ubicacion, id_campana, estado, fiabilidad, id_usuario, id_usuario_apoyo) VALUES (21, '2011-09-24 17:09:00', '2011-09-24 17:09:00', 'Parcial', NULL, 10, 1, 'ARevisar', 'Fiable', 1, 1);
 
 
 --
--- TOC entry 2710 (class 0 OID 33714)
--- Dependencies: 2327
--- Data for Name: observacion_clima; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2843 (class 0 OID 33714)
+-- Dependencies: 2368
+-- Data for Name: observacion_clima; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (1, false, false, 'ParcialmenteNublado', 'MuyVentoso', 13, 1);
@@ -15426,12 +14667,24 @@ INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_o
 INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (28, false, false, 'ParcialmenteNublado', 'MuyVentoso', 14, 28);
 INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (29, false, false, 'ParcialmenteNublado', 'MuyVentoso', 13, 29);
 INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (30, false, false, 'ParcialmenteNublado', 'MuyVentoso', 13, 30);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (31, true, false, 'ParcialmenteNublado', 'Ventoso', 16, 31);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (32, false, false, 'MayormenteNublado', 'Ventoso', 13, 32);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (33, false, false, 'MayormenteNublado', 'Ventoso', 13, 33);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (34, true, false, 'MayormenteNublado', 'Ventoso', 13, 34);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (35, true, false, 'ParcialmenteNublado', 'Ventoso', 14, 35);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (36, true, false, 'MayormenteNublado', 'MuyVentoso', 13, 36);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (37, false, false, 'MayormenteNublado', 'MuyVentoso', 10, 37);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (38, false, false, 'ParcialmenteNublado', 'PocoVentoso', 20, 38);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (39, false, false, 'ParcialmenteNublado', 'PocoVentoso', 20, 39);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (40, false, false, 'ParcialmenteNublado', 'PocoVentoso', 20, 40);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (41, false, false, 'ParcialmenteNublado', 'PocoVentoso', 20, 41);
+INSERT INTO observacion_clima (id, sol, lluvia, nubes, viento, temperatura, id_observacion) VALUES (42, false, false, 'ParcialmenteNublado', 'PocoVentoso', 20, 42);
 
 
 --
--- TOC entry 2711 (class 0 OID 33721)
--- Dependencies: 2329
--- Data for Name: observacion_especie; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2844 (class 0 OID 33721)
+-- Dependencies: 2370
+-- Data for Name: observacion_especie; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO observacion_especie (id, cantidad, distancia, conteo, edad, observaciones, id_observacion, id_especie) VALUES (77, 237, 'Lejos', 'Preciso', 'Adulto', NULL, 21, 231);
@@ -15473,23 +14726,21 @@ INSERT INTO observacion_especie (id, cantidad, distancia, conteo, edad, observac
 
 
 --
--- TOC entry 2712 (class 0 OID 33732)
--- Dependencies: 2331
--- Data for Name: observacion_foto; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2845 (class 0 OID 33732)
+-- Dependencies: 2372
+-- Data for Name: observacion_foto; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 
 
 --
--- TOC entry 2713 (class 0 OID 33743)
--- Dependencies: 2334
--- Data for Name: observacion_matriz_productiva; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2846 (class 0 OID 33743)
+-- Dependencies: 2375
+-- Data for Name: observacion_matriz_productiva; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (25, 8, 30, 21);
-INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (26, 10, 65, 21);
 INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (27, 7, 5, 21);
-INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (28, 10, 100, 22);
 INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (29, 8, 70, 23);
 INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (30, 6, 30, 23);
 INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (31, 8, 90, 24);
@@ -15500,20 +14751,22 @@ INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcen
 INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (36, 8, 100, 28);
 INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (37, 8, 100, 29);
 INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (38, 8, 100, 30);
+INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (26, 15, 65, 21);
+INSERT INTO observacion_matriz_productiva (id, id_tipo_matriz_productiva, porcentaje, id_observacion) VALUES (28, 13, 100, 22);
 
 
 --
--- TOC entry 2704 (class 0 OID 33135)
--- Dependencies: 2319
--- Data for Name: par_usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2838 (class 0 OID 33135)
+-- Dependencies: 2362
+-- Data for Name: par_usuarios; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 
 
 --
--- TOC entry 2698 (class 0 OID 31912)
--- Dependencies: 2308
--- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2832 (class 0 OID 31912)
+-- Dependencies: 2351
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) VALUES (3819, 'EPSG', 3819, 'GEOGCS["HD1909",DATUM["Hungarian_Datum_1909",SPHEROID["Bessel 1841",6377397.155,299.1528128,AUTHORITY["EPSG","7004"]],TOWGS84[595.48,121.69,515.35,4.115,-2.9383,0.853,-3.408],AUTHORITY["EPSG","1024"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.01745329251994328,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","3819"]]', '+proj=longlat +ellps=bessel +towgs84=595.48,121.69,515.35,4.115,-2.9383,0.853,-3.408 +no_defs ');
@@ -19268,43 +18521,48 @@ INSERT INTO spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) VALU
 
 
 --
--- TOC entry 2703 (class 0 OID 33067)
--- Dependencies: 2317
--- Data for Name: tipo_matriz_productiva; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2837 (class 0 OID 33067)
+-- Dependencies: 2360
+-- Data for Name: tipo_matriz_productiva; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (1, 'Sorgo');
 INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (4, 'Maiz');
 INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (5, 'Soja');
-INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (6, 'Trigo');
-INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (7, 'Bosque Sembrado');
-INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (8, 'Pastizal');
 INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (9, 'Bosque Nativo');
 INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (10, 'Barbecho');
+INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (7, 'Monte');
+INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (6, 'Cultivo Indeterminado Fino');
+INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (11, 'Trigo');
+INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (12, 'Cultivo Indeterminado Grueso');
+INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (13, 'Forraje Indeterminado');
+INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (14, 'Avena');
+INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (15, 'Cultivo Indeterminado');
+INSERT INTO tipo_matriz_productiva (id, nombre) VALUES (8, 'Pastizal Natural');
 
 
 --
--- TOC entry 2702 (class 0 OID 32996)
--- Dependencies: 2315
--- Data for Name: ubicacion; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2836 (class 0 OID 32996)
+-- Dependencies: 2358
+-- Data for Name: ubicacion; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (1, 'Don Emilio 1', 227, '-37º 31.285'' - -60º 0.329''');
 INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (2, 'Don Emilio 2', 238, '-37º 31.640'' - -60º 0.452''');
 INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (3, 'Don Emilio 3', 233, '-37º 31.658'' - -60º 1.193''');
-INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (4, 'Don Emilio 4', 230, '-37º 312.089'' - -60º 0.939''');
 INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (5, 'Don Emilio 5', 232, '-37º 32.228'' - -60º 2.029''');
 INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (6, 'Don Emilio 6', 227, '-37º 32.718'' - -60º 1.792''');
-INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (7, 'NN 1', NULL, NULL);
-INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (10, 'NN 4', NULL, '-37º 42'' 50.8'''' - -60º 14'' 20.4''''');
-INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (9, 'NN 3', NULL, '-37º 42'' 33.4'''' - -60º 14'' 32.6''''');
-INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (8, 'NN 2', NULL, '-37º 39'' 36.2'''' - -60º 14'' 15.5''''');
+INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (8, 'NN 2', NULL, '-37º 39'' 36.2" - -60º 14'' 15.5"');
+INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (9, 'NN 3', NULL, '-37º 42'' 33.4" - -60º 14'' 32.6"');
+INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (10, 'NN 4', NULL, '-37º 42'' 50.8" - -60º 14'' 20.4"');
+INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (7, 'NN 1', NULL, '-37º 28.449'' - -60º 02.671''');
+INSERT INTO ubicacion (id, nombre, altura, coordenadas) VALUES (4, 'Don Emilio 4', 230, '-37º 32.089'' - -60º 0.939''');
 
 
 --
--- TOC entry 2701 (class 0 OID 32984)
--- Dependencies: 2313
--- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2835 (class 0 OID 32984)
+-- Dependencies: 2356
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO usuario (id, nombre, clave, tipo, email, telefono) VALUES (1, 'administrador', 'admin', 'Administrador', NULL, NULL);
@@ -19313,9 +18571,19 @@ INSERT INTO usuario (id, nombre, clave, tipo, email, telefono) VALUES (1, 'admin
 SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2675 (class 2606 OID 33563)
--- Dependencies: 2323 2323
--- Name: especie_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: postgres; Tablespace: 
+-- TOC entry 2790 (class 2606 OID 33863)
+-- Dependencies: 2380 2380
+-- Name: campana_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY campana
+    ADD CONSTRAINT campana_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2788 (class 2606 OID 33847)
+-- Dependencies: 2378 2378
+-- Name: especie_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY especie
@@ -19323,21 +18591,111 @@ ALTER TABLE ONLY especie
 
 
 --
--- TOC entry 2673 (class 2606 OID 33546)
--- Dependencies: 2320 2320
--- Name: infseg_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: postgres; Tablespace: 
+-- TOC entry 2776 (class 2606 OID 33546)
+-- Dependencies: 2363 2363
+-- Name: infseg_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY infseg
     ADD CONSTRAINT infseg_pkey PRIMARY KEY (nombtabla);
 
 
+--
+-- TOC entry 2794 (class 2606 OID 33895)
+-- Dependencies: 2384 2384
+-- Name: observacion_clima_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY observacion_clima
+    ADD CONSTRAINT observacion_clima_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2796 (class 2606 OID 33911)
+-- Dependencies: 2386 2386
+-- Name: observacion_especie_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY observacion_especie
+    ADD CONSTRAINT observacion_especie_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2798 (class 2606 OID 33927)
+-- Dependencies: 2388 2388
+-- Name: observacion_foto_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY observacion_foto
+    ADD CONSTRAINT observacion_foto_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2800 (class 2606 OID 33943)
+-- Dependencies: 2390 2390
+-- Name: observacion_matriz_productiva_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY observacion_matriz_productiva
+    ADD CONSTRAINT observacion_matriz_productiva_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2792 (class 2606 OID 33879)
+-- Dependencies: 2382 2382
+-- Name: observacion_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY observacion
+    ADD CONSTRAINT observacion_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2802 (class 2606 OID 33959)
+-- Dependencies: 2392 2392
+-- Name: par_usuarios_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY par_usuarios
+    ADD CONSTRAINT par_usuarios_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2804 (class 2606 OID 33975)
+-- Dependencies: 2394 2394
+-- Name: tipo_matriz_productiva_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tipo_matriz_productiva
+    ADD CONSTRAINT tipo_matriz_productiva_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2806 (class 2606 OID 33991)
+-- Dependencies: 2396 2396
+-- Name: ubicacion_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ubicacion
+    ADD CONSTRAINT ubicacion_pkey PRIMARY KEY (idmovimiento);
+
+
+--
+-- TOC entry 2808 (class 2606 OID 34007)
+-- Dependencies: 2398 2398
+-- Name: usuario_pkey; Type: CONSTRAINT; Schema: auditoria; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (idmovimiento);
+
+
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2663 (class 2606 OID 32981)
--- Dependencies: 2311 2311
--- Name: campana_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2766 (class 2606 OID 32981)
+-- Dependencies: 2354 2354
+-- Name: campana_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY campana
@@ -19345,9 +18703,9 @@ ALTER TABLE ONLY campana
 
 
 --
--- TOC entry 2677 (class 2606 OID 33636)
--- Dependencies: 2325 2325
--- Name: especie_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2778 (class 2606 OID 33636)
+-- Dependencies: 2366 2366
+-- Name: especie_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY especie
@@ -19355,9 +18713,9 @@ ALTER TABLE ONLY especie
 
 
 --
--- TOC entry 2661 (class 2606 OID 31927)
--- Dependencies: 2309 2309 2309 2309 2309
--- Name: geometry_columns_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2764 (class 2606 OID 31927)
+-- Dependencies: 2352 2352 2352 2352 2352
+-- Name: geometry_columns_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY geometry_columns
@@ -19365,9 +18723,9 @@ ALTER TABLE ONLY geometry_columns
 
 
 --
--- TOC entry 2681 (class 2606 OID 33754)
--- Dependencies: 2327 2327
--- Name: observacion_clima_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2782 (class 2606 OID 33754)
+-- Dependencies: 2368 2368
+-- Name: observacion_clima_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY observacion_clima
@@ -19375,9 +18733,9 @@ ALTER TABLE ONLY observacion_clima
 
 
 --
--- TOC entry 2683 (class 2606 OID 33756)
--- Dependencies: 2329 2329
--- Name: observacion_especie_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2784 (class 2606 OID 33756)
+-- Dependencies: 2370 2370
+-- Name: observacion_especie_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY observacion_especie
@@ -19385,9 +18743,9 @@ ALTER TABLE ONLY observacion_especie
 
 
 --
--- TOC entry 2685 (class 2606 OID 33758)
--- Dependencies: 2334 2334
--- Name: observacion_matriz_productiva_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2786 (class 2606 OID 33758)
+-- Dependencies: 2375 2375
+-- Name: observacion_matriz_productiva_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY observacion_matriz_productiva
@@ -19395,9 +18753,9 @@ ALTER TABLE ONLY observacion_matriz_productiva
 
 
 --
--- TOC entry 2679 (class 2606 OID 33760)
--- Dependencies: 2326 2326
--- Name: observacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2780 (class 2606 OID 33760)
+-- Dependencies: 2367 2367
+-- Name: observacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY observacion
@@ -19405,9 +18763,9 @@ ALTER TABLE ONLY observacion
 
 
 --
--- TOC entry 2671 (class 2606 OID 33141)
--- Dependencies: 2319 2319
--- Name: par_usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2774 (class 2606 OID 33141)
+-- Dependencies: 2362 2362
+-- Name: par_usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY par_usuarios
@@ -19415,9 +18773,9 @@ ALTER TABLE ONLY par_usuarios
 
 
 --
--- TOC entry 2659 (class 2606 OID 31919)
--- Dependencies: 2308 2308
--- Name: spatial_ref_sys_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2762 (class 2606 OID 31919)
+-- Dependencies: 2351 2351
+-- Name: spatial_ref_sys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spatial_ref_sys
@@ -19425,9 +18783,9 @@ ALTER TABLE ONLY spatial_ref_sys
 
 
 --
--- TOC entry 2669 (class 2606 OID 33075)
--- Dependencies: 2317 2317
--- Name: tipo_matriz_productiva_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2772 (class 2606 OID 33075)
+-- Dependencies: 2360 2360
+-- Name: tipo_matriz_productiva_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tipo_matriz_productiva
@@ -19435,9 +18793,9 @@ ALTER TABLE ONLY tipo_matriz_productiva
 
 
 --
--- TOC entry 2667 (class 2606 OID 33004)
--- Dependencies: 2315 2315
--- Name: ubicacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2770 (class 2606 OID 33004)
+-- Dependencies: 2358 2358
+-- Name: ubicacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ubicacion
@@ -19445,9 +18803,9 @@ ALTER TABLE ONLY ubicacion
 
 
 --
--- TOC entry 2665 (class 2606 OID 32993)
--- Dependencies: 2313 2313
--- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2768 (class 2606 OID 32993)
+-- Dependencies: 2356 2356
+-- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY usuario
@@ -19457,9 +18815,9 @@ ALTER TABLE ONLY usuario
 SET search_path = auditoria, pg_catalog;
 
 --
--- TOC entry 2697 (class 2620 OID 33569)
--- Dependencies: 2321 717
--- Name: fallar_on_insert; Type: TRIGGER; Schema: auditoria; Owner: postgres
+-- TOC entry 2825 (class 2620 OID 33569)
+-- Dependencies: 2364 708
+-- Name: fallar_on_insert; Type: TRIGGER; Schema: auditoria; Owner: -
 --
 
 CREATE TRIGGER fallar_on_insert
@@ -19469,9 +18827,9 @@ CREATE TRIGGER fallar_on_insert
 
 
 --
--- TOC entry 3001 (class 0 OID 0)
--- Dependencies: 2697
--- Name: TRIGGER fallar_on_insert ON tmp_usuario; Type: COMMENT; Schema: auditoria; Owner: postgres
+-- TOC entry 3165 (class 0 OID 0)
+-- Dependencies: 2825
+-- Name: TRIGGER fallar_on_insert ON tmp_usuario; Type: COMMENT; Schema: auditoria; Owner: -
 --
 
 COMMENT ON TRIGGER fallar_on_insert ON tmp_usuario IS 'para que no deje insertar valores nuevos';
@@ -19480,9 +18838,141 @@ COMMENT ON TRIGGER fallar_on_insert ON tmp_usuario IS 'para que no deje insertar
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2693 (class 2606 OID 33761)
--- Dependencies: 2326 2329 2678
--- Name: observacion_especie_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2820 (class 2620 OID 33865)
+-- Dependencies: 712 2354
+-- Name: tg_public_campana; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_campana
+    AFTER INSERT OR DELETE OR UPDATE ON campana
+    FOR EACH ROW
+    EXECUTE PROCEDURE campana_trigauto();
+
+
+--
+-- TOC entry 2826 (class 2620 OID 33849)
+-- Dependencies: 711 2366
+-- Name: tg_public_especie; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_especie
+    AFTER INSERT OR DELETE OR UPDATE ON especie
+    FOR EACH ROW
+    EXECUTE PROCEDURE especie_trigauto();
+
+
+--
+-- TOC entry 2827 (class 2620 OID 33881)
+-- Dependencies: 2367 713
+-- Name: tg_public_observacion; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_observacion
+    AFTER INSERT OR DELETE OR UPDATE ON observacion
+    FOR EACH ROW
+    EXECUTE PROCEDURE observacion_trigauto();
+
+
+--
+-- TOC entry 2828 (class 2620 OID 33897)
+-- Dependencies: 714 2368
+-- Name: tg_public_observacion_clima; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_observacion_clima
+    AFTER INSERT OR DELETE OR UPDATE ON observacion_clima
+    FOR EACH ROW
+    EXECUTE PROCEDURE observacion_clima_trigauto();
+
+
+--
+-- TOC entry 2829 (class 2620 OID 33913)
+-- Dependencies: 2370 715
+-- Name: tg_public_observacion_especie; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_observacion_especie
+    AFTER INSERT OR DELETE OR UPDATE ON observacion_especie
+    FOR EACH ROW
+    EXECUTE PROCEDURE observacion_especie_trigauto();
+
+
+--
+-- TOC entry 2830 (class 2620 OID 33929)
+-- Dependencies: 716 2372
+-- Name: tg_public_observacion_foto; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_observacion_foto
+    AFTER INSERT OR DELETE OR UPDATE ON observacion_foto
+    FOR EACH ROW
+    EXECUTE PROCEDURE observacion_foto_trigauto();
+
+
+--
+-- TOC entry 2831 (class 2620 OID 33945)
+-- Dependencies: 2375 717
+-- Name: tg_public_observacion_matriz_productiva; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_observacion_matriz_productiva
+    AFTER INSERT OR DELETE OR UPDATE ON observacion_matriz_productiva
+    FOR EACH ROW
+    EXECUTE PROCEDURE observacion_matriz_productiva_trigauto();
+
+
+--
+-- TOC entry 2824 (class 2620 OID 33961)
+-- Dependencies: 718 2362
+-- Name: tg_public_par_usuarios; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_par_usuarios
+    AFTER INSERT OR DELETE OR UPDATE ON par_usuarios
+    FOR EACH ROW
+    EXECUTE PROCEDURE par_usuarios_trigauto();
+
+
+--
+-- TOC entry 2823 (class 2620 OID 33977)
+-- Dependencies: 719 2360
+-- Name: tg_public_tipo_matriz_productiva; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_tipo_matriz_productiva
+    AFTER INSERT OR DELETE OR UPDATE ON tipo_matriz_productiva
+    FOR EACH ROW
+    EXECUTE PROCEDURE tipo_matriz_productiva_trigauto();
+
+
+--
+-- TOC entry 2822 (class 2620 OID 33993)
+-- Dependencies: 2358 720
+-- Name: tg_public_ubicacion; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_ubicacion
+    AFTER INSERT OR DELETE OR UPDATE ON ubicacion
+    FOR EACH ROW
+    EXECUTE PROCEDURE ubicacion_trigauto();
+
+
+--
+-- TOC entry 2821 (class 2620 OID 34009)
+-- Dependencies: 2356 721
+-- Name: tg_public_usuario; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tg_public_usuario
+    AFTER INSERT OR DELETE OR UPDATE ON usuario
+    FOR EACH ROW
+    EXECUTE PROCEDURE usuario_trigauto();
+
+
+--
+-- TOC entry 2816 (class 2606 OID 33761)
+-- Dependencies: 2367 2370 2779
+-- Name: observacion_especie_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY observacion_especie
@@ -19490,9 +18980,9 @@ ALTER TABLE ONLY observacion_especie
 
 
 --
--- TOC entry 2694 (class 2606 OID 33766)
--- Dependencies: 2326 2331 2678
--- Name: observacion_foto_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2817 (class 2606 OID 33766)
+-- Dependencies: 2367 2372 2779
+-- Name: observacion_foto_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY observacion_foto
@@ -19500,9 +18990,9 @@ ALTER TABLE ONLY observacion_foto
 
 
 --
--- TOC entry 2689 (class 2606 OID 33771)
--- Dependencies: 2311 2326 2662
--- Name: observacion_id_campana_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2812 (class 2606 OID 33771)
+-- Dependencies: 2765 2367 2354
+-- Name: observacion_id_campana_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY observacion
@@ -19510,9 +19000,9 @@ ALTER TABLE ONLY observacion
 
 
 --
--- TOC entry 2690 (class 2606 OID 33776)
--- Dependencies: 2666 2326 2315
--- Name: observacion_id_ubicacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2813 (class 2606 OID 33776)
+-- Dependencies: 2358 2769 2367
+-- Name: observacion_id_ubicacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY observacion
@@ -19520,9 +19010,9 @@ ALTER TABLE ONLY observacion
 
 
 --
--- TOC entry 2691 (class 2606 OID 33781)
--- Dependencies: 2664 2313 2326
--- Name: observacion_id_usuario_apoyo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2814 (class 2606 OID 33781)
+-- Dependencies: 2356 2367 2767
+-- Name: observacion_id_usuario_apoyo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY observacion
@@ -19530,9 +19020,9 @@ ALTER TABLE ONLY observacion
 
 
 --
--- TOC entry 2692 (class 2606 OID 33786)
--- Dependencies: 2313 2326 2664
--- Name: observacion_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2815 (class 2606 OID 33786)
+-- Dependencies: 2767 2356 2367
+-- Name: observacion_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY observacion
@@ -19540,9 +19030,9 @@ ALTER TABLE ONLY observacion
 
 
 --
--- TOC entry 2695 (class 2606 OID 33791)
--- Dependencies: 2678 2334 2326
--- Name: observacion_matriz_productiva_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2818 (class 2606 OID 33791)
+-- Dependencies: 2375 2367 2779
+-- Name: observacion_matriz_productiva_id_observacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY observacion_matriz_productiva
@@ -19550,9 +19040,9 @@ ALTER TABLE ONLY observacion_matriz_productiva
 
 
 --
--- TOC entry 2696 (class 2606 OID 33796)
--- Dependencies: 2317 2334 2668
--- Name: observacion_matriz_productiva_id_tipo_matriz_productiva_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2819 (class 2606 OID 33796)
+-- Dependencies: 2771 2375 2360
+-- Name: observacion_matriz_productiva_id_tipo_matriz_productiva_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY observacion_matriz_productiva
@@ -19560,9 +19050,9 @@ ALTER TABLE ONLY observacion_matriz_productiva
 
 
 --
--- TOC entry 2688 (class 2606 OID 33152)
--- Dependencies: 2319 2311 2662
--- Name: par_usuarios_id_campana_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2811 (class 2606 OID 33152)
+-- Dependencies: 2362 2765 2354
+-- Name: par_usuarios_id_campana_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY par_usuarios
@@ -19570,9 +19060,9 @@ ALTER TABLE ONLY par_usuarios
 
 
 --
--- TOC entry 2687 (class 2606 OID 33147)
--- Dependencies: 2313 2664 2319
--- Name: par_usuarios_id_usuario_apoyo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2810 (class 2606 OID 33147)
+-- Dependencies: 2767 2356 2362
+-- Name: par_usuarios_id_usuario_apoyo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY par_usuarios
@@ -19580,9 +19070,9 @@ ALTER TABLE ONLY par_usuarios
 
 
 --
--- TOC entry 2686 (class 2606 OID 33142)
--- Dependencies: 2319 2313 2664
--- Name: par_usuarios_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2809 (class 2606 OID 33142)
+-- Dependencies: 2362 2356 2767
+-- Name: par_usuarios_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY par_usuarios
@@ -19590,9 +19080,9 @@ ALTER TABLE ONLY par_usuarios
 
 
 --
--- TOC entry 2718 (class 0 OID 0)
+-- TOC entry 2862 (class 0 OID 0)
 -- Dependencies: 3
--- Name: public; Type: ACL; Schema: -; Owner: postgres
+-- Name: public; Type: ACL; Schema: -; Owner: -
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
@@ -19601,7 +19091,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2011-09-26 20:23:17 ART
+-- Completed on 2011-09-30 20:02:08 ART
 
 --
 -- PostgreSQL database dump complete

@@ -1,0 +1,7 @@
+para generar las tablas y triggers de auditoria se debe ejecutar:
+
+SELECT sinf.nombtabla ,sinf.esquema ,createTablesSeguimiento(sinf.nombtabla,sinf.esquema,'pruebaAudit')
+FROM "auditoria".infseg sinf WHERE sinf.activar
+
+Modelo de auditoria basado en tutorial de:
+http://pelinii.blogspot.com/2008/11/auditoria-en-postgresql.html
