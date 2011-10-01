@@ -7,7 +7,8 @@ public class ObservacionEspecie implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -3955657492269272900L;
-
+	public static final int PRESENCIA = -1;
+	public static final int PRESENCIA_MUCHOS = -2;
 	public ObservacionEspecie() {
 		// TODO Auto-generated constructor stub
 	}
