@@ -35,7 +35,6 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.VientoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
-import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -64,7 +63,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
@@ -671,7 +669,7 @@ public class VentanaCarga extends FlexTable {
 
 		horizontalPanel.add(comboBox1);
 
-		IntegerBox textBox_1 = new IntegerBox();
+		CantidadBox textBox_1 = new CantidadBox();
 		textBox_1.setWidth("35px");
 		textBox_1.setMaxLength(4);
 		horizontalPanel.add(textBox_1);
@@ -842,16 +840,17 @@ public class VentanaCarga extends FlexTable {
 
 	private ObservacionEspecie getObservacionEspecie(VerticalPanel vp)
 			throws ValidacionException {
-		if (((IntegerBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(1))
-				.getValue() != null) {
+		if (((CantidadBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(1))
+				.getValue() != null && !((CantidadBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(1))
+				.getValue().equals("")) {
 			ObservacionEspecie oe = new ObservacionEspecie();
 
 			if (((ListBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(0))
 					.getSelectedIndex() <= 0)// debe seleccionar especie
 				throw new ValidacionException(ctes.validacionEspecie());
 
-			oe.setCantidad(((IntegerBox) ((HorizontalPanel) vp.getWidget(0))
-					.getWidget(1)).getValue());
+			oe.setCantidad(((CantidadBox) ((HorizontalPanel) vp.getWidget(0))
+					.getWidget(1)).parseValue());
 			oe.setIdEspecie(especies.get(
 					(((ListBox) ((HorizontalPanel) vp.getWidget(0))
 							.getWidget(0))
@@ -983,15 +982,21 @@ public class VentanaCarga extends FlexTable {
 			class NoHoraFinDialog extends DialogBox {
 
 				public NoHoraFinDialog() {
-					setText("No selecciono hora de Fin ¿desea establecer la actual?");
+					setText(ctes.sinHoraFinCargaActual());
 					
 					setAnimationEnabled(true);
 					Button aceptarButton = new Button("Aceptar");
 					Button closeButton = new Button("Cancelar");
 					closeButton.addClickHandler(new ClickHandler() {
 
+						@SuppressWarnings("deprecation")
 						@Override
 						public void onClick(ClickEvent event) {
+							DeferredCommand.addCommand(new Command() {
+								public void execute() {
+									horaFin.setFocus(true);
+								}
+							});
 							hide();
 						}
 					});

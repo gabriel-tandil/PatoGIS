@@ -98,12 +98,12 @@ public interface VentanaCargaConstantes extends Constants {
 
 	String observacionGuardadaLocalmente();
 
-	String validacionHoraInicio();
-
 	String validacionFechaYHoras();
 	
 	String horaInicioTooltip();
 	
 	String horaFinTooltip();
+
+	String sinHoraFinCargaActual();
 
 }
