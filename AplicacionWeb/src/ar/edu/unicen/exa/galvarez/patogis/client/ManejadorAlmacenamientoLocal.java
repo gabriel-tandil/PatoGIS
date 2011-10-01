@@ -426,7 +426,6 @@ public class ManejadorAlmacenamientoLocal {
 	public static void persistirDatosLocales() {
 		persistirMapasLocales();
 		persistirObservacionesLocales();
-		storage.put("idAlmacenamientoLocal", "0");
 	}
 
 	public static void persistirMapasLocales() {
