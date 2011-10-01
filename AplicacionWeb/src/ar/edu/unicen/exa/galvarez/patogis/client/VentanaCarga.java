@@ -68,31 +68,33 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
 public class VentanaCarga extends FlexTable {
-	VentanaCargaConstantes ctes = GWT.create(VentanaCargaConstantes.class);
+	static VentanaCargaConstantes ctes = GWT.create(VentanaCargaConstantes.class);
 	EnumConstantes constantesEnum = GWT.create(EnumConstantes.class);
 
 	class AgregarEspecieDialog extends AgregarElementoDialog {
 
 		public AgregarEspecieDialog() {
-
 			setText(ctes.ingresarNuevaEspecie());
 		}
 
 		protected void grabar() {
-			Especie e = new Especie();
+			final Especie e = new Especie();
 			e.setNombre(text.getValue());
+			especies.put(text.getValue(), e);
 			especiesService.addElemento(e, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					AplicacionWeb.setMensajeAlerta(ctes.errorGuardarEspecie());
+					e.setId(ManejadorAlmacenamientoLocal
+							.obtenerProximoIdAlmacenamientoLocal());
+					ManejadorAlmacenamientoLocal
+							.guardarLocalMapaEspecies(especies);
 				}
 
 				@Override
 				public void onSuccess(Void result) {
 					// nada
-
 				}
 			});
-			especies.put(text.getValue(), e);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
@@ -101,64 +103,64 @@ public class VentanaCarga extends FlexTable {
 	class AgregarTipoMatrizProductivaDialog extends AgregarElementoDialog {
 
 		public AgregarTipoMatrizProductivaDialog() {
-
 			setText(ctes.ingresarNuevoTipoMatrizProductiva());
 		}
 
 		protected void grabar() {
-			TipoMatrizProductiva tmp = new TipoMatrizProductiva();
+			final TipoMatrizProductiva tmp = new TipoMatrizProductiva();
 			tmp.setNombre(text.getValue());
+			tiposMatrizProductiva.put(text.getValue(), tmp);
 			tipoMatrizProductivaService.addElemento(tmp,
 					new AsyncCallback<Void>() {
 						public void onFailure(Throwable caught) {
 							AplicacionWeb.setMensajeAlerta(ctes
 									.errorGuardarNuevoTipoMatrizProductiva());
+							tmp.setId(ManejadorAlmacenamientoLocal
+									.obtenerProximoIdAlmacenamientoLocal());
+							ManejadorAlmacenamientoLocal
+									.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
 						}
 
 						@Override
 						public void onSuccess(Void result) {
 							// nada
-
 						}
 					});
-			tiposMatrizProductiva.put(text.getValue(), tmp);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
-
 	}
 
 	class AgregarUbicacionDialog extends AgregarElementoDialog {
 
 		public AgregarUbicacionDialog() {
-
 			setText(ctes.ingresarNuevaUbicacion());
 		}
 
 		protected void grabar() {
-			Ubicacion u = new Ubicacion();
+			final Ubicacion u = new Ubicacion();
 			u.setNombre(text.getValue());
+			ubicaciones.put(text.getValue(), u);
 			ubicacionService.addElemento(u, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					AplicacionWeb.setMensajeAlerta(ctes
 							.errorGuardarNuevaUbicacion());
+					u.setId(ManejadorAlmacenamientoLocal
+							.obtenerProximoIdAlmacenamientoLocal());
+					ManejadorAlmacenamientoLocal
+							.guardarLocalMapaUbicacions(ubicaciones);
 				}
 
 				@Override
 				public void onSuccess(Void result) {
 					// nada
-
 				}
 			});
-			ubicaciones.put(text.getValue(), u);
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
-
 	}
 
-	final ArchivosServiceAsync archivosService = GWT
-			.create(ArchivosService.class);
 	private CheckBox checkLluvia;
 	private DoubleBox temperatura;
 	private CheckBox checkSol;
@@ -168,10 +170,6 @@ public class VentanaCarga extends FlexTable {
 	private DateBox dateBox;
 	private SingleUploader uploader;
 	private Label labelFotos;
-	MapaOrdenado<String, Especie> especies = new MapaOrdenado<String, Especie>();
-
-	final EspeciesServiceAsync especiesService = GWT
-			.create(EspeciesService.class);
 	private TimeBox horaFin;
 	private TimeBox horaInicio;
 	private List<String> imagenes = new ArrayList<String>();
@@ -179,6 +177,14 @@ public class VentanaCarga extends FlexTable {
 	private TextArea observaciones;
 	final ObservacionServiceAsync observacionService = GWT
 			.create(ObservacionService.class);
+	final ArchivosServiceAsync archivosService = GWT
+			.create(ArchivosService.class);
+	final EspeciesServiceAsync especiesService = GWT
+			.create(EspeciesService.class);
+	final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
+			.create(TipoMatrizProductivaService.class);
+	final UbicacionServiceAsync ubicacionService = GWT
+			.create(UbicacionService.class);
 	// Load the image in the document and in the case of success attach it to
 	// the viewer
 	private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
@@ -230,15 +236,10 @@ public class VentanaCarga extends FlexTable {
 			panelImages.add(hp);
 		}
 	};
-	final TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
-			.create(TipoMatrizProductivaService.class);
 
+	MapaOrdenado<String, Especie> especies = new MapaOrdenado<String, Especie>();
 	MapaOrdenado<String, TipoMatrizProductiva> tiposMatrizProductiva = new MapaOrdenado<String, TipoMatrizProductiva>();
-
 	MapaOrdenado<String, Ubicacion> ubicaciones = new MapaOrdenado<String, Ubicacion>();
-
-	final UbicacionServiceAsync ubicacionService = GWT
-			.create(UbicacionService.class);
 
 	private List<VerticalPanel> widgetsObsEspecie = new ArrayList<VerticalPanel>();
 
@@ -251,13 +252,15 @@ public class VentanaCarga extends FlexTable {
 					.get(clave).getNombreCientifico() : clave);
 		}
 	};
+
 	class ObtenerTextoUbicacion implements ObtenerTexto {
 		@Override
 		public String getValor(String clave) {
-			return (ubicaciones.get(clave).getNombre()+" ("+ ubicaciones.get(clave).getCoordenadas()+")");
+			return (ubicaciones.get(clave).getNombre() + " ("
+					+ ubicaciones.get(clave).getCoordenadas() + ")");
 		}
 	};
-	
+
 	class ComparadorTipoMatrizProductiva implements Comparator<String> {
 		public int compare(String arg0, String arg1) {
 			try {
@@ -265,9 +268,7 @@ public class VentanaCarga extends FlexTable {
 				TipoMatrizProductiva argE1 = tiposMatrizProductiva.get(arg1);
 				if (argE0.getCantidadObservaciones() == null
 						&& argE1.getCantidadObservaciones() == null)
-					return argE0.getNombre()
-							.compareTo(
-									argE1.getNombre());
+					return argE0.getNombre().compareTo(argE1.getNombre());
 				if (argE1.getCantidadObservaciones() == null)
 					return 0;
 				if (argE0.getCantidadObservaciones() == null)
@@ -279,16 +280,14 @@ public class VentanaCarga extends FlexTable {
 				if (argE0.getCantidadObservaciones() < argE1
 						.getCantidadObservaciones())
 					return 1;
-				return argE0.getNombre()
-				.compareTo(
-						argE1.getNombre());
+				return argE0.getNombre().compareTo(argE1.getNombre());
 			} catch (Exception e) {
 				return 0; // por las dudas
 			}
 
 		}
-	};	
-	
+	};
+
 	class ComparadorEspecies implements Comparator<String> {
 		public int compare(String arg0, String arg1) {
 			try {
@@ -350,7 +349,7 @@ public class VentanaCarga extends FlexTable {
 			@Override
 			public void onSuccess(Map<String, Especie> result) {
 				especies = (MapaOrdenado<String, Especie>) result;
-				ManejadorAlmacenamientoLocal.persistirMapaEspecies(especies);
+				ManejadorAlmacenamientoLocal.guardarLocalMapaEspecies(especies);
 				llenarCombosEspecies();
 				cambiarAModoOnLine();
 			}
@@ -394,13 +393,14 @@ public class VentanaCarga extends FlexTable {
 							Map<String, TipoMatrizProductiva> result) {
 						tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
 						ManejadorAlmacenamientoLocal
-								.persistirMapaTiposMatrizProductiva(tiposMatrizProductiva);
+								.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
 						llenarCombosTipoMatrizProductiva();
 						cambiarAModoOnLine();
 					}
 
 					private void llenarCombosTipoMatrizProductiva() {
-						tiposMatrizProductiva.ordenarClaves(new ComparadorTipoMatrizProductiva());
+						tiposMatrizProductiva
+								.ordenarClaves(new ComparadorTipoMatrizProductiva());
 						for (Iterator<HorizontalPanel> iterator = widgetsObsMatrizProductiva
 								.iterator(); iterator.hasNext();) {
 							HorizontalPanel hp = iterator.next();
@@ -429,7 +429,8 @@ public class VentanaCarga extends FlexTable {
 								.obtenerMapaUbicacions();
 						cambiarAModoOffLine();
 						if (laguna.getSelectedIndex() <= 0)
-							agregarItemsCombo(laguna, ubicaciones.keyList(), new ObtenerTextoUbicacion());
+							agregarItemsCombo(laguna, ubicaciones.keyList(),
+									new ObtenerTextoUbicacion());
 					}
 
 					@Override
@@ -437,9 +438,10 @@ public class VentanaCarga extends FlexTable {
 						ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
 						ubicaciones.ordenarClaves();
 						ManejadorAlmacenamientoLocal
-								.persistirMapaUbicacions(ubicaciones);
+								.guardarLocalMapaUbicacions(ubicaciones);
 						if (laguna.getSelectedIndex() <= 0)
-							agregarItemsCombo(laguna, ubicaciones.keyList(), new ObtenerTextoUbicacion());
+							agregarItemsCombo(laguna, ubicaciones.keyList(),
+									new ObtenerTextoUbicacion());
 						cambiarAModoOnLine();
 					}
 
@@ -460,13 +462,13 @@ public class VentanaCarga extends FlexTable {
 		horaInicio = new TimeBox();
 		horaInicio.setWidth("45px");
 		horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
-		 .format(new Date()));
+				.format(new Date()));
 		horaInicio.addMouseListener(new TooltipListener(ctes
 				.horaInicioTooltip(), 5000));
 		horaFin = new TimeBox();
 		horaFin.setWidth("45px");
-	//	horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(
-	//			new Date()));
+		// horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(
+		// new Date()));
 		horaFin.addMouseListener(new TooltipListener(ctes.horaFinTooltip(),
 				5000));
 
@@ -637,7 +639,8 @@ public class VentanaCarga extends FlexTable {
 		}
 	}
 
-	private void agregarItemsCombo(final ListBox comboBox, Collection<String> list) {
+	private void agregarItemsCombo(final ListBox comboBox,
+			Collection<String> list) {
 		agregarItemsCombo(comboBox, list, new ObtenerMismoTexto());
 	}
 
@@ -650,8 +653,8 @@ public class VentanaCarga extends FlexTable {
 			comboBox.addItem(obtenerPropiedad.getValor(especie), especie);
 		}
 		comboBox.setItemSelected(0, true);
-		if (AplicacionWeb.contexto.isOnline())
-			comboBox.addItem(ctes.otra());
+		// if (AplicacionWeb.contexto.isOnline())
+		comboBox.addItem(ctes.otra());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -841,8 +844,9 @@ public class VentanaCarga extends FlexTable {
 	private ObservacionEspecie getObservacionEspecie(VerticalPanel vp)
 			throws ValidacionException {
 		if (((CantidadBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(1))
-				.getValue() != null && !((CantidadBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(1))
-				.getValue().equals("")) {
+				.getValue() != null
+				&& !((CantidadBox) ((HorizontalPanel) vp.getWidget(0))
+						.getWidget(1)).getValue().equals("")) {
 			ObservacionEspecie oe = new ObservacionEspecie();
 
 			if (((ListBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(0))
@@ -978,12 +982,12 @@ public class VentanaCarga extends FlexTable {
 
 	private void grabarObservacion() {
 		final Observacion observacion;
-		if ("".equals(horaFin.getText())){
+		if ("".equals(horaFin.getText())) {
 			class NoHoraFinDialog extends DialogBox {
 
 				public NoHoraFinDialog() {
 					setText(ctes.sinHoraFinCargaActual());
-					
+
 					setAnimationEnabled(true);
 					Button aceptarButton = new Button("Aceptar");
 					Button closeButton = new Button("Cancelar");
@@ -1004,10 +1008,10 @@ public class VentanaCarga extends FlexTable {
 
 						@Override
 						public void onClick(ClickEvent event) {
-								horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora()).format(
-										new Date()));
-								hide();
-								grabarObservacion();
+							horaFin.setValue(DateTimeFormat.getFormat(
+									ctes.formatoHora()).format(new Date()));
+							hide();
+							grabarObservacion();
 						}
 					});
 					HorizontalPanel botones = new HorizontalPanel();
@@ -1023,54 +1027,54 @@ public class VentanaCarga extends FlexTable {
 					dock.setWidth("100%");
 					setWidget(dock);
 
-
 				}
 
 				@Override
 				public void center() {
 					setPopupPositionAndShow(new PopupPanel.PositionCallback() {
-						public void setPosition(int offsetWidth, int offsetHeight) {
+						public void setPosition(int offsetWidth,
+								int offsetHeight) {
 							int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
-							int top = (Window.getScrollTop()+(Window.getClientHeight() - offsetHeight) / 2) >> 0;
+							int top = (Window.getScrollTop() + (Window
+									.getClientHeight() - offsetHeight) / 2) >> 0;
 							setPopupPosition(left, top);
 						}
 					});
 				}
 			}
-			DialogBox db=new NoHoraFinDialog();
+			DialogBox db = new NoHoraFinDialog();
 			db.center();
-		}
-		else
-		
-		try {
-			observacion = getObservacion();
+		} else
 
-			observacionService.addElemento(observacion,
-					new AsyncCallback<Void>() {
+			try {
+				observacion = getObservacion();
 
-						@Override
-						public void onFailure(Throwable caught) {
-							AplicacionWeb.setMensajeAlerta(ctes
-									.observacionGuardadaLocalmente());
-							ManejadorAlmacenamientoLocal
-									.persistirObservacion(observacion);
-							AplicacionWeb
-									.actualizarCantidadObservacionesLocales();
-							AplicacionWeb.cargarObservacion();
-						}
+				observacionService.addElemento(observacion,
+						new AsyncCallback<Void>() {
 
-						@Override
-						public void onSuccess(Void result) {
-							AplicacionWeb.setMensajeAlerta(ctes
-									.observacionGuardada());
-							AplicacionWeb.cargarObservacion();
+							@Override
+							public void onFailure(Throwable caught) {
+								AplicacionWeb.setMensajeAlerta(ctes
+										.observacionGuardadaLocalmente());
+								ManejadorAlmacenamientoLocal
+										.persistirObservacion(observacion);
+								AplicacionWeb
+										.actualizarCantidadObservacionesLocales();
+								AplicacionWeb.cargarObservacion();
+							}
 
-						}
-					});
+							@Override
+							public void onSuccess(Void result) {
+								AplicacionWeb.setMensajeAlerta(ctes
+										.observacionGuardada());
+								AplicacionWeb.cargarObservacion();
 
-		} catch (ValidacionException e) {
-			AplicacionWeb.setMensajeAlerta(e.getMensaje());
-		}
+							}
+						});
+
+			} catch (ValidacionException e) {
+				AplicacionWeb.setMensajeAlerta(e.getMensaje());
+			}
 	}
 
 }

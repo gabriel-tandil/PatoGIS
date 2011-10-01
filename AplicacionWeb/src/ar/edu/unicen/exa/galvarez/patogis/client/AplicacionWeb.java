@@ -41,8 +41,6 @@ public class AplicacionWeb implements EntryPoint {
 	private static String mensajeActual;
 	public static Contexto contexto = new Contexto();
 	final static DisclosurePanel dp = new DisclosurePanel(constantes.menu());;
-	final ObservacionServiceAsync observacionService = GWT
-			.create(ObservacionService.class);
 	private static Timer t = new Timer() {
 		public void run() {
 			alertaPopup.hide();
@@ -173,31 +171,8 @@ public class AplicacionWeb implements EntryPoint {
 			}
 
 			private void persistirObservacionesLocales() {
-				List<Observacion> observaciones = ManejadorAlmacenamientoLocal
-						.obtenerObservacionesPersistidas();
-				if (observaciones.size() > 0) {
-					Observacion observacion = observaciones.get(observaciones.size()-1);
-					observacionService.addElemento(observacion,
-							new AsyncCallback<Void>() {
-
-								@Override
-								public void onFailure(Throwable caught) {
-									AplicacionWeb.setMensajeAlerta(constantes
-											.errorGuardarObservacion());
-								}
-
-								@Override
-								public void onSuccess(Void result) {
-									AplicacionWeb.setMensajeAlerta(constantes
-											.observacionGuardada());
-									ManejadorAlmacenamientoLocal
-											.setCantidadObservacionesPersistidas(ManejadorAlmacenamientoLocal
-													.getCantidadObservacionesPersistidas() - 1);
-									actualizarCantidadObservacionesLocales();
-									persistirObservacionesLocales();
-								}
-							});
-				}
+				
+				ManejadorAlmacenamientoLocal.persistirDatosLocales();
 			}
 
 		};

@@ -3,6 +3,7 @@ package ar.edu.unicen.exa.galvarez.patogis.client;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
@@ -14,6 +15,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONBoolean;
@@ -23,19 +25,29 @@ import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.storage.client.StorageMap;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ManejadorAlmacenamientoLocal {
-	private static StorageMap storage =new StorageMap(Storage.getLocalStorageIfSupported());
+	private static StorageMap storage = new StorageMap(
+			Storage.getLocalStorageIfSupported());
+	final static ObservacionServiceAsync observacionService = GWT
+			.create(ObservacionService.class);
+	final static EspeciesServiceAsync especiesService = GWT
+			.create(EspeciesService.class);
+	final static TipoMatrizProductivaServiceAsync tipoMatrizProductivaService = GWT
+			.create(TipoMatrizProductivaService.class);
+	final static UbicacionServiceAsync ubicacionService = GWT
+			.create(UbicacionService.class);
 
-	public static void eliminarObservacionesLocales(){
+	public static void eliminarObservacionesLocales() {
 		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
 		for (int i = 0; i < cantidadObservacionesPersistidas; i++) {
-			storage.remove("observacion"+i);
+			storage.remove("observacion" + i);
 		}
 		setCantidadObservacionesPersistidas(0);
 	}
-	
-	public static void persistirMapaTiposMatrizProductiva(
+
+	public static void guardarLocalMapaTiposMatrizProductiva(
 			MapaOrdenado<String, TipoMatrizProductiva> tiposMatrizProductiva) {
 
 		JSONArray arreglo = new JSONArray();
@@ -95,7 +107,7 @@ public class ManejadorAlmacenamientoLocal {
 		return tipoMatrizProductiva;
 	}
 
-	public static void persistirMapaUbicacions(
+	public static void guardarLocalMapaUbicacions(
 			MapaOrdenado<String, Ubicacion> ubicacions) {
 
 		JSONArray arreglo = new JSONArray();
@@ -156,7 +168,7 @@ public class ManejadorAlmacenamientoLocal {
 		return ubicacion;
 	}
 
-	public static void persistirMapaEspecies(
+	public static void guardarLocalMapaEspecies(
 			MapaOrdenado<String, Especie> especies) {
 		JSONArray arreglo = new JSONArray();
 		int i = 0;
@@ -225,13 +237,13 @@ public class ManejadorAlmacenamientoLocal {
 		persistirObservacionString(jo.toString());
 	}
 
-	public static void persistirObservacionString(String observacion){
+	public static void persistirObservacionString(String observacion) {
 		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
 		storage.put("observacion" + cantidadObservacionesPersistidas,
 				observacion);
 		setCantidadObservacionesPersistidas(cantidadObservacionesPersistidas + 1);
 	}
-	
+
 	public static List<Observacion> obtenerObservacionesPersistidas() {
 		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
 		List<Observacion> observaciones = new ArrayList<Observacion>(
@@ -343,18 +355,18 @@ public class ManejadorAlmacenamientoLocal {
 				.stringValue());
 		JSONObject obsClima = (JSONObject) value.get("observacionClima");
 		ObservacionClima observacionClima = new ObservacionClima();
-		observacionClima.setTemperatura(((JSONNumber) obsClima.get("temperatura"))
-				.doubleValue());
+		observacionClima.setTemperatura(((JSONNumber) obsClima
+				.get("temperatura")).doubleValue());
 		observacionClima.setNubes(((JSONString) obsClima.get("nubes"))
 				.stringValue());
 		observacionClima.setLluvia(((JSONBoolean) obsClima.get("lluvia"))
 				.booleanValue());
 		observacionClima.setViento(((JSONString) obsClima.get("viento"))
 				.stringValue());
-		observacionClima
-				.setSol(((JSONBoolean) obsClima.get("sol")).booleanValue());
+		observacionClima.setSol(((JSONBoolean) obsClima.get("sol"))
+				.booleanValue());
 		obs.setObservacionClima(observacionClima);
-		
+
 		JSONArray obsEspecie = (JSONArray) value.get("observacionesEspecie");
 		ObservacionEspecie[] observacionesEspecie = new ObservacionEspecie[obsEspecie
 				.size()];
@@ -398,8 +410,316 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static void setCantidadObservacionesPersistidas(int i) {
-		storage.put("cantidadObservacionesPersistidas",
-				Integer.toString(i));
+		storage.put("cantidadObservacionesPersistidas", Integer.toString(i));
 	}
-	
+
+	public static Integer obtenerProximoIdAlmacenamientoLocal() {
+		String s = storage.get("idAlmacenamientoLocal");
+		if (s == null)
+			s = "0";
+		Integer i = new Integer(s);
+		i--;
+		storage.put("idAlmacenamientoLocal", i.toString());
+		return i;
+	}
+
+	public static void persistirDatosLocales() {
+		persistirMapasLocales();
+		persistirObservacionesLocales();
+		storage.put("idAlmacenamientoLocal", "0");
+	}
+
+	public static void persistirMapasLocales() {
+		persistirUbicacionesLocales();
+		persistirEspeciesLocales();
+		persistirTiposMatrizProductivaLocales();
+	}
+
+	public static void persistirTiposMatrizProductivaLocales() {
+		final MapaOrdenado<String, TipoMatrizProductiva> mu = obtenerMapaTiposMatrizProductiva();
+		for (String clave : mu.keyList()) {
+			final TipoMatrizProductiva u = mu.get(clave);
+			if (u.getId() < 0) {
+				final Integer idLocal = u.getId();
+				tipoMatrizProductivaService.addElemento(u,
+						new AsyncCallback<Void>() {
+							public void onFailure(Throwable caught) {
+								AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
+										.errorGuardarNuevoTipoMatrizProductiva());
+							}
+
+							@Override
+							public void onSuccess(Void result) {
+								tipoMatrizProductivaService
+										.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
+
+											@Override
+											public void onSuccess(
+													Map<String, TipoMatrizProductiva> result) {
+
+												TipoMatrizProductiva TipoMatrizProductivaPersistida = result
+														.get(u.getNombre());
+												mu.put(u.getNombre(),
+														TipoMatrizProductivaPersistida);
+												guardarLocalMapaTiposMatrizProductiva(mu); // actualizo
+												// el
+												// mapa
+												// de
+												// persistencia
+												// local
+												// para
+												// que
+												// tenga
+												// el id
+												// nuevo
+
+												List<Observacion> observaciones = obtenerObservacionesPersistidas();
+												if (observaciones.size() > 0) {
+
+													for (int i = 0; i < observaciones
+															.size(); i++) {
+														Observacion observacion = observaciones
+																.get(i);
+														boolean modifico = false;
+														for (int j = 0; j < observacion
+																.getObservacionesMatrizProductiva().length; j++) {
+															ObservacionMatrizProductiva omp = observacion
+																	.getObservacionesMatrizProductiva()[j];
+															if (omp.getIdTipoMatrizProductiva() == idLocal) {
+																omp.setIdTipoMatrizProductiva(TipoMatrizProductivaPersistida
+																		.getId());
+																modifico = true;
+															}
+														}
+														{
+															if (modifico)
+																storage.put(
+																		"observacion"
+																				+ i,
+																		observacionAJson(
+																				observacion)
+																				.toString());
+														}
+
+													}
+												}
+
+												persistirTiposMatrizProductivaLocales();
+											}
+
+											@Override
+											public void onFailure(
+													Throwable caught) {
+												AplicacionWeb
+														.setMensajeAlerta(VentanaCarga.ctes
+																.errorGuardarNuevoTipoMatrizProductiva());
+											}
+										});
+
+							}
+
+						});
+				break; // se llama revursivamente al terminar la persistencia
+						// para no atorar a la base
+			}
+		}
+	}
+
+	public static void persistirEspeciesLocales() {
+		final MapaOrdenado<String, Especie> mu = obtenerMapaEspecies();
+		for (String clave : mu.keyList()) {
+			final Especie u = mu.get(clave);
+			if (u.getId() < 0) {
+				final Integer idLocal = u.getId();
+				especiesService.addElemento(u,
+						new AsyncCallback<Void>() {
+							public void onFailure(Throwable caught) {
+								AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
+										.errorGuardarEspecie());
+							}
+
+							@Override
+							public void onSuccess(Void result) {
+								especiesService
+										.getElementos(new AsyncCallback<Map<String, Especie>>() {
+
+											@Override
+											public void onSuccess(
+													Map<String, Especie> result) {
+
+												Especie EspeciePersistida = result
+														.get(u.getNombre());
+												mu.put(u.getNombre(),
+														EspeciePersistida);
+												guardarLocalMapaEspecies(mu); // actualizo
+												// el
+												// mapa
+												// de
+												// persistencia
+												// local
+												// para
+												// que
+												// tenga
+												// el id
+												// nuevo
+
+												List<Observacion> observaciones = obtenerObservacionesPersistidas();
+												if (observaciones.size() > 0) {
+
+													for (int i = 0; i < observaciones
+															.size(); i++) {
+														Observacion observacion = observaciones
+																.get(i);
+														boolean modifico = false;
+														for (int j = 0; j < observacion
+																.getObservacionesEspecie().length; j++) {
+															ObservacionEspecie omp = observacion
+																	.getObservacionesEspecie()[j];
+															if (omp.getIdEspecie() == idLocal) {
+																omp.setIdEspecie(EspeciePersistida
+																		.getId());
+																modifico = true;
+															}
+														}
+														{
+															if (modifico)
+																storage.put(
+																		"observacion"
+																				+ i,
+																		observacionAJson(
+																				observacion)
+																				.toString());
+														}
+
+													}
+												}
+
+												persistirEspeciesLocales();
+											}
+
+											@Override
+											public void onFailure(
+													Throwable caught) {
+												AplicacionWeb
+														.setMensajeAlerta(VentanaCarga.ctes
+																.errorGuardarEspecie());
+											}
+										});
+
+							}
+
+						});
+				break; // se llama revursivamente al terminar la persistencia
+						// para no atorar a la base
+			}
+		}
+	}
+
+	public static void persistirUbicacionesLocales() {
+		final MapaOrdenado<String, Ubicacion> mu = obtenerMapaUbicacions();
+		for (String clave : mu.keyList()) {
+			final Ubicacion u = mu.get(clave);
+			if (u.getId() < 0) {
+				final Integer idLocal = u.getId();
+				ubicacionService.addElemento(u, new AsyncCallback<Void>() {
+					public void onFailure(Throwable caught) {
+						AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
+								.errorGuardarNuevaUbicacion());
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						ubicacionService
+								.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
+
+									@Override
+									public void onSuccess(
+											Map<String, Ubicacion> result) {
+
+										Ubicacion ubicacionPersistida = result
+												.get(u.getNombre());
+										mu.put(u.getNombre(),
+												ubicacionPersistida);
+										guardarLocalMapaUbicacions(mu); // actualizo
+																		// el
+																		// mapa
+																		// de
+																		// persistencia
+																		// local
+																		// para
+																		// que
+																		// tenga
+																		// el id
+																		// nuevo
+
+										List<Observacion> observaciones = obtenerObservacionesPersistidas();
+										if (observaciones.size() > 0) {
+
+											for (int i = 0; i < observaciones
+													.size(); i++) {
+												Observacion observacion = observaciones
+														.get(i);
+												if (observacion
+														.getIdUbicacion() == idLocal) {
+													observacion
+															.setIdUbicacion(ubicacionPersistida
+																	.getId());
+													storage.put(
+															"observacion" + i,
+															observacionAJson(
+																	observacion)
+																	.toString());
+												}
+
+											}
+										}
+
+										persistirUbicacionesLocales();
+									}
+
+									@Override
+									public void onFailure(Throwable caught) {
+										AplicacionWeb
+												.setMensajeAlerta(VentanaCarga.ctes
+														.errorGuardarNuevaUbicacion());
+									}
+								});
+
+					}
+
+				});
+				break; // se llama revursivamente al terminar la persistencia
+						// para no atorar a la base
+			}
+		}
+	}
+
+	public static void persistirObservacionesLocales() {
+		List<Observacion> observaciones = obtenerObservacionesPersistidas();
+		if (observaciones.size() > 0) {
+			Observacion observacion = observaciones
+					.get(observaciones.size() - 1);
+			observacionService.addElemento(observacion,
+					new AsyncCallback<Void>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							AplicacionWeb
+									.setMensajeAlerta(AplicacionWeb.constantes
+											.errorGuardarObservacion());
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							AplicacionWeb
+									.setMensajeAlerta(AplicacionWeb.constantes
+											.observacionGuardada());
+							setCantidadObservacionesPersistidas(getCantidadObservacionesPersistidas() - 1);
+							AplicacionWeb
+									.actualizarCantidadObservacionesLocales();
+							persistirObservacionesLocales();
+						}
+					});
+		}
+	}
 }
