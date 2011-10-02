@@ -424,14 +424,11 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static void persistirDatosLocales() {
-		persistirMapasLocales();
-		persistirObservacionesLocales();
+		persistirMapasLocales(); // este llama a persistir ubicaciones
 	}
 
 	public static void persistirMapasLocales() {
-		persistirUbicacionesLocales();
-		persistirEspeciesLocales();
-		persistirTiposMatrizProductivaLocales();
+		persistirUbicacionesLocales(); //este llama en cadena a los demas
 	}
 
 	public static void persistirTiposMatrizProductivaLocales() {
@@ -440,6 +437,7 @@ public class ManejadorAlmacenamientoLocal {
 			final TipoMatrizProductiva u = mu.get(clave);
 			if (u.getId() < 0) {
 				final Integer idLocal = u.getId();
+				u.setId(null);
 				tipoMatrizProductivaService.addElemento(u,
 						new AsyncCallback<Void>() {
 							public void onFailure(Throwable caught) {
@@ -518,10 +516,11 @@ public class ManejadorAlmacenamientoLocal {
 							}
 
 						});
-				break; // se llama revursivamente al terminar la persistencia
+				return; // se llama recursivamente al terminar la persistencia
 						// para no atorar a la base
 			}
 		}
+		persistirObservacionesLocales();
 	}
 
 	public static void persistirEspeciesLocales() {
@@ -530,6 +529,7 @@ public class ManejadorAlmacenamientoLocal {
 			final Especie u = mu.get(clave);
 			if (u.getId() < 0) {
 				final Integer idLocal = u.getId();
+				u.setId(null);
 				especiesService.addElemento(u,
 						new AsyncCallback<Void>() {
 							public void onFailure(Throwable caught) {
@@ -608,10 +608,11 @@ public class ManejadorAlmacenamientoLocal {
 							}
 
 						});
-				break; // se llama revursivamente al terminar la persistencia
+				return; // se llama revursivamente al terminar la persistencia
 						// para no atorar a la base
 			}
 		}
+		persistirTiposMatrizProductivaLocales();
 	}
 
 	public static void persistirUbicacionesLocales() {
@@ -620,6 +621,7 @@ public class ManejadorAlmacenamientoLocal {
 			final Ubicacion u = mu.get(clave);
 			if (u.getId() < 0) {
 				final Integer idLocal = u.getId();
+				u.setId(null);
 				ubicacionService.addElemento(u, new AsyncCallback<Void>() {
 					public void onFailure(Throwable caught) {
 						AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
@@ -687,10 +689,11 @@ public class ManejadorAlmacenamientoLocal {
 					}
 
 				});
-				break; // se llama revursivamente al terminar la persistencia
+				return; // se llama revursivamente al terminar la persistencia
 						// para no atorar a la base
 			}
 		}
+		persistirEspeciesLocales();
 	}
 
 	public static void persistirObservacionesLocales() {
