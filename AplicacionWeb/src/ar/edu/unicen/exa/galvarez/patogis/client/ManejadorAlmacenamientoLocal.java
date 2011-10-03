@@ -244,13 +244,23 @@ public class ManejadorAlmacenamientoLocal {
 		setCantidadObservacionesPersistidas(cantidadObservacionesPersistidas + 1);
 	}
 
-	public static List<Observacion> obtenerObservacionesPersistidas() {
+	public static List<Observacion> obtenerObservacionesLocales() {
 		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
 		List<Observacion> observaciones = new ArrayList<Observacion>(
 				cantidadObservacionesPersistidas);
 		for (int i = 0; i < cantidadObservacionesPersistidas; i++) {
-			observaciones.add(jSONAObservacion((JSONObject) JSONParser
-					.parseStrict(storage.get("observacion" + i))));
+			Observacion obs=jSONAObservacion((JSONObject) JSONParser
+					.parseStrict(storage.get("observacion" + i)));
+			Map<String,Ubicacion>mapa= obtenerMapaUbicacions();
+			Ubicacion ubicacion=null;
+			for (String clave :mapa.keySet()) {
+				ubicacion=mapa.get(clave);
+				if (ubicacion.getId().equals(obs.getIdUbicacion())){
+					obs.setUbicacion(ubicacion);
+					break;
+				}
+			}	
+			observaciones.add(obs);
 		}
 
 		return observaciones;
@@ -470,7 +480,7 @@ public class ManejadorAlmacenamientoLocal {
 												// el id
 												// nuevo
 
-												List<Observacion> observaciones = obtenerObservacionesPersistidas();
+												List<Observacion> observaciones = obtenerObservacionesLocales();
 												if (observaciones.size() > 0) {
 
 													for (int i = 0; i < observaciones
@@ -562,7 +572,7 @@ public class ManejadorAlmacenamientoLocal {
 												// el id
 												// nuevo
 
-												List<Observacion> observaciones = obtenerObservacionesPersistidas();
+												List<Observacion> observaciones = obtenerObservacionesLocales();
 												if (observaciones.size() > 0) {
 
 													for (int i = 0; i < observaciones
@@ -653,7 +663,7 @@ public class ManejadorAlmacenamientoLocal {
 																		// el id
 																		// nuevo
 
-										List<Observacion> observaciones = obtenerObservacionesPersistidas();
+										List<Observacion> observaciones = obtenerObservacionesLocales();
 										if (observaciones.size() > 0) {
 
 											for (int i = 0; i < observaciones
@@ -697,10 +707,11 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static void persistirObservacionesLocales() {
-		List<Observacion> observaciones = obtenerObservacionesPersistidas();
+		List<Observacion> observaciones = obtenerObservacionesLocales();
 		if (observaciones.size() > 0) {
 			Observacion observacion = observaciones
 					.get(observaciones.size() - 1);
+			observacion.setId(null);
 			observacionService.addElemento(observacion,
 					new AsyncCallback<Void>() {
 

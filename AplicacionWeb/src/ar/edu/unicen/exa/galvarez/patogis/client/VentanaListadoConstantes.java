@@ -16,4 +16,5 @@ public interface VentanaListadoConstantes extends Constants {
 	String formatoHora();
 	String inicio();
 	String laguna();
+	String editar();
 }

@@ -94,13 +94,15 @@ public class AplicacionWeb implements EntryPoint {
 					+ cantidadObservacionesLocales));
 	}
 
-	public static void cargarObservacion() {
+	public static VentanaCarga cargarObservacion() {
 
 		RootPanel rootPanel = RootPanel
 				.get((dp.isOpen() ? "principalContainer2"
 						: "principalContainer"));
 		rootPanel.clear();
-		rootPanel.add(new VentanaCarga());
+		VentanaCarga vc=new VentanaCarga();
+		rootPanel.add(vc);
+		return vc;
 	}
 
 	private Widget crearMenu() {

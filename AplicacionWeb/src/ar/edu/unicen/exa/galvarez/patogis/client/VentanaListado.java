@@ -31,7 +31,8 @@ public class VentanaListado extends FlexTable {
 		setText(0, 2, constantes.fin());
 		setText(0, 3, constantes.laguna());
 		setText(0, 4, constantes.detalles());
-		
+		setText(0, 5, constantes.editar());
+
 		getRowFormatter().addStyleName(0, "watchListHeader");
 		addStyleName("watchList");
 		getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");
@@ -42,48 +43,60 @@ public class VentanaListado extends FlexTable {
 		observacionService.getElementos(new AsyncCallback<List<Observacion>>() {
 			@Override
 			public void onFailure(Throwable caught) {
-				AplicacionWeb.setMensajeAlerta(constantes.errorObtenerObservaciones());
-				;
-
+				agregarObservacionesLocales();
+				AplicacionWeb.setMensajeAlerta(constantes
+						.errorObtenerObservaciones());
 			}
 
 			public void onSuccess(List<Observacion> result) {
-
+				agregarObservacionesLocales();
 				for (Iterator<Observacion> iterator = result.iterator(); iterator
 						.hasNext();) {
 					final Observacion observacion = iterator.next();
-					int fila = getRowCount();
-					setText(fila, 0,
-							DateTimeFormat.getFormat(constantes.formatoFecha())
-									.format(observacion.getInicio()));
-
-					setText(fila, 1,
-							DateTimeFormat.getFormat(constantes.formatoHora())
-									.format(observacion.getInicio()));
-
-					setText(fila, 2,
-							DateTimeFormat.getFormat(constantes.formatoHora())
-									.format(observacion.getFin()));
-					setText(fila, 3, observacion.getUbicacion().getNombre());
-					Button detalles = new Button(constantes.detalles());
-					;
-					detalles.addClickHandler(new ClickHandler() {
-						public void onClick(ClickEvent event) {
-							mostrarDetalles(observacion);
-						}
-
-						private void mostrarDetalles(Observacion observacion) {
-							DetallesObservacionDialog dlg = new DetallesObservacionDialog(
-									observacion);
-							dlg.center();
-
-						}
-					});
-					setWidget(fila, 4, detalles);
+					agregarFila(observacion);
 				}
-			};
+			}
+		});
+	}
+
+	private void agregarFila(final Observacion observacion) {
+		int fila = getRowCount();
+		setText(fila, 0, DateTimeFormat.getFormat(constantes.formatoFecha())
+				.format(observacion.getInicio()));
+		setText(fila, 1, DateTimeFormat.getFormat(constantes.formatoHora())
+				.format(observacion.getInicio()));
+		setText(fila, 2, DateTimeFormat.getFormat(constantes.formatoHora())
+				.format(observacion.getFin()));
+		setText(fila, 3, observacion.getUbicacion().getNombre());
+		Button detalles = new Button(constantes.detalles());
+		detalles.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				mostrarDetalles(observacion);
+			}
+
+			private void mostrarDetalles(Observacion observacion) {
+				DetallesObservacionDialog dlg = new DetallesObservacionDialog(
+						observacion);
+				dlg.center();
+
+			}
+		});
+		setWidget(fila, 4, detalles);
+		Button editar = new Button(constantes.editar());
+		editar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				VentanaCarga.editar(observacion);
+			}
 
 		});
+		setWidget(fila, 5, editar);
+	}
+
+	protected void agregarObservacionesLocales() {
+		for (Observacion observacion : ManejadorAlmacenamientoLocal
+				.obtenerObservacionesLocales()) {
+			agregarFila(observacion);
+		}
 
 	}
 

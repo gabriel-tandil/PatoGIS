@@ -68,7 +68,8 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
 public class VentanaCarga extends FlexTable {
-	static VentanaCargaConstantes ctes = GWT.create(VentanaCargaConstantes.class);
+	static VentanaCargaConstantes ctes = GWT
+			.create(VentanaCargaConstantes.class);
 	EnumConstantes constantesEnum = GWT.create(EnumConstantes.class);
 
 	class AgregarEspecieDialog extends AgregarElementoDialog {
@@ -1058,6 +1059,8 @@ public class VentanaCarga extends FlexTable {
 										.observacionGuardadaLocalmente());
 								ManejadorAlmacenamientoLocal
 										.persistirObservacion(observacion);
+								observacion.setId(ManejadorAlmacenamientoLocal
+										.obtenerProximoIdAlmacenamientoLocal());
 								AplicacionWeb
 										.actualizarCantidadObservacionesLocales();
 								AplicacionWeb.cargarObservacion();
@@ -1075,6 +1078,24 @@ public class VentanaCarga extends FlexTable {
 			} catch (ValidacionException e) {
 				AplicacionWeb.setMensajeAlerta(e.getMensaje());
 			}
+	}
+
+	public static void editar(Observacion observacion) {
+		VentanaCarga vc = AplicacionWeb.cargarObservacion();
+		while (vc.laguna.getSelectedIndex() <= 0);
+		vc.horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
+				.format(observacion.getInicio()));
+		vc.horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
+				.format(observacion.getFin()));
+		vc.dateBox.setValue(observacion.getInicio());
+
+		for (int i = 0; i < vc.laguna.getItemCount(); i++) {
+			if (vc.laguna.getValue(i).equals(
+					observacion.getUbicacion().getNombre())) {
+				vc.laguna.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 
 }
