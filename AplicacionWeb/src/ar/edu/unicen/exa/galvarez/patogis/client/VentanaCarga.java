@@ -176,6 +176,8 @@ public class VentanaCarga extends FlexTable {
 	private List<String> imagenes = new ArrayList<String>();
 	private ListBox laguna;
 	private TextArea observaciones;
+	private int contadorLlamadasAsincronicas = 3;
+	final VerticalPanel panelObservacionesEspecies = new VerticalPanel();
 	final ObservacionServiceAsync observacionService = GWT
 			.create(ObservacionService.class);
 	final ArchivosServiceAsync archivosService = GWT
@@ -245,6 +247,8 @@ public class VentanaCarga extends FlexTable {
 	private List<VerticalPanel> widgetsObsEspecie = new ArrayList<VerticalPanel>();
 
 	private List<HorizontalPanel> widgetsObsMatrizProductiva = new ArrayList<HorizontalPanel>();
+	private boolean edicion = false;
+	private Observacion observacionEditada;
 
 	class ObtenerPropiedadEspecie implements ObtenerTexto {
 		@Override
@@ -345,6 +349,7 @@ public class VentanaCarga extends FlexTable {
 				especies = ManejadorAlmacenamientoLocal.obtenerMapaEspecies();
 				cambiarAModoOffLine();
 				llenarCombosEspecies();
+				finLlamadaAsincronica();
 			}
 
 			@Override
@@ -353,6 +358,7 @@ public class VentanaCarga extends FlexTable {
 				ManejadorAlmacenamientoLocal.guardarLocalMapaEspecies(especies);
 				llenarCombosEspecies();
 				cambiarAModoOnLine();
+				finLlamadaAsincronica();
 			}
 
 			private void llenarCombosEspecies() {
@@ -387,6 +393,7 @@ public class VentanaCarga extends FlexTable {
 								.obtenerMapaTiposMatrizProductiva();
 						cambiarAModoOffLine();
 						llenarCombosTipoMatrizProductiva();
+						finLlamadaAsincronica();
 					}
 
 					@Override
@@ -397,6 +404,7 @@ public class VentanaCarga extends FlexTable {
 								.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
 						llenarCombosTipoMatrizProductiva();
 						cambiarAModoOnLine();
+						finLlamadaAsincronica();
 					}
 
 					private void llenarCombosTipoMatrizProductiva() {
@@ -428,10 +436,12 @@ public class VentanaCarga extends FlexTable {
 								.setMostroWarningUbicacionesOffline(true);
 						ubicaciones = ManejadorAlmacenamientoLocal
 								.obtenerMapaUbicacions();
+						ubicaciones.ordenarClaves();
 						cambiarAModoOffLine();
 						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keyList(),
 									new ObtenerTextoUbicacion());
+						finLlamadaAsincronica();
 					}
 
 					@Override
@@ -444,6 +454,7 @@ public class VentanaCarga extends FlexTable {
 							agregarItemsCombo(laguna, ubicaciones.keyList(),
 									new ObtenerTextoUbicacion());
 						cambiarAModoOnLine();
+						finLlamadaAsincronica();
 					}
 
 				});
@@ -487,9 +498,8 @@ public class VentanaCarga extends FlexTable {
 		Label lblNewLabel_2 = new Label(ctes.conteoEspecie());
 		setWidget(3, 0, lblNewLabel_2);
 
-		final VerticalPanel verticalPanel_1 = new VerticalPanel();
-		setWidget(3, 1, verticalPanel_1);
-		agregarObservacionEspecie(verticalPanel_1);
+		setWidget(3, 1, panelObservacionesEspecies);
+		agregarObservacionEspecie(panelObservacionesEspecies);
 
 		Button button = new Button(ctes.agregar());
 		button.addMouseListener(new TooltipListener(ctes
@@ -497,7 +507,7 @@ public class VentanaCarga extends FlexTable {
 		setWidget(3, 2, button);
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				agregarObservacionEspecie(verticalPanel_1);
+				agregarObservacionEspecie(panelObservacionesEspecies);
 			}
 		});
 		// We can add style names to widgets
@@ -612,6 +622,16 @@ public class VentanaCarga extends FlexTable {
 		setWidget(9, 1, sendButton);
 
 		laguna.setFocus(true);
+	}
+
+	private synchronized void finLlamadaAsincronica() {
+
+		contadorLlamadasAsincronicas--;
+		if (contadorLlamadasAsincronicas == 0) {
+			if (edicion) {
+				seleccionarValoresCombos();
+			}
+		}
 	}
 
 	protected void cambiarAModoOnLine() {
@@ -1080,19 +1100,58 @@ public class VentanaCarga extends FlexTable {
 			}
 	}
 
+	private void seleccionarValoresCombos() {
+		for (int i = 0; i < laguna.getItemCount(); i++) {
+			if (laguna.getValue(i).equals(
+					observacionEditada.getUbicacion().getNombre())) {
+				laguna.setSelectedIndex(i);
+				break;
+			}
+		}
+
+		for (int i = 0; i < observacionEditada.getObservacionesEspecie().length; i++) {
+			ObservacionEspecie oe = observacionEditada
+					.getObservacionesEspecie()[i];
+
+			VerticalPanel vp = widgetsObsEspecie
+					.get(widgetsObsEspecie.size() - 1);
+
+			((CantidadBox) ((HorizontalPanel) vp.getWidget(0))
+					.getWidget(1)).setValue(oe.getCantidad().toString());
+			ListBox especie=(ListBox) ((HorizontalPanel) vp
+					.getWidget(0)).getWidget(0);
+		
+			ListBox edad=(ListBox) ((HorizontalPanel) vp.getWidget(1))
+					.getWidget(0);
+			ListBox distancia=(ListBox) ((HorizontalPanel) vp.getWidget(1))
+					.getWidget(1);
+			ListBox conteo=(ListBox) ((HorizontalPanel) vp.getWidget(1))
+					.getWidget(2);	
+			
+			for (int ii = 0; i < especie.getItemCount(); ii++) {
+				if (especie.getValue(ii).equals(
+						oe.getEspecie().getNombre())) {
+					especie.setSelectedIndex(ii);
+					break;
+				}
+			}
+			if (i < observacionEditada.getObservacionesEspecie().length - 1)
+				agregarObservacionEspecie(panelObservacionesEspecies);
+		}
+	}
+
 	public static void editar(Observacion observacion) {
 		VentanaCarga vc = AplicacionWeb.cargarObservacion();
-		while (vc.laguna.getSelectedIndex() <= 0);
+		vc.edicion = true;
+		vc.observacionEditada = observacion;
 		vc.horaInicio.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
 				.format(observacion.getInicio()));
 		vc.horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
 				.format(observacion.getFin()));
 		vc.dateBox.setValue(observacion.getInicio());
-
-		for (int i = 0; i < vc.laguna.getItemCount(); i++) {
-			if (vc.laguna.getValue(i).equals(
-					observacion.getUbicacion().getNombre())) {
-				vc.laguna.setSelectedIndex(i);
+		for (int i = 0; i < vc.alcance.getItemCount(); i++) {
+			if (vc.alcance.getValue(i).equals(observacion.getAlcance())) {
+				vc.alcance.setSelectedIndex(i);
 				break;
 			}
 		}

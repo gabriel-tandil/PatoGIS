@@ -94,7 +94,7 @@ public class VentanaListado extends FlexTable {
 
 	protected void agregarObservacionesLocales() {
 		for (Observacion observacion : ManejadorAlmacenamientoLocal
-				.obtenerObservacionesLocales()) {
+				.obtenerObservacionesLocales(true)) {
 			agregarFila(observacion);
 		}
 

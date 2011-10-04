@@ -244,26 +244,66 @@ public class ManejadorAlmacenamientoLocal {
 		setCantidadObservacionesPersistidas(cantidadObservacionesPersistidas + 1);
 	}
 
-	public static List<Observacion> obtenerObservacionesLocales() {
+	public static List<Observacion> obtenerObservacionesLocales(boolean completo) {
 		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
 		List<Observacion> observaciones = new ArrayList<Observacion>(
 				cantidadObservacionesPersistidas);
 		for (int i = 0; i < cantidadObservacionesPersistidas; i++) {
-			Observacion obs=jSONAObservacion((JSONObject) JSONParser
+			Observacion obs = jSONAObservacion((JSONObject) JSONParser
 					.parseStrict(storage.get("observacion" + i)));
-			Map<String,Ubicacion>mapa= obtenerMapaUbicacions();
-			Ubicacion ubicacion=null;
-			for (String clave :mapa.keySet()) {
-				ubicacion=mapa.get(clave);
-				if (ubicacion.getId().equals(obs.getIdUbicacion())){
-					obs.setUbicacion(ubicacion);
-					break;
-				}
-			}	
+			if (completo){
+			cargarUbicacion(obs);
+			cargarEspecies(obs);
+			cargarTiposMatricesProductivas(obs);
+			}
 			observaciones.add(obs);
 		}
 
 		return observaciones;
+	}
+
+	private static void cargarTiposMatricesProductivas(Observacion obs) {
+
+		for (ObservacionMatrizProductiva oe : obs.getObservacionesMatrizProductiva()) {
+
+			Map<String, TipoMatrizProductiva> mapa = obtenerMapaTiposMatrizProductiva();
+			TipoMatrizProductiva tmp = null;
+			for (String clave : mapa.keySet()) {
+				tmp = mapa.get(clave);
+				if (tmp.getId().equals(oe.getIdTipoMatrizProductiva())) {
+					oe.setTipoMatrizProductiva(tmp);
+					break;
+				}
+			}
+		}
+	}
+
+	private static void cargarEspecies(Observacion obs) {
+
+		for (ObservacionEspecie oe : obs.getObservacionesEspecie()) {
+
+			Map<String, Especie> mapa = obtenerMapaEspecies();
+			Especie especie = null;
+			for (String clave : mapa.keySet()) {
+				especie = mapa.get(clave);
+				if (especie.getId().equals(oe.getIdEspecie())) {
+					oe.setEspecie(especie);
+					break;
+				}
+			}
+		}
+	}
+
+	private static void cargarUbicacion(Observacion obs) {
+		Map<String, Ubicacion> mapa = obtenerMapaUbicacions();
+		Ubicacion ubicacion = null;
+		for (String clave : mapa.keySet()) {
+			ubicacion = mapa.get(clave);
+			if (ubicacion.getId().equals(obs.getIdUbicacion())) {
+				obs.setUbicacion(ubicacion);
+				break;
+			}
+		}
 	}
 
 	public static int getCantidadObservacionesPersistidas() {
@@ -438,7 +478,7 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static void persistirMapasLocales() {
-		persistirUbicacionesLocales(); //este llama en cadena a los demas
+		persistirUbicacionesLocales(); // este llama en cadena a los demas
 	}
 
 	public static void persistirTiposMatrizProductivaLocales() {
@@ -480,7 +520,7 @@ public class ManejadorAlmacenamientoLocal {
 												// el id
 												// nuevo
 
-												List<Observacion> observaciones = obtenerObservacionesLocales();
+												List<Observacion> observaciones = obtenerObservacionesLocales(false);
 												if (observaciones.size() > 0) {
 
 													for (int i = 0; i < observaciones
@@ -540,84 +580,81 @@ public class ManejadorAlmacenamientoLocal {
 			if (u.getId() < 0) {
 				final Integer idLocal = u.getId();
 				u.setId(null);
-				especiesService.addElemento(u,
-						new AsyncCallback<Void>() {
-							public void onFailure(Throwable caught) {
-								AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
-										.errorGuardarEspecie());
-							}
+				especiesService.addElemento(u, new AsyncCallback<Void>() {
+					public void onFailure(Throwable caught) {
+						AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
+								.errorGuardarEspecie());
+					}
 
-							@Override
-							public void onSuccess(Void result) {
-								especiesService
-										.getElementos(new AsyncCallback<Map<String, Especie>>() {
+					@Override
+					public void onSuccess(Void result) {
+						especiesService
+								.getElementos(new AsyncCallback<Map<String, Especie>>() {
 
-											@Override
-											public void onSuccess(
-													Map<String, Especie> result) {
+									@Override
+									public void onSuccess(
+											Map<String, Especie> result) {
 
-												Especie EspeciePersistida = result
-														.get(u.getNombre());
-												mu.put(u.getNombre(),
-														EspeciePersistida);
-												guardarLocalMapaEspecies(mu); // actualizo
-												// el
-												// mapa
-												// de
-												// persistencia
-												// local
-												// para
-												// que
-												// tenga
-												// el id
-												// nuevo
+										Especie EspeciePersistida = result
+												.get(u.getNombre());
+										mu.put(u.getNombre(), EspeciePersistida);
+										guardarLocalMapaEspecies(mu); // actualizo
+										// el
+										// mapa
+										// de
+										// persistencia
+										// local
+										// para
+										// que
+										// tenga
+										// el id
+										// nuevo
 
-												List<Observacion> observaciones = obtenerObservacionesLocales();
-												if (observaciones.size() > 0) {
+										List<Observacion> observaciones = obtenerObservacionesLocales(false);
+										if (observaciones.size() > 0) {
 
-													for (int i = 0; i < observaciones
-															.size(); i++) {
-														Observacion observacion = observaciones
-																.get(i);
-														boolean modifico = false;
-														for (int j = 0; j < observacion
-																.getObservacionesEspecie().length; j++) {
-															ObservacionEspecie omp = observacion
-																	.getObservacionesEspecie()[j];
-															if (omp.getIdEspecie() == idLocal) {
-																omp.setIdEspecie(EspeciePersistida
-																		.getId());
-																modifico = true;
-															}
-														}
-														{
-															if (modifico)
-																storage.put(
-																		"observacion"
-																				+ i,
-																		observacionAJson(
-																				observacion)
-																				.toString());
-														}
-
+											for (int i = 0; i < observaciones
+													.size(); i++) {
+												Observacion observacion = observaciones
+														.get(i);
+												boolean modifico = false;
+												for (int j = 0; j < observacion
+														.getObservacionesEspecie().length; j++) {
+													ObservacionEspecie omp = observacion
+															.getObservacionesEspecie()[j];
+													if (omp.getIdEspecie() == idLocal) {
+														omp.setIdEspecie(EspeciePersistida
+																.getId());
+														modifico = true;
 													}
 												}
+												{
+													if (modifico)
+														storage.put(
+																"observacion"
+																		+ i,
+																observacionAJson(
+																		observacion)
+																		.toString());
+												}
 
-												persistirEspeciesLocales();
 											}
+										}
 
-											@Override
-											public void onFailure(
-													Throwable caught) {
-												AplicacionWeb
-														.setMensajeAlerta(VentanaCarga.ctes
-																.errorGuardarEspecie());
-											}
-										});
+										persistirEspeciesLocales();
+									}
 
-							}
+									@Override
+									public void onFailure(Throwable caught) {
+										AplicacionWeb
+												.setMensajeAlerta(VentanaCarga.ctes
+														.errorGuardarEspecie());
+									}
+								});
 
-						});
+					}
+
+				});
 				return; // se llama revursivamente al terminar la persistencia
 						// para no atorar a la base
 			}
@@ -663,7 +700,7 @@ public class ManejadorAlmacenamientoLocal {
 																		// el id
 																		// nuevo
 
-										List<Observacion> observaciones = obtenerObservacionesLocales();
+										List<Observacion> observaciones = obtenerObservacionesLocales(false);
 										if (observaciones.size() > 0) {
 
 											for (int i = 0; i < observaciones
@@ -707,7 +744,7 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static void persistirObservacionesLocales() {
-		List<Observacion> observaciones = obtenerObservacionesLocales();
+		List<Observacion> observaciones = obtenerObservacionesLocales(false);
 		if (observaciones.size() > 0) {
 			Observacion observacion = observaciones
 					.get(observaciones.size() - 1);
