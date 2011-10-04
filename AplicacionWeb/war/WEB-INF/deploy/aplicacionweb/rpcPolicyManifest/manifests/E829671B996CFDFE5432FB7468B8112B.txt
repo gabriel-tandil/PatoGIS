@@ -1,2 +1,0 @@
-serviceClass: ar.edu.unicen.exa.galvarez.patogis.client.ObservacionService
-path: 04ED2E9BDD7A939A65E32294B630B873.gwt.rpc
