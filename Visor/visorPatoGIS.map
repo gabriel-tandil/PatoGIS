@@ -156,5 +156,35 @@ size 7
  END
  END
 #-----------------------------------------------------------------------------------------------------------
+ LAYER
+ CONNECTIONTYPE postgis
+ NAME "clima"
+ CONNECTION "user=postgres dbname=patoGis host=localhost password=atlas"
+ DATA "the_geom from clima"
+ STATUS ON
+ TYPE polygon
+ # Of the lines in the extents, only render the wide highways
+ # FILTER "type = 'highway' and numlanes >= 4"
+ CLASS
+  COLOR 128 128 255 
+ END
+ END
+#-----------------------------------------------------------------------------------------------------------
+ LAYER
+ CONNECTIONTYPE postgis
+ NAME "vegetacion"
+ CONNECTION "user=postgres dbname=patoGis host=localhost password=atlas"
+ DATA "the_geom from vegetacion"
+ STATUS ON
+ TYPE polygon
+ # Of the lines in the extents, only render the wide highways
+ # FILTER "type = 'highway' and numlanes >= 4"
+ CLASS
+  COLOR 128 128 255 
+ END
+ END
+#-----------------------------------------------------------------------------------------------------------
+
+
 END
 
