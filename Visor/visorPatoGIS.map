@@ -1,5 +1,5 @@
 MAP
- NAME "RegistrosMeteorologicos"
+ NAME "VisorPatoGIS"
  SIZE 500 350
  IMAGECOLOR 255 255 255
  IMAGETYPE PNG
@@ -7,7 +7,7 @@ MAP
  SYMBOLSET "symbols/symbols.sym"
  FONTSET "data/fonts/fonts.list"
  WEB
- TEMPLATE "/var/www/visorPatoGIS.html"
+ TEMPLATE "/var/www/Visor/visorPatoGIS.html"
  IMAGEPATH "/var/www/tmp/"
  IMAGEURL "/tmp/"
  END
@@ -15,7 +15,7 @@ MAP
  LAYER
  CONNECTIONTYPE postgis
  NAME "partidos"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
+ CONNECTION "user=postgres dbname=patoGis host=localhost password=atlas"
  DATA "the_geom from departamento"
  STATUS ON
  TYPE polygon
@@ -31,72 +31,8 @@ MAP
 #-----------------------------------------------------------------------------------------------------------
  LAYER
  CONNECTIONTYPE postgis
- NAME "temperatura"
- LABELITEM "temperatura"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
- DATA "the_geom from (select g.gid, g.the_geom,trunc(temperatura_ponderada(g.gid,'%fecha%'),1) temperatura, color_temperatura(temperatura_ponderada(g.gid,'%fecha%'),temperatura_minima('%fecha%'), temperatura_maxima('%fecha%')) color from departamento g) as subquery using unique gid"
- STATUS ON
- TYPE polygon
- CLASS
- STYLE
- SYMBOL "lleno"
- SIZE 8
- COLOR [color]
- OUTLINECOLOR 0 0 0
- END
-  LABEL
-   COLOR 31 31 31
-   SHADOWCOLOR 218 218 218
-   SHADOWSIZE 2 2
-   TYPE TRUETYPE
-   FONT arial
-   SIZE 8
-   ANTIALIAS TRUE
-   POSITION CC
-   FORCE true
-   PARTIALS true
-   MINDISTANCE 1
-   BUFFER 4
-  END # end of label
- END
- END
-#-----------------------------------------------------------------------------------------------------------
- LAYER
- CONNECTIONTYPE postgis
- NAME "sensacion"
- LABELITEM "sensacion"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
- DATA "the_geom from (select g.gid, g.the_geom,trunc(sensacion_ponderada(g.gid,'%fecha%'),1) sensacion, color_temperatura(sensacion_ponderada(g.gid,'%fecha%'),sensacion_minima('%fecha%'), sensacion_maxima('%fecha%')) color from departamento g) as subquery using unique gid"
- STATUS ON
- TYPE polygon
- CLASS
- STYLE
- SYMBOL "kreuz4"
- SIZE 8
- COLOR [color]
- OUTLINECOLOR 0 0 0
- END
-  LABEL
-   COLOR 31 31 31
-   SHADOWCOLOR 218 218 218
-   SHADOWSIZE 2 2
-   TYPE TRUETYPE
-   FONT arial
-   SIZE 8
-   ANTIALIAS TRUE
-   POSITION CC
-   FORCE true
-   PARTIALS true
-   MINDISTANCE 1
-   BUFFER 4
-  END # end of label
- END
- END
-#-----------------------------------------------------------------------------------------------------------
- LAYER
- CONNECTIONTYPE postgis
  NAME "rutas"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
+ CONNECTION "user=postgres dbname=patoGis host=localhost password=atlas"
  DATA "the_geom from ruta"
  STATUS ON
  TYPE LINE
@@ -113,7 +49,7 @@ MAP
  LAYER
  CONNECTIONTYPE postgis
  NAME "localidades"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
+ CONNECTION "user=postgres dbname=patoGis host=localhost password=atlas"
  LABELITEM "localidad"
  DATA "the_geom from localidad"
  STATUS ON
@@ -209,7 +145,7 @@ size 7
  LAYER
  CONNECTIONTYPE postgis
  NAME "hidrografia"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
+ CONNECTION "user=postgres dbname=patoGis host=localhost password=atlas"
  DATA "the_geom from hidrografia"
  STATUS ON
  TYPE line
@@ -217,122 +153,6 @@ size 7
  # FILTER "type = 'highway' and numlanes >= 4"
  CLASS
   COLOR 128 128 255 
- END
- END
-#-----------------------------------------------------------------------------------------------------------
- LAYER
- CONNECTIONTYPE postgis
- NAME "estaciones"
- LABELITEM "nombre"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
- DATA "coordenadas from estacion"
- STATUS ON
- TYPE POINT
- CLASS
- style
- size 8
- SYMBOL "haus"
- end
- COLOR 255 0 255
- LABEL
- COLOR 31 31 31
- SHADOWCOLOR 218 218 218
- SHADOWSIZE 2 2
- TYPE TRUETYPE
- FONT arial
- SIZE 8
- ANTIALIAS TRUE
- POSITION CL
- PARTIALS true
- MINDISTANCE 80
- BUFFER 4
- END # end of label
- END
- END
-#-----------------------------------------------------------------------------------------------------------
- LAYER
- CONNECTIONTYPE postgis
- NAME "presion"
- LABELITEM "presion"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
- DATA "coordenadas from (select g.id, g.coordenadas,trunc(presion(g.id,'%fecha%')) presion, tam_presion(presion(g.id,'%fecha%'),presion_minima('%fecha%'),presion_maxima('%fecha%')) tam from estacion g) as subquery using unique id"
- STATUS ON
- TYPE POINT
- CLASS
-  style
-   size [tam]
-   SYMBOL "punkt"
-   COLOR 128 128 0
-  end
-  LABEL
-   COLOR 31 31 31
-   SHADOWCOLOR 218 218 218
-   SHADOWSIZE 2 2
-   TYPE TRUETYPE
-   FONT arial
-   SIZE 8
-   ANTIALIAS TRUE
-   POSITION CL
-   FORCE true
-   PARTIALS true
-   MINDISTANCE 1
-   BUFFER 4
-  END # end of label
- end
- END
-#-----------------------------------------------------------------------------------------------------------
- LAYER
- CONNECTIONTYPE postgis
- NAME "viento"
- LABELITEM "viento"
- CONNECTION "user=postgres dbname=geodb host=localhost password=atlas"
- DATA "coordenadas from (select g.id, g.coordenadas, trunc(viento(g.id,'%fecha%')) viento, color_viento(viento_minimo('%fecha%'), viento_maximo('%fecha%'),viento(g.id,'%fecha%')) color, angulo_viento(direccion_viento(g.id,'%fecha%')) angulo from estacion g) as subquery using unique id"
- STATUS ON
- TYPE POINT
- CLASS
-  EXPRESSION ("[viento]" == "0") #para no introducir otro parametro veo que no haya viento por el color calculado
-  style
-   size 8
-   SYMBOL "punkt"
-   COLOR 128 128 128
-  end
-  LABEL
-   COLOR 31 31 31
-   SHADOWCOLOR 218 218 218
-   SHADOWSIZE 2 2
-   TYPE TRUETYPE
-   FONT arial
-   SIZE 8
-   ANTIALIAS TRUE
-   POSITION CR
-   FORCE true
-   PARTIALS true
-   MINDISTANCE 1
-   BUFFER 4
-  END # end of label
- end
- CLASS
-  EXPRESSION ("[viento]" != "0")
-  style
-   size 8
-   SYMBOL "zelt"
-   COLOR [color]
-   ANGLE [angulo]
-  end
-  LABEL
-   COLOR 31 31 31
-   SHADOWCOLOR 218 218 218
-   SHADOWSIZE 2 2
-   TYPE TRUETYPE
-   FONT arial
-   SIZE 8
-   ANTIALIAS TRUE
-   POSITION CR
-   FORCE true
-   PARTIALS true
-   MINDISTANCE 1
-   BUFFER 4
-  END # end of label
  END
  END
 #-----------------------------------------------------------------------------------------------------------

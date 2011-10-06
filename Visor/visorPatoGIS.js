@@ -1,40 +1,6 @@
 /** Initializacion 
  */
-function fechaActual() {
-if (document.elForm.fecha.value==""){
-Stamp = new Date();
-year = Stamp.getYear();
-if (year < 2000) year = 1900 + year;
 
-var Hours;
-var Mins;
-var Time;
-var dia;
-var mes;
-
-dia=Stamp.getDate();
-if (dia < 10) {
-dia = "0" + dia;
-}
-
-mes=Stamp.getMonth()+1;
-if (mes < 10) {
-mes = "0" + mes;
-}
-
-Hours = Stamp.getHours();
-if (Hours < 10) {
-Hours = "0" + Hours;
-}
-
-Mins = Stamp.getMinutes();
-if (Mins < 10) {
-Mins = "0" + Mins;
-}
-
-  document.elForm.fecha.value= ""+year+mes+dia+" "+Hours + ":" + Mins +":00";
-}
-}
 if (window.addEventListener)
 	/** DOMMouseScroll is for mozilla. */
 	window.addEventListener('DOMMouseScroll', wheel, false);
