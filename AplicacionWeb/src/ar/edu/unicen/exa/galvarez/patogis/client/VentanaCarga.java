@@ -50,11 +50,9 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -66,7 +64,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -330,8 +327,24 @@ public class VentanaCarga extends FlexTable {
 	class ObtenerTextoUbicacion implements ObtenerTexto {
 		@Override
 		public String getValor(String clave) {
-			return (ubicaciones.get(clave).getNombre() + " ("
-					+ ubicaciones.get(clave).getCoordenadas() + ")");
+			try {
+				String coor = ubicaciones.get(clave).getCoordenadas();
+				return (ubicaciones.get(clave).getNombre()
+						+ " ("
+						+ coor.split(" ")[1]
+								.substring(
+										0,
+										coor.split(" ")[1].length() < 7 ? coor
+												.split(" ")[1].length() : 7)
+						+ " "
+						+ coor.split(" ")[0]
+								.substring(
+										0,
+										coor.split(" ")[0].length() < 7 ? coor
+												.split(" ")[0].length() : 7) + ")");
+			} catch (Exception e) {
+				return ubicaciones.get(clave).getNombre();
+			}
 		}
 	};
 
@@ -1070,7 +1083,7 @@ public class VentanaCarga extends FlexTable {
 	private void grabarObservacion() {
 		final Observacion observacion;
 		if ("".equals(horaFin.getText())) {
-			class NoHoraFinDialog extends DialogBox {
+			class NoHoraFinDialog extends DialogBoxExtendido {
 
 				public NoHoraFinDialog() {
 					setText(ctes.sinHoraFinCargaActual());
@@ -1114,21 +1127,8 @@ public class VentanaCarga extends FlexTable {
 					setWidget(dock);
 
 				}
-
-				@Override
-				public void center() {
-					setPopupPositionAndShow(new PopupPanel.PositionCallback() {
-						public void setPosition(int offsetWidth,
-								int offsetHeight) {
-							int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
-							int top = (Window.getScrollTop() + (Window
-									.getClientHeight() - offsetHeight) / 2) >> 0;
-							setPopupPosition(left, top);
-						}
-					});
-				}
 			}
-			DialogBox db = new NoHoraFinDialog();
+			DialogBoxExtendido db = new NoHoraFinDialog();
 			db.center();
 		} else
 

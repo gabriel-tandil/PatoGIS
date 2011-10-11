@@ -2,19 +2,16 @@ package ar.edu.unicen.exa.galvarez.patogis.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
-abstract class AgregarElementoDialog extends DialogBox {
+abstract class AgregarElementoDialog extends DialogBoxExtendido {
 
 	protected ListBox combo;
 
@@ -54,7 +51,6 @@ abstract class AgregarElementoDialog extends DialogBox {
 		HorizontalPanel botones = new HorizontalPanel();
 		botones.add(closeButton);
 		botones.add(aceptarButton);
-		Label label = new Label();
 		errorLabel = new Label();
 		text = new TextBox();
 
@@ -79,16 +75,5 @@ abstract class AgregarElementoDialog extends DialogBox {
 	public void cerrar() {
 		combo.setSelectedIndex(0);
 		hide();
-	}
-
-	@Override
-	public void center() {
-		setPopupPositionAndShow(new PopupPanel.PositionCallback() {
-			public void setPosition(int offsetWidth, int offsetHeight) {
-				int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
-				int top = ((Window.getClientHeight() - offsetHeight) / 2) >> 0;
-				setPopupPosition(left, top);
-			}
-		});
 	}
 }

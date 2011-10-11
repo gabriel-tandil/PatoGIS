@@ -12,7 +12,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -100,7 +99,7 @@ public class VentanaListado extends FlexTable {
 
 	}
 
-	class DetallesObservacionDialog extends DialogBox {
+	class DetallesObservacionDialog extends DialogBoxExtendido {
 
 		public DetallesObservacionDialog(Observacion obs) {
 			setText(constantes.detallesObservacion());
@@ -120,9 +119,7 @@ public class VentanaListado extends FlexTable {
 			FlexTable tabla = new FlexTable();
 
 			tabla.setText(0, 0, constantes.especie());
-			;
 			tabla.setText(0, 1, constantes.cantidad());
-			;
 			tabla.getRowFormatter().addStyleName(0, "watchListHeader");
 			tabla.addStyleName("watchList");
 			tabla.getCellFormatter().addStyleName(0, 1,

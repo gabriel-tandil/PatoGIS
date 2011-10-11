@@ -1,9 +1,5 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
-import java.util.List;
-
-import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,9 +11,7 @@ import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -123,7 +117,7 @@ public class AplicacionWeb implements EntryPoint {
 
 		Command eliminarObservacionesLocalesCommand = new Command() {
 			public void execute() {
-				final DialogBox dialogo = new DialogBox();
+				final DialogBoxExtendido dialogo = new DialogBoxExtendido();
 				dialogo.setAnimationEnabled(true);
 				dialogo.setText(constantes.confirmacion());
 				Button aceptarButton = new Button("Aceptar");
@@ -157,13 +151,7 @@ public class AplicacionWeb implements EntryPoint {
 				botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 				dock.setWidth("100%");
 				dialogo.setWidget(dock);
-				dialogo.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
-					public void setPosition(int offsetWidth, int offsetHeight) {
-						int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
-						int top = ((Window.getClientHeight() - offsetHeight) / 2) >> 0;
-						dialogo.setPopupPosition(left, top);
-					}
-				});
+				dialogo.center();
 			}
 		};
 
