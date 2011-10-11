@@ -166,26 +166,32 @@ public class VentanaCarga extends FlexTable {
 								String message = "";
 								switch (error.getCode()) {
 								case PositionError.UNKNOWN_ERROR:
-									message = ctes.geolocation_errorDesconocido(); 
+									message = ctes
+											.geolocation_errorDesconocido();
 									break;
 								case PositionError.PERMISSION_DENIED:
-									message = ctes.geolocation_permisoDenegado();
+									message = ctes
+											.geolocation_permisoDenegado();
 									break;
 								case PositionError.POSITION_UNAVAILABLE:
-									message = ctes.geolocation_posicionNoDisponible();
+									message = ctes
+											.geolocation_posicionNoDisponible();
 									break;
 								case PositionError.TIMEOUT:
-									message =ctes.geolocation_timeout();
+									message = ctes.geolocation_timeout();
 									break;
 								default:
-									message = ctes.geolocation_codigoErrorDesconocido();
+									message = ctes
+											.geolocation_codigoErrorDesconocido();
 								}
-								AplicacionWeb
-										.setMensajeAlerta(ctes.geolocation_errorObteniendoPosicion()
-												+ error.getMessage()
-												+ ctes.geolocation_codigo()
-												+ error.getCode()
-												+ " (" + message + ")");
+								AplicacionWeb.setMensajeAlerta(ctes
+										.geolocation_errorObteniendoPosicion()
+										+ error.getMessage()
+										+ ctes.geolocation_codigo()
+										+ error.getCode()
+										+ " ("
+										+ message
+										+ ")");
 							}
 
 							public void onSuccess(Position position) {
@@ -650,8 +656,8 @@ public class VentanaCarga extends FlexTable {
 		Label lblNewLabel5 = new Label(ctes.temperatura());
 		Label lblNewLabel6 = new Label(ctes.grados());
 		temperatura = new NumberBox();
-		temperatura.setWidth("20px");
-//		temperatura.setDouble(20.0);
+		temperatura.setWidth("30px");
+		// temperatura.setDouble(20.0);
 		grid2.setWidget(2, 0, lblNewLabel5);
 		grid2.setWidget(2, 2, temperatura);
 		grid2.setWidget(2, 3, lblNewLabel6);
@@ -1134,31 +1140,60 @@ public class VentanaCarga extends FlexTable {
 
 			try {
 				observacion = getObservacion();
+				if (edicion) {
+					if (observacionEditada.getId() > 0) {
 
-				observacionService.addElemento(observacion,
-						new AsyncCallback<Void>() {
+						observacionService.editElemento(observacion,
+								new AsyncCallback<Void>() {
 
-							@Override
-							public void onFailure(Throwable caught) {
-								AplicacionWeb.setMensajeAlerta(ctes
-										.observacionGuardadaLocalmente());
-								ManejadorAlmacenamientoLocal
-										.persistirObservacion(observacion);
-								observacion.setId(ManejadorAlmacenamientoLocal
-										.obtenerProximoIdAlmacenamientoLocal());
-								AplicacionWeb
-										.actualizarCantidadObservacionesLocales();
-								AplicacionWeb.cargarObservacion();
-							}
+									@Override
+									public void onFailure(Throwable caught) {
+										AplicacionWeb.setMensajeAlerta(ctes
+												.observacionNoEditada());
+										AplicacionWeb.cargarObservacion();
+									}
 
-							@Override
-							public void onSuccess(Void result) {
-								AplicacionWeb.setMensajeAlerta(ctes
-										.observacionGuardada());
-								AplicacionWeb.cargarObservacion();
+									@Override
+									public void onSuccess(Void result) {
+										AplicacionWeb.setMensajeAlerta(ctes
+												.observacionEditada());
+										AplicacionWeb.cargarObservacion();
 
-							}
-						});
+									}
+								});
+					} else {
+						ManejadorAlmacenamientoLocal
+								.actualizarObservacion(observacion);
+						AplicacionWeb.setMensajeAlerta(ctes
+								.observacionEditada());
+						AplicacionWeb.cargarObservacion();
+					}
+				} else {
+					observacionService.addElemento(observacion,
+							new AsyncCallback<Void>() {
+
+								@Override
+								public void onFailure(Throwable caught) {
+									AplicacionWeb.setMensajeAlerta(ctes
+											.observacionGuardadaLocalmente());
+									ManejadorAlmacenamientoLocal
+											.persistirObservacion(observacion);
+									observacion.setId(ManejadorAlmacenamientoLocal
+											.obtenerProximoIdAlmacenamientoLocal());
+									AplicacionWeb
+											.actualizarCantidadObservacionesLocales();
+									AplicacionWeb.cargarObservacion();
+								}
+
+								@Override
+								public void onSuccess(Void result) {
+									AplicacionWeb.setMensajeAlerta(ctes
+											.observacionGuardada());
+									AplicacionWeb.cargarObservacion();
+
+								}
+							});
+				}
 
 			} catch (ValidacionException e) {
 				AplicacionWeb.setMensajeAlerta(e.getMensaje());
@@ -1204,47 +1239,47 @@ public class VentanaCarga extends FlexTable {
 					edad.setSelectedIndex(ii);
 					break;
 				}
-			}			
+			}
 			for (int ii = 0; i < distancia.getItemCount(); ii++) {
 				if (distancia.getValue(ii).equals(oe.getDistancia())) {
 					distancia.setSelectedIndex(ii);
 					break;
 				}
-			}			
+			}
 			for (int ii = 0; i < conteo.getItemCount(); ii++) {
 				if (conteo.getValue(ii).equals(oe.getConteo())) {
 					conteo.setSelectedIndex(ii);
 					break;
 				}
 			}
-			
+
 			if (i < observacionEditada.getObservacionesEspecie().length - 1)
 				agregarObservacionEspecie(panelObservacionesEspecies);
 		}
-		
-		for (int i = 0; i < observacionEditada.getObservacionesMatrizProductiva().length; i++) {
+
+		for (int i = 0; i < observacionEditada
+				.getObservacionesMatrizProductiva().length; i++) {
 			ObservacionMatrizProductiva oe = observacionEditada
 					.getObservacionesMatrizProductiva()[i];
 
 			HorizontalPanel vp = widgetsObsMatrizProductiva
 					.get(widgetsObsMatrizProductiva.size() - 1);
 
-			((NumberBox)  vp.getWidget(1)) 
-					.setInteger(oe.getPorcentaje());
-			ListBox tipoMatriz = (ListBox)  vp.getWidget(0);
-
+			((NumberBox) vp.getWidget(1)).setInteger(oe.getPorcentaje());
+			ListBox tipoMatriz = (ListBox) vp.getWidget(0);
 
 			for (int ii = 0; i < tipoMatriz.getItemCount(); ii++) {
-				if (tipoMatriz.getValue(ii).equals(oe.getTipoMatrizProductiva().getNombre())) {
+				if (tipoMatriz.getValue(ii).equals(
+						oe.getTipoMatrizProductiva().getNombre())) {
 					tipoMatriz.setSelectedIndex(ii);
 					break;
 				}
 			}
-			
+
 			if (i < observacionEditada.getObservacionesMatrizProductiva().length - 1)
 				agregarObservacionMatrizProductiva(panelObservacionesMatrizProductiva);
-		}		
-		
+		}
+
 	}
 
 	public static void editar(Observacion observacion) {
@@ -1256,10 +1291,28 @@ public class VentanaCarga extends FlexTable {
 		vc.horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
 				.format(observacion.getFin()));
 		vc.dateBox.setValue(observacion.getInicio());
-		vc.temperatura.setDouble(observacion.getObservacionClima().getTemperatura());
+		vc.observaciones.setValue(observacion.getObservaciones());
 		for (int i = 0; i < vc.alcance.getItemCount(); i++) {
 			if (vc.alcance.getValue(i).equals(observacion.getAlcance())) {
 				vc.alcance.setSelectedIndex(i);
+				break;
+			}
+		}
+		vc.temperatura.setDouble(observacion.getObservacionClima()
+				.getTemperatura());
+		vc.checkLluvia.setValue(observacion.getObservacionClima().getLluvia());
+		vc.checkSol.setValue(observacion.getObservacionClima().getSol());
+		for (int i = 0; i < vc.comboNuves.getItemCount(); i++) {
+			if (vc.comboNuves.getValue(i).equals(
+					observacion.getObservacionClima().getNubes())) {
+				vc.comboNuves.setSelectedIndex(i);
+				break;
+			}
+		}
+		for (int i = 0; i < vc.comboViento.getItemCount(); i++) {
+			if (vc.comboViento.getValue(i).equals(
+					observacion.getObservacionClima().getViento())) {
+				vc.comboViento.setSelectedIndex(i);
 				break;
 			}
 		}
