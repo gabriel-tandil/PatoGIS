@@ -35,6 +35,11 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.VientoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
+import com.google.code.gwt.geolocation.client.Coordinates;
+import com.google.code.gwt.geolocation.client.Geolocation;
+import com.google.code.gwt.geolocation.client.Position;
+import com.google.code.gwt.geolocation.client.PositionError;
+import com.google.code.gwt.geolocation.client.PositionOptions;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -133,14 +138,72 @@ public class VentanaCarga extends FlexTable {
 	}
 
 	class AgregarUbicacionDialog extends AgregarElementoDialog {
+		DoubleBox latitud = new DoubleBox();
+		DoubleBox longitud = new DoubleBox();
+		IntegerBox altura = new IntegerBox();
 
 		public AgregarUbicacionDialog() {
 			setText(ctes.ingresarNuevaUbicacion());
+			etiquetas.add(new Label("Latitud"));
+			etiquetas.add(new Label("Longitud"));
+			etiquetas.add(new Label("Altura"));
+			panel.add(latitud);
+			panel.add(longitud);
+			panel.add(altura);
+		}
+
+		void obtainPosition() {
+			final Geolocation geo = Geolocation.getGeolocation();
+			if (Geolocation.isSupported()) {
+
+				geo.getCurrentPosition(
+						new com.google.code.gwt.geolocation.client.PositionCallback() {
+							public void onFailure(PositionError error) {
+								String message = "";
+								switch (error.getCode()) {
+								case PositionError.UNKNOWN_ERROR:
+									message = "Unknown Error";
+									break;
+								case PositionError.PERMISSION_DENIED:
+									message = "Permission Denied";
+									break;
+								case PositionError.POSITION_UNAVAILABLE:
+									message = "Position Unavailable";
+									break;
+								case PositionError.TIMEOUT:
+									message = "Time-out";
+									break;
+								default:
+									message = "Unknown error code.";
+								}
+								AplicacionWeb
+										.setMensajeAlerta("Obtaining position FAILED! Message: '"
+												+ error.getMessage()
+												+ "', code: "
+												+ error.getCode()
+												+ " (" + message + ")");
+							}
+
+							public void onSuccess(Position position) {
+
+								Coordinates c = position.getCoords();
+								latitud.setValue(c.getLatitude());
+								longitud.setValue(c.getLongitude());
+
+								if (c.hasAltitude())
+									altura.setValue((int) c.getAltitude());
+							}
+						}, PositionOptions.getPositionOptions(false, 15000,
+								30000));
+			}
 		}
 
 		protected void grabar() {
 			final Ubicacion u = new Ubicacion();
 			u.setNombre(text.getValue());
+			u.setAltura(altura.getValue());
+			u.setCoordenadas((longitud.getValue() + " " + latitud.getValue())
+					.replace(',', '.'));
 			ubicaciones.put(text.getValue(), u);
 			ubicacionService.addElemento(u, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
@@ -1116,21 +1179,20 @@ public class VentanaCarga extends FlexTable {
 			VerticalPanel vp = widgetsObsEspecie
 					.get(widgetsObsEspecie.size() - 1);
 
-			((CantidadBox) ((HorizontalPanel) vp.getWidget(0))
-					.getWidget(1)).setValue(oe.getCantidad().toString());
-			ListBox especie=(ListBox) ((HorizontalPanel) vp
-					.getWidget(0)).getWidget(0);
-		
-			ListBox edad=(ListBox) ((HorizontalPanel) vp.getWidget(1))
+			((CantidadBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(1))
+					.setValue(oe.getCantidad().toString());
+			ListBox especie = (ListBox) ((HorizontalPanel) vp.getWidget(0))
 					.getWidget(0);
-			ListBox distancia=(ListBox) ((HorizontalPanel) vp.getWidget(1))
+
+			ListBox edad = (ListBox) ((HorizontalPanel) vp.getWidget(1))
+					.getWidget(0);
+			ListBox distancia = (ListBox) ((HorizontalPanel) vp.getWidget(1))
 					.getWidget(1);
-			ListBox conteo=(ListBox) ((HorizontalPanel) vp.getWidget(1))
-					.getWidget(2);	
-			
+			ListBox conteo = (ListBox) ((HorizontalPanel) vp.getWidget(1))
+					.getWidget(2);
+
 			for (int ii = 0; i < especie.getItemCount(); ii++) {
-				if (especie.getValue(ii).equals(
-						oe.getEspecie().getNombre())) {
+				if (especie.getValue(ii).equals(oe.getEspecie().getNombre())) {
 					especie.setSelectedIndex(ii);
 					break;
 				}

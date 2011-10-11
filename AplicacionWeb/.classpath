@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/saaj.jar"/>
 	<classpathentry kind="lib" path="/opt/PRG/env/eclipse/plugins/javax.wsdl_1.6.2.v201005080631.jar"/>
 	<classpathentry kind="lib" path="/opt/PRG/env/eclipse/plugins/org.apache.commons.logging_1.0.4.v201005080501.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-html5-geolocation.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 @SuppressWarnings("deprecation")
 abstract class AgregarElementoDialog extends DialogBox {
@@ -30,7 +31,8 @@ abstract class AgregarElementoDialog extends DialogBox {
 
 	TextBox text = null;
 	Label errorLabel = null;
-
+	VerticalPanel panel = null;
+	VerticalPanel etiquetas = null;
 	public AgregarElementoDialog() {
 		setAnimationEnabled(true);
 		Button aceptarButton = new Button("Aceptar");
@@ -64,8 +66,13 @@ abstract class AgregarElementoDialog extends DialogBox {
 
 		dock.add(botones, DockPanel.SOUTH);
 		dock.add(errorLabel, DockPanel.NORTH);
-		dock.add(label, DockPanel.WEST);
-		dock.add(text, DockPanel.CENTER);
+
+		panel=new VerticalPanel();
+		etiquetas=new VerticalPanel();
+		etiquetas.add(label);
+		dock.add(etiquetas, DockPanel.WEST);
+		panel.add(text);
+		dock.add(panel, DockPanel.CENTER);
 
 		botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		dock.setWidth("100%");

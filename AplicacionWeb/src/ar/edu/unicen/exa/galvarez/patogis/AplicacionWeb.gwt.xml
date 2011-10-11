@@ -13,6 +13,7 @@
 
 	<!-- Other module inherits                                      -->
 	<inherits name="gwtupload.GWTUpload"/>
+	<inherits name="com.google.code.gwt.geolocation.Html5Geolocation"/>
 	<inherits name="com.google.gwt.json.JSON" /> 
 	<inherits name="com.google.gwt.i18n.I18N"/>
 	
