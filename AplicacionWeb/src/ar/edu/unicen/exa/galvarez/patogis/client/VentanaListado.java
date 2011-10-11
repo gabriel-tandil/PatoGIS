@@ -32,7 +32,7 @@ public class VentanaListado extends FlexTable {
 		setText(0, 4, constantes.detalles());
 		setText(0, 5, constantes.editar());
 		setText(0, 6, constantes.local());
-		
+
 		getRowFormatter().addStyleName(0, "watchListHeader");
 		addStyleName("watchList");
 		getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");
@@ -90,7 +90,7 @@ public class VentanaListado extends FlexTable {
 
 		});
 		setWidget(fila, 5, editar);
-		if (observacion.getId() < 0)
+		if (observacion.getId() == null || observacion.getId() < 0)
 			setText(fila, 6, "*");
 	}
 
