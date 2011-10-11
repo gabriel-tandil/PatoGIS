@@ -230,7 +230,7 @@ public class VentanaCarga extends FlexTable {
 	}
 
 	private CheckBox checkLluvia;
-	private DoubleBox temperatura;
+	private NumberBox temperatura;
 	private CheckBox checkSol;
 	private ListBox comboNuves;
 	private ListBox comboViento;
@@ -649,9 +649,9 @@ public class VentanaCarga extends FlexTable {
 		grid2.setWidget(1, 3, comboViento);
 		Label lblNewLabel5 = new Label(ctes.temperatura());
 		Label lblNewLabel6 = new Label(ctes.grados());
-		temperatura = new DoubleBox();
+		temperatura = new NumberBox();
 		temperatura.setWidth("20px");
-		temperatura.setValue(20.0);
+//		temperatura.setDouble(20.0);
 		grid2.setWidget(2, 0, lblNewLabel5);
 		grid2.setWidget(2, 2, temperatura);
 		grid2.setWidget(2, 3, lblNewLabel6);
@@ -808,7 +808,7 @@ public class VentanaCarga extends FlexTable {
 
 		horizontalPanel1.add(comboBox);
 
-		IntegerBox textBox_1 = new IntegerBox();
+		NumberBox textBox_1 = new NumberBox();
 		textBox_1.setWidth("25px");
 		textBox_1.setMaxLength(3);
 		horizontalPanel1.add(textBox_1);
@@ -932,13 +932,13 @@ public class VentanaCarga extends FlexTable {
 		return comboBox;
 	}
 
-	private ObservacionClima getObservacionClima() {
+	private ObservacionClima getObservacionClima() throws ValidacionException {
 		ObservacionClima oc = new ObservacionClima();
 		oc.setLluvia(checkLluvia.getValue());
 		oc.setSol(checkSol.getValue());
 		oc.setNubes(comboNuves.getValue(comboNuves.getSelectedIndex()));
 		oc.setViento(comboViento.getValue(comboViento.getSelectedIndex()));
-		oc.setTemperatura(temperatura.getValue());
+		oc.setTemperatura(temperatura.getDouble());
 		return oc;
 	}
 
@@ -997,7 +997,7 @@ public class VentanaCarga extends FlexTable {
 			omp.setIdTipoMatrizProductiva(tiposMatrizProductiva.get(
 					(((ListBox) hp.getWidget(0)).getValue(((ListBox) hp
 							.getWidget(0)).getSelectedIndex()))).getId());
-			omp.setPorcentaje(((IntegerBox) hp.getWidget(1)).getValue());
+			omp.setPorcentaje(((NumberBox) hp.getWidget(1)).getInteger());
 
 			return omp;
 		}
@@ -1229,8 +1229,8 @@ public class VentanaCarga extends FlexTable {
 			HorizontalPanel vp = widgetsObsMatrizProductiva
 					.get(widgetsObsMatrizProductiva.size() - 1);
 
-			((IntegerBox)  vp.getWidget(1)) 
-					.setValue(oe.getPorcentaje());
+			((NumberBox)  vp.getWidget(1)) 
+					.setInteger(oe.getPorcentaje());
 			ListBox tipoMatriz = (ListBox)  vp.getWidget(0);
 
 
@@ -1256,6 +1256,7 @@ public class VentanaCarga extends FlexTable {
 		vc.horaFin.setValue(DateTimeFormat.getFormat(ctes.formatoHora())
 				.format(observacion.getFin()));
 		vc.dateBox.setValue(observacion.getInicio());
+		vc.temperatura.setDouble(observacion.getObservacionClima().getTemperatura());
 		for (int i = 0; i < vc.alcance.getItemCount(); i++) {
 			if (vc.alcance.getValue(i).equals(observacion.getAlcance())) {
 				vc.alcance.setSelectedIndex(i);

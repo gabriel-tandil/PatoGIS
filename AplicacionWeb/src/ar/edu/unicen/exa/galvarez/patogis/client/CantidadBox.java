@@ -8,12 +8,10 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
 @SuppressWarnings("deprecation")
@@ -74,17 +72,6 @@ public class CantidadBox extends TextBox {
 						DeferredCommand.addCommand(new Command() {
 							public void execute() {
 								cb.setFocus(true);
-							}
-						});
-					}
-
-					@Override
-					public void center() {
-						setPopupPositionAndShow(new PopupPanel.PositionCallback() {
-							public void setPosition(int offsetWidth, int offsetHeight) {
-								int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
-								int top = (Window.getScrollTop()+(Window.getClientHeight() - offsetHeight) / 2) >> 0;
-								setPopupPosition(left, top);
 							}
 						});
 					}

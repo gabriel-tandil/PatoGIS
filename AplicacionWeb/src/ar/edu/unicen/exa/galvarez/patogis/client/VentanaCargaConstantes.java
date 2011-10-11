@@ -1,7 +1,6 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
 import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.safehtml.shared.SafeHtml;
 
 public interface VentanaCargaConstantes extends Constants {
 
@@ -127,8 +126,8 @@ public interface VentanaCargaConstantes extends Constants {
 
 	String geolocation_codigo();
 
-	SafeHtml aceptar();
+	String aceptar();
 
-	SafeHtml cancelar();
+	String cancelar();
 
 }

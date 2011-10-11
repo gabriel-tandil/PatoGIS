@@ -1,22 +1,14 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecie;
+
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class TimeBox extends TextBox {
+public class NumberBox extends TextBox {
 
-	public final static String DEFAULT_TIME_FORMAT = "HH:mm";
-
-	private String format = DEFAULT_TIME_FORMAT;
-
-	public TimeBox() {
-		setFormat(DEFAULT_TIME_FORMAT);
-		super.sinkEvents(Event.ONKEYDOWN);
-	}
-
-	public TimeBox(String format) {
-		setFormat(format);
+	public NumberBox() {
 		super.sinkEvents(Event.ONKEYDOWN);
 	}
 
@@ -26,14 +18,9 @@ public class TimeBox extends TextBox {
 
 		switch (eventType) {
 		case Event.ONKEYDOWN: {
-			if (isTimeKey(keyCode)) {
+			if (isCantidadKey(keyCode)) {
 				char newChar = ((char) convert(keyCode));
-				if ((getText().length() == 0) && newChar != '0'
-						&& newChar != '1' && newChar != '2')
-					setText(getText() + "0");
 				setText(getText() + String.valueOf(newChar));
-				if (getText().length() == 2)
-					setText(getText() + ":");
 				DOM.eventPreventDefault(event);
 				return;
 			}
@@ -71,7 +58,7 @@ public class TimeBox extends TextBox {
 		return keyCode;
 	}
 
-	private boolean isTimeKey(int keyCode) {
+	private boolean isCantidadKey(int keyCode) {
 		// 0 - 9 keys above qwerty
 		if (keyCode >= 48 && keyCode <= 57) {
 			return true;
@@ -86,17 +73,49 @@ public class TimeBox extends TextBox {
 				|| keyCode == 37 || keyCode == 79 || keyCode == 80) {
 			return true;
 		}
+		if (keyCode == 88) { // X
+			return true;
+		}
+
 		return false;
 	}
 
-	public String getFormat() {
-		return format;
+	public Integer parseValue() throws ValidacionException {
+		if (getValue().equals("X"))
+			return new Integer(ObservacionEspecie.PRESENCIA);
+		if (getValue().equals("XX"))
+			return new Integer(ObservacionEspecie.PRESENCIA_MUCHOS);
+		try {
+			return Integer.parseInt(getValue());
+		} catch (NumberFormatException e) {
+			throw new ValidacionException("Cantidad Incorrecta.");
+		}
+
 	}
 
-	public void setFormat(String format) {
-		this.format = format;
-		super.setMaxLength(format.length());
-		super.setVisibleLength(format.length());
-
+	public void setDouble(Double d) {
+		setValue(Double.toString(d).replace('.', ','));
+		
 	}
+
+	public Double getDouble() throws ValidacionException {
+		try {
+			return Double.parseDouble(getValue().replace(',', '.'));
+		} catch (NumberFormatException e) {
+			throw new ValidacionException("Cantidad Incorrecta.");
+		}
+	}
+
+	public Integer getInteger() throws ValidacionException {
+		try {
+			return Integer.parseInt(getValue());
+		} catch (NumberFormatException e) {
+			throw new ValidacionException("Cantidad Incorrecta.");
+		}
+	}
+
+	public void setInteger(Integer i) {
+		setValue(Integer.toString(i));
+	}
+
 }
