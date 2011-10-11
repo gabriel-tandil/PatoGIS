@@ -72,6 +72,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
+@SuppressWarnings("deprecation")
 public class VentanaCarga extends FlexTable {
 	static VentanaCargaConstantes ctes = GWT
 			.create(VentanaCargaConstantes.class);
@@ -144,12 +145,18 @@ public class VentanaCarga extends FlexTable {
 
 		public AgregarUbicacionDialog() {
 			setText(ctes.ingresarNuevaUbicacion());
-			etiquetas.add(new Label("Latitud"));
-			etiquetas.add(new Label("Longitud"));
-			etiquetas.add(new Label("Altura"));
-			panel.add(latitud);
-			panel.add(longitud);
-			panel.add(altura);
+			panel.setText(1, 0, "Latitud");
+			panel.setText(2, 0, "Longitud");
+			panel.setText(3, 0, "Altura");
+			panel.setWidget(1, 1, latitud);
+			panel.setWidget(2, 1, longitud);
+			panel.setWidget(3, 1, altura);
+		}
+
+		@Override
+		public void show() {
+			obtainPosition();
+			super.show();
 		}
 
 		void obtainPosition() {
@@ -193,7 +200,7 @@ public class VentanaCarga extends FlexTable {
 								if (c.hasAltitude())
 									altura.setValue((int) c.getAltitude());
 							}
-						}, PositionOptions.getPositionOptions(false, 15000,
+						}, PositionOptions.getPositionOptions(true, 15000,
 								30000));
 			}
 		}
@@ -274,7 +281,6 @@ public class VentanaCarga extends FlexTable {
 	private FlowPanel panelImages = new FlowPanel();
 	// Attach an image to the pictures viewer
 	private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
-		@SuppressWarnings("deprecation")
 		public void onLoad(PreloadedImage image) {
 			image.setWidth("75px");
 			final HorizontalPanel hp = new HorizontalPanel();
@@ -391,7 +397,6 @@ public class VentanaCarga extends FlexTable {
 		}
 	};
 
-	@SuppressWarnings("deprecation")
 	VentanaCarga() {
 		super();
 		setSize("100px", "100px");
@@ -741,7 +746,6 @@ public class VentanaCarga extends FlexTable {
 		comboBox.addItem(ctes.otra());
 	}
 
-	@SuppressWarnings("deprecation")
 	private void agregarObservacionEspecie(final VerticalPanel verticalPanel_1) {
 		VerticalPanel verticalPanel = new VerticalPanel();
 		if (widgetsObsEspecie.size() > 0)
@@ -993,7 +997,6 @@ public class VentanaCarga extends FlexTable {
 		return ubicaciones.get(laguna.getValue(laguna.getSelectedIndex()));
 	}
 
-	@SuppressWarnings("deprecation")
 	private Observacion getObservacion() throws ValidacionException {
 
 		Observacion observacion = new Observacion();
@@ -1077,7 +1080,6 @@ public class VentanaCarga extends FlexTable {
 					Button closeButton = new Button("Cancelar");
 					closeButton.addClickHandler(new ClickHandler() {
 
-						@SuppressWarnings("deprecation")
 						@Override
 						public void onClick(ClickEvent event) {
 							DeferredCommand.addCommand(new Command() {
