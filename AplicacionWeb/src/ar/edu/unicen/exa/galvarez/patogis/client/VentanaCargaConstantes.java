@@ -1,6 +1,7 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
 import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.safehtml.shared.SafeHtml;
 
 public interface VentanaCargaConstantes extends Constants {
 
@@ -105,5 +106,29 @@ public interface VentanaCargaConstantes extends Constants {
 	String horaFinTooltip();
 
 	String sinHoraFinCargaActual();
+
+	String latitud();
+
+	String longitud();
+
+	String altura();
+
+	String geolocation_errorDesconocido();
+
+	String geolocation_permisoDenegado();
+
+	String geolocation_posicionNoDisponible();
+
+	String geolocation_timeout();
+
+	String geolocation_codigoErrorDesconocido();
+
+	String geolocation_errorObteniendoPosicion();
+
+	String geolocation_codigo();
+
+	SafeHtml aceptar();
+
+	SafeHtml cancelar();
 
 }

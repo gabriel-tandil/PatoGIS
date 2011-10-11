@@ -17,4 +17,5 @@ public interface VentanaListadoConstantes extends Constants {
 	String inicio();
 	String laguna();
 	String editar();
+	String local();
 }

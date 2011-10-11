@@ -142,9 +142,9 @@ public class VentanaCarga extends FlexTable {
 
 		public AgregarUbicacionDialog() {
 			setText(ctes.ingresarNuevaUbicacion());
-			panel.setText(1, 0, "Latitud");
-			panel.setText(2, 0, "Longitud");
-			panel.setText(3, 0, "Altura");
+			panel.setText(1, 0, ctes.latitud());
+			panel.setText(2, 0, ctes.longitud());
+			panel.setText(3, 0, ctes.altura());
 			panel.setWidget(1, 1, latitud);
 			panel.setWidget(2, 1, longitud);
 			panel.setWidget(3, 1, altura);
@@ -166,24 +166,24 @@ public class VentanaCarga extends FlexTable {
 								String message = "";
 								switch (error.getCode()) {
 								case PositionError.UNKNOWN_ERROR:
-									message = "Unknown Error";
+									message = ctes.geolocation_errorDesconocido(); 
 									break;
 								case PositionError.PERMISSION_DENIED:
-									message = "Permission Denied";
+									message = ctes.geolocation_permisoDenegado();
 									break;
 								case PositionError.POSITION_UNAVAILABLE:
-									message = "Position Unavailable";
+									message = ctes.geolocation_posicionNoDisponible();
 									break;
 								case PositionError.TIMEOUT:
-									message = "Time-out";
+									message =ctes.geolocation_timeout();
 									break;
 								default:
-									message = "Unknown error code.";
+									message = ctes.geolocation_codigoErrorDesconocido();
 								}
 								AplicacionWeb
-										.setMensajeAlerta("Obtaining position FAILED! Message: '"
+										.setMensajeAlerta(ctes.geolocation_errorObteniendoPosicion()
 												+ error.getMessage()
-												+ "', code: "
+												+ ctes.geolocation_codigo()
 												+ error.getCode()
 												+ " (" + message + ")");
 							}
@@ -245,6 +245,7 @@ public class VentanaCarga extends FlexTable {
 	private TextArea observaciones;
 	private int contadorLlamadasAsincronicas = 3;
 	final VerticalPanel panelObservacionesEspecies = new VerticalPanel();
+	final VerticalPanel panelObservacionesMatrizProductiva = new VerticalPanel();
 	final ObservacionServiceAsync observacionService = GWT
 			.create(ObservacionService.class);
 	final ArchivosServiceAsync archivosService = GWT
@@ -601,9 +602,8 @@ public class VentanaCarga extends FlexTable {
 		Label lblNewLabel_3 = new Label(ctes.matrizProductiva());
 		setWidget(4, 0, lblNewLabel_3);
 
-		final VerticalPanel verticalPanel_2 = new VerticalPanel();
-		setWidget(4, 1, verticalPanel_2);
-		agregarObservacionMatrizProductiva(verticalPanel_2);
+		setWidget(4, 1, panelObservacionesMatrizProductiva);
+		agregarObservacionMatrizProductiva(panelObservacionesMatrizProductiva);
 
 		Button button2 = new Button(ctes.agregar());
 		button2.addMouseListener(new TooltipListener(ctes
@@ -611,7 +611,7 @@ public class VentanaCarga extends FlexTable {
 		setWidget(4, 2, button2);
 		button2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				agregarObservacionMatrizProductiva(verticalPanel_2);
+				agregarObservacionMatrizProductiva(panelObservacionesMatrizProductiva);
 			}
 		});
 
@@ -1089,8 +1089,8 @@ public class VentanaCarga extends FlexTable {
 					setText(ctes.sinHoraFinCargaActual());
 
 					setAnimationEnabled(true);
-					Button aceptarButton = new Button("Aceptar");
-					Button closeButton = new Button("Cancelar");
+					Button aceptarButton = new Button(ctes.aceptar());
+					Button closeButton = new Button(ctes.cancelar());
 					closeButton.addClickHandler(new ClickHandler() {
 
 						@Override
@@ -1199,9 +1199,52 @@ public class VentanaCarga extends FlexTable {
 					break;
 				}
 			}
+			for (int ii = 0; i < edad.getItemCount(); ii++) {
+				if (edad.getValue(ii).equals(oe.getEdad())) {
+					edad.setSelectedIndex(ii);
+					break;
+				}
+			}			
+			for (int ii = 0; i < distancia.getItemCount(); ii++) {
+				if (distancia.getValue(ii).equals(oe.getDistancia())) {
+					distancia.setSelectedIndex(ii);
+					break;
+				}
+			}			
+			for (int ii = 0; i < conteo.getItemCount(); ii++) {
+				if (conteo.getValue(ii).equals(oe.getConteo())) {
+					conteo.setSelectedIndex(ii);
+					break;
+				}
+			}
+			
 			if (i < observacionEditada.getObservacionesEspecie().length - 1)
 				agregarObservacionEspecie(panelObservacionesEspecies);
 		}
+		
+		for (int i = 0; i < observacionEditada.getObservacionesMatrizProductiva().length; i++) {
+			ObservacionMatrizProductiva oe = observacionEditada
+					.getObservacionesMatrizProductiva()[i];
+
+			HorizontalPanel vp = widgetsObsMatrizProductiva
+					.get(widgetsObsMatrizProductiva.size() - 1);
+
+			((IntegerBox)  vp.getWidget(1)) 
+					.setValue(oe.getPorcentaje());
+			ListBox tipoMatriz = (ListBox)  vp.getWidget(0);
+
+
+			for (int ii = 0; i < tipoMatriz.getItemCount(); ii++) {
+				if (tipoMatriz.getValue(ii).equals(oe.getTipoMatrizProductiva().getNombre())) {
+					tipoMatriz.setSelectedIndex(ii);
+					break;
+				}
+			}
+			
+			if (i < observacionEditada.getObservacionesMatrizProductiva().length - 1)
+				agregarObservacionMatrizProductiva(panelObservacionesMatrizProductiva);
+		}		
+		
 	}
 
 	public static void editar(Observacion observacion) {
