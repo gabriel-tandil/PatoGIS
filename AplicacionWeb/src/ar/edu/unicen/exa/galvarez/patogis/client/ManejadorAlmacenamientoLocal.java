@@ -232,12 +232,12 @@ public class ManejadorAlmacenamientoLocal {
 		return especie;
 	}
 
-	public static void persistirObservacion(Observacion observacion) {
+	public static void guardarLocalObservacion(Observacion observacion) {
 		JSONObject jo = observacionAJson(observacion);
-		persistirObservacionString(jo.toString());
+		guardarLocalObservacionString(jo.toString());
 	}
 
-	public static void persistirObservacionString(String observacion) {
+	public static void guardarLocalObservacionString(String observacion) {
 		int cantidadObservacionesPersistidas = getCantidadObservacionesPersistidas();
 		storage.put("observacion" + cantidadObservacionesPersistidas,
 				observacion);
@@ -251,10 +251,10 @@ public class ManejadorAlmacenamientoLocal {
 		for (int i = 0; i < cantidadObservacionesPersistidas; i++) {
 			Observacion obs = jSONAObservacion((JSONObject) JSONParser
 					.parseStrict(storage.get("observacion" + i)));
-			if (completo){
-			cargarUbicacion(obs);
-			cargarEspecies(obs);
-			cargarTiposMatricesProductivas(obs);
+			if (completo) {
+				cargarUbicacion(obs);
+				cargarEspecies(obs);
+				cargarTiposMatricesProductivas(obs);
 			}
 			observaciones.add(obs);
 		}
@@ -264,7 +264,8 @@ public class ManejadorAlmacenamientoLocal {
 
 	private static void cargarTiposMatricesProductivas(Observacion obs) {
 
-		for (ObservacionMatrizProductiva oe : obs.getObservacionesMatrizProductiva()) {
+		for (ObservacionMatrizProductiva oe : obs
+				.getObservacionesMatrizProductiva()) {
 
 			Map<String, TipoMatrizProductiva> mapa = obtenerMapaTiposMatrizProductiva();
 			TipoMatrizProductiva tmp = null;
@@ -770,6 +771,18 @@ public class ManejadorAlmacenamientoLocal {
 							persistirObservacionesLocales();
 						}
 					});
+		}
+	}
+
+	public static void actualizarObservacion(Observacion observacion) {
+		for (int i = 0; i < getCantidadObservacionesPersistidas(); i++) {
+			Observacion obs = jSONAObservacion((JSONObject) JSONParser
+					.parseStrict(storage.get("observacion" + i)));
+			if (obs.getId().equals(observacion.getId())) {
+				JSONObject jo = observacionAJson(observacion);
+				storage.put("observacion" + i, jo.toString());
+				break;
+			}
 		}
 	}
 }

@@ -41,6 +41,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="addElementoResponse">
     <complexType/>
    </element>
+   <element name="editElemento">
+    <complexType>
+     <sequence>
+      <element name="elemento" type="tns1:Observacion"/>
+      <element name="idUsuario" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editElementoResponse">
+    <complexType/>
+   </element>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar"/>
@@ -55,16 +66,21 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="idObservacion" nillable="true" type="xsd:int"/>
      <element name="lluvia" nillable="true" type="xsd:boolean"/>
-     <element name="nuves" nillable="true" type="xsd:string"/>
+     <element name="nubes" nillable="true" type="xsd:string"/>
      <element name="observacion" nillable="true" type="tns1:Observacion"/>
      <element name="sol" nillable="true" type="xsd:boolean"/>
+     <element name="temperatura" nillable="true" type="xsd:double"/>
      <element name="viento" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
    <complexType name="Especie">
     <sequence>
+     <element name="cantidadObservaciones" nillable="true" type="xsd:int"/>
+     <element name="familia" nillable="true" type="xsd:string"/>
+     <element name="grupo" nillable="true" type="xsd:string"/>
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="nombre" nillable="true" type="xsd:string"/>
+     <element name="nombreCientifico" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
    <complexType name="ObservacionEspecie">
@@ -92,6 +108,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    </complexType>
    <complexType name="TipoMatrizProductiva">
     <sequence>
+     <element name="cantidadObservaciones" nillable="true" type="xsd:int"/>
      <element name="id" nillable="true" type="xsd:int"/>
      <element name="nombre" nillable="true" type="xsd:string"/>
     </sequence>
@@ -158,6 +175,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="editElementoRequest">
+
+      <wsdl:part element="impl:editElemento" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="addElementoRequest">
 
       <wsdl:part element="impl:addElemento" name="parameters">
@@ -177,6 +202,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="getElementosRequest">
 
       <wsdl:part element="impl:getElementos" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editElementoResponse">
+
+      <wsdl:part element="impl:editElementoResponse" name="parameters">
 
       </wsdl:part>
 
@@ -203,6 +236,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:addElementoResponse" name="addElementoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editElemento">
+
+         <wsdl:input message="impl:editElementoRequest" name="editElementoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editElementoResponse" name="editElementoResponse">
 
        </wsdl:output>
 
@@ -243,6 +288,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="addElementoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editElemento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editElementoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editElementoResponse">
 
             <wsdlsoap:body use="literal"/>
 

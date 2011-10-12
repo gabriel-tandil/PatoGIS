@@ -15,4 +15,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface ObservacionService extends RemoteService {
 	List<Observacion> getElementos() throws ServicioRemotoException;
 	void addElemento(Observacion observacion) throws ServicioRemotoException;
+	void editElemento(Observacion observacion) throws ServicioRemotoException;
 }

@@ -1177,7 +1177,7 @@ public class VentanaCarga extends FlexTable {
 									AplicacionWeb.setMensajeAlerta(ctes
 											.observacionGuardadaLocalmente());
 									ManejadorAlmacenamientoLocal
-											.persistirObservacion(observacion);
+											.guardarLocalObservacion(observacion);
 									observacion.setId(ManejadorAlmacenamientoLocal
 											.obtenerProximoIdAlmacenamientoLocal());
 									AplicacionWeb

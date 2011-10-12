@@ -13,4 +13,6 @@ public interface ObservacionServiceAsync {
 	void getElementos(AsyncCallback<List<Observacion>> asyncCallback);
 
 	void addElemento(Observacion observacion, AsyncCallback<Void> callback);
+
+	void editElemento(Observacion observacion, AsyncCallback<Void> asyncCallback);
 }

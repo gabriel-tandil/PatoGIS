@@ -130,4 +130,8 @@ public interface VentanaCargaConstantes extends Constants {
 
 	String cancelar();
 
+	String observacionEditada();
+
+	String observacionNoEditada();
+
 }

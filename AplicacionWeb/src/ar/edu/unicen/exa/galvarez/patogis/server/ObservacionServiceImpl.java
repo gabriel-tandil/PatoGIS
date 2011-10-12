@@ -55,4 +55,21 @@ public class ObservacionServiceImpl extends RemoteServiceServlet implements
 		}
 	}
 
+	@Override
+	public void editElemento(Observacion observacion) throws ServicioRemotoException {
+		ObservacionWSImplServiceLocator ObservacionWSImplServiceLocator = new ObservacionWSImplServiceLocator();
+
+		try {
+
+			ObservacionWSImpl ObservacionWS = ObservacionWSImplServiceLocator
+					.getObservacionWSImpl();
+
+			ObservacionWS.editElemento(observacion, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServicioRemotoException();
+
+		}		
+	}
+
 }
