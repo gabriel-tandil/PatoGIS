@@ -30,6 +30,12 @@ public class EspecieWSImpl extends PatoGisWSAbstractImpl<Especie> implements
 	}
 	
 	@Override
+	public void editElemento(Especie elemento, Integer idUsuario)
+			throws RemoteException {
+		super.editElementoGenerico(elemento, idUsuario);
+	}	
+	
+	@Override
 	public Especie[] getElementosConCantidadObs() throws RemoteException {
 		SqlSession sqlSession = null;
 		Especie[] resultado =null;

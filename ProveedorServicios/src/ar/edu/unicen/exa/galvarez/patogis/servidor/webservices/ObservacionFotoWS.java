@@ -14,4 +14,7 @@ public interface ObservacionFotoWS extends Remote {
 	public void addElemento(ObservacionFoto elemento, Integer idUsuario)
 			throws RemoteException;
 
+	void editElemento(ObservacionFoto elemento, Integer idUsuario)
+			throws RemoteException;
+
 }

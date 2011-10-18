@@ -14,4 +14,7 @@ public interface CampanaWS extends Remote {
 	public void addElemento(Campana elemento, Integer idUsuario)
 			throws RemoteException;
 
+	void editElemento(Campana elemento, Integer idUsuario)
+			throws RemoteException;
+
 }

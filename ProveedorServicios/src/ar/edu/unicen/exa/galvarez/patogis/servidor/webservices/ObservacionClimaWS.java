@@ -14,4 +14,7 @@ public interface ObservacionClimaWS extends Remote {
 	public void addElemento(ObservacionClima elemento, Integer idUsuario)
 			throws RemoteException;
 
+	void editElemento(ObservacionClima elemento, Integer idUsuario)
+			throws RemoteException;
+
 }

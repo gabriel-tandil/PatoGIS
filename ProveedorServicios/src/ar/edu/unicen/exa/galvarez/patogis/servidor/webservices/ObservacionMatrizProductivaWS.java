@@ -14,4 +14,7 @@ public interface ObservacionMatrizProductivaWS extends Remote {
 	public void addElemento(ObservacionMatrizProductiva elemento,
 			Integer idUsuario) throws RemoteException;
 
+	void editElemento(ObservacionMatrizProductiva elemento, Integer idUsuario)
+			throws RemoteException;
+
 }

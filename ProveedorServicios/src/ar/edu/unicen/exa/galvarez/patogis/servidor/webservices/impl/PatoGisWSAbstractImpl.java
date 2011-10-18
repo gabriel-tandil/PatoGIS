@@ -93,8 +93,30 @@ public abstract class PatoGisWSAbstractImpl<T> {
 			Object mapper = sqlSession.getMapper(mapperClass);
 			m.invoke(mapper, elemento);
 			liberarSesionAuditada(sqlSession);
-			m=clazz.getDeclaredMethod("getId");
+			m = clazz.getDeclaredMethod("getId");
 			return (Integer) m.invoke(elemento);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return null;
+
+	}
+
+	protected Integer editElementoGenerico(T elemento, Integer idUsuario)
+			throws RemoteException {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = obtenerSesionAuditada(idUsuario.intValue());
+			Class<?> mapperClass = getMapperClass();
+			Method m = mapperClass.getDeclaredMethod(
+					"updateByPrimaryKeySelective", clazz);
+			Object mapper = sqlSession.getMapper(mapperClass);
+			m.invoke(mapper, elemento);
+			liberarSesionAuditada(sqlSession);
+
 		} catch (Exception e) {
 
 			e.printStackTrace();

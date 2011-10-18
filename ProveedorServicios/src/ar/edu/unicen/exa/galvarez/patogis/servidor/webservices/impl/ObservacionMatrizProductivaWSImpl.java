@@ -25,4 +25,10 @@ public class ObservacionMatrizProductivaWSImpl extends
 			Integer idUsuario) throws RemoteException {
 		super.addElementoGenerico(elemento, idUsuario);
 	}
+
+	@Override
+	public void editElemento(ObservacionMatrizProductiva elemento,
+			Integer idUsuario) throws RemoteException {
+		super.editElementoGenerico(elemento, idUsuario);
+	}
 }

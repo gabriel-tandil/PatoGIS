@@ -25,4 +25,10 @@ public class ObservacionEspecieWSImpl extends
 			throws RemoteException {
 		super.addElementoGenerico(elemento, idUsuario);
 	}
+	
+	@Override
+	public void editElemento(ObservacionEspecie elemento, Integer idUsuario)
+			throws RemoteException {
+		super.editElementoGenerico(elemento, idUsuario);
+	}
 }

@@ -15,4 +15,7 @@ public interface EspecieWS extends Remote {
 			throws RemoteException;
 
 	public Especie[] getElementosConCantidadObs() throws RemoteException;
+
+	void editElemento(Especie elemento, Integer idUsuario)
+			throws RemoteException;
 }

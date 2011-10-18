@@ -24,4 +24,10 @@ public class UsuarioWSImpl extends PatoGisWSAbstractImpl<Usuario> implements
 			throws RemoteException {
 		super.addElementoGenerico(elemento, idUsuario);
 	}
+	
+	@Override
+	public void editElemento(Usuario elemento, Integer idUsuario)
+			throws RemoteException {
+		super.editElementoGenerico(elemento, idUsuario);
+	}
 }

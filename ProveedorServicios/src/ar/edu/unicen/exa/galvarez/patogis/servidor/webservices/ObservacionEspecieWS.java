@@ -14,4 +14,7 @@ public interface ObservacionEspecieWS extends Remote {
 	public void addElemento(ObservacionEspecie elemento, Integer idUsuario)
 			throws RemoteException;
 
+	void editElemento(ObservacionEspecie elemento, Integer idUsuario)
+			throws RemoteException;
+
 }

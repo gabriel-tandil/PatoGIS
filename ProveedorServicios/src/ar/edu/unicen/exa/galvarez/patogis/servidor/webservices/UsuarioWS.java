@@ -14,4 +14,7 @@ public interface UsuarioWS extends Remote {
 	public void addElemento(Usuario elemento, Integer idUsuario)
 			throws RemoteException;
 
+	void editElemento(Usuario elemento, Integer idUsuario)
+			throws RemoteException;
+
 }

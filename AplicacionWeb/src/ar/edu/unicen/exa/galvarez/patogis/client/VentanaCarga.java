@@ -442,8 +442,16 @@ public class VentanaCarga extends FlexTable {
 
 			@Override
 			public void onSuccess(Map<String, Especie> result) {
-				especies = (MapaOrdenado<String, Especie>) result;
-				ManejadorAlmacenamientoLocal.guardarLocalMapaEspecies(especies);
+				if (ManejadorAlmacenamientoLocal
+						.isEspeciesAlmacenadasLocalmente()) {
+					AplicacionWeb.setMensajeAlerta(ctes.especiesSinPersistir());
+					especies = ManejadorAlmacenamientoLocal
+							.obtenerMapaEspecies();
+				} else {
+					especies = (MapaOrdenado<String, Especie>) result;
+					ManejadorAlmacenamientoLocal
+							.guardarLocalMapaEspecies(especies);
+				}
 				llenarCombosEspecies();
 				cambiarAModoOnLine();
 				finLlamadaAsincronica();
@@ -487,9 +495,16 @@ public class VentanaCarga extends FlexTable {
 					@Override
 					public void onSuccess(
 							Map<String, TipoMatrizProductiva> result) {
+						if (ManejadorAlmacenamientoLocal
+								.isTiposMatrizProductivaAlmacenadasLocalmente()) {
+							AplicacionWeb.setMensajeAlerta(ctes.tiposMatrizProductivaSinPersistir());
+							tiposMatrizProductiva = ManejadorAlmacenamientoLocal
+									.obtenerMapaTiposMatrizProductiva();
+						} else {						
 						tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
 						ManejadorAlmacenamientoLocal
 								.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
+						}
 						llenarCombosTipoMatrizProductiva();
 						cambiarAModoOnLine();
 						finLlamadaAsincronica();
@@ -523,7 +538,7 @@ public class VentanaCarga extends FlexTable {
 						AplicacionWeb.contexto
 								.setMostroWarningUbicacionesOffline(true);
 						ubicaciones = ManejadorAlmacenamientoLocal
-								.obtenerMapaUbicacions();
+								.obtenerMapaUbicaciones();
 						ubicaciones.ordenarClaves();
 						cambiarAModoOffLine();
 						if (laguna.getSelectedIndex() <= 0)
@@ -534,10 +549,17 @@ public class VentanaCarga extends FlexTable {
 
 					@Override
 					public void onSuccess(Map<String, Ubicacion> result) {
+						if (ManejadorAlmacenamientoLocal
+								.isUbicacionesAlmacenadasLocalmente()) {
+							AplicacionWeb.setMensajeAlerta(ctes.ubicacionesSinPersistir());
+							ubicaciones = ManejadorAlmacenamientoLocal
+									.obtenerMapaUbicaciones();
+						} else {
 						ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
 						ubicaciones.ordenarClaves();
 						ManejadorAlmacenamientoLocal
 								.guardarLocalMapaUbicacions(ubicaciones);
+						}
 						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keyList(),
 									new ObtenerTextoUbicacion());

@@ -24,4 +24,10 @@ public class ObservacionFotoWSImpl extends
 			throws RemoteException {
 		super.addElementoGenerico(elemento, idUsuario);
 	}
+	
+	@Override
+	public void editElemento(ObservacionFoto elemento, Integer idUsuario)
+			throws RemoteException {
+		super.editElementoGenerico(elemento, idUsuario);
+	}
 }

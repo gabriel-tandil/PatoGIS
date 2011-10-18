@@ -139,7 +139,7 @@ public class ManejadorAlmacenamientoLocal {
 		return elemento;
 	}
 
-	public static MapaOrdenado<String, Ubicacion> obtenerMapaUbicacions() {
+	public static MapaOrdenado<String, Ubicacion> obtenerMapaUbicaciones() {
 		MapaOrdenado<String, Ubicacion> salida = new MapaOrdenado<String, Ubicacion>();
 		String cadenaMapaUbicacions = storage.get("mapaUbicacions");
 		if (cadenaMapaUbicacions != null) {
@@ -296,7 +296,7 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	private static void cargarUbicacion(Observacion obs) {
-		Map<String, Ubicacion> mapa = obtenerMapaUbicacions();
+		Map<String, Ubicacion> mapa = obtenerMapaUbicaciones();
 		Ubicacion ubicacion = null;
 		for (String clave : mapa.keySet()) {
 			ubicacion = mapa.get(clave);
@@ -664,7 +664,7 @@ public class ManejadorAlmacenamientoLocal {
 	}
 
 	public static void persistirUbicacionesLocales() {
-		final MapaOrdenado<String, Ubicacion> mu = obtenerMapaUbicacions();
+		final MapaOrdenado<String, Ubicacion> mu = obtenerMapaUbicaciones();
 		for (String clave : mu.keyList()) {
 			final Ubicacion u = mu.get(clave);
 			if (u.getId() < 0) {
@@ -785,4 +785,34 @@ public class ManejadorAlmacenamientoLocal {
 			}
 		}
 	}
+
+	public static boolean isEspeciesAlmacenadasLocalmente() {
+		final MapaOrdenado<String, Especie> mu = obtenerMapaEspecies();
+		for (String clave : mu.keyList()) {
+			final Especie u = mu.get(clave);
+			if (u.getId() < 0) 
+				return true;
+		}
+		return false;
+	}
+	
+	public static boolean isUbicacionesAlmacenadasLocalmente() {
+		final MapaOrdenado<String, Ubicacion> mu = obtenerMapaUbicaciones();
+		for (String clave : mu.keyList()) {
+			final Ubicacion u = mu.get(clave);
+			if (u.getId() < 0) 
+				return true;
+		}
+		return false;
+	}
+	
+	public static boolean isTiposMatrizProductivaAlmacenadasLocalmente() {
+		final MapaOrdenado<String, TipoMatrizProductiva> mu = obtenerMapaTiposMatrizProductiva();
+		for (String clave : mu.keyList()) {
+			final TipoMatrizProductiva u = mu.get(clave);
+			if (u.getId() < 0) 
+				return true;
+		}
+		return false;
+	}	
 }

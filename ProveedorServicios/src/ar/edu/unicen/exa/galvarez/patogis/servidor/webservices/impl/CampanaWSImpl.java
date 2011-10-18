@@ -24,4 +24,10 @@ public class CampanaWSImpl extends PatoGisWSAbstractImpl<Campana> implements
 			throws RemoteException {
 		super.addElementoGenerico(elemento, idUsuario);
 	}
+
+	@Override
+	public void editElemento(Campana elemento, Integer idUsuario)
+			throws RemoteException {
+		super.editElementoGenerico(elemento, idUsuario);
+	}
 }

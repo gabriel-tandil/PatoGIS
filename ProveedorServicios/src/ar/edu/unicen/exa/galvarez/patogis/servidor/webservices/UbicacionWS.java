@@ -14,4 +14,7 @@ public interface UbicacionWS extends Remote {
 	public void addElemento(Ubicacion elemento, Integer idUsuario)
 			throws RemoteException;
 
+	void editElemento(Ubicacion elemento, Integer idUsuario)
+			throws RemoteException;
+
 }

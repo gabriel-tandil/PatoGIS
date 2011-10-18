@@ -31,6 +31,12 @@ public class TipoMatrizProductivaWSImpl extends
 	}
 	
 	@Override
+	public void editElemento(TipoMatrizProductiva elemento, Integer idUsuario)
+			throws RemoteException {
+		super.editElementoGenerico(elemento, idUsuario);
+	}	
+	
+	@Override
 	public TipoMatrizProductiva[] getElementosConCantidadObs() throws RemoteException {
 		SqlSession sqlSession = null;
 		TipoMatrizProductiva[] resultado =null;

@@ -154,4 +154,31 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 		elemento.getObservacionClima().setIdObservacion(elemento.getId());
 		ocws.addElemento(elemento.getObservacionClima(), idUsuario);
 	}
+	
+	@Override
+	public void editElemento(Observacion elemento, Integer idUsuario)
+			throws RemoteException {
+		// TODO: mejorar esquema de salvado e ids padres en hijos y viceversa y
+		// separar dto y jbo
+		super.editElementoGenerico(elemento, idUsuario);
+		
+		ObservacionEspecieWS oews = new ObservacionEspecieWSImpl();
+		ObservacionMatrizProductivaWS ompws = new ObservacionMatrizProductivaWSImpl();
+		ObservacionClimaWS ocws = new ObservacionClimaWSImpl();
+		ObservacionFotoWS ofws = new ObservacionFotoWSImpl();
+
+		for (ObservacionEspecie observacionEspecie : elemento
+				.getObservacionesEspecie()) {
+			oews.editElemento(observacionEspecie, idUsuario);
+		}
+		for (ObservacionMatrizProductiva observacionMatrizProductiva : elemento
+				.getObservacionesMatrizProductiva()) {
+			ompws.editElemento(observacionMatrizProductiva, idUsuario);
+		}
+		for (ObservacionFoto observacionFoto : elemento.getObservacionesFoto()) {
+			ofws.editElemento(observacionFoto, idUsuario);
+		}
+		ocws.editElemento(elemento.getObservacionClima(), idUsuario);
+	}
+	
 }

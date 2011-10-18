@@ -24,4 +24,10 @@ public class UbicacionWSImpl extends PatoGisWSAbstractImpl<Ubicacion> implements
 			throws RemoteException {
 		super.addElementoGenerico(elemento, idUsuario);
 	}
+	
+	@Override
+	public void editElemento(Ubicacion elemento, Integer idUsuario)
+			throws RemoteException {
+		super.editElementoGenerico(elemento, idUsuario);
+	}
 }
