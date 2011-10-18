@@ -2,15 +2,22 @@ MAP
  NAME "VisorPatoGIS"
  SIZE 500 350
  IMAGECOLOR 255 255 255
- IMAGETYPE PNG
+ IMAGETYPE png
+ OUTPUTFORMAT
+   NAME "png"
+     DRIVER AGG/PNG
+       MIMETYPE "image/png"
+         IMAGEMODE RGB
+           EXTENSION "png"
+             FORMATOPTION "GAMMA=0.75"
+             TRANSPARENT ON
+             END
+#PROJECTION
+#  "init=epsg:4031"
+#  END
  EXTENT -71.014740 -45.019310 -45.446885 -27.988302
  SYMBOLSET "symbols/symbols.sym"
  FONTSET "data/fonts/fonts.list"
- WEB
- TEMPLATE "/var/www/Visor/visorPatoGIS.html"
- IMAGEPATH "/var/www/tmp/"
- IMAGEURL "/tmp/"
- END
 #-----------------------------------------------------------------------------------------------------------
  LAYER
  CONNECTIONTYPE postgis

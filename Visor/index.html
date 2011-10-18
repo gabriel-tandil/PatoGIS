@@ -1,49 +1,78 @@
-<!-- MapServer Template -->
+<!DOCTYPE html>
 <html>
-<head>
-<title>Visor PatoGIS</title>
-<script type="text/javascript" src="/Visor/visorPatoGIS.js"></script>
-<style type="text/css" media="screen"><!--
- body{
- margin: 0px;
- overflow-y:hidden;overflow-x:hidden; 
- }
- #pointer_div{
- BORDER: #000 1px solid ;
- vertical-align: middle;
- margin-top: -175px;
- margin-left: -250px;
- position: absolute;
- top: 50%;
- left: 50%;
- height: 350px;
- width: 500px;
- }
- }
- -->
- </style>
-</head>
-<body>
-<form method="post" action="/cgi-bin/mapserv" name="elForm">
- <input name="map" value="/var/www/Visor/visorPatoGIS.map" type="hidden">
- <input type="hidden" name="program" value="/cgi-bin/mapserv">
- <input type="hidden" name="mapext" value="-71.014740 -45.019310 -45.446885 -27.988302">
- <table border="1" cellpadding="2" cellspacing="2">
-  <tbody>
-  <tr>
-   <td style="text-align: right;">Localidades<input name="layers" value="localidades" [localidades_check] type="checkbox" onclick="document.elForm.submit()"></td>
-   <td style="text-align: right;">Partidos<input name="layers" value="partidos" [partidos_check] type="checkbox" onclick="document.elForm.submit()"></td>
-   <td style="text-align: right;">Hidrograf&iacute;a<input name="layers" value="hidrografia" [hidrografia_check] type="checkbox" onclick="document.elForm.submit()"></td>
-   <td style="text-align: right;">Rutas<input name="layers" value="rutas" [rutas_check] type="checkbox" onclick="document.elForm.submit()"></td>
-   <td style="text-align: right;">Clima<input name="layers" value="clima" [clima_check] type="checkbox" onclick="document.elForm.submit()"></td>
-   <td style="text-align: right;">Vegetaci&oacute;n<input name="layers" value="vegetacion" [vegetacion_check] type="checkbox" onclick="document.elForm.submit()"></td>
-   <td style="text-align: right;">Lagunas<input name="layers" value="lagunas" [lagunas_check] type="checkbox" onclick="document.elForm.submit()"></td>
-  </tr>
- </tbody>
- </table>
- <br>
-</form>
-<div id="pointer_div" class="cuerpo" style = "width:500px;height:350px;" border=1>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>MapServer Layer</title>
+    <link rel="stylesheet" href="theme/default/style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ'></script>
+    <script src="OpenLayers.js"></script>
+    <script type="text/javascript">
+        var lon = -70;
+        var lat = -40;
+        var zoom = 5;
+        var map, layer;
 
-</body>
+        function init(){
+            map = new OpenLayers.Map( 'map' );
+            layer = new OpenLayers.Layer.MapServer( "Partidos",
+                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'partidos'},
+                    {gutter: 50});
+            map.addLayer(layer);
+            layer = new OpenLayers.Layer.MapServer( "Localidades",
+                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'localidades'},
+                    {gutter: 50,isBaseLayer: false, visibility: false});
+            map.addLayer(layer);
+            layer = new OpenLayers.Layer.MapServer( "Hidrografía",
+                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'hidrografia'},
+                    {gutter: 50,isBaseLayer: false, visibility: false});
+            map.addLayer(layer);
+            layer = new OpenLayers.Layer.MapServer( "Rutas",
+                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'rutas'},
+                    {gutter: 50,isBaseLayer: false, visibility: false});
+            map.addLayer(layer);
+            layer = new OpenLayers.Layer.MapServer( "Lagunas",
+                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'lagunas'},
+                    {gutter: 50,isBaseLayer: false, visibility: false});
+            map.addLayer(layer);
+
+
+              var gphy = new OpenLayers.Layer.Google(
+                "Google Physical",
+                {type: G_PHYSICAL_MAP}
+            );
+            var gmap = new OpenLayers.Layer.Google(
+                "Google Streets", // the default
+                {numZoomLevels: 20}
+            );
+            var ghyb = new OpenLayers.Layer.Google(
+                "Google Hybrid",
+                {type: G_HYBRID_MAP, numZoomLevels: 20}
+            );
+            var gsat = new OpenLayers.Layer.Google(
+                "Google Satellite",
+                {type: G_SATELLITE_MAP, numZoomLevels: 22}
+            );
+
+
+            map.addLayers([gphy, gmap, ghyb, gsat]);
+    map.addControl(new OpenLayers.Control.MousePosition());
+
+            map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
+            map.addControl( new OpenLayers.Control.LayerSwitcher() );
+        }
+       
+    </script>
+  </head>
+  <body onload="init()">
+    <h1 id="title">Visor Pato GIS</h1>
+    <div id="tags">Pato GIS</div>
+    <div id="shortdesc">Visor Pato GIS</div>
+    <div id="map" class="smallmap"></div>
+    <div id="docs">
+        <p>Visualización de los datos cargados por en el sistema PatoGIS y capas tematicas adicionales.</p>
+    </div>
+  </body>
 </html>
