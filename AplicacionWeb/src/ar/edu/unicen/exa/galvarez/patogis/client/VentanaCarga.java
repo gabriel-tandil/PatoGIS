@@ -203,7 +203,7 @@ public class VentanaCarga extends FlexTable {
 								if (c.hasAltitude())
 									altura.setValue((int) c.getAltitude());
 							}
-						}, PositionOptions.getPositionOptions(true, 15000,
+						}, PositionOptions.getPositionOptions(true, 4*60*1000,
 								30000));
 			}
 		}
