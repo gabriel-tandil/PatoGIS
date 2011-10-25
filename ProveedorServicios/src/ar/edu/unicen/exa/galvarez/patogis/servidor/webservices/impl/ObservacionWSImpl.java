@@ -11,6 +11,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionEspecieMapp
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionFotoMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.ObservacionMatrizProductivaMapper;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.TipoMatrizProductivaMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.logica.UbicacionMapper;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
@@ -23,6 +24,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFoto;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFotoExample;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductivaExample;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.ObservacionClimaWS;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.ObservacionEspecieWS;
@@ -58,7 +60,6 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 					Especie especie = em.selectByPrimaryKey(observacionEspecie
 							.getIdEspecie());
 					observacionEspecie.setEspecie(especie);
-					
 				}
 				observacion.setObservacionesEspecie(loe.toArray(new ObservacionEspecie[loe.size()]));
 				ObservacionFotoExample ofe = new ObservacionFotoExample();
@@ -77,6 +78,15 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 						.getMapper(ObservacionMatrizProductivaMapper.class);
 				List<ObservacionMatrizProductiva> lomp = ompm
 						.selectByExample(ompe);
+				
+				for (ObservacionMatrizProductiva observacionMatrizProductiva : lomp) {
+					TipoMatrizProductivaMapper tmm = sqlSession
+							.getMapper(TipoMatrizProductivaMapper.class);
+					TipoMatrizProductiva tmp = tmm.selectByPrimaryKey(observacionMatrizProductiva
+							.getIdTipoMatrizProductiva());
+					observacionMatrizProductiva.setTipoMatrizProductiva(tmp);
+				}
+				
 				observacion.setObservacionesMatrizProductiva(lomp.toArray(new ObservacionMatrizProductiva[lomp.size()]));
 				
 

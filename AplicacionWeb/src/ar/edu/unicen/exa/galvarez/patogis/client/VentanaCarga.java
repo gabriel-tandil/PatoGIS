@@ -1016,7 +1016,7 @@ public class VentanaCarga extends FlexTable {
 
 	private ObservacionMatrizProductiva getObservacionMatrizProductiva(
 			HorizontalPanel hp) throws ValidacionException {
-		if (((IntegerBox) hp.getWidget(1)).getValue() != null) {
+		if (((NumberBox) hp.getWidget(1)).getValue() != null) {
 			if (((ListBox) hp.getWidget(0)).getSelectedIndex() <= 0)
 				throw new ValidacionException(
 						ctes.validacionTipoMatrizProductiva());
