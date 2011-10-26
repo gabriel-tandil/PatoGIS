@@ -114,7 +114,36 @@ public class AplicacionWeb implements EntryPoint {
 				rootPanel.add(new VentanaListado());
 			}
 		};
-
+		Command generarBackupCommand = new Command() {
+			public void execute() {
+				final PopupPanel popup = new PopupPanel();
+				//popup.setWidth("px");
+				//popup.setHeight("170px");
+				popup.setAnimationEnabled(true);
+				popup.setAutoHideEnabled(true);
+				popup.setModal(true);
+				
+				popup.setWidget(new HTML(ManejadorAlmacenamientoLocal.getInfoBackup()));
+				popup
+						.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+							public void setPosition(int offsetWidth,
+									int offsetHeight) {
+								int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
+								int top = ((Window.getClientHeight() - offsetHeight) / 2) >> 0;
+								popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+									public void setPosition(int offsetWidth,
+											int offsetHeight) {
+										int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
+										int top = (Window.getScrollTop() + (Window
+												.getClientHeight() - offsetHeight) / 2) >> 0;
+												popup.setPopupPosition(left, top);
+									}
+								});
+							}
+						});
+				
+			}
+		};
 		Command eliminarObservacionesLocalesCommand = new Command() {
 			public void execute() {
 				final DialogBoxExtendido dialogo = new DialogBoxExtendido();
@@ -205,6 +234,8 @@ public class AplicacionWeb implements EntryPoint {
 			}
 		});
 		configuracionMenu.addItem(mi);
+		configuracionMenu.addItem(constantes.generarBackup(),
+				generarBackupCommand);
 		configuracionMenu.addItem(constantes.eliminarObservacionesLocales(),
 				eliminarObservacionesLocalesCommand);
 

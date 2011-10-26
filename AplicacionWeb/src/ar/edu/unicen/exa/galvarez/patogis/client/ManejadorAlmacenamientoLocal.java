@@ -1,6 +1,7 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.storage.client.StorageMap;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -790,29 +792,60 @@ public class ManejadorAlmacenamientoLocal {
 		final MapaOrdenado<String, Especie> mu = obtenerMapaEspecies();
 		for (String clave : mu.keyList()) {
 			final Especie u = mu.get(clave);
-			if (u.getId() < 0) 
+			if (u.getId() < 0)
 				return true;
 		}
 		return false;
 	}
-	
+
 	public static boolean isUbicacionesAlmacenadasLocalmente() {
 		final MapaOrdenado<String, Ubicacion> mu = obtenerMapaUbicaciones();
 		for (String clave : mu.keyList()) {
 			final Ubicacion u = mu.get(clave);
-			if (u.getId() < 0) 
+			if (u.getId() < 0)
 				return true;
 		}
 		return false;
 	}
-	
+
 	public static boolean isTiposMatrizProductivaAlmacenadasLocalmente() {
 		final MapaOrdenado<String, TipoMatrizProductiva> mu = obtenerMapaTiposMatrizProductiva();
 		for (String clave : mu.keyList()) {
 			final TipoMatrizProductiva u = mu.get(clave);
-			if (u.getId() < 0) 
+			if (u.getId() < 0)
 				return true;
 		}
 		return false;
-	}	
+	}
+
+	public static String getInfoBackup() {
+		String salida = "Backup " + new Date() + ": /*/*/* Especies:";
+
+		final MapaOrdenado<String, Especie> mu = obtenerMapaEspecies();
+		for (String clave : mu.keyList()) {
+			final Especie u = mu.get(clave);
+			if (u.getId() < 0)
+				salida+=especieAJSON(clave, u);
+		}
+		salida += "/*/*/* TiposMatrizProductiva:";
+		final MapaOrdenado<String, Ubicacion> mu1 = obtenerMapaUbicaciones();
+		for (String clave : mu1.keyList()) {
+			final Ubicacion u = mu1.get(clave);
+			if (u.getId() < 0)
+				salida+=ubicacionAJSON(clave, u);
+		}
+		salida += "/*/*/* Ubicaciones:";
+		final MapaOrdenado<String, TipoMatrizProductiva> mu2 = obtenerMapaTiposMatrizProductiva();
+		for (String clave : mu2.keyList()) {
+			final TipoMatrizProductiva u = mu2.get(clave);
+			if (u.getId() < 0)
+				salida+=tipoMatrizProductivaAJSON(clave, u);
+		}
+		salida += "/*/*/* Observaciones:";
+
+		for (int i = 0; i < getCantidadObservacionesPersistidas(); i++) {
+			salida += storage.get("observacion" + i) + "/*/*/*";
+		}
+		return salida;
+	}
 }
