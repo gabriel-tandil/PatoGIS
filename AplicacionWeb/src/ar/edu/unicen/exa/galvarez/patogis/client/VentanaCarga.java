@@ -962,6 +962,9 @@ public class VentanaCarga extends FlexTable {
 
 	private ObservacionClima getObservacionClima() throws ValidacionException {
 		ObservacionClima oc = new ObservacionClima();
+		if (edicion){
+			oc.setId(observacionEditada.getObservacionClima().getId());	
+		}
 		oc.setLluvia(checkLluvia.getValue());
 		oc.setSol(checkSol.getValue());
 		oc.setNubes(comboNuves.getValue(comboNuves.getSelectedIndex()));
@@ -981,7 +984,6 @@ public class VentanaCarga extends FlexTable {
 			if (((ListBox) ((HorizontalPanel) vp.getWidget(0)).getWidget(0))
 					.getSelectedIndex() <= 0)// debe seleccionar especie
 				throw new ValidacionException(ctes.validacionEspecie());
-
 			oe.setCantidad(((CantidadBox) ((HorizontalPanel) vp.getWidget(0))
 					.getWidget(1)).parseValue());
 			oe.setIdEspecie(especies.get(
@@ -1039,8 +1041,11 @@ public class VentanaCarga extends FlexTable {
 	}
 
 	private Observacion getObservacion() throws ValidacionException {
-
+		
 		Observacion observacion = new Observacion();
+		if (edicion){
+			observacion.setId(observacionEditada.getId());	
+		}
 		observacion.setObservaciones(observaciones.getValue());
 		observacion.setEstado(EstadoEnum.ARevisar.toString());// TODO: asociar
 																// al usuario
@@ -1062,6 +1067,8 @@ public class VentanaCarga extends FlexTable {
 			ObservacionEspecie oe = getObservacionEspecie(widgetsObsEspecie
 					.get(i));
 			if (oe != null) {
+				if (edicion)
+					oe.setId(observacionEditada.getObservacionesEspecie()[i].getId());	
 				observacionesEspecie.add(oe);
 			}
 		}
@@ -1074,6 +1081,8 @@ public class VentanaCarga extends FlexTable {
 					.get(i));
 
 			if (omp != null) {
+				if (edicion)
+					omp.setId(observacionEditada.getObservacionesMatrizProductiva()[i].getId());	
 				obsMatrizProductiva.add(omp);
 			}
 		}

@@ -14,7 +14,7 @@
 <!--       <table schema="public" tableName="campana" /> -->
       <table schema="public" tableName="especie" />
 <!--       <table schema="public" tableName="observacion" /> -->
-<!--       <table schema="public" tableName="observacion_clima" /> -->
+       <table schema="public" tableName="observacion_clima" /> 
 <!--       <table schema="public" tableName="observacion_especie" /> -->
 <!--       <table schema="public" tableName="observacion_foto" /> -->
 <!--       <table schema="public" tableName="observacion_matriz_productiva" /> -->
