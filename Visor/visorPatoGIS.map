@@ -5,19 +5,21 @@ MAP
  IMAGETYPE png
  OUTPUTFORMAT
    NAME "png"
-     DRIVER AGG/PNG
-       MIMETYPE "image/png"
-         IMAGEMODE RGB
-           EXTENSION "png"
-             FORMATOPTION "GAMMA=0.75"
-             TRANSPARENT ON
-             END
+   DRIVER AGG/PNG
+   MIMETYPE "image/png"
+   IMAGEMODE RGBA
+   EXTENSION "png"
+   FORMATOPTION "GAMMA=0.75"
+   TRANSPARENT ON
+ END
 #PROJECTION
-#  "init=epsg:4031"
+#  "init=epsg:4326"
+#  "init=epsg:3857"
 #  END
  EXTENT -71.014740 -45.019310 -45.446885 -27.988302
  SYMBOLSET "symbols/symbols.sym"
  FONTSET "data/fonts/fonts.list"
+
 #-----------------------------------------------------------------------------------------------------------
  LAYER
  CONNECTIONTYPE postgis
@@ -26,13 +28,12 @@ MAP
  DATA "the_geom from departamento"
  STATUS ON
  TYPE polygon
- CLASS
-  STYLE
-   SYMBOL "lleno"
-   SIZE 8
-   COLOR 220 220 220
-   OUTLINECOLOR 0 0 0
-  END
+CLASS
+style
+ SYMBOL 0
+ COLOR 0 255 0
+ OUTLINECOLOR 0 0 0
+end
  END
  END
 #-----------------------------------------------------------------------------------------------------------
@@ -227,7 +228,33 @@ CLASS
  END
  END
 #-----------------------------------------------------------------------------------------------------------
-
+ LAYER
+  CONNECTIONTYPE postgis
+   NAME "obsPartido"
+    LABELITEM "cantidad"
+     CONNECTION "user=postgres dbname=patoGis host=localhost password=atlas"
+      DATA "the_geom from (select g.gid, g.the_geom, (100||' '|| obs.cantidad*10 ||' '|| 100) color, obs.cantidad from departamento g,(select count(*) cantidad,
+                                                                                              departamento.gid
+                                                                                         from observacion,
+                                                                                              departamento,  
+                                                                                              coordenadasLaguna cl, 
+                                                                                              ubicacion  
+                                                                                        where ubicacion.id=cl.id
+                                                                                          AND observacion.id_ubicacion=ubicacion.id 
+                                                                                          and ST_Contains(departamento.the_geom,cl.coordenadas)
+                                                                                        group by departamento.gid  )obs where obs.gid=g.gid) as subquery using unique gid"
+       STATUS on
+        TYPE polygon
+     CLASS
+style
+ SYMBOL 0
+ COLOR [color]
+ OUTLINECOLOR 0 0 0
+end
+ END
+end
+ END #-----------------------------------------------------------------------------------------------------------
+                                                         
 
 END
 

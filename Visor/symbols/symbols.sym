@@ -61,9 +61,9 @@ SYMBOL
   POINTS
     1 1
   END
-  STYLE
-    20 10 20 10
-  END
+#  STYLE
+#    20 10 20 10
+#  END
 END
 #7
 SYMBOL
@@ -72,9 +72,9 @@ SYMBOL
   POINTS
     1 1
   END
-  STYLE
-    10 5 10 5
-  END
+#  STYLE
+#    10 5 10 5
+#  END
 END
 #8
 SYMBOL
@@ -83,9 +83,9 @@ SYMBOL
   POINTS
     1 1
   END
-  STYLE
-    6 3 6 3
-  END
+#  STYLE
+#    6 3 6 3
+#  END
 END
 #9
 SYMBOL
@@ -94,9 +94,9 @@ SYMBOL
   POINTS
     1 1
   END
-  STYLE
-    10 10 10 10
-  END
+ # STYLE
+ #   10 10 10 10
+ # END
 END
 
 # gepunktete Linien #
@@ -107,9 +107,9 @@ SYMBOL
   POINTS
     1 1
   END
-  STYLE
-    1 10 1 10
-  END
+ # STYLE
+ #   1 10 1 10
+ # END
   FILLED TRUE
 END
 #11
@@ -119,9 +119,9 @@ SYMBOL
   POINTS
     1 1
   END
-  STYLE
-    1 20 1 20
-  END
+ # STYLE
+ #   1 20 1 20
+ # END
   FILLED TRUE
 END
 #12
@@ -131,9 +131,9 @@ SYMBOL
   POINTS
     1 1
   END
-  STYLE
-    1 41 1 41
-  END
+ # STYLE
+ #   1 41 1 41
+ # END
   FILLED TRUE
 END
 
@@ -145,9 +145,9 @@ SYMBOL # abwechselnd ein Linienstück und ein Punkt
   POINTS
     1 1
   END
-  STYLE
-    10 5 1 5
-  END
+ # STYLE
+ #   10 5 1 5
+ # END
   FILLED TRUE
 END
 #14
@@ -161,9 +161,9 @@ SYMBOL # grenzsignatur mit gleichem Muster, aber einem Rechteck als Grundelement
     0 0.8
     0 0
   END
-  STYLE
-    10 6 1 6
-  END
+ # STYLE
+ #   10 6 1 6
+ # END
   FILLED TRUE
 END
 #15
@@ -178,9 +178,9 @@ SYMBOL # wie "rechteck-quer" aber mit einem STYLE für ein Linienmuster
     0 0
   END
   FILLED TRUE
-  STYLE
-    12 22 12 22
-  END
+ # STYLE
+ #   12 22 12 22
+ # END
 END
 
 #16
@@ -195,9 +195,9 @@ SYMBOL # wie "rechteck-quer" aber mit einem typischen Linienmuster für Eisenbahn
     0 0
   END
   FILLED TRUE
-  STYLE
-    8 12 8 12
-  END
+#  STYLE
+#    8 12 8 12
+#  END
 END
 
 
@@ -221,9 +221,9 @@ SYMBOL # gleiches Zeichen wie "punkt" nur ohne Füllung und mit einem STYLE
   POINTS
     1 1
   END
-  STYLE
-    1 10 1 10
-  END
+#  STYLE
+#    1 10 1 10
+#  END
 END
 #19
 SYMBOL # gleiches Zeichen wie "punkt" nur ohne Füllung und mit einem STYLE
@@ -232,9 +232,9 @@ SYMBOL # gleiches Zeichen wie "punkt" nur ohne Füllung und mit einem STYLE
   POINTS
     1 1
   END
-  STYLE
-    1 10 1 10
-  END
+#  STYLE
+#    1 10 1 10
+#  END
   FILLED TRUE
 END
 #20
@@ -245,9 +245,9 @@ SYMBOL
     2 1.25
   END
   FILLED TRUE
-  STYLE
-    1 20 1 20
-  END
+#  STYLE
+#    1 20 1 20
+#  END
 END
 #21
 SYMBOL
@@ -271,9 +271,9 @@ SYMBOL # Dreieck mit einem STYLE für Linienmuster
     0 1
   END
   FILLED TRUE
-  STYLE
-    1 25 1 25
-  END
+#  STYLE
+#    1 25 1 25
+#  END
 END
 #23
 SYMBOL # wie dreieck aber ohne Füllung
@@ -285,9 +285,9 @@ SYMBOL # wie dreieck aber ohne Füllung
     2 2
     0 2
   END
-  STYLE
-    1 30 1 30
-  END
+#  STYLE
+#    1 30 1 30
+#  END
 END
 #24
 SYMBOL
@@ -299,9 +299,9 @@ SYMBOL
     1 0
     0 0
   END
-  STYLE
-    1 20 1 20
-  END
+#  STYLE
+#    1 20 1 20
+#  END
   FILLED TRUE
 END
 #25
@@ -333,9 +333,9 @@ SYMBOL
     0 1
   END
   FILLED FALSE
-  STYLE
-    1 20 1 20
-  END
+#  STYLE
+#    1 20 1 20
+#  END
   ANTIALIAS TRUE
 END
 
@@ -365,9 +365,9 @@ SYMBOL
     0 0
   END
   FILLED TRUE
-  STYLE
-    1 20 1 20
-  END
+#  STYLE
+#    1 20 1 20
+#  END
 END
 #29
 SYMBOL # um 45-Grad gedrehtes Quadrat
@@ -421,9 +421,9 @@ SYMBOL
     0 0.5
     1 0.5
   END
-  STYLE
-    1 15 1 15
-  END
+#  STYLE
+#    1 15 1 15
+#  END
 END
 #33
 SYMBOL # Andreaskreuz
@@ -436,9 +436,9 @@ SYMBOL # Andreaskreuz
     0 1
     1 0
   END
-  STYLE
-    1 15 1 15
-  END
+#  STYLE
+#    1 15 1 15
+#  END
 END
 #34
 SYMBOL # ein christliches Kreuz
@@ -539,9 +539,9 @@ SYMBOL
     0 0.375
   END
   FILLED TRUE
-  STYLE
-    1 20 1 20
-  END
+#  STYLE
+#    1 20 1 20
+#  END
 END
 #40
 SYMBOL
@@ -557,9 +557,9 @@ SYMBOL
 	0 0
   END
   FILLED FALSE
-  STYLE
-    1 20 1 20
-  END
+ # STYLE
+ #   1 20 1 20
+ # END
 END
 
 ### Zeichen aus TrueTypeFonts ###
@@ -570,7 +570,7 @@ SYMBOL # Linienelement für ein Flächenmuster
   FONT "symbols"
   CHARACTER "&#61473;"
   ANTIALIAS TRUE
-  GAP 10
+  # GAP 10
 END
 #42
 SYMBOL # 45-Grad Linienelement für eine nicht durchgehende Schraffur
@@ -579,7 +579,7 @@ SYMBOL # 45-Grad Linienelement für eine nicht durchgehende Schraffur
   FONT "symbols"
   CHARACTER "&#61520;"
   ANTIALIAS TRUE
-  GAP 10
+  # GAP 10
 END
 #43
 SYMBOL # Buchstabe T aus Arial
@@ -588,7 +588,7 @@ SYMBOL # Buchstabe T aus Arial
   FONT "arial"
   CHARACTER "&#84;"
   ANTIALIAS TRUE
-  GAP 10
+  # GAP 10
 END
 #44
 SYMBOL # Buchstabe U aus Arial-Fett
@@ -597,7 +597,7 @@ SYMBOL # Buchstabe U aus Arial-Fett
   FONT "arialblk"
   CHARACTER "&#85;"
   ANTIALIAS TRUE
-  GAP 10
+  # GAP 10
 END
 #45
 SYMBOL # Buchstabe S aus Arial-Fett
@@ -606,7 +606,7 @@ SYMBOL # Buchstabe S aus Arial-Fett
   FONT "arialbd"
   CHARACTER "&#83;"
   ANTIALIAS TRUE
-  GAP 10
+  # GAP 10
 END
 #46
 SYMBOL # Buchstabe H aus Arial-Fett
@@ -615,7 +615,7 @@ SYMBOL # Buchstabe H aus Arial-Fett
   FONT "arialbd"
   CHARACTER "&#72;"
   ANTIALIAS TRUE
-  GAP 10
+  # GAP 10
 END
 #47
 SYMBOL # ein Zeichen für Sonne aus Arial-Fett
@@ -624,7 +624,7 @@ SYMBOL # ein Zeichen für Sonne aus Arial-Fett
   FONT "arialbd"
   CHARACTER "&#9788;"
   ANTIALIAS TRUE
-  GAP 10
+  # GAP 10
 END
 
 ### Rasterbilder ###
@@ -672,29 +672,7 @@ SYMBOL
 END
 
 
-### Linienmuster mit dem SymbolTyp CARTOLINE###
-#54
-SYMBOL   
-  NAME "cartoline_butt"
-  TYPE cartoline
-  LINECAP butt  #[butt|round|square|triangle]
-  LINEJOIN miter #[round|miter|bevel]
-  LINEJOINMAXSIZE 3 #
-END
-SYMBOL   
-  NAME "cartoline_round"
-  TYPE cartoline
-  LINECAP round  #[butt|round|square|triangle]
-  LINEJOIN miter #[round|miter|bevel]
-  LINEJOINMAXSIZE 3 #
-END
-SYMBOL   
-  NAME "cartoline_square"
-  TYPE cartoline
-  LINECAP square  #[butt|round|square|triangle]
-  LINEJOIN miter #[round|miter|bevel]
-  LINEJOINMAXSIZE 3 #
-END
+
 #SYMBOL   
 #  NAME "cartoline_triangle"
 #  TYPE cartoline
@@ -762,16 +740,7 @@ END
 #  END
 #END
 #60
-SYMBOL
-  NAME "linie-gepunkt2_C"
-  TYPE cartoline
-  LINECAP butt
-  LINEJOIN miter
-  LINEJOINMAXSIZE 3
-  STYLE
-    1 20 1 20
-  END
-END
+
 #61
 #SYMBOL
 #  NAME "linie-gepunkt3_C"
@@ -784,51 +753,6 @@ END
 #  END
 #END
 
-# Muster mit Punkten und Linien #
-#62
-SYMBOL # abwechselnd ein Linienstück und ein Punkt
-  NAME "grenze1_C"
-  TYPE cartoline
-  LINECAP round
-  LINEJOIN miter
-  LINEJOINMAXSIZE 3
-  STYLE
-    10 5 1 5
-  END
-END
-#63
-SYMBOL # abwechselnd ein Linienstück und ein Punkt
-  NAME "grenze2_C"
-  TYPE cartoline
-  LINECAP butt
-  LINEJOIN miter
-  LINEJOINMAXSIZE 3
-  STYLE
-    15 10 5 10
-  END
-END
-#64
-SYMBOL # abwechselnd ein Linienstück und ein Punkt
-  NAME "grenze3_C"
-  TYPE cartoline
-  LINECAP round
-  LINEJOIN miter
-  LINEJOINMAXSIZE 3
-  STYLE
-    1 10 1 10
-  END
-END
-#64
-SYMBOL # 
-  NAME "grenze4_C"
-  TYPE cartoline
-  LINECAP round
-  LINEJOIN bevel
-  LINEJOINMAXSIZE 3
-  STYLE
-    20 30 20 30
-  END
-END
 SYMBOL
   NAME "lleno"
   TYPE vector

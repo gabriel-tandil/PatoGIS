@@ -1,3 +1,8 @@
+<!-- <!DOCTYPE html> -->
+<html>
+<head>
+<title>Visor PatoGIS</title>
+<script type="text/javascript" src="/Visor/visorPatoGIS.js"></script>
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,70 +12,72 @@
     <title>MapServer Layer</title>
     <link rel="stylesheet" href="theme/default/style.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ'></script>
+    <script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
+
+<!--    <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ'></script> -->
     <script src="OpenLayers.js"></script>
     <script type="text/javascript">
         var lon = -70;
         var lat = -40;
         var zoom = 5;
-        var map, layer;
-
+        var map, layer, layer1, layer2;
+   
         function init(){
+
+
             map = new OpenLayers.Map( 'map' );
+            var aerial = new OpenLayers.Layer.VirtualEarth("Satelital", {
+                            type: VEMapStyle.Aerial
+                                        });
+
             layer = new OpenLayers.Layer.MapServer( "Partidos",
-                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'partidos'},
+                    "http://grupo11ing.dnsalias.org:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'partidos'},
                     {gutter: 50});
             map.addLayer(layer);
             layer = new OpenLayers.Layer.MapServer( "Localidades",
-                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'localidades'},
+                    "http://grupo11ing.dnsalias.org:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'localidades'},
                     {gutter: 50,isBaseLayer: false, visibility: false});
             map.addLayer(layer);
             layer = new OpenLayers.Layer.MapServer( "Hidrografía",
-                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'hidrografia'},
+                    "http://grupo11ing.dnsalias.org:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'hidrografia'},
                     {gutter: 50,isBaseLayer: false, visibility: false});
             map.addLayer(layer);
             layer = new OpenLayers.Layer.MapServer( "Rutas",
-                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'rutas'},
-                    {gutter: 50,isBaseLayer: false, visibility: false});
-            map.addLayer(layer);
-            layer = new OpenLayers.Layer.MapServer( "Lagunas",
-                    "http://localhost:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'lagunas'},
+                    "http://grupo11ing.dnsalias.org:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'rutas'},
                     {gutter: 50,isBaseLayer: false, visibility: false});
             map.addLayer(layer);
 
+            layer1 = new OpenLayers.Layer.MapServer( "Observaciones por Partido",
+                    "http://grupo11ing.dnsalias.org:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'obsPartido'},
+                    {gutter: 50,isBaseLayer: false, visibility: false});
+            map.addLayer(layer1);
 
-              var gphy = new OpenLayers.Layer.Google(
-                "Google Physical",
-                {type: G_PHYSICAL_MAP}
-            );
-            var gmap = new OpenLayers.Layer.Google(
-                "Google Streets", // the default
-                {numZoomLevels: 20}
-            );
-            var ghyb = new OpenLayers.Layer.Google(
-                "Google Hybrid",
-                {type: G_HYBRID_MAP, numZoomLevels: 20}
-            );
-            var gsat = new OpenLayers.Layer.Google(
-                "Google Satellite",
-                {type: G_SATELLITE_MAP, numZoomLevels: 22}
-            );
+            layer2 = new OpenLayers.Layer.MapServer( "Ubicaciones",
+                    "http://grupo11ing.dnsalias.org:8081/cgi-bin/mapserv?map=%2Fvar%2Fwww%2FVisor%2FvisorPatoGIS.map", {layers: 'lagunas'},
+                    {gutter: 50,isBaseLayer: false, visibility: false});
+            map.addLayer(layer2);
 
-
-            map.addLayers([gphy, gmap, ghyb, gsat]);
-    map.addControl(new OpenLayers.Control.MousePosition());
-
+            map.addLayers([ aerial]);
+	    map.addControl(new OpenLayers.Control.MousePosition());
             map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
             map.addControl( new OpenLayers.Control.LayerSwitcher() );
+	    var panel = new OpenLayers.Control.NavToolbar();
+	    map.addControl(panel);
+            setTimeout("update()", 6000);
+
         }
-       
+                 function update() {
+                                       layer1.redraw(true);
+                                       layer2.redraw(true);
+                                       setTimeout("update()", 6000);
+                 }
     </script>
   </head>
   <body onload="init()">
     <h1 id="title">Visor Pato GIS</h1>
     <div id="tags">Pato GIS</div>
     <div id="shortdesc">Visor Pato GIS</div>
-    <div id="map" class="smallmap"></div>
+    <div id="map" class="bigmap"></div>
     <div id="docs">
         <p>Visualización de los datos cargados por en el sistema PatoGIS y capas tematicas adicionales.</p>
     </div>
