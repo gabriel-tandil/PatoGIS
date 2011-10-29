@@ -96,7 +96,20 @@ public class VentanaCarga extends FlexTable {
 
 				@Override
 				public void onSuccess(Void result) {
-					// nada
+					especiesService
+							.getElementos(new AsyncCallback<Map<String, Especie>>() {
+								public void onFailure(Throwable caught) {
+									// nada, no deberia pasar
+								}
+
+								@Override
+								public void onSuccess(
+										Map<String, Especie> result) {
+									especies = (MapaOrdenado<String, Especie>) result;
+									ManejadorAlmacenamientoLocal
+											.guardarLocalMapaEspecies(especies);
+								}
+							});
 				}
 			});
 			establecerElementoCombo(combo, text.getValue());
@@ -127,7 +140,20 @@ public class VentanaCarga extends FlexTable {
 
 						@Override
 						public void onSuccess(Void result) {
-							// nada
+							tipoMatrizProductivaService
+							.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
+								public void onFailure(Throwable caught) {
+									// nada, no deberia pasar
+								}
+
+								@Override
+								public void onSuccess(
+										Map<String, TipoMatrizProductiva> result) {
+									tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
+									ManejadorAlmacenamientoLocal
+											.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
+								}
+							});
 						}
 					});
 			establecerElementoCombo(combo, text.getValue());
@@ -203,8 +229,8 @@ public class VentanaCarga extends FlexTable {
 								if (c.hasAltitude())
 									altura.setValue((int) c.getAltitude());
 							}
-						}, PositionOptions.getPositionOptions(true, 4*60*1000,
-								30000));
+						}, PositionOptions.getPositionOptions(true,
+								4 * 60 * 1000, 30000));
 			}
 		}
 
@@ -227,7 +253,21 @@ public class VentanaCarga extends FlexTable {
 
 				@Override
 				public void onSuccess(Void result) {
-					// nada
+					ubicacionService
+					.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
+						public void onFailure(Throwable caught) {
+							// nada, no deberia pasar
+						}
+
+						@Override
+						public void onSuccess(
+								Map<String, Ubicacion> result) {
+							ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
+							ManejadorAlmacenamientoLocal
+									.guardarLocalMapaUbicacions(ubicaciones);
+						}
+					});
+
 				}
 			});
 			establecerElementoCombo(combo, text.getValue());
@@ -497,13 +537,14 @@ public class VentanaCarga extends FlexTable {
 							Map<String, TipoMatrizProductiva> result) {
 						if (ManejadorAlmacenamientoLocal
 								.isTiposMatrizProductivaAlmacenadasLocalmente()) {
-							AplicacionWeb.setMensajeAlerta(ctes.tiposMatrizProductivaSinPersistir());
+							AplicacionWeb.setMensajeAlerta(ctes
+									.tiposMatrizProductivaSinPersistir());
 							tiposMatrizProductiva = ManejadorAlmacenamientoLocal
 									.obtenerMapaTiposMatrizProductiva();
-						} else {						
-						tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
-						ManejadorAlmacenamientoLocal
-								.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
+						} else {
+							tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
+							ManejadorAlmacenamientoLocal
+									.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
 						}
 						llenarCombosTipoMatrizProductiva();
 						cambiarAModoOnLine();
@@ -551,14 +592,15 @@ public class VentanaCarga extends FlexTable {
 					public void onSuccess(Map<String, Ubicacion> result) {
 						if (ManejadorAlmacenamientoLocal
 								.isUbicacionesAlmacenadasLocalmente()) {
-							AplicacionWeb.setMensajeAlerta(ctes.ubicacionesSinPersistir());
+							AplicacionWeb.setMensajeAlerta(ctes
+									.ubicacionesSinPersistir());
 							ubicaciones = ManejadorAlmacenamientoLocal
 									.obtenerMapaUbicaciones();
 						} else {
-						ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
-						ubicaciones.ordenarClaves();
-						ManejadorAlmacenamientoLocal
-								.guardarLocalMapaUbicacions(ubicaciones);
+							ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
+							ubicaciones.ordenarClaves();
+							ManejadorAlmacenamientoLocal
+									.guardarLocalMapaUbicacions(ubicaciones);
 						}
 						if (laguna.getSelectedIndex() <= 0)
 							agregarItemsCombo(laguna, ubicaciones.keyList(),
@@ -679,7 +721,7 @@ public class VentanaCarga extends FlexTable {
 		Label lblNewLabel6 = new Label(ctes.grados());
 		temperatura = new NumberBox();
 		temperatura.setWidth("30px");
-		// temperatura.setDouble(20.0);
+		temperatura.setDouble(0.0);
 		grid2.setWidget(2, 0, lblNewLabel5);
 		grid2.setWidget(2, 2, temperatura);
 		grid2.setWidget(2, 3, lblNewLabel6);
@@ -962,14 +1004,18 @@ public class VentanaCarga extends FlexTable {
 
 	private ObservacionClima getObservacionClima() throws ValidacionException {
 		ObservacionClima oc = new ObservacionClima();
-		if (edicion){
-			oc.setId(observacionEditada.getObservacionClima().getId());	
+		if (edicion) {
+			oc.setId(observacionEditada.getObservacionClima().getId());
 		}
 		oc.setLluvia(checkLluvia.getValue());
 		oc.setSol(checkSol.getValue());
 		oc.setNubes(comboNuves.getValue(comboNuves.getSelectedIndex()));
 		oc.setViento(comboViento.getValue(comboViento.getSelectedIndex()));
+		try{
 		oc.setTemperatura(temperatura.getDouble());
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		return oc;
 	}
 
@@ -1041,10 +1087,10 @@ public class VentanaCarga extends FlexTable {
 	}
 
 	private Observacion getObservacion() throws ValidacionException {
-		
+
 		Observacion observacion = new Observacion();
-		if (edicion){
-			observacion.setId(observacionEditada.getId());	
+		if (edicion) {
+			observacion.setId(observacionEditada.getId());
 		}
 		observacion.setObservaciones(observaciones.getValue());
 		observacion.setEstado(EstadoEnum.ARevisar.toString());// TODO: asociar
@@ -1068,7 +1114,8 @@ public class VentanaCarga extends FlexTable {
 					.get(i));
 			if (oe != null) {
 				if (edicion)
-					oe.setId(observacionEditada.getObservacionesEspecie()[i].getId());	
+					oe.setId(observacionEditada.getObservacionesEspecie()[i]
+							.getId());
 				observacionesEspecie.add(oe);
 			}
 		}
@@ -1082,7 +1129,8 @@ public class VentanaCarga extends FlexTable {
 
 			if (omp != null) {
 				if (edicion)
-					omp.setId(observacionEditada.getObservacionesMatrizProductiva()[i].getId());	
+					omp.setId(observacionEditada
+							.getObservacionesMatrizProductiva()[i].getId());
 				obsMatrizProductiva.add(omp);
 			}
 		}

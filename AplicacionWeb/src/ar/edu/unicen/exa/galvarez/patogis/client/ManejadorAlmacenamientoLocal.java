@@ -196,9 +196,9 @@ public class ManejadorAlmacenamientoLocal {
 		valor.put("id", new JSONNumber(especie.getId()));
 		valor.put("nombre", new JSONString(especie.getNombre()));
 		valor.put("nombreCientifico",
-				new JSONString(especie.getNombreCientifico()));
-		valor.put("familia", new JSONString(especie.getFamilia()));
-		valor.put("grupo", new JSONString(especie.getGrupo()));
+				new JSONString(especie.getNombreCientifico()==null?"":especie.getNombreCientifico()));
+		valor.put("familia", new JSONString(especie.getFamilia()==null?"":especie.getFamilia()));
+		valor.put("grupo", new JSONString(especie.getGrupo()==null?"":especie.getGrupo()));
 		elemento.put("valor", valor);
 		return elemento;
 	}

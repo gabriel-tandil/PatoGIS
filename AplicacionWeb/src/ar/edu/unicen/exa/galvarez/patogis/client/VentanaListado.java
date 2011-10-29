@@ -60,38 +60,44 @@ public class VentanaListado extends FlexTable {
 	}
 
 	private void agregarFila(final Observacion observacion) {
-		int fila = getRowCount();
-		setText(fila, 0, DateTimeFormat.getFormat(constantes.formatoFecha())
-				.format(observacion.getInicio()));
-		setText(fila, 1, DateTimeFormat.getFormat(constantes.formatoHora())
-				.format(observacion.getInicio()));
-		setText(fila, 2, DateTimeFormat.getFormat(constantes.formatoHora())
-				.format(observacion.getFin()));
-		setText(fila, 3, observacion.getUbicacion().getNombre());
-		Button detalles = new Button(constantes.detalles());
-		detalles.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				mostrarDetalles(observacion);
-			}
+		try {
+			int fila = getRowCount();
+			setText(fila,
+					0,
+					DateTimeFormat.getFormat(constantes.formatoFecha()).format(
+							observacion.getInicio()));
+			setText(fila, 1, DateTimeFormat.getFormat(constantes.formatoHora())
+					.format(observacion.getInicio()));
+			setText(fila, 2, DateTimeFormat.getFormat(constantes.formatoHora())
+					.format(observacion.getFin()));
+			setText(fila, 3, observacion.getUbicacion().getNombre());
+			Button detalles = new Button(constantes.detalles());
+			detalles.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					mostrarDetalles(observacion);
+				}
 
-			private void mostrarDetalles(Observacion observacion) {
-				DetallesObservacionDialog dlg = new DetallesObservacionDialog(
-						observacion);
-				dlg.center();
+				private void mostrarDetalles(Observacion observacion) {
+					DetallesObservacionDialog dlg = new DetallesObservacionDialog(
+							observacion);
+					dlg.center();
 
-			}
-		});
-		setWidget(fila, 4, detalles);
-		Button editar = new Button(constantes.editar());
-		editar.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				VentanaCarga.editar(observacion);
-			}
+				}
+			});
+			setWidget(fila, 4, detalles);
+			Button editar = new Button(constantes.editar());
+			editar.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					VentanaCarga.editar(observacion);
+				}
 
-		});
-		setWidget(fila, 5, editar);
-		if (observacion.getId() == null || observacion.getId() < 0)
-			setText(fila, 6, "*");
+			});
+			setWidget(fila, 5, editar);
+			if (observacion.getId() == null || observacion.getId() < 0)
+				setText(fila, 6, "*");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	protected void agregarObservacionesLocales() {
