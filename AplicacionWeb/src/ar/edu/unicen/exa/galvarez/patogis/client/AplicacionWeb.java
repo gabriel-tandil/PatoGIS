@@ -14,14 +14,17 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -61,7 +64,49 @@ public class AplicacionWeb implements EntryPoint {
 		}
 		t.schedule(7000);
 	}
+	
+	Command loginCommand = new Command() {
+		public void execute() {
+			final DialogBoxExtendido dialogo = new DialogBoxExtendido();
+			dialogo.setAnimationEnabled(true);
+			dialogo.setText(constantes.login());
+			Button aceptarButton = new Button(constantes.loginBoton());
+			
+	
+			aceptarButton.addClickHandler(new ClickHandler() {
 
+				@Override
+				public void onClick(ClickEvent event) {
+					ManejadorAlmacenamientoLocal
+							.eliminarObservacionesLocales();
+					actualizarCantidadObservacionesLocales();
+					dialogo.hide();
+				}
+			});
+			HorizontalPanel botones = new HorizontalPanel();
+
+			botones.add(aceptarButton);
+			Label text = new Label(constantes.ingreseUsuarioYClave());
+Grid g=new Grid(2,2);
+Label lUsuario=new Label(constantes.usuario());
+Label lClave=new Label(constantes.clave());
+TextBox usuario=new TextBox();
+PasswordTextBox clave=new PasswordTextBox();
+g.setWidget(0, 0,lUsuario);
+g.setWidget(1, 0,lClave);
+g.setWidget(0, 1,usuario);
+g.setWidget(1, 1,clave);
+			DockPanel dock = new DockPanel();
+			dock.setSpacing(4);
+			dock.add(botones, DockPanel.SOUTH);
+			dock.add(text, DockPanel.NORTH);
+			dock.add(g, DockPanel.CENTER);
+			botones.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+			dock.setWidth("100%");
+			dialogo.setWidget(dock);
+			dialogo.center();
+		}
+	};		
 	/**
 	 * This is the entry point method.
 	 */
@@ -75,7 +120,7 @@ public class AplicacionWeb implements EntryPoint {
 		alertaPopup.setAnimationEnabled(true);
 		alertaPopup.setAutoHideEnabled(true);
 		alertaPopup.setModal(true);
-
+		loginCommand.execute();
 	}
 
 	public static void actualizarCantidadObservacionesLocales() {
@@ -218,11 +263,12 @@ public class AplicacionWeb implements EntryPoint {
 		observacionesMenu.addItem(constantes.ver(), listarCommand);
 		observacionesMenu.addItem(constantes.persistirLocales(),
 				persistirLocalesCommand);
-		observacionesMenu.addItem(constantes.cerrarSesion(), nadaCommand);
+		observacionesMenu.addItem(constantes.cerrarSesion(), loginCommand);
 		menu.addItem(new MenuItem(constantes.observaciones(), observacionesMenu));
 
 		configuracionMenu.addItem(constantes.preferencias(), nadaCommand);
 		final MenuItem mi = new MenuItem(constantes.nombreComun(), nadaCommand);
+		
 		mi.setCommand(new Command() {
 
 			@Override
@@ -240,10 +286,23 @@ public class AplicacionWeb implements EntryPoint {
 				eliminarObservacionesLocalesCommand);
 
 		menu.addItem(new MenuItem(constantes.configuracion(), configuracionMenu));
+		
+		final MenuItem mAyuda = new MenuItem(constantes.ayuda(), nadaCommand);
+		mAyuda.setEnabled(false);
+		ayudaMenu.addItem(mAyuda);
+		ayudaMenu.addItem(constantes.acercaDe(), new Command() {
+			@Override
+			public void execute() {
+				setMensajeAlerta("PatoGIS - 2011");
+				setMensajeAlerta("Tesis de: Gabriel Alvarez");
+				setMensajeAlerta("Director: Mg. Ing. Jos\u00E9 M. Massa");
+				setMensajeAlerta("Co-Directora: Med. Vet. Andrea Caselli");
+				setMensajeAlerta("Facultad de Ciecias Exactas");
+				setMensajeAlerta("UNICEN");
 
-		ayudaMenu.addItem(constantes.ayuda(), nadaCommand);
-		ayudaMenu.addItem(constantes.acercaDe(), nadaCommand);
-		menu.addItem(new MenuItem("Ayuda", ayudaMenu));
+			}
+		});
+		menu.addItem(new MenuItem(constantes.ayuda(), ayudaMenu));
 
 		dp.setContent(menu);
 		dp.addOpenHandler(new OpenHandler<DisclosurePanel>() {

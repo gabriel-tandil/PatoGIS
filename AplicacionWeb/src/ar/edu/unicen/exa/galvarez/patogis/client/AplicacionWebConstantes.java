@@ -23,4 +23,9 @@ public interface AplicacionWebConstantes extends Constants {
 	String seguroDeBorrarObsLocales();
 	String menu();
 	String generarBackup();
+	String loginBoton();
+	String login();
+	String ingreseUsuarioYClave();
+	String usuario();
+	String clave();
 }
