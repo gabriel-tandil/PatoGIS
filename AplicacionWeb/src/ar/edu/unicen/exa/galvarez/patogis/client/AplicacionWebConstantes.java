@@ -28,4 +28,6 @@ public interface AplicacionWebConstantes extends Constants {
 	String ingreseUsuarioYClave();
 	String usuario();
 	String clave();
+	String usuarioOClaveIncorrectos();
+	String errorAlLoguearSinConexion();
 }

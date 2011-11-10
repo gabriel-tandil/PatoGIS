@@ -14,5 +14,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("usuarios")
 public interface UsuariosService extends RemoteService {
 	Map<String, Usuario> getElementos() throws ServicioRemotoException;
+
 	void addElemento(Usuario usuario) throws ServicioRemotoException;
+
+	Usuario obtenerUsuario(String usuario, String clave)
+			throws ServicioRemotoException;;
 }

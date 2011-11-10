@@ -4,6 +4,8 @@ import java.util.Map;
 
 import ar.edu.unicen.exa.galvarez.patogis.client.UsuariosService;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.UsuarioWSImpl;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl.UsuarioWSImplServiceLocator;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 import ar.edu.unicen.exa.galvarez.patogis.shared.ServicioRemotoException;
 
@@ -16,6 +18,19 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class UsuariosServiceImpl extends RemoteServiceServlet implements
 		UsuariosService {
 
+	public Usuario obtenerUsuario(String usuario, String clave) throws ServicioRemotoException{
+		UsuarioWSImplServiceLocator usuarioWSServiceLocator = new UsuarioWSImplServiceLocator();
+		try {
+			UsuarioWSImpl usuarioWS = usuarioWSServiceLocator
+					.getUsuarioWSImpl();
+			return usuarioWS.obtenerUsuario(usuario, clave);	
+			} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServicioRemotoException();
+
+		}
+	}
+	
 	public Map<String, Usuario> getElementos() throws ServicioRemotoException {
 //		UsuarioWSImplServiceLocator usuarioWSServiceLocator = new UsuarioWSImplServiceLocator();
 		Map<String, Usuario> l = new MapaOrdenado<String, Usuario>();

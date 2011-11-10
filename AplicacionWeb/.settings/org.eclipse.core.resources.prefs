@@ -1,4 +1,4 @@
-#Wed Oct 12 20:28:39 ART 2011
+#Wed Nov 09 20:30:36 ART 2011
 eclipse.preferences.version=1
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/modelo/Campana.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/modelo/Especie.java=UTF-8
@@ -26,3 +26,7 @@ encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/Ubica
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UbicacionWSImplService.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UbicacionWSImplServiceLocator.java=UTF-8
 encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UbicacionWSImplSoapBindingStub.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UsuarioWSImpl.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UsuarioWSImplService.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UsuarioWSImplServiceLocator.java=UTF-8
+encoding//src/ar/edu/unicen/exa/galvarez/patogis/servidor/webservices/impl/UsuarioWSImplSoapBindingStub.java=UTF-8

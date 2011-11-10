@@ -17,4 +17,5 @@ public interface UsuarioWS extends Remote {
 	void editElemento(Usuario elemento, Integer idUsuario)
 			throws RemoteException;
 
+	Usuario obtenerUsuario(String usuario, String clave) throws RemoteException;;
 }

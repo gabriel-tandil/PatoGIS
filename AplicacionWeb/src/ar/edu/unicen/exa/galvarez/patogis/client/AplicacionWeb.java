@@ -1,5 +1,7 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,6 +13,7 @@ import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -38,6 +41,8 @@ public class AplicacionWeb implements EntryPoint {
 	private static String mensajeActual;
 	public static Contexto contexto = new Contexto();
 	final static DisclosurePanel dp = new DisclosurePanel(constantes.menu());;
+	final UsuariosServiceAsync usuariosService = GWT
+			.create(UsuariosService.class);
 	private static Timer t = new Timer() {
 		public void run() {
 			alertaPopup.hide();
@@ -64,38 +69,56 @@ public class AplicacionWeb implements EntryPoint {
 		}
 		t.schedule(7000);
 	}
-	
+
 	Command loginCommand = new Command() {
 		public void execute() {
 			final DialogBoxExtendido dialogo = new DialogBoxExtendido();
 			dialogo.setAnimationEnabled(true);
 			dialogo.setText(constantes.login());
 			Button aceptarButton = new Button(constantes.loginBoton());
-			
-	
-			aceptarButton.addClickHandler(new ClickHandler() {
 
-				@Override
-				public void onClick(ClickEvent event) {
-					ManejadorAlmacenamientoLocal
-							.eliminarObservacionesLocales();
-					actualizarCantidadObservacionesLocales();
-					dialogo.hide();
-				}
-			});
 			HorizontalPanel botones = new HorizontalPanel();
 
 			botones.add(aceptarButton);
 			Label text = new Label(constantes.ingreseUsuarioYClave());
-Grid g=new Grid(2,2);
-Label lUsuario=new Label(constantes.usuario());
-Label lClave=new Label(constantes.clave());
-TextBox usuario=new TextBox();
-PasswordTextBox clave=new PasswordTextBox();
-g.setWidget(0, 0,lUsuario);
-g.setWidget(1, 0,lClave);
-g.setWidget(0, 1,usuario);
-g.setWidget(1, 1,clave);
+			Grid g = new Grid(2, 2);
+			Label lUsuario = new Label(constantes.usuario());
+			Label lClave = new Label(constantes.clave());
+			final TextBox usuario = new TextBox();
+			final PasswordTextBox clave = new PasswordTextBox();
+			g.setWidget(0, 0, lUsuario);
+			g.setWidget(1, 0, lClave);
+			g.setWidget(0, 1, usuario);
+			g.setWidget(1, 1, clave);
+			aceptarButton.addClickHandler(new ClickHandler() {
+
+				@Override
+				public void onClick(ClickEvent event) {
+					usuariosService.obtenerUsuario(usuario.getText(),
+							clave.getText(), new AsyncCallback<Usuario>() {
+
+								@Override
+								public void onSuccess(Usuario result) {
+									if (result != null) {
+										contexto.setUsuarioLogueado(result);
+									} else {
+										setMensajeAlerta(constantes
+												.usuarioOClaveIncorrectos());
+									}
+									dialogo.hide();
+								}
+
+								@Override
+								public void onFailure(Throwable caught) {
+									contexto.setOnline(false);
+									setMensajeAlerta(constantes
+											.errorAlLoguearSinConexion());
+									dialogo.hide();
+
+								}
+							});
+				}
+			});
 			DockPanel dock = new DockPanel();
 			dock.setSpacing(4);
 			dock.add(botones, DockPanel.SOUTH);
@@ -106,7 +129,8 @@ g.setWidget(1, 1,clave);
 			dialogo.setWidget(dock);
 			dialogo.center();
 		}
-	};		
+	};
+
 	/**
 	 * This is the entry point method.
 	 */
@@ -139,7 +163,7 @@ g.setWidget(1, 1,clave);
 				.get((dp.isOpen() ? "principalContainer2"
 						: "principalContainer"));
 		rootPanel.clear();
-		VentanaCarga vc=new VentanaCarga();
+		VentanaCarga vc = new VentanaCarga();
 		rootPanel.add(vc);
 		return vc;
 	}
@@ -162,31 +186,28 @@ g.setWidget(1, 1,clave);
 		Command generarBackupCommand = new Command() {
 			public void execute() {
 				final PopupPanel popup = new PopupPanel();
-				//popup.setWidth("px");
-				//popup.setHeight("170px");
+				// popup.setWidth("px");
+				// popup.setHeight("170px");
 				popup.setAnimationEnabled(true);
 				popup.setAutoHideEnabled(true);
 				popup.setModal(true);
-				
-				popup.setWidget(new HTML(ManejadorAlmacenamientoLocal.getInfoBackup()));
-				popup
-						.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+
+				popup.setWidget(new HTML(ManejadorAlmacenamientoLocal
+						.getInfoBackup()));
+				popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+					public void setPosition(int offsetWidth, int offsetHeight) {
+						popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
 							public void setPosition(int offsetWidth,
 									int offsetHeight) {
 								int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
-								int top = ((Window.getClientHeight() - offsetHeight) / 2) >> 0;
-								popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
-									public void setPosition(int offsetWidth,
-											int offsetHeight) {
-										int left = ((Window.getClientWidth() - offsetWidth) / 2) >> 0;
-										int top = (Window.getScrollTop() + (Window
-												.getClientHeight() - offsetHeight) / 2) >> 0;
-												popup.setPopupPosition(left, top);
-									}
-								});
+								int top = (Window.getScrollTop() + (Window
+										.getClientHeight() - offsetHeight) / 2) >> 0;
+								popup.setPopupPosition(left, top);
 							}
 						});
-				
+					}
+				});
+
 			}
 		};
 		Command eliminarObservacionesLocalesCommand = new Command() {
@@ -235,7 +256,7 @@ g.setWidget(1, 1,clave);
 			}
 
 			private void persistirObservacionesLocales() {
-				
+
 				ManejadorAlmacenamientoLocal.persistirDatosLocales();
 			}
 
@@ -268,7 +289,7 @@ g.setWidget(1, 1,clave);
 
 		configuracionMenu.addItem(constantes.preferencias(), nadaCommand);
 		final MenuItem mi = new MenuItem(constantes.nombreComun(), nadaCommand);
-		
+
 		mi.setCommand(new Command() {
 
 			@Override
@@ -286,7 +307,7 @@ g.setWidget(1, 1,clave);
 				eliminarObservacionesLocalesCommand);
 
 		menu.addItem(new MenuItem(constantes.configuracion(), configuracionMenu));
-		
+
 		final MenuItem mAyuda = new MenuItem(constantes.ayuda(), nadaCommand);
 		mAyuda.setEnabled(false);
 		ayudaMenu.addItem(mAyuda);
