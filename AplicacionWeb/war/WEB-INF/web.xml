@@ -79,6 +79,16 @@
 		<url-pattern>/aplicacionweb/observacion</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>usuariosServlet</servlet-name>
+		<servlet-class>ar.edu.unicen.exa.galvarez.patogis.server.UsuariosServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>usuariosServlet</servlet-name>
+		<url-pattern>/aplicacionweb/usuarios</url-pattern>
+	</servlet-mapping>
+
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>AplicacionWeb.html</welcome-file>

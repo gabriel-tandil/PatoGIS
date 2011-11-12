@@ -39,6 +39,7 @@ public class AplicacionWeb implements EntryPoint {
 	public static Configuracion configuracion = new Configuracion();
 	public static PopupPanel alertaPopup = new PopupPanel();
 	private static String mensajeActual;
+	private MenuItem labelUsuario;
 	public static Contexto contexto = new Contexto();
 	final static DisclosurePanel dp = new DisclosurePanel(constantes.menu());;
 	final UsuariosServiceAsync usuariosService = GWT
@@ -72,13 +73,22 @@ public class AplicacionWeb implements EntryPoint {
 
 	Command loginCommand = new Command() {
 		public void execute() {
+			contexto.setUsuarioLogueado(null);
+			labelUsuario.setText("l:");
 			final DialogBoxExtendido dialogo = new DialogBoxExtendido();
 			dialogo.setAnimationEnabled(true);
 			dialogo.setText(constantes.login());
 			Button aceptarButton = new Button(constantes.loginBoton());
-
+			Button closeButton = new Button("Cancelar");
+			closeButton.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					dialogo.hide();
+				}
+			});
 			HorizontalPanel botones = new HorizontalPanel();
-
+			botones.add(closeButton);
 			botones.add(aceptarButton);
 			Label text = new Label(constantes.ingreseUsuarioYClave());
 			Grid g = new Grid(2, 2);
@@ -101,9 +111,12 @@ public class AplicacionWeb implements EntryPoint {
 								public void onSuccess(Usuario result) {
 									if (result != null) {
 										contexto.setUsuarioLogueado(result);
+										labelUsuario.setText("l: "
+												+ usuario.getText());
 									} else {
 										setMensajeAlerta(constantes
 												.usuarioOClaveIncorrectos());
+										loginCommand.execute();
 									}
 									dialogo.hide();
 								}
@@ -324,7 +337,9 @@ public class AplicacionWeb implements EntryPoint {
 			}
 		});
 		menu.addItem(new MenuItem(constantes.ayuda(), ayudaMenu));
-
+		labelUsuario = new MenuItem("l: ", nadaCommand);
+		labelUsuario.setEnabled(false);
+		menu.addItem(labelUsuario);
 		dp.setContent(menu);
 		dp.addOpenHandler(new OpenHandler<DisclosurePanel>() {
 			@Override
