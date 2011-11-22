@@ -11,8 +11,8 @@ public interface ObservacionWS extends Remote {
 	// padre porque la refinicion del web service asi lo requiere
 	public Observacion[] getElementos() throws RemoteException;
 
-	public void addElemento(Observacion elemento, Integer idUsuario)
+	public void addElemento(Observacion elemento, String usuario, String clave)
 			throws RemoteException;
-	public void editElemento(Observacion elemento, Integer idUsuario)
+	public void editElemento(Observacion elemento, String usuario, String clave)
 	throws RemoteException;
 }

@@ -11,10 +11,10 @@ public interface CampanaWS extends Remote {
 	// padre porque la refinicion del web service asi lo requiere
 	public Campana[] getElementos() throws RemoteException;
 
-	public void addElemento(Campana elemento, Integer idUsuario)
+	public void addElemento(Campana elemento, String usuario, String clave)
 			throws RemoteException;
 
-	void editElemento(Campana elemento, Integer idUsuario)
+	void editElemento(Campana elemento, String usuario, String clave)
 			throws RemoteException;
 
 }

@@ -12,5 +12,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface UbicacionServiceAsync {
 	void getElementos(AsyncCallback<Map<String, Ubicacion>> asyncCallback);
 
-	void addElemento(Ubicacion ubicacion, AsyncCallback<Void> callback);
+	void addElemento(Ubicacion ubicacion, String usuario, String clave,
+			AsyncCallback<Void> callback);
 }

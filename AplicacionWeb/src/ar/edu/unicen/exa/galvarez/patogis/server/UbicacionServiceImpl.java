@@ -16,21 +16,21 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  */
 @SuppressWarnings("serial")
 public class UbicacionServiceImpl extends RemoteServiceServlet implements
-UbicacionService {
+		UbicacionService {
 
-	public Map<String, Ubicacion> getElementos() throws  ServicioRemotoException {
+	public Map<String, Ubicacion> getElementos() throws ServicioRemotoException {
 		UbicacionWSImplServiceLocator UbicacionWSImplServiceLocator = new UbicacionWSImplServiceLocator();
 		Map<String, Ubicacion> l = new MapaOrdenado<String, Ubicacion>();
 
 		try {
 			UbicacionWSImpl UbicacionWS = UbicacionWSImplServiceLocator
-			.getUbicacionWSImpl();
+					.getUbicacionWSImpl();
 			Ubicacion[] ubicaciones = UbicacionWS.getElementos();
-		
-				for (int i = 0; i < ubicaciones.length; i++) {
-					l.put(ubicaciones[i].getNombre(),ubicaciones[i]);
-				}
-			
+
+			for (int i = 0; i < ubicaciones.length; i++) {
+				l.put(ubicaciones[i].getNombre(), ubicaciones[i]);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServicioRemotoException();
@@ -40,14 +40,15 @@ UbicacionService {
 	}
 
 	@Override
-	public void addElemento(Ubicacion ubicacion)  throws ServicioRemotoException{
+	public void addElemento(Ubicacion ubicacion, String usuario, String clave)
+			throws ServicioRemotoException {
 		UbicacionWSImplServiceLocator UbicacionWSImplServiceLocator = new UbicacionWSImplServiceLocator();
 
 		try {
 
 			UbicacionWSImpl UbicacionWS = UbicacionWSImplServiceLocator
 					.getUbicacionWSImpl();
-			UbicacionWS.addElemento(ubicacion,1);
+			UbicacionWS.addElemento(ubicacion, usuario, clave);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServicioRemotoException();

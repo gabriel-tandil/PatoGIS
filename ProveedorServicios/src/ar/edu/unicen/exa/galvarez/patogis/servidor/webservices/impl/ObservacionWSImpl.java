@@ -118,11 +118,11 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 	}
 
 	@Override
-	public void addElemento(Observacion elemento, Integer idUsuario)
+	public void addElemento(Observacion elemento, String usuario, String clave)
 			throws RemoteException {
 		// TODO: mejorar esquema de salvado e ids padres en hijos y viceversa y
 		// separar dto y jbo
-		super.addElementoGenerico(elemento, idUsuario);
+		super.addElementoGenerico(elemento, usuario, clave);
 		
 		ObservacionExample oe = new ObservacionExample();
 		oe.createCriteria().andInicioEqualTo(elemento.getInicio()).andFinEqualTo(elemento.getFin());
@@ -150,27 +150,27 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 		for (ObservacionEspecie observacionEspecie : elemento
 				.getObservacionesEspecie()) {
 			observacionEspecie.setIdObservacion(elemento.getId());
-			oews.addElemento(observacionEspecie, idUsuario);
+			oews.addElemento(observacionEspecie, usuario, clave);
 		}
 		for (ObservacionMatrizProductiva observacionMatrizProductiva : elemento
 				.getObservacionesMatrizProductiva()) {
 			observacionMatrizProductiva.setIdObservacion(elemento.getId());
-			ompws.addElemento(observacionMatrizProductiva, idUsuario);
+			ompws.addElemento(observacionMatrizProductiva, usuario, clave);
 		}
 		for (ObservacionFoto observacionFoto : elemento.getObservacionesFoto()) {
 			observacionFoto.setIdObservacion(elemento.getId());
-			ofws.addElemento(observacionFoto, idUsuario);
+			ofws.addElemento(observacionFoto, usuario, clave);
 		}
 		elemento.getObservacionClima().setIdObservacion(elemento.getId());
-		ocws.addElemento(elemento.getObservacionClima(), idUsuario);
+		ocws.addElemento(elemento.getObservacionClima(), usuario, clave);
 	}
 	
 	@Override
-	public void editElemento(Observacion elemento, Integer idUsuario)
+	public void editElemento(Observacion elemento, String usuario, String clave)
 			throws RemoteException {
 		// TODO: mejorar esquema de salvado e ids padres en hijos y viceversa y
 		// separar dto y jbo
-		super.editElementoGenerico(elemento, idUsuario);
+		super.editElementoGenerico(elemento, usuario, clave);
 		
 		ObservacionEspecieWS oews = new ObservacionEspecieWSImpl();
 		ObservacionMatrizProductivaWS ompws = new ObservacionMatrizProductivaWSImpl();
@@ -179,16 +179,16 @@ public class ObservacionWSImpl extends PatoGisWSAbstractImpl<Observacion>
 
 		for (ObservacionEspecie observacionEspecie : elemento
 				.getObservacionesEspecie()) {
-			oews.editElemento(observacionEspecie, idUsuario);
+			oews.editElemento(observacionEspecie, usuario, clave);
 		}
 		for (ObservacionMatrizProductiva observacionMatrizProductiva : elemento
 				.getObservacionesMatrizProductiva()) {
-			ompws.editElemento(observacionMatrizProductiva, idUsuario);
+			ompws.editElemento(observacionMatrizProductiva, usuario, clave);
 		}
 		for (ObservacionFoto observacionFoto : elemento.getObservacionesFoto()) {
-			ofws.editElemento(observacionFoto, idUsuario);
+			ofws.editElemento(observacionFoto, usuario, clave);
 		}
-		ocws.editElemento(elemento.getObservacionClima(), idUsuario);
+		ocws.editElemento(elemento.getObservacionClima(), usuario, clave);
 	}
 	
 }

@@ -39,7 +39,8 @@ public class ObservacionServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public void addElemento(Observacion observacion) throws ServicioRemotoException {
+	public void addElemento(Observacion observacion, String usuario,
+			String clave) throws ServicioRemotoException {
 		ObservacionWSImplServiceLocator ObservacionWSImplServiceLocator = new ObservacionWSImplServiceLocator();
 
 		try {
@@ -47,7 +48,7 @@ public class ObservacionServiceImpl extends RemoteServiceServlet implements
 			ObservacionWSImpl ObservacionWS = ObservacionWSImplServiceLocator
 					.getObservacionWSImpl();
 
-			ObservacionWS.addElemento(observacion, 1);
+			ObservacionWS.addElemento(observacion, usuario, clave);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServicioRemotoException();
@@ -56,7 +57,8 @@ public class ObservacionServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public void editElemento(Observacion observacion) throws ServicioRemotoException {
+	public void editElemento(Observacion observacion, String usuario,
+			String clave) throws ServicioRemotoException {
 		ObservacionWSImplServiceLocator ObservacionWSImplServiceLocator = new ObservacionWSImplServiceLocator();
 
 		try {
@@ -64,12 +66,12 @@ public class ObservacionServiceImpl extends RemoteServiceServlet implements
 			ObservacionWSImpl ObservacionWS = ObservacionWSImplServiceLocator
 					.getObservacionWSImpl();
 
-			ObservacionWS.editElemento(observacion, 1);
+			ObservacionWS.editElemento(observacion, usuario, clave);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServicioRemotoException();
 
-		}		
+		}
 	}
 
 }

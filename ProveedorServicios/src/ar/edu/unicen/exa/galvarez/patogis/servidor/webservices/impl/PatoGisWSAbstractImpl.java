@@ -10,9 +10,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.AuditoriaUtil;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.PersistenciaUtil;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.util.SqlConnection;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.UsuarioWS;
 
 public abstract class PatoGisWSAbstractImpl<T> {
 
@@ -83,10 +85,12 @@ public abstract class PatoGisWSAbstractImpl<T> {
 		return exampleClass;
 	}
 
-	protected Integer addElementoGenerico(T elemento, Integer idUsuario)
+	protected Integer addElementoGenerico(T elemento, String usuario, String clave)
 			throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
+			
+			Integer idUsuario = obtenerIdUsuario(usuario, clave);
 			sqlSession = obtenerSesionAuditada(idUsuario.intValue());
 			Class<?> mapperClass = getMapperClass();
 			Method m = mapperClass.getDeclaredMethod("insertSelective", clazz);
@@ -105,10 +109,22 @@ public abstract class PatoGisWSAbstractImpl<T> {
 
 	}
 
-	protected Integer editElementoGenerico(T elemento, Integer idUsuario)
+	private Integer obtenerIdUsuario(String usuario, String clave)
+			throws RemoteException {
+		UsuarioWS uws = new UsuarioWSImpl();
+		Usuario u=uws.obtenerUsuario(usuario, clave);
+		if (u==null){
+			throw new RemoteException("No se pudo autenticar al usuario : "+usuario);
+		}
+		Integer idUsuario=u.getId();
+		return idUsuario;
+	}
+
+	protected Integer editElementoGenerico(T elemento, String usuario, String clave)
 			throws RemoteException {
 		SqlSession sqlSession = null;
 		try {
+			Integer idUsuario = obtenerIdUsuario(usuario, clave);
 			sqlSession = obtenerSesionAuditada(idUsuario.intValue());
 			Class<?> mapperClass = getMapperClass();
 			Method m = mapperClass.getDeclaredMethod(

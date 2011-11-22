@@ -50,10 +50,16 @@ public class TipoMatrizProductivaWSImplProxy implements ar.edu.unicen.exa.galvar
     return tipoMatrizProductivaWSImpl.getElementos();
   }
   
-  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva in0, int in1) throws java.rmi.RemoteException{
+  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
     if (tipoMatrizProductivaWSImpl == null)
       _initTipoMatrizProductivaWSImplProxy();
-    tipoMatrizProductivaWSImpl.addElemento(in0, in1);
+    tipoMatrizProductivaWSImpl.addElemento(elemento, usuario, clave);
+  }
+  
+  public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
+    if (tipoMatrizProductivaWSImpl == null)
+      _initTipoMatrizProductivaWSImplProxy();
+    tipoMatrizProductivaWSImpl.editElemento(elemento, usuario, clave);
   }
   
   public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva[] getElementosConCantidadObs() throws java.rmi.RemoteException{

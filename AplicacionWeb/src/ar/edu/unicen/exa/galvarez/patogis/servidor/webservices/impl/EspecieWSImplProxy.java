@@ -50,10 +50,16 @@ public class EspecieWSImplProxy implements ar.edu.unicen.exa.galvarez.patogis.se
     return especieWSImpl.getElementos();
   }
   
-  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie elemento, int idUsuario) throws java.rmi.RemoteException{
+  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
     if (especieWSImpl == null)
       _initEspecieWSImplProxy();
-    especieWSImpl.addElemento(elemento, idUsuario);
+    especieWSImpl.addElemento(elemento, usuario, clave);
+  }
+  
+  public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
+    if (especieWSImpl == null)
+      _initEspecieWSImplProxy();
+    especieWSImpl.editElemento(elemento, usuario, clave);
   }
   
   public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie[] getElementosConCantidadObs() throws java.rmi.RemoteException{

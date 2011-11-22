@@ -12,6 +12,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface TipoMatrizProductivaServiceAsync {
 	void getElementos(AsyncCallback<Map<String, TipoMatrizProductiva>> asyncCallback);
 
-	void addElemento(TipoMatrizProductiva tipoMatrizProductiva,
-			AsyncCallback<Void> callback);
+	void addElemento(TipoMatrizProductiva tipoMatrizProductiva, String usuario,
+			String clave, AsyncCallback<Void> callback);
 }

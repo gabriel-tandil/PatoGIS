@@ -12,5 +12,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface EspeciesServiceAsync {
 	void getElementos(AsyncCallback<Map<String, Especie>> asyncCallback);
 
-	void addElemento(Especie especie, AsyncCallback<Void> callback);
+	void addElemento(Especie especie, String usuario, String clave,
+			AsyncCallback<Void> callback);
 }

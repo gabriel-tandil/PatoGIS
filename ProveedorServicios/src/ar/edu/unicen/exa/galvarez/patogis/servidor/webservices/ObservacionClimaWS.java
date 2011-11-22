@@ -11,10 +11,10 @@ public interface ObservacionClimaWS extends Remote {
 	// padre porque la refinicion del web service asi lo requiere
 	public ObservacionClima[] getElementos() throws RemoteException;
 
-	public void addElemento(ObservacionClima elemento, Integer idUsuario)
+	public void addElemento(ObservacionClima elemento, String usuario, String clave)
 			throws RemoteException;
 
-	void editElemento(ObservacionClima elemento, Integer idUsuario)
+	void editElemento(ObservacionClima elemento, String usuario, String clave)
 			throws RemoteException;
 
 }

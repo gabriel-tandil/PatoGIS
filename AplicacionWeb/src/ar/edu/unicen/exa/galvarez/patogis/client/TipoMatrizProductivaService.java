@@ -14,5 +14,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("tipoMatrizProductiva")
 public interface TipoMatrizProductivaService extends RemoteService {
 	Map<String, TipoMatrizProductiva> getElementos() throws ServicioRemotoException;
-	void addElemento(TipoMatrizProductiva tipoMatrizProductiva) throws ServicioRemotoException;
+	void addElemento(TipoMatrizProductiva tipoMatrizProductiva, String usuario, String clave) throws ServicioRemotoException;
 }

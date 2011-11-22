@@ -85,33 +85,37 @@ public class VentanaCarga extends FlexTable {
 			final Especie e = new Especie();
 			e.setNombre(text.getValue());
 			especies.put(text.getValue(), e);
-			especiesService.addElemento(e, new AsyncCallback<Void>() {
-				public void onFailure(Throwable caught) {
-					AplicacionWeb.setMensajeAlerta(ctes.errorGuardarEspecie());
-					e.setId(ManejadorAlmacenamientoLocal
-							.obtenerProximoIdAlmacenamientoLocal());
-					ManejadorAlmacenamientoLocal
-							.guardarLocalMapaEspecies(especies);
-				}
+			especiesService.addElemento(e, AplicacionWeb.contexto
+					.getUsuarioLogueado().getNombre(), AplicacionWeb.contexto
+					.getUsuarioLogueado().getClave(),
+					new AsyncCallback<Void>() {
+						public void onFailure(Throwable caught) {
+							AplicacionWeb.setMensajeAlerta(ctes
+									.errorGuardarEspecie());
+							e.setId(ManejadorAlmacenamientoLocal
+									.obtenerProximoIdAlmacenamientoLocal());
+							ManejadorAlmacenamientoLocal
+									.guardarLocalMapaEspecies(especies);
+						}
 
-				@Override
-				public void onSuccess(Void result) {
-					especiesService
-							.getElementos(new AsyncCallback<Map<String, Especie>>() {
-								public void onFailure(Throwable caught) {
-									// nada, no deberia pasar
-								}
+						@Override
+						public void onSuccess(Void result) {
+							especiesService
+									.getElementos(new AsyncCallback<Map<String, Especie>>() {
+										public void onFailure(Throwable caught) {
+											// nada, no deberia pasar
+										}
 
-								@Override
-								public void onSuccess(
-										Map<String, Especie> result) {
-									especies = (MapaOrdenado<String, Especie>) result;
-									ManejadorAlmacenamientoLocal
-											.guardarLocalMapaEspecies(especies);
-								}
-							});
-				}
-			});
+										@Override
+										public void onSuccess(
+												Map<String, Especie> result) {
+											especies = (MapaOrdenado<String, Especie>) result;
+											ManejadorAlmacenamientoLocal
+													.guardarLocalMapaEspecies(especies);
+										}
+									});
+						}
+					});
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
@@ -127,7 +131,9 @@ public class VentanaCarga extends FlexTable {
 			final TipoMatrizProductiva tmp = new TipoMatrizProductiva();
 			tmp.setNombre(text.getValue());
 			tiposMatrizProductiva.put(text.getValue(), tmp);
-			tipoMatrizProductivaService.addElemento(tmp,
+			tipoMatrizProductivaService.addElemento(tmp, AplicacionWeb.contexto
+					.getUsuarioLogueado().getNombre(), AplicacionWeb.contexto
+					.getUsuarioLogueado().getClave(),
 					new AsyncCallback<Void>() {
 						public void onFailure(Throwable caught) {
 							AplicacionWeb.setMensajeAlerta(ctes
@@ -141,19 +147,19 @@ public class VentanaCarga extends FlexTable {
 						@Override
 						public void onSuccess(Void result) {
 							tipoMatrizProductivaService
-							.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
-								public void onFailure(Throwable caught) {
-									// nada, no deberia pasar
-								}
+									.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
+										public void onFailure(Throwable caught) {
+											// nada, no deberia pasar
+										}
 
-								@Override
-								public void onSuccess(
-										Map<String, TipoMatrizProductiva> result) {
-									tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
-									ManejadorAlmacenamientoLocal
-											.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
-								}
-							});
+										@Override
+										public void onSuccess(
+												Map<String, TipoMatrizProductiva> result) {
+											tiposMatrizProductiva = (MapaOrdenado<String, TipoMatrizProductiva>) result;
+											ManejadorAlmacenamientoLocal
+													.guardarLocalMapaTiposMatrizProductiva(tiposMatrizProductiva);
+										}
+									});
 						}
 					});
 			establecerElementoCombo(combo, text.getValue());
@@ -241,35 +247,38 @@ public class VentanaCarga extends FlexTable {
 			u.setCoordenadas((longitud.getValue() + " " + latitud.getValue())
 					.replace(',', '.'));
 			ubicaciones.put(text.getValue(), u);
-			ubicacionService.addElemento(u, new AsyncCallback<Void>() {
-				public void onFailure(Throwable caught) {
-					AplicacionWeb.setMensajeAlerta(ctes
-							.errorGuardarNuevaUbicacion());
-					u.setId(ManejadorAlmacenamientoLocal
-							.obtenerProximoIdAlmacenamientoLocal());
-					ManejadorAlmacenamientoLocal
-							.guardarLocalMapaUbicacions(ubicaciones);
-				}
-
-				@Override
-				public void onSuccess(Void result) {
-					ubicacionService
-					.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
+			ubicacionService.addElemento(u, AplicacionWeb.contexto
+					.getUsuarioLogueado().getNombre(), AplicacionWeb.contexto
+					.getUsuarioLogueado().getClave(),
+					new AsyncCallback<Void>() {
 						public void onFailure(Throwable caught) {
-							// nada, no deberia pasar
-						}
-
-						@Override
-						public void onSuccess(
-								Map<String, Ubicacion> result) {
-							ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
+							AplicacionWeb.setMensajeAlerta(ctes
+									.errorGuardarNuevaUbicacion());
+							u.setId(ManejadorAlmacenamientoLocal
+									.obtenerProximoIdAlmacenamientoLocal());
 							ManejadorAlmacenamientoLocal
 									.guardarLocalMapaUbicacions(ubicaciones);
 						}
-					});
 
-				}
-			});
+						@Override
+						public void onSuccess(Void result) {
+							ubicacionService
+									.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
+										public void onFailure(Throwable caught) {
+											// nada, no deberia pasar
+										}
+
+										@Override
+										public void onSuccess(
+												Map<String, Ubicacion> result) {
+											ubicaciones = (MapaOrdenado<String, Ubicacion>) result;
+											ManejadorAlmacenamientoLocal
+													.guardarLocalMapaUbicacions(ubicaciones);
+										}
+									});
+
+						}
+					});
 			establecerElementoCombo(combo, text.getValue());
 			hide();
 		}
@@ -1011,9 +1020,9 @@ public class VentanaCarga extends FlexTable {
 		oc.setSol(checkSol.getValue());
 		oc.setNubes(comboNuves.getValue(comboNuves.getSelectedIndex()));
 		oc.setViento(comboViento.getValue(comboViento.getSelectedIndex()));
-		try{
-		oc.setTemperatura(temperatura.getDouble());
-		}catch (Exception e) {
+		try {
+			oc.setTemperatura(temperatura.getDouble());
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return oc;
@@ -1223,6 +1232,9 @@ public class VentanaCarga extends FlexTable {
 					if (observacionEditada.getId() > 0) {
 
 						observacionService.editElemento(observacion,
+								AplicacionWeb.contexto.getUsuarioLogueado()
+										.getNombre(), AplicacionWeb.contexto
+										.getUsuarioLogueado().getClave(),
 								new AsyncCallback<Void>() {
 
 									@Override
@@ -1249,6 +1261,9 @@ public class VentanaCarga extends FlexTable {
 					}
 				} else {
 					observacionService.addElemento(observacion,
+							AplicacionWeb.contexto.getUsuarioLogueado()
+									.getNombre(), AplicacionWeb.contexto
+									.getUsuarioLogueado().getClave(),
 							new AsyncCallback<Void>() {
 
 								@Override

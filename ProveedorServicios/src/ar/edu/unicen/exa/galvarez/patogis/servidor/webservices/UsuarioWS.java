@@ -11,10 +11,10 @@ public interface UsuarioWS extends Remote {
 	// padre porque la refinicion del web service asi lo requiere
 	public Usuario[] getElementos() throws RemoteException;
 
-	public void addElemento(Usuario elemento, Integer idUsuario)
+	public void addElemento(Usuario elemento, String usuario, String clave)
 			throws RemoteException;
 
-	void editElemento(Usuario elemento, Integer idUsuario)
+	void editElemento(Usuario elemento, String usuario, String clave)
 			throws RemoteException;
 
 	Usuario obtenerUsuario(String usuario, String clave) throws RemoteException;;

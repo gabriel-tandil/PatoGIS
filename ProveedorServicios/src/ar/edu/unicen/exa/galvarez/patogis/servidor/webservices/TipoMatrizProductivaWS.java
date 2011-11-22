@@ -10,11 +10,11 @@ public interface TipoMatrizProductivaWS extends Remote {
 	// padre porque la refinicion del web service asi lo requiere
 	public TipoMatrizProductiva[] getElementos() throws RemoteException;
 
-	public void addElemento(TipoMatrizProductiva elemento, Integer idUsuario)
+	public void addElemento(TipoMatrizProductiva elemento, String usuario, String clave)
 			throws RemoteException;
 	
 	public TipoMatrizProductiva[] getElementosConCantidadObs() throws RemoteException;
 
-	void editElemento(TipoMatrizProductiva elemento, Integer idUsuario)
+	void editElemento(TipoMatrizProductiva elemento, String usuario, String clave)
 			throws RemoteException;
 }

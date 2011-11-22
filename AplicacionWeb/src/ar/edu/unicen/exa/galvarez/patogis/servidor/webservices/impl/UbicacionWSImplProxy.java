@@ -50,10 +50,16 @@ public class UbicacionWSImplProxy implements ar.edu.unicen.exa.galvarez.patogis.
     return ubicacionWSImpl.getElementos();
   }
   
-  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion elemento, int idUsuario) throws java.rmi.RemoteException{
+  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
     if (ubicacionWSImpl == null)
       _initUbicacionWSImplProxy();
-    ubicacionWSImpl.addElemento(elemento, idUsuario);
+    ubicacionWSImpl.addElemento(elemento, usuario, clave);
+  }
+  
+  public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
+    if (ubicacionWSImpl == null)
+      _initUbicacionWSImplProxy();
+    ubicacionWSImpl.editElemento(elemento, usuario, clave);
   }
   
   

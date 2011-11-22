@@ -12,9 +12,9 @@ public interface ObservacionMatrizProductivaWS extends Remote {
 	public ObservacionMatrizProductiva[] getElementos() throws RemoteException;
 
 	public void addElemento(ObservacionMatrizProductiva elemento,
-			Integer idUsuario) throws RemoteException;
+			String usuario, String clave) throws RemoteException;
 
-	void editElemento(ObservacionMatrizProductiva elemento, Integer idUsuario)
+	void editElemento(ObservacionMatrizProductiva elemento, String usuario, String clave)
 			throws RemoteException;
 
 }

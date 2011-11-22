@@ -9,5 +9,6 @@ package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl;
 
 public interface UbicacionWSImpl extends java.rmi.Remote {
     public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion[] getElementos() throws java.rmi.RemoteException;
-    public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion elemento, int idUsuario) throws java.rmi.RemoteException;
+    public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException;
+    public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException;
 }

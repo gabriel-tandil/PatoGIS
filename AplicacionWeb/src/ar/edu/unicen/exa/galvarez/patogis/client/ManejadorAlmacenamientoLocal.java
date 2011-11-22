@@ -196,9 +196,12 @@ public class ManejadorAlmacenamientoLocal {
 		valor.put("id", new JSONNumber(especie.getId()));
 		valor.put("nombre", new JSONString(especie.getNombre()));
 		valor.put("nombreCientifico",
-				new JSONString(especie.getNombreCientifico()==null?"":especie.getNombreCientifico()));
-		valor.put("familia", new JSONString(especie.getFamilia()==null?"":especie.getFamilia()));
-		valor.put("grupo", new JSONString(especie.getGrupo()==null?"":especie.getGrupo()));
+				new JSONString(especie.getNombreCientifico() == null ? ""
+						: especie.getNombreCientifico()));
+		valor.put("familia", new JSONString(especie.getFamilia() == null ? ""
+				: especie.getFamilia()));
+		valor.put("grupo", new JSONString(especie.getGrupo() == null ? ""
+				: especie.getGrupo()));
 		elemento.put("valor", valor);
 		return elemento;
 	}
@@ -491,27 +494,127 @@ public class ManejadorAlmacenamientoLocal {
 			if (u.getId() < 0) {
 				final Integer idLocal = u.getId();
 				u.setId(null);
-				tipoMatrizProductivaService.addElemento(u,
+				tipoMatrizProductivaService
+						.addElemento(u, AplicacionWeb.contexto
+								.getUsuarioLogueado().getNombre(),
+								AplicacionWeb.contexto.getUsuarioLogueado()
+										.getClave(), new AsyncCallback<Void>() {
+									public void onFailure(Throwable caught) {
+										AplicacionWeb
+												.setMensajeAlerta(VentanaCarga.ctes
+														.errorGuardarNuevoTipoMatrizProductiva());
+									}
+
+									@Override
+									public void onSuccess(Void result) {
+										tipoMatrizProductivaService
+												.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
+
+													@Override
+													public void onSuccess(
+															Map<String, TipoMatrizProductiva> result) {
+
+														TipoMatrizProductiva TipoMatrizProductivaPersistida = result.get(u
+																.getNombre());
+														mu.put(u.getNombre(),
+																TipoMatrizProductivaPersistida);
+														guardarLocalMapaTiposMatrizProductiva(mu); // actualizo
+														// el
+														// mapa
+														// de
+														// persistencia
+														// local
+														// para
+														// que
+														// tenga
+														// el id
+														// nuevo
+
+														List<Observacion> observaciones = obtenerObservacionesLocales(false);
+														if (observaciones
+																.size() > 0) {
+
+															for (int i = 0; i < observaciones
+																	.size(); i++) {
+																Observacion observacion = observaciones
+																		.get(i);
+																boolean modifico = false;
+																for (int j = 0; j < observacion
+																		.getObservacionesMatrizProductiva().length; j++) {
+																	ObservacionMatrizProductiva omp = observacion
+																			.getObservacionesMatrizProductiva()[j];
+																	if (omp.getIdTipoMatrizProductiva() == idLocal) {
+																		omp.setIdTipoMatrizProductiva(TipoMatrizProductivaPersistida
+																				.getId());
+																		modifico = true;
+																	}
+																}
+																{
+																	if (modifico)
+																		storage.put(
+																				"observacion"
+																						+ i,
+																				observacionAJson(
+																						observacion)
+																						.toString());
+																}
+
+															}
+														}
+
+														persistirTiposMatrizProductivaLocales();
+													}
+
+													@Override
+													public void onFailure(
+															Throwable caught) {
+														AplicacionWeb
+																.setMensajeAlerta(VentanaCarga.ctes
+																		.errorGuardarNuevoTipoMatrizProductiva());
+													}
+												});
+
+									}
+
+								});
+				return; // se llama recursivamente al terminar la persistencia
+						// para no atorar a la base
+			}
+		}
+		persistirObservacionesLocales();
+	}
+
+	public static void persistirEspeciesLocales() {
+		final MapaOrdenado<String, Especie> mu = obtenerMapaEspecies();
+		for (String clave : mu.keyList()) {
+			final Especie u = mu.get(clave);
+			if (u.getId() < 0) {
+				final Integer idLocal = u.getId();
+				u.setId(null);
+				especiesService.addElemento(u, AplicacionWeb.contexto
+						.getUsuarioLogueado().getNombre(),
+						AplicacionWeb.contexto.getUsuarioLogueado().getClave(),
 						new AsyncCallback<Void>() {
 							public void onFailure(Throwable caught) {
-								AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
-										.errorGuardarNuevoTipoMatrizProductiva());
+								AplicacionWeb
+										.setMensajeAlerta(VentanaCarga.ctes
+												.errorGuardarEspecie());
 							}
 
 							@Override
 							public void onSuccess(Void result) {
-								tipoMatrizProductivaService
-										.getElementos(new AsyncCallback<Map<String, TipoMatrizProductiva>>() {
+								especiesService
+										.getElementos(new AsyncCallback<Map<String, Especie>>() {
 
 											@Override
 											public void onSuccess(
-													Map<String, TipoMatrizProductiva> result) {
+													Map<String, Especie> result) {
 
-												TipoMatrizProductiva TipoMatrizProductivaPersistida = result
+												Especie EspeciePersistida = result
 														.get(u.getNombre());
 												mu.put(u.getNombre(),
-														TipoMatrizProductivaPersistida);
-												guardarLocalMapaTiposMatrizProductiva(mu); // actualizo
+														EspeciePersistida);
+												guardarLocalMapaEspecies(mu); // actualizo
 												// el
 												// mapa
 												// de
@@ -532,11 +635,11 @@ public class ManejadorAlmacenamientoLocal {
 																.get(i);
 														boolean modifico = false;
 														for (int j = 0; j < observacion
-																.getObservacionesMatrizProductiva().length; j++) {
-															ObservacionMatrizProductiva omp = observacion
-																	.getObservacionesMatrizProductiva()[j];
-															if (omp.getIdTipoMatrizProductiva() == idLocal) {
-																omp.setIdTipoMatrizProductiva(TipoMatrizProductivaPersistida
+																.getObservacionesEspecie().length; j++) {
+															ObservacionEspecie omp = observacion
+																	.getObservacionesEspecie()[j];
+															if (omp.getIdEspecie() == idLocal) {
+																omp.setIdEspecie(EspeciePersistida
 																		.getId());
 																modifico = true;
 															}
@@ -554,7 +657,7 @@ public class ManejadorAlmacenamientoLocal {
 													}
 												}
 
-												persistirTiposMatrizProductivaLocales();
+												persistirEspeciesLocales();
 											}
 
 											@Override
@@ -562,102 +665,13 @@ public class ManejadorAlmacenamientoLocal {
 													Throwable caught) {
 												AplicacionWeb
 														.setMensajeAlerta(VentanaCarga.ctes
-																.errorGuardarNuevoTipoMatrizProductiva());
+																.errorGuardarEspecie());
 											}
 										});
 
 							}
 
 						});
-				return; // se llama recursivamente al terminar la persistencia
-						// para no atorar a la base
-			}
-		}
-		persistirObservacionesLocales();
-	}
-
-	public static void persistirEspeciesLocales() {
-		final MapaOrdenado<String, Especie> mu = obtenerMapaEspecies();
-		for (String clave : mu.keyList()) {
-			final Especie u = mu.get(clave);
-			if (u.getId() < 0) {
-				final Integer idLocal = u.getId();
-				u.setId(null);
-				especiesService.addElemento(u, new AsyncCallback<Void>() {
-					public void onFailure(Throwable caught) {
-						AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
-								.errorGuardarEspecie());
-					}
-
-					@Override
-					public void onSuccess(Void result) {
-						especiesService
-								.getElementos(new AsyncCallback<Map<String, Especie>>() {
-
-									@Override
-									public void onSuccess(
-											Map<String, Especie> result) {
-
-										Especie EspeciePersistida = result
-												.get(u.getNombre());
-										mu.put(u.getNombre(), EspeciePersistida);
-										guardarLocalMapaEspecies(mu); // actualizo
-										// el
-										// mapa
-										// de
-										// persistencia
-										// local
-										// para
-										// que
-										// tenga
-										// el id
-										// nuevo
-
-										List<Observacion> observaciones = obtenerObservacionesLocales(false);
-										if (observaciones.size() > 0) {
-
-											for (int i = 0; i < observaciones
-													.size(); i++) {
-												Observacion observacion = observaciones
-														.get(i);
-												boolean modifico = false;
-												for (int j = 0; j < observacion
-														.getObservacionesEspecie().length; j++) {
-													ObservacionEspecie omp = observacion
-															.getObservacionesEspecie()[j];
-													if (omp.getIdEspecie() == idLocal) {
-														omp.setIdEspecie(EspeciePersistida
-																.getId());
-														modifico = true;
-													}
-												}
-												{
-													if (modifico)
-														storage.put(
-																"observacion"
-																		+ i,
-																observacionAJson(
-																		observacion)
-																		.toString());
-												}
-
-											}
-										}
-
-										persistirEspeciesLocales();
-									}
-
-									@Override
-									public void onFailure(Throwable caught) {
-										AplicacionWeb
-												.setMensajeAlerta(VentanaCarga.ctes
-														.errorGuardarEspecie());
-									}
-								});
-
-					}
-
-				});
 				return; // se llama revursivamente al terminar la persistencia
 						// para no atorar a la base
 			}
@@ -672,73 +686,80 @@ public class ManejadorAlmacenamientoLocal {
 			if (u.getId() < 0) {
 				final Integer idLocal = u.getId();
 				u.setId(null);
-				ubicacionService.addElemento(u, new AsyncCallback<Void>() {
-					public void onFailure(Throwable caught) {
-						AplicacionWeb.setMensajeAlerta(VentanaCarga.ctes
-								.errorGuardarNuevaUbicacion());
-					}
+				ubicacionService.addElemento(u, AplicacionWeb.contexto
+						.getUsuarioLogueado().getNombre(),
+						AplicacionWeb.contexto.getUsuarioLogueado().getClave(),
+						new AsyncCallback<Void>() {
+							public void onFailure(Throwable caught) {
+								AplicacionWeb
+										.setMensajeAlerta(VentanaCarga.ctes
+												.errorGuardarNuevaUbicacion());
+							}
 
-					@Override
-					public void onSuccess(Void result) {
-						ubicacionService
-								.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
+							@Override
+							public void onSuccess(Void result) {
+								ubicacionService
+										.getElementos(new AsyncCallback<Map<String, Ubicacion>>() {
 
-									@Override
-									public void onSuccess(
-											Map<String, Ubicacion> result) {
+											@Override
+											public void onSuccess(
+													Map<String, Ubicacion> result) {
 
-										Ubicacion ubicacionPersistida = result
-												.get(u.getNombre());
-										mu.put(u.getNombre(),
-												ubicacionPersistida);
-										guardarLocalMapaUbicacions(mu); // actualizo
-																		// el
-																		// mapa
-																		// de
-																		// persistencia
-																		// local
-																		// para
-																		// que
-																		// tenga
-																		// el id
-																		// nuevo
+												Ubicacion ubicacionPersistida = result
+														.get(u.getNombre());
+												mu.put(u.getNombre(),
+														ubicacionPersistida);
+												guardarLocalMapaUbicacions(mu); // actualizo
+																				// el
+																				// mapa
+																				// de
+																				// persistencia
+																				// local
+																				// para
+																				// que
+																				// tenga
+																				// el
+																				// id
+																				// nuevo
 
-										List<Observacion> observaciones = obtenerObservacionesLocales(false);
-										if (observaciones.size() > 0) {
+												List<Observacion> observaciones = obtenerObservacionesLocales(false);
+												if (observaciones.size() > 0) {
 
-											for (int i = 0; i < observaciones
-													.size(); i++) {
-												Observacion observacion = observaciones
-														.get(i);
-												if (observacion
-														.getIdUbicacion() == idLocal) {
-													observacion
-															.setIdUbicacion(ubicacionPersistida
-																	.getId());
-													storage.put(
-															"observacion" + i,
-															observacionAJson(
-																	observacion)
-																	.toString());
+													for (int i = 0; i < observaciones
+															.size(); i++) {
+														Observacion observacion = observaciones
+																.get(i);
+														if (observacion
+																.getIdUbicacion() == idLocal) {
+															observacion
+																	.setIdUbicacion(ubicacionPersistida
+																			.getId());
+															storage.put(
+																	"observacion"
+																			+ i,
+																	observacionAJson(
+																			observacion)
+																			.toString());
+														}
+
+													}
 												}
 
+												persistirUbicacionesLocales();
 											}
-										}
 
-										persistirUbicacionesLocales();
-									}
+											@Override
+											public void onFailure(
+													Throwable caught) {
+												AplicacionWeb
+														.setMensajeAlerta(VentanaCarga.ctes
+																.errorGuardarNuevaUbicacion());
+											}
+										});
 
-									@Override
-									public void onFailure(Throwable caught) {
-										AplicacionWeb
-												.setMensajeAlerta(VentanaCarga.ctes
-														.errorGuardarNuevaUbicacion());
-									}
-								});
+							}
 
-					}
-
-				});
+						});
 				return; // se llama revursivamente al terminar la persistencia
 						// para no atorar a la base
 			}
@@ -752,7 +773,9 @@ public class ManejadorAlmacenamientoLocal {
 			Observacion observacion = observaciones
 					.get(observaciones.size() - 1);
 			observacion.setId(null);
-			observacionService.addElemento(observacion,
+			observacionService.addElemento(observacion, AplicacionWeb.contexto
+					.getUsuarioLogueado().getNombre(), AplicacionWeb.contexto
+					.getUsuarioLogueado().getClave(),
 					new AsyncCallback<Void>() {
 
 						@Override
@@ -825,21 +848,21 @@ public class ManejadorAlmacenamientoLocal {
 		for (String clave : mu.keyList()) {
 			final Especie u = mu.get(clave);
 			if (u.getId() < 0)
-				salida+=especieAJSON(clave, u);
+				salida += especieAJSON(clave, u);
 		}
 		salida += "/*/*/* TiposMatrizProductiva:";
 		final MapaOrdenado<String, Ubicacion> mu1 = obtenerMapaUbicaciones();
 		for (String clave : mu1.keyList()) {
 			final Ubicacion u = mu1.get(clave);
 			if (u.getId() < 0)
-				salida+=ubicacionAJSON(clave, u);
+				salida += ubicacionAJSON(clave, u);
 		}
 		salida += "/*/*/* Ubicaciones:";
 		final MapaOrdenado<String, TipoMatrizProductiva> mu2 = obtenerMapaTiposMatrizProductiva();
 		for (String clave : mu2.keyList()) {
 			final TipoMatrizProductiva u = mu2.get(clave);
 			if (u.getId() < 0)
-				salida+=tipoMatrizProductivaAJSON(clave, u);
+				salida += tipoMatrizProductivaAJSON(clave, u);
 		}
 		salida += "/*/*/* Observaciones:";
 

@@ -20,15 +20,15 @@ public class ParUsuariosWSImpl extends PatoGisWSAbstractImpl<ParUsuarios>
 	}
 
 	@Override
-	public void addElemento(ParUsuarios elemento, Integer idUsuario)
+	public void addElemento(ParUsuarios elemento, String usuario, String clave)
 			throws RemoteException {
-		super.addElementoGenerico(elemento, idUsuario);
+		super.addElementoGenerico(elemento, usuario, clave);
 	}
 	
 	@Override
-	public void editElemento(ParUsuarios elemento, Integer idUsuario)
+	public void editElemento(ParUsuarios elemento, String usuario, String clave)
 			throws RemoteException {
-		super.editElementoGenerico(elemento, idUsuario);
+		super.editElementoGenerico(elemento, usuario, clave);
 	}
 	
 }

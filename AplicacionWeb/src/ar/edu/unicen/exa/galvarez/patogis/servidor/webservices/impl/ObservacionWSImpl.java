@@ -9,6 +9,6 @@ package ar.edu.unicen.exa.galvarez.patogis.servidor.webservices.impl;
 
 public interface ObservacionWSImpl extends java.rmi.Remote {
     public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion[] getElementos() throws java.rmi.RemoteException;
-    public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion elemento, int idUsuario) throws java.rmi.RemoteException;
-    public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion elemento, int idUsuario) throws java.rmi.RemoteException;
+    public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException;
+    public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException;
 }

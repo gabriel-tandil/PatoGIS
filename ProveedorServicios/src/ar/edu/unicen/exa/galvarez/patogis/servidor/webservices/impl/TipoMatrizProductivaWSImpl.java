@@ -25,15 +25,15 @@ public class TipoMatrizProductivaWSImpl extends
 	}
 
 	@Override
-	public void addElemento(TipoMatrizProductiva elemento, Integer idUsuario)
+	public void addElemento(TipoMatrizProductiva elemento, String usuario, String clave)
 			throws RemoteException {
-		super.addElementoGenerico(elemento, idUsuario);
+		super.addElementoGenerico(elemento, usuario, clave);
 	}
 	
 	@Override
-	public void editElemento(TipoMatrizProductiva elemento, Integer idUsuario)
+	public void editElemento(TipoMatrizProductiva elemento, String usuario, String clave)
 			throws RemoteException {
-		super.editElementoGenerico(elemento, idUsuario);
+		super.editElementoGenerico(elemento, usuario, clave);
 	}	
 	
 	@Override

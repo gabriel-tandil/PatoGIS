@@ -21,14 +21,14 @@ public class ObservacionEspecieWSImpl extends
 	}
 
 	@Override
-	public void addElemento(ObservacionEspecie elemento, Integer idUsuario)
+	public void addElemento(ObservacionEspecie elemento, String usuario, String clave)
 			throws RemoteException {
-		super.addElementoGenerico(elemento, idUsuario);
+		super.addElementoGenerico(elemento, usuario, clave);
 	}
 	
 	@Override
-	public void editElemento(ObservacionEspecie elemento, Integer idUsuario)
+	public void editElemento(ObservacionEspecie elemento, String usuario, String clave)
 			throws RemoteException {
-		super.editElementoGenerico(elemento, idUsuario);
+		super.editElementoGenerico(elemento, usuario, clave);
 	}
 }

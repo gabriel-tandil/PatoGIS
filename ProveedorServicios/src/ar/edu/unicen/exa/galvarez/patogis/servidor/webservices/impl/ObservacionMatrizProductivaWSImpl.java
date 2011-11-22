@@ -22,13 +22,13 @@ public class ObservacionMatrizProductivaWSImpl extends
 
 	@Override
 	public void addElemento(ObservacionMatrizProductiva elemento,
-			Integer idUsuario) throws RemoteException {
-		super.addElementoGenerico(elemento, idUsuario);
+			String usuario, String clave) throws RemoteException {
+		super.addElementoGenerico(elemento, usuario, clave);
 	}
 
 	@Override
 	public void editElemento(ObservacionMatrizProductiva elemento,
-			Integer idUsuario) throws RemoteException {
-		super.editElementoGenerico(elemento, idUsuario);
+			String usuario, String clave) throws RemoteException {
+		super.editElementoGenerico(elemento, usuario, clave);
 	}
 }

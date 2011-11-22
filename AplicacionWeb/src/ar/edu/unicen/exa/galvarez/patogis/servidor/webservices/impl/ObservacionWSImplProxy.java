@@ -50,16 +50,16 @@ public class ObservacionWSImplProxy implements ar.edu.unicen.exa.galvarez.patogi
     return observacionWSImpl.getElementos();
   }
   
-  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion elemento, int idUsuario) throws java.rmi.RemoteException{
+  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
     if (observacionWSImpl == null)
       _initObservacionWSImplProxy();
-    observacionWSImpl.addElemento(elemento, idUsuario);
+    observacionWSImpl.addElemento(elemento, usuario, clave);
   }
   
-  public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion elemento, int idUsuario) throws java.rmi.RemoteException{
+  public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
     if (observacionWSImpl == null)
       _initObservacionWSImplProxy();
-    observacionWSImpl.editElemento(elemento, idUsuario);
+    observacionWSImpl.editElemento(elemento, usuario, clave);
   }
   
   

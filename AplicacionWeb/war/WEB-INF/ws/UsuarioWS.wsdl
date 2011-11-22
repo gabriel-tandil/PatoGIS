@@ -19,7 +19,8 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="elemento" type="tns1:Usuario"/>
-      <element name="idUsuario" type="xsd:int"/>
+      <element name="usuario" type="xsd:string"/>
+      <element name="clave" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
@@ -30,7 +31,8 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="elemento" type="tns1:Usuario"/>
-      <element name="idUsuario" type="xsd:int"/>
+      <element name="usuario" type="xsd:string"/>
+      <element name="clave" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>

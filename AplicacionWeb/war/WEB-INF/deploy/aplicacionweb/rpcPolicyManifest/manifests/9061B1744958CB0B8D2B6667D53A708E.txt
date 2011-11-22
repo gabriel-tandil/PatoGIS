@@ -1,0 +1,2 @@
+serviceClass: ar.edu.unicen.exa.galvarez.patogis.client.UsuariosService
+path: 68A3AF5B5971DC3CFCDC04CFC35517BF.gwt.rpc

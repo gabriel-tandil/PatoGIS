@@ -41,7 +41,8 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public void addElemento(Especie especie) throws ServicioRemotoException {
+	public void addElemento(Especie especie, String usuario, String clave)
+			throws ServicioRemotoException {
 		EspecieWSImplServiceLocator especieWSServiceLocator = new EspecieWSImplServiceLocator();
 
 		try {
@@ -49,7 +50,7 @@ public class EspeciesServiceImpl extends RemoteServiceServlet implements
 			EspecieWSImpl especieWS = especieWSServiceLocator
 					.getEspecieWSImpl();
 
-			especieWS.addElemento(especie, 1);
+			especieWS.addElemento(especie, usuario, clave);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServicioRemotoException();

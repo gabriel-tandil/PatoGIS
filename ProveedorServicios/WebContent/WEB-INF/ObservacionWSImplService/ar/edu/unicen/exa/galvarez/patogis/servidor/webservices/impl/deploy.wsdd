@@ -14,11 +14,13 @@
       </operation>
       <operation xmlns:operNS="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" name="addElemento" qname="operNS:addElemento" soapAction="">
         <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" qname="pns:elemento" type="tns:Observacion"/>
-        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idUsuario" type="tns:int"/>
+        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:usuario" type="tns:string"/>
+        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:clave" type="tns:string"/>
       </operation>
       <operation xmlns:operNS="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" name="editElemento" qname="operNS:editElemento" soapAction="">
         <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://modelo.servidor.patogis.galvarez.exa.unicen.edu.ar" qname="pns:elemento" type="tns:Observacion"/>
-        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idUsuario" type="tns:int"/>
+        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:usuario" type="tns:string"/>
+        <parameter xmlns:pns="http://impl.webservices.servidor.patogis.galvarez.exa.unicen.edu.ar" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:clave" type="tns:string"/>
       </operation>
       <parameter name="allowedMethods" value="getElementos addElemento editElemento"/>
 

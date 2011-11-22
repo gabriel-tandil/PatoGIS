@@ -11,10 +11,10 @@ public interface ObservacionFotoWS extends Remote {
 	// padre porque la refinicion del web service asi lo requiere
 	public ObservacionFoto[] getElementos() throws RemoteException;
 
-	public void addElemento(ObservacionFoto elemento, Integer idUsuario)
+	public void addElemento(ObservacionFoto elemento, String usuario, String clave)
 			throws RemoteException;
 
-	void editElemento(ObservacionFoto elemento, Integer idUsuario)
+	void editElemento(ObservacionFoto elemento, String usuario, String clave)
 			throws RemoteException;
 
 }

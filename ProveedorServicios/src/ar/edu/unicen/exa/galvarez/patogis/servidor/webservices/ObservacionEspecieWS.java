@@ -11,10 +11,10 @@ public interface ObservacionEspecieWS extends Remote {
 	// padre porque la refinicion del web service asi lo requiere
 	public ObservacionEspecie[] getElementos() throws RemoteException;
 
-	public void addElemento(ObservacionEspecie elemento, Integer idUsuario)
+	public void addElemento(ObservacionEspecie elemento, String usuario, String clave)
 			throws RemoteException;
 
-	void editElemento(ObservacionEspecie elemento, Integer idUsuario)
+	void editElemento(ObservacionEspecie elemento, String usuario, String clave)
 			throws RemoteException;
 
 }

@@ -50,16 +50,16 @@ public class UsuarioWSImplProxy implements ar.edu.unicen.exa.galvarez.patogis.se
     return usuarioWSImpl.getElementos();
   }
   
-  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario elemento, int idUsuario) throws java.rmi.RemoteException{
+  public void addElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
     if (usuarioWSImpl == null)
       _initUsuarioWSImplProxy();
-    usuarioWSImpl.addElemento(elemento, idUsuario);
+    usuarioWSImpl.addElemento(elemento, usuario, clave);
   }
   
-  public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario elemento, int idUsuario) throws java.rmi.RemoteException{
+  public void editElemento(ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario elemento, java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{
     if (usuarioWSImpl == null)
       _initUsuarioWSImplProxy();
-    usuarioWSImpl.editElemento(elemento, idUsuario);
+    usuarioWSImpl.editElemento(elemento, usuario, clave);
   }
   
   public ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario obtenerUsuario(java.lang.String usuario, java.lang.String clave) throws java.rmi.RemoteException{

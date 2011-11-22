@@ -11,10 +11,10 @@ public interface UbicacionWS extends Remote {
 	// padre porque la refinicion del web service asi lo requiere
 	public Ubicacion[] getElementos() throws RemoteException;
 
-	public void addElemento(Ubicacion elemento, Integer idUsuario)
+	public void addElemento(Ubicacion elemento, String usuario, String clave)
 			throws RemoteException;
 
-	void editElemento(Ubicacion elemento, Integer idUsuario)
+	void editElemento(Ubicacion elemento, String usuario, String clave)
 			throws RemoteException;
 
 }
