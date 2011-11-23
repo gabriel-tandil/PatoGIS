@@ -780,7 +780,10 @@ public class VentanaCarga extends FlexTable {
 			}
 		});
 		setWidget(9, 1, sendButton);
-
+		ObservacionClima oc=ManejadorAlmacenamientoLocal.getUltimaObservacionClima();
+		if (oc!=null)
+			establecerObservacionClima(this, oc);
+		
 		laguna.setFocus(true);
 	}
 
@@ -1260,6 +1263,7 @@ public class VentanaCarga extends FlexTable {
 						AplicacionWeb.cargarObservacion();
 					}
 				} else {
+					ManejadorAlmacenamientoLocal.setUltimaObservacionClima(observacion.getObservacionClima());
 					observacionService.addElemento(observacion,
 							AplicacionWeb.contexto.getUsuarioLogueado()
 									.getNombre(), AplicacionWeb.contexto
@@ -1392,20 +1396,26 @@ public class VentanaCarga extends FlexTable {
 				break;
 			}
 		}
-		vc.temperatura.setDouble(observacion.getObservacionClima()
+		ObservacionClima oc=observacion.getObservacionClima();
+		establecerObservacionClima(vc, oc);
+	}
+
+	private static void establecerObservacionClima(VentanaCarga vc,
+			ObservacionClima oc) {
+		vc.temperatura.setDouble(oc
 				.getTemperatura());
-		vc.checkLluvia.setValue(observacion.getObservacionClima().getLluvia());
-		vc.checkSol.setValue(observacion.getObservacionClima().getSol());
+		vc.checkLluvia.setValue(oc.getLluvia());
+		vc.checkSol.setValue(oc.getSol());
 		for (int i = 0; i < vc.comboNuves.getItemCount(); i++) {
 			if (vc.comboNuves.getValue(i).equals(
-					observacion.getObservacionClima().getNubes())) {
+					oc.getNubes())) {
 				vc.comboNuves.setSelectedIndex(i);
 				break;
 			}
 		}
 		for (int i = 0; i < vc.comboViento.getItemCount(); i++) {
 			if (vc.comboViento.getValue(i).equals(
-					observacion.getObservacionClima().getViento())) {
+					oc.getViento())) {
 				vc.comboViento.setSelectedIndex(i);
 				break;
 			}

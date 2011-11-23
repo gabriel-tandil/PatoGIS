@@ -339,18 +339,9 @@ public class ManejadorAlmacenamientoLocal {
 						.format(obs.getInicio())));
 
 		result.put("observaciones", new JSONString(obs.getObservaciones()));
-		JSONObject observacionClima = new JSONObject();
-		observacionClima.put("temperatura", new JSONNumber(obs
-				.getObservacionClima().getTemperatura()));
-		observacionClima.put("nubes", new JSONString(obs.getObservacionClima()
-				.getNubes()));
-
-		observacionClima.put("lluvia", JSONBoolean.getInstance((obs
-				.getObservacionClima().getLluvia())));
-		observacionClima.put("viento", new JSONString(obs.getObservacionClima()
-				.getViento()));
-		observacionClima.put("sol",
-				JSONBoolean.getInstance((obs.getObservacionClima().getSol())));
+		ObservacionClima oc=obs.getObservacionClima();
+		
+		JSONObject observacionClima = obsClimaAJSONObsClima(oc);
 		result.put("observacionClima", observacionClima);
 		JSONArray observacionesEspecie = new JSONArray();
 		for (int i = 0; i < obs.getObservacionesEspecie().length; i++) {
@@ -388,6 +379,20 @@ public class ManejadorAlmacenamientoLocal {
 		return result;
 	}
 
+	private static JSONObject obsClimaAJSONObsClima(ObservacionClima oc) {
+		JSONObject observacionClima = new JSONObject();
+		observacionClima.put("temperatura", new JSONNumber(oc.getTemperatura()));
+		observacionClima.put("nubes", new JSONString(oc
+				.getNubes()));
+
+		observacionClima.put("lluvia", JSONBoolean.getInstance((oc.getLluvia())));
+		observacionClima.put("viento", new JSONString(oc
+				.getViento()));
+		observacionClima.put("sol",
+				JSONBoolean.getInstance((oc.getSol())));
+		return observacionClima;
+	}
+
 	private static Observacion jSONAObservacion(JSONObject value) {
 		Observacion obs = new Observacion();
 
@@ -410,17 +415,7 @@ public class ManejadorAlmacenamientoLocal {
 		obs.setObservaciones(((JSONString) value.get("observaciones"))
 				.stringValue());
 		JSONObject obsClima = (JSONObject) value.get("observacionClima");
-		ObservacionClima observacionClima = new ObservacionClima();
-		observacionClima.setTemperatura(((JSONNumber) obsClima
-				.get("temperatura")).doubleValue());
-		observacionClima.setNubes(((JSONString) obsClima.get("nubes"))
-				.stringValue());
-		observacionClima.setLluvia(((JSONBoolean) obsClima.get("lluvia"))
-				.booleanValue());
-		observacionClima.setViento(((JSONString) obsClima.get("viento"))
-				.stringValue());
-		observacionClima.setSol(((JSONBoolean) obsClima.get("sol"))
-				.booleanValue());
+		ObservacionClima observacionClima = jsonObsClomaAObsClima(obsClima);
 		obs.setObservacionClima(observacionClima);
 
 		JSONArray obsEspecie = (JSONArray) value.get("observacionesEspecie");
@@ -463,6 +458,21 @@ public class ManejadorAlmacenamientoLocal {
 		obs.setObservacionesFoto(new ObservacionFoto[0]);
 		return obs;
 
+	}
+
+	private static ObservacionClima jsonObsClomaAObsClima(JSONObject obsClima) {
+		ObservacionClima observacionClima = new ObservacionClima();
+		observacionClima.setTemperatura(((JSONNumber) obsClima
+				.get("temperatura")).doubleValue());
+		observacionClima.setNubes(((JSONString) obsClima.get("nubes"))
+				.stringValue());
+		observacionClima.setLluvia(((JSONBoolean) obsClima.get("lluvia"))
+				.booleanValue());
+		observacionClima.setViento(((JSONString) obsClima.get("viento"))
+				.stringValue());
+		observacionClima.setSol(((JSONBoolean) obsClima.get("sol"))
+				.booleanValue());
+		return observacionClima;
 	}
 
 	public static void setCantidadObservacionesPersistidas(int i) {
@@ -870,5 +880,17 @@ public class ManejadorAlmacenamientoLocal {
 			salida += storage.get("observacion" + i) + "/*/*/*";
 		}
 		return salida;
+	}
+	
+	public static void setUltimaObservacionClima(ObservacionClima observacionClima) {
+		JSONObject oc=obsClimaAJSONObsClima(observacionClima);
+		storage.put("UltimaObservacionClima", oc.toString());
+	}
+	
+	public static ObservacionClima getUltimaObservacionClima() {
+		String cadena=storage.get("UltimaObservacionClima");
+		if (cadena==null)
+			return null;
+		return jsonObsClomaAObsClima((JSONObject) JSONParser.parseStrict(cadena));
 	}
 }

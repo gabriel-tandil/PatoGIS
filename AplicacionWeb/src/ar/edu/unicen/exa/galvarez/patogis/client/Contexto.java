@@ -1,5 +1,6 @@
 package ar.edu.unicen.exa.galvarez.patogis.client;
 
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Usuario;
 
 public class Contexto {
@@ -50,7 +51,6 @@ public class Contexto {
 
 	public void setUsuarioLogueado(Usuario result) {
 		usuarioLogueado = result;
-
 	}
 
 }
