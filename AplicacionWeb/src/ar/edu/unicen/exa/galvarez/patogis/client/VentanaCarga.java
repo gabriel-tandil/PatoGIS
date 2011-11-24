@@ -1274,10 +1274,10 @@ public class VentanaCarga extends FlexTable {
 								public void onFailure(Throwable caught) {
 									AplicacionWeb.setMensajeAlerta(ctes
 											.observacionGuardadaLocalmente());
-									ManejadorAlmacenamientoLocal
-											.guardarLocalObservacion(observacion);
 									observacion.setId(ManejadorAlmacenamientoLocal
 											.obtenerProximoIdAlmacenamientoLocal());
+									ManejadorAlmacenamientoLocal
+											.guardarLocalObservacion(observacion);
 									AplicacionWeb
 											.actualizarCantidadObservacionesLocales();
 									AplicacionWeb.cargarObservacion();
