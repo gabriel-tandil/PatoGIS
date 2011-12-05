@@ -31,6 +31,7 @@ import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFoto;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoFotoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoUsuario;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.VientoEnum;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
@@ -780,10 +781,11 @@ public class VentanaCarga extends FlexTable {
 			}
 		});
 		setWidget(9, 1, sendButton);
-		ObservacionClima oc=ManejadorAlmacenamientoLocal.getUltimaObservacionClima();
-		if (oc!=null)
+		ObservacionClima oc = ManejadorAlmacenamientoLocal
+				.getUltimaObservacionClima();
+		if (oc != null)
 			establecerObservacionClima(this, oc);
-		
+
 		laguna.setFocus(true);
 	}
 
@@ -1026,7 +1028,7 @@ public class VentanaCarga extends FlexTable {
 		try {
 			oc.setTemperatura(temperatura.getDouble());
 		} catch (Exception e) {
-			// TODO: handle exception
+			// nada
 		}
 		return oc;
 	}
@@ -1105,13 +1107,29 @@ public class VentanaCarga extends FlexTable {
 			observacion.setId(observacionEditada.getId());
 		}
 		observacion.setObservaciones(observaciones.getValue());
-		observacion.setEstado(EstadoEnum.ARevisar.toString());// TODO: asociar
-																// al usuario
+		if (AplicacionWeb.contexto.getUsuarioLogueado() != null
+				&& (AplicacionWeb.contexto.getUsuarioLogueado().getTipo()
+						.equals(TipoUsuario.Administrador.toString()) || AplicacionWeb.contexto
+						.getUsuarioLogueado().getTipo()
+						.equals(TipoUsuario.DirectorCampaña.toString()))) {
+			observacion.setEstado(EstadoEnum.Aprobado.toString());
+
+		} else {
+			observacion.setEstado(EstadoEnum.ARevisar.toString());
+
+		}
+		if (AplicacionWeb.contexto.getUsuarioLogueado() != null
+				&& (AplicacionWeb.contexto.getUsuarioLogueado().getTipo()
+						.equals(TipoUsuario.Cargador.toString()) || AplicacionWeb.contexto
+						.getUsuarioLogueado().getTipo()
+						.equals(TipoUsuario.Guia.toString()))) {
+			observacion.setFiabilidad(FiabilidadEnum.NoFiable.toString());
+		} else {
+			observacion.setFiabilidad(FiabilidadEnum.Fiable.toString());
+		}
+
 		observacion.setAlcance(alcance.getValue(alcance.getSelectedIndex()));
-		observacion.setFiabilidad(FiabilidadEnum.Fiable.toString());// TODO:
-																	// asociar
-																	// al
-																	// usuario
+
 		observacion.setIdCampana(1);
 		observacion.setIdUsuario(1);
 		observacion.setIdUsuarioApoyo(1);
@@ -1263,7 +1281,9 @@ public class VentanaCarga extends FlexTable {
 						AplicacionWeb.cargarObservacion();
 					}
 				} else {
-					ManejadorAlmacenamientoLocal.setUltimaObservacionClima(observacion.getObservacionClima());
+					ManejadorAlmacenamientoLocal
+							.setUltimaObservacionClima(observacion
+									.getObservacionClima());
 					observacionService.addElemento(observacion,
 							AplicacionWeb.contexto.getUsuarioLogueado()
 									.getNombre(), AplicacionWeb.contexto
@@ -1396,26 +1416,23 @@ public class VentanaCarga extends FlexTable {
 				break;
 			}
 		}
-		ObservacionClima oc=observacion.getObservacionClima();
+		ObservacionClima oc = observacion.getObservacionClima();
 		establecerObservacionClima(vc, oc);
 	}
 
 	private static void establecerObservacionClima(VentanaCarga vc,
 			ObservacionClima oc) {
-		vc.temperatura.setDouble(oc
-				.getTemperatura());
+		vc.temperatura.setDouble(oc.getTemperatura());
 		vc.checkLluvia.setValue(oc.getLluvia());
 		vc.checkSol.setValue(oc.getSol());
 		for (int i = 0; i < vc.comboNuves.getItemCount(); i++) {
-			if (vc.comboNuves.getValue(i).equals(
-					oc.getNubes())) {
+			if (vc.comboNuves.getValue(i).equals(oc.getNubes())) {
 				vc.comboNuves.setSelectedIndex(i);
 				break;
 			}
 		}
 		for (int i = 0; i < vc.comboViento.getItemCount(); i++) {
-			if (vc.comboViento.getValue(i).equals(
-					oc.getViento())) {
+			if (vc.comboViento.getValue(i).equals(oc.getViento())) {
 				vc.comboViento.setSelectedIndex(i);
 				break;
 			}

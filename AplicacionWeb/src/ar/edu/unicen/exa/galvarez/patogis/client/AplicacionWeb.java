@@ -40,6 +40,7 @@ public class AplicacionWeb implements EntryPoint {
 	public static PopupPanel alertaPopup = new PopupPanel();
 	private static String mensajeActual;
 	private MenuItem labelUsuario;
+	private MenuItem persistirLocales;
 	public static Contexto contexto = new Contexto();
 	final static DisclosurePanel dp = new DisclosurePanel(constantes.menu());;
 	final UsuariosServiceAsync usuariosService = GWT
@@ -74,6 +75,7 @@ public class AplicacionWeb implements EntryPoint {
 	Command loginCommand = new Command() {
 		public void execute() {
 			contexto.setUsuarioLogueado(null);
+			persistirLocales.setEnabled(false);
 			labelUsuario.setText("l:");
 			final DialogBoxExtendido dialogo = new DialogBoxExtendido();
 			dialogo.setAnimationEnabled(true);
@@ -111,6 +113,7 @@ public class AplicacionWeb implements EntryPoint {
 								public void onSuccess(Usuario result) {
 									if (result != null) {
 										contexto.setUsuarioLogueado(result);
+										persistirLocales.setEnabled(true);
 										labelUsuario.setText("l: "
 												+ usuario.getText());
 									} else {
@@ -295,8 +298,10 @@ public class AplicacionWeb implements EntryPoint {
 
 		observacionesMenu.addItem(constantes.cargar(), cargarCommand);
 		observacionesMenu.addItem(constantes.ver(), listarCommand);
-		observacionesMenu.addItem(constantes.persistirLocales(),
+		persistirLocales=new MenuItem(constantes.persistirLocales(),
 				persistirLocalesCommand);
+		persistirLocales.setEnabled(false);
+		observacionesMenu.addItem(persistirLocales);
 		observacionesMenu.addItem(constantes.cerrarSesion(), loginCommand);
 		menu.addItem(new MenuItem(constantes.observaciones(), observacionesMenu));
 

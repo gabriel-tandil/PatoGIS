@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Especie;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.EstadoEnum;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.FiabilidadEnum;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Observacion;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionClima;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionEspecie;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionFoto;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.ObservacionMatrizProductiva;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoMatrizProductiva;
+import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.TipoUsuario;
 import ar.edu.unicen.exa.galvarez.patogis.servidor.modelo.Ubicacion;
 import ar.edu.unicen.exa.galvarez.patogis.shared.MapaOrdenado;
 
@@ -783,6 +786,30 @@ public class ManejadorAlmacenamientoLocal {
 			Observacion observacion = observaciones
 					.get(observaciones.size() - 1);
 			observacion.setId(null);
+			
+			//------------ pongo el fiabilidad y estado acorde al usuario por si no lo habia hecho antes por no estar logueado
+			if (AplicacionWeb.contexto.getUsuarioLogueado() != null
+					&& (AplicacionWeb.contexto.getUsuarioLogueado().getTipo()
+							.equals(TipoUsuario.Administrador.toString()) || AplicacionWeb.contexto
+							.getUsuarioLogueado().getTipo()
+							.equals(TipoUsuario.DirectorCampaña.toString()))) {
+				observacion.setEstado(EstadoEnum.Aprobado.toString());
+
+			} else {
+				observacion.setEstado(EstadoEnum.ARevisar.toString());
+
+			}
+			if (AplicacionWeb.contexto.getUsuarioLogueado() != null
+					&& (AplicacionWeb.contexto.getUsuarioLogueado().getTipo()
+							.equals(TipoUsuario.Cargador.toString()) || AplicacionWeb.contexto
+							.getUsuarioLogueado().getTipo()
+							.equals(TipoUsuario.Guia.toString()))) {
+				observacion.setFiabilidad(FiabilidadEnum.NoFiable.toString());
+			} else {
+				observacion.setFiabilidad(FiabilidadEnum.Fiable.toString());
+			}			
+			//------------------------------------
+			
 			observacionService.addElemento(observacion, AplicacionWeb.contexto
 					.getUsuarioLogueado().getNombre(), AplicacionWeb.contexto
 					.getUsuarioLogueado().getClave(),
