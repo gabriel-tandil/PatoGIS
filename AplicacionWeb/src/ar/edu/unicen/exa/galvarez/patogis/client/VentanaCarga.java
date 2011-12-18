@@ -48,14 +48,17 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.DoubleBox;
+import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
@@ -294,6 +297,7 @@ public class VentanaCarga extends FlexTable {
 	private DateBox dateBox;
 	private SingleUploader uploader;
 	private Label labelFotos;
+	private Label labelFotosOffline;
 	private TimeBox horaFin;
 	private TimeBox horaInicio;
 	private List<String> imagenes = new ArrayList<String>();
@@ -302,6 +306,7 @@ public class VentanaCarga extends FlexTable {
 	private int contadorLlamadasAsincronicas = 3;
 	final VerticalPanel panelObservacionesEspecies = new VerticalPanel();
 	final VerticalPanel panelObservacionesMatrizProductiva = new VerticalPanel();
+	final VerticalPanel panelFotosOffline = new VerticalPanel();
 	final ObservacionServiceAsync observacionService = GWT
 			.create(ObservacionService.class);
 	final ArchivosServiceAsync archivosService = GWT
@@ -312,6 +317,21 @@ public class VentanaCarga extends FlexTable {
 			.create(TipoMatrizProductivaService.class);
 	final UbicacionServiceAsync ubicacionService = GWT
 			.create(UbicacionService.class);
+	private IUploader.OnStatusChangedHandler onStatusChangedHandler = new IUploader.OnStatusChangedHandler() {
+
+		@Override
+		public void onStatusChanged(IUploader uploader) {
+			if (uploader.getStatus().equals(Status.ERROR)){
+				Window.alert(uploader.getBasename());
+		//		uploader.
+			}
+			
+			
+		}
+		
+
+	};
+	
 	// Load the image in the document and in the case of success attach it to
 	// the viewer
 	private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
@@ -762,14 +782,43 @@ public class VentanaCarga extends FlexTable {
 
 		uploader.setI18Constants(new UploaderConstantsImpl());
 		uploader.setAutoSubmit(true);
+		uploader.addOnStatusChangedHandler(onStatusChangedHandler);
 		uploader.setEnabled(true);
 		uploader.setAvoidRepeatFiles(true);
 		uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+		
 		uploader.setValidExtensions("jpg", "jpeg", "png", "gif");
+		
 		setWidget(7, 1, uploader);
 
 		setWidget(8, 1, panelImages);
 
+		
+		
+		labelFotosOffline = new Label(ctes.fotos());
+
+		setWidget(9, 0, labelFotosOffline);
+
+		setWidget(9, 1, panelFotosOffline);
+		agregarRenglonFotoOffline(panelFotosOffline);
+
+		Button button3 = new Button(ctes.agregar());
+		button3.addMouseListener(new TooltipListener(ctes
+				.agregarRenglonFotoOfflineTooltip(), 5000));
+		setWidget(9, 2, button3);
+		button3.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				agregarRenglonFotoOffline(panelFotosOffline);
+			}
+		});
+
+		getCellFormatter().setVerticalAlignment(9, 2,
+				HasVerticalAlignment.ALIGN_BOTTOM);
+		getCellFormatter().setVerticalAlignment(9, 0,
+				HasVerticalAlignment.ALIGN_TOP);
+		
+		
 		final Button sendButton = new Button(ctes.enviar());
 		sendButton.addMouseListener(new TooltipListener(ctes.enviarTooltip(),
 				5000));
@@ -780,13 +829,56 @@ public class VentanaCarga extends FlexTable {
 				grabarObservacion();
 			}
 		});
-		setWidget(9, 1, sendButton);
+		setWidget(10, 1, sendButton);
+
+
+		
 		ObservacionClima oc = ManejadorAlmacenamientoLocal
 				.getUltimaObservacionClima();
 		if (oc != null)
 			establecerObservacionClima(this, oc);
 
 		laguna.setFocus(true);
+	}
+
+	private void agregarRenglonFotoOffline(VerticalPanel panelFotosOffline2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private HorizontalPanel crearRenglonFotoOffline() {
+		FileUpload fu=new FileUpload();
+		final HorizontalPanel hp = new HorizontalPanel();
+		hp.add(fu);
+		VerticalPanel vp = new VerticalPanel();
+
+		CheckBox cb = new CheckBox();
+		cb.addMouseListener(new TooltipListener(ctes.panoramicaTooltip(),
+				5000));
+		cb.setText(ctes.panoramica());
+		vp.add(cb);
+		Button borrar = new Button(ctes.eliminarFoto());
+		borrar.addMouseListener(new TooltipListener(ctes
+				.borrarImagenTooltip(), 5000));
+		borrar.addClickHandler(new ClickHandler() {
+
+			public void onClick(ClickEvent event) {
+
+			}
+		});
+		vp.add(borrar);
+		hp.add(vp);
+		
+		
+		fu.addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		return hp;
 	}
 
 	private synchronized void finLlamadaAsincronica() {
@@ -811,8 +903,8 @@ public class VentanaCarga extends FlexTable {
 
 	protected void cambiarAModoOffLine() {
 		AplicacionWeb.contexto.setOnline(false);
-		uploader.setVisible(false);
-		labelFotos.setVisible(false);
+//		uploader.setVisible(false);
+//		labelFotos.setVisible(false);
 	}
 
 	interface ObtenerTexto {

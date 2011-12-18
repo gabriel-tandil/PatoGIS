@@ -137,6 +137,8 @@ public interface VentanaCargaConstantes extends Constants {
 	String especiesSinPersistir();
 	String ubicacionesSinPersistir();
 	String tiposMatrizProductivaSinPersistir();
+
+	String agregarRenglonFotoOfflineTooltip();
 	
 
 }

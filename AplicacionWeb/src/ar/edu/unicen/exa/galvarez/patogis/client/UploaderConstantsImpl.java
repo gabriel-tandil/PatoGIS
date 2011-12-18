@@ -6,116 +6,116 @@ class UploaderConstantsImpl implements UploaderConstants {
 
 	@Override
 	public String uploadLabelCancel() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploadStatusCanceled() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploadStatusCanceling() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploadStatusDeleted() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploadStatusError() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploadStatusInProgress() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploadStatusQueued() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploadStatusSubmitting() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploadStatusSuccess() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploaderActiveUpload() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploaderAlreadyDone() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploaderBlobstoreError() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploaderBrowse() {
-		// TODO Auto-generated method stub
+
 		return "Agregar...";
 	}
 
 	@Override
 	public String uploaderInvalidExtension() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploaderSend() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploaderServerError() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String submitError() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploaderServerUnavailable() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 	@Override
 	public String uploaderTimeout() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "etiqueta no traducida";
 	}
 
 }
