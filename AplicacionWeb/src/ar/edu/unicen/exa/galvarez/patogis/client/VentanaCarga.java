@@ -390,6 +390,8 @@ public class VentanaCarga extends FlexTable {
 	private List<VerticalPanel> widgetsObsEspecie = new ArrayList<VerticalPanel>();
 
 	private List<HorizontalPanel> widgetsObsMatrizProductiva = new ArrayList<HorizontalPanel>();
+	
+	private List<HorizontalPanel> widgetsFotosOffline = new ArrayList<HorizontalPanel>();
 	private boolean edicion = false;
 	private Observacion observacionEditada;
 
@@ -795,28 +797,28 @@ public class VentanaCarga extends FlexTable {
 
 		
 		
-		labelFotosOffline = new Label(ctes.fotos());
-
-		setWidget(9, 0, labelFotosOffline);
-
-		setWidget(9, 1, panelFotosOffline);
-		agregarRenglonFotoOffline(panelFotosOffline);
-
-		Button button3 = new Button(ctes.agregar());
-		button3.addMouseListener(new TooltipListener(ctes
-				.agregarRenglonFotoOfflineTooltip(), 5000));
-		setWidget(9, 2, button3);
-		button3.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-
-				agregarRenglonFotoOffline(panelFotosOffline);
-			}
-		});
-
-		getCellFormatter().setVerticalAlignment(9, 2,
-				HasVerticalAlignment.ALIGN_BOTTOM);
-		getCellFormatter().setVerticalAlignment(9, 0,
-				HasVerticalAlignment.ALIGN_TOP);
+//		labelFotosOffline = new Label(ctes.fotos());
+//
+//		setWidget(9, 0, labelFotosOffline);
+//
+//		setWidget(9, 1, panelFotosOffline);
+//		agregarRenglonFotoOffline(panelFotosOffline);
+//
+//		Button button3 = new Button(ctes.agregar());
+//		button3.addMouseListener(new TooltipListener(ctes
+//				.agregarRenglonFotoOfflineTooltip(), 5000));
+//		setWidget(9, 2, button3);
+//		button3.addClickHandler(new ClickHandler() {
+//			public void onClick(ClickEvent event) {
+//
+//				agregarRenglonFotoOffline(panelFotosOffline);
+//			}
+//		});
+//
+//		getCellFormatter().setVerticalAlignment(9, 2,
+//				HasVerticalAlignment.ALIGN_BOTTOM);
+//		getCellFormatter().setVerticalAlignment(9, 0,
+//				HasVerticalAlignment.ALIGN_TOP);
 		
 		
 		final Button sendButton = new Button(ctes.enviar());
@@ -829,7 +831,7 @@ public class VentanaCarga extends FlexTable {
 				grabarObservacion();
 			}
 		});
-		setWidget(10, 1, sendButton);
+		setWidget(9, 1, sendButton);
 
 
 		
@@ -842,7 +844,28 @@ public class VentanaCarga extends FlexTable {
 	}
 
 	private void agregarRenglonFotoOffline(VerticalPanel panelFotosOffline2) {
-		// TODO Auto-generated method stub
+
+		
+		HorizontalPanel horizontalPanel1 = new HorizontalPanel();
+		if (widgetsFotosOffline.size() > 0)
+			panelFotosOffline2.setBorderWidth(1);
+		panelFotosOffline2.add(horizontalPanel1);
+
+		final ListBox comboBox = generarComboItemsObservables(
+				tiposMatrizProductiva.keyList(),
+				new AgregarTipoMatrizProductivaDialog());
+
+		horizontalPanel1.add(comboBox);
+
+		NumberBox textBox_1 = new NumberBox();
+		textBox_1.setWidth("25px");
+		textBox_1.setMaxLength(3);
+		horizontalPanel1.add(textBox_1);
+		widgetsFotosOffline.add(horizontalPanel1);
+		Label l = new Label("%");
+		horizontalPanel1.add(l);
+		
+		
 		
 	}
 
@@ -903,8 +926,8 @@ public class VentanaCarga extends FlexTable {
 
 	protected void cambiarAModoOffLine() {
 		AplicacionWeb.contexto.setOnline(false);
-//		uploader.setVisible(false);
-//		labelFotos.setVisible(false);
+		uploader.setVisible(false);
+		labelFotos.setVisible(false);
 	}
 
 	interface ObtenerTexto {
