@@ -1,4 +1,6 @@
 MAP
+
+
  NAME "VisorPatoGIS"
  SIZE 500 350
  IMAGECOLOR 255 255 255
@@ -19,6 +21,7 @@ MAP
  EXTENT -71.014740 -45.019310 -45.446885 -27.988302
  SYMBOLSET "symbols/symbols.sym"
  FONTSET "data/fonts/fonts.list"
+CONFIG  "MS_ERRORFILE" "/tmp/mapserver.log"
 
 #-----------------------------------------------------------------------------------------------------------
  LAYER
@@ -149,6 +152,53 @@ size 7
  END # end of label
  END
  END
+#---------------------------------------------
+ LAYER
+METADATA
+    'especie_validation_pattern' '.*'
+    'default_especie' '%'
+END
+
+  CONNECTIONTYPE postgis
+   NAME "obsEspecie"
+    LABELITEM "cantidad"
+     CONNECTION "user=postgres dbname=patoGis host=localhost password=atlas"
+      DATA "coordenadas from (select cl.id, cl.coordenadas coordenadas, sum(cantidad) cantidad, especie.nombre nombreEspecie
+                                                                                         from coordenadasLaguna cl,
+                                                                                              ubicacion,
+                                                                                              observacion_especie,
+                                                                                              especie,
+ 										observacion
+                                                                                        where ubicacion.id=cl.id
+                                                                                          AND observacion.id_ubicacion=ubicacion.id
+                                                                                          and observacion_especie.id_observacion=observacion.id
+                                                                                          and observacion_especie.id_especie=especie.id
+                                                                                        group by especie.nombre, cl.id, cl.coordenadas ) as subquery using unique id"
+FILTER "nombreEspecie ilike '%especie%'"
+ STATUS ON
+ TYPE POINT
+ CLASS
+ style
+ size 8
+ SYMBOL "punkt"
+ end
+ COLOR 255 255 0
+ LABEL
+ COLOR 31 31 31
+ SHADOWCOLOR 218 218 218
+ SHADOWSIZE 2 2
+ TYPE TRUETYPE
+ FONT arial
+ SIZE 8
+ ANTIALIAS TRUE
+ POSITION CL
+ PARTIALS true
+ MINDISTANCE 80
+ BUFFER 4
+ END # end of label
+ END
+ END
+
 #-----------------------------------------------------------------------------------------------------------
  LAYER
  CONNECTIONTYPE postgis
@@ -227,6 +277,7 @@ CLASS
  END # end of label
  END
  END
+ 
 #-----------------------------------------------------------------------------------------------------------
  LAYER
   CONNECTIONTYPE postgis
@@ -236,11 +287,11 @@ CLASS
       DATA "the_geom from (select g.gid, g.the_geom, (100||' '|| obs.cantidad*10 ||' '|| 100) color, obs.cantidad from departamento g,(select count(*) cantidad,
                                                                                               departamento.gid
                                                                                          from observacion,
-                                                                                              departamento,  
-                                                                                              coordenadasLaguna cl, 
-                                                                                              ubicacion  
+                                                                                              departamento,
+                                                                                              coordenadasLaguna cl,
+                                                                                              ubicacion
                                                                                         where ubicacion.id=cl.id
-                                                                                          AND observacion.id_ubicacion=ubicacion.id 
+                                                                                          AND observacion.id_ubicacion=ubicacion.id
                                                                                           and ST_Contains(departamento.the_geom,cl.coordenadas)
                                                                                         group by departamento.gid  )obs where obs.gid=g.gid) as subquery using unique gid"
        STATUS on
@@ -253,8 +304,84 @@ style
 end
  END
 end
- END #-----------------------------------------------------------------------------------------------------------
-                                                         
+ END
+#-----------------------------------------------------------------------------------------------------------
+ LAYER
+ NAME "AreaDeInteres"
+ DATA "/var/www/Visor/capas/AreaDeInteres"
+ STATUS ON
+ TYPE polygon
+CLASS
+ STYLE
+ SYMBOL 0
+ COLOR 0 255 255
+ OUTLINECOLOR 0 0 0
+ END
+ END
+ END
+#-----------------------------------------------------------------------------------------------------------                                                         
+#-----------------------------------------------------------------------------------------------------------
+ LAYER
+ NAME "AreasHabilitadasParaCaza"
+ DATA "/var/www/Visor/capas/AreasHabilitadasParaCaza"
+ STATUS ON
+ TYPE polygon
+CLASS
+ STYLE
+ SYMBOL 0
+ COLOR 255 0 255
+ OUTLINECOLOR 0 0 0
+ END
+ END
+ END
+#-----------------------------------------------------------------------------------------------------------    
+ LAYER
+ NAME "PuntosDeMuestreo"
+ DATA "/var/www/Visor/capas/PuntosDeMuestreo"
+ STATUS ON
+ TYPE point
+CLASS
+ STYLE
+ SYMBOL "haus"
+ size 8
+ COLOR 255 255 0
+ OUTLINECOLOR 0 0 0
+ END
+ END
+ END
+
+#-----------------------------------------------------------------------------------------------------------
+ LAYER
+ NAME "ComplejosDeTurismoCinegetico"
+ DATA "/var/www/Visor/capas/ComplejosDeTurismoCinegetico"
+ STATUS ON
+ TYPE point
+CLASS
+ STYLE
+ SYMBOL "haus"
+ size 8
+ COLOR 255 255 0
+ OUTLINECOLOR 0 0 0
+ END
+ END
+ END
+#-----------------------------------------------------------------------------------------------------------    
+#-----------------------------------------------------------------------------------------------------------
+ LAYER
+ NAME "ZonasPropuestasDeMonitoreo"
+ DATA "/var/www/Visor/capas/ZonasPropuestasDeMonitoreo"
+ STATUS ON
+ TYPE polygon
+CLASS
+ STYLE
+ SYMBOL 0
+ COLOR 128 255 255
+ OUTLINECOLOR 0 0 0
+ END
+ END
+ END
+#-----------------------------------------------------------------------------------------------------------    
+
+
 
 END
-
